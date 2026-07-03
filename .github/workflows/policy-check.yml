@@ -1,0 +1,49 @@
+# .github/workflows/policy-check.yml
+# Workflow për të verifikuar skedarët e konfigurimit me OPA Conftest (Policy-as-Code)
+
+name: "Policy-as-Code Check"
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  opa-conftest:
+    name: "OPA Conftest Policy Check"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run conftest against Dockerfiles
+        uses: open-policy-agent/conftest-action@v3
+        with:
+          # Teston të gjithë skedarët që fillojnë me 'Dockerfile'
+          input: 'Dockerfile*'
+          # Specifikon direktorinë dhe politikën që do të përdoret
+          policy: '.github/policy'
+          # Specifikon namespace-in e politikës për Docker
+          namespace: 'main.docker'
+
+      - name: Run conftest against Docker Compose files
+        uses: open-policy-agent/conftest-action@v3
+        with:
+          # Teston të gjithë skedarët docker-compose
+          input: 'docker-compose*.yml'
+          policy: '.github/policy'
+          # Specifikon namespace-in e politikës për Docker Compose
+          namespace: 'main.compose'
+
+      - name: Run conftest against Kubernetes manifests (if any)
+        uses: open-policy-agent/conftest-action@v3
+        with:
+          # Teston skedarët .yaml dhe .yml (p.sh., për Kubernetes)
+          # Vazhdon edhe nëse nuk gjen skedarë, për të mos bllokuar workflow-in
+          input: 'k8s/**/*.yaml'
+          policy: '.github/policy'
+          # Specifikon namespace-in e politikës për Kubernetes
+          namespace: 'main.k8s'
+          # Mos dështo nëse nuk gjenden skedarë që përputhen me 'input'
+          no_fail: true
