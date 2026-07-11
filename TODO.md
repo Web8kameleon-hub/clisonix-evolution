@@ -7,8 +7,12 @@
 
 ## Step 2: Add SEO assets
 - [x] Create `robots.txt` (clisonix.com root)
-- [x] Create `sitemap.xml` (basic index + placeholders for future sitemap entries)
+- [x] Create `sitemap.xml` (basic index)
 - [x] Add `security.txt` to `/.well-known/`
+
+
+
+
 
 
 ## Step 3: Improve API catalog for SEO
