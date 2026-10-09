@@ -126,7 +126,7 @@ U lidh me sukses sistemi **Cycle Engine** me Research Data Ecosystem për të kr
 ## 📊 Statistika
 
 | Metrika | Vlera |
-|---------|-------|
+| --------- | ------- |
 | **Dokumentacione totale** | 930+ rreshta |
 | **Files të krijuar** | 7 |
 | **Files të modifikuar** | 2 |
@@ -459,6 +459,6 @@ display_cycles_dashboard()
 **Integrimi**: ✅ I PLOTË  
 **Versioni**: 1.0.0  
 **Data**: 15 Dhjetor 2025  
-**Ekipi**: Neurosonix
+**Ekipi**: Clisonix
 
 **Sukses dhe faleminderit!** 🙏

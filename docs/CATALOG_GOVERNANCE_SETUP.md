@@ -126,7 +126,7 @@ default_args = {
     'depends_on_past': False,
     'start_date': datetime(2025, 1, 1),
     'email_on_failure': True,
-    'email': ['ops@clisonix.com'],
+    'email': ['clisonix@pm.me'],
     'retries': 2,
     'retry_delay': timedelta(minutes=5),
 }
@@ -354,3 +354,4 @@ catalog_ingestion_lag_seconds
 ---
 
 **Next Step**: [Ingestion Pipeline Architecture](./INGESTION_PIPELINE_ARCHITECTURE.md)
+

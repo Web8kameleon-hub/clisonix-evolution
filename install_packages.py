@@ -70,7 +70,7 @@ def main():
 
     print("\n🎉 ALL PACKAGES INSTALLED SUCCESSFULLY!")
     print("\n💡 You can now run:")
-    print("   Backend: python start_neurosonix.py")
+    print("   Backend: python start_Clisonix.py")
     print("   Frontend: cd frontend && npm run dev")
     print("   Web App: cd apps/web && npm run dev")
 

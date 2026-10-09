@@ -79,7 +79,7 @@ Use our automated script:
 
 ```bash
 # Download and run configuration script
-curl -sSL https://raw.githubusercontent.com/LedjanAhmati/Clisonix-cloud/main/scripts/setup-floating-ip.sh -o setup-floating-ip.sh
+curl -sSL https://raw.githubusercontent.com/Web8kameleon-hub/clisonix.com/main/scripts/setup-floating-ip.sh -o setup-floating-ip.sh
 
 chmod +x setup-floating-ip.sh
 
@@ -156,7 +156,7 @@ certbot certonly --standalone \
   -d clisonix.com \
   -d api.clisonix.com \
   -d www.clisonix.com \
-  --email admin@clisonix.com \
+  --email clisonix@pm.me \
   --agree-tos \
   --non-interactive
 
@@ -258,14 +258,14 @@ curl -X POST \
 
 # Send alert
 echo "Floating IP failover: PRIMARY is now MASTER" | \
-  mail -s "Clisonix Failover Alert" admin@clisonix.com
+  mail -s "Clisonix Failover Alert" clisonix@pm.me
 ```
 
 **Backup script** (`/opt/clisonix/scripts/floating-ip-backup.sh`):
 ```bash
 #!/bin/bash
 echo "Floating IP failover: PRIMARY is now BACKUP" | \
-  mail -s "Clisonix Failover Alert" admin@clisonix.com
+  mail -s "Clisonix Failover Alert" clisonix@pm.me
 ```
 
 **Make executable:**
@@ -513,3 +513,4 @@ certbot certonly --standalone -d clisonix.com -d api.clisonix.com
 
 **Last Updated:** December 12, 2025  
 **Maintainer:** Clisonix DevOps Team
+

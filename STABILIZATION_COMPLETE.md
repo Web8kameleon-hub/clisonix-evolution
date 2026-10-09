@@ -335,5 +335,5 @@ All stabilization objectives achieved:
 
 **Report Generated:** December 11, 2025  
 **Platform Owner:** Ledjan Ahmati  
-**Repository:** LedjanAhmati/Clisonix-cloud  
+**Repository:** Web8kameleon-hub/clisonix.com  
 **Branch:** main

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # TODO — SEO + Public API Documentation (Phase 1)
 
 ## Step 1: Repo audit (completed)
@@ -33,3 +34,6 @@
 - [ ] curl checks: status codes + content-type for robots/sitemap/docs
 - [ ] basic SEO checks: structured data present, canonical set, noindex where required
 
+=======
+# Step 1: Create project structure and TODO.md [COMPLETE]&#10;## Step 2: Create firmware/ files (boot_rom.S, supervisor.c, linker.ld, Makefile) [COMPLETE]
+>>>>>>> c1f6cec4fc9d5b7cab11712c7a2c12433881c0d0

@@ -1,10 +1,7 @@
 /**
  * Clisonix INDUSTRIAL PAYMENT MODELS
  * ===================================
- * SQLAlchemy-style models pÃ«r pagesa industriale
- * SEPA IBAN: DE72 4305 0001 0015 0122 63
- * PayPal: ahmati.bau@gmail.com
- * Ledjan Ahmati - WEB8euroweb
+ * Payment models for industrial use
  */
 
 import { FastifyInstance } from "fastify";
@@ -77,11 +74,11 @@ export interface RefundPaymentRequest {
 // =================================================================================
 
 export const PAYMENT_CONFIG: PaymentConfig = {
-  SEPA_IBAN: "DE72 4305 0001 0015 0122 63",
-  SEPA_BIC: "WELADED1XXX", // Sparkasse Dortmund
-  SEPA_HOLDER: "Ledjan Ahmati - WEB8euroweb",
-  PAYPAL_EMAIL: "ahmati.bau@gmail.com",
-  COMPANY: "WEB8euroweb"
+  SEPA_IBAN: process.env['SEPA_IBAN'] || "YOUR-IBAN-HERE",
+  SEPA_BIC: process.env['SEPA_BIC'] || "YOUR-BIC-HERE",
+  SEPA_HOLDER: process.env['SEPA_HOLDER'] || "Your Company Name",
+  PAYPAL_EMAIL: process.env['PAYPAL_EMAIL'] || "payments@your-domain.com",
+  COMPANY: "Clisonix Cloud"
 };
 
 // =================================================================================

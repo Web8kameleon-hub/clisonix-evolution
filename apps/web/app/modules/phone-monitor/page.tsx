@@ -1,1003 +1,437 @@
-﻿'use client';
-/**
- * Phone Monitor v3.0 - Industrial Mobile Neural Interface
- * Advanced Communication Analysis & Real-time Monitoring
- * REAL DATA ONLY - Full Industrial Grade System
- */
+'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useState, useEffect, useCallback } from 'react';
+import { Smartphone, Radio, Shield, Activity, RefreshCw, Clock, CheckCircle, AlertCircle, Brain, Wifi, Lock, Database } from 'lucide-react';
 
-interface PhoneMetrics {
-  device_status: string;
-  neural_interface: {
-    active: boolean;
-    signal_strength: number;
-    last_sync: string;
-    encryption_level: number;
-    bandwidth: number;
-  };
-  monitoring: {
-    calls_tracked: number;
-    messages_analyzed: number;
-    neural_patterns: number;
-    security_violations: number;
-    data_streams: number;
-  };
-  industrial_features: {
-    auto_response: boolean;
-    ai_filtering: boolean;
-    threat_detection: boolean;
-    pattern_learning: boolean;
-  };
+// Endpoint Configuration - REAL APIs ONLY
+interface EndpointConfig {
+  url: string;
+  method: 'GET' | 'POST';
+  name: string;
+  description: string;
+  icon: React.ComponentType<{ className?: string }>;
+  category: 'monitoring' | 'neural' | 'security' | 'system';
 }
 
-interface ActivityItem {
-  id: string;
-  icon: string;
-  label: string;
-  accentClass: string;
-  borderClass: string;
-  value: string;
-  timestamp: Date;
+interface ResponseState {
+  data: unknown;
+  loading: boolean;
+  error: string | null;
+  responseTime: number;
+  status: number | null;
+  timestamp: string | null;
 }
 
-const PROGRESS_WIDTH_CLASSES: Record<number, string> = {
-  0: 'w-0',
-  10: 'w-[10%]',
-  20: 'w-[20%]',
-  30: 'w-[30%]',
-  40: 'w-[40%]',
-  50: 'w-[50%]',
-  60: 'w-[60%]',
-  70: 'w-[70%]',
-  80: 'w-[80%]',
-  90: 'w-[90%]',
-  100: 'w-full',
-};
+// REAL API ENDPOINTS - No fake data, no Math.random()
+const ENDPOINTS: EndpointConfig[] = [
+  {
+    url: '/api/asi-status',
+    method: 'GET',
+    name: 'ASI Phone Status',
+    description: 'Neural phone monitoring status from ASI Trinity',
+    icon: Smartphone,
+    category: 'monitoring'
+  },
+  {
+    url: '/api/asi/status',
+    method: 'GET',
+    name: 'ASI Trinity Status',
+    description: 'Complete ASI system status with ALBA, ALBI, JONA',
+    icon: Brain,
+    category: 'neural'
+  },
+  {
+    url: '/api/asi/health',
+    method: 'GET',
+    name: 'ASI Health Check',
+    description: 'Health status of all ASI components',
+    icon: Activity,
+    category: 'system'
+  },
+  {
+    url: '/api/asi/alba/metrics',
+    method: 'GET',
+    name: 'ALBA Neural Metrics',
+    description: 'Advanced neural processing metrics from ALBA',
+    icon: Radio,
+    category: 'neural'
+  },
+  {
+    url: '/api/asi/albi/metrics',
+    method: 'GET',
+    name: 'ALBI Signal Metrics',
+    description: 'Signal processing and biofeedback data from ALBI',
+    icon: Wifi,
+    category: 'neural'
+  },
+  {
+    url: '/api/system/health',
+    method: 'GET',
+    name: 'System Health',
+    description: 'Unified system health status',
+    icon: Shield,
+    category: 'system'
+  },
+  {
+    url: '/api/asi/jona/metrics',
+    method: 'GET',
+    name: 'JONA Analytics',
+    description: 'AI-powered analytics and insights from JONA',
+    icon: Database,
+    category: 'neural'
+  },
+  {
+    url: '/api/security/status',
+    method: 'GET',
+    name: 'Security Status',
+    description: 'Security monitoring and threat detection status',
+    icon: Lock,
+    category: 'security'
+  }
+];
 
-const getProgressWidthClass = (value: number): string => {
-  const normalized = Math.max(0, Math.min(100, Math.round(value / 10) * 10));
-  return PROGRESS_WIDTH_CLASSES[normalized];
-};
+export default function PhoneMonitorPage() {
+  const [responses, setResponses] = useState<Record<string, ResponseState>>({});
+  const [selectedEndpoint, setSelectedEndpoint] = useState<string>(ENDPOINTS[0].url);
+  const [autoRefresh, setAutoRefresh] = useState(false);
+  const [refreshInterval, setRefreshInterval] = useState(5000);
 
-export default function PhoneMonitor() {
-  const [metrics, setMetrics] = useState<PhoneMetrics | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
-  const [searchQuery, setSearchQuery] = useState('');
-  const [actionResult, setActionResult] = useState<string | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [userPersona, setUserPersona] = useState<'doctor' | 'scientist' | 'student' | 'general'>('general');
-  const [activityFeed, setActivityFeed] = useState<ActivityItem[]>([]);
-  const [statusSource, setStatusSource] = useState<'live' | 'fallback'>('fallback');
-  const [metricsHistory, setMetricsHistory] = useState<PhoneMetrics[]>([]);
-  const [albaMaxStreams, setAlbaMaxStreams] = useState(0);
+  // Fetch single endpoint with timing - REAL DATA ONLY
+  const fetchEndpoint = useCallback(async (endpoint: EndpointConfig) => {
+    const startTime = performance.now();
 
-  const signalStrength = metrics?.neural_interface.signal_strength ?? 0;
-  const connectionStrength = metrics?.monitoring.data_streams
-    ? Math.min(100, Math.round(metrics.monitoring.data_streams * 12.5))
-    : 0;
-  const encryptionLevel = metrics?.neural_interface.encryption_level ?? 0;
-
-  const signalStrengthWidthClass = getProgressWidthClass(signalStrength);
-  const connectionWidthClass = getProgressWidthClass(connectionStrength);
-  const encryptionWidthClass = getProgressWidthClass(encryptionLevel);
-
-  useEffect(() => {
-    const fetchRealPhoneData = async () => {
-      try {
-        // Try to get real device data from ASI system
-        const response = await fetch('/api/asi-status');
-        if (response.ok) {
-          const data = await response.json();
-          const success = data.success !== false;
-          const asiPayload = data.asi_status ?? data;
-
-          // Extract real metrics from ASI Trinity system
-          const albiHealth = asiPayload.trinity?.albi?.health || 0;
-          const albaHealth = asiPayload.trinity?.alba?.health || 0;
-          const jonaHealth = asiPayload.trinity?.jona?.health || 0;
-          
-          const nextMetrics: PhoneMetrics = {
-            device_status: success ? 'connected' : 'degraded',
-            neural_interface: {
-              active: asiPayload.trinity?.albi?.status === 'active',
-              signal_strength: Math.round(albiHealth * 100),
-              last_sync: asiPayload.timestamp || new Date().toISOString(),
-              encryption_level: Math.round(jonaHealth * 100),
-              bandwidth: Math.round(albaHealth * 1000)
-            },
-            monitoring: {
-              calls_tracked: Math.round(albaHealth * 50), // Real data from Alba monitoring
-              messages_analyzed: Math.round(albiHealth * 75), // Real data from Albi processing
-              neural_patterns: Math.round(albaHealth * 1000),
-              security_violations: Math.round((1 - jonaHealth) * 25), // Jona security data
-              data_streams: Math.round(albaHealth * 8)
-            },
-            industrial_features: {
-              auto_response: albiHealth > 0.8,
-              ai_filtering: albiHealth > 0.7,
-              threat_detection: jonaHealth > 0.9,
-              pattern_learning: albiHealth > 0.75
-            }
-          };
-
-          setMetrics(nextMetrics);
-          setMetricsHistory(prev => {
-            const next = [...prev, nextMetrics];
-            const maxLength = 20;
-            return next.length > maxLength ? next.slice(next.length - maxLength) : next;
-          });
-          setAlbaMaxStreams(prev => Math.max(prev, nextMetrics.monitoring.data_streams));
-          setStatusSource(success ? 'live' : 'fallback');
-        }
-        
-        setLastUpdate(new Date());
-      } catch (error) {
-        console.error('Error fetching phone monitor data:', error);
-        setStatusSource('fallback');
-      } finally {
-        setLoading(false);
+    setResponses(prev => ({
+      ...prev,
+      [endpoint.url]: {
+        ...prev[endpoint.url],
+        loading: true,
+        error: null
       }
-    };
-
-    fetchRealPhoneData();
-    const interval = setInterval(fetchRealPhoneData, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    if (!metrics) {
-      setActivityFeed([]);
-      return;
-    }
-
-    const now = new Date();
-    const feed: ActivityItem[] = [
-      {
-        id: 'neural-sync',
-        icon: '🧠',
-        label: 'Neural pattern sync',
-        accentClass: 'text-blue-400',
-        borderClass: 'border-blue-500',
-        value: `${signalStrength}%`,
-        timestamp: now,
-      },
-      {
-        id: 'security-scan',
-        icon: '🔒',
-        label: 'Security scan completed',
-        accentClass: metrics.industrial_features.threat_detection ? 'text-green-400' : 'text-yellow-400',
-        borderClass: metrics.industrial_features.threat_detection ? 'border-green-500' : 'border-yellow-500',
-        value: metrics.industrial_features.threat_detection ? 'Secure' : 'Action required',
-        timestamp: now,
-      },
-      {
-        id: 'pattern-learning',
-        icon: '🎯',
-        label: 'AI pattern learning active',
-        accentClass: 'text-purple-400',
-        borderClass: 'border-purple-500',
-        value: `${metrics.monitoring.neural_patterns ?? 0} patterns`,
-        timestamp: now,
-      },
-      {
-        id: 'data-stream',
-        icon: '📡',
-        label: 'Data stream optimized',
-        accentClass: 'text-pink-400',
-        borderClass: 'border-pink-500',
-        value: `${metrics.neural_interface.bandwidth ?? 0} MB/s`,
-        timestamp: now,
-      },
-    ];
-
-    setActivityFeed(feed);
-  }, [metrics, signalStrength, connectionStrength, encryptionLevel]);
-
-  // Interactive Functions
-  type ActionParams = {
-    query?: string;
-  };
-
-  const executeAction = async (action: string, params?: ActionParams) => {
-    setIsProcessing(true);
-    setActionResult(null);
+    }));
 
     try {
-      let result = '';
-      
-      switch (action) {
-        case 'neural_scan':
-          if (userPersona === 'doctor') {
-            result = `🏥 MEDICAL NEURAL SCAN REPORT\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `Patient Neural Activity: ${metrics?.neural_interface.signal_strength || 0}%\n` +
-                    `- Cognitive Load Assessment: ${(metrics?.neural_interface.signal_strength || 0) > 70 ? 'Normal' : 'Requires Attention'}\n` +
-                    `- Stress Indicators: ${Math.floor(Math.random() * 30 + 10)}% baseline\n` +
-                    `- Neural Pathway Health: ${Math.floor(Math.random() * 15 + 5)} active connections\n` +
-                    `- Recommended Action: ${(metrics?.neural_interface.signal_strength || 0) > 80 ? 'Continue monitoring' : 'Schedule follow-up'}`;
-          } else if (userPersona === 'scientist') {
-            result = `🔬 RESEARCH-GRADE NEURAL ANALYSIS\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `Dataset: ${metrics?.monitoring.neural_patterns || 0} patterns analyzed\n` +
-                    `- Signal-to-Noise Ratio: ${(metrics?.neural_interface.signal_strength || 0) / 10}:1\n` +
-                    `- Frequency Distribution: Alpha (${Math.floor(Math.random() * 30 + 40)}%) Beta (${Math.floor(Math.random() * 20 + 25)}%)\n` +
-                    `- Correlation Coefficient: 0.${Math.floor(Math.random() * 300 + 700)}\n` +
-                    `- Statistical Significance: p < 0.${Math.floor(Math.random() * 9 + 1)}`;
-          } else if (userPersona === 'student') {
-            result = `📚 LEARNING: Neural Scan Basics\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `🧠 What we found:\n` +
-                    `- Your brain is ${(metrics?.neural_interface.signal_strength || 0) > 70 ? 'very active' : 'in a relaxed state'} right now\n` +
-                    `- Neural patterns detected: ${metrics?.monitoring.neural_patterns || 0}\n` +
-                    `- Fun fact: Your brain uses about 20% of your body's energy!\n` +
-                    `- Learning tip: High neural activity often means you're focused and learning!`;
-          } else {
-            result = `🧠 Neural Scan Started...\n` +
-                    `- Scanning ${metrics?.monitoring.neural_patterns || 0} patterns\n` +
-                    `- Signal strength: ${metrics?.neural_interface.signal_strength || 0}%\n` +
-                    `- Found ${Math.floor(Math.random() * 15 + 5)} active neural pathways\n` +
-                    `- Encryption level validated at ${metrics?.neural_interface.encryption_level || 0}%`;
-          }
-          break;
-          
-        case 'security_audit':
-          if (userPersona === 'doctor') {
-            result = `🏥 PATIENT DATA SECURITY COMPLIANCE\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `HIPAA Compliance: ✅ FULLY COMPLIANT\n` +
-                    `- Patient Data Encryption: ${metrics?.neural_interface.encryption_level || 0}% (AES-256)\n` +
-                    `- Access Violations: ${metrics?.monitoring.security_violations || 0} (Within acceptable limits)\n` +
-                    `- Audit Trail: Complete and tamper-proof\n` +
-                    `- Medical Device Security: FDA approved protocols active`;
-          } else if (userPersona === 'scientist') {
-            result = `� RESEARCH DATA SECURITY ANALYSIS\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `Data Integrity Index: ${(metrics?.neural_interface.encryption_level || 0) / 100}\n` +
-                    `- Cryptographic Hash Validation: SHA-256 verified\n` +
-                    `- Research Ethics Compliance: IRB approved\n` +
-                    `- Data Anonymization: ${Math.floor(Math.random() * 15 + 85)}% complete\n` +
-                    `- Publication-ready security level achieved`;
-          } else if (userPersona === 'student') {
-            result = `📚 SECURITY 101: Keeping Your Data Safe\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `🔒 Your privacy score: ${metrics?.neural_interface.encryption_level || 0}%\n` +
-                    `- Think of encryption like a secret code only you know!\n` +
-                    `- Security violations found: ${metrics?.monitoring.security_violations || 0} (That's ${(metrics?.monitoring.security_violations || 0) === 0 ? 'excellent!' : 'something to watch'} )\n` +
-                    `- Fun fact: Modern encryption would take billions of years to crack!`;
-          } else {
-            result = `��️ Security Audit Complete:\n` +
-                    `- Threats detected: ${metrics?.monitoring.security_violations || 0}\n` +
-                    `- Firewall status: ${metrics?.industrial_features.threat_detection ? 'ACTIVE' : 'INACTIVE'}\n` +
-                    `- Data streams secured: ${metrics?.monitoring.data_streams || 0}/8\n` +
-                    `- Encryption protocols: AES-256, RSA-4096`;
-          }
-          break;
-          
-        case 'pattern_analysis':
-          if (userPersona === 'doctor') {
-            result = `� CLINICAL PATTERN ASSESSMENT\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `Patient Behavioral Patterns: ANALYZED\n` +
-                    `- Communication frequency: ${metrics?.monitoring.messages_analyzed || 0} interactions\n` +
-                    `- Mood stability indicators: ${Math.floor(Math.random() * 15 + 80)}% stable\n` +
-                    `- Sleep-wake cycle analysis: Regular patterns detected\n` +
-                    `- Clinical recommendation: ${Math.floor(Math.random() * 3) === 0 ? 'Schedule consultation' : 'Continue monitoring'}`;
-          } else if (userPersona === 'scientist') {
-            result = `🔬 ADVANCED PATTERN RECOGNITION\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `Dataset: ${metrics?.monitoring.messages_analyzed || 0} data points\n` +
-                    `- Machine Learning Model: Random Forest (accuracy: ${Math.floor(Math.random() * 20 + 80)}%)\n` +
-                    `- Feature Engineering: 47 variables extracted\n` +
-                    `- Anomaly Detection: ${Math.floor(Math.random() * 3)} outliers identified\n` +
-                    `- Cross-validation score: 0.${Math.floor(Math.random() * 200 + 800)}`;
-          } else if (userPersona === 'student') {
-            result = `📚 UNDERSTANDING PATTERNS IN DATA\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `🎯 What are patterns?\n` +
-                    `- We looked at ${metrics?.monitoring.messages_analyzed || 0} of your activities\n` +
-                    `- Found ${Math.floor(Math.random() * 10 + 5)} interesting trends!\n` +
-                    `- Cool discovery: Your brain creates patterns to help you learn faster\n` +
-                    `- Study tip: Recognizing patterns helps with problem-solving!`;
-          } else {
-            result = `�🎯 Pattern Analysis Results:\n` +
-                    `- Communication patterns analyzed: ${metrics?.monitoring.messages_analyzed || 0}\n` +
-                    `- Learning algorithm: ${metrics?.industrial_features.pattern_learning ? 'ACTIVE' : 'DISABLED'}\n` +
-                    `- Behavioral anomalies: ${Math.floor(Math.random() * 3)}\n` +
-                    `- Prediction accuracy: ${Math.floor(Math.random() * 20 + 80)}%`;
-          }
-          break;
-          
-        case 'search':
-          const query = params?.query || searchQuery;
-          if (query) {
-            result = `🔍 Search Results for "${query}":\n` +
-                    `- Found ${Math.floor(Math.random() * 25 + 10)} matches in communication logs\n` +
-                    `- Neural pattern matches: ${Math.floor(Math.random() * 8 + 2)}\n` +
-                    `- Frequency analysis: ${Math.floor(Math.random() * 100)}% relevance\n` +
-                    `- Processing time: ${Math.floor(Math.random() * 300 + 100)}ms`;
-          } else {
-            result = '❌ Please enter a search query';
-          }
-          break;
-          
-        case 'optimize':
-          if (userPersona === 'doctor') {
-            result = `🏥 MEDICAL SYSTEM OPTIMIZATION\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `Patient Monitoring Enhanced: ✅ OPTIMIZED\n` +
-                    `- Diagnostic accuracy improved: +${Math.floor(Math.random() * 15 + 10)}%\n` +
-                    `- Alert response time: ${Math.floor(Math.random() * 3 + 2)} seconds\n` +
-                    `- Data synchronization with EHR: ACTIVE\n` +
-                    `- Medical device compliance: FDA standards maintained`;
-          } else if (userPersona === 'scientist') {
-            result = `🔬 RESEARCH SYSTEM OPTIMIZATION\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `Computational Performance Boost: ${Math.floor(Math.random() * 40 + 60)}%\n` +
-                    `- Algorithm efficiency: O(log n) complexity achieved\n` +
-                    `- Statistical processing: ${Math.floor(Math.random() * 50 + 150)}% faster\n` +
-                    `- Memory allocation optimized: -${Math.floor(Math.random() * 30 + 20)}% usage\n` +
-                    `- Ready for high-throughput analysis`;
-          } else if (userPersona === 'student') {
-            result = `📚 LEARNING SYSTEM BOOST!\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `🚀 Your learning experience just got better!\n` +
-                    `- Brain-computer connection: ${Math.floor(Math.random() * 20 + 80)}% stronger\n` +
-                    `- Information processing: ${Math.floor(Math.random() * 30 + 20)}% faster\n` +
-                    `- Study session efficiency: Significantly improved!\n` +
-                    `- Tip: Optimized systems help you learn more effectively!`;
-          } else {
-            result = `⚡ System Optimization:\n` +
-                    `- Bandwidth increased by ${Math.floor(Math.random() * 15 + 10)}%\n` +
-                    `- Neural processing speed: +${Math.floor(Math.random() * 25 + 15)}%\n` +
-                    `- Memory usage optimized: -${Math.floor(Math.random() * 20 + 10)}%\n` +
-                    `- Data compression ratio: ${Math.floor(Math.random() * 30 + 70)}%`;
-          }
-          break;
-          
-        default:
-          result = '❌ Unknown action';
+      const response = await fetch(endpoint.url, {
+        method: endpoint.method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        cache: 'no-store'
+      });
+
+      const endTime = performance.now();
+      const responseTime = Math.round(endTime - startTime);
+
+      let data;
+      const contentType = response.headers.get('content-type');
+      if (contentType?.includes('application/json')) {
+        data = await response.json();
+      } else {
+        data = await response.text();
       }
-      
-      setActionResult(result);
+
+      setResponses(prev => ({
+        ...prev,
+        [endpoint.url]: {
+          data,
+          loading: false,
+          error: null,
+          responseTime,
+          status: response.status,
+          timestamp: new Date().toISOString()
+        }
+      }));
     } catch (error) {
-      setActionResult('❌ Action failed: ' + (error as Error).message);
-    } finally {
-      setIsProcessing(false);
+      const endTime = performance.now();
+      setResponses(prev => ({
+        ...prev,
+        [endpoint.url]: {
+          data: null,
+          loading: false,
+          error: error instanceof Error ? error.message : 'Unknown error',
+          responseTime: Math.round(endTime - startTime),
+          status: null,
+          timestamp: new Date().toISOString()
+        }
+      }));
     }
+  }, []);
+
+  // Fetch all endpoints
+  const fetchAllEndpoints = useCallback(() => {
+    ENDPOINTS.forEach(endpoint => fetchEndpoint(endpoint));
+  }, [fetchEndpoint]);
+
+  // Initial load
+  useEffect(() => {
+    fetchAllEndpoints();
+  }, [fetchAllEndpoints]);
+
+  // Auto refresh
+  useEffect(() => {
+    if (autoRefresh) {
+      const interval = setInterval(fetchAllEndpoints, refreshInterval);
+      return () => clearInterval(interval);
+    }
+  }, [autoRefresh, refreshInterval, fetchAllEndpoints]);
+
+  const getStatusColor = (status: number | null) => {
+    if (status === null) return 'bg-gray-500';
+    if (status >= 200 && status < 300) return 'bg-green-500';
+    if (status >= 400 && status < 500) return 'bg-yellow-500';
+    return 'bg-red-500';
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-pink-900 flex items-center justify-center">
-        <div className="text-center text-white">
-          <div className="text-4xl mb-4">📱</div>
-          <h2 className="text-2xl font-bold mb-2">Initializing Phone Monitor</h2>
-          <p className="text-gray-300">Connecting to neural interface...</p>
-        </div>
-      </div>
-    );
-  }
+  const getStatusText = (status: number | null) => {
+    if (status === null) return 'N/A';
+    if (status >= 200 && status < 300) return 'Success';
+    if (status >= 400 && status < 500) return 'Client Error';
+    return 'Server Error';
+  };
+
+  const selectedResponse = responses[selectedEndpoint];
+  const selectedConfig = ENDPOINTS.find(e => e.url === selectedEndpoint);
+
+  const categorizedEndpoints = {
+    monitoring: ENDPOINTS.filter(e => e.category === 'monitoring'),
+    neural: ENDPOINTS.filter(e => e.category === 'neural'),
+    security: ENDPOINTS.filter(e => e.category === 'security'),
+    system: ENDPOINTS.filter(e => e.category === 'system')
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-pink-900 p-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-block mb-4 text-pink-400 hover:text-pink-300 transition-colors">
-            ← Back to Clisonix Cloud
-          </Link>
-          <h1 className="text-4xl font-bold text-white mb-4">
-            📱 Phone Monitor v3.0
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900 text-white p-4 md:p-6">
+      {/* Header */}
+      <div className="mb-6">
+        <div className="flex items-center gap-3 mb-2">
+          <Smartphone className="w-8 h-8 text-blue-700" />
+          <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-700 to-violet-400 bg-clip-text text-transparent">
+            Phone Monitor API
           </h1>
-          <p className="text-xl text-gray-300 mb-2">
-            Mobile Neural Interface & Communication Analysis
-          </p>
-          <div className="text-sm text-gray-400 mb-4">
-            Last sync: {lastUpdate.toLocaleTimeString()}
-          </div>
-          {statusSource === 'fallback' && (
-            <div className="text-sm text-yellow-300 bg-yellow-500/10 border border-yellow-500/40 rounded-lg inline-block px-3 py-1">
-              Live ASI telemetry unavailable — showing fallback telemetry. Start the backend API to enable real metrics.
-            </div>
-          )}
-          
-          {/* User Persona Selector */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 max-w-4xl mx-auto">
-            <h3 className="text-lg font-semibold text-white mb-4">🎭 Select Your Profession</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <button
-                onClick={() => setUserPersona('doctor')}
-                className={`p-3 rounded-lg border transition-all ${
-                  userPersona === 'doctor' 
-                    ? 'bg-red-500/20 border-red-500 text-red-300' 
-                    : 'bg-black/20 border-gray-600 text-gray-300 hover:bg-white/5'
-                }`}
-              >
-                <div className="text-2xl mb-1">👨‍⚕️</div>
-                <div className="text-sm">Doctor</div>
-              </button>
-              
-              <button
-                onClick={() => setUserPersona('scientist')}
-                className={`p-3 rounded-lg border transition-all ${
-                  userPersona === 'scientist' 
-                    ? 'bg-blue-500/20 border-blue-500 text-blue-300' 
-                    : 'bg-black/20 border-gray-600 text-gray-300 hover:bg-white/5'
-                }`}
-              >
-                <div className="text-2xl mb-1">🔬</div>
-                <div className="text-sm">Researcher</div>
-              </button>
-              
-              <button
-                onClick={() => setUserPersona('student')}
-                className={`p-3 rounded-lg border transition-all ${
-                  userPersona === 'student' 
-                    ? 'bg-green-500/20 border-green-500 text-green-300' 
-                    : 'bg-black/20 border-gray-600 text-gray-300 hover:bg-white/5'
-                }`}
-              >
-                <div className="text-2xl mb-1">🎓</div>
-                <div className="text-sm">Student</div>
-              </button>
-              
-              <button
-                onClick={() => setUserPersona('general')}
-                className={`p-3 rounded-lg border transition-all ${
-                  userPersona === 'general' 
-                    ? 'bg-purple-500/20 border-purple-500 text-purple-300' 
-                    : 'bg-black/20 border-gray-600 text-gray-300 hover:bg-white/5'
-                }`}
-              >
-                <div className="text-2xl mb-1">👤</div>
-                <div className="text-sm">General</div>
-              </button>
-            </div>
-            
-            {/* Persona Description */}
-            <div className="mt-4 p-3 bg-black/30 rounded-lg">
-              <div className="text-sm text-gray-300">
-                {userPersona === 'doctor' && "🏥 Medical Professional Mode: Focus on patient monitoring, health metrics, and clinical data analysis"}
-                {userPersona === 'scientist' && "🔬 Research Mode: Advanced pattern analysis, data visualization, and experimental controls"}
-                {userPersona === 'student' && "📚 Learning Mode: Educational insights, simplified explanations, and tutorial guidance"}
-                {userPersona === 'general' && "🌟 General User Mode: Balanced interface with all features accessible"}
-              </div>
-            </div>
-          </div>
+          <span className="px-2 py-1 text-xs font-mono bg-blue-800/20 text-blue-700 rounded border border-blue-800/30">
+            REAL DATA
+          </span>
         </div>
+        <p className="text-gray-400">
+          Neural phone monitoring system • Real API responses from ASI Trinity
+        </p>
+      </div>
 
-        {/* Industrial Device Status Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Main Device Status */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-            <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
-              📡 Device Connection Status
-            </h3>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="text-center p-4 bg-black/20 rounded-lg">
-                <div className={`text-3xl mb-2 ${
-                  metrics?.device_status === 'connected' ? 'text-green-400' : 'text-red-400'
-                }`}>
-                  {metrics?.device_status === 'connected' ? '🟢' : '🔴'}
-                </div>
-                <div className="text-white font-medium">Connection</div>
-                <div className="text-gray-400 capitalize text-sm">
-                  {metrics?.device_status || 'unknown'}
-                </div>
-              </div>
-              
-              <div className="text-center p-4 bg-black/20 rounded-lg">
-                <div className={`text-3xl mb-2 ${
-                  metrics?.neural_interface.active ? 'text-blue-400' : 'text-gray-400'
-                }`}>
-                  🧠
-                </div>
-                <div className="text-white font-medium">Neural Link</div>
-                <div className="text-gray-400 text-sm">
-                  {metrics?.neural_interface.active ? 'ACTIVE' : 'INACTIVE'}
-                </div>
-              </div>
-              
-              <div className="text-center p-4 bg-black/20 rounded-lg">
-                <div className="text-3xl mb-2 text-purple-400">📊</div>
-                <div className="text-white font-medium">Signal</div>
-                <div className="text-gray-400 text-sm">
-                  {metrics?.neural_interface.signal_strength || 0}%
-                </div>
-              </div>
-              
-              <div className="text-center p-4 bg-black/20 rounded-lg">
-                <div className="text-3xl mb-2 text-yellow-400">🔒</div>
-                <div className="text-white font-medium">Encryption</div>
-                <div className="text-gray-400 text-sm">
-                  {metrics?.neural_interface.encryption_level || 0}%
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Industrial Features Status */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-            <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
-              🏭 Industrial Features
-            </h3>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 bg-black/20 rounded-lg">
-                <span className="text-gray-300 flex items-center">
-                  🤖 Auto Response
-                </span>
-                <span className={`px-2 py-1 rounded text-xs ${
-                  metrics?.industrial_features.auto_response ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
-                }`}>
-                  {metrics?.industrial_features.auto_response ? 'ENABLED' : 'DISABLED'}
-                </span>
-              </div>
-              
-              <div className="flex items-center justify-between p-3 bg-black/20 rounded-lg">
-                <span className="text-gray-300 flex items-center">
-                  🔍 AI Filtering
-                </span>
-                <span className={`px-2 py-1 rounded text-xs ${
-                  metrics?.industrial_features.ai_filtering ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
-                }`}>
-                  {metrics?.industrial_features.ai_filtering ? 'ACTIVE' : 'INACTIVE'}
-                </span>
-              </div>
-              
-              <div className="flex items-center justify-between p-3 bg-black/20 rounded-lg">
-                <span className="text-gray-300 flex items-center">
-                  🛡️ Threat Detection
-                </span>
-                <span className={`px-2 py-1 rounded text-xs ${
-                  metrics?.industrial_features.threat_detection ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
-                }`}>
-                  {metrics?.industrial_features.threat_detection ? 'SECURED' : 'VULNERABLE'}
-                </span>
-              </div>
-              
-              <div className="flex items-center justify-between p-3 bg-black/20 rounded-lg">
-                <span className="text-gray-300 flex items-center">
-                  🎯 Pattern Learning
-                </span>
-                <span className={`px-2 py-1 rounded text-xs ${
-                  metrics?.industrial_features.pattern_learning ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
-                }`}>
-                  {metrics?.industrial_features.pattern_learning ? 'LEARNING' : 'STATIC'}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Interactive Neural Status */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all cursor-pointer group"
-               onClick={() => executeAction('neural_scan')}>
-            <h3 className="text-lg font-semibold text-white mb-3 flex items-center justify-between">
-              🧠 Neural Activity
-              <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click to scan</span>
-            </h3>
-            <div className="text-3xl font-bold text-pink-400 mb-2">
-              {metrics?.neural_interface.signal_strength || 0}%
-            </div>
-            <div className="w-full bg-black/30 rounded-full h-2">
-                <div
-                  className={`bg-gradient-to-r from-pink-500 to-purple-500 h-2 rounded-full transition-all duration-300 ${signalStrengthWidthClass}`}
-                />
-            </div>
-            <div className="mt-2 text-xs text-gray-400">
-              {(metrics?.neural_interface.signal_strength || 0) > 80 ? '🔥 High activity detected' : 
-               (metrics?.neural_interface.signal_strength || 0) > 50 ? '⚡ Moderate activity' : 
-               '💤 Low activity'}
-            </div>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all cursor-pointer group"
-               onClick={() => executeAction('optimize')}>
-            <h3 className="text-lg font-semibold text-white mb-3 flex items-center justify-between">
-              🔗 Connection Strength
-              <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click to optimize</span>
-            </h3>
-            <div className="text-3xl font-bold text-blue-400 mb-2">
-              {metrics?.monitoring.data_streams ? Math.floor(metrics.monitoring.data_streams * 12.5) : 0}%
-            </div>
-            <div className="w-full bg-black/30 rounded-full h-2">
-                <div
-                  className={`bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full transition-all duration-300 ${connectionWidthClass}`}
-                />
-            </div>
-            <div className="mt-2 text-xs text-gray-400">
-              {(metrics?.monitoring.data_streams ? metrics.monitoring.data_streams * 12.5 : 0) > 85 ? '🚀 Excellent signal' : 
-               (metrics?.monitoring.data_streams ? metrics.monitoring.data_streams * 12.5 : 0) > 60 ? '📶 Good connection' : 
-               '⚠️ Weak signal'}
-            </div>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all cursor-pointer group"
-               onClick={() => executeAction('security_audit')}>
-            <h3 className="text-lg font-semibold text-white mb-3 flex items-center justify-between">
-              🛡️ Security Level
-              <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">Click to audit</span>
-            </h3>
-            <div className="text-3xl font-bold text-green-400 mb-2">
-              {metrics?.neural_interface.encryption_level || 0}%
-            </div>
-            <div className="w-full bg-black/30 rounded-full h-2">
-                <div
-                  className={`bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full transition-all duration-300 ${encryptionWidthClass}`}
-                />
-            </div>
-            <div className="mt-2 text-xs text-gray-400">
-              {(metrics?.neural_interface.encryption_level || 0) > 90 ? '🔒 Maximum security' : 
-               (metrics?.neural_interface.encryption_level || 0) > 70 ? '✅ Secure' : 
-               '🚨 Needs attention'}
-            </div>
-          </div>
-        </div>
-
-        {/* Neural Interface Details */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-            <h3 className="text-xl font-semibold text-white mb-4">
-              🧠 Neural Interface Stats
-            </h3>
-            <div className="space-y-4">
-              <div className="flex justify-between">
-                <span className="text-gray-300">Interface Status:</span>
-                <span className={`font-medium ${
-                  metrics?.neural_interface.active ? 'text-green-400' : 'text-red-400'
-                }`}>
-                  {metrics?.neural_interface.active ? 'ACTIVE' : 'INACTIVE'}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">Signal Strength:</span>
-                <span className="text-white">
-                  {metrics?.neural_interface.signal_strength || 0}%
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">Bandwidth:</span>
-                <span className="text-white">
-                  {metrics?.neural_interface.bandwidth || 0} MB/s
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">Last Sync:</span>
-                <span className="text-gray-400 text-sm">
-                  {metrics?.neural_interface.last_sync ? 
-                    new Date(metrics.neural_interface.last_sync).toLocaleTimeString() : 
-                    'Never'
-                  }
-                </span>
-              </div>
-              
-              {/* Signal Meter */}
-              <div className="mt-4">
-                <div className="text-sm text-gray-400 mb-2">Signal Quality</div>
-                <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-                  <div 
-                    className={`h-3 rounded-full transition-all duration-1000 ${
-                      (metrics?.neural_interface.signal_strength || 0) > 70 ? 'bg-green-500 w-full' :
-                      (metrics?.neural_interface.signal_strength || 0) > 40 ? 'bg-yellow-500 w-2/3' : 
-                      'bg-red-500 w-1/3'
-                    }`}
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-            <h3 className="text-xl font-semibold text-white mb-4">
-              📊 Monitoring Stats
-            </h3>
-            <div className="space-y-4">
-              <div className="flex justify-between">
-                <span className="text-gray-300">Calls Tracked:</span>
-                <span className="text-white font-mono">
-                  {metrics?.monitoring.calls_tracked || 0}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">Messages Analyzed:</span>
-                <span className="text-white font-mono">
-                  {metrics?.monitoring.messages_analyzed || 0}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">Neural Patterns:</span>
-                <span className="text-white font-mono">
-                  {metrics?.monitoring.neural_patterns || 0}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">Security Violations:</span>
-                <span className={`font-mono ${
-                  (metrics?.monitoring.security_violations || 0) > 0 ? 'text-red-400' : 'text-green-400'
-                }`}>
-                  {metrics?.monitoring.security_violations || 0}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">Data Streams:</span>
-                <span className="text-white font-mono">
-                  {metrics?.monitoring.data_streams || 0}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-300">Max Streams (buffer):</span>
-                <span className="text-white font-mono">
-                  {albaMaxStreams}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Warning Notice */}
-        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-6 mb-8">
-          <div className="flex items-start space-x-3">
-            <div className="text-yellow-400 text-2xl">⚠️</div>
-            <div>
-              <h3 className="text-yellow-400 font-semibold mb-2">
-                Development Module
-              </h3>
-              <p className="text-gray-300 text-sm">
-                Phone Monitor v3.0 is currently in development. Full mobile neural interface 
-                capabilities require specialized hardware and software integration. Current 
-                implementation shows system integration status from ASI Trinity components.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Interactive Control Panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Action Center */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-            <h3 className="text-xl font-semibold text-white mb-4">
-              🎮 Interactive Control Center
-            </h3>
-            
-            {/* Search Function */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                🔍 Neural Pattern Search
-              </label>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search patterns, keywords, or data..."
-                  className="flex-1 bg-black/30 border border-gray-600 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:border-pink-500 focus:outline-none"
-                />
-                <button
-                  onClick={() => executeAction('search')}
-                  disabled={isProcessing}
-                  className="px-4 py-2 bg-pink-600 hover:bg-pink-700 disabled:bg-gray-600 text-white rounded-lg transition-colors"
-                >
-                  {isProcessing ? '🔄' : '🔍'}
-                </button>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                onClick={() => executeAction('neural_scan')}
-                disabled={isProcessing}
-                className="p-3 bg-blue-600/20 hover:bg-blue-600/30 border border-blue-600/30 rounded-lg text-white transition-colors disabled:opacity-50"
-              >
-                🧠 Neural Scan
-              </button>
-              
-              <button
-                onClick={() => executeAction('security_audit')}
-                disabled={isProcessing}
-                className="p-3 bg-red-600/20 hover:bg-red-600/30 border border-red-600/30 rounded-lg text-white transition-colors disabled:opacity-50"
-              >
-                🛡️ Security Audit
-              </button>
-              
-              <button
-                onClick={() => executeAction('pattern_analysis')}
-                disabled={isProcessing}
-                className="p-3 bg-green-600/20 hover:bg-green-600/30 border border-green-600/30 rounded-lg text-white transition-colors disabled:opacity-50"
-              >
-                🎯 Pattern Analysis
-              </button>
-              
-              <button
-                onClick={() => executeAction('optimize')}
-                disabled={isProcessing}
-                className="p-3 bg-purple-600/20 hover:bg-purple-600/30 border border-purple-600/30 rounded-lg text-white transition-colors disabled:opacity-50"
-              >
-                ⚡ Optimize System
-              </button>
-            </div>
-          </div>
-
-          {/* Results Panel */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-            <h3 className="text-xl font-semibold text-white mb-4">
-              📊 Action Results
-            </h3>
-            
-            {isProcessing ? (
-              <div className="flex items-center justify-center h-40">
-                <div className="text-center">
-                  <div className="text-4xl mb-2 animate-spin">🔄</div>
-                  <div className="text-gray-300">Processing...</div>
-                </div>
-              </div>
-            ) : actionResult ? (
-              <div className="bg-black/30 rounded-lg p-4 border border-gray-600">
-                <pre className="text-green-400 text-sm whitespace-pre-wrap font-mono">
-                  {actionResult}
-                </pre>
-                <button
-                  onClick={() => setActionResult(null)}
-                  className="mt-3 text-xs text-gray-400 hover:text-white transition-colors"
-                >
-                  Clear Results
-                </button>
-              </div>
-            ) : (
-              <div className="flex items-center justify-center h-40 text-gray-400">
-                <div className="text-center">
-                  <div className="text-4xl mb-2">🎯</div>
-                  <div>Select an action to see results</div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Advanced Tools */}
-        <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 mb-8">
-          <h3 className="text-xl font-semibold text-white mb-4">
-            🛠️ {userPersona === 'doctor' ? 'Medical Tools' : 
-                userPersona === 'scientist' ? 'Research Tools' : 
-                userPersona === 'student' ? 'Learning Tools' : 
-                'Advanced Neural Tools'}
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-black/20 rounded-lg p-4 border border-gray-600">
-              <h4 className="text-white font-medium mb-2">
-                {userPersona === 'doctor' ? '🏥 Patient Monitoring' : 
-                 userPersona === 'scientist' ? '📊 Data Collection' : 
-                 userPersona === 'student' ? '🧠 Brain Explorer' : 
-                 '📈 Real-time Monitoring'}
-              </h4>
-              <p className="text-gray-400 text-sm mb-3">
-                {userPersona === 'doctor' ? 'Monitor patient neural activity and vital signs' : 
-                 userPersona === 'scientist' ? 'Collect neural data for research analysis' : 
-                 userPersona === 'student' ? 'Explore how your brain works in real-time' : 
-                 'Live neural activity tracking with pattern recognition'}
-              </p>
-              <button
-                onClick={() => executeAction('neural_scan')}
-                className="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors text-sm"
-              >
-                {userPersona === 'doctor' ? 'Start Patient Scan' : 
-                 userPersona === 'scientist' ? 'Begin Data Collection' : 
-                 userPersona === 'student' ? 'Explore My Brain' : 
-                 'Start Monitoring'}
-              </button>
-            </div>
-            
-            <div className="bg-black/20 rounded-lg p-4 border border-gray-600">
-              <h4 className="text-white font-medium mb-2">
-                {userPersona === 'doctor' ? '🛡️ HIPAA Compliance' : 
-                 userPersona === 'scientist' ? '🔐 Research Ethics' : 
-                 userPersona === 'student' ? '🔒 Privacy Protection' : 
-                 '🔐 Data Protection'}
-              </h4>
-              <p className="text-gray-400 text-sm mb-3">
-                {userPersona === 'doctor' ? 'Ensure patient data meets medical privacy standards' : 
-                 userPersona === 'scientist' ? 'Verify research data compliance and ethics' : 
-                 userPersona === 'student' ? 'Keep your personal data safe and private' : 
-                 'Advanced encryption and security protocols'}
-              </p>
-              <button
-                onClick={() => executeAction('security_audit')}
-                className="w-full px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded transition-colors text-sm"
-              >
-                {userPersona === 'doctor' ? 'HIPAA Audit' : 
-                 userPersona === 'scientist' ? 'Ethics Check' : 
-                 userPersona === 'student' ? 'Privacy Check' : 
-                 'Run Security Check'}
-              </button>
-            </div>
-            
-            <div className="bg-black/20 rounded-lg p-4 border border-gray-600">
-              <h4 className="text-white font-medium mb-2">
-                {userPersona === 'doctor' ? '📋 Clinical Analysis' : 
-                 userPersona === 'scientist' ? '🔬 Statistical Analysis' : 
-                 userPersona === 'student' ? '🎯 Learning Patterns' : 
-                 '🎯 Smart Analysis'}
-              </h4>
-              <p className="text-gray-400 text-sm mb-3">
-                {userPersona === 'doctor' ? 'Analyze patient patterns for clinical insights' : 
-                 userPersona === 'scientist' ? 'Perform statistical analysis on research data' : 
-                 userPersona === 'student' ? 'Discover how you learn and study best' : 
-                 'AI-powered pattern recognition and learning'}
-              </p>
-              <button
-                onClick={() => executeAction('pattern_analysis')}
-                className="w-full px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded transition-colors text-sm"
-              >
-                {userPersona === 'doctor' ? 'Clinical Analysis' : 
-                 userPersona === 'scientist' ? 'Statistical Analysis' : 
-                 userPersona === 'student' ? 'Study My Patterns' : 
-                 'Analyze Patterns'}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Live Activity Feed */}
-        <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 mb-8">
-          <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
-            📈 Live Activity Feed
-            <span className="ml-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-          </h3>
-          
-          <div className="space-y-3 max-h-60 overflow-y-auto">
-            {activityFeed.length > 0 ? (
-              activityFeed.map((item) => (
-                <div
-                  key={item.id}
-                  className={`flex items-center justify-between p-3 bg-black/20 rounded-lg border-l-4 ${item.borderClass}`}
-                >
-                  <div className="flex items-center space-x-3">
-                    <div className={item.accentClass}>{item.icon}</div>
-                    <div>
-                      <div className="text-white text-sm">{item.label}</div>
-                      <div className="text-gray-400 text-xs">
-                        {item.timestamp.toLocaleTimeString()}
-                      </div>
-                    </div>
-                  </div>
-                  <div className={`${item.accentClass} text-sm`}>{item.value}</div>
-                </div>
-              ))
-            ) : (
-              <div className="text-gray-400 text-sm">
-                Telemetry activity will appear here once data syncs.
-              </div>
-            )}
-          </div>
-          
+      {/* Controls */}
+      <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-4 mb-6">
+        <div className="flex flex-wrap items-center gap-4">
           <button
-            onClick={() => executeAction('pattern_analysis')}
-            className="mt-4 w-full px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-lg transition-all"
+            onClick={fetchAllEndpoints}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-900 hover:bg-emerald-700 rounded-lg transition-colors"
           >
-            🔍 Analyze All Activity
+            <RefreshCw className="w-4 h-4" />
+            Refresh All
           </button>
+
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="autoRefresh"
+              checked={autoRefresh}
+              onChange={(e) => setAutoRefresh(e.target.checked)}
+              className="w-4 h-4 accent-blue-800"
+            />
+            <label htmlFor="autoRefresh" className="text-sm text-gray-300">Auto Refresh</label>
+          </div>
+
+          {autoRefresh && (
+            <select
+              value={refreshInterval}
+              onChange={(e) => setRefreshInterval(Number(e.target.value))}
+              className="bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"
+            >
+              <option value={3000}>3s</option>
+              <option value={5000}>5s</option>
+              <option value={10000}>10s</option>
+              <option value={30000}>30s</option>
+            </select>
+          )}
+
+          <div className="ml-auto text-xs text-gray-500 font-mono">
+            {Object.values(responses).filter(r => !r.loading && r.status !== null).length} / {ENDPOINTS.length} loaded
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Endpoint List */}
+        <div className="lg:col-span-1 space-y-4">
+          {Object.entries(categorizedEndpoints).map(([category, endpoints]) => (
+            <div key={category} className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden">
+              <div className="px-4 py-2 bg-white/5 border-b border-white/10">
+                <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">
+                  {category}
+                </h3>
+              </div>
+              <div className="divide-y divide-white/5">
+                {endpoints.map((endpoint) => {
+                  const response = responses[endpoint.url];
+                  const Icon = endpoint.icon;
+                  const isSelected = selectedEndpoint === endpoint.url;
+
+                  return (
+                    <button
+                      key={endpoint.url}
+                      onClick={() => setSelectedEndpoint(endpoint.url)}
+                      className={`w-full p-3 text-left transition-colors ${isSelected ? 'bg-blue-900/20 border-l-2 border-blue-800' : 'hover:bg-white/5'
+                        }`}
+                    >
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="flex items-center gap-2">
+                          <Icon className={`w-4 h-4 ${isSelected ? 'text-blue-700' : 'text-gray-500'}`} />
+                          <span className="font-medium text-sm">{endpoint.name}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {response?.loading ? (
+                            <RefreshCw className="w-3 h-3 text-violet-400 animate-spin" />
+                          ) : response?.status ? (
+                            <span className={`w-2 h-2 rounded-full ${getStatusColor(response.status)}`} />
+                          ) : null}
+                          <span className="px-1.5 py-0.5 text-xs font-mono bg-blue-800/20 text-blue-700 rounded">
+                            {endpoint.method}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="text-xs text-gray-500 truncate">{endpoint.url}</div>
+                      {response?.responseTime && !response.loading && (
+                        <div className="flex items-center gap-1 mt-1 text-xs text-gray-500">
+                          <Clock className="w-3 h-3" />
+                          {response.responseTime}ms
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* Raw Data - Now Collapsible */}
-        <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-          <details className="group">
-            <summary className="cursor-pointer text-xl font-semibold text-white mb-4 flex items-center">
-              🔧 Raw Interface Data 
-              <span className="ml-2 text-sm group-open:rotate-90 transition-transform">▶</span>
-            </summary>
-            <pre className="bg-black/20 rounded-lg p-4 text-xs text-pink-400 overflow-auto max-h-60">
-              {metrics ? JSON.stringify({ current: metrics, bufferSize: metricsHistory.length, history: metricsHistory }, null, 2) : 'No data available'}
-            </pre>
-          </details>
+        {/* Response Panel */}
+        <div className="lg:col-span-2">
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden">
+            {/* Response Header */}
+            <div className="p-4 bg-white/5 border-b border-white/10">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  {selectedConfig && <selectedConfig.icon className="w-5 h-5 text-blue-700" />}
+                  <h2 className="text-lg font-semibold">{selectedConfig?.name}</h2>
+                </div>
+                <button
+                  onClick={() => selectedConfig && fetchEndpoint(selectedConfig)}
+                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                  disabled={selectedResponse?.loading}
+                >
+                  <RefreshCw className={`w-4 h-4 ${selectedResponse?.loading ? 'animate-spin text-violet-400' : 'text-gray-400'}`} />
+                </button>
+              </div>
+
+              <div className="flex items-center gap-4 text-sm">
+                <div className="flex items-center gap-2 font-mono text-blue-700">
+                  <span className="px-2 py-0.5 bg-blue-800/20 rounded text-xs">
+                    {selectedConfig?.method}
+                  </span>
+                  {selectedConfig?.url}
+                </div>
+              </div>
+
+              {selectedResponse && !selectedResponse.loading && (
+                <div className="flex items-center gap-4 mt-3 text-xs">
+                  <div className="flex items-center gap-1">
+                    {selectedResponse.status && selectedResponse.status >= 200 && selectedResponse.status < 300 ? (
+                      <CheckCircle className="w-4 h-4 text-green-400" />
+                    ) : (
+                      <AlertCircle className="w-4 h-4 text-red-400" />
+                    )}
+                    <span className={`font-mono ${selectedResponse.status && selectedResponse.status >= 200 && selectedResponse.status < 300 ? 'text-green-400' : 'text-red-400'}`}>
+                      {selectedResponse.status} {getStatusText(selectedResponse.status)}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1 text-gray-400">
+                    <Clock className="w-3 h-3" />
+                    <span className="font-mono">{selectedResponse.responseTime}ms</span>
+                  </div>
+                  {selectedResponse.timestamp && (
+                    <div className="text-gray-500 font-mono">
+                      {new Date(selectedResponse.timestamp).toLocaleTimeString()}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Response Body */}
+            <div className="p-4">
+              <div className="text-xs text-gray-500 uppercase tracking-wider mb-2">Response Body</div>
+
+              {selectedResponse?.loading ? (
+                <div className="flex items-center justify-center py-12">
+                  <RefreshCw className="w-6 h-6 text-blue-700 animate-spin" />
+                  <span className="ml-2 text-gray-400">Loading...</span>
+                </div>
+              ) : selectedResponse?.error ? (
+                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                  <div className="flex items-center gap-2 text-red-400 mb-2">
+                    <AlertCircle className="w-5 h-5" />
+                    <span className="font-semibold">Error</span>
+                    </div>
+                    <pre className="text-sm text-red-300 font-mono whitespace-pre-wrap">
+                      {selectedResponse.error}
+                    </pre>
+                  </div>
+                ) : (
+                <div className="bg-gray-900/50 rounded-lg p-4 max-h-[600px] overflow-auto">
+                  <pre className="text-sm font-mono text-gray-300 whitespace-pre-wrap">
+                    {JSON.stringify(selectedResponse?.data, null, 2)}
+                  </pre>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+            {Object.entries(responses).slice(0, 4).map(([url, response]) => {
+              const config = ENDPOINTS.find(e => e.url === url);
+              if (!config || !response || response.loading) return null;
+
+              return (
+                <div key={url} className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <config.icon className="w-4 h-4 text-blue-700" />
+                    <span className="text-xs text-gray-400 truncate">{config.name}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className={`text-lg font-bold ${response.status && response.status < 300 ? 'text-green-400' : 'text-red-400'}`}>
+                      {response.status || 'N/A'}
+                    </span>
+                    <span className="text-xs text-gray-500">{response.responseTime}ms</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
+      </div>
+
+      {/* Footer */}
+      <div className="mt-8 text-center">
+        <p className="text-xs text-gray-600 font-mono">
+          Phone Monitor • Real API Data • No Mock Values • No Math.random()
+        </p>
       </div>
     </div>
   );
 }
+
+
+
+
+
+
+
 

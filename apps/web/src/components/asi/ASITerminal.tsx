@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ASI Terminal Component
  * =====================
  * 
@@ -73,10 +73,9 @@ export function ASITerminal({ className, maxCommands = 10 }: ASITerminalProps) {
     }
   };
 
-  const getInputState = () => {
-    if (alba.status === 'active') return 'processing';
-    if (sandbox.violations > 0) return 'error';
-    return 'normal';
+  const getInputState = (): 'default' | 'error' | 'focused' => {
+    if ((sandbox.violations?.length ?? 0) > 0) return 'error';
+    return 'default';
   };
 
   return (
@@ -103,8 +102,8 @@ export function ASITerminal({ className, maxCommands = 10 }: ASITerminalProps) {
           <button
             onClick={clearCommands}
             className={asiButton({ 
-              intent: 'ghost', 
-              size: 'xs' 
+              variant: 'ghost',
+              size: 'sm' 
             })}
           >
             Clear
@@ -121,12 +120,12 @@ export function ASITerminal({ className, maxCommands = 10 }: ASITerminalProps) {
             animate={{ opacity: 1, y: 0 }}
             className="text-gray-400 text-sm space-y-2"
           >
-            <div>🤖 <span className="text-cyan-400">Clisonix ASI</span> Online</div>
+            <div>🤖 <span className="text-violet-400">Clisonix ASI</span> Online</div>
             <div>🔐 <span className="text-purple-400">Jona Sandbox</span> Active</div>
             <div>🌐 <span className="text-sky-400">Alba Network</span> Monitoring</div>
             <div>💡 <span className="text-emerald-400">Albi Intelligence</span> Ready</div>
             <div className="pt-2 text-xs">
-              Shkruani një komandë për të filluar...
+              Type a command to get started...
             </div>
           </motion.div>
         )}
@@ -149,18 +148,18 @@ export function ASITerminal({ className, maxCommands = 10 }: ASITerminalProps) {
                       <ClientTimeDisplay timestamp={command.timestamp} />
                     </span>
                     <span className="flex-1 font-mono text-sm">
-                      <span className="text-cyan-400">ASI&gt;</span> {command.text}
+                      <span className="text-violet-400">ASI&gt;</span> {command.text}
                     </span>
                   </div>
                   
-                  {command.output && (
+                  {command.result && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       transition={{ delay: 0.2 }}
                       className="text-sm text-gray-300 font-mono ml-4 pl-4 border-l border-gray-600"
                     >
-                      {command.output.split('\n').map((line, lineIndex) => (
+                      {command.result.split('\n').map((line, lineIndex) => (
                         <div key={lineIndex} className="mb-1">
                           {line}
                         </div>
@@ -187,13 +186,13 @@ export function ASITerminal({ className, maxCommands = 10 }: ASITerminalProps) {
 
       {/* Quick Commands */}
       <div className="px-6 pb-4">
-        <div className="text-xs text-gray-500 mb-2">Komanda të shpejta:</div>
+        <div className="text-xs text-gray-500 mb-2">Quick Commands:</div>
         <div className="flex flex-wrap gap-2">
           {[
             { cmd: 'status', label: 'Status' },
-            { cmd: 'analyze system', label: 'Analizë' },
-            { cmd: 'health check', label: 'Shëndeti' },
-            { cmd: 'optimize performance', label: 'Optimizim' },
+            { cmd: 'analyze system', label: 'Analyze' },
+            { cmd: 'health check', label: 'Health' },
+            { cmd: 'optimize performance', label: 'Optimize' },
             { cmd: 'backup data', label: 'Backup' }
           ].map(({ cmd, label }) => (
             <motion.button
@@ -202,8 +201,8 @@ export function ASITerminal({ className, maxCommands = 10 }: ASITerminalProps) {
               whileTap={{ scale: 0.95 }}
               onClick={() => handleQuickCommand(cmd)}
               className={asiButton({ 
-                intent: 'ghost', 
-                size: 'xs'
+                variant: 'ghost', 
+                size: 'sm'
               })}
             >
               {label}
@@ -221,24 +220,23 @@ export function ASITerminal({ className, maxCommands = 10 }: ASITerminalProps) {
             onChange={(e) => setInput(e.target.value)}
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
-            placeholder="Shkruani komandën tuaj këtu... (p.sh: 'analyze data', 'system status')"
+            placeholder="Type your command here... (e.g. 'analyze data', 'system status')"
             className={commandInputVariants({ 
               state: getInputState()
             })}
-            disabled={alba.status === 'active'}
           />
           
           <motion.button
             type="submit"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            disabled={!input.trim() || alba.status === 'active'}
+            disabled={!input.trim()}
             className={asiButton({ 
-              intent: alba.status === 'active' ? 'secondary' : 'primary',
-              state: alba.status === 'active' ? 'processing' : 'idle'
+              variant: 'default',
+              size: 'default'
             })}
           >
-            {alba.status === 'active' ? 'Duke procesuar...' : 'Ekzekuto'}
+            Execute
           </motion.button>
         </div>
 
@@ -250,7 +248,7 @@ export function ASITerminal({ className, maxCommands = 10 }: ASITerminalProps) {
             exit={{ opacity: 0, y: -10 }}
             className="mt-2 text-xs text-gray-500"
           >
-            💡 Provoni: &quot;monitor network&quot;, &quot;scan security&quot;, &quot;backup files&quot;, &quot;optimize system&quot;
+            💡 Try: &quot;monitor network&quot;, &quot;scan security&quot;, &quot;backup files&quot;, &quot;optimize system&quot;
           </motion.div>
         )}
       </form>

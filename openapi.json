@@ -7,7 +7,7 @@
     "contact": {
       "name": "Clisonix Support",
       "url": "https://clisonix.cloud/support",
-      "email": "support@clisonix.cloud"
+      "email": "clisonix@pm.me"
     },
     "license": {
       "name": "Proprietary",
@@ -24,13 +24,28 @@
       "variables": {}
     },
     {
-      "url": "https://api.clisonix.cloud",
-      "description": "Production",
+      "url": "https://api.clisonix.com",
+      "description": "Production API",
+      "variables": { }
+    },
+    {
+      "url": "https://api.clisonix.com",
+      "description": "Production - Domain",
       "variables": {}
     },
     {
-      "url": "https://sandbox.clisonix.cloud",
-      "description": "Sandbox Testing",
+      "url": "https://reporting.clisonix.com",
+      "description": "Reporting Microservice",
+      "variables": { }
+    },
+    {
+      "url": "https://excel.clisonix.com",
+      "description": "Excel Microservice",
+      "variables": { }
+    },
+    {
+      "url": "http://localhost:8000",
+      "description": "Local Development",
       "variables": {}
     }
   ],
@@ -2677,4 +2692,5 @@
     }
   }
 }
+
 

@@ -20,10 +20,19 @@ from fastapi.responses import JSONResponse
 # OpenTelemetry imports
 from tracing import setup_tracing, instrument_fastapi_app, instrument_http_clients
 
+# API Version
+API_V1 = "/api/v1"
+
 # Initialize tracing
 tracer = setup_tracing("alba-api")
 
-app = FastAPI(title="ALBA API Server", version="1.0.0")
+app = FastAPI(
+    title="ALBA API Server", 
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json"
+)
 
 # Instrument FastAPI app for automatic tracing
 instrument_fastapi_app(app, "alba-api")
@@ -117,6 +126,21 @@ def root() -> dict[str, object]:
         "service": "ALBA API Server",
         "endpoint": "/alba/frame",
     }
+
+
+@app.get("/health")
+def health():
+    return {"status": "healthy", "service": "alba", "timestamp": datetime.now(timezone.utc).isoformat()}
+
+
+@app.get(API_V1 + "/status")
+def api_status():
+    return {"status": "operational", "service": "alba", "api_version": "v1", "timestamp": datetime.now(timezone.utc).isoformat()}
+
+
+@app.get(API_V1 + "/spec")
+def api_spec():
+    return app.openapi()
 
 
 if __name__ == "__main__":

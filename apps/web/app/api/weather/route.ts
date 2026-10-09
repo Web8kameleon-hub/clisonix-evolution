@@ -14,14 +14,17 @@ export async function GET() {
     const payload = await upstream.json()
     return NextResponse.json({ success: true, data: payload })
   } catch (error) {
-    console.error('[weather] fallback engaged:', error)
-    const fallback = {
-      temperature: 22,
-      humidity: 65,
-      condition: 'Cloudy',
-      location: 'Local',
-      timestamp: new Date().toISOString(),
-    }
-    return NextResponse.json({ success: false, data: fallback }, { status: 200 })
+    const message =
+      error instanceof Error ? error.message : "Weather upstream unavailable";
+    console.error("[weather] upstream error:", message);
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Weather service unavailable",
+        details: message,
+        data: null,
+      },
+      { status: 503 },
+    );
   }
 }

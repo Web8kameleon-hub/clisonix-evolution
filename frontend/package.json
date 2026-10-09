@@ -12,28 +12,36 @@
     "production": "next build && NODE_ENV=production next start"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "next": "^15.5.9",
-    "typescript": "^5.4.5",
+    "@types/node": "^20.12.7",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
-    "@types/node": "^20.12.7",
-    "tailwindcss": "^3.4.3",
-    "postcss": "^8.4.37",
     "autoprefixer": "^10.4.19",
-    "axios": "^1.7.7",
+    "axios": "^1.16.0",
     "chart.js": "^4.4.2",
-    "react-chartjs-2": "^5.2.0",
+    "classnames": "^2.3.2",
     "date-fns": "^3.6.0",
+    "next": "^16.2.6",
+    "postcss": "^8.5.14",
+    "react": "^18.3.1",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.3.1",
     "recharts": "^2.12.7",
-    "classnames": "^2.3.2"
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.0",
-    "@typescript-eslint/eslint-plugin": "^7.8.0",
-    "@typescript-eslint/parser": "^7.8.0"
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "@tailwindcss/typography": "^0.5.19",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.1.4"
+  },
+  "overrides": {
+    "follow-redirects": "^1.16.0",
+    "lodash": "^4.18.0"
   },
   "engines": {
     "node": ">=18.0.0",

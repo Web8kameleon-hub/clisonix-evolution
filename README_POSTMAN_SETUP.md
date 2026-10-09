@@ -18,8 +18,13 @@
 ### Step 1: Import the Collection
 1. Open Postman
 2. Click **Import** (top left)
-3. Select file: `Clisonix-Cloud-API.postman_collection.json`
-4. ✅ Collection imported successfully!
+ 3. Select file: `Clisonix-Cloud-API.postman_collection.json`
+ 4. Import the environment: `clisonix-environment-production.json` and select it from the environment dropdown (this sets `baseUrl`).
+ 5. ✅ Collection and environment imported successfully!
+
+Run in Postman (quick):
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection?collection_url=https://raw.githubusercontent.com/Web8kameleon-hub/clisonix.com/main/postman-collections/Clisonix_Cloud_API.postman_collection.json)
 
 ### Step 2: Test Your First Endpoint
 1. Go to **System Status** folder

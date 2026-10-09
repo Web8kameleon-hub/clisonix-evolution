@@ -1,8 +1,0 @@
-version: '3.8'
-
-services:
-    manager:
-      image: python:3.11-slim
-
-      working_dir: /app
-

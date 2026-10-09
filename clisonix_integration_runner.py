@@ -445,7 +445,7 @@ class ClisonixIntegrationRunner:
                 # Import dhe ekzekutim i scanner TypeScript (simulim)
                 # Në praktikë, do të thirrej scanner-i TypeScript
                 scan_result = {
-                    'base_url': 'https://api.clisonix.cloud',
+                    'base_url': 'https://api.clisonix.com',
                     'endpoints_discovered': 25,
                     'authenticated_endpoints': 15,
                     'rate_limited_endpoints': 5,

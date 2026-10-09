@@ -74,7 +74,7 @@ ultra-security.yml (Weekly Schedule - Monday 2am UTC)
 
 ### STEP 1: Set GitHub Secrets (5 minutes)
 ```
-URL: https://github.com/LedjanAhmati/Clisonix-cloud/settings/secrets/actions
+URL: https://github.com/Web8kameleon-hub/clisonix.com/settings/secrets/actions
 
 Add CRITICAL variables:
   - DB_HOST (e.g., localhost or Hetzner IP)
@@ -112,7 +112,7 @@ apt install docker-compose
 
 # Phase 3: Deploy app
 cd /home/clisonix
-git clone https://github.com/LedjanAhmati/Clisonix-cloud.git
+git clone https://github.com/Web8kameleon-hub/clisonix.com.git
 cd Clisonix-cloud
 cp .env.example .env.production
 # Edit .env.production with actual values
@@ -187,9 +187,9 @@ After setup, verify:
 
 ## 📞 QUICK LINKS
 
-- **GitHub Repo**: https://github.com/LedjanAhmati/Clisonix-cloud
-- **GitHub Secrets**: https://github.com/LedjanAhmati/Clisonix-cloud/settings/secrets/actions
-- **GitHub Actions**: https://github.com/LedjanAhmati/Clisonix-cloud/actions
+- **GitHub Repo**: https://github.com/Web8kameleon-hub/clisonix.com
+- **GitHub Secrets**: https://github.com/Web8kameleon-hub/clisonix.com/settings/secrets/actions
+- **GitHub Actions**: https://github.com/Web8kameleon-hub/clisonix.com/actions
 - **Hetzner Console**: https://console.hetzner.com
 - **Domain (STRATO)**: clisonix.com
 

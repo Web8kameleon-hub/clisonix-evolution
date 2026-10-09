@@ -174,7 +174,7 @@ receivers:
   - name: email
     email_configs:
       - smarthost: smtp.gmail.com:587
-        auth_username: alerts@clisonix.com
+        auth_username: clisonix@pm.me
         auth_password: ${SMTP_PASSWORD}
 ```
 
@@ -410,3 +410,4 @@ Your Clisonix Cloud now has **enterprise-grade monitoring**:
 3. Create custom dashboards
 4. Set up log retention policies
 5. Test alert notifications
+

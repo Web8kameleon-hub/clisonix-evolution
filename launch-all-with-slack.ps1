@@ -185,7 +185,7 @@ $services = @()
 if ($Mode -in @("full", "saas-only")) {
     $services += @(
         @{ Name = "ALBA Collector"; Port = 5555; Cmd = "python alba_service_5555.py"; Wait = 1 },
-        @{ Name = "ALBI Processor"; Port = 6666; Cmd = "python albi_service_6666.py"; Wait = 1 },
+        @{ Name = "ALBI Processor"; Port = 6680; Cmd = "python albi_service_6680.py"; Wait = 1 },
         @{ Name = "JONA Coordinator"; Port = 7777; Cmd = "python jona_service_7777.py"; Wait = 1 },
         @{ Name = "Orchestrator"; Port = 9999; Cmd = "python saas_services_orchestrator.py"; Wait = 2 }
     )
@@ -249,7 +249,7 @@ Write-Host "  ❤️  Health Check         → http://localhost:8000/health"
 Write-Host ""
 Write-Host "SAAS SERVICES TIER:" -ForegroundColor Cyan
 Write-Host "  🔵 ALBA (Telemetry)    → http://localhost:5555"
-Write-Host "  🟣 ALBI (Analytics)    → http://localhost:6666"
+Write-Host "  🟣 ALBI (Analytics)    → http://localhost:6680"
 Write-Host "  🟡 JONA (Synthesis)    → http://localhost:7777"
 Write-Host "  ⚙️  Orchestrator        → http://localhost:9999"
 Write-Host "  📋 Service Registry    → http://localhost:9999/registry"
@@ -289,7 +289,7 @@ Write-Host ""
 Write-Host "DATA FLOW ARCHITECTURE:" -ForegroundColor Yellow
 Write-Host "  ALBA (5555)"
 Write-Host "    ↓ [Telemetry Data]"
-Write-Host "  ALBI (6666)"
+Write-Host "  ALBI (6680)"
 Write-Host "    ↓ [Insights]"
 Write-Host "  JONA (7777)"
 Write-Host "    ↓ [Synthesized Audio]"

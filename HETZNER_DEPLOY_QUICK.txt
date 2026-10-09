@@ -9,7 +9,7 @@ export SERVER_IP=157.90.234.158
 export DOMAIN=clisonix.com
 export API_DOMAIN=api.clisonix.com
 
-curl -fsSL https://raw.githubusercontent.com/LedjanAhmati/Clisonix-cloud/main/deploy-hetzner.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Web8kameleon-hub/clisonix.com/main/deploy-hetzner.sh | bash
 
 ## Step 3: Verify deployment
 docker-compose ps

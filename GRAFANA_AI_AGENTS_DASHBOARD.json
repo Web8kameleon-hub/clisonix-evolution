@@ -172,6 +172,71 @@
           }
         ],
         "gridPos": {"x": 6, "y": 12, "w": 18, "h": 4}
+      },
+      {
+        "id": 11,
+        "title": "CLX.I Request Rate",
+        "type": "graph",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "sum(rate(clx_i_requests_total[5m]))",
+            "legendFormat": "req/sec"
+          }
+        ],
+        "gridPos": {"x": 0, "y": 16, "w": 8, "h": 4}
+      },
+      {
+        "id": 12,
+        "title": "CLX.I Latency p95",
+        "type": "graph",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(clx_i_request_duration_seconds_bucket[5m])) by (le))",
+            "legendFormat": "p95"
+          }
+        ],
+        "gridPos": {"x": 8, "y": 16, "w": 8, "h": 4}
+      },
+      {
+        "id": 13,
+        "title": "CLX.I Resonance (NDB)",
+        "type": "gauge",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "clx_i_resonance_ndb{mode='wwwmmm_ndb'}",
+            "legendFormat": "resonance"
+          }
+        ],
+        "gridPos": {"x": 16, "y": 16, "w": 8, "h": 4}
+      },
+      {
+        "id": 14,
+        "title": "CLX.I Mode Status",
+        "type": "stat",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "clx_i_mode_info{mode='wwwmmm_ndb'}",
+            "legendFormat": "wwwmmm_ndb"
+          }
+        ],
+        "gridPos": {"x": 0, "y": 20, "w": 12, "h": 4}
+      },
+      {
+        "id": 15,
+        "title": "CLX.I Self-Learning Throughput",
+        "type": "graph",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "sum(rate(clx_i_selflearning_events_total[5m]))",
+            "legendFormat": "events/sec"
+          }
+        ],
+        "gridPos": {"x": 12, "y": 20, "w": 12, "h": 4}
       }
     ],
     "refresh": "10s",

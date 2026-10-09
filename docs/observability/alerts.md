@@ -264,7 +264,7 @@ route:
 receivers:
   - name: 'default'
     email_configs:
-      - to: 'ops@clisonix.com'
+      - to: 'clisonix@pm.me'
 
   - name: 'pagerduty'
     pagerduty_configs:
@@ -278,7 +278,7 @@ receivers:
 
   - name: 'email'
     email_configs:
-      - to: 'monitoring@clisonix.com'
+      - to: 'clisonix@pm.me'
 ```
 
 ---
@@ -361,3 +361,4 @@ sum(rate(alerts_silenced_total[7d])) by (alertname) / sum(rate(alerts_fired_tota
 ---
 
 **Next:** [Anomalies Report →](anomalies-report.md)
+

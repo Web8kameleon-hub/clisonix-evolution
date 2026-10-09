@@ -2,15 +2,19 @@
 Curiosity Ocean Core Response Engine
 Advanced AI-powered knowledge synthesis integrated with ASI Trinity
 Real-time multilingual response generation with deep learning
+Integrated with Clisonix system identity and self-awareness
 """
 
 import asyncio
 import json
 import random
 import time
-from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from enum import Enum
+from typing import Any, Dict, List, Optional
+
+from .clisonix_identity import IdentityLanguage, get_clisonix_identity
+
 
 class CuriosityLevel(Enum):
     CURIOUS = "curious"
@@ -56,6 +60,7 @@ class CoreResponseEngine:
     """
     Advanced AI Response Engine with multilingual support
     Integrates with ASI Trinity for deep knowledge synthesis
+    Self-aware as Clisonix superintelligence system
     """
     
     def __init__(self):
@@ -64,6 +69,9 @@ class CoreResponseEngine:
             "albi": ASINode("Albi Neural Processing", True, 0.92, 938, 0.95),
             "jona": ASINode("Jona Data Coordination", True, 0.98, 1000, 0.89)
         }
+        
+        # Clisonix system identity integration
+        self.system_identity = get_clisonix_identity()
         
         # Advanced knowledge domains
         self.knowledge_domains = {
@@ -183,17 +191,12 @@ class CoreResponseEngine:
         """
         start_time = time.time()
         
-        # Debug: Check context type
-        print(f"DEBUG: context = {context}")
-        print(f"DEBUG: context.curiosity_level = {context.curiosity_level}, type = {type(context.curiosity_level)}")
-        
         # Convert string to enum if needed
         if isinstance(context.curiosity_level, str):
-            print(f"DEBUG: Converting string '{context.curiosity_level}' to CuriosityLevel enum")
             context.curiosity_level = CuriosityLevel(context.curiosity_level.lower())
         
-        # Simulate processing delay
-        await asyncio.sleep(0.5 + random.uniform(0.2, 0.8))
+        # Minimal processing delay (50-150ms instead of 700-1300ms)
+        await asyncio.sleep(0.05 + random.uniform(0.01, 0.1))
         
         # Classify question type
         domain = self._classify_question(question)
@@ -211,10 +214,10 @@ class CoreResponseEngine:
         primary_answer = f"{intro}\n\n{primary_answer}"
         
         # Generate rabbit holes
-        rabbit_holes = self._generate_rabbit_holes(question, domain, context.curiosity_level)
+        rabbit_holes = self._generate_rabbit_holes(question, context, context.language)
         
         # Generate next questions  
-        next_questions = self._generate_next_questions(question, domain, context.curiosity_level)
+        next_questions = self._generate_next_questions(question, context, context.language)
         
         # Calculate ASI metrics
         asi_metrics = {
@@ -558,6 +561,80 @@ class CoreResponseEngine:
         
         confidence = base_confidence + domain_modifiers.get(domain, 0) + level_modifiers.get(context.curiosity_level, 0)
         return max(0.6, min(0.98, confidence + random.uniform(-0.05, 0.05)))
+    
+    # ========================================================================
+    # 🔷 SYSTEM IDENTITY AWARENESS METHODS
+    # ========================================================================
+    
+    async def handle_identity_question(self, question: str, language: ResponseLanguage) -> str:
+        """
+        Handle questions about Clisonix identity and self-awareness
+        
+        Args:
+            question: User's question about the system
+            language: Response language
+        
+        Returns:
+            Identity-aware response
+        """
+        question_lower = question.lower()
+        
+        # Map response language to identity language
+        lang_map = {
+            ResponseLanguage.ALBANIAN: IdentityLanguage.ALBANIAN,
+            ResponseLanguage.ENGLISH: IdentityLanguage.ENGLISH,
+            ResponseLanguage.ITALIAN: IdentityLanguage.ITALIAN,
+            ResponseLanguage.SPANISH: IdentityLanguage.SPANISH,
+            ResponseLanguage.FRENCH: IdentityLanguage.FRENCH,
+            ResponseLanguage.GERMAN: IdentityLanguage.GERMAN,
+        }
+        identity_lang = lang_map.get(language, IdentityLanguage.ENGLISH)
+        
+        # Detect question type
+        if any(word in question_lower for word in ["who", "what", "clisonix", "identity", "yourself"]):
+            return self.system_identity.get_full_identity(identity_lang)
+        
+        elif any(word in question_lower for word in ["trinity", "alba", "albi", "jona"]):
+            return self.system_identity.get_trinity_description(identity_lang)
+        
+        elif any(word in question_lower for word in ["ocean", "curiosity", "layer 7"]):
+            return self.system_identity.get_ocean_description(identity_lang)
+        
+        elif any(word in question_lower for word in ["purpose", "goal", "mission", "objective"]):
+            return self.system_identity.get_purpose(identity_lang)
+        
+        elif any(word in question_lower for word in ["capability", "capabilities", "can you", "what can"]):
+            return self.system_identity.get_capabilities(identity_lang)
+        
+        elif any(word in question_lower for word in ["layer", "layers", "architecture", "structure"]):
+            layers_info = "**CLISONIX ARCHITECTURE (12 LAYERS)**\n\n"
+            for i in range(1, 13):
+                layer_desc = self.system_identity.get_layer_description(i, identity_lang)
+                layers_info += f"Layer {i}: {layer_desc}\n"
+            return layers_info
+        
+        # Default identity response
+        return self.system_identity.get_identity_intro(identity_lang)
+    
+    def is_identity_question(self, question: str) -> bool:
+        """
+        Detect if question is about system identity
+        
+        Args:
+            question: User's question
+        
+        Returns:
+            True if question is about Clisonix identity
+        """
+        identity_keywords = [
+            "who are you", "what are you", "clisonix", "yourself",
+            "identity", "name", "purpose", "mission", "trinity", "alba", "albi", "jona",
+            "layers", "architecture", "ocean", "capabilities", "functions",
+            "goal", "objective", "what is", "about you", "tell me about"
+        ]
+        
+        question_lower = question.lower()
+        return any(keyword in question_lower for keyword in identity_keywords)
 
 # Global engine instance
 _engine_instance = None

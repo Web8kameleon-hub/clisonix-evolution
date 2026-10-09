@@ -7,7 +7,20 @@
 
 import Fastify, { FastifyInstance } from "fastify";
 import cors from "@fastify/cors";
+import rateLimit from "@fastify/rate-limit";
 import { registerRealApiRoutes } from "./real-api-routes.js";
+
+const trustedOrigins = (
+  process.env["CORS_ORIGINS"] || "http://localhost:3000,http://127.0.0.1:3000"
+)
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+const trustProxy =
+  (
+    process.env["TRUST_PROXY"] ||
+    (process.env["NODE_ENV"] === "production" ? "true" : "false")
+  ).toLowerCase() === "true";
 
 // Industrial Server Configuration
 const serverConfig = {
@@ -18,23 +31,38 @@ const serverConfig = {
       options: {
         colorize: true,
         translateTime: "yyyy-mm-dd HH:MM:ss",
-        ignore: "pid,hostname"
-      }
-    }
+        ignore: "pid,hostname",
+      },
+    },
   },
-  trustProxy: true,
+  trustProxy,
   requestTimeout: 30000,
-  keepAliveTimeout: 5000
+  keepAliveTimeout: 5000,
 };
 
 // Initialize Industrial Fastify Server
 const industrialServer: FastifyInstance = Fastify(serverConfig);
 
+// ================== RATE LIMITING (SECURITY) ==================
+await industrialServer.register(rateLimit, {
+  max: 100,  // max 100 requests
+  timeWindow: '1 minute',
+  errorResponseBuilder: function (request, context) {
+    return {
+      code: 429,
+      error: 'Too Many Requests',
+      message: `Rate limit exceeded. Max ${context.max} requests per ${context.after}`,
+      date: new Date().toISOString(),
+      expiresIn: context.ttl
+    }
+  }
+});
+
 // ================== INDUSTRIAL MIDDLEWARE ==================
 await industrialServer.register(cors, {
-  origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
+  origin: trustedOrigins,
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 });
 
 // Request logging middleware
@@ -65,7 +93,7 @@ industrialServer.get("/health", async (request, reply) => {
     industrial_grade: true,
     real_data_only: true
   };
-  
+
   return systemHealth;
 });
 
@@ -74,12 +102,12 @@ industrialServer.get("/status", async (request, reply) => {
   return {
     clisonix_ecosystem: {
       albi: "active",
-      alba: "collecting", 
-      jona: "monitoring"
+      alba: "collecting",
+      jona: "monitoring",
     },
     backend_status: "industrial_operational",
     data_processing: "real_time",
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 });
 
@@ -94,9 +122,9 @@ await industrialServer.register(registerRealApiRoutes);
 industrialServer.get("/", async (request, reply) => {
   const fs = await import("fs");
   const path = await import("path");
-  
+
   const dashboardPath = path.resolve(process.cwd(), "../frontend/industrial-dashboard.html");
-  
+
   try {
     const htmlContent = fs.readFileSync(dashboardPath, "utf-8");
     reply.type("text/html").send(htmlContent);
@@ -130,7 +158,7 @@ industrialServer.get("/", async (request, reply) => {
 // Global error handler
 industrialServer.setErrorHandler((error, request, reply) => {
   request.log.error(error);
-  
+
   const industrialError = {
     error: "industrial_system_error",
     message: error.message,
@@ -138,7 +166,7 @@ industrialServer.setErrorHandler((error, request, reply) => {
     request_id: request.id,
     industrial_handling: true
   };
-  
+
   reply.status(500).send(industrialError);
 });
 
@@ -158,12 +186,12 @@ const startIndustrialServer = async (): Promise<void> => {
   try {
     const port = process.env.PORT ? Number(process.env.PORT) : 8088;
     const host = process.env.HOST || "0.0.0.0";
-    
-    await industrialServer.listen({ 
+
+    await industrialServer.listen({
       host,
-      port 
+      port,
     });
-    
+
     console.log("==========================================");
     console.log("clisonix INDUSTRIAL BACKEND STARTED");
     console.log("==========================================");
@@ -173,7 +201,7 @@ const startIndustrialServer = async (): Promise<void> => {
     console.log("Industrial Grade: ACTIVE");
     console.log("Real Data Only: ENABLED");
     console.log("==========================================");
-    
+
   } catch (error) {
     industrialServer.log.error(error);
     console.error("Industrial server startup failed:", error);

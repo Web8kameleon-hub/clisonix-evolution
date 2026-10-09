@@ -13,26 +13,27 @@ Ky modul përfshin:
 """
 
 from __future__ import annotations
+
 import asyncio
-import json
-import uuid
-import time
-from datetime import datetime, timezone, timedelta
-from typing import Dict, List, Any, Optional, Set, Tuple, Union, Callable
-from dataclasses import dataclass, field
-from enum import Enum
-import logging
 import hashlib
+import json
+import logging
+import time
+import uuid
 from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass, field
+from datetime import datetime, timedelta, timezone
+from enum import Enum
 from pathlib import Path
+from typing import Any, Callable, Dict, List, Optional, Set, Tuple, Union
 
 # Konfigurimi i logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 try:
-    from enhanced_asi import get_enhanced_asi, IntelligenceType, IntelligenceUnit
-    from cycle_engine import CycleEngine, CycleType, AlignmentPolicy
+    from cycle_engine import AlignmentPolicy, CycleEngine, CycleType
+    from enhanced_asi import IntelligenceType, IntelligenceUnit, get_enhanced_asi
     from open_data_scalability import get_scalability_engine
     INTEGRATIONS_AVAILABLE = True
 except ImportError:
@@ -391,65 +392,67 @@ class AIPipelineBuilder:
 
     async def _validate_input(self, input_data: Any, pipeline: AIPipeline) -> Dict[str, Any]:
         """Validon të dhënat input"""
-        result = {'valid': True, 'issues': []}
+        issues: List[str] = []
+        valid = True
 
         # Kontrollo skemën
         if pipeline.input_schema:
             # Simulim validimi
             if not isinstance(input_data, dict):
-                result['valid'] = False
-                result['issues'].append("Input duhet të jetë dictionary")
+                valid = False
+                issues.append("Input duhet të jetë dictionary")
 
         # Kontrollo për të dhëna problematike
         if input_data is None:
-            result['valid'] = False
-            result['issues'].append("Input është null")
+            valid = False
+            issues.append("Input është null")
 
-        return result
+        return {'valid': valid, 'issues': issues}
 
     async def _preprocess_data(self, data: Any) -> Dict[str, Any]:
         """Përpunon paraprakisht të dhënat"""
-        result = {'processed_data': data, 'transformations': []}
+        transformations: List[str] = []
+        processed_data: Any = data
 
         if isinstance(data, str):
             # Normalizim teksti
-            result['processed_data'] = data.lower().strip()
-            result['transformations'].append('text_normalization')
+            processed_data = data.lower().strip()
+            transformations.append('text_normalization')
 
         elif isinstance(data, dict):
             # Strukturim i të dhënave
-            result['processed_data'] = {k.lower(): v for k, v in data.items()}
-            result['transformations'].append('key_normalization')
+            processed_data = {k.lower(): v for k, v in data.items()}
+            transformations.append('key_normalization')
 
-        return result
+        return {'processed_data': processed_data, 'transformations': transformations}
 
     async def _perform_ai_analysis(self, data: Any) -> Dict[str, Any]:
         """Kryen analizë AI"""
-        result = {
-            'insights': [],
-            'confidence': 0.8,
-            'patterns': [],
-            'recommendations': []
-        }
+        insights: List[str] = []
+        patterns: List[str] = []
+        recommendations: List[str] = []
 
         # Simulim analizë AI
         if isinstance(data, str) and len(data) > 10:
-            result['insights'].append("Teksti përmban informacion të vlefshëm")
-            result['patterns'].append("text_pattern_detected")
+            insights.append("Teksti përmban informacion të vlefshëm")
+            patterns.append("text_pattern_detected")
 
         elif isinstance(data, dict):
-            result['insights'].append(f"Dictionary me {len(data)} fusha")
-            result['patterns'].append("structured_data_pattern")
+            insights.append(f"Dictionary me {len(data)} fusha")
+            patterns.append("structured_data_pattern")
 
-        return result
+        return {
+            'insights': insights,
+            'confidence': 0.8,
+            'patterns': patterns,
+            'recommendations': recommendations
+        }
 
     async def _perform_agi_synthesis(self, previous_results: Dict[str, Any]) -> Dict[str, Any]:
         """Kryen sintetizim AGI"""
-        result = {
-            'synthetic_intelligence': [],
-            'new_concepts': [],
-            'intelligence_gain': 0.0
-        }
+        synthetic_intelligence: List[Dict[str, Any]] = []
+        new_concepts: List[str] = []
+        intelligence_gain = 0.0
 
         # Merr rezultatet e mëparshme
         ai_analysis = previous_results.get('ai_analysis', {})
@@ -461,10 +464,14 @@ class AIPipelineBuilder:
                 'description': 'Inteligjencë e re nga kombinimi i të dhënave',
                 'confidence': 0.85
             }
-            result['synthetic_intelligence'].append(synthetic_concept)
-            result['intelligence_gain'] = 0.15
+            synthetic_intelligence.append(synthetic_concept)
+            intelligence_gain = 0.15
 
-        return result
+        return {
+            'synthetic_intelligence': synthetic_intelligence,
+            'new_concepts': new_concepts,
+            'intelligence_gain': intelligence_gain
+        }
 
     async def _perform_intelligence_fusion(self, previous_results: Dict[str, Any]) -> Dict[str, Any]:
         """Kryen fuzion inteligjence"""
@@ -491,69 +498,73 @@ class AIPipelineBuilder:
 
     async def _generate_output(self, results: Dict[str, Any], pipeline: AIPipeline) -> Dict[str, Any]:
         """Gjeneron output final"""
-        output = {
+        output_results: Dict[str, Any] = {}
+        
+        # Kombinon rezultatet
+        for stage, stage_result in results.items():
+            if isinstance(stage_result, dict) and 'error' not in stage_result:
+                output_results[stage] = stage_result
+
+        return {
             'pipeline_id': pipeline.id,
             'timestamp': datetime.now(timezone.utc).isoformat(),
-            'results': {},
+            'results': output_results,
             'metadata': {
                 'execution_time': 'calculated',
                 'quality_score': 0.85
             }
         }
 
-        # Kombinon rezultatet
-        for stage, stage_result in results.items():
-            if isinstance(stage_result, dict) and 'error' not in stage_result:
-                output['results'][stage] = stage_result
-
-        return output
-
     async def _perform_quality_assurance(self, results: Dict[str, Any]) -> Dict[str, Any]:
         """Kryen kontroll cilësie"""
-        qa_result = {
-            'quality_score': 0.8,
-            'issues': [],
-            'recommendations': []
-        }
+        issues: List[str] = []
+        recommendations: List[str] = []
+        quality_score = 0.8
 
         # Kontrollo për gabime
         error_count = sum(1 for r in results.values() if isinstance(r, dict) and 'error' in r)
         if error_count > 0:
-            qa_result['issues'].append(f"Gjetën {error_count} gabime")
-            qa_result['quality_score'] -= error_count * 0.1
+            issues.append(f"Gjetën {error_count} gabime")
+            quality_score -= error_count * 0.1
 
         # Kontrollo për rezultate boshe
         empty_results = sum(1 for r in results.values() if isinstance(r, dict) and not r)
         if empty_results > 0:
-            qa_result['issues'].append(f"{empty_results} rezultate boshe")
-            qa_result['quality_score'] -= empty_results * 0.05
+            issues.append(f"{empty_results} rezultate boshe")
+            quality_score -= empty_results * 0.05
 
-        return qa_result
+        return {
+            'quality_score': quality_score,
+            'issues': issues,
+            'recommendations': recommendations
+        }
 
     async def _deploy_results(self, results: Dict[str, Any]) -> Dict[str, Any]:
         """Implementon rezultatet"""
-        deployment = {
-            'deployed': True,
-            'target_systems': [],
-            'deployment_id': f"dep_{uuid.uuid4().hex[:8]}",
-            'timestamp': datetime.now(timezone.utc).isoformat()
-        }
+        target_systems: List[str] = []
+        deployment_id = f"dep_{uuid.uuid4().hex[:8]}"
+        timestamp = datetime.now(timezone.utc).isoformat()
 
         # Integrime me sisteme të tjera
         if INTEGRATIONS_AVAILABLE:
             try:
                 # Dergo në Enhanced ASI
-                asi = await get_enhanced_asi()
-                deployment['target_systems'].append('enhanced_asi')
+                _asi = await get_enhanced_asi()
+                target_systems.append('enhanced_asi')
 
                 # Dergo në Scalability Engine
-                scalability = await get_scalability_engine()
-                deployment['target_systems'].append('scalability_engine')
+                _scalability = await get_scalability_engine()
+                target_systems.append('scalability_engine')
 
             except Exception as e:
                 logger.warning(f"Gabim në deployment: {e}")
 
-        return deployment
+        return {
+            'deployed': True,
+            'target_systems': target_systems,
+            'deployment_id': deployment_id,
+            'timestamp': timestamp
+        }
 
     def _update_pipeline_metrics(self, pipeline: AIPipeline, execution: PipelineExecution):
         """Përditëson metrikat e pipeline-it"""

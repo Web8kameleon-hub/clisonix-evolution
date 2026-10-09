@@ -34,6 +34,12 @@ paths-ignore:
   - '**/*.ps1'
   - 'node_modules/'
   - '.vscode/'
+  - 'apps/web/.env*.example'
+  - '**/billing/**'
+  - '**/*billing*'
+  - '**/*payment*'
+  - '**/*stripe*'
+  - '**/*paypal*'
 
 # Konfigurime shtesë për të reduktuar "zhurmën"
 queries:

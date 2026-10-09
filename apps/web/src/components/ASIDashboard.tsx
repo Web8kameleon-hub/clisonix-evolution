@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ASI Frontend Components
  * ======================
  * 
@@ -105,10 +105,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        alba: 'bg-blue-600 hover:bg-blue-700 border-blue-500 text-white',
+        alba: 'bg-violet-600 hover:bg-violet-700 border-violet-500 text-white',
         albi: 'bg-green-600 hover:bg-green-700 border-green-500 text-white',
         jona: 'bg-purple-600 hover:bg-purple-700 border-purple-500 text-white',
-        asi: 'bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 hover:from-blue-700 hover:via-purple-700 hover:to-green-700 border-cyan-400 text-white',
+        asi: 'bg-gradient-to-r from-violet-600 via-purple-600 to-green-600 hover:from-violet-700 hover:via-purple-700 hover:to-green-700 border-violet-400 text-white',
         danger: 'bg-red-600 hover:bg-red-700 border-red-500 text-white',
         ghost: 'bg-transparent hover:bg-white/10 border-gray-600 text-gray-300',
       },
@@ -321,7 +321,7 @@ const ASITerminal: React.FC<ASITerminalProps> = ({ commands, onCommand }) => {
       </div>
       
       <form onSubmit={handleSubmit} className="flex">
-        <span className="text-cyan-400 mr-2">ASI&gt;</span>
+        <span className="text-violet-400 mr-2">ASI&gt;</span>
         <input
           type="text"
           value={input}
@@ -373,21 +373,21 @@ const BackgroundParticles: React.FC = () => (
 const ASIDashboard: React.FC = () => {
   const [agents, setAgents] = useState<Agent[]>([
     {
-      name: 'Alba',
+      name: 'Analytical',
       role: 'Network Infrastructure Monitor',
       status: 'active',
       health: 94,
       variant: 'alba',
     },
     {
-      name: 'Albi',
+      name: 'Creative',
       role: 'Process Automation Engine',
       status: 'active',
       health: 87,
       variant: 'albi',
     },
     {
-      name: 'Jona',
+      name: 'Coordinator',
       role: 'Human-AI Communication Bridge',
       status: 'processing',
       health: 92,

@@ -49,7 +49,6 @@ if (-not (Test-Path ".\secrets")) {
     
     # Check optional secrets
     $optionalSecrets = @(
-        "openai_api_key",
         "slack_webhook_url"
     )
     

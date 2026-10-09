@@ -3,9 +3,11 @@ Clisonix Cloud Settings
 Industrial-grade configuration with Stripe integration and plan quotas
 """
 import os
-from typing import Dict, List, Optional
-from pydantic import BaseSettings, Field, validator
 from enum import Enum
+from typing import Dict, List, Optional
+
+from pydantic import Field, field_validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Environment(str, Enum):
@@ -22,24 +24,31 @@ class SubscriptionPlan(str, Enum):
 
 
 class Settings(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=False,
+        extra="ignore",
+    )
+
     # Environment
     environment: Environment = Environment.DEVELOPMENT
     debug: bool = Field(default=True)
-    
+
     # API Configuration
     api_title: str = "Clisonix Cloud API"
     api_version: str = "1.0.0"
     api_description: str = "Industrial AI-Powered Neurological Analysis Platform"
-    
+
     # Database
     database_url: str = Field(
         default="postgresql+asyncpg://Clisonix:secure123@localhost:5432/Clisonix_db"
     )
     database_echo: bool = Field(default=False)
-    
+
     # Redis
     redis_url: str = Field(default="redis://localhost:6379/0")
-    
+
     # Security
     secret_key: str = Field(
         default="your-super-secure-secret-key-change-in-production",
@@ -47,41 +56,41 @@ class Settings(BaseSettings):
     )
     access_token_expire_minutes: int = 30
     refresh_token_expire_days: int = 7
-    
+
     # Stripe Configuration
     stripe_publishable_key: str = Field(default="pk_test_...")
     stripe_secret_key: str = Field(default="sk_test_...")
     stripe_webhook_secret: str = Field(default="whsec_...")
-    stripe_success_url: str = Field(default="https://app.Clisonix.com/success")
-    stripe_cancel_url: str = Field(default="https://app.Clisonix.com/cancel")
-    
+    stripe_success_url: str = Field(default="https://app.clisonix.com/success")
+    stripe_cancel_url: str = Field(default="https://app.clisonix.com/cancel")
+
     # Stripe Price IDs (Set these in your environment or .env file)
     stripe_price_standard: str = Field(default="price_standard_monthly")
     stripe_price_professional: str = Field(default="price_professional_monthly")
     stripe_price_enterprise: str = Field(default="price_enterprise_monthly")
-    
+
     # File Storage
     s3_bucket: str = Field(default="Clisonix-uploads")
     s3_access_key: str = Field(default="")
     s3_secret_key: str = Field(default="")
     s3_endpoint_url: Optional[str] = Field(default="http://localhost:9000")  # MinIO for local dev
     s3_region: str = Field(default="us-east-1")
-    
+
     # File Upload Limits
     max_file_size_mb: int = 100
     allowed_file_types: List[str] = [
         "audio/wav", "audio/mpeg", "audio/mp4",
         "application/edf", "application/octet-stream"  # EEG files
     ]
-    
+
     # Rate Limiting
     rate_limit_per_minute: int = 60
     rate_limit_burst: int = 10
-    
+
     # OpenTelemetry
     jaeger_endpoint: Optional[str] = Field(default="http://localhost:14268/api/traces")
     enable_tracing: bool = Field(default=True)
-    
+
     # Subscription Plan Quotas and Features
     plan_quotas: Dict[str, Dict] = {
         "free": {
@@ -136,53 +145,56 @@ class Settings(BaseSettings):
             "sla_guarantee": "99.9%"
         }
     }
-    
+
     # Stripe Plan Mapping
     stripe_plan_mapping: Dict[str, str] = {
         "price_standard_monthly": "standard",
-        "price_professional_monthly": "professional", 
+        "price_professional_monthly": "professional",
         "price_enterprise_monthly": "enterprise"
     }
-    
+
     # Worker Configuration
     celery_broker_url: str = Field(default="redis://localhost:6379/1")
     celery_result_backend: str = Field(default="redis://localhost:6379/2")
-    
+
     # Processing Configuration
     max_processing_time_seconds: int = 1800  # 30 minutes
     processing_timeout_seconds: int = 300    # 5 minutes for individual tasks
-    
+
     # Email Configuration (for notifications)
     smtp_server: Optional[str] = Field(default="smtp.gmail.com")
     smtp_port: int = 587
     smtp_username: Optional[str] = Field(default="")
     smtp_password: Optional[str] = Field(default="")
     smtp_use_tls: bool = True
-    
+
     # Monitoring
     sentry_dsn: Optional[str] = Field(default="")
     log_level: str = Field(default="INFO")
-    
-    @validator("environment", pre=True)
+
+    @field_validator("environment", mode="before")
+    @classmethod
     def validate_environment(cls, v):
         if isinstance(v, str):
             return Environment(v.lower())
         return v
-    
-    @validator("debug")
-    def validate_debug(cls, v, values):
-        if "environment" in values:
-            return values["environment"] == Environment.DEVELOPMENT
+
+    @field_validator("debug")
+    @classmethod
+    def validate_debug(cls, v, info):
+        environment = info.data.get("environment") if info and info.data else None
+        if environment is not None:
+            return environment == Environment.DEVELOPMENT
         return v
-    
+
     def get_plan_quota(self, plan: str, quota_key: str, default=None):
         """Get specific quota value for a plan"""
         return self.plan_quotas.get(plan, {}).get(quota_key, default)
-    
+
     def is_feature_enabled(self, plan: str, feature: str) -> bool:
         """Check if a feature is enabled for a specific plan"""
         return self.plan_quotas.get(plan, {}).get(feature, False)
-    
+
     def get_stripe_price_id(self, plan: str) -> Optional[str]:
         """Get Stripe price ID for a plan"""
         plan_to_price = {
@@ -191,16 +203,10 @@ class Settings(BaseSettings):
             "enterprise": self.stripe_price_enterprise
         }
         return plan_to_price.get(plan)
-    
+
     def get_plan_from_price_id(self, price_id: str) -> str:
         """Get plan name from Stripe price ID"""
         return self.stripe_plan_mapping.get(price_id, "free")
-    
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        case_sensitive = False
-
 
 # Global settings instance
 settings = Settings()

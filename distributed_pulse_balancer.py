@@ -15,7 +15,7 @@ REAL DATA ONLY â€¢ NO MOCK â€¢ NO RANDOM
 
 import os, sys, json, time, uuid, hmac, hashlib, socket, threading, signal, logging
 from logging.handlers import RotatingFileHandler
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Dict, Any, Optional, Tuple, List
 
 import psutil
@@ -23,7 +23,7 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 import uvicorn
 
-from neurosonix.colored_logger import setup_logger
+from clisonix.colored_logger import setup_logger
 
 # =========================
 # Config
@@ -70,7 +70,7 @@ CB_LOCK = threading.Lock()
 # Helpers
 # =========================
 def now_utc() -> str:
-    return datetime.utcnow().isoformat()
+    return datetime.now(timezone.utc).isoformat()
 def hmac_sign(payload: dict) -> str:
     msg = json.dumps(payload, sort_keys=True).encode("utf-8")
     return hmac.new(CLUSTER_KEY.encode("utf-8"), msg, hashlib.sha256).hexdigest()
@@ -110,7 +110,7 @@ def capacity_score(m: Dict[str, Any]) -> float:
 
 def is_peer_alive(peer: Dict[str, Any]) -> bool:
     last = datetime.fromisoformat(peer["last_seen"])
-    return (datetime.utcnow() - last).total_seconds() < HB_TIMEOUT
+    return (datetime.now(timezone.utc) - last).total_seconds() < HB_TIMEOUT
 
 def elect_leader() -> Tuple[str, Dict[str, Any]]:
     """
@@ -282,6 +282,94 @@ app = FastAPI(
     version="1.0.0-industrial",
     description="Cluster-aware balancer with real metrics, rate limit, and circuit breaker."
 )
+
+# =========================
+# Prometheus Metrics Endpoint
+# =========================
+@app.get("/metrics")
+def prometheus_metrics():
+    """
+    📊 Prometheus-compatible metrics endpoint for Grafana
+    Scrape this endpoint with Prometheus to visualize in Grafana
+    """
+    from fastapi.responses import PlainTextResponse
+    
+    me = system_metrics()
+    leader_id, leader = elect_leader()
+    is_leader = leader_id == NODE_ID
+    
+    with PEERS_LOCK:
+        peer_count = len(PEERS)
+        alive_peers = sum(1 for p in PEERS.values() if is_peer_alive(p))
+    
+    with CB_LOCK:
+        open_circuits = sum(1 for c in CB.values() if c.get("open", False))
+    
+    capacity = capacity_score(me)
+    
+    lines = [
+        "# HELP clisonix_balancer_cpu_percent CPU usage percentage",
+        "# TYPE clisonix_balancer_cpu_percent gauge",
+        f'clisonix_balancer_cpu_percent{{node="{NODE_NAME}"}} {me.get("cpu", 0)}',
+        "",
+        "# HELP clisonix_balancer_mem_percent Memory usage percentage",
+        "# TYPE clisonix_balancer_mem_percent gauge",
+        f'clisonix_balancer_mem_percent{{node="{NODE_NAME}"}} {me.get("mem", 0)}',
+        "",
+        "# HELP clisonix_balancer_disk_percent Disk usage percentage",
+        "# TYPE clisonix_balancer_disk_percent gauge",
+        f'clisonix_balancer_disk_percent{{node="{NODE_NAME}"}} {me.get("disk", 0)}',
+        "",
+        "# HELP clisonix_balancer_net_sent_mb Network bytes sent (MB)",
+        "# TYPE clisonix_balancer_net_sent_mb counter",
+        f'clisonix_balancer_net_sent_mb{{node="{NODE_NAME}"}} {me.get("net_sent_MB", 0)}',
+        "",
+        "# HELP clisonix_balancer_net_recv_mb Network bytes received (MB)",
+        "# TYPE clisonix_balancer_net_recv_mb counter",
+        f'clisonix_balancer_net_recv_mb{{node="{NODE_NAME}"}} {me.get("net_recv_MB", 0)}',
+        "",
+        "# HELP clisonix_balancer_procs Number of processes",
+        "# TYPE clisonix_balancer_procs gauge",
+        f'clisonix_balancer_procs{{node="{NODE_NAME}"}} {me.get("procs", 0)}',
+        "",
+        "# HELP clisonix_balancer_uptime_seconds System uptime in seconds",
+        "# TYPE clisonix_balancer_uptime_seconds counter",
+        f'clisonix_balancer_uptime_seconds{{node="{NODE_NAME}"}} {me.get("uptime_sec", 0)}',
+        "",
+        "# HELP clisonix_balancer_capacity_score Capacity score (lower is better)",
+        "# TYPE clisonix_balancer_capacity_score gauge",
+        f'clisonix_balancer_capacity_score{{node="{NODE_NAME}"}} {round(capacity, 2)}',
+        "",
+        "# HELP clisonix_balancer_is_leader Whether this node is cluster leader",
+        "# TYPE clisonix_balancer_is_leader gauge",
+        f'clisonix_balancer_is_leader{{node="{NODE_NAME}"}} {1 if is_leader else 0}',
+        "",
+        "# HELP clisonix_balancer_peer_count Total known peers",
+        "# TYPE clisonix_balancer_peer_count gauge",
+        f'clisonix_balancer_peer_count{{node="{NODE_NAME}"}} {peer_count}',
+        "",
+        "# HELP clisonix_balancer_alive_peers Alive peers count",
+        "# TYPE clisonix_balancer_alive_peers gauge",
+        f'clisonix_balancer_alive_peers{{node="{NODE_NAME}"}} {alive_peers}',
+        "",
+        "# HELP clisonix_balancer_open_circuits Number of open circuit breakers",
+        "# TYPE clisonix_balancer_open_circuits gauge",
+        f'clisonix_balancer_open_circuits{{node="{NODE_NAME}"}} {open_circuits}',
+        "",
+    ]
+    
+    # Add peer metrics
+    with PEERS_LOCK:
+        for pid, peer in PEERS.items():
+            pm = peer.get("metrics", {})
+            pname = peer.get("node_name", pid)
+            alive = 1 if is_peer_alive(peer) else 0
+            lines.append(f'clisonix_balancer_peer_alive{{node="{NODE_NAME}",peer="{pname}"}} {alive}')
+            lines.append(f'clisonix_balancer_peer_cpu{{node="{NODE_NAME}",peer="{pname}"}} {pm.get("cpu", 0)}')
+            lines.append(f'clisonix_balancer_peer_mem{{node="{NODE_NAME}",peer="{pname}"}} {pm.get("mem", 0)}')
+    
+    return PlainTextResponse("\n".join(lines), media_type="text/plain; charset=utf-8")
+
 
 @app.get("/balancer/status")
 def balancer_status():

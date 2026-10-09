@@ -1,58 +1,23 @@
 # Closed Source License - Clisonix Cloud
 # Copyright (c) Clisonix. All rights reserved.
 #
-# Dockerfile for Clisonix-api (FastAPI) - Hardened Version
+# Dockerfile for Clisonix-api (FastAPI)
+FROM python:3.13
 
-# Faza 1: Builder - Përdoret për të ndërtuar varësitë
-FROM python:3.11-slim as builder
-
-WORKDIR /wheels
-
-# Kopjon vetëm skedarin e varësive për të shfrytëzuar cache-in e Docker
-COPY apps/api/requirements.txt .
-
-# Instalon varësitë në një direktori lokale 'wheelhouse'
-# Kjo shmang instalimin e mjeteve të ndërtimit në imazhin final
-RUN pip wheel --no-cache-dir --wheel-dir=/wheels -r requirements.txt
-
-
-# Faza 2: Final - Imazhi final i prodhimit, i vogël dhe i sigurt
-FROM python:3.11-slim
-
-# Krijon një përdorues dhe grup pa privilegje 'clisonix'
-RUN groupadd --system clisonix && useradd --system --gid clisonix clisonix
-
-# Përcakton direktorinë e punës
 WORKDIR /app
 
-# Kopjon skedarët e aplikacionit nga konteksti i ndërtimit
+# Copy API application files
 COPY apps/api/ /app/
 
-# Kopjon varësitë e ndërtuara nga faza 'builder'
-COPY --from=builder /wheels /wheels
-
-# Instalon varësitë nga 'wheelhouse' pa pasur nevojë për rrjet
-# dhe pastron cache-in për të mbajtur imazhin të vogël
-RUN pip install --no-cache --no-index --find-links=/wheels /wheels/* \
-    && rm -rf /wheels
-
-# Instalon 'curl' për health check në një komandë të vetme dhe pastron
-RUN apt-get update && apt-get install -y --no-install-recommends curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Ndryshon pronësinë e direktorisë së aplikacionit te përdoruesi pa privilegje
-RUN chown -R clisonix:clisonix /app
-
-# Kalon te përdoruesi pa privilegje
-USER clisonix
+# Install dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --no-cache-dir -r /app/requirements.txt
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
-# Ekspozon portin 8000
-EXPOSE 8000
-
-# Ekzekuton aplikacionin
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-
+# Run application
+CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

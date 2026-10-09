@@ -67,6 +67,17 @@ scrape_configs:
         target_label: service
         replacement: 'ai-agents'
 
+  # CLX.I (WWWMMM/NDB icon intelligence)
+  - job_name: 'clx-i'
+    static_configs:
+      - targets: ['localhost:8048']
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: service
+        replacement: 'clx-i'
+
   # System Metrics (if Node Exporter is running)
   - job_name: 'node'
     static_configs:

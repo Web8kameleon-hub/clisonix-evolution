@@ -14,7 +14,7 @@ These are injected by GitHub Secrets (not in .env file, which is local-only).
 
 ## 📋 STEP 1: Go to GitHub Settings
 
-1. Open: https://github.com/LedjanAhmati/Clisonix-cloud
+1. Open: https://github.com/Web8kameleon-hub/clisonix.com
 2. Click **Settings** (top-right)
 3. Left sidebar → **Secrets and variables** → **Actions**
 4. Click **New repository secret**

@@ -570,10 +570,11 @@ EOF
 
 ## Contact
 
-For deployment issues, contact: devops@clisonix.com
+For deployment issues, contact: clisonix@pm.me
 
 ---
 
 **Last Updated**: 2024
 **Version**: 1.0.0
 **Maintainer**: Clisonix DevOps Team
+

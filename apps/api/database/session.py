@@ -2,12 +2,16 @@
 Clisonix Database Session Management
 Async SQLAlchemy configuration with connection pooling
 """
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
-from sqlalchemy.orm import sessionmaker
-from typing import AsyncGenerator
 import logging
+from typing import AsyncGenerator
 
-from ..settings import settings
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.orm import sessionmaker
+
+try:
+    from ..settings import settings
+except ImportError:
+    from settings import settings
 
 logger = logging.getLogger(__name__)
 
@@ -53,8 +57,11 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 
 async def init_db():
     """Initialize database tables"""
-    from ..auth.models import Base
-    
+    try:
+        from ..auth.models import Base
+    except ImportError:
+        from auth.models import Base
+
     async with engine.begin() as conn:
         # Create all tables
         await conn.run_sync(Base.metadata.create_all)

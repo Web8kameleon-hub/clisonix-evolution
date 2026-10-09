@@ -31,10 +31,11 @@ logger = logging.getLogger("SlackIntegration")
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL", "")
 SLACK_CHANNEL = os.getenv("SLACK_CHANNEL", "#clisonix-monitoring")
 SERVICE_MODE = os.getenv("SERVICE_MODE", "production")  # production | development
+SLACK_ENABLED = os.getenv("SLACK_INTEGRATION_ENABLED", "true").lower() == "true"
 
 SERVICE_URLS = {
     "alba": "http://localhost:5555",
-    "albi": "http://localhost:6666",
+    "albi": "http://localhost:6680",
     "jona": "http://localhost:7777",
     "orchestrator": "http://localhost:9999",
     "api": "http://localhost:8000",
@@ -78,8 +79,13 @@ class DeploymentNotification(BaseModel):
 async def send_slack_message(message: SlackMessage) -> bool:
     """Send message to Slack webhook"""
     
+    # Check if Slack is disabled
+    if not SLACK_ENABLED:
+        logger.debug("Slack integration disabled via SLACK_INTEGRATION_ENABLED=false")
+        return False
+    
     if not SLACK_WEBHOOK_URL or "hooks.slack.com" not in SLACK_WEBHOOK_URL:
-        logger.warning("⚠️  Slack webhook is not configured (SLACK_WEBHOOK_URL env var)")
+        logger.info("ℹ️  Slack disabled — webhook not configured")
         return False
 
     payload = {

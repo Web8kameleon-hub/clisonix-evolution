@@ -23,14 +23,15 @@ neuro       IN  A   76.76.21.21
 
 ; --- TXT & Security ---
 @           IN  TXT "v=spf1 include:_spf.google.com ~all"
-_dmarc      IN  TXT "v=DMARC1; p=none; rua=mailto:postmaster@clisonix.com"
+_dmarc      IN  TXT "v=DMARC1; p=none; rua=mailto:clisonix@pm.me"
 selector1._domainkey IN TXT "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCt7"
 
 ; --- CAA (SSL Certificate Authority Authorization) ---
 @           IN  CAA 0 issue "letsencrypt.org"
 @           IN  CAA 0 issuewild "letsencrypt.org"
-@           IN  CAA 0 iodef "mailto:admin@clisonix.com"
+@           IN  CAA 0 iodef "mailto:clisonix@pm.me"
 
 ; Notes:
 ; - Import this file into Cloudflare (DNS → Import) and then toggle which A records you want proxied (orange cloud).
 ; - Cloudflare will set its own SOA/NS values after import. Do not try to import SOA/NS here.
+

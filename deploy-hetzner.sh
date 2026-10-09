@@ -3,7 +3,7 @@
 # Clisonix Cloud - Hetzner Production Deployment Script
 # Auto-installs Docker, configures services, and deploys the platform
 #
-# Usage: curl -fsSL https://raw.githubusercontent.com/LedjanAhmati/Clisonix-cloud/main/deploy-hetzner.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/Web8kameleon-hub/clisonix.com/main/deploy-hetzner.sh | bash
 #
 
 set -e
@@ -17,7 +17,8 @@ echo ""
 SERVER_IP="${SERVER_IP:-$(curl -s ifconfig.me)}"
 DOMAIN="${DOMAIN:-clisonix.com}"
 API_DOMAIN="${API_DOMAIN:-api.clisonix.com}"
-PROJECT_DIR="/opt/clisonix"
+PROJECT_DIR="${PROJECT_DIR:-/root/Clisonix-cloud}"
+DEPLOY_BRANCH="${DEPLOY_BRANCH:-main}"
 
 echo "📍 Server IP: $SERVER_IP"
 echo "🌐 Domain: $DOMAIN"
@@ -36,17 +37,17 @@ if ! command -v docker &> /dev/null; then
     install -m 0755 -d /etc/apt/keyrings
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     chmod a+r /etc/apt/keyrings/docker.gpg
-    
+
     echo \
       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
       $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-    
+
     apt update -y
     apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-    
+
     systemctl enable docker
     systemctl start docker
-    
+
     echo "✅ Docker installed: $(docker --version)"
 else
     echo "✅ Docker already installed: $(docker --version)"
@@ -76,10 +77,12 @@ echo "✅ Project directory: $PROJECT_DIR"
 echo ""
 echo "[5/8] Cloning Clisonix Cloud repository..."
 if [ ! -d ".git" ]; then
-    git clone https://github.com/LedjanAhmati/Clisonix-cloud.git .
-else
-    git pull origin main
+    git clone --branch "$DEPLOY_BRANCH" https://github.com/Web8kameleon-hub/clisonix.com.git . || git clone https://github.com/Web8kameleon-hub/clisonix.com.git .
 fi
+
+git fetch origin "$DEPLOY_BRANCH"
+git checkout "$DEPLOY_BRANCH" 2>/dev/null || git checkout -b "$DEPLOY_BRANCH" "origin/$DEPLOY_BRANCH"
+git pull --ff-only origin "$DEPLOY_BRANCH"
 echo "✅ Repository cloned"
 
 # Step 6: Create Production Environment File
@@ -94,6 +97,10 @@ DB_PASSWORD=$(openssl rand -hex 16)
 GRAFANA_PASSWORD=$(openssl rand -hex 16)
 MINIO_PASSWORD=$(openssl rand -hex 16)
 
+if [ -f .env.production ]; then
+    cp .env.production ".env.production.bak.$(date +%s)"
+    echo "✅ Existing .env.production preserved (backup created)"
+else
 cat > .env.production <<EOF
 # ════════════════════════════════════════════════════════════
 # CLISONIX CLOUD - PRODUCTION ENVIRONMENT
@@ -160,7 +167,7 @@ LOG_LEVEL=info
 PYTHONUNBUFFERED=1
 
 # SSL Configuration
-SSL_EMAIL=amati.ledian@gmail.com
+SSL_EMAIL=clisonix@pm.me
 CERTBOT_DOMAIN=$DOMAIN
 
 # Feature Flags
@@ -175,6 +182,7 @@ ENABLE_DISTRIBUTED_TRACING=true
 # - SMTP settings (optional for emails)
 # ════════════════════════════════════════════════════════════
 EOF
+fi
 
 # Save credentials to secure file
 cat > .credentials.txt <<EOF
@@ -216,6 +224,10 @@ echo "✅ Credentials saved to .credentials.txt (chmod 600)"
 # Step 7: Create Docker Compose Configuration
 echo ""
 echo "[7/8] Creating Docker Compose configuration..."
+if [ -f docker-compose.production.yml ]; then
+    cp docker-compose.production.yml "docker-compose.production.yml.bak.$(date +%s)"
+    echo "✅ Existing docker-compose.production.yml preserved (backup created)"
+else
 cat > docker-compose.production.yml <<EOF
 version: "3.9"
 
@@ -343,11 +355,16 @@ volumes:
   prometheus_data:
   grafana_data:
 EOF
-echo "✅ Docker Compose configuration created"
+fi
+echo "✅ Docker Compose configuration ready"
 
 # Step 8: Create Nginx Configuration
 echo ""
 echo "[8/8] Creating Nginx configuration..."
+if [ -f nginx.conf ]; then
+    cp nginx.conf "nginx.conf.bak.$(date +%s)"
+    echo "✅ Existing nginx.conf preserved (backup created)"
+else
 cat > nginx.conf <<'EOF'
 events {
     worker_connections 1024;
@@ -398,7 +415,7 @@ http {
 
         location / {
             limit_req zone=web_limit burst=20 nodelay;
-            
+
             proxy_pass http://web:3000;
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
@@ -438,7 +455,7 @@ http {
 
         location / {
             limit_req zone=api_limit burst=10 nodelay;
-            
+
             proxy_pass http://api:8000;
             proxy_http_version 1.1;
             proxy_set_header Host $host;
@@ -449,7 +466,8 @@ http {
     }
 }
 EOF
-echo "✅ Nginx configuration created"
+fi
+echo "✅ Nginx configuration ready"
 
 # Final Instructions
 echo ""
@@ -474,16 +492,17 @@ echo "   certbot certonly --standalone -d api.clisonix.com"
 echo ""
 echo "4. Start the platform:"
 echo "   cd $PROJECT_DIR"
-echo "   docker compose -f docker-compose.prod.yml up -d --build"
+echo "   docker compose -f docker-compose.production.yml up -d --build"
 echo ""
 echo "5. View credentials:"
 echo "   cat .credentials.txt"
 echo ""
 echo "6. Monitor deployment:"
-echo "   docker compose -f docker-compose.prod.yml logs -f"
+echo "   docker compose -f docker-compose.production.yml logs -f"
 echo ""
 echo "📁 Project directory: $PROJECT_DIR"
 echo "🔐 Credentials file: $PROJECT_DIR/.credentials.txt (chmod 600)"
 echo ""
 echo "════════════════════════════════════════════════════════════"
+
 

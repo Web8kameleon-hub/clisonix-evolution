@@ -2,12 +2,23 @@
 Clisonix Authentication Models
 User and subscription management with SQLAlchemy
 """
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text, ForeignKey, Enum, Numeric
+import enum
+from datetime import datetime, timezone
+
+from sqlalchemy import (
+    Boolean,
+    Column,
+    DateTime,
+    Enum,
+    ForeignKey,
+    Integer,
+    Numeric,
+    String,
+    Text,
+)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from datetime import datetime, timezone
-import enum
 
 Base = declarative_base()
 
@@ -120,6 +131,37 @@ class Subscription(Base):
             self.status == SubscriptionStatus.ACTIVE and
             self.current_period_end > datetime.now(timezone.utc)
         )
+
+
+class OneTimePurchase(Base):
+    """Track one-time checkout purchases from Stripe webhooks."""
+    __tablename__ = "one_time_purchases"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+
+    # Stripe references (idempotency anchors)
+    stripe_event_id = Column(String(255), unique=True, nullable=False, index=True)
+    stripe_checkout_session_id = Column(String(255), unique=True, nullable=False, index=True)
+    stripe_payment_intent_id = Column(String(255), unique=True, nullable=True, index=True)
+    stripe_customer_id = Column(String(255), nullable=True, index=True)
+
+    # Payment payload
+    amount_total = Column(Integer, nullable=True)
+    currency = Column(String(10), nullable=True)
+    payment_status = Column(String(50), nullable=True)
+    customer_email = Column(String(255), nullable=True)
+
+    # Optional product context
+    product_id = Column(String(255), nullable=True)
+    price_id = Column(String(255), nullable=True)
+    quantity = Column(Integer, nullable=True)
+
+    metadata_json = Column(Text, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    # Relationships
+    user = relationship("User")
 
 
 class UploadSession(Base):

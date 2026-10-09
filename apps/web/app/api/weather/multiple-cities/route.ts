@@ -14,12 +14,19 @@ export async function GET() {
     const payload = await upstream.json()
     return NextResponse.json({ success: true, data: payload })
   } catch (error) {
-    console.error('[weather/multiple-cities] fallback engaged:', error)
-    const fallback = [
-      { city: 'New York', temperature: 18, condition: 'Rainy' },
-      { city: 'London', temperature: 12, condition: 'Cloudy' },
-      { city: 'Tokyo', temperature: 25, condition: 'Sunny' },
-    ]
-    return NextResponse.json({ success: false, data: fallback }, { status: 200 })
+    const message =
+      error instanceof Error
+        ? error.message
+        : "Weather multi-city upstream unavailable";
+    console.error("[weather/multiple-cities] upstream error:", message);
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Weather multi-city service unavailable",
+        details: message,
+        data: null,
+      },
+      { status: 503 },
+    );
   }
 }

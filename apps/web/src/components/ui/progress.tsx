@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import { cn } from '@/lib/utils'
 
 interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -26,7 +26,7 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
     const percentage = Math.min(100, Math.max(0, (value / max) * 100))
     
     const colorClasses = {
-      blue: 'bg-blue-600',
+      blue: 'bg-violet-600',
       green: 'bg-green-600',
       purple: 'bg-purple-600',
       red: 'bg-red-600',

@@ -55,7 +55,7 @@ $Script:ServicePorts = @{
     "API"              = 8000
     "Frontend"         = 3000
     "ALBA"             = 5555
-    "ALBI"             = 6666
+    "ALBI"             = 6680
     "JONA"             = 7777
     "Orchestrator"     = 9999
     "PostgreSQL"       = 5432
@@ -66,6 +66,9 @@ $Script:ServicePorts = @{
     "Grafana"          = 3001
     "Loki"             = 3100
     "Victoria-Metrics" = 8428
+    "ocean-core"       = 8030
+    "Ollama"           = 11434
+    "Ollama-Multi-API" = 4444
 }
 
 $Script:Services = @{
@@ -73,9 +76,13 @@ $Script:Services = @{
         @{ Name = "API Server"; Script = "python -m uvicorn apps.api.main:app --host 0.0.0.0 --port 8000 --reload"; Port = 8000; Priority = 1 }
         @{ Name = "Frontend"; Script = "cd apps\web; npm run dev"; Port = 3000; Priority = 2 }
     )
+    AI = @(
+        @{ Name = "Ollama Server"; Script = "ollama serve"; Port = 11434; Priority = 0; External = $true }
+        @{ Name = "Ollama Multi API"; Script = "cd ocean-core; python ollama_multi_api.py"; Port = 4444; Priority = 1; File = "ocean-core\ollama_multi_api.py" }
+    )
     Microservices = @(
         @{ Name = "ALBA"; Script = "python alba_core.py"; Port = 5555; Priority = 3; File = "alba_core.py" }
-        @{ Name = "ALBI"; Script = "python albi_core.py"; Port = 6666; Priority = 3; File = "albi_core.py" }
+        @{ Name = "ALBI"; Script = "python albi_core.py"; Port = 6680; Priority = 3; File = "albi_core.py" }
         @{ Name = "JONA"; Script = "python jona_service_7777.py"; Port = 7777; Priority = 3; File = "jona_service_7777.py" }
     )
     Orchestration = @(
@@ -214,7 +221,7 @@ function Test-Prerequisites {
     # Check Python
     Show-Status "Checking Python..." "WAIT"
     try {
-        $pythonVersion = python --version 2>&1
+        python --version 2>&1
         if ($LASTEXITCODE -eq 0) {
             Show-Status "Python installed" "OK"
         } else {
@@ -229,13 +236,17 @@ function Test-Prerequisites {
     if ($Mode -eq "docker") {
         Show-Status "Checking Docker..." "WAIT"
         try {
+            # PSScriptAnalyzer: Variables are used in string interpolation below
+            [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
             $dockerVersion = docker --version 2>&1
             if ($LASTEXITCODE -eq 0) {
-                Show-Status "Docker installed" "OK"
+                Show-Status "Docker: $dockerVersion" "OK"
                 
+                [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
                 $dockerInfo = docker info 2>&1
                 if ($LASTEXITCODE -eq 0) {
-                    Show-Status "Docker daemon running" "OK"
+                    $firstLine = ($dockerInfo -split "`n")[0]
+                    Show-Status "Docker daemon: $firstLine" "OK"
                 } else {
                     Show-Status "Docker daemon not running" "ERROR"
                     $allPassed = $false
@@ -723,7 +734,7 @@ function Show-Dashboard {
     Write-Host "                                                                               " -ForegroundColor $Script:Colors.Title
     Write-Host "  MICROSERVICES                                                                " -ForegroundColor $Script:Colors.Title
     Write-Host "  - ALBA:          Port 5555                                                   " -ForegroundColor $Script:Colors.Info
-    Write-Host "  - ALBI:          Port 6666                                                   " -ForegroundColor $Script:Colors.Info
+    Write-Host "  - ALBI:          Port 6680                                                   " -ForegroundColor $Script:Colors.Info
     Write-Host "  - JONA:          Port 7777                                                   " -ForegroundColor $Script:Colors.Info
     Write-Host "  - Orchestrator:  Port 9999                                                   " -ForegroundColor $Script:Colors.Info
     Write-Host "                                                                               " -ForegroundColor $Script:Colors.Title

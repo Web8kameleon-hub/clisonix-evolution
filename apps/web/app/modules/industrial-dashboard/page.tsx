@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Industrial Dashboard - Real System Monitoring
  * REAL DATA ONLY - No mock, no fake, no Math.random()
  */
@@ -46,47 +46,64 @@ export default function IndustrialDashboard() {
   useEffect(() => {
     const fetchRealData = async () => {
       try {
-        // Fetch REAL ASI metrics from API routes
-        const [statusRes, systemRes] = await Promise.allSettled([
-          fetch('/api/asi-status'),
-          fetch('/api/system-status')
-        ]);
+        // 🔒 PRIVATE: Neural Biofeedback & Neuroacoustic endpoints hidden
+        // Fetch REAL ASI metrics - DISABLED FOR PRIVATE ACCESS
+        // const [statusRes, healthRes, albaRes, albiRes, jonaRes] = await Promise.allSettled([
+        //   fetch('/api/asi/status'),
+        //   fetch('/api/asi/health'),
+        //   fetch('/api/asi/alba/metrics'),
+        //   fetch('/api/asi/albi/metrics'),
+        //   fetch('/api/asi/jona/metrics')
+        // ]);
+        const [statusRes, healthRes, albaRes, albiRes, jonaRes] = [
+          { status: 'rejected', reason: new Error('Mocked rejection') },
+          { status: 'rejected', reason: new Error('Mocked rejection') },
+          { status: 'rejected', reason: new Error('Mocked rejection') },
+          { status: 'rejected', reason: new Error('Mocked rejection') },
+          { status: 'rejected', reason: new Error('Mocked rejection') }
+        ];
 
         // Process status
-        if (statusRes.status === 'fulfilled' && statusRes.value.ok) {
-          const statusData = await statusRes.value.json();
-          const asiData = statusData.asi_status;
+        if (
+          statusRes.status === 'fulfilled' &&
+          'value' in statusRes &&
+          (statusRes.value as Response).ok
+        ) {
+          const statusData = await (statusRes.value as Response).json();
           setMetrics({
             asi_system: {
-              status: asiData.status || 'unknown',
+              status: statusData.status,
               trinity: {
-                alba: asiData.trinity?.alba?.status === 'online' ? 'Online' : 'Offline',
-                albi: asiData.trinity?.albi?.status === 'online' ? 'Online' : 'Offline',
-                jona: asiData.trinity?.jona?.status === 'online' ? 'Online' : 'Offline'
+                alba: statusData.trinity?.alba?.operational ? 'Online' : 'Offline',
+                albi: statusData.trinity?.albi?.operational ? 'Online' : 'Offline',
+                jona: statusData.trinity?.jona?.operational ? 'Online' : 'Offline'
               }
             },
             signal_gen: {
               status: 'Online',
-              uptime: asiData.system?.uptime || 0,
+              uptime: statusData.system?.uptime || 0,
               memory_usage: 88.1
             },
-            timestamp: asiData.timestamp || new Date().toISOString()
+            timestamp: statusData.timestamp
           });
         }
 
-        // Process system status for backend health
-        if (systemRes.status === 'fulfilled' && systemRes.value.ok) {
-          const systemData = await systemRes.value.json();
-          const statusPayload = systemData.data || systemData;
+        // Process health
+        if (
+          healthRes.status === 'fulfilled' &&
+          'value' in healthRes &&
+          (healthRes.value as Response).ok
+        ) {
+          const healthData = await (healthRes.value as Response).json();
           setBackendHealth({
             service: 'Clisonix Backend (REAL)',
-            status: statusPayload.core_services === 'Operational' ? 'Operational' : 'Degraded',
+            status: healthData.healthy ? 'Operational' : 'Degraded',
             version: '2.1.0',
-            uptime: 3600, // Mock uptime for now
+            uptime: healthData.components?.alba_network?.metrics?.latency_ms || 0,
             memory: {
-              used: 88,
+              used: healthData.components?.alba_network?.metrics?.memory_mb || 88,
               total: 1024,
-              rss: 88
+              rss: healthData.components?.alba_network?.metrics?.memory_mb || 88
             }
           });
         }
@@ -107,7 +124,7 @@ export default function IndustrialDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-900 flex items-center justify-center">
         <div className="text-center text-white">
           <div className="text-4xl mb-4">🏭</div>
           <h2 className="text-2xl font-bold mb-2">Loading Industrial Dashboard</h2>
@@ -140,11 +157,11 @@ export default function IndustrialDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-900 p-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-block mb-4 text-cyan-400 hover:text-cyan-300 transition-colors">
+          <Link href="/" className="inline-block mb-4 text-violet-400 hover:text-violet-300 transition-colors">
             ← Back to Clisonix Cloud
           </Link>
           <h1 className="text-4xl font-bold text-white mb-4">
@@ -175,19 +192,19 @@ export default function IndustrialDashboard() {
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span className="text-gray-400">⚙️ Alba:</span>
+                    <span className="text-gray-400">⚙️ Core-A:</span>
                     <span className={`text-sm ${getStatusColor(metrics.asi_system.trinity.alba)}`}>
                       {metrics.asi_system.trinity.alba}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-400">🧠 Albi:</span>
+                    <span className="text-gray-400">🧠 Core-B:</span>
                     <span className={`text-sm ${getStatusColor(metrics.asi_system.trinity.albi)}`}>
                       {metrics.asi_system.trinity.albi}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-400">❤️ Jona:</span>
+                    <span className="text-gray-400">❤️ Core-C:</span>
                     <span className={`text-sm ${getStatusColor(metrics.asi_system.trinity.jona)}`}>
                       {metrics.asi_system.trinity.jona}
                     </span>
@@ -282,7 +299,7 @@ export default function IndustrialDashboard() {
             </div>
             <div>
               <h4 className="text-lg font-medium text-gray-300 mb-2">Backend Health</h4>
-              <pre className="bg-black/20 rounded-lg p-4 text-xs text-blue-400 overflow-auto max-h-60">
+              <pre className="bg-black/20 rounded-lg p-4 text-xs text-violet-400 overflow-auto max-h-60">
                 {backendHealth ? JSON.stringify(backendHealth, null, 2) : 'No data'}
               </pre>
             </div>
@@ -295,7 +312,7 @@ export default function IndustrialDashboard() {
             🔗 Quick Module Access
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link href="/modules/eeg-analysis" className="bg-cyan-500/20 hover:bg-cyan-500/30 rounded-lg p-4 text-center transition-colors border border-cyan-500/30">
+            <Link href="/modules/eeg-analysis" className="bg-violet-500/20 hover:bg-violet-500/30 rounded-lg p-4 text-center transition-colors border border-violet-500/30">
               <div className="text-2xl mb-2">🧠</div>
               <div className="text-white font-medium">EEG Analysis</div>
             </Link>
@@ -307,14 +324,22 @@ export default function IndustrialDashboard() {
               <div className="text-2xl mb-2">📊</div>
               <div className="text-white font-medium">Spectrum Analyzer</div>
             </Link>
-            <Link href="/modules/neuroacoustic-converter" className="bg-green-500/20 hover:bg-green-500/30 rounded-lg p-4 text-center transition-colors border border-green-500/30">
+            {/* 🔒 PRIVATE: Neuroacoustic Converter hidden from public access */}
+            {/* <Link href="/modules/neuroacoustic-converter" className="bg-green-500/20 hover:bg-green-500/30 rounded-lg p-4 text-center transition-colors border border-green-500/30">
               <div className="text-2xl mb-2">🔄</div>
               <div className="text-white font-medium">Neuroacoustic Converter</div>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+
+
+
+
+
+
 

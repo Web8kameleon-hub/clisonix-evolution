@@ -7,24 +7,12 @@
     "date": "2025-12-10"
   },
   "auth": {
-    "type": "bearer",
-    "bearer": [
-      {
-        "key": "token",
-        "value": "{{openai_api_key}}",
-        "type": "string"
-      }
-    ]
+    "type": "noauth"
   },
   "variable": [
     {
       "key": "base_url",
       "value": "http://localhost:8000",
-      "type": "string"
-    },
-    {
-      "key": "openai_api_key",
-      "value": "sk-your-key-here",
       "type": "string"
     }
   ],

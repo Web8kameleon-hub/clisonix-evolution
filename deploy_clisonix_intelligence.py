@@ -182,7 +182,7 @@ CLISONIX_VERSION=1.0.0
 DEPLOYMENT_TIMESTAMP={datetime.now(timezone.utc).isoformat()}
 
 # API Configuration
-CLISONIX_API_BASE_URL=https://api.clisonix.cloud
+CLISONIX_API_BASE_URL=https://api.clisonix.com
 CLISONIX_API_TIMEOUT=30000
 CLISONIX_API_MAX_CONCURRENCY=10
 
@@ -201,7 +201,7 @@ API_KEY={self.generate_secret()}
 # Monitoring Configuration
 MONITORING_ENABLED=true
 METRICS_INTERVAL=30
-ALERT_EMAIL=admin@clisonix.cloud
+ALERT_EMAIL=clisonix@pm.me
 """
 
         with open(env_file, 'w', encoding='utf-8') as f:
@@ -299,7 +299,7 @@ ALERT_EMAIL=admin@clisonix.cloud
             },
             'api_scanner': {
                 'enabled': True,
-                'base_url': 'https://api.clisonix.cloud',
+                'base_url': 'https://api.clisonix.com',
                 'scan_depth': 3,
                 'timeout': 30000
             }
@@ -780,3 +780,4 @@ async def main():
 if __name__ == "__main__":
     # Ekzekuto deploy-in
     asyncio.run(main())
+

@@ -2,13 +2,36 @@
 
 Industrial Backend & Payment System
 
-**-Industrial-Grade FastAPI Backend with Real
- Business Integration**
+## Industrial-Grade FastAPI Backend with Real Business Integration
+
+## 📧 Contact & Support
+
+- **Email:** <clisonix@pm.me>
+- **Support:** <clisonix@pm.me>
+- **Website:** [clisonix.com](https://clisonix.com)
+
+## 💰 Support This Project
+
+**SEPA Bank Transfer:**
+
+- **IBAN:** DE72 xxxx xxxx xxxx xxxx xx
+- **BIC:** WELADEDxxxx
+- **Account Holder:** Configured via secrets
+
+**PayPal:**
+
+- **Email:** Configured via secrets
+
+> 💡 For real payment details, contact: <clisonix@pm.me>
+
+---
 
 **Business Information:**
 
-- **Owner:** [Contact for details]
-- **Company:** WEB8euroweb GmbH
+- **Owner:** Ledjan Ahmati (Geschäftsführer / Inhaber)
+- **Brand:** Clisonix
+- **Registered Legal Entity:** ABA GmbH
+- **Registration:** Amtsgericht Bochum HRB: 21069
 - **SEPA IBAN:** `${SEPA_IBAN}` (Configured via secrets)
 - **PayPal:** `${PAYPAL_EMAIL}` (Configured via secrets)
 - **Data Policy:** Production credentials managed via secrets - See SECURITY.md
@@ -22,6 +45,18 @@ Industrial Backend & Payment System
 - **ALBI:** Advanced Learning & Brain Intelligence - Cognitive pattern analysis
 - **ALBA:** Adaptive Learning & Brain Analysis - Real-time EEG processing  
 - **JONA:** Joint Oscillatory Neural Analysis - Multi-modal signal correlation
+
+### 🚀 LLM Inference Engines
+
+- **Ollama:** Local LLM inference (llama3.1:8b) - CPU optimized
+- **vLLM:** High-throughput GPU inference engine ([vllm.ai](https://vllm.ai)) - Requires NVIDIA GPU
+- **Curiosity Ocean:** Hybrid multilingual AI assistant v8.0
+
+### 🔬 ML/AI Stack
+
+- **PyTorch:** Deep learning framework (CPU/CUDA)
+- **Transformers:** Hugging Face models integration
+- **Sentence-Transformers:** Semantic embeddings
 
 ### 💳 Payment System Integration
 
@@ -306,10 +341,10 @@ docker-compose logs -f api
 {
   "owner": "Ledjan Ahmati",
   "company": "WEB8euroweb GmbH", 
-  "sepa_iban": "DE72430500010015012263",
-  "sepa_bic": "DORTDE33XXX",
+  "sepa_iban": "DE72xxxxxxxxxxx63",
+  "sepa_bic": "XXX",
   "sepa_bank": "Sparkasse Bochum",
-  "paypal_email": "ahmati.bau@gmail.com",
+  "paypal_email": "axxxxgmail.com",
   "data_policy": "REAL DATA ONLY - NO MOCK"
 }
 ```
@@ -353,17 +388,6 @@ pytest tests/test_billing.py -v
 
 ---
 
-## 📞 Business Contact
-
-Ledjan Ahmati - WEB8euroweb GmbH**
-
-- **Email:** <ahmati.bau@gmail.com>
-- **SEPA:** DE72430500010015012263 (Sparkasse Bochum)
-- **Company:** WEB8euroweb GmbH
-- **Data Policy:** Industrial-grade real data processing only
-
----
-
 ## 🔍 System Status
 
 **Live Monitoring Available:**
@@ -374,3 +398,4 @@ Ledjan Ahmati - WEB8euroweb GmbH**
 - Payment system status at `/billing/stats`
 
 **No Mock Data:** This is an industrial-grade backend using real business integration, actual system monitoring, and live payment processing. All metrics, business information, and processing capabilities are real and functional. - FastAPI + Worker + Docker Compose
+

@@ -327,7 +327,7 @@ dredd openapi/jona-api-v1.yaml http://localhost:7777
 
 **Documentation:** API_DOCS.md  
 **Contract Issues:** Open GitHub issue with `openapi` label  
-**Contact:** Ledjan Ahmati (LedjanAhmati/Clisonix-cloud)  
+**Contact:** Ledjan Ahmati (Web8kameleon-hub/clisonix.com)  
 
 ---
 

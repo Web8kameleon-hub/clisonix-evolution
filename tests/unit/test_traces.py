@@ -14,7 +14,7 @@ BASE_URL = "http://localhost"
 
 # Service endpoints
 ALBA_URL = f"{BASE_URL}:5555"
-ALBI_URL = f"{BASE_URL}:6666"
+ALBI_URL = f"{BASE_URL}:6680"
 JONA_URL = f"{BASE_URL}:7777"
 API_URL = f"{BASE_URL}:8000"
 ORCHESTRATOR_URL = f"{BASE_URL}:9999"
@@ -85,7 +85,7 @@ def test_alba_data():
 
 def test_albi_health():
     """Test ALBI health"""
-    print_header("4️⃣ Testing ALBI Processor (6666)")
+    print_header("4️⃣ Testing ALBI Processor (6680)")
     try:
         response = requests.get(f"{ALBI_URL}/health", timeout=5)
         print(f"✓ ALBI Health: {response.status_code}")
@@ -203,7 +203,7 @@ def main():
     print("║          CLISONIX DISTRIBUTED TRACING - FULL PIPELINE TEST         ║")
     print("║                                                                    ║")
     print("║  This test generates traces through:                              ║")
-    print("║  ALBA (5555) → ALBI (6666) → JONA (7777) → Orchestrator (9999)    ║")
+    print("║  ALBA (5555) → ALBI (6680) → JONA (7777) → Orchestrator (9999)    ║")
     print("║                                                                    ║")
     print("║  📊 Open Grafana: http://localhost:3001                           ║")
     print("║  🔍 View Traces: Explore → Select 'Tempo' datasource → Search     ║")

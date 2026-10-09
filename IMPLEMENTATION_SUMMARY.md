@@ -26,6 +26,7 @@ Complete authentication overhaul for Clisonix Cloud API is now production-ready.
 ### 1. OpenAPI Specification (`openapi.yaml`)
 
 **New Schemas (5 total):**
+
 ```yaml
 - AuthLoginRequest: {email: string, password: string}
 - AuthLoginResponse: {token: string, refresh_token: string, api_key: string, expires_in: integer}
@@ -36,11 +37,13 @@ Complete authentication overhaul for Clisonix Cloud API is now production-ready.
 ```
 
 **New Endpoints (3 total):**
+
 - `POST /auth/login` – Login with email/password (public, no auth required)
 - `POST /auth/refresh` – Get new JWT from refresh_token (public, no auth required)
 - `POST /auth/api-key` – Generate new API key (requires Bearer JWT)
 
 **Security Schemes:**
+
 - `bearer`: JWT Bearer token in Authorization header
 - `api_key`: X-API-Key header for production deployments
 
@@ -53,6 +56,7 @@ Complete authentication overhaul for Clisonix Cloud API is now production-ready.
 **File Size**: 424 lines (clean, no duplicate code)
 
 **New Class Fields**:
+
 - `refresh_token: Optional[str] = None`
 - `api_key: Optional[str] = None`
 
@@ -81,12 +85,14 @@ def set_api_key(api_key: str) -> None
 ```
 
 **Updated Methods**:
+
 - `_headers()`: Now includes X-API-Key when set
 - Constructor: Added token/refresh_token/api_key parameters
 
 **All Existing Methods Preserved**: 40+ methods for health, ask, ALBA streams, brain engine, etc.
 
 **Example Usage**:
+
 ```python
 client = ClisonixClient("https://api.clisonix.com")
 login_data = client.login("user@example.com", "password")
@@ -105,6 +111,7 @@ api_key_resp = client.create_api_key("prod-server")
 **File Size**: 435 lines
 
 **New Private Fields**:
+
 - `private refreshToken: string | null;`
 - `private apiKey: string | null;`
 
@@ -133,11 +140,13 @@ setApiKey(apiKey: string): void
 ```
 
 **Updated Methods**:
+
 - `getHeaders()`: Now includes X-API-Key when set
 
 **All Existing Methods Preserved**: 40+ async methods
 
 **Example Usage**:
+
 ```typescript
 const client = new ClisonixClient({baseUrl: 'https://api.clisonix.com'});
 const loginData = await client.login('user@example.com', 'password');
@@ -154,6 +163,7 @@ const apiKeyResp = await client.createApiKey('prod-server');
 ### 4. Postman Collection (`postman_collection_auth.json`)
 
 **Collection Structure**:
+
 ```
 Clisonix Cloud API – Auth Folder
 ├── Auth (Folder)
@@ -186,6 +196,7 @@ Clisonix Cloud API – Auth Folder
    - Status check: 2xx response validation
 
 **Test Scripts**: Each endpoint includes JavaScript test scripts that:
+
 - Validate response status (2xx)
 - Check for required fields
 - Auto-capture tokens/API keys to `pm.environment`
@@ -198,12 +209,14 @@ Clisonix Cloud API – Auth Folder
 ### 5. Landing Page (`index.html`)
 
 **Features**:
+
 - Modern dark theme with gradient backgrounds
 - Responsive design (desktop, tablet, mobile)
 - Animated wave visualization
 - Smooth animations and transitions
 
 **Sections**:
+
 1. **Navigation** – Logo, links, Sign In / Get Started buttons
 2. **Hero** – Main headline, subtitle, CTA buttons, animated wave
 3. **Features** – 6 feature cards with icons
@@ -218,6 +231,7 @@ Clisonix Cloud API – Auth Folder
 6. **Footer** – Links, resources, company info
 
 **Design**:
+
 - Color scheme: Dark navy (#0f0f1e) with cyan (#00d4ff) and purple (#7f39fb) accents
 - Typography: System fonts for performance
 - Animations: Fade-in effects, hover states, wave SVG animation
@@ -230,6 +244,7 @@ Clisonix Cloud API – Auth Folder
 ### 6. Authentication Guide (`AUTHENTICATION.md`)
 
 **Content**:
+
 - Overview of authentication methods (JWT, API Key, Refresh Token)
 - Complete API endpoint documentation
 - Python SDK usage examples (login, refresh, create_api_key)
@@ -247,26 +262,31 @@ Clisonix Cloud API – Auth Folder
 ## Security Features Implemented
 
 ✅ **JWT Bearer Authentication**
+
 - Secure token-based auth
 - Automatic expiration (3600 seconds)
 - Refresh token support
 
 ✅ **API Key Management**
+
 - Long-lived API keys for server-to-server auth
 - Per-user key generation
 - X-API-Key header support
 
 ✅ **Token Refresh Flow**
+
 - Automatic token refresh without re-login
 - Refresh token with extended lifetime
 - Automatic token capture in SDKs
 
 ✅ **Secure Headers**
+
 - Authorization: Bearer <token>
 - X-API-Key: <key>
 - Proper CORS handling
 
 ✅ **Error Handling**
+
 - Clear error messages (401, 403, etc.)
 - Token expiration detection
 - Proper HTTP status codes
@@ -276,21 +296,25 @@ Clisonix Cloud API – Auth Folder
 ## Integration Points
 
 ### 1. OpenAPI ↔ SDKs
+
 - All 3 auth endpoints defined in OpenAPI
 - SDKs auto-generate request/response types
 - Consistent interface across languages
 
 ### 2. SDKs ↔ Postman
+
 - Same endpoints tested in Postman
 - Token auto-capture for manual testing
 - Example payloads in Postman match SDK docs
 
 ### 3. Landing Page ↔ Documentation
+
 - Code examples on landing page match SDK docs
 - Pricing tiers linked to features
 - Links to API reference and documentation
 
 ### 4. All Components ↔ AUTHENTICATION.md
+
 - Complete guide covers all auth methods
 - Examples for Python, TypeScript, Postman
 - Security best practices documented
@@ -315,6 +339,7 @@ Clisonix Cloud API – Auth Folder
 ## Validation Results
 
 ### Python SDK
+
 ```
 ✅ No syntax errors
 ✅ All auth methods implemented
@@ -324,6 +349,7 @@ Clisonix Cloud API – Auth Folder
 ```
 
 ### TypeScript SDK
+
 ```
 ✅ No TypeScript compilation errors
 ✅ All auth methods implemented
@@ -333,6 +359,7 @@ Clisonix Cloud API – Auth Folder
 ```
 
 ### OpenAPI Specification
+
 ```
 ✅ Valid YAML syntax
 ✅ All schemas properly referenced
@@ -342,6 +369,7 @@ Clisonix Cloud API – Auth Folder
 ```
 
 ### Postman Collection
+
 ```
 ✅ Valid JSON structure
 ✅ All 3 auth endpoints included
@@ -351,6 +379,7 @@ Clisonix Cloud API – Auth Folder
 ```
 
 ### Landing Page
+
 ```
 ✅ Valid HTML5
 ✅ Responsive CSS (desktop/tablet/mobile)
@@ -364,6 +393,7 @@ Clisonix Cloud API – Auth Folder
 ## Authentication Flow Diagrams
 
 ### 1. Initial Login
+
 ```
 User
   ↓
@@ -379,6 +409,7 @@ Subsequent API calls
 ```
 
 ### 2. Token Refresh
+
 ```
 Token Expired?
   ↓ Yes
@@ -394,6 +425,7 @@ Continue with refreshed auth
 ```
 
 ### 3. API Key Based Auth
+
 ```
 client.set_api_key("api_sk_xxx")
   ↓
@@ -432,6 +464,7 @@ Process request
 ## Next Steps (Optional)
 
 ### Future Enhancements
+
 1. **OAuth2/OIDC Integration** – Third-party provider support
 2. **Two-Factor Authentication** – Added security layer
 3. **Token Blacklisting** – Logout functionality
@@ -442,6 +475,7 @@ Process request
 8. **Admin Dashboard** – Key management interface
 
 ### Deployment
+
 1. Deploy updated OpenAPI spec to API Gateway
 2. Implement `/auth/login`, `/auth/refresh`, `/auth/api-key` endpoints
 3. Set up token signing keys (HS256 recommended)
@@ -469,6 +503,7 @@ Process request
 Clisonix Cloud API now has a complete, enterprise-grade authentication system ready for immediate deployment. All components are integrated, tested, and documented.
 
 **Key Achievements**:
+
 - ✅ 3 new auth endpoints (login, refresh, api-key)
 - ✅ 6 authentication schemas
 - ✅ 2 SDKs with full auth support (Python + TypeScript)

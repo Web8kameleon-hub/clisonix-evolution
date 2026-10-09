@@ -14,9 +14,17 @@ from pydantic import BaseModel
 
 from economy_layer import EconomyLayer
 
+# API Version
+API_V1 = "/api/v1"
 PORT = int(os.getenv("ECONOMY_API_PORT", "9093"))
 
-app = FastAPI(title="Earthmind Economy API", version="0.1.0")
+app = FastAPI(
+    title="Earthmind Economy API", 
+    version="0.1.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json"
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -39,6 +47,19 @@ class ComputeIn(BaseModel):
 @app.get("/health")
 def health() -> Dict[str, Any]:
     return {"status": "running", "service": "Economy API", "port": PORT}
+
+
+@app.get("/status")
+@app.get("/api/status")
+@app.get(API_V1 + "/status")
+def api_status() -> Dict[str, Any]:
+    return {
+        "status": "operational",
+        "service": "Economy API",
+        "version": "0.1.0",
+        "port": PORT,
+        "timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    }
 
 
 @app.get("/")
@@ -73,6 +94,12 @@ def report() -> Dict[str, Any]:
     return rep
 
 
+@app.get(API_V1 + "/spec")
+def api_spec():
+    return app.openapi()
+
+
 if __name__ == "__main__":
-    uvicorn.run("economy_api_server:app", host="127.0.0.1", port=PORT, reload=True)
+    # PRODUCTION: reload=False për të mos konsumuar CPU me file watching
+    uvicorn.run("economy_api_server:app", host="0.0.0.0", port=PORT, reload=False)
 

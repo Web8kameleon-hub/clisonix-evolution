@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-🧠 NEUROSONIX INDUSTRIAL BACKEND (REAL)
+🧠 Clisonix INDUSTRIAL BACKEND (REAL)
 ========================================
-NeuroSonix Web8 Division - EuroSonix Industrial API Server
+Clisonix Web8 Division - EuroSonix Industrial API Server
 
-Ky është backend-i industrial për NeuroSonix që ofron:
+Ky është backend-i industrial për Clisonix që ofron:
 - EEG dhe Audio Processing
 - ALBA Data Collection
 - ASI Trinity Architecture
@@ -52,12 +52,25 @@ try:
 except ImportError:
     alignments_available = False
     print("⚠️ Advanced Cycle Alignments not available")
+    
+    # Define stub functions when module is not available
+    async def evaluate_cycle_alignment(cycle_id: str, cycle_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Stub function when advanced_cycle_alignments is not available"""
+        raise NotImplementedError("Advanced cycle alignments not available")
+    
+    async def create_adaptive_cycle(domain: str, requirements: Dict[str, Any]) -> str:
+        """Stub function when advanced_cycle_alignments is not available"""
+        raise NotImplementedError("Advanced cycle alignments not available")
+    
+    async def get_alignment_dashboard() -> Dict[str, Any]:
+        """Stub function when advanced_cycle_alignments is not available"""
+        raise NotImplementedError("Advanced cycle alignments not available")
 
 # Create FastAPI app
 app = FastAPI(
-    title="NeuroSonix Industrial Backend (REAL)",
+    title="Clisonix Industrial Backend (REAL)",
     version="1.0.0",
-    description="NeuroSonix Web8 Division - EuroSonix Industrial API Server"
+    description="Clisonix Web8 Division - EuroSonix Industrial API Server"
 )
 
 # Add CORS middleware
@@ -190,8 +203,8 @@ system_status = {
     }
 }
 
-active_streams = {}
-stream_data = {}
+active_streams: Dict[str, Dict[str, Any]] = {}
+stream_data: Dict[str, List[Any]] = {}
 
 # ==================== API KEY SYSTEM ENDPOINTS ====================
 
@@ -498,7 +511,7 @@ async def db_ping():
     """Database ping"""
     return {
         "status": "connected",
-        "database": "neurosonix_industrial",
+        "database": "Clisonix_industrial",
         "response_time_ms": 12.5,
         "timestamp": datetime.now(timezone.utc).isoformat()
     }
@@ -924,7 +937,7 @@ async def root():
         })
 
     return {
-        "message": "NeuroSonix Industrial Backend (REAL) - Web8 Division EuroSonix",
+        "message": "Clisonix Industrial Backend (REAL) - Web8 Division EuroSonix",
         "version": "1.0.0",
         "status": "operational",
         "api_key_system": "enabled",
@@ -938,7 +951,7 @@ async def root():
 if __name__ == "__main__":
     import uvicorn
 
-    logger.info("🚀 Starting NeuroSonix Industrial Backend (REAL)")
+    logger.info("🚀 Starting Clisonix Industrial Backend (REAL)")
     logger.info("🌐 Web8 Division - EuroSonix")
     logger.info("📡 Server starting on http://localhost:8003")
 

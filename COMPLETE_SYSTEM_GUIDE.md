@@ -1,6 +1,7 @@
 # CLISONIX CLOUD - COMPLETE SYSTEM DOCUMENTATION
 
 ## 📋 Table of Contents
+
 - [Architecture Overview](#architecture-overview)
 - [Services](#services)
 - [Getting Started](#getting-started)
@@ -32,7 +33,7 @@ CLISONIX Cloud is a **fully integrated neural audio synthesis system** with dist
 ▼    ▼                 ▼                 ▼                    ▼
 ┌────────┐         ┌────────┐       ┌────────┐         ┌─────────┐
 │ ALBA   │         │ ALBI   │       │ JONA   │         │ORCHESTR │
-│5555    │         │6666    │       │7777    │         │9999     │
+│5555    │         │6680    │       │7777    │         │9999     │
 │        │         │        │       │        │         │         │
 │Telemetry         │Neural  │       │Data    │         │Service  │
 │Collector         │Analytics      │Synthesis         │Registry │
@@ -55,12 +56,14 @@ CLISONIX Cloud is a **fully integrated neural audio synthesis system** with dist
 ## Services
 
 ### 1. **Frontend (Port 3000)**
+
 - Next.js 15 web application
 - Real-time dashboard for system monitoring
 - User interface for audio synthesis
 - Environment: `NEXT_PUBLIC_API_BASE=http://localhost:8000`
 
 ### 2. **API Gateway (Port 8000)**
+
 - FastAPI main application
 - REST API endpoints
 - WebSocket support
@@ -68,6 +71,7 @@ CLISONIX Cloud is a **fully integrated neural audio synthesis system** with dist
 - Database connection pool
 
 ### 3. **ALBA Collector (Port 5555)**
+
 - **Purpose**: Network telemetry collection
 - **Endpoints**:
   - `POST /ingest` - Ingest sensor data
@@ -75,7 +79,8 @@ CLISONIX Cloud is a **fully integrated neural audio synthesis system** with dist
   - `GET /metrics` - Service metrics
   - `GET /health` - Health check
 
-### 4. **ALBI Processor (Port 6666)**
+### 4. **ALBI Processor (Port 6680)**
+
 - **Purpose**: Neural data analysis and pattern detection
 - **Endpoints**:
   - `POST /analyze` - Analyze data for patterns
@@ -85,6 +90,7 @@ CLISONIX Cloud is a **fully integrated neural audio synthesis system** with dist
   - `GET /health` - Health check
 
 ### 5. **JONA Coordinator (Port 7777)**
+
 - **Purpose**: Audio synthesis and data coordination
 - **Endpoints**:
   - `POST /synthesize` - Generate neural audio
@@ -95,6 +101,7 @@ CLISONIX Cloud is a **fully integrated neural audio synthesis system** with dist
   - `GET /health` - Health check
 
 ### 6. **SAAS Orchestrator (Port 9999)**
+
 - **Purpose**: Service discovery and orchestration
 - **Key Endpoints**:
   - `GET /registry` - Service registry with health status
@@ -108,6 +115,7 @@ CLISONIX Cloud is a **fully integrated neural audio synthesis system** with dist
 ## Getting Started
 
 ### Prerequisites
+
 - **Node.js** 18+ (for frontend)
 - **Python** 3.10+ (for services)
 - **Docker** (optional, for containerized deployment)
@@ -116,12 +124,14 @@ CLISONIX Cloud is a **fully integrated neural audio synthesis system** with dist
 ### Installation
 
 1. **Clone Repository**
+
 ```bash
-git clone https://github.com/LedjanAhmati/Clisonix-cloud.git
+git clone https://github.com/Web8kameleon-hub/clisonix.com.git
 cd Clisonix-cloud
 ```
 
-2. **Install Dependencies**
+1. **Install Dependencies**
+
 ```bash
 # Frontend
 cd apps/web
@@ -132,7 +142,8 @@ cd ../..
 pip install -r requirements.txt
 ```
 
-3. **Configure Environment**
+1. **Configure Environment**
+
 ```bash
 # Copy environment template
 cp .env.example .env
@@ -146,21 +157,25 @@ cp .env.example .env
 ### Quick Start
 
 #### Mode 1: Full System (Recommended)
+
 ```powershell
 .\scripts\launch-all.ps1
 ```
 
 #### Mode 2: SaaS Services Only
+
 ```powershell
 .\scripts\launch-all.ps1 -Mode saas-only
 ```
 
 #### Mode 3: Application Only
+
 ```powershell
 .\scripts\launch-all.ps1 -Mode app-only
 ```
 
 #### Mode 4: Docker Compose
+
 ```bash
 docker-compose up -d
 ```
@@ -172,6 +187,7 @@ docker-compose up -d
 ### ALBA - Telemetry Collector
 
 #### Ingest Data
+
 ```bash
 POST /ingest
 Content-Type: application/json
@@ -188,6 +204,7 @@ Content-Type: application/json
 ```
 
 **Response:**
+
 ```json
 {
   "status": "ingested",
@@ -199,6 +216,7 @@ Content-Type: application/json
 ### ALBI - Neural Processor
 
 #### Analyze Data
+
 ```bash
 POST /analyze
 Content-Type: application/json
@@ -212,6 +230,7 @@ Content-Type: application/json
 ```
 
 **Response:**
+
 ```json
 {
   "analysis_id": "xyz789",
@@ -230,6 +249,7 @@ Content-Type: application/json
 ### JONA - Data Synthesis
 
 #### Generate Audio
+
 ```bash
 POST /synthesize
 Content-Type: application/json
@@ -243,6 +263,7 @@ Content-Type: application/json
 ```
 
 **Response:**
+
 ```json
 {
   "synthesis_id": "syn_001",
@@ -254,6 +275,7 @@ Content-Type: application/json
 ```
 
 #### Stream Audio
+
 ```bash
 GET /synthesize/{synthesis_id}/audio
 
@@ -263,11 +285,13 @@ GET /synthesize/{synthesis_id}/audio
 ### Orchestrator - Service Management
 
 #### Get Service Registry
+
 ```bash
 GET /registry
 ```
 
 **Response:**
+
 ```json
 {
   "timestamp": "2025-01-01T00:00:00",
@@ -313,7 +337,7 @@ response = requests.post(
 ### Data Flow Example
 
 1. **Telemetry Ingestion** → ALBA (5555)
-2. **Pattern Analysis** → ALBI (6666)
+2. **Pattern Analysis** → ALBI (6680)
 3. **Audio Synthesis** → JONA (7777)
 4. **Result Delivery** → API (8000)
 
@@ -335,10 +359,11 @@ docker-compose down
 ```
 
 **Included Services:**
+
 - Frontend (3000)
 - API (8000)
 - ALBA (5555)
-- ALBI (6666)
+- ALBI (6680)
 - JONA (7777)
 - Orchestrator (9999)
 - PostgreSQL (5432)
@@ -377,6 +402,7 @@ pytest tests/test_comprehensive_integration.py --cov=. --cov-report=html
 ### CI/CD Pipeline
 
 GitHub Actions workflow runs on every push:
+
 - Code quality checks (flake8, black)
 - Unit tests
 - Integration tests
@@ -405,19 +431,22 @@ Stop-Process -Id <PID> -Force
 ### Services Not Connecting
 
 1. **Check health endpoints:**
+
 ```bash
 curl http://localhost:5555/health
-curl http://localhost:6666/health
+curl http://localhost:4444/health
 curl http://localhost:7777/health
 curl http://localhost:9999/health
 ```
 
-2. **Check service registry:**
+1. **Check service registry:**
+
 ```bash
 curl http://localhost:9999/registry
 ```
 
-3. **Verify networking:**
+1. **Verify networking:**
+
 ```bash
 docker network ls
 docker network inspect clisonix
@@ -451,17 +480,20 @@ Get-Process | Where-Object {$_.Name -like "*python*" -or $_.Name -like "*node*"}
 ## Monitoring & Observability
 
 ### Prometheus (Port 9090)
+
 - System metrics collection
 - Service health tracking
 - Alert configuration
 
 ### Grafana (Port 3001)
+
 - Dashboard visualization
 - Real-time monitoring
 - Alert notifications
 - Default login: admin/admin
 
 ### Logs
+
 ```bash
 # API logs
 tail -f logs/Clisonix_real.log
@@ -493,7 +525,7 @@ r1 = requests.post(f"{alba_url}/ingest", json=data)
 print(f"Ingested: {r1.json()['id']}")
 
 # 2. Analyze with ALBI
-albi_url = "http://localhost:6666"
+albi_url = "http://localhost:4444"
 analysis_data = {
     "channels": {
         "ch1": [1.0, 1.1, 1.0, 0.9, 1.1],
@@ -529,7 +561,7 @@ print("Audio saved to output.wav")
 - **Issues**: GitHub Issues
 - **Discussions**: GitHub Discussions
 - **Documentation**: `/docs/` directory
-- **API Docs**: http://localhost:8000/docs (interactive Swagger UI)
+- **API Docs**: <http://localhost:8000/docs> (interactive Swagger UI)
 
 ---
 

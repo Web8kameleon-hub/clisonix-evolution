@@ -207,7 +207,7 @@ curl http://localhost:8000/docs
 curl -X POST http://localhost:8000/fitness/users/profile \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "test@clisonix.com",
+    "email": "clisonix@pm.me",
     "name": "Test User",
     "age": 30,
     "gender": "M",
@@ -376,3 +376,4 @@ All systems are running and ready to use!
 **Last Updated**: December 3, 2025  
 **Docker Compose File**: docker-compose.prod.yml  
 **Status**: ✅ ALL SYSTEMS OPERATIONAL
+

@@ -54,7 +54,6 @@ New-SecretFile -Name "jwt_secret" -Value (New-SecurePassword -Length 64)
 New-SecretFile -Name "encryption_key" -Value (New-SecurePassword -Length 32)
 
 # Placeholder secrets (user duhet t'i plotësojë)
-New-SecretFile -Name "openai_api_key" -Value "sk-REPLACE_WITH_YOUR_KEY"
 New-SecretFile -Name "slack_webhook_url" -Value "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
 
 # Vendos permissions (vetëm owner mund të lexojë)

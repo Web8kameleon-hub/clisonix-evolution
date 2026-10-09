@@ -44,7 +44,7 @@ if (Test-Path "package-lock.json") {
 Write-Host "5️⃣  Verifying production services..." -ForegroundColor Yellow
 $services = @(
     "alba_service_5555.py",
-    "albi_service_6666.py",
+    "albi_service_6680.py",
     "jona_service_7777.py",
     "master.py",
     "apps\api\main.py"

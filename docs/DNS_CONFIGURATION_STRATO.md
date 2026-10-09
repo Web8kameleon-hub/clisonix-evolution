@@ -25,7 +25,7 @@ Point `clisonix.com` domain (registered at STRATO) to Hetzner server.
 1. Go to: https://www.strato.de/apps/CustomerService
 2. Login with:
    - **Kundennummer:** K1266374525
-   - **Email:** amati.ledian@gmail.com
+   - **Email:** clisonix@pm.me
    - **Password:** [Your STRATO password]
 
 ---
@@ -148,9 +148,9 @@ Once DNS is propagated, run on Hetzner server:
 apt install -y certbot
 
 # Get certificates
-certbot certonly --standalone -d clisonix.com -d www.clisonix.com --email amati.ledian@gmail.com --agree-tos
+certbot certonly --standalone -d clisonix.com -d www.clisonix.com --email clisonix@pm.me --agree-tos
 
-certbot certonly --standalone -d api.clisonix.com --email amati.ledian@gmail.com --agree-tos
+certbot certonly --standalone -d api.clisonix.com --email clisonix@pm.me --agree-tos
 
 # Auto-renewal
 certbot renew --dry-run
@@ -199,3 +199,4 @@ Nginx Reverse Proxy (SSL/TLS)
 
 **Last Updated:** December 11, 2025  
 **Author:** Clisonix Cloud DevOps Team
+

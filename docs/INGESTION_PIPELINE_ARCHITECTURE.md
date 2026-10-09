@@ -179,7 +179,7 @@ default_args = {
     'depends_on_past': False,
     'start_date': datetime(2025, 1, 1),
     'email_on_failure': True,
-    'email': ['data-eng@clisonix.com'],
+    'email': ['clisonix@pm.me'],
     'retries': 3,
     'retry_delay': timedelta(minutes=5),
 }
@@ -202,7 +202,7 @@ def fetch_openalex_works(**context):
     params = {
         'filter': f'from_publication_date:{yesterday}',
         'per-page': 200,
-        'mailto': 'api@clisonix.com'  # OpenAlex polite pool
+        'mailto': 'clisonix@pm.me'  # OpenAlex polite pool
     }
     
     works = []
@@ -567,3 +567,4 @@ def embed_batch(documents: List[Dict]):
 
 **Previous**: [Catalog & Governance Setup](./CATALOG_GOVERNANCE_SETUP.md)  
 **Next**: [Storage & Indexing Infrastructure](./STORAGE_INDEXING_INFRASTRUCTURE.md)
+

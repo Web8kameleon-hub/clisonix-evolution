@@ -850,8 +850,8 @@ Info (logged):
 | Role | Contact | Status |
 |------|---------|--------|
 | **On-Call Engineer** | +1-xxx-xxx-xxxx | 24/7 |
-| **Support Manager** | support@clisonix.com | 24/5 |
-| **CEO/CTO** | cto@clisonix.com | Critical only |
+| **Support Manager** | clisonix@pm.me | 24/5 |
+| **CEO/CTO** | clisonix@pm.me | Critical only |
 | **Status Page** | status.clisonix.com | Public |
 
 ---
@@ -859,3 +859,4 @@ Info (logged):
 **Clisonix Cloud – Complete Startup Guide**  
 **Ready for Production Launch**  
 **November 30, 2025**
+

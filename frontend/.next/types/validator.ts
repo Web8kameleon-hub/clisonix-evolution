@@ -47,6 +47,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 }
 
 
+// Validate ../../src/app/modules/cognitive-impact/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/modules/cognitive-impact">> = Specific
+  const handler = {} as typeof import("../../src/app/modules/cognitive-impact/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/modules/eeg-analysis/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/modules/eeg-analysis">> = Specific
@@ -87,6 +96,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/modules/spectrum-analyzer">> = Specific
   const handler = {} as typeof import("../../src/app/modules/spectrum-analyzer/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/">> = Specific
+  const handler = {} as typeof import("../../src/app/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

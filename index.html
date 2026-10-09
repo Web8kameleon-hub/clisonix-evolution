@@ -1,695 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clisonix – Neural Audio Engine</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
-            color: #e0e0e0;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            position: sticky;
-            top: 0;
-            background: rgba(15, 15, 30, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            border-bottom: 1px solid rgba(100, 200, 255, 0.1);
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #00d4ff, #7f39fb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 40px;
-        }
-
-        nav a {
-            color: #b0b0b0;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 14px;
-        }
-
-        nav a:hover {
-            color: #00d4ff;
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 10px 25px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #00d4ff;
-            border: 1px solid #00d4ff;
-        }
-
-        .btn-secondary:hover {
-            background: #00d4ff;
-            color: #0f0f1e;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #00d4ff, #7f39fb);
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 100px 50px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        h1 {
-            font-size: 56px;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #00d4ff, #7f39fb, #ff006e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        .subtitle {
-            font-size: 20px;
-            color: #a0a0a0;
-            margin-bottom: 40px;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 80px;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        /* Wave Animation */
-        .wave-container {
-            position: relative;
-            height: 200px;
-            margin: 60px auto 0;
-            max-width: 1000px;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
-        }
-
-        svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.3));
-        }
-
-        /* Features Grid */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 100px 50px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background: linear-gradient(135deg, rgba(100, 200, 255, 0.05), rgba(127, 57, 251, 0.05));
-            border: 1px solid rgba(100, 200, 255, 0.2);
-            border-radius: 12px;
-            padding: 40px;
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 212, 255, 0.5);
-            background: linear-gradient(135deg, rgba(100, 200, 255, 0.1), rgba(127, 57, 251, 0.1));
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
-        }
-
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: #00d4ff;
-        }
-
-        .feature-card p {
-            color: #a0a0a0;
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        /* Code Examples */
-        .code-section {
-            background: linear-gradient(135deg, rgba(15, 15, 30, 0.5), rgba(26, 26, 46, 0.5));
-            padding: 80px 50px;
-            border-top: 1px solid rgba(100, 200, 255, 0.1);
-            border-bottom: 1px solid rgba(100, 200, 255, 0.1);
-        }
-
-        .code-section h2 {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 60px;
-            background: linear-gradient(135deg, #00d4ff, #7f39fb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .code-examples {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .code-block {
-            background: #0a0a14;
-            border: 1px solid rgba(100, 200, 255, 0.2);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .code-header {
-            background: rgba(0, 212, 255, 0.1);
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(100, 200, 255, 0.2);
-            font-weight: 600;
-            color: #00d4ff;
-        }
-
-        pre {
-            padding: 20px;
-            overflow-x: auto;
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        code {
-            color: #00d4ff;
-            font-family: 'Courier New', monospace;
-        }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 80px 50px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .pricing h2 {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 60px;
-            background: linear-gradient(135deg, #00d4ff, #7f39fb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .pricing-card {
-            background: linear-gradient(135deg, rgba(100, 200, 255, 0.05), rgba(127, 57, 251, 0.05));
-            border: 1px solid rgba(100, 200, 255, 0.2);
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .pricing-card.featured {
-            border-color: rgba(0, 212, 255, 0.6);
-            transform: scale(1.05);
-            background: linear-gradient(135deg, rgba(100, 200, 255, 0.1), rgba(127, 57, 251, 0.1));
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
-        }
-
-        .pricing-card:hover {
-            border-color: rgba(0, 212, 255, 0.5);
-            transform: translateY(-10px);
-        }
-
-        .price {
-            font-size: 42px;
-            color: #00d4ff;
-            margin: 20px 0;
-            font-weight: bold;
-        }
-
-        .price span {
-            font-size: 14px;
-            color: #a0a0a0;
-        }
-
-        .pricing-card ul {
-            list-style: none;
-            margin: 30px 0;
-            text-align: left;
-        }
-
-        .pricing-card li {
-            padding: 10px 0;
-            color: #a0a0a0;
-            border-bottom: 1px solid rgba(100, 200, 255, 0.1);
-        }
-
-        .pricing-card li:before {
-            content: '✓ ';
-            color: #00d4ff;
-            margin-right: 10px;
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(15, 15, 30, 0.9);
-            border-top: 1px solid rgba(100, 200, 255, 0.1);
-            padding: 60px 50px;
-            text-align: center;
-            color: #707070;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto 40px;
-            text-align: left;
-        }
-
-        .footer-section h4 {
-            color: #00d4ff;
-            margin-bottom: 15px;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section a {
-            color: #a0a0a0;
-            text-decoration: none;
-            font-size: 14px;
-            display: block;
-            margin-bottom: 10px;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: #00d4ff;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(100, 200, 255, 0.1);
-            padding-top: 30px;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes wave {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav {
-                padding: 15px 30px;
-            }
-
-            nav ul {
-                gap: 20px;
-            }
-
-            .hero {
-                padding: 50px 30px;
-            }
-
-            h1 {
-                font-size: 36px;
-            }
-
-            .subtitle {
-                font-size: 16px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .features {
-                padding: 60px 30px;
-            }
-
-            .code-section {
-                padding: 60px 30px;
-            }
-
-            .pricing {
-                padding: 60px 30px;
-            }
-
-            footer {
-                padding: 40px 30px;
-            }
-
-            .pricing-card.featured {
-                transform: scale(1);
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clisonix Industrial Knowledge Hub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    body { background: #f5f7fb; }
+    .hero { background: linear-gradient(120deg,#0d2f6b,#0f6ab4); color: #fff; }
+    .card-soft { border: 1px solid #e7ebf3; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+    .service-pill { font-size: .82rem; }
+    .doc-card { cursor: pointer; }
+    .doc-card:hover { transform: translateY(-2px); transition: .2s ease; }
+    .preview { min-height: 72px; color: #516078; }
+    .sticky-filters { position: sticky; top: 16px; }
+    .badge-category { text-transform: capitalize; }
+    .search-tab-content { min-height: 380px; }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">◆ Clisonix</div>
-        <ul>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#code">Integration</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#docs">Documentation</a></li>
+  <nav class="navbar navbar-expand-lg bg-white border-bottom">
+    <div class="container-fluid px-4">
+      <span class="navbar-brand fw-bold"><i class="fa-solid fa-layer-group me-2"></i>Clisonix Hub</span>
+      <span class="text-muted small">Industrial • Search • Classified documents</span>
+    </div>
+  </nav>
+
+  <header class="hero py-5">
+    <div class="container">
+      <h1 class="display-6 fw-bold mb-2">Classified Document Library</h1>
+      <p class="mb-0">Modern UI with sections, search tabs, and document-nature categories.</p>
+    </div>
+  </header>
+
+  <main class="container py-4">
+    <div class="row g-4">
+      <div class="col-lg-3">
+        <div class="sticky-filters d-grid gap-3">
+          <section class="card card-soft">
+            <div class="card-body">
+              <h6 class="fw-bold mb-3"><i class="fa-solid fa-sliders me-2"></i>Document Filters</h6>
+              <label class="form-label small text-muted">Search documents</label>
+              <input id="searchInput" class="form-control" placeholder="Title, domain, keyword..." />
+              <button id="searchBtn" class="btn btn-primary w-100 mt-2">Search</button>
+              <hr>
+              <label class="form-label small text-muted">Category (Nature)</label>
+              <select id="categorySelect" class="form-select"></select>
+            </div>
+          </section>
+
+          <section class="card card-soft">
+            <div class="card-body">
+              <h6 class="fw-bold mb-3"><i class="fa-solid fa-cubes me-2"></i>Active Services</h6>
+              <div id="servicesList" class="d-grid gap-2"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="col-lg-9">
+        <ul class="nav nav-tabs" id="hubTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-documents" type="button" role="tab">Documents</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-search" type="button" role="tab">Advanced Search</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-categories" type="button" role="tab">Categories</button>
+          </li>
         </ul>
-        <div class="nav-buttons">
-            <button class="btn btn-secondary">Sign In</button>
-            <button class="btn btn-primary">Get Started</button>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Neural Audio Engine for Modern Applications</h1>
-            <p class="subtitle">Enterprise-grade brain-audio processing, EEG analysis, and neural synchronization</p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary">Start Free Trial</button>
-                <button class="btn btn-secondary">View Docs</button>
+        <div class="tab-content card card-soft border-top-0 rounded-0 rounded-bottom p-3 search-tab-content">
+          <div class="tab-pane fade show active" id="tab-documents" role="tabpanel">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="mb-0">Indexed documents</h5>
+              <span id="resultCount" class="badge text-bg-light">0 results</span>
             </div>
+            <div id="documentsGrid" class="row g-3"></div>
+          </div>
 
-            <!-- Animated Wave -->
-            <div class="wave-container">
-                <svg viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet">
-                    <!-- Animated wave paths -->
-                    <defs>
-                        <linearGradient id="waveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.6" />
-                            <stop offset="100%" style="stop-color:#7f39fb;stop-opacity:0.1" />
-                        </linearGradient>
-                    </defs>
-                    <path d="M0,150 Q250,100 500,150 T1000,150" stroke="url(#waveGradient)" stroke-width="3" fill="none" opacity="0.8" style="animation: wave 3s ease-in-out infinite;"/>
-                    <path d="M0,170 Q250,120 500,170 T1000,170" stroke="url(#waveGradient)" stroke-width="2" fill="none" opacity="0.6" style="animation: wave 4s ease-in-out infinite 0.5s;"/>
-                    <path d="M0,190 Q250,140 500,190 T1000,190" stroke="url(#waveGradient)" stroke-width="1" fill="none" opacity="0.4" style="animation: wave 5s ease-in-out infinite 1s;"/>
-                </svg>
+          <div class="tab-pane fade" id="tab-search" role="tabpanel">
+            <h5>Document search</h5>
+            <p class="text-muted mb-3">Use keywords from content, title, or document nature.</p>
+            <div class="input-group mb-3">
+              <input id="advancedSearchInput" class="form-control" placeholder="e.g. trial, endocrine, diagnostic..." />
+              <button id="advancedSearchBtn" class="btn btn-outline-primary">Search</button>
             </div>
+            <div id="advancedSearchResults" class="row g-3"></div>
+          </div>
+
+          <div class="tab-pane fade" id="tab-categories" role="tabpanel">
+            <h5>Classification by document nature</h5>
+            <p class="text-muted">Functional categorization to avoid endless unstructured lists.</p>
+            <div id="categoriesBoard" class="row g-3"></div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </main>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="feature-card">
-            <div class="feature-icon">🧠</div>
-            <h3>BrainSync Music</h3>
-            <p>Generate neural-aligned music that synchronizes with EEG patterns for enhanced focus, relaxation, and cognitive enhancement.</p>
+  <div class="modal fade" id="docModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="docModalTitle">Document</h5>
+          <button class="btn-close" data-bs-dismiss="modal"></button>
         </div>
+        <div class="modal-body" id="docModalBody"></div>
+      </div>
+    </div>
+  </div>
 
-        <div class="feature-card">
-            <div class="feature-icon">📊</div>
-            <h3>EEG Analysis</h3>
-            <p>Advanced real-time analysis of brain signals with harmonic personality detection and cognitive load assessment.</p>
-        </div>
-
-        <div class="feature-card">
-            <div class="feature-icon">📡</div>
-            <h3>ALBA Streams</h3>
-            <p>High-performance data collection and streaming from biomedical sensors with multi-channel support.</p>
-        </div>
-
-        <div class="feature-card">
-            <div class="feature-icon">🔐</div>
-            <h3>Secure Auth</h3>
-            <p>Enterprise JWT authentication, API key management, and role-based access control.</p>
-        </div>
-
-        <div class="feature-card">
-            <div class="feature-icon">⚡</div>
-            <h3>High Performance</h3>
-            <p>Sub-millisecond latency processing with distributed neural load balancing.</p>
-        </div>
-
-        <div class="feature-card">
-            <div class="feature-icon">💳</div>
-            <h3>Flexible Billing</h3>
-            <p>Usage-based pricing with Starter, Pro, and Enterprise tiers. Pay only for what you use.</p>
-        </div>
-    </section>
-
-    <!-- Code Examples Section -->
-    <section class="code-section" id="code">
-        <h2>Easy Integration</h2>
-        <div class="code-examples">
-            <div class="code-block">
-                <div class="code-header">Python SDK</div>
-                <pre><code>from clisonix import ClisonixClient
-
-# Initialize client
-client = ClisonixClient()
-
-# Login with credentials
-login_data = client.login(
-    "user@example.com",
-    "password"
-)
-print(f"Token: {login_data['token']}")
-
-# Use the API
-health = client.health()
-answer = client.ask("What is neural audio?")
-
-# Auto-refresh if needed
-client.refresh()
-
-# Generate API key for production
-api_key = client.create_api_key("prod-server")</code></pre>
-            </div>
-
-            <div class="code-block">
-                <div class="code-header">TypeScript SDK</div>
-                <pre><code>import { ClisonixClient } from './clisonix_sdk';
-
-// Initialize client
-const client = new ClisonixClient({
-    baseUrl: 'https://api.clisonix.com'
-});
-
-// Login with email and password
-const loginData = await client.login(
-    'user@example.com',
-    'password'
-);
-console.log(`Token: ${loginData.token}`);
-
-// Make authenticated requests
-const health = await client.health();
-const answer = await client.ask("Hello!");
-
-// Refresh token when needed
-await client.refresh();
-
-// Create API key for service
-const apiKey = await client.createApiKey("backend-server");</code></pre>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
-        <h2>Transparent Pricing</h2>
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <h3>Starter</h3>
-                <div class="price">$29<span>/month</span></div>
-                <p style="color: #a0a0a0; margin-bottom: 30px;">For individual developers and hobbyists</p>
-                <ul>
-                    <li>Up to 10,000 API requests/month</li>
-                    <li>EEG analysis (basic)</li>
-                    <li>BrainSync music generation</li>
-                    <li>1 concurrent stream</li>
-                    <li>Email support</li>
-                </ul>
-                <button class="btn btn-secondary" style="width: 100%;">Get Started</button>
-            </div>
-
-            <div class="pricing-card featured">
-                <h3>Pro</h3>
-                <div class="price">$99<span>/month</span></div>
-                <p style="color: #a0a0a0; margin-bottom: 30px;">For growing teams and businesses</p>
-                <ul>
-                    <li>Unlimited API requests</li>
-                    <li>Advanced EEG analysis</li>
-                    <li>Priority BrainSync generation</li>
-                    <li>10 concurrent streams</li>
-                    <li>Dedicated webhook support</li>
-                    <li>Analytics dashboard</li>
-                    <li>Priority support</li>
-                </ul>
-                <button class="btn btn-primary" style="width: 100%;">Start Pro Trial</button>
-            </div>
-
-            <div class="pricing-card">
-                <h3>Enterprise</h3>
-                <div class="price">Custom</div>
-                <p style="color: #a0a0a0; margin-bottom: 30px;">For large-scale deployments</p>
-                <ul>
-                    <li>Unlimited everything</li>
-                    <li>Custom models & training</li>
-                    <li>100+ concurrent streams</li>
-                    <li>On-premise deployment option</li>
-                    <li>Dedicated account manager</li>
-                    <li>SLA guarantee (99.99%)</li>
-                    <li>24/7 phone support</li>
-                </ul>
-                <button class="btn btn-secondary" style="width: 100%;">Contact Sales</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Product</h4>
-                <ul>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Security</a></li>
-                    <li><a href="#">Status</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">API Reference</a></li>
-                    <li><a href="#">Code Examples</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Terms</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Connect</h4>
-                <ul>
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">LinkedIn</a></li>
-                    <li><a href="#">Discord</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2024 Clisonix Cloud. Part of UltraWebThinking / Euroweb. All rights reserved.</p>
-        </div>
-    </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

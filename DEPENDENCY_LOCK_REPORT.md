@@ -9,10 +9,12 @@
 ## 🔒 Python Dependencies (pyproject.toml)
 
 ### Runtime Requirements
+
 - **Python Version:** `>=3.13` (LOCKED)
 - **Package Format:** PEP 621 compliant (pyproject.toml)
 
 ### Core Framework
+
 | Package | Previous | Locked Version | Purpose |
 |---------|----------|----------------|---------|
 | `fastapi` | `>=0.104.1` | `==0.115.5` | Web framework |
@@ -21,6 +23,7 @@
 | `pydantic-settings` | `>=2.1.0` | `==2.6.1` | Settings management |
 
 ### Database & Cache
+
 | Package | Previous | Locked Version | Purpose |
 |---------|----------|----------------|---------|
 | `sqlalchemy[asyncio]` | `>=2.0.23` | `==2.0.36` | ORM |
@@ -29,6 +32,7 @@
 | `redis[hiredis]` | `>=5.0.1` | `==5.2.0` | Cache/queue |
 
 ### Security & Auth
+
 | Package | Previous | Locked Version | Purpose |
 |---------|----------|----------------|---------|
 | `python-jose[cryptography]` | `>=3.3.0` | `==3.3.0` | JWT tokens |
@@ -36,11 +40,13 @@
 | `python-multipart` | `>=0.0.6` | `==0.0.18` | File uploads |
 
 ### Payment Processing
+
 | Package | Previous | Locked Version | Purpose |
 |---------|----------|----------------|---------|
 | `stripe` | `>=7.8.0` | `==11.2.0` | Payment gateway |
 
 ### Scientific Computing
+
 | Package | Previous | Locked Version | Purpose |
 |---------|----------|----------------|---------|
 | `numpy` | `>=1.25.0` | `==2.2.0` | Array operations |
@@ -49,6 +55,7 @@
 | `mne` | `>=1.5.0` | `==1.8.0` | EEG signal processing |
 
 ### Observability
+
 | Package | Previous | Locked Version | Purpose |
 |---------|----------|----------------|---------|
 | `opentelemetry-api` | `>=1.21.0` | `==1.29.0` | Tracing API |
@@ -61,11 +68,13 @@
 | `sentry-sdk[fastapi]` | `>=1.38.0` | `==2.19.2` | Error tracking |
 
 ### Task Queue
+
 | Package | Previous | Locked Version | Purpose |
 |---------|----------|----------------|---------|
 | `celery[redis]` | `>=5.3.4` | `==5.4.0` | Async task queue |
 
 ### Utilities
+
 | Package | Previous | Locked Version | Purpose |
 |---------|----------|----------------|---------|
 | `boto3` | `>=1.34.0` | `==1.35.76` | AWS SDK |
@@ -86,10 +95,12 @@
 ## 🔒 Node.js Dependencies (package.json)
 
 ### Runtime Requirements
+
 - **Node.js Version:** `>=20.0.0` (LOCKED - updated from 18.0.0)
 - **npm Version:** `>=10.0.0` (LOCKED - new requirement)
 
 ### Production Dependencies
+
 | Package | Previous | Locked Version | Purpose |
 |---------|----------|----------------|---------|
 | `next` | `^15.5.4` | `15.5.4` | React framework |
@@ -111,6 +122,7 @@
 | `helmet` | `^8.1.0` | `8.0.0` | Security headers |
 
 ### Development Dependencies
+
 | Package | Previous | Locked Version | Purpose |
 |---------|----------|----------------|---------|
 | `typescript` | `^5.0.0` | `5.7.2` | TypeScript compiler |
@@ -131,6 +143,7 @@
 | `rimraf` | `^5.0.5` | `6.0.1` | Cross-platform rm -rf |
 
 ### Removed Dependencies (Noise Reduction)
+
 ❌ `airflow` - Unused experimental package  
 ❌ `css` - Redundant with Tailwind  
 ❌ `docs` - Unused canary package  
@@ -152,6 +165,7 @@
 ## 📊 Version Lock Summary
 
 ### Python Packages
+
 - **Total Dependencies:** 29 packages
 - **Locked Versions:** 29/29 (100%)
 - **Major Upgrades:** 5 (Stripe, NumPy, Pydantic, OpenTelemetry, psutil)
@@ -160,6 +174,7 @@
 - **New Additions:** 2 (httpx, requests - explicit declarations)
 
 ### Node.js Packages
+
 - **Total Dependencies:** 18 production + 16 dev = 34 packages
 - **Locked Versions:** 34/34 (100%)
 - **Removed Packages:** 14 (noise reduction)
@@ -171,6 +186,7 @@
 ## 🎯 Production Readiness Checklist
 
 ### ✅ Completed
+
 - [x] All Python dependencies locked to exact versions
 - [x] All Node.js dependencies locked to exact versions
 - [x] Python minimum version locked to 3.13+
@@ -181,7 +197,9 @@
 - [x] Version matrix documented in PRODUCTION_SERVICES.md
 
 ### ⏭️ Next Steps
+
 1. **Test Dependency Installation:**
+
    ```bash
    # Python
    pip install -e .
@@ -191,6 +209,7 @@
    ```
 
 2. **Generate Lock Files:**
+
    ```bash
    # Python (create requirements.txt from pyproject.toml)
    pip freeze > requirements.lock
@@ -219,12 +238,14 @@
 ## 🔐 Security Considerations
 
 ### Known Compatibility Issues Resolved
+
 - **Pydantic v1 → v2:** All code updated to use `model_dump()` instead of `dict()`
 - **FastAPI 0.115.5:** Compatible with Pydantic 2.10.3
 - **Node.js 20+:** Required for Next.js 15.5.4
 - **ESLint 9.x:** Flat config format (breaking change from 8.x)
 
 ### Breaking Changes to Watch
+
 - **NumPy 2.x:** API changes in some legacy functions (test thoroughly)
 - **Stripe 11.x:** Webhook signature verification changes (verify in production)
 - **Redis client (Node):** Downgraded to 4.7.0 due to v5.x connection instability
@@ -234,13 +255,15 @@
 ## 📝 Maintenance Notes
 
 **Lock File Locations:**
+
 - Python: `pyproject.toml` (source), `requirements.lock` (generated)
 - Node.js: `package.json` (source), `package-lock.json` (auto-generated)
 
 **Dependency Audit Schedule:**
+
 - **Weekly:** Automated security scans (GitHub Actions)
 - **Monthly:** Minor version review
 - **Quarterly:** Major version upgrade planning
 
-**Contact:** Ledjan Ahmati (LedjanAhmati/Clisonix-cloud)  
+**Contact:** Ledjan Ahmati (Web8kameleon-hub/clisonix.com)  
 **Last Updated:** December 11, 2025

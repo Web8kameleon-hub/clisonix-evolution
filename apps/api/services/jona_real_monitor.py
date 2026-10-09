@@ -7,15 +7,14 @@ Real health monitor, real harmony checker, real system optimizer.
 NO FAKE METRICS, NO MOCK HEALTH, REAL MONITORING ONLY
 """
 
-import asyncio
 import json
-import aiofiles
 from datetime import datetime, timedelta
-from typing import Dict, List, Any, Tuple
-from pathlib import Path
-import psutil
-import subprocess
 from enum import Enum
+from pathlib import Path
+from typing import Any, Dict, List
+
+import aiofiles  # type: ignore[import-untyped]
+import psutil
 
 
 class HarmonyLevel(Enum):

@@ -1,17 +1,17 @@
 plans = {
     "free": {
         "price": 0,
-        "max_requests_per_day": 50,
+        "max_requests_per_day": -1,  # unlimited
         "features": ["basic_analysis", "demo_access"]
     },
     "pro": {
         "price": 29,
-        "max_requests_per_day": 5000,
+        "max_requests_per_day": -1,  # unlimited
         "features": ["EEG processing", "Audio synthesis", "API access"]
     },
     "enterprise": {
         "price": 199,
-        "max_requests_per_day": 50000,
+        "max_requests_per_day": -1,  # unlimited
         "features": ["Distributed nodes", "Realtime analytics", "Priority support"]
     }
 }

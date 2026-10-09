@@ -9,6 +9,7 @@
 ## 🎯 What Was Fixed & Improved
 
 ### **1. ✅ Nginx Reverse Proxy Integration**
+
 - Added nginx service to `docker-compose.prod.yml`
 - Configured SSL/TLS with Let's Encrypt support
 - Rate limiting for API and web traffic
@@ -18,6 +19,7 @@
 **File:** `docker-compose.prod.yml` - Added nginx service with proper routing
 
 ### **2. ✅ SSL/TLS Configuration**
+
 - Updated nginx.conf to use Let's Encrypt certificates
 - Added fallback to self-signed certificates
 - Domain-specific configuration for clisonix.com
@@ -26,16 +28,19 @@
 **File:** `nginx/nginx.conf` - Updated SSL paths and configuration
 
 ### **3. ✅ Secure Environment Variables**
+
 - Created comprehensive `.env.production.template`
 - Auto-generates strong secrets using `openssl rand`
 - No hardcoded passwords in deployment script
 - Credentials saved to protected file (chmod 600)
 
 **Files:**
+
 - `.env.production.template` - Template for production config
 - `deploy-hetzner.sh` - Auto-generates secure secrets
 
 ### **4. ✅ Port Conflicts Fixed**
+
 - Web: Port 3000 (consistent)
 - Grafana: Port 3001
 - API: Port 8000
@@ -44,6 +49,7 @@
 **File:** `docker-compose.prod.yml` - Standardized all ports
 
 ### **5. ✅ Health Checks Added**
+
 - ALBA service: HTTP health check on port 5555
 - ALBI service: HTTP health check on port 6666
 - JONA service: HTTP health check on port 7777
@@ -52,6 +58,7 @@
 **File:** `docker-compose.prod.yml` - Added healthcheck to all AI services
 
 ### **6. ✅ Docker Networking**
+
 - Created `clisonix-network` bridge network
 - All services properly networked
 - Internal communication via service names
@@ -60,6 +67,7 @@
 **File:** `docker-compose.prod.yml` - Added network configuration
 
 ### **7. ✅ Documentation Created**
+
 - `QUICK_DEPLOY.md` - Fast deployment guide (3 steps)
 - `SECURITY_PRODUCTION.md` - Security best practices
 - `DEPLOYMENT_SUMMARY.md` - This summary file
@@ -83,6 +91,7 @@
 ## 🚀 Quick Deployment Steps
 
 ### **Prerequisites:**
+
 - Hetzner account (K1266374525)
 - STRATO account with clisonix.com domain
 - SSH key ready
@@ -90,6 +99,7 @@
 ### **Deploy in 3 Steps:**
 
 #### **1️⃣ Create Hetzner Server (5 min)**
+
 ```
 Login: console.hetzner.com
 Server: CX32 (4 vCPU, 8GB RAM) - Ubuntu 24.04
@@ -98,6 +108,7 @@ Cost: €8.21/month
 ```
 
 #### **2️⃣ Configure DNS (5 min)**
+
 ```
 STRATO → clisonix.com → DNS Settings
 
@@ -108,10 +119,11 @@ A Records:
 ```
 
 #### **3️⃣ Deploy (20 min)**
+
 ```bash
 ssh root@[HETZNER_IP]
 
-curl -fsSL https://raw.githubusercontent.com/LedjanAhmati/Clisonix-cloud/main/deploy-hetzner.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Web8kameleon-hub/clisonix.com/main/deploy-hetzner.sh | bash
 
 # After deployment:
 cd /opt/clisonix
@@ -192,31 +204,35 @@ Monitoring Stack:
 ## ✅ Pre-Flight Checklist
 
 ### **Before Deployment:**
+
 - [ ] Hetzner server created
 - [ ] Server IP noted
 - [ ] DNS A records configured at STRATO
 - [ ] SSH key ready
 
 ### **During Deployment:**
+
 - [ ] `deploy-hetzner.sh` executed successfully
 - [ ] Docker installed and running
 - [ ] Firewall (UFW) configured
 - [ ] Environment file created
 
 ### **After Deployment:**
+
 - [ ] DNS propagation verified (`nslookup clisonix.com`)
 - [ ] SSL certificates installed
 - [ ] Services started (`docker compose up`)
 - [ ] Credentials saved and `.credentials.txt` deleted
 - [ ] Health checks passing
-- [ ] Website accessible (https://clisonix.com)
-- [ ] API accessible (https://api.clisonix.com)
+- [ ] Website accessible (<https://clisonix.com>)
+- [ ] API accessible (<https://api.clisonix.com>)
 
 ---
 
 ## 🎯 Post-Deployment Tasks
 
 1. **Configure Stripe Integration**
+
    ```bash
    nano /opt/clisonix/.env.production
    # Add: STRIPE_SECRET_KEY=sk_live_...
@@ -224,17 +240,19 @@ Monitoring Stack:
    ```
 
 2. **Set Up Monitoring Alerts**
-   - Access Grafana: https://clisonix.com:3001
+   - Access Grafana: <https://clisonix.com:3001>
    - Configure alerts for CPU, memory, disk
    - Add Slack webhook (optional)
 
 3. **Enable Database Backups**
+
    ```bash
    # See SECURITY_PRODUCTION.md for backup script
    /opt/clisonix/backup-db.sh
    ```
 
 4. **SSL Auto-Renewal Test**
+
    ```bash
    certbot renew --dry-run
    ```
@@ -258,11 +276,12 @@ Monitoring Stack:
 
 ---
 
-## 🎉 You're Ready to Deploy!
+## 🎉 You're Ready to Deploy
 
 Të gjitha përmirësimet janë bërë dhe sistemi është i gatshëm për production deployment në Hetzner!
 
 ### **Next Steps:**
+
 1. Push këto ndryshime në GitHub
 2. Krijo Hetzner server
 3. Konfiguro DNS në STRATO

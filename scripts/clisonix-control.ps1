@@ -118,7 +118,7 @@ function Telemetry-Unifim {
     
     $urls = @(
         @{ name = "ALBA"; url = "http://localhost:5555/health" },
-        @{ name = "ALBI"; url = "http://localhost:6666/health" },
+        @{ name = "ALBI"; url = "http://localhost:6680/health" },
         @{ name = "JONA"; url = "http://localhost:7777/health" },
         @{ name = "Orchestrator"; url = "http://localhost:9999/status" },
         @{ name = "API"; url = "http://localhost:8000/health" },

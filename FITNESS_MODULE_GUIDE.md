@@ -961,10 +961,11 @@ CREATE TABLE biometric_data (
 - API Docs: `http://localhost:8000/docs` (Swagger UI)
 - Python SDK: `clisonix_sdk.fitness`
 - Postman Collection: `clisonix-fitness-collection.json`
-- Issues: GitHub Issues or /support@clisonix.cloud
+- Issues: GitHub Issues or /clisonix@pm.me
 
 ---
 
 **Version**: 1.0.0  
 **Last Updated**: January 2024  
 **Maintainer**: Clisonix Cloud Team
+

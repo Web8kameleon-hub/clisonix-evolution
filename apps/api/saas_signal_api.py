@@ -3,11 +3,12 @@ Ultra-Industrial SaaS Signal API
 Author: Ledjan Ahmati
 """
 
-from fastapi import FastAPI, HTTPException, Depends
-from pydantic import BaseModel
-from typing import List, Dict, Any
-import uuid
 import time
+import uuid
+from typing import Any, Dict, List
+
+from fastapi import Depends, FastAPI, HTTPException
+from pydantic import BaseModel
 
 app = FastAPI(title="Ultra-Industrial SaaS Signal API")
 
@@ -24,6 +25,27 @@ BILLING_DB: Dict[str, Dict[str, Any]] = {}
 AUDIT_LOG: List[Dict[str, Any]] = []
 WEBHOOKS: Dict[str, str] = {}
 QUOTA: Dict[str, int] = {"free": 10, "enterprise": 1000}
+
+
+@app.get("/")
+def root():
+    return {"service": "saas-api", "status": "ready"}
+
+
+@app.get("/health")
+def health():
+    return {"status": "healthy", "service": "saas-api"}
+
+
+@app.get("/status")
+def status():
+    return {
+        "service": "saas-api",
+        "users": len(USER_DB),
+        "signals": len(SIGNAL_DB),
+        "nodes": len(NODE_DB),
+        "status": "operational",
+    }
 
 class Signal(BaseModel):
     id: str
@@ -76,15 +98,6 @@ def check_rate_limit(user: str):
 def create_signal(data: SignalCreate, auth: UserAuth = Depends()):
     user = get_current_user(auth)
     check_rate_limit(user)
-@app.get("/quota/{username}")
-def get_user_quota(username: str):
-    user = USER_DB.get(username)
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    plan = user.get("plan", "free")
-    quota = QUOTA.get(plan, 10)
-    rl = RATE_LIMITS.get(username, {"count": 0})
-    return {"plan": plan, "quota": quota, "used": rl.get("count", 0)}
     signal_id = str(uuid.uuid4())
     signal = Signal(
         id=signal_id,
@@ -113,6 +126,17 @@ def get_user_quota(username: str):
     if webhook_url:
         AUDIT_LOG.append({"event": "webhook_called", "url": webhook_url, "signal_id": signal_id, "timestamp": signal.timestamp})
     return signal
+
+
+@app.get("/quota/{username}")
+def get_user_quota(username: str):
+    user = USER_DB.get(username)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    plan = user.get("plan", "free")
+    quota = QUOTA.get(plan, 10)
+    rl = RATE_LIMITS.get(username, {"count": 0})
+    return {"plan": plan, "quota": quota, "used": rl.get("count", 0)}
 # --- SaaS Features ---
 @app.post("/billing/event")
 def billing_event(event: BillingEvent):

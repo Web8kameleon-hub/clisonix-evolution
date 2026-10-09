@@ -1,335 +1,481 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useState, useEffect, useCallback } from 'react';
+import { Heart, Brain, Waves, Radio, RefreshCw, Clock, CheckCircle, AlertCircle, Zap, Activity, Target } from 'lucide-react';
 
-interface BiofeedbackSession {
-  id: string;
-  timestamp: Date;
-  frequency: string;
-  duration: number;
-  intensity: number;
+// API Response Types
+interface TrainingSession {
+  session_id: string;
+  wave_type: string;
+  frequency_range: string;
+  duration_seconds: number;
   coherence: number;
-  sessions_completed: number;
+  progress: number;
+  started_at: string;
+  completed: boolean;
 }
 
 interface TrainingProgress {
   wave_type: string;
   frequency_range: string;
-  sessions: number;
+  total_sessions: number;
   avg_coherence: number;
-  last_session: Date;
+  best_coherence: number;
+  total_time_minutes: number;
+  last_session: string;
 }
 
 interface BiofeedbackMetrics {
+  service: string;
+  status: string;
   alpha_training: TrainingProgress;
   theta_training: TrainingProgress;
   beta_training: TrainingProgress;
-  sessions_history: BiofeedbackSession[];
+  active_session: TrainingSession | null;
+  total_sessions_completed: number;
 }
 
-export default function NeuralBiofeedback() {
-  const [activeTab, setActiveTab] = useState('alpha');
-  const [metrics, setMetrics] = useState<BiofeedbackMetrics | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [sessionData, setSessionData] = useState<BiofeedbackSession | null>(null);
+interface APIResponse {
+  success: boolean;
+  data: BiofeedbackMetrics | TrainingSession | TrainingProgress[] | null;
+  error: string | null;
+  status: number;
+  responseTime: number;
+  timestamp: string;
+}
 
-  // Load synthetic data
-  useEffect(() => {
-    const loadMetrics = async () => {
+interface EndpointConfig {
+  name: string;
+  method: string;
+  path: string;
+  description: string;
+}
+
+const ENDPOINTS: EndpointConfig[] = [
+  { name: 'ASI Status', method: 'GET', path: '/api/asi/status', description: 'ASI Trinity system status' },
+  { name: 'ASI Health', method: 'GET', path: '/api/asi/health', description: 'System health check' },
+  { name: 'ALBI Metrics', method: 'GET', path: '/api/asi/albi/metrics', description: 'ALBI neural processor metrics' },
+  { name: 'ALBA Metrics', method: 'GET', path: '/api/asi/alba/metrics', description: 'ALBA network metrics' },
+  { name: 'JONA Metrics', method: 'GET', path: '/api/asi/jona/metrics', description: 'JONA coordination metrics' },
+];
+
+// Use relative paths for security - proxied through Next.js API routes
+const API_BASE = '';
+
+export default function NeuralBiofeedbackPage() {
+  const [selectedEndpoint, setSelectedEndpoint] = useState<EndpointConfig>(ENDPOINTS[0]);
+  const [response, setResponse] = useState<APIResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [autoRefresh, setAutoRefresh] = useState(false);
+  const [requestHistory, setRequestHistory] = useState<APIResponse[]>([]);
+
+  const executeRequest = useCallback(async (endpoint: EndpointConfig) => {
+    setIsLoading(true);
+    const startTime = performance.now();
+
+    try {
+      const res = await fetch(`${API_BASE}${endpoint.path}`, {
+        method: endpoint.method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        cache: 'no-store',
+      });
+
+      const endTime = performance.now();
+      const responseTime = Math.round(endTime - startTime);
+
+      let data = null;
+      let error = null;
+
       try {
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 500));
-
-        // Generate synthetic data
-        const now = new Date();
-        const data: BiofeedbackMetrics = {
-          alpha_training: {
-            wave_type: 'Alpha (8-12 Hz)',
-            frequency_range: '8-12 Hz',
-            sessions: 47,
-            avg_coherence: 78.4,
-            last_session: new Date(now.getTime() - 2 * 60 * 60 * 1000),
-          },
-          theta_training: {
-            wave_type: 'Theta (4-8 Hz)',
-            frequency_range: '4-8 Hz',
-            sessions: 32,
-            avg_coherence: 82.1,
-            last_session: new Date(now.getTime() - 5 * 60 * 60 * 1000),
-          },
-          beta_training: {
-            wave_type: 'Beta (12-30 Hz)',
-            frequency_range: '12-30 Hz',
-            sessions: 25,
-            avg_coherence: 71.6,
-            last_session: new Date(now.getTime() - 24 * 60 * 60 * 1000),
-          },
-          sessions_history: [
-            {
-              id: '1',
-              timestamp: new Date(now.getTime() - 2 * 60 * 60 * 1000),
-              frequency: 'Alpha (10 Hz)',
-              duration: 45,
-              intensity: 85,
-              coherence: 79,
-              sessions_completed: 47,
-            },
-            {
-              id: '2',
-              timestamp: new Date(now.getTime() - 24 * 60 * 60 * 1000),
-              frequency: 'Theta (6 Hz)',
-              duration: 60,
-              intensity: 92,
-              coherence: 84,
-              sessions_completed: 32,
-            },
-            {
-              id: '3',
-              timestamp: new Date(now.getTime() - 48 * 60 * 60 * 1000),
-              frequency: 'Beta (20 Hz)',
-              duration: 35,
-              intensity: 78,
-              coherence: 72,
-              sessions_completed: 25,
-            },
-            {
-              id: '4',
-              timestamp: new Date(now.getTime() - 72 * 60 * 60 * 1000),
-              frequency: 'Alpha (9 Hz)',
-              duration: 50,
-              intensity: 88,
-              coherence: 77,
-              sessions_completed: 46,
-            },
-            {
-              id: '5',
-              timestamp: new Date(now.getTime() - 96 * 60 * 60 * 1000),
-              frequency: 'Theta (5 Hz)',
-              duration: 55,
-              intensity: 90,
-              coherence: 81,
-              sessions_completed: 31,
-            },
-          ],
-        };
-
-        setMetrics(data);
-        setSessionData(data.sessions_history[0]);
-      } catch (error) {
-        console.error('Error loading biofeedback metrics:', error);
-      } finally {
-        setIsLoading(false);
+        const jsonData = await res.json();
+        if (res.ok) {
+          data = jsonData;
+        } else {
+          error = jsonData.detail || jsonData.message || `HTTP ${res.status}`;
+        }
+      } catch {
+        error = 'Invalid JSON response';
       }
-    };
 
-    loadMetrics();
+      const apiResponse: APIResponse = {
+        success: res.ok,
+        data,
+        error,
+        status: res.status,
+        responseTime,
+        timestamp: new Date().toISOString(),
+      };
+
+      setResponse(apiResponse);
+      setRequestHistory(prev => [apiResponse, ...prev].slice(0, 10));
+
+    } catch (err) {
+      const endTime = performance.now();
+      const apiResponse: APIResponse = {
+        success: false,
+        data: null,
+        error: err instanceof Error ? err.message : 'Network error',
+        status: 0,
+        responseTime: Math.round(endTime - startTime),
+        timestamp: new Date().toISOString(),
+      };
+      setResponse(apiResponse);
+      setRequestHistory(prev => [apiResponse, ...prev].slice(0, 10));
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
-  const getTabConfig = () => {
-    if (!metrics) return null;
-    
-    const configs: Record<string, { title: string; emoji: string; description: string; color: string; data: TrainingProgress }> = {
-      alpha: {
-        title: 'Alpha Training',
-        emoji: '🌊',
-        description: 'Relaxation & calm focus',
-        color: 'cyan',
-        data: metrics.alpha_training,
-      },
-      theta: {
-        title: 'Theta Training',
-        emoji: '🧠',
-        description: 'Deep meditation states',
-        color: 'violet',
-        data: metrics.theta_training,
-      },
-      beta: {
-        title: 'Beta Training',
-        emoji: '⚡',
-        description: 'Focus & concentration',
-        color: 'amber',
-        data: metrics.beta_training,
-      },
-    };
+  useEffect(() => {
+    executeRequest(selectedEndpoint);
+  }, []);
 
-    return configs[activeTab] || configs.alpha;
+  useEffect(() => {
+    if (!autoRefresh) return;
+    const interval = setInterval(() => {
+      executeRequest(selectedEndpoint);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [autoRefresh, selectedEndpoint, executeRequest]);
+
+  const getStatusColor = (status: number) => {
+    if (status >= 200 && status < 300) return 'text-blue-700';
+    if (status >= 400 && status < 500) return 'text-amber-400';
+    return 'text-red-400';
   };
 
-  const config = getTabConfig();
+  const getStatusBadge = (status: number) => {
+    if (status >= 200 && status < 300) return 'bg-blue-800/20 text-blue-700 border-blue-800/30';
+    if (status >= 400 && status < 500) return 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+    return 'bg-red-500/20 text-red-400 border-red-500/30';
+  };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-teal-900 flex items-center justify-center">
-        <div className="text-center text-white">
-          <div className="text-6xl mb-4 animate-pulse">🧠</div>
-          <h2 className="text-3xl font-bold mb-2">Loading Neural Biofeedback</h2>
-          <p className="text-gray-300">Initializing brainwave sensors...</p>
-        </div>
-      </div>
-    );
-  }
+  const getCoherenceColor = (coherence: number) => {
+    if (coherence >= 80) return 'text-blue-700';
+    if (coherence >= 60) return 'text-violet-400';
+    if (coherence >= 40) return 'text-amber-400';
+    return 'text-red-400';
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-teal-900 p-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-block mb-4 text-teal-400 hover:text-teal-300 transition-colors">
-            ← Back to Clisonix Cloud
-          </Link>
-          <h1 className="text-5xl font-bold text-white mb-4 flex items-center justify-center">
-            🧘 Neural Biofeedback Training
-            <span className="ml-3 w-4 h-4 bg-teal-400 rounded-full animate-pulse"></span>
-          </h1>
-          <p className="text-xl text-blue-300 mb-2">
-            Real-time Brainwave Optimization • EEG-Guided Training
-          </p>
-        </div>
-
-        {/* Tab Navigation */}
-        <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 mb-8">
-          <div className="flex flex-col md:flex-row gap-4 mb-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-rose-950 to-slate-950 text-white p-6">
+      {/* Header */}
+      <div className="max-w-7xl mx-auto mb-8">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-gradient-to-br from-rose-500/20 to-pink-500/20 border border-rose-500/30">
+              <Heart className="w-8 h-8 text-rose-400" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-rose-400 to-pink-400 bg-clip-text text-transparent">
+                Neural Biofeedback
+              </h1>
+              <p className="text-slate-400 text-sm">Brain Wave Training System • Postman-Style API Interface</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
             <button
-              onClick={() => setActiveTab('alpha')}
-              className={`flex-1 p-4 rounded-lg transition-all border ${
-                activeTab === 'alpha'
-                  ? 'bg-cyan-500/30 border-cyan-400 text-white'
-                  : 'bg-white/5 border-white/20 text-gray-300 hover:bg-white/10'
+              onClick={() => setAutoRefresh(!autoRefresh)}
+              className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-all ${autoRefresh
+                  ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
+                  : 'bg-slate-800/50 text-slate-400 border border-slate-700/50 hover:bg-slate-700/50'
               }`}
             >
-              <div className="text-3xl mb-2">🌊</div>
-              <div className="font-semibold">Alpha Training</div>
-              <div className="text-sm">Relaxation & calm focus</div>
-            </button>
-            <button
-              onClick={() => setActiveTab('theta')}
-              className={`flex-1 p-4 rounded-lg transition-all border ${
-                activeTab === 'theta'
-                  ? 'bg-violet-500/30 border-violet-400 text-white'
-                  : 'bg-white/5 border-white/20 text-gray-300 hover:bg-white/10'
-              }`}
-            >
-              <div className="text-3xl mb-2">🧠</div>
-              <div className="font-semibold">Theta Training</div>
-              <div className="text-sm">Deep meditation states</div>
-            </button>
-            <button
-              onClick={() => setActiveTab('beta')}
-              className={`flex-1 p-4 rounded-lg transition-all border ${
-                activeTab === 'beta'
-                  ? 'bg-amber-500/30 border-amber-400 text-white'
-                  : 'bg-white/5 border-white/20 text-gray-300 hover:bg-white/10'
-              }`}
-            >
-              <div className="text-3xl mb-2">⚡</div>
-              <div className="font-semibold">Beta Training</div>
-              <div className="text-sm">Focus & concentration</div>
+              <RefreshCw className={`w-4 h-4 ${autoRefresh ? 'animate-spin' : ''}`} />
+              {autoRefresh ? 'Live' : 'Auto'}
             </button>
           </div>
+        </div>
+      </div>
 
-          {/* Tab Content */}
-          {config && (
-            <div className="space-y-6">
-              {/* Training Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="bg-white/10 rounded-lg p-4 border border-white/20">
-                  <div className="text-sm text-gray-400 mb-2">Wave Type</div>
-                  <div className="text-2xl font-bold text-white">{config.data.wave_type}</div>
+      <div className="max-w-7xl mx-auto grid grid-cols-12 gap-6">
+        {/* Sidebar - Endpoints */}
+        <div className="col-span-3 space-y-3">
+          <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl border border-slate-800/50 p-4">
+            <h3 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+              <Radio className="w-4 h-4 text-rose-400" />
+              API Endpoints
+            </h3>
+            <div className="space-y-2">
+              {ENDPOINTS.map((endpoint) => (
+                <button
+                  key={endpoint.path}
+                  onClick={() => {
+                    setSelectedEndpoint(endpoint);
+                    executeRequest(endpoint);
+                  }}
+                  className={`w-full text-left p-3 rounded-lg transition-all ${selectedEndpoint.path === endpoint.path
+                      ? 'bg-rose-500/20 border border-rose-500/30'
+                      : 'bg-slate-800/30 border border-slate-700/30 hover:bg-slate-800/50'
+                    }`}
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="px-2 py-0.5 text-xs font-mono rounded bg-blue-800/20 text-blue-700 border border-blue-800/30">
+                      {endpoint.method}
+                    </span>
+                    <span className="text-sm font-medium text-white">{endpoint.name}</span>
+                  </div>
+                  <p className="text-xs text-slate-500 font-mono truncate">{endpoint.path}</p>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Request History */}
+          <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl border border-slate-800/50 p-4">
+            <h3 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+              <Clock className="w-4 h-4 text-rose-400" />
+              Request History
+            </h3>
+            <div className="space-y-2 max-h-64 overflow-y-auto">
+              {requestHistory.length === 0 ? (
+                <p className="text-xs text-slate-500 text-center py-4">No requests yet</p>
+              ) : (
+                requestHistory.map((req, idx) => (
+                  <div key={idx} className="p-2 rounded-lg bg-slate-800/30 border border-slate-700/30">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className={`text-xs font-mono ${getStatusColor(req.status)}`}>
+                        {req.status || 'ERR'}
+                      </span>
+                      <span className="text-xs text-slate-500">{req.responseTime}ms</span>
+                    </div>
+                    <p className="text-xs text-slate-400">
+                      {new Date(req.timestamp).toLocaleTimeString()}
+                    </p>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="col-span-9 space-y-6">
+          {/* Request Bar */}
+          <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl border border-slate-800/50 p-4">
+            <div className="flex items-center gap-3">
+              <span className="px-3 py-1.5 text-sm font-mono rounded-lg bg-blue-800/20 text-blue-700 border border-blue-800/30">
+                {selectedEndpoint.method}
+              </span>
+              <div className="flex-1 px-4 py-2 bg-slate-800/50 rounded-lg border border-slate-700/50 font-mono text-sm text-slate-300">
+                {selectedEndpoint.path}
+              </div>
+              <button
+                onClick={() => executeRequest(selectedEndpoint)}
+                disabled={isLoading}
+                className="px-6 py-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white font-semibold rounded-lg hover:from-rose-600 hover:to-pink-600 transition-all disabled:opacity-50 flex items-center gap-2"
+              >
+                {isLoading ? (
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Zap className="w-4 h-4" />
+                )}
+                Send
+              </button>
+            </div>
+          </div>
+
+          {/* Response Section */}
+          {response && (
+            <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl border border-slate-800/50 overflow-hidden">
+              {/* Response Header */}
+              <div className="px-4 py-3 border-b border-slate-800/50 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <span className={`px-3 py-1 text-sm font-mono rounded-lg border ${getStatusBadge(response.status)}`}>
+                    {response.status || 'Error'}
+                  </span>
+                  <span className="text-sm text-slate-400">
+                    <Clock className="w-4 h-4 inline mr-1" />
+                    {response.responseTime}ms
+                  </span>
+                  {response.success ? (
+                    <span className="text-blue-700 flex items-center gap-1 text-sm">
+                      <CheckCircle className="w-4 h-4" /> Success
+                    </span>
+                  ) : (
+                    <span className="text-red-400 flex items-center gap-1 text-sm">
+                      <AlertCircle className="w-4 h-4" /> Failed
+                    </span>
+                  )}
                 </div>
-                <div className="bg-white/10 rounded-lg p-4 border border-white/20">
-                  <div className="text-sm text-gray-400 mb-2">Sessions</div>
-                  <div className="text-2xl font-bold text-white">{config.data.sessions}</div>
-                </div>
-                <div className="bg-white/10 rounded-lg p-4 border border-white/20">
-                  <div className="text-sm text-gray-400 mb-2">Avg Coherence</div>
-                  <div className="text-2xl font-bold text-teal-400">{config.data.avg_coherence.toFixed(1)}%</div>
-                </div>
-                <div className="bg-white/10 rounded-lg p-4 border border-white/20">
-                  <div className="text-sm text-gray-400 mb-2">Last Session</div>
-                  <div className="text-xl font-bold text-white">{config.data.last_session.toLocaleTimeString()}</div>
-                </div>
+                <span className="text-xs text-slate-500">
+                  {new Date(response.timestamp).toLocaleString()}
+                </span>
               </div>
 
-              {/* Real-time Visualization */}
-              <div className="bg-white/5 rounded-lg p-6 border border-white/20">
-                <h3 className="text-lg font-semibold text-white mb-4">{config.emoji} Live Training Data</h3>
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between text-sm mb-2">
-                      <span className="text-gray-400">Brain Coherence</span>
-                      <span className="text-teal-400 font-semibold">{config.data.avg_coherence.toFixed(1)}%</span>
-                    </div>
-                    <div className="bg-black/30 rounded-full h-3 overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-to-r from-teal-500 to-cyan-500 transition-all duration-300"
-                        style={{ width: `${config.data.avg_coherence}%` }}
-                      ></div>
-                    </div>
+              {/* Response Body */}
+              <div className="p-4">
+                {response.error ? (
+                  <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400">
+                    <p className="font-mono text-sm">{response.error}</p>
                   </div>
-                  <div>
-                    <div className="flex justify-between text-sm mb-2">
-                      <span className="text-gray-400">Training Intensity</span>
-                      <span className="text-amber-400 font-semibold">{Math.floor(Math.random() * 20 + 80)}%</span>
-                    </div>
-                    <div className="bg-black/30 rounded-full h-3 overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-300"
-                        style={{ width: `${Math.floor(Math.random() * 20 + 80)}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-sm mb-2">
-                      <span className="text-gray-400">Neural Synchronization</span>
-                      <span className="text-violet-400 font-semibold">{Math.floor(Math.random() * 15 + 75)}%</span>
-                    </div>
-                    <div className="bg-black/30 rounded-full h-3 overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-to-r from-violet-500 to-indigo-500 transition-all duration-300"
-                        style={{ width: `${Math.floor(Math.random() * 15 + 75)}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                ) : response.data ? (
+                  <div className="space-y-6">
+                      {/* Biofeedback Metrics Cards */}
+                      {(response.data as BiofeedbackMetrics).service && (
+                        <>
+                          <div className="grid grid-cols-4 gap-4">
+                            <div className="p-4 rounded-xl bg-gradient-to-br from-rose-500/10 to-pink-500/10 border border-rose-500/20">
+                              <div className="flex items-center gap-2 mb-2">
+                                <Heart className="w-5 h-5 text-rose-400" />
+                                <span className="text-sm text-slate-400">Status</span>
+                              </div>
+                              <p className={`text-xl font-bold capitalize ${(response.data as BiofeedbackMetrics).status === 'online' ? 'text-blue-700' : 'text-slate-400'
+                                }`}>
+                                {(response.data as BiofeedbackMetrics).status || 'Unknown'}
+                              </p>
+                            </div>
+                            <div className="p-4 rounded-xl bg-gradient-to-br from-violet-500/10 to-violet-500/10 border border-violet-500/20">
+                              <div className="flex items-center gap-2 mb-2">
+                                <Target className="w-5 h-5 text-violet-400" />
+                                <span className="text-sm text-slate-400">Total Sessions</span>
+                              </div>
+                              <p className="text-xl font-bold text-violet-400">
+                                {(response.data as BiofeedbackMetrics).total_sessions_completed || 0}
+                              </p>
+                            </div>
+                            <div className="p-4 rounded-xl bg-gradient-to-br from-blue-800/10 to-green-500/10 border border-blue-800/20">
+                              <div className="flex items-center gap-2 mb-2">
+                                <Waves className="w-5 h-5 text-blue-700" />
+                                <span className="text-sm text-slate-400">Alpha Sessions</span>
+                              </div>
+                              <p className="text-xl font-bold text-blue-700">
+                                {(response.data as BiofeedbackMetrics).alpha_training?.total_sessions || 0}
+                              </p>
+                            </div>
+                            <div className="p-4 rounded-xl bg-gradient-to-br from-purple-500/10 to-violet-500/10 border border-purple-500/20">
+                              <div className="flex items-center gap-2 mb-2">
+                                <Brain className="w-5 h-5 text-purple-400" />
+                                <span className="text-sm text-slate-400">Theta Sessions</span>
+                              </div>
+                              <p className="text-xl font-bold text-purple-400">
+                                {(response.data as BiofeedbackMetrics).theta_training?.total_sessions || 0}
+                              </p>
+                            </div>
+                          </div>
 
-              {/* Session Controls */}
-              <div className="grid grid-cols-2 gap-4">
-                <button className="bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-semibold py-3 rounded-lg transition-all">
-                  ▶️ Start Training
-                </button>
-                <button className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-semibold py-3 rounded-lg transition-all">
-                  ⏹️ Stop Session
-                </button>
+                          {/* Training Progress */}
+                          <div className="grid grid-cols-3 gap-4">
+                            {/* Alpha */}
+                            <div className="p-4 rounded-xl bg-gradient-to-br from-violet-500/10 to-violet-500/10 border border-violet-500/20">
+                              <h4 className="text-sm font-semibold text-violet-400 mb-3 flex items-center gap-2">
+                                🌊 Alpha Training
+                              </h4>
+                              <div className="space-y-2">
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-slate-400">Avg Coherence</span>
+                                  <span className={getCoherenceColor((response.data as BiofeedbackMetrics).alpha_training?.avg_coherence || 0)}>
+                                    {(response.data as BiofeedbackMetrics).alpha_training?.avg_coherence?.toFixed(1) || 0}%
+                                  </span>
+                                </div>
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-slate-400">Best</span>
+                                  <span className="text-blue-700">
+                                    {(response.data as BiofeedbackMetrics).alpha_training?.best_coherence?.toFixed(1) || 0}%
+                                  </span>
+                                </div>
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-slate-400">Total Time</span>
+                                  <span className="text-white">
+                                    {(response.data as BiofeedbackMetrics).alpha_training?.total_time_minutes || 0} min
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Theta */}
+                            <div className="p-4 rounded-xl bg-gradient-to-br from-purple-500/10 to-violet-500/10 border border-purple-500/20">
+                              <h4 className="text-sm font-semibold text-purple-400 mb-3 flex items-center gap-2">
+                                🧘 Theta Training
+                              </h4>
+                              <div className="space-y-2">
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-slate-400">Avg Coherence</span>
+                                  <span className={getCoherenceColor((response.data as BiofeedbackMetrics).theta_training?.avg_coherence || 0)}>
+                                    {(response.data as BiofeedbackMetrics).theta_training?.avg_coherence?.toFixed(1) || 0}%
+                                  </span>
+                                </div>
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-slate-400">Best</span>
+                                  <span className="text-blue-700">
+                                    {(response.data as BiofeedbackMetrics).theta_training?.best_coherence?.toFixed(1) || 0}%
+                                  </span>
+                                </div>
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-slate-400">Total Time</span>
+                                  <span className="text-white">
+                                    {(response.data as BiofeedbackMetrics).theta_training?.total_time_minutes || 0} min
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Beta */}
+                            <div className="p-4 rounded-xl bg-gradient-to-br from-blue-800/10 to-green-500/10 border border-blue-800/20">
+                              <h4 className="text-sm font-semibold text-blue-700 mb-3 flex items-center gap-2">
+                                ⚡ Beta Training
+                              </h4>
+                              <div className="space-y-2">
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-slate-400">Avg Coherence</span>
+                                  <span className={getCoherenceColor((response.data as BiofeedbackMetrics).beta_training?.avg_coherence || 0)}>
+                                    {(response.data as BiofeedbackMetrics).beta_training?.avg_coherence?.toFixed(1) || 0}%
+                                  </span>
+                                </div>
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-slate-400">Best</span>
+                                  <span className="text-blue-700">
+                                    {(response.data as BiofeedbackMetrics).beta_training?.best_coherence?.toFixed(1) || 0}%
+                                  </span>
+                                </div>
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-slate-400">Total Time</span>
+                                  <span className="text-white">
+                                    {(response.data as BiofeedbackMetrics).beta_training?.total_time_minutes || 0} min
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </>
+                      )}
+
+                      {/* Raw JSON Response */}
+                      <div className="p-4 rounded-xl bg-slate-800/30 border border-slate-700/30">
+                        <h4 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                          <Zap className="w-4 h-4 text-rose-400" />
+                          Raw JSON Response
+                        </h4>
+                        <pre className="p-4 bg-slate-950/50 rounded-lg overflow-x-auto text-xs font-mono text-slate-300 max-h-96 overflow-y-auto">
+                          {JSON.stringify(response.data, null, 2)}
+                        </pre>
+                      </div>
+                  </div>
+                ) : (
+                  <p className="text-slate-500 text-center py-8">No data received</p>
+                )}
               </div>
             </div>
           )}
         </div>
+      </div>
 
-        {/* Recent Sessions */}
-        <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-          <h3 className="text-lg font-semibold text-white mb-4">📊 Recent Sessions</h3>
-          <div className="space-y-3 max-h-96 overflow-y-auto">
-            {metrics?.sessions_history.map((session) => (
-              <div key={session.id} className="bg-black/20 rounded-lg p-4 border border-white/10 hover:border-teal-500/50 transition-all">
-                <div className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <div className="text-white font-semibold">{session.frequency}</div>
-                    <div className="text-gray-400 text-sm">
-                      {session.timestamp.toLocaleTimeString()} • Duration: {session.duration} min • Coherence: {session.coherence}%
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold text-teal-400">{session.intensity}%</div>
-                    <div className="text-xs text-gray-400">Intensity</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* Footer */}
+      <div className="max-w-7xl mx-auto mt-8 text-center">
+        <p className="text-xs text-slate-600">
+          Neural Biofeedback Training • Real API Data • No Mock Values
+        </p>
       </div>
     </div>
   );
 }
+
+
+
+
+
+
+

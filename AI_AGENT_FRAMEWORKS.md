@@ -8,7 +8,7 @@
 ## Executive Summary
 
 | Framework | Best For | Rating | Clisonix Fit | Implementation |
-|-----------|----------|--------|-------------|---|
+| --- | --- | --- | --- | --- |
 | **LangChain** | Complex chains, memory, tools | 9/10 | ⭐⭐⭐⭐⭐ | Hybrid (chains) |
 | **CrewAI** | Multi-agent orchestration | 9.5/10 | ⭐⭐⭐⭐⭐ | Primary (agents) |
 | **Claude Tools** | Simple tool integration | 6/10 | ⭐⭐⭐ | Complement |
@@ -19,11 +19,13 @@
 
 ## 1️⃣ **LangChain** (Python/JavaScript)
 
-### Overview
+### Overview – Universal LLM Application Framework
+
 Universal framework for building LLM applications with chains, agents, memory, and tool integration. Supports any LLM provider.
 
 ### Architecture
-```
+
+...
 User Input
     ↓
 [Prompt Template]
@@ -38,6 +40,7 @@ Output
 ```
 
 ### Strengths ✅
+
 - **Multi-provider support**: OpenAI, Claude, local models, Hugging Face
 - **Chain composition**: Sequential, parallel, conditional logic flows
 - **Built-in memory**: Conversation history, summarization, context management
@@ -48,12 +51,14 @@ Output
 - **Perfect for Curiosity Ocean**: Memory chains for deep question exploration
 
 ### Weaknesses ⚠️
+
 - Requires manual orchestration for complex multi-agent workflows
 - Can become verbose for simple tasks
 - Learning curve for advanced patterns
 - Team needs to understand chain design patterns
 
 ### Code Example for Clisonix
+
 ```python
 from langchain.llms import OpenAI
 from langchain.chains import LLMChain
@@ -99,22 +104,26 @@ response = chain.run(
 ```
 
 ### Integration Points in Clisonix
+
 - **Homepage**: Real-time metrics analysis with memory
 - **Curiosity Ocean**: Multi-turn conversation chains for knowledge exploration
 - **EEG Analysis**: Chain for frequency analysis → pattern recognition → recommendations
 - **Industrial Dashboard**: Time-series analysis chains
 
 ### Implementation Effort
+
 ⏱️ **Medium** (2-3 days for production setup)
 
 ---
 
 ## 2️⃣ **CrewAI** (Python Only)
 
-### Overview
+### Overview – Multi-Agent Orchestration Framework
+
 Framework for orchestrating multiple AI agents with distinct roles, expertise, and tool access. Perfect multi-agent coordination without manual orchestration.
 
 ### Architecture
+
 ```
 [Task Queue]
     ↓
@@ -142,6 +151,7 @@ Framework for orchestrating multiple AI agents with distinct roles, expertise, a
 ```
 
 ### Strengths ✅
+
 - **Perfect ASI Trinity alignment**: ALBA → ALBI → JONA naturally maps to agent roles
 - **Automatic orchestration**: No manual task sequencing needed
 - **Role-based expertise**: Agents specialize in their domains
@@ -152,12 +162,14 @@ Framework for orchestrating multiple AI agents with distinct roles, expertise, a
 - **Tool authorization**: Fine-grained control over what each agent can do
 
 ### Weaknesses ⚠️
+
 - Python-only (no JavaScript version)
 - Newer framework (smaller community than LangChain)
 - Requires careful role/goal definition
 - Less flexibility than raw LangChain for custom workflows
 
 ### Code Example for Clisonix
+
 ```python
 from crewai import Agent, Task, Crew, Process
 from crewai_tools import tool
@@ -248,6 +260,7 @@ result = crew.kickoff()
 ```
 
 ### Integration Points in Clisonix
+
 - **Primary AI orchestration**: All neural analysis workflows
 - **ASI Trinity engine**: Native ALBA/ALBI/JONA agent implementation
 - **API endpoints**: `/api/ai/trinity-analysis` using CrewAI
@@ -255,16 +268,19 @@ result = crew.kickoff()
 - **Report generation**: Automatic generation from agent findings
 
 ### Implementation Effort
+
 ⏱️ **Medium** (2-3 days, Python-only)
 
 ---
 
 ## 3️⃣ **Claude Tools** (Anthropic Native)
 
-### Overview
+### Overview – Native Tool Calling for Claude
+
 Native function/tool calling for Claude models. Simple, direct integration without framework overhead.
 
 ### Architecture
+
 ```
 User Message
     ↓
@@ -278,6 +294,7 @@ Final Response
 ```
 
 ### Strengths ✅
+
 - **Zero framework overhead**: Just API calls
 - **Claude's reasoning**: Excellent for complex analysis
 - **Simple to implement**: ~50 lines of code
@@ -287,6 +304,7 @@ Final Response
 - **Strong reasoning**: Claude excels at complex neural analysis
 
 ### Weaknesses ⚠️
+
 - **Not a framework**: No multi-agent orchestration
 - **No memory management**: You handle conversation history
 - **Manual coordination**: Must implement agent logic yourself
@@ -294,6 +312,7 @@ Final Response
 - **No built-in chains**: Each tool call is independent
 
 ### Code Example for Clisonix
+
 ```python
 from anthropic import Anthropic
 
@@ -379,22 +398,26 @@ result = analyze_with_claude("Analyze ALBA metrics and identify patterns")
 ```
 
 ### Integration Points in Clisonix
+
 - **Quick one-off tasks**: Single-turn analysis
 - **Complement to CrewAI**: Use for specific neural interpretation tasks
 - **Simple workflows**: When orchestration overhead isn't needed
 - **Cost-sensitive operations**: Simple tools without framework overhead
 
 ### Implementation Effort
+
 ⏱️ **Fast** (1-2 hours, minimal setup)
 
 ---
 
 ## 4️⃣ **n8n** (No-Code Automation)
 
-### Overview
+### Overview – Visual Workflow Automation Platform
+
 Visual workflow automation platform (like Zapier, but self-hosted). Great for connecting APIs, webhooks, and triggering actions.
 
 ### Architecture
+
 ```
 [Trigger]
   ↓ (Time, Webhook, API call)
@@ -411,6 +434,7 @@ Visual workflow automation platform (like Zapier, but self-hosted). Great for co
 ```
 
 ### Strengths ✅
+
 - **No coding needed**: Visual workflow builder
 - **Perfect for non-coders**: Business logic without engineering
 - **Self-hosted option**: Privacy-friendly, no SaaS lock-in
@@ -421,6 +445,7 @@ Visual workflow automation platform (like Zapier, but self-hosted). Great for co
 - **Great for monitoring**: EEG anomaly detection → alerts
 
 ### Weaknesses ⚠️
+
 - **Not for AI agents**: Automation ≠ reasoning
 - **Limited AI capabilities**: Can call LLM APIs but no true agent logic
 - **Visual complexity**: Large workflows become hard to manage
@@ -428,6 +453,7 @@ Visual workflow automation platform (like Zapier, but self-hosted). Great for co
 - **Overkill for simple tasks**: Overhead for basic automation
 
 ### Example Workflow for Clisonix
+
 ```
 [n8n Workflow: EEG Anomaly Detection & Alert]
 
@@ -452,6 +478,7 @@ Visual workflow automation platform (like Zapier, but self-hosted). Great for co
 ```
 
 ### Integration Points in Clisonix
+
 - **Monitoring workflows**: Real-time alerts based on thresholds
 - **Data pipeline**: EEG → Prometheus → Alerts
 - **Incident response**: Automated escalation workflows
@@ -459,19 +486,23 @@ Visual workflow automation platform (like Zapier, but self-hosted). Great for co
 - **Cross-system integration**: Connect Clisonix with Slack, PagerDuty, etc.
 
 ### Implementation Effort
+
 ⏱️ **Fast** (1 day for setup, workflows are visual)
 
 ### Sample n8n Workflow JSON
+
 See "n8n Workflows" section below.
 
 ---
 
 ## 5️⃣ **AutoGPT** (Autonomous Agents)
 
-### Overview
+### Overview – Fully Autonomous Agent Framework
+
 Framework for creating fully autonomous agents that set their own goals, break them into sub-tasks, and execute them with tool access.
 
 ### Architecture
+
 ```
 Agent gets task: "Optimize neural synthesis"
     ↓
@@ -488,12 +519,14 @@ Agent gets task: "Optimize neural synthesis"
 ```
 
 ### Strengths ✅
+
 - **True autonomy**: Agent plans and executes without supervision
 - **Complex problem solving**: Handles multi-step, open-ended tasks
 - **Adaptive**: Retries failed actions, adjusts strategy
 - **Interesting research**: Cutting-edge autonomous AI
 
 ### Weaknesses ⚠️ **CRITICAL**
+
 - **Unpredictable behavior**: Hard to control what it does
 - **Expensive**: Constant LLM calls for planning/reasoning
 - **Slow**: Lots of overhead for simple tasks
@@ -504,6 +537,7 @@ Agent gets task: "Optimize neural synthesis"
 - **Hallucinations**: Agent might "invent" facts and act on them
 
 ### Why NOT for Clisonix
+
 ```python
 # You want this:
 task = "Analyze ALBA metrics for neural patterns"
@@ -520,12 +554,14 @@ result = agent.execute(task)  # Predictable, controlled
 ### Verdict: ❌ **NOT RECOMMENDED**
 
 **Only use if:**
+
 - You need experimental autonomous research agents
 - You can run them in isolated sandboxes
 - You can afford to lose/reset everything they do
 - You're doing R&D, not production
 
 ### Implementation Effort
+
 ❌ Not recommended for production
 
 ---
@@ -569,24 +605,28 @@ result = agent.execute(task)  # Predictable, controlled
 ### Implementation Roadmap
 
 **Phase 1: Foundation (Week 1)**
+
 - [ ] Install CrewAI, LangChain dependencies
 - [ ] Create ALBA/ALBI/JONA agents
 - [ ] Implement basic CrewAI crew
 - [ ] Add `/api/ai/trinity-analysis` endpoint
 
 **Phase 2: Enhancement (Week 2)**
+
 - [ ] Add LangChain conversation chains
 - [ ] Implement memory for Curiosity Ocean
 - [ ] Add Claude Tools for quick tasks
 - [ ] Integrate with frontend
 
 **Phase 3: Automation (Week 3)**
+
 - [ ] Set up n8n self-hosted instance
 - [ ] Create monitoring workflows
 - [ ] Connect to Slack/alerts
 - [ ] Schedule report generation
 
 **Phase 4: Optimization (Week 4)**
+
 - [ ] Fine-tune agent prompts
 - [ ] Optimize tool selection
 - [ ] Add observability/logging
@@ -663,11 +703,11 @@ docker run -it --rm \
 
 ## 🔗 **RESOURCES**
 
-- **CrewAI**: https://github.com/joaomdmoura/crewai
-- **LangChain**: https://github.com/langchain-ai/langchain
-- **Claude Tools**: https://docs.anthropic.com/en/docs/build/tool-use
-- **n8n**: https://n8n.io
-- **AutoGPT**: https://github.com/Significant-Gravitas/AutoGPT (⚠️ experimental)
+- **CrewAI**: <https://github.com/joaomdmoura/crewai>
+- **LangChain**: <https://github.com/langchain-ai/langchain>
+- **Claude Tools**: <https://docs.anthropic.com/en/docs/build/tool-use>
+- **n8n**: <https://n8n.io>
+- **AutoGPT**: <https://github.com/Significant-Gravitas/AutoGPT> (⚠️ experimental)
 
 ---
 

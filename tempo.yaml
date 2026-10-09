@@ -1,5 +1,6 @@
 server:
   http_listen_port: 3200
+  grpc_listen_port: 9095
 
 distributor:
   receivers:
@@ -24,36 +25,6 @@ storage:
       max_workers: 100
       queue_depth: 10000
 
-metrics_generator:
-  registry:
-    external_labels:
-      source: tempo
-      cluster: clisonix
-  storage:
-    path: /var/tempo/generator/wal
-  processor:
-    service_graphs:
-      dimensions:
-        - resource.service.name
-    span_metrics:
-      dimensions:
-        - resource.service.name
-        - span.name
-        - span.kind
-        - status.code
-
-compactor:
-  compaction:
-    compacted_block_retention: 48h
-
 querier:
   frontend_worker:
-    frontend_address: localhost:9095
-
-query_frontend:
-  search:
-    max_duration: 0s
-  trace_by_id:
-    query_shards: 50
-
-
+    frontend_address: 127.0.0.1:9095

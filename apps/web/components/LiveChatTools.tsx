@@ -32,16 +32,16 @@ const DEFAULT_TOOLS: ChatTool[] = [
 		id: 'clisonix-health-scan',
 		label: 'Clisonix Health Scan',
 		description:
-			'Run an instant diagnostic against Clisonix mesh nodes, pipeline latency, and ALBA/ALBI heartbeat.',
+			'Run an instant diagnostic against Clisonix mesh nodes, pipeline latency, and Core-A/Core-B heartbeat.',
 		category: 'triage',
 		latency: '~1.4s',
 		endpoint: '/api/diagnostics/mesh-health',
 	},
 	{
-		id: 'albi-pattern-detector',
-		label: 'ALBI Pattern Detector',
+		id: 'core-b-pattern-detector',
+		label: 'Core-B Pattern Detector',
 		description:
-			'Stream brain harmonics through ALBI to uncover anomalies, training drift, and neuro-spectrum gaps.',
+			'Stream brain harmonics through Core-B to uncover anomalies, training drift, and neuro-spectrum gaps.',
 		category: 'analysis',
 		latency: '~900ms',
 		endpoint: '/api/albi/patterns',
@@ -56,8 +56,8 @@ const DEFAULT_TOOLS: ChatTool[] = [
 		endpoint: '/api/asi/safety-audit',
 	},
 	{
-		id: 'jona-symphony',
-		label: 'JONA Neural Symphony',
+		id: 'core-c-symphony',
+		label: 'Core-C Neural Symphony',
 		description:
 			'Convert the latest EEG buffer into musical textures and stream readiness signals back to the chat.',
 		category: 'automation',

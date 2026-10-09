@@ -1,24 +1,25 @@
-﻿"""
+"""
 Blerina - Cycle Engine Integration
 Lidhja e Blerina Reformatter me Cycle Engine
 """
 import asyncio
 import json
-from typing import Dict, List, Any, Optional
 from datetime import datetime
+from typing import Any, Dict, Optional
+
 
 class BlerinaCycleIntegration:
     """Integrimi i Blerina (YouTube reformatter) me Cycle Engine"""
-    
+
     def __init__(self, api_url: str = "http://clisonix-api:8000"):
         self.api_url = api_url
         self.source = "youtube"
         self.task = "reformat"
-    
+
     async def create_blerina_cycle(
         self,
         domain: str = "media",
-        youtube_query: str = "neurosonix",
+        youtube_query: str = "clisonix",
         interval: int = 3600,  # 1 hour
         alignment: str = "moderate"
     ) -> Dict[str, Any]:
@@ -37,7 +38,7 @@ class BlerinaCycleIntegration:
             }
         }
         return cycle_config
-    
+
     async def execute_blerina_cycle(
         self,
         cycle_id: str,
@@ -55,11 +56,11 @@ class BlerinaCycleIntegration:
             "status": "processing"
         }
         return execution
-    
+
     async def register_blerina_source(
         self,
         source_name: str = "youtube_api",
-        api_key: str = None
+        api_key: Optional[str] = None
     ) -> bool:
         """Regjistro YouTube si burim për Blerina cycles"""
         config = {
@@ -69,7 +70,7 @@ class BlerinaCycleIntegration:
             "connected": True
         }
         return True
-    
+
     async def get_blerina_metrics(self, cycle_id: str) -> Dict[str, Any]:
         """Merr metriken e Blerina cycle execution"""
         metrics = {
@@ -81,7 +82,7 @@ class BlerinaCycleIntegration:
             "success_rate": 100.0
         }
         return metrics
-    
+
     async def setup_production_blerina(self) -> bool:
         """Setup Blerina në production me Cycle Engine"""
         cycle_config = await self.create_blerina_cycle(
@@ -89,7 +90,7 @@ class BlerinaCycleIntegration:
             youtube_query="technology",
             interval=3600
         )
-        
+
         print(f"✓ Blerina cycle configured: {json.dumps(cycle_config, indent=2)}")
         return True
 
@@ -97,12 +98,12 @@ async def main():
     """Demo Blerina-Cycle integration"""
     print("🔗 BLERINA - CYCLE ENGINE INTEGRATION")
     print("=" * 50)
-    
+
     integration = BlerinaCycleIntegration()
-    
+
     # Setup production Blerina
     result = await integration.setup_production_blerina()
-    
+
     if result:
         print("\n✓ Blerina integrated with Cycle Engine")
         print("✓ Ready for YouTube content reformatting cycles")

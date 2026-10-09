@@ -1,4 +1,5 @@
 # 🏗️ CLISONIX ARCHITECTURE BASELINE 2025
+
 **Commercial SaaS Platform - Production Architecture Document**
 
 ---
@@ -10,6 +11,7 @@
 **Platform Status**: Operational but requires stabilization through architectural cleanup and boundary enforcement.
 
 **Prometheus TSDB Health** (as of Dec 2025):
+
 - Series: 1,244 (healthy, no cardinality explosion)
 - TSDB: Stable, compaction working
 - Labels: Optimal distribution
@@ -22,6 +24,7 @@
 ## 🎯 Clisonix Platform Mission
 
 **Clisonix** is a commercial SaaS platform providing:
+
 1. **Neural signal processing** (EEG, biofeedback, audio synthesis)
 2. **AI-powered agent coordination** (Alba, Albi, Jona, ASI, AGIEM)
 3. **Real-time monitoring & telemetry** (Prometheus, Grafana, distributed tracing)
@@ -37,6 +40,7 @@
 ### Core Backend Services
 
 #### 1. **Main API Service** (`apps/api/main.py`)
+
 - **Port**: 8000
 - **Role**: Central FastAPI gateway for all Clisonix operations
 - **Lines**: 3,219
@@ -53,6 +57,7 @@
 #### 2. **AI Agent Trinity (Alba → Albi → Jona)**
 
 ##### ALBA - Adaptive Learning & Brain Analysis
+
 - **Port**: 5555
 - **Files**:
   - `alba_api_server.py` (FastAPI service)
@@ -67,7 +72,8 @@
 - **Status**: ✅ CORE PRODUCTION
 
 ##### ALBI - Advanced Learning & Brain Intelligence
-- **Port**: 6666
+
+- **Port**: 6680
 - **Files**:
   - `albi_core.py` (154 lines - analytics engine)
   - FastAPI service integration
@@ -79,6 +85,7 @@
 - **Status**: ✅ CORE PRODUCTION
 
 ##### JONA - Joint Oscillatory Neural Analysis
+
 - **Port**: 7777
 - **Files**:
   - `jona_service_7777.py` (267 lines - coordinator)
@@ -91,6 +98,7 @@
 - **Status**: ✅ CORE PRODUCTION
 
 #### 3. **ASI - Artificial Superintelligence Core**
+
 - **Port**: N/A (internal service)
 - **Files**:
   - `asi_core.py` (258 lines)
@@ -103,6 +111,7 @@
 - **Status**: ✅ CORE PRODUCTION
 
 #### 4. **AGIEM - AGI Evolution Module**
+
 - **Port**: N/A (internal service)
 - **Files**:
   - `agiem_core.py` (1,360 lines)
@@ -114,6 +123,7 @@
 - **Status**: ✅ CORE PRODUCTION
 
 #### 5. **Blerina - YouTube Integration**
+
 - **Port**: N/A (utility service)
 - **Files**:
   - `blerina_reformatter_ai.py` (253 lines)
@@ -126,6 +136,7 @@
 ### Orchestration & Coordination
 
 #### Master Orchestrator
+
 - **Port**: 9999
 - **Files**:
   - `master.py` (orchestrator core)
@@ -141,6 +152,7 @@
 ### Supporting Services
 
 #### Backend Application (`backend/`)
+
 - **Files**:
   - `backend/app.py` (Flask/FastAPI hybrid)
   - `backend/mesh/` (networking, security, telemetry)
@@ -150,6 +162,7 @@
 - **Status**: ✅ PRODUCTION BACKEND (requires consolidation with `apps/api/`)
 
 #### Billing & Economy
+
 - **Files**:
   - `billing_plans.py` (subscription tiers)
   - `stripe_integration.py` (payment processing)
@@ -158,6 +171,7 @@
 - **Status**: ✅ PRODUCTION BILLING
 
 #### Authentication & Security
+
 - **Files**:
   - `api_key_middleware.py` (API key validation)
   - `backend/middleware/security.py` (JWT, quotas)
@@ -165,12 +179,14 @@
 - **Status**: ✅ PRODUCTION SECURITY
 
 #### Slack Notifications
+
 - **Port**: 8888
 - **Files**: `slack_integration_service.py`
 - **Role**: **Alert Notifications**
 - **Status**: ✅ PRODUCTION UTILITY
 
 #### Telemetry & Tracing
+
 - **Files**:
   - `tracing.py` (OpenTelemetry integration)
   - `usage_tracker.py` (API usage metrics)
@@ -182,6 +198,7 @@
 ## 🌐 Frontend Application (`apps/web/`)
 
 ### Framework
+
 - **Technology**: Next.js 14+ (App Router)
 - **Location**: `apps/web/`
 - **Port**: 3000
@@ -212,11 +229,13 @@
 ## 🗄️ Infrastructure Services (Docker)
 
 ### Database Layer
+
 - **PostgreSQL 16**: Primary RDBMS (shared by all agents + API)
 - **Redis 7**: Caching & session storage
 - **MinIO**: S3-compatible object storage
 
 ### Monitoring Stack (Production-Grade)
+
 - **Prometheus**: Metrics collection (TSDB: 1,244 series, healthy)
 - **VictoriaMetrics**: High-performance long-term metrics storage
 - **Grafana**: Visualization dashboards
@@ -225,11 +244,13 @@
 - **Alertmanager**: Alert routing & management
 
 ### Logging & Search
+
 - **Elasticsearch**: Full-text log search
 - **Kibana**: Log visualization
 - **Filebeat**: Log shipping
 
 **Docker Compose Files**:
+
 - `docker-compose.yml` (primary)
 - `docker-compose.python.yml` (Python services)
 - `docker-compose.producer-manager.yml` (producer services)
@@ -241,6 +262,7 @@
 ## 📊 Data Pipeline (Airflow)
 
 ### DAG Inventory (`dags/`)
+
 - `alba_eeg_pipeline.py` - EEG data processing
 - `albi_analytics_pipeline.py` - Analytics orchestration
 - `jona_synthesis_pipeline.py` - Audio synthesis pipeline
@@ -275,7 +297,7 @@
    │              │              │              │
    │              ▼              ▼              ▼
    │    ┌───────────────┐ ┌────────────┐ ┌────────────┐
-   │    │ ALBA (5555)   │ │ ALBI (6666)│ │ JONA (7777)│
+  │    │ ALBA (5555)   │ │ ALBI (6680)│ │ JONA (7777)│
    │    │ Data Collect  │ │ Analytics  │ │ Coordinator│
    │    └───────┬───────┘ └──────┬─────┘ └──────┬─────┘
    │            │                │              │
@@ -328,6 +350,7 @@
 ## 🔒 Security Boundaries
 
 ### Authentication Flow
+
 ```
 User → Frontend → API (JWT validation) → Service
                         ↓
@@ -337,12 +360,14 @@ User → Frontend → API (JWT validation) → Service
 ```
 
 ### Authorization Levels
+
 1. **Public**: Health checks, OpenAPI docs
 2. **Authenticated**: Standard API access
 3. **Premium**: High-rate-limit endpoints
 4. **Admin**: Service management, billing access
 
 ### Current Issues ⚠️
+
 - API keys in `.env` files (not secret-managed)
 - Test Stripe keys in codebase
 - No encryption at rest for DB
@@ -353,6 +378,7 @@ User → Frontend → API (JWT validation) → Service
 ## 📁 Repository Structure (Production Only)
 
 ### Recommended Clean Structure
+
 ```
 clisonix-cloud/
 ├── apps/
@@ -364,7 +390,7 @@ clisonix-cloud/
 │   └── utils/            # Shared utilities
 ├── agents/               # AI Agent services
 │   ├── alba/             # Port 5555 - Data collector
-│   ├── albi/             # Port 6666 - Analytics
+│   ├── albi/             # Port 6680 - Analytics
 │   ├── jona/             # Port 7777 - Coordinator
 │   ├── asi/              # ASI core
 │   └── agiem/            # AGIEM evolution module
@@ -388,6 +414,7 @@ clisonix-cloud/
 ```
 
 ### Files to Archive/Remove
+
 See **Appendix A: Cleanup Recommendations**
 
 ---
@@ -395,22 +422,25 @@ See **Appendix A: Cleanup Recommendations**
 ## 🚀 Deployment Model
 
 ### Current: Docker Compose (Development + Production)
+
 - **Primary**: `docker-compose.yml`
 - **Scaling**: Limited to single-node
 - **Orchestration**: Manual via PowerShell scripts
 
 ### Recommended: Hybrid Approach
+
 1. **Development**: Docker Compose (current)
 2. **Staging**: Docker Swarm or Kubernetes
 3. **Production**: Kubernetes (AWS EKS / GCP GKE / Azure AKS)
 
 ### Service Ports (Production)
+
 | Service | Port | Exposure |
 |---------|------|----------|
 | Frontend | 3000 | Public |
 | Main API | 8000 | Public |
 | Alba | 5555 | Internal |
-| Albi | 6666 | Internal |
+| Albi | 6680 | Internal |
 | Jona | 7777 | Internal |
 | Slack Service | 8888 | Internal |
 | Orchestrator | 9999 | Internal |
@@ -424,6 +454,7 @@ See **Appendix A: Cleanup Recommendations**
 ## 🔧 CI/CD Pipeline (Future State)
 
 ### Build Pipeline
+
 ```
 GitHub → CI (GitHub Actions / GitLab CI)
   ├── Lint & Type Check
@@ -435,6 +466,7 @@ GitHub → CI (GitHub Actions / GitLab CI)
 ```
 
 ### Deployment Pipeline
+
 ```
 Registry → Staging (Auto Deploy)
   ├── Smoke Tests
@@ -454,10 +486,12 @@ Production (Blue/Green Deploy)
 ## 🎯 Agent Roles & Boundaries
 
 ### ALBA - Data Collection Agent
+
 **Owner**: Data Engineering Team  
 **Responsibility**: Raw signal ingestion  
 **SLA**: 99.5% uptime, < 100ms latency  
 **API Surface**:
+
 - `POST /collect` - Ingest EEG frames
 - `GET /status` - Health check
 - `GET /metrics` - Prometheus metrics
@@ -467,10 +501,12 @@ Production (Blue/Green Deploy)
 ---
 
 ### ALBI - Analytics Agent
+
 **Owner**: Data Science Team  
 **Responsibility**: Pattern recognition & learning  
 **SLA**: 99.5% uptime, < 500ms processing time  
 **API Surface**:
+
 - `POST /analyze` - Process neural data
 - `GET /model/status` - ML model health
 - `GET /metrics` - Prometheus metrics
@@ -480,10 +516,12 @@ Production (Blue/Green Deploy)
 ---
 
 ### JONA - Coordination Agent
+
 **Owner**: Platform Team  
 **Responsibility**: Multi-agent synthesis & orchestration  
 **SLA**: 99.9% uptime, < 200ms response  
 **API Surface**:
+
 - `POST /synthesize` - Generate neural audio
 - `GET /coordination/status` - Mesh health
 - `GET /metrics` - Prometheus metrics
@@ -493,6 +531,7 @@ Production (Blue/Green Deploy)
 ---
 
 ### ASI - System Intelligence
+
 **Owner**: Platform Team  
 **Responsibility**: Cross-system optimization  
 **SLA**: Best effort (experimental-to-production transition)  
@@ -503,6 +542,7 @@ Production (Blue/Green Deploy)
 ---
 
 ### AGIEM - Evolution Module
+
 **Owner**: Research Team  
 **Responsibility**: Meta-intelligence & system evolution  
 **SLA**: Best effort (production monitoring, experimental optimization)  
@@ -517,26 +557,31 @@ Production (Blue/Green Deploy)
 ### Key Metrics (Prometheus)
 
 #### System Health
+
 - `clisonix_api_requests_total` - API request count
 - `clisonix_api_latency_seconds` - API response time
 - `clisonix_agent_health` - Agent status (0=down, 1=up)
 
 #### Business Metrics
+
 - `clisonix_active_users` - Current user sessions
 - `clisonix_subscriptions_active` - Paid subscriptions
 - `clisonix_revenue_mrr` - Monthly recurring revenue
 
 #### Agent Metrics
+
 - `alba_frames_processed_total` - Data ingestion rate
 - `albi_predictions_total` - Analytics throughput
 - `jona_synthesis_duration_seconds` - Audio generation time
 
 ### Alerting Rules (`ops/alert-rules.yml`)
+
 - **Critical**: API down > 1min, DB unreachable
 - **Warning**: High latency (p95 > 1s), error rate > 1%
 - **Info**: High load (CPU > 80%), disk > 85%
 
 ### Grafana Dashboards
+
 1. **Executive Dashboard** - Business KPIs
 2. **System Overview** - Infrastructure health
 3. **Agent Trinity** - Alba/Albi/Jona metrics
@@ -547,6 +592,7 @@ Production (Blue/Green Deploy)
 ## 🧪 Testing Strategy
 
 ### Test Pyramid
+
 ```
         /\
        /E2E\        (10% - Selenium, Playwright)
@@ -558,6 +604,7 @@ Production (Blue/Green Deploy)
 ```
 
 ### Current Test Coverage
+
 - **Unit Tests**: Scattered (`test_*.py` in root)
 - **Integration Tests**: 3 files in `tests/`
 - **E2E Tests**: Missing ❌
@@ -569,12 +616,14 @@ Production (Blue/Green Deploy)
 ## 📜 Licensing & Ownership
 
 ### Clisonix SaaS Platform
+
 - **Type**: Commercial Proprietary
 - **Owner**: [Company Name]
 - **License**: Closed Source (for SaaS customers)
 - **Scope**: All services in this document
 
 ### Third-Party Dependencies
+
 - **Open Source**: FastAPI, Next.js, PostgreSQL, Prometheus (see `requirements.txt`, `package.json`)
 - **Commercial**: Stripe (payment gateway), OpenAI (optional AI features)
 
@@ -585,6 +634,7 @@ Production (Blue/Green Deploy)
 ## 🔮 2026 Roadmap (Stability Focus)
 
 ### Q1 2026: Cleanup & Consolidation
+
 - [ ] Archive experimental code to `/research`
 - [ ] Remove duplicate frontends & launchers
 - [ ] Consolidate backend services (`backend/` → `apps/api/`)
@@ -592,18 +642,21 @@ Production (Blue/Green Deploy)
 - [ ] Add circuit breakers & retry logic
 
 ### Q2 2026: Testing & CI/CD
+
 - [ ] 80% unit test coverage
 - [ ] Integration test suite for all agents
 - [ ] Automated CI/CD pipeline (GitHub Actions)
 - [ ] Blue/green deployment strategy
 
 ### Q3 2026: Kubernetes Migration
+
 - [ ] Kubernetes manifests for all services
 - [ ] Horizontal pod autoscaling
 - [ ] Production deployment to managed K8s
 - [ ] Multi-region replication
 
 ### Q4 2026: Enterprise Features
+
 - [ ] SSO integration (OAuth, SAML)
 - [ ] Advanced RBAC & audit logs
 - [ ] Multi-tenancy improvements
@@ -627,12 +680,14 @@ Production (Blue/Green Deploy)
 ## 🆘 Incident Response
 
 ### Severity Levels
+
 - **SEV-1**: Complete platform outage → Page all teams
 - **SEV-2**: Major feature broken → Page owning team
 - **SEV-3**: Degraded performance → Slack alert
 - **SEV-4**: Minor bug → Ticket only
 
 ### Runbooks
+
 - **API Down**: Check Orchestrator (9999), restart agents
 - **DB Slow**: Check connection pool, restart PostgreSQL
 - **High Latency**: Check Prometheus for bottleneck, scale services
@@ -642,6 +697,7 @@ Production (Blue/Green Deploy)
 ## 📚 Appendix A: Cleanup Recommendations
 
 ### Move to `/research/`
+
 ```
 - generated_apis/
 - generated_proposals/
@@ -653,6 +709,7 @@ Production (Blue/Green Deploy)
 ```
 
 ### Move to `/archive/`
+
 ```
 - frontend/ (old Next.js)
 - frontend-new/ (another old Next.js)
@@ -667,12 +724,14 @@ Production (Blue/Green Deploy)
 ```
 
 ### Consolidate to `/tests/`
+
 ```
 - All test_*.py from root (13 files)
 - Keep tests/ directory structure
 ```
 
 ### Delete Entirely
+
 ```
 - *.db files (SQLite dev databases)
 - dump.rdb (Redis dev dump)
@@ -685,6 +744,7 @@ Production (Blue/Green Deploy)
 ## 📚 Appendix B: Environment Variables
 
 ### Production `.env` Template
+
 ```bash
 # Database
 DATABASE_URL=postgresql://user:pass@postgres:5432/clisonix
@@ -693,7 +753,7 @@ REDIS_URL=redis://redis:6379/0
 # Services
 API_BASE_URL=https://api.clisonix.com
 ALBA_URL=http://alba:5555
-ALBI_URL=http://albi:6666
+ALBI_URL=http://albi:6680
 JONA_URL=http://jona:7777
 ORCHESTRATOR_URL=http://orchestrator:9999
 
@@ -722,6 +782,7 @@ LOKI_URL=http://loki:3100
 ## 📚 Appendix C: API Contract Examples
 
 ### Alba API Contract
+
 ```yaml
 openapi: 3.0.0
 info:
@@ -764,6 +825,7 @@ paths:
 **Review Status**: ⚠️ DRAFT - Awaiting stakeholder approval  
 
 **Approved By**:
+
 - [ ] CTO
 - [ ] Head of Engineering
 - [ ] Lead DevOps Engineer

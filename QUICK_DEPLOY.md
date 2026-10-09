@@ -44,7 +44,7 @@
 SSH to server and run ONE command:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/LedjanAhmati/Clisonix-cloud/main/deploy-hetzner.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Web8kameleon-hub/clisonix.com/main/deploy-hetzner.sh | bash
 ```
 
 This will:
@@ -73,7 +73,7 @@ certbot certonly --standalone \
   -d clisonix.com \
   -d www.clisonix.com \
   -d api.clisonix.com \
-  --email amati.ledian@gmail.com \
+  --email clisonix@pm.me \
   --agree-tos --non-interactive
 
 # Certificates will be at:
@@ -285,3 +285,4 @@ docker compose -f docker-compose.prod.yml restart postgres
 Your Clisonix Cloud platform is now running in production on Hetzner!
 
 **Next:** Visit https://clisonix.com and start using your platform.
+

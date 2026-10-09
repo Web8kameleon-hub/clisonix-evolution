@@ -7,7 +7,7 @@ import json
 import time
 import logging
 import requests
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional
 from datetime import datetime, timezone
 from dataclasses import dataclass, asdict
 
@@ -21,7 +21,7 @@ class AgentMetrics:
     agent_name: str
     timestamp: float
     status: str
-    operation: str
+    operation: Optional[str] = None
     duration_ms: Optional[float] = None
     input_tokens: Optional[int] = None
     output_tokens: Optional[int] = None
@@ -373,7 +373,9 @@ def send_agent_telemetry(
 ) -> Dict[str, bool]:
     """Send telemetry using global router"""
     if _global_router is None:
-        init_telemetry()
+        router = init_telemetry()
+    else:
+        router = _global_router
     
     metrics = AgentMetrics(
         agent_name=agent_name,
@@ -386,7 +388,7 @@ def send_agent_telemetry(
         metadata=metadata
     )
     
-    return _global_router.send_all(metrics)
+    return router.send_all(metrics)
 
 
 def telemetry_loop(interval: int = 15, max_iterations: Optional[int] = None):

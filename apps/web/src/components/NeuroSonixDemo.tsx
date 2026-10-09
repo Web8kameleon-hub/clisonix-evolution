@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -180,12 +180,12 @@ export default function ClisonixDemo() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white p-6">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-900 via-neutral-900 to-neutral-900 text-white p-6">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-violet-400 to-violet-300 bg-clip-text text-transparent">
               Clisonix Integrated System
             </h1>
             <p className="text-slate-300 mt-2">
@@ -217,7 +217,7 @@ export default function ClisonixDemo() {
 
       {/* System Status Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <Card className="bg-slate-800/50 border-slate-700">
+        <Card className="bg-neutral-800/50 border-neutral-700">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-slate-300 flex items-center">
               <Shield className="w-4 h-4 mr-2 text-green-400" />
@@ -228,13 +228,13 @@ export default function ClisonixDemo() {
             <div className="text-2xl font-bold text-green-400">
               {systemStatus?.security.eu_compliance ? 'COMPLIANT' : 'OFFLINE'}
             </div>
-            <div className="text-xs text-slate-400 mt-1">
+            <div className="text-xs text-neutral-400 mt-1">
               GDPR • NIS2 • Encryption
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-slate-800/50 border-slate-700">
+        <Card className="bg-neutral-800/50 border-neutral-700">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-slate-300 flex items-center">
               <Zap className="w-4 h-4 mr-2 text-yellow-400" />
@@ -245,30 +245,30 @@ export default function ClisonixDemo() {
             <div className="text-2xl font-bold text-yellow-400">
               {systemStatus ? `${systemStatus.performance.pulses_sent}` : '0'}
             </div>
-            <div className="text-xs text-slate-400 mt-1">
+            <div className="text-xs text-neutral-400 mt-1">
               Total Pulses (1.0s interval)
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-slate-800/50 border-slate-700">
+        <Card className="bg-neutral-800/50 border-neutral-700">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-slate-300 flex items-center">
-              <Users className="w-4 h-4 mr-2 text-blue-400" />
+              <Users className="w-4 h-4 mr-2 text-violet-400" />
               Active Nodes
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-blue-400">
+            <div className="text-2xl font-bold text-violet-400">
               {systemStatus ? `${systemStatus.pulse_balancer.healthy_nodes}/${systemStatus.pulse_balancer.total_nodes}` : '0/0'}
             </div>
-            <div className="text-xs text-slate-400 mt-1">
+            <div className="text-xs text-neutral-400 mt-1">
               Healthy/Total
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-slate-800/50 border-slate-700">
+        <Card className="bg-neutral-800/50 border-neutral-700">
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-slate-300 flex items-center">
               <Activity className="w-4 h-4 mr-2 text-purple-400" />
@@ -279,7 +279,7 @@ export default function ClisonixDemo() {
             <div className="text-2xl font-bold text-purple-400">
               {systemStatus?.pulse_balancer.statistics.tasks_processed || 0}
             </div>
-            <div className="text-xs text-slate-400 mt-1">
+            <div className="text-xs text-neutral-400 mt-1">
               Distributed Processing
             </div>
           </CardContent>
@@ -289,7 +289,7 @@ export default function ClisonixDemo() {
       {/* Main Content */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* System Status */}
-        <Card className="bg-slate-800/50 border-slate-700">
+        <Card className="bg-neutral-800/50 border-neutral-700">
           <CardHeader>
             <CardTitle className="flex items-center">
               <Server className="w-5 h-5 mr-2" />
@@ -323,7 +323,7 @@ export default function ClisonixDemo() {
                 
                 <div className="flex items-center justify-between">
                   <span className="text-slate-300">Queue Size:</span>
-                  <span className="font-mono text-blue-400">
+                  <span className="font-mono text-violet-400">
                     {systemStatus.pulse_balancer.queue_size}
                   </span>
                 </div>
@@ -343,17 +343,17 @@ export default function ClisonixDemo() {
                 </div>
               </div>
             ) : (
-              <div className="text-center py-8 text-slate-400">
+              <div className="text-center py-8 text-neutral-400">
                 <Server className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>System offline</p>
-                <p className="text-sm">Click "Start Demo" to begin</p>
+                <p className="text-sm">Click &quot;Start Demo&quot; to begin</p>
               </div>
             )}
           </CardContent>
         </Card>
 
         {/* Real-time Pulse Log */}
-        <Card className="bg-slate-800/50 border-slate-700">
+        <Card className="bg-neutral-800/50 border-neutral-700">
           <CardHeader>
             <CardTitle className="flex items-center">
               <Activity className="w-5 h-5 mr-2" />
@@ -368,15 +368,15 @@ export default function ClisonixDemo() {
               {pulseLog.map((pulse, index) => (
                 <div 
                   key={index} 
-                  className="text-xs font-mono p-2 bg-slate-900/50 rounded border border-slate-700"
+                  className="text-xs font-mono p-2 bg-neutral-900/50 rounded border border-neutral-700"
                 >
-                  <span className="text-slate-400">[{pulse.timestamp}]</span>
-                  <span className="text-blue-400 ml-2">{pulse.node_id}</span>
+                  <span className="text-neutral-400">[{pulse.timestamp}]</span>
+                  <span className="text-violet-400 ml-2">{pulse.node_id}</span>
                   <span className="text-slate-300 ml-2">{pulse.message}</span>
                 </div>
               ))}
               {pulseLog.length === 0 && (
-                <div className="text-center py-8 text-slate-400">
+                <div className="text-center py-8 text-neutral-400">
                   <Activity className="w-8 h-8 mx-auto mb-2 opacity-50" />
                   <p>No pulse activity</p>
                 </div>
@@ -386,7 +386,7 @@ export default function ClisonixDemo() {
         </Card>
 
         {/* System Logs */}
-        <Card className="bg-slate-800/50 border-slate-700 lg:col-span-2">
+        <Card className="bg-neutral-800/50 border-neutral-700 lg:col-span-2">
           <CardHeader>
             <CardTitle className="flex items-center">
               <Database className="w-5 h-5 mr-2" />
@@ -398,13 +398,13 @@ export default function ClisonixDemo() {
               {logs.map((log, index) => (
                 <div 
                   key={index} 
-                  className="text-sm font-mono p-2 bg-slate-900/30 rounded"
+                  className="text-sm font-mono p-2 bg-neutral-900/30 rounded"
                 >
                   {log}
                 </div>
               ))}
               {logs.length === 0 && (
-                <div className="text-center py-8 text-slate-400">
+                <div className="text-center py-8 text-neutral-400">
                   <Database className="w-8 h-8 mx-auto mb-2 opacity-50" />
                   <p>No logs available</p>
                 </div>

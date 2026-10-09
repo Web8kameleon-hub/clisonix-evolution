@@ -8,7 +8,7 @@ Write-Host "⚠️  MANUAL STEP REQUIRED - Cannot set secrets programmatically" 
 Write-Host ""
 Write-Host "Follow these steps to set GitHub Secrets:" -ForegroundColor Green
 Write-Host ""
-Write-Host "1. Open: https://github.com/LedjanAhmati/Clisonix-cloud/settings/secrets/actions" -ForegroundColor White
+Write-Host "1. Open: https://github.com/Web8kameleon-hub/clisonix.com/settings/secrets/actions" -ForegroundColor White
 Write-Host ""
 Write-Host "2. Click 'New repository secret' and add these CRITICAL variables:" -ForegroundColor White
 Write-Host ""

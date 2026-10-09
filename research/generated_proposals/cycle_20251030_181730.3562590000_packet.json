@@ -32,10 +32,7 @@
       "api": {
         "domain": "system-telemetry",
         "priority": "normal",
-        "tags": [
-          "ok",
-          "pending"
-        ],
+        "tags": ["ok", "pending"],
         "spec_path": "generated_apis\\system_telemetry_spec.json",
         "code_path": "generated_apis\\generated_service\\system_telemetry_service.py",
         "manifest": "generated_apis\\system_telemetry_manifest.json"
@@ -43,10 +40,7 @@
     },
     "strategic_alignment": {
       "priority": "normal",
-      "tags": [
-        "ok",
-        "pending"
-      ],
+      "tags": ["ok", "pending"],
       "center": {
         "name": "Zurich-Lab"
       }
@@ -55,4 +49,3 @@
   },
   "attachments": {}
 }
-

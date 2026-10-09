@@ -71,7 +71,7 @@
 1. [ ] SSH into server: `ssh root@[HETZNER_IP]`
 2. [ ] Run deployment script:
    ```bash
-   curl -fsSL https://raw.githubusercontent.com/LedjanAhmati/Clisonix-cloud/main/deploy-hetzner.sh | bash
+   curl -fsSL https://raw.githubusercontent.com/Web8kameleon-hub/clisonix.com/main/deploy-hetzner.sh | bash
    ```
 3. [ ] Wait for installation (~5 min)
 4. [ ] Verify Docker: `docker --version`
@@ -97,10 +97,10 @@
 3. [ ] Get certificates:
    ```bash
    certbot certonly --standalone -d clisonix.com -d www.clisonix.com \
-     --email amati.ledian@gmail.com --agree-tos --non-interactive
+     --email clisonix@pm.me --agree-tos --non-interactive
    
    certbot certonly --standalone -d api.clisonix.com \
-     --email amati.ledian@gmail.com --agree-tos --non-interactive
+     --email clisonix@pm.me --agree-tos --non-interactive
    ```
 
 4. [ ] Verify certificates:
@@ -309,3 +309,4 @@ Deployment is successful when:
 **Next Action:** Create Hetzner server and note IP address  
 **Estimated Total Time:** 30-60 minutes  
 **Est. Monthly Cost:** €5.83 (CX22 server) + €1.40 (domain)
+

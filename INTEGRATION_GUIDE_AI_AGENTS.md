@@ -9,7 +9,7 @@
 ## 📋 Table of Contents
 
 1. [Quick Start](#quick-start)
-2. [Postman Testing](#postman-testing)
+2. [Thunder Client Testing](#thunder-client-testing)
 3. [Prometheus Setup](#prometheus-setup)
 4. [Grafana Dashboard](#grafana-dashboard)
 5. [Testing Procedures](#testing-procedures)
@@ -18,6 +18,9 @@
 ---
 
 ## 🎯 Quick Start
+
+Primary local workflow: Thunder Client + Kitchen + Excel Core.
+Postman collection is optional/public only and not required for operation.
 
 ### Prerequisites
 ```bash
@@ -30,7 +33,7 @@
 
 ### Files Available
 ```
-📄 POSTMAN_AI_AGENTS_COLLECTION.json       - API testing
+📄 POSTMAN_AI_AGENTS_COLLECTION.json       - Optional public API testing collection
 📄 prometheus-ai-agents.yml                - Prometheus config
 📄 GRAFANA_AI_AGENTS_DASHBOARD.json        - Dashboard
 📄 AI_AGENT_FRAMEWORKS.md                  - Documentation
@@ -39,23 +42,29 @@
 
 ---
 
-## 🔧 Postman Testing
+## 🔧 Thunder Client Testing (Primary)
 
-### Step 1: Import Collection
+### Step 1: Open Thunder Client
 ```
-1. Open Postman
-2. Click "Import" → "Upload Files"
-3. Select: POSTMAN_AI_AGENTS_COLLECTION.json
-4. Click "Import"
+1. Open Thunder Client in VS Code
+2. Use existing local requests/collection
+3. Set base URL to http://localhost:8000
+4. Run requests directly
 ```
 
 ### Step 2: Set Environment Variables
 ```
-1. Click "Environments" (top left)
-2. Create new: "Clisonix Local"
-3. Add variables:
-   - base_url: http://localhost:8000
-   - openai_api_key: sk-your-actual-key (optional)
+1. Open Thunder Client environments
+2. Create/select: "Clisonix Local"
+3. Add variable:
+  - base_url: http://localhost:8000
+4. No paid AI key required
+
+### Optional: Public Postman Collection
+```
+POSTMAN_AI_AGENTS_COLLECTION.json is kept for public sharing/import,
+but local development/testing is not dependent on Postman.
+```
 ```
 
 ### Step 3: Test Each Endpoint
@@ -94,16 +103,16 @@
   - Open-Meteo real weather data
 ```
 
-#### Group 3: OpenAI Neural Analysis
+#### Group 3: Local Neural Analysis
 ```
 ✓ POST /api/ai/analyze-neural
-  - Real GPT-4 neural analysis (if API key configured)
+  - Local neural analysis (no paid key)
   
 ✓ POST /api/ai/eeg-interpretation
-  - Real GPT-4 EEG interpretation
+  - Local EEG interpretation
   
 ✓ GET /api/ai/health
-  - Check OpenAI API status
+  - Check local AI engine status
 ```
 
 ---
@@ -184,7 +193,7 @@ jona_synthesis_confidence_score
 ✓ Panel 6: ALBA Network Metrics
 ✓ Panel 7: ALBI EEG Frequency Bands
 ✓ Panel 8: JONA Neural Synthesis
-✓ Panel 9: OpenAI API Status
+✓ Panel 9: Local AI Engine Status
 ✓ Panel 10: Error Rates by Component
 ```
 
@@ -269,7 +278,7 @@ wrk -t4 -c100 -d30s http://localhost:8000/api/ai/agents-status
 ```
 /api/ai/agents-status        ~50ms    (status check)
 /api/ai/quick-interpret      ~500ms   (Claude API)
-/api/ai/analyze-neural       ~1000ms  (GPT-4 call)
+/api/ai/analyze-neural       ~1000ms  (local AI call)
 /api/ai/trinity-analysis     ~3000ms  (Multi-agent orchestration)
 /api/ai/curiosity-ocean      ~1500ms  (LangChain reasoning)
 ```
@@ -289,16 +298,13 @@ Claude Tools:        ~5-10% CPU, 100-150 MB RAM
 ### Issue: "CrewAI not available"
 **Solution:**
 ```bash
-pip install crewai langchain langchain-openai
+pip install crewai langchain
 # Restart backend: npm run dev
 ```
 
-### Issue: "OpenAI API key not configured"
+### Issue: "AI engine unavailable"
 **Solution:**
 ```bash
-# Add to .env
-OPENAI_API_KEY=sk-your-actual-key
-
 # Restart backend
 npm run dev
 ```
@@ -316,7 +322,7 @@ npm run dev
 ```
 # CrewAI takes time for multi-agent coordination
 # Normal: 2-5 seconds
-# If longer: Check OpenAI API rate limits
+# If longer: Check local model/container resources
 ```
 
 ### Issue: "Grafana dashboard not showing data"
@@ -352,7 +358,7 @@ npm run dev
   - [ ] [x] LangChain Curiosity Ocean working
   - [ ] [x] Claude Tools Quick Interpret working
   - [ ] [x] Real data endpoints (Crypto, Weather) working
-  - [ ] [x] OpenAI integration configured (optional)
+  - [ ] [x] Local AI integration configured
 
 - [ ] **Documentation Ready**
   - [ ] This integration guide
@@ -391,7 +397,7 @@ npm run dev
 2. **Short-term (This Week)**
    - Set up Prometheus + Grafana
    - Import Grafana dashboard
-   - Configure OpenAI API key
+  - Configure local AI runtime
    - Deploy n8n workflows
 
 3. **Medium-term (This Month)**

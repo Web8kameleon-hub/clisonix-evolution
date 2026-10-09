@@ -1,4 +1,5 @@
-﻿
+"use client"
+
 // Advanced Industrial Layout for Clisonix Modules
 // Author: Ledjan Ahmati
 
@@ -61,6 +62,7 @@ export default function ModulesLayout({ children }: { children: React.ReactNode 
         </div>
         <nav className="space-x-6">
           <a href="/modules" className="hover:underline">Dashboard</a>
+          <a href="/modules/cognitive-impact" className="hover:underline">🧠 Cognitive Impact</a>
           <a href="/modules/neuroacoustic-converter" className="hover:underline">Neuroacoustic Converter</a>
           <a href="/modules/neural-synthesis" className="hover:underline">Neural Synthesis</a>
           <a href="/modules/eeg-analysis" className="hover:underline">EEG Analysis</a>

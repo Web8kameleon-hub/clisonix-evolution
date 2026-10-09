@@ -1,8 +1,6 @@
 """
 Clisonix Cloud - Monitoring Middleware  
 Real-time performance monitoring and metrics collection
-Business: Ledjan Ahmati - WEB8euroweb GmbH
-SEPA: DE72430500010015012263 | PayPal: ahmati.bau@gmail.com
 """
 import asyncio
 import time
@@ -69,7 +67,6 @@ class MonitoringMiddleware(BaseHTTPMiddleware):
             # Add monitoring headers
             response.headers["X-Processing-Time"] = f"{processing_time:.4f}"
             response.headers["X-Endpoint"] = endpoint
-            response.headers["X-Business"] = "Ledjan-Ahmati-WEB8euroweb"
             
             return response
             
@@ -192,16 +189,14 @@ class MonitoringMiddleware(BaseHTTPMiddleware):
                     "bytes_recv": network.bytes_recv if network else 0,
                     "packets_sent": network.packets_sent if network else 0,
                     "packets_recv": network.packets_recv if network else 0
-                } if network else None,
-                "business": "Ledjan Ahmati - WEB8euroweb GmbH"
+                } if network else None
             }
             
         except Exception as e:
             logger.error(f"Error collecting system metrics: {e}")
             return {
                 "timestamp": time.time(),
-                "error": str(e),
-                "business": "Ledjan Ahmati - WEB8euroweb GmbH"
+                "error": str(e)
             }
     
     def get_performance_metrics(self) -> Dict[str, Any]:
@@ -241,8 +236,7 @@ class MonitoringMiddleware(BaseHTTPMiddleware):
                 "maximum": round(max_response_time, 4)
             },
             "status_codes": dict(self.status_codes),
-            "top_endpoints": self._get_top_endpoints(),
-            "business": "Ledjan Ahmati - WEB8euroweb GmbH"
+            "top_endpoints": self._get_top_endpoints()
         }
     
     def get_system_metrics(self) -> Dict[str, Any]:
@@ -269,8 +263,7 @@ class MonitoringMiddleware(BaseHTTPMiddleware):
                 "memory_percent": round(memory_avg, 2),
                 "window_minutes": self.metrics_window / 60
             },
-            "history_samples": len(self.system_metrics_history),
-            "business": "Ledjan Ahmati - WEB8euroweb GmbH"
+            "history_samples": len(self.system_metrics_history)
         }
     
     def _get_top_endpoints(self, limit: int = 10) -> List[Dict[str, Any]]:

@@ -18,7 +18,7 @@ info:
   contact:
     name: Clisonix Support
     url: https://clisonix.cloud/support
-    email: support@clisonix.cloud
+    email: clisonix@pm.me
   license:
     name: Proprietary
     url: https://clisonix.cloud/license
@@ -29,7 +29,7 @@ servers:
   - url: http://localhost:8000
     description: Local Development
     variables: {}
-  - url: https://api.clisonix.cloud
+  - url: https://api.clisonix.com
     description: Production
     variables: {}
   - url: https://sandbox.clisonix.cloud
@@ -1960,4 +1960,5 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AlbaHealthResponse'
+
 

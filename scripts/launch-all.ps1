@@ -110,7 +110,7 @@ function Ensure-Dependencies {
 function Start-Services {
     Write-Section "Cleaning up existing processes..."
     
-    $Ports = @(3000, 8000, 5555, 6666, 7777, 9999)
+    $Ports = @(3000, 8000, 5555, 6680, 7777, 9999)
     foreach ($Port in $Ports) {
         if (Test-Port $Port) {
             Write-Info "Port $Port in use - attempting cleanup..."
@@ -187,15 +187,15 @@ function Start-Services {
             Write-Success "ALBA service started"
         }
         
-        Write-Section "Starting ALBI Processor Service (Port 6666)..."
+        Write-Section "Starting ALBI Processor Service (Port 6680)..."
         $AlbiCommand = {
             Set-Location $using:Root
             Write-Host "[ALBI] Starting service..."
-            python albi_service_6666.py 2>&1
+            python albi_service_6680.py 2>&1
         }
         
         if ($DryRun) {
-            Write-Info "[DRY-RUN] Would execute: python albi_service_6666.py"
+            Write-Info "[DRY-RUN] Would execute: python albi_service_6680.py"
         }
         else {
             Start-Process pwsh -ArgumentList @('-NoExit', '-Command', "& {$AlbiCommand}")
@@ -252,7 +252,7 @@ function Show-Dashboard {
     
     Write-Host "⚙️  SAAS SERVICES:" -ForegroundColor White
     Write-Host "   ALBA (Collector):   http://localhost:5555" -ForegroundColor Green
-    Write-Host "   ALBI (Processor):   http://localhost:6666" -ForegroundColor Green
+    Write-Host "   ALBI (Processor):   http://localhost:6680" -ForegroundColor Green
     Write-Host "   JONA (Coordinator): http://localhost:7777" -ForegroundColor Green
     Write-Host "   Orchestrator:       http://localhost:9999" -ForegroundColor Green
     Write-Host "   Registry:           http://localhost:9999/registry" -ForegroundColor Green

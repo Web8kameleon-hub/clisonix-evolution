@@ -8,27 +8,23 @@ License: Closed Source
 
 from __future__ import annotations
 
-from typing import Optional, List, Dict, Any, Callable
-
-from datetime import datetime, timedelta
+import hashlib
 import json
 import uuid
-import hashlib
+from datetime import datetime, timedelta
+from typing import Any, Callable, Dict, List, Optional
 
-from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-
-from jose import JWTError, jwt
-
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
-
+import jwt
 import redis.asyncio as redis
+from fastapi import Depends, HTTPException, status
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from jwt import InvalidTokenError
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from .models import User, APIKey
 from ..database.session import get_db
 from ..settings import settings
-
+from .models import APIKey, User
 
 # ---------------------------------------------------------------------------
 # Exceptions
@@ -132,7 +128,7 @@ def verify_token(token: str) -> Dict[str, Any]:
             _get_jwt_secret(),
             algorithms=[_get_jwt_algorithm()],
         )
-    except JWTError as exc:
+    except InvalidTokenError as exc:
         raise AuthenticationError("Invalid token") from exc
 
     # Basic structural checks

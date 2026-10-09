@@ -1,8 +1,19 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import bioscience, clinical, concept, graph, search, telemetry
+from routers import bioscience, clinical, concept, graph, search, telemetry
 
 app = FastAPI(title="clisonix Knowledge Fabric API")
+
+# CORS middleware for browser requests
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://clisonix.com", "https://www.clisonix.com", "http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(search.router)
 app.include_router(telemetry.router)
 app.include_router(clinical.router)

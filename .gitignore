@@ -1,13 +1,21 @@
 ﻿# Clisonix Cloud Industrial Backend - .gitignore
 # SECURITY: Never commit sensitive data!
 
+# Embedded Git Repositories (causes CI submodule issues)
+clisonix-repo/
+research/generated_cycles_v12/grafana-ml-ecosystem/
+
 # Environment Variables (SENSITIVE DATA)
 .env
 .env.*
+*.env
+*.env.*
 .env.local
 .env.production
 .env.staging
 .env.development
+.env.clerk
+.env.clerk.*
 .secrets
 .secrets.*
 secrets/
@@ -16,6 +24,16 @@ secrets/
 *.key
 *.pem
 *.crt
+# Stripe & Payment Secrets
+.stripe-keys
+stripe_webhook.secret
+
+# Allow non-secret templates to be versioned
+!.env.template
+!.env.example
+!*.env.example
+!*.env.sample
+!apps/web/.env.example
 
 # Database
 *.db
@@ -33,8 +51,8 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
-yarn.lock
+# package-lock.json  # ENABLED for Dependency Review in CI
+# yarn.lock          # ENABLED for Dependency Review in CI
 
 # Python
 __pycache__/
@@ -49,6 +67,9 @@ downloads/
 eggs/
 .eggs/
 lib/
+# But don't ignore Next.js src/lib directories
+!apps/**/src/lib/
+!apps/**/src/lib/**
 lib64/
 parts/
 sdist/
@@ -76,6 +97,7 @@ docker-compose.override.yml
 
 # IDE
 .vscode/
+.vs/
 .idea/
 *.swp
 *.swo
@@ -91,6 +113,14 @@ ehthumbs.db
 Thumbs.db
 
 # Test data (may contain sensitive info)
+
+# Auto-generated content (flows to separate blog repo)
+# Koncepti "batica-zbatica" - content flows OUT to clisonix-blog repo
+published/
+**/published/
+services/content-factory/published/
+*.generated.md
+*.generated.html
 test_data/
 temp/
 tmp/
@@ -100,6 +130,8 @@ payment_config.json
 business_secrets.txt
 client_data/
 financial_records/
+services/video-generator/client_secrets.json
+**/client_secrets.json
 
 # SSL/TLS certificates
 *.pem
@@ -133,6 +165,7 @@ data/prometheus/
 data/victoria-metrics/
 data/loki/
 data/tempo/
+tempo_data/
 
 # Elasticsearch runtime
 data/elasticsearch/
@@ -155,7 +188,91 @@ instance/
 # Cache & temp
 .cache/
 *.tmp
+.tmp.nginx.remote.conf
 tmp/
 temp/
 
+# Session reports (local testing)
+session_report_*.json
+runtime/mali-cycles/
+
+# AGIEM generated proposal/cycle artifacts
+research/generated_proposals/live_*/
+research/generated_proposals/cycle_*_packet.json
+research/generated_proposals/cycle-*.json
+
+# Kloud Bridge runtime registry artifacts
+services/kloud_bridge/data/*.json
+services/kloud_bridge/data/*.jsonl
+services/kloud_bridge/openapi/*.json
+!services/kloud_bridge/data/.gitkeep
+
+# Clisonix nested repo
 Clisonix-cloud/
+
+# Build artifacts to ignore
+frontend/.next/
+.next/
+apps/web/.next/
+apps/web/kitchen-jobs/
+*.pack.gz
+*.pack.gz.old
+
+# Claude temporary directories
+tmpclaude-*
+
+# Clerk authentication/runtime artifacts
+.clerk/
+clerk/.env
+clerk/.env.*
+**/clerk-jwt-*.json
+**/clerk-session-*.json
+
+
+# Claude temporary directories
+tmpclaude-*
+
+
+# Claude temporary directories
+tmpclaude-*
+
+.env.monetization
+
+# Temp compose/debug artifacts (may contain expanded secrets)
+.tmp_compose*.yaml
+
+# Legacy Clerk migration folder
+clerk-nextjs/
+
+# Local workspace clones and TS build metadata
+_profile_repos/
+*.tsbuildinfo
+
+# Rust and FPGA generated artifacts
+**/target/
+hardware/kloud-soc/firmware/*.elf
+hardware/kloud-soc/firmware/*.hex
+hardware/kloud-soc/kloud_soc.json
+hardware/kloud-soc/kloud_soc.config
+hardware/kloud-soc/kloud_soc.bit
+
+# Terraform local artifacts
+**/.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Local nested clone (kept locally, not tracked)
+kloud-soc-clean/
+
+# Hetzner runtime and reporting artifacts
+certs/
+generated_medical_pillars/
+reports/*.pptx
+reports/*.xlsx
+research/generated_proposals/_server_backup_live_*/
+storage/user_data/
+OK
+
+# Decoupled external repos - no longer submodules
+external/

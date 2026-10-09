@@ -21,40 +21,47 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 ## 🤖 Agent Services (Microservices)
 
 ### 1. Alba (Port 5555)
+
 **File:** `alba_api_server.py`, `alba_core.py`, `alba_feeder_service.py`, `alba_frame_generator.py`, `alba_service_5555.py`  
 **Purpose:** Content generation, creative workflows, frame-by-frame animation  
 **Dependencies:** FastAPI, async task queue  
 **Health Check:** `GET http://localhost:5555/health`
 
-### 2. Albi (Port 6666)
-**File:** `albi_core.py`, `albi_service_6666.py`  
+### 2. Albi (Port 6680)
+
+**File:** `albi_core.py`, `albi_service_6680.py`  
 **Purpose:** Data processing, analytics, business intelligence  
 **Dependencies:** FastAPI, pandas, numpy  
-**Health Check:** `GET http://localhost:6666/health`
+**Health Check:** `GET http://localhost:6680/health`
 
 ### 3. Jona (Port 7777)
+
 **File:** `jona_service_7777.py`  
 **Purpose:** User interaction, conversational AI, natural language understanding  
 **Dependencies:** FastAPI, NLP models  
 **Health Check:** `GET http://localhost:7777/health`
 
 ### 4. ASI (Artificial Superintelligence)
+
 **File:** `asi_core.py`, `asi_realtime_engine.py`  
 **Purpose:** Real-time cognitive processing, pattern recognition, decision-making  
 **Dependencies:** FastAPI, real-time event loop, signal processing  
 **Logs:** `asi_logs.json`
 
 ### 5. AGIEM (Advanced General Intelligence Engine Module)
+
 **File:** `agiem_core.py`  
 **Purpose:** General-purpose AI reasoning, multi-modal learning  
 **Dependencies:** FastAPI, machine learning models
 
 ### 6. Blerina (Content Reformatter)
+
 **File:** `blerina_reformatter.py`  
 **Purpose:** Text transformation, content restructuring, format conversion  
 **Dependencies:** FastAPI, text processing libraries
 
 ### 7. Master Orchestrator (Port 9999)
+
 **File:** `master.py`  
 **Purpose:** Central coordination of all agents, workflow management  
 **Dependencies:** FastAPI, inter-service communication  
@@ -65,12 +72,14 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 ## 🌐 API Gateway (Primary Production Service)
 
 ### Main API Service
+
 **Location:** `apps/api/main.py` (3,219 lines)  
 **Port:** 8000 (default)  
 **Framework:** FastAPI  
 **Description:** Unified API gateway exposing all Clisonix functionality
 
 **Key Modules:**
+
 - **Brain Router** (`/brain/*`)
   - YouTube insight generation
   - Energy state analysis
@@ -94,6 +103,7 @@ Clisonix operates as a **microservices-based AI platform** with the following la
   - Security services
 
 **Internal Modules:**
+
 - `apps/api/neuro/` - Neural processing engines (5 engines)
 - `apps/api/integrations/` - External API integrations (YouTube, etc.)
 - `apps/api/mesh/` - Mesh networking services (8 modules)
@@ -104,12 +114,14 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 ## 🎨 Frontend Application
 
 ### Next.js Web App
+
 **Location:** `apps/web/`  
 **Port:** 3000 (default)  
 **Framework:** Next.js 15.5.4, React 18  
 **Modules:** 14 total (13 production, 1 demo)
 
 **Production Modules:**
+
 1. Agent Control Panel
 2. Analytics Dashboard
 3. API Playground
@@ -129,9 +141,11 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 ## 🔧 Orchestration Layer
 
 ### System Orchestrator (Port 5555)
+
 **Location:** `backend/system/smart_orchestrator.py` (381 lines)  
 **Purpose:** Real-time system monitoring, auto-healing, admin dashboard  
 **Features:**
+
 - Live event timeline
 - Module health scanning
 - PDF report generation
@@ -140,16 +154,19 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 - NeuroReset API (`/neuro/*`)
 
 **Dependencies:**
+
 - `backend/system/neuro_trigger.py` - Event-driven automation
 - `backend/system/exporter.py` - PDF report generation
 - `backend/system/email_reporter.py` - SMTP email delivery
 
 ### Daily Scheduler
+
 **Location:** `backend/system/daily_scheduler.py`  
 **Purpose:** Automated daily reports at 08:00 Europe/Berlin  
 **Deployment:** Systemd service (`clisonix_daily.service`)
 
 ### Additional System Tools
+
 - `backend/system/auto_monitor.py` - Autonomous monitoring agent
 - `backend/system/smart_scanner.py` - Service health scanner
 - `backend/system/neuro_reset.py` - System reset/recovery API
@@ -160,6 +177,7 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 ## 🛠️ Supporting Utilities
 
 ### Production Utilities (Root Directory)
+
 - **`usage_tracker.py`** - API usage metering and quota management
 - **`tracing.py`** - OpenTelemetry distributed tracing
 - **`billing_plans.py`** - Subscription tier definitions
@@ -168,6 +186,7 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 - **`API_CONFIG.py`** - Global API configuration
 
 ### Additional Services
+
 - **`economy_api_server.py`** - Virtual economy management
 - **`economy_layer.py`** - Economic simulation layer
 - **`distributed_pulse_balancer.py`** - Load balancing for distributed nodes
@@ -184,33 +203,39 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 ## 📊 Monitoring & Observability Stack
 
 ### Prometheus
+
 - **Purpose:** Metrics collection and storage
 - **Port:** 9090
 - **Metrics:** 1,244 time series (healthy TSDB)
 - **Config:** `ops/prometheus.yml`
 
 ### VictoriaMetrics
+
 - **Purpose:** Long-term metrics storage (Prometheus-compatible)
 - **Port:** 8428
 - **Retention:** Configurable long-term storage
 
 ### Grafana
+
 - **Purpose:** Metrics visualization and dashboards
 - **Port:** 3001
 - **Datasources:** Prometheus, VictoriaMetrics, Loki, Tempo
 - **Config:** `ops/grafana/provisioning/`
 
 ### Loki
+
 - **Purpose:** Log aggregation and querying
 - **Port:** 3100
 - **Config:** `ops/loki-config.yml`
 
 ### Tempo
+
 - **Purpose:** Distributed tracing backend
 - **Port:** 3200
 - **Config:** `ops/tempo-config.yml`
 
 ### Deployment
+
 - **Method:** Docker Compose
 - **Config:** `docker-compose.yml`, `ops/docker-compose.monitoring.yml`
 
@@ -219,11 +244,13 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 ## 🗄️ Database & Cache
 
 ### PostgreSQL 16
+
 - **Purpose:** Primary relational database
 - **Port:** 5432
 - **Schema:** User accounts, subscriptions, agent data, audit logs
 
 ### Redis 7
+
 - **Purpose:** Caching, session storage, task queue (Celery)
 - **Port:** 6379
 - **Persistence:** RDB snapshots
@@ -256,11 +283,13 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 ## 📦 Deployment
 
 ### Docker Containers
+
 - **API Service:** `Dockerfile.api`
 - **Worker Service:** `Dockerfile.worker`
 - **Orchestration:** `docker-compose.yml`, `docker-compose.python.yml`, `docker-compose.producer-manager.yml`
 
 ### Scripts
+
 - `docker-run.ps1` - Windows PowerShell deployment script
 - `init_industrial.ps1` - Industrial demo initialization (archived)
 
@@ -269,6 +298,7 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 ## 🧪 Testing
 
 ### Test Suite Location: `tests/`
+
 - **Unit Tests:** `tests/unit/` (13 files)
   - `test_alba_albi_jona.py`
   - `test_backend.py`
@@ -295,6 +325,7 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 **Location:** `/archive/`
 
 ### Old Services
+
 - `clisonix_*.py` (8 files) - Legacy clisonix modules
 - `saas_api.py` - Old Flask-based SaaS API
 - `saas_services_orchestrator.py` - Deprecated orchestrator
@@ -303,10 +334,12 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 - `main_minimal.py` - Lightweight API variant
 
 ### Old Frontends
+
 - `archive/frontends/clisonix-web-nextjs/` - Previous Next.js app
 - `archive/frontends/clisonix-frontend-nextjs/` - Earlier version
 
 ### Launchers
+
 - 6 archived launcher scripts in `archive/launchers/`
 
 ---
@@ -326,6 +359,7 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 ## 📋 Runtime Requirements
 
 ### Python Environment
+
 - **Version:** Python 3.13+
 - **Package Manager:** pip (pyproject.toml)
 - **Key Dependencies:**
@@ -339,6 +373,7 @@ Clisonix operates as a **microservices-based AI platform** with the following la
   - Celery 5.3.4+ (task queue)
 
 ### Node.js Environment
+
 - **Version:** Node.js 18.0.0+
 - **Package Manager:** npm (workspaces)
 - **Key Dependencies:**
@@ -348,6 +383,7 @@ Clisonix operates as a **microservices-based AI platform** with the following la
   - Tailwind CSS 3.4.0+
 
 ### Infrastructure
+
 - **PostgreSQL:** 16+
 - **Redis:** 7+
 - **Docker:** 20.10+ with Docker Compose
@@ -358,11 +394,13 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 ## 📞 Service Communication
 
 ### Inter-Service Communication
+
 - **Protocol:** HTTP/REST (internal services), WebSocket (real-time features)
 - **Service Discovery:** Hardcoded ports (development), Docker DNS (production)
 - **Message Format:** JSON, CBOR (lightweight telemetry), MessagePack
 
 ### External APIs
+
 - **YouTube API:** OAuth2 + API key
 - **Stripe API:** Secret key authentication
 - **Slack API:** Webhook URLs
@@ -372,6 +410,7 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 ## 🎯 Production Checklist
 
 ### Pre-Deployment
+
 - [ ] Lock dependency versions (requirements.txt, package.json)
 - [ ] Define OpenAPI contracts for all 7 agents
 - [ ] Configure environment variables (.env.production)
@@ -381,6 +420,7 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 - [ ] Configure Stripe webhook endpoints
 
 ### Monitoring Setup
+
 - [ ] Deploy Prometheus scrape targets
 - [ ] Import Grafana dashboards
 - [ ] Configure Loki log sources
@@ -388,6 +428,7 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 - [ ] Configure alerting rules
 
 ### Security Hardening
+
 - [ ] Rotate API keys
 - [ ] Enable HTTPS/TLS
 - [ ] Configure firewall rules
@@ -395,6 +436,7 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 - [ ] Enable audit logging
 
 ### Performance Optimization
+
 - [ ] Enable Redis caching
 - [ ] Configure connection pooling (PostgreSQL)
 - [ ] Set up CDN for static assets
@@ -405,18 +447,18 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 
 ## 📈 Service Health Endpoints
 
-| Service | Port | Health Check |
-|---------|------|--------------|
-| Alba | 5555 | `GET /health` |
-| Albi | 6666 | `GET /health` |
-| Jona | 7777 | `GET /health` |
-| Master Orchestrator | 9999 | `GET /health` |
-| Main API | 8000 | `GET /health` |
-| Smart Orchestrator | 5555 | `GET /` (dashboard) |
-| Prometheus | 9090 | `GET /-/healthy` |
-| Grafana | 3001 | `GET /api/health` |
-| Loki | 3100 | `GET /ready` |
-| Tempo | 3200 | `GET /ready` |
+|Service|Port|Health Check|
+|---|---|---|
+|Alba|5555|`GET /health`|
+|Albi|6680|`GET /health`|
+|Jona|7777|`GET /health`|
+|Master Orchestrator|9999|`GET /health`|
+|Main API|8000|`GET /health`|
+|Smart Orchestrator|5555|`GET /` (dashboard)|
+|Prometheus|9090|`GET /-/healthy`|
+|Grafana|3001|`GET /api/health`|
+|Loki|3100|`GET /ready`|
+|Tempo|3200|`GET /ready`|
 
 ---
 
@@ -433,6 +475,7 @@ Clisonix operates as a **microservices-based AI platform** with the following la
 ## 🚀 Quick Start Commands
 
 ### Development
+
 ```bash
 # Backend
 cd apps/api
@@ -447,6 +490,7 @@ docker-compose up -d
 ```
 
 ### Production
+
 ```bash
 # Deploy monitoring stack
 docker-compose -f ops/docker-compose.monitoring.yml up -d
@@ -462,4 +506,4 @@ python backend/system/smart_orchestrator.py
 
 **Document Version:** 1.0.0  
 **Maintained By:** Clisonix Engineering Team  
-**Contact:** Ledjan Ahmati (LedjanAhmati/Clisonix-cloud)
+**Contact:** Ledjan Ahmati (Web8kameleon-hub/clisonix.com)

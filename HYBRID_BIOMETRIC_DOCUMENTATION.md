@@ -562,10 +562,11 @@ Coach monitors performance
 ## 📞 SUPPORT
 
 For issues or integration help:
-- GitHub: https://github.com/LedjanAhmati/Clisonix-cloud
-- Email: support@clisonix.com
+- GitHub: https://github.com/Web8kameleon-hub/clisonix.com
+- Email: clisonix@pm.me
 - Docs: https://clisonix-docs.example.com
 
 ---
 
 **Sistema e Plotë Hybrid Biometric ready! 🚀**
+

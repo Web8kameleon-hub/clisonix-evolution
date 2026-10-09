@@ -1,41 +1,43 @@
-import psutil
 import datetime
-import requests
 import json
 import os
-from typing import Dict, List
-import subprocess
 import socket
+import subprocess
+from typing import Dict, List
+
+import psutil
+import requests
+
 
 class ClisonixRealMetrics:
     def __init__(self):
         self.start_time = datetime.datetime.utcnow()
-        
+
     def get_system_metrics(self) -> Dict:
         """Metrika reale tÃ« sistemit pa fake data"""
         try:
             # CPU me procese aktuale
             cpu_per_core = psutil.cpu_percent(percpu=True)
             cpu_processes = len(psutil.pids())
-            
+
             # Memory me breakdown
             memory = psutil.virtual_memory()
             swap = psutil.swap_memory()
-            
+
             # Disk I/O real
             disk_io = psutil.disk_io_counters()
             disk_usage = psutil.disk_usage('/')
-            
+
             # Network me interface specifik
             net_io = psutil.net_io_counters()
             network_interfaces = self.get_network_interfaces()
-            
+
             # Temperatura nÃ«se Ã«shtÃ« e mundur
             temperatures = self.get_temperatures()
-            
+
             # Proceset e Clisonix
             Clisonix_processes = self.get_Clisonix_processes()
-            
+
             return {
                 "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
                 "system": {
@@ -76,7 +78,7 @@ class ClisonixRealMetrics:
                 },
                 "health_score": self.calculate_health_score()
             }
-            
+
         except Exception as e:
             return {
                 "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
@@ -91,7 +93,7 @@ class ClisonixRealMetrics:
             for interface, addrs in psutil.net_if_addrs().items():
                 stats = psutil.net_if_stats().get(interface)
                 io_counters = psutil.net_io_counters(pernic=True).get(interface)
-                
+
                 interfaces.append({
                     "interface": interface,
                     "is_up": stats.isup if stats else False,
@@ -119,17 +121,18 @@ class ClisonixRealMetrics:
     def get_Clisonix_processes(self) -> List[Dict]:
         """Gjen proceset aktive tÃ« Clisonix"""
         Clisonix_processes = []
+        cpu_cores = max(psutil.cpu_count(logical=True) or 1, 1)
         try:
             for proc in psutil.process_iter(['pid', 'name', 'cpu_percent', 'memory_percent']):
                 try:
                     proc_info = proc.info
                     # Kontrollo nÃ«se Ã«shtÃ« proces Clisonix
-                    if any(keyword in proc_info['name'].lower() for keyword in 
+                    if any(keyword in proc_info['name'].lower() for keyword in
                           ['python', 'Clisonix', 'alba', 'asi', 'fastapi', 'uvicorn']):
                         Clisonix_processes.append({
                             "pid": proc_info['pid'],
                             "name": proc_info['name'],
-                            "cpu_percent": round(proc_info['cpu_percent'] or 0, 2),
+                            "cpu_percent": round(min(max((proc_info['cpu_percent'] or 0) / cpu_cores, 0), 100), 2),
                             "memory_mb": round((proc.memory_info().rss / (1024**2)), 2)
                         })
                 except (psutil.NoSuchProcess, psutil.AccessDenied):
@@ -170,12 +173,12 @@ class ClisonixRealMetrics:
         """Kontrollon tÃ« gjitha endpoint-et e API-t"""
         endpoints = [
             ("/health", "GET"),
-            ("/status", "GET"), 
+            ("/status", "GET"),
             ("/api/alba/status", "GET"),
             ("/asi/status", "GET"),
             ("/billing/stripe/payment-intent", "POST")
         ]
-        
+
         results = []
         for endpoint, method in endpoints:
             try:
@@ -183,7 +186,7 @@ class ClisonixRealMetrics:
                     response = requests.get(f'http://localhost:8000{endpoint}', timeout=1)
                 else:
                     response = requests.post(f'http://localhost:8000{endpoint}', timeout=1)
-                
+
                 results.append({
                     "endpoint": endpoint,
                     "method": method,
@@ -197,57 +200,57 @@ class ClisonixRealMetrics:
                     "status": "inactive",
                     "response_time_ms": 0
                 })
-        
+
         return results
 
     def calculate_health_score(self) -> float:
         """Llogarit score real tÃ« shÃ«ndetit tÃ« sistemit"""
         try:
             score = 100.0
-            
+
             # Zbrit pÃ«r CPU tÃ« lartÃ«
             cpu_usage = psutil.cpu_percent(interval=0.1)
             if cpu_usage > 80:
                 score -= 20
             elif cpu_usage > 60:
                 score -= 10
-                
+
             # Zbrit pÃ«r memory tÃ« lartÃ«
             memory = psutil.virtual_memory()
             if memory.percent > 90:
                 score -= 20
             elif memory.percent > 80:
                 score -= 10
-                
+
             # Zbrit pÃ«r disk tÃ« plotÃ«
             disk = psutil.disk_usage('/')
             if disk.percent > 90:
                 score -= 15
             elif disk.percent > 80:
                 score -= 5
-                
+
             # Zbrit pÃ«r API joaktiv
             api_status = self.check_api_endpoints()
             inactive_apis = sum(1 for api in api_status if api['status'] == 'inactive')
             if inactive_apis > 0:
                 score -= (inactive_apis * 5)
-                
+
             return max(round(score, 2), 0)
-            
+
         except:
             return 0.0
 
 # âœ… PÃ‹RDORIMI:
 if __name__ == "__main__":
     metrics_collector = ClisonixRealMetrics()
-    
+
     # Merr metrika reale
     real_metrics = metrics_collector.get_system_metrics()
-    
+
     # Printo rezultatet
     print("ðŸš€ Clisonix REAL METRICS:")
     print(json.dumps(real_metrics, indent=2))
-    
+
     # Gjendja e shÃ«ndetit
     health = real_metrics['health_score']
     status = "âœ… OPTIMAL" if health > 90 else "âš ï¸ ATTENTION" if health > 70 else "ðŸš¨ CRITICAL"

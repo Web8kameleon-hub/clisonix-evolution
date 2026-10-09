@@ -1,458 +1,458 @@
-﻿/**
- * 📊 Spectrum Analyzer
- * Multi-band EEG frequency analysis with real-time FFT visualization
- */
+'use client';
 
-"use client"
+import { useState, useEffect, useCallback } from 'react';
+import { BarChart3, Waves, Radio, RefreshCw, Clock, CheckCircle, AlertCircle, Zap, Activity } from 'lucide-react';
 
-import { useState, useEffect, useRef } from 'react'
-import Link from 'next/link'
-
+// API Response Types
 interface FrequencyBand {
-  name: string
-  range: [number, number]
-  color: string
-  power: number
-  dominant: boolean
+  name: string;
+  range: string;
+  power: number;
+  dominant: boolean;
+  color: string;
 }
 
-interface AnalysisSession {
-  id: string
-  name: string
-  timestamp: string
-  duration: number
-  averagePower: number
+interface SpectrumData {
+  session_id: string;
+  timestamp: string;
+  sampling_rate: number;
+  frequency_bands: FrequencyBand[];
+  total_power: number;
+  dominant_band: string;
+  signal_quality: number;
+  analysis_duration_ms: number;
 }
 
-interface ComparisonData {
-  session1: string
-  session2: string
-  difference: number
-  correlation: number
+interface HistoricalSession {
+  id: string;
+  name: string;
+  timestamp: string;
+  duration_seconds: number;
+  average_power: number;
+  dominant_frequency: string;
 }
+
+interface APIResponse {
+  success: boolean;
+  data: SpectrumData | HistoricalSession[] | null;
+  error: string | null;
+  status: number;
+  responseTime: number;
+  timestamp: string;
+}
+
+interface EndpointConfig {
+  name: string;
+  method: string;
+  path: string;
+  description: string;
+}
+
+const ENDPOINTS: EndpointConfig[] = [
+  { name: 'Live Spectrum', method: 'GET', path: '/api/spectrum/live', description: 'Real-time FFT analysis' },
+  { name: 'Frequency Bands', method: 'GET', path: '/api/spectrum/bands', description: 'Frequency band breakdown' },
+  { name: 'Historical Sessions', method: 'GET', path: '/api/spectrum/history', description: 'Past analysis sessions' },
+  { name: 'ALBI Health', method: 'GET', path: '/api/albi/health', description: 'ALBI service status' },
+];
+
+// Use relative paths for security - proxied through Next.js API routes
+const API_BASE = '';
+
+const BAND_COLORS: Record<string, string> = {
+  'delta': 'bg-red-500',
+  'theta': 'bg-orange-500',
+  'alpha': 'bg-yellow-500',
+  'beta': 'bg-blue-800',
+  'gamma': 'bg-purple-500',
+};
 
 export default function SpectrumAnalyzerPage() {
-  const [frequencyBands, setFrequencyBands] = useState<FrequencyBand[]>([
-    { name: 'Delta', range: [0.5, 4], color: '#ef4444', power: 0, dominant: false },
-    { name: 'Theta', range: [4, 8], color: '#f97316', power: 0, dominant: false },
-    { name: 'Alpha', range: [8, 13], color: '#eab308', power: 0, dominant: false },
-    { name: 'Beta', range: [13, 30], color: '#22c55e', power: 0, dominant: false },
-    { name: 'Gamma', range: [30, 100], color: '#a855f7', power: 0, dominant: false }
-  ])
+  const [selectedEndpoint, setSelectedEndpoint] = useState<EndpointConfig>(ENDPOINTS[0]);
+  const [response, setResponse] = useState<APIResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [autoRefresh, setAutoRefresh] = useState(false);
+  const [requestHistory, setRequestHistory] = useState<APIResponse[]>([]);
 
-  const [isAnalyzing, setIsAnalyzing] = useState(false)
-  const [selectedSessions, setSelectedSessions] = useState<string[]>([])
-  const [analysisType, setAnalysisType] = useState<'realtime' | 'comparative' | 'historical'>('realtime')
-  
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const spectrumRef = useRef<HTMLCanvasElement>(null)
+  const executeRequest = useCallback(async (endpoint: EndpointConfig) => {
+    setIsLoading(true);
+    const startTime = performance.now();
 
-  const sessions: AnalysisSession[] = [
-    { id: '1', name: 'Morning Meditation', timestamp: '2025-10-04T08:00:00', duration: 600, averagePower: 45.2 },
-    { id: '2', name: 'Focus Session', timestamp: '2025-10-04T14:30:00', duration: 1200, averagePower: 62.8 },
-    { id: '3', name: 'Evening Relaxation', timestamp: '2025-10-04T20:15:00', duration: 900, averagePower: 38.9 },
-    { id: '4', name: 'Deep Work', timestamp: '2025-10-03T10:45:00', duration: 1800, averagePower: 71.3 }
-  ]
+    try {
+      const res = await fetch(`${API_BASE}${endpoint.path}`, {
+        method: endpoint.method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        cache: 'no-store',
+      });
+
+      const endTime = performance.now();
+      const responseTime = Math.round(endTime - startTime);
+
+      let data = null;
+      let error = null;
+
+      try {
+        const jsonData = await res.json();
+        if (res.ok) {
+          data = jsonData;
+        } else {
+          error = jsonData.detail || jsonData.message || `HTTP ${res.status}`;
+        }
+      } catch {
+        error = 'Invalid JSON response';
+      }
+
+      const apiResponse: APIResponse = {
+        success: res.ok,
+        data,
+        error,
+        status: res.status,
+        responseTime,
+        timestamp: new Date().toISOString(),
+      };
+
+      setResponse(apiResponse);
+      setRequestHistory(prev => [apiResponse, ...prev].slice(0, 10));
+
+    } catch (err) {
+      const endTime = performance.now();
+      const apiResponse: APIResponse = {
+        success: false,
+        data: null,
+        error: err instanceof Error ? err.message : 'Network error',
+        status: 0,
+        responseTime: Math.round(endTime - startTime),
+        timestamp: new Date().toISOString(),
+      };
+      setResponse(apiResponse);
+      setRequestHistory(prev => [apiResponse, ...prev].slice(0, 10));
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    const updateSpectrum = () => {
-      if (!isAnalyzing) return
+    executeRequest(selectedEndpoint);
+  }, []);
 
-      // Simulate real-time frequency analysis
-      const updatedBands = frequencyBands.map(band => {
-        const power = Math.random() * 100
-        return {
-          ...band,
-          power,
-          dominant: false
-        }
-      })
-
-      // Find dominant frequency band
-      const maxPowerIndex = updatedBands.reduce((maxIdx, band, idx, arr) => 
-        band.power > arr[maxIdx].power ? idx : maxIdx, 0
-      )
-      updatedBands[maxPowerIndex].dominant = true
-
-      setFrequencyBands(updatedBands)
-    }
-
-    const drawSpectrum = () => {
-      const canvas = spectrumRef.current
-      if (!canvas) return
-
-      const ctx = canvas.getContext('2d')
-      if (!ctx) return
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      if (isAnalyzing) {
-        // Draw frequency spectrum
-        const barWidth = canvas.width / frequencyBands.length
-        
-        frequencyBands.forEach((band, index) => {
-          const barHeight = (band.power / 100) * canvas.height * 0.8
-          const x = index * barWidth
-          const y = canvas.height - barHeight
-
-          // Draw bar
-          ctx.fillStyle = band.color
-          ctx.fillRect(x + 5, y, barWidth - 10, barHeight)
-
-          // Draw label
-          ctx.fillStyle = '#ffffff'
-          ctx.font = '12px Arial'
-          ctx.textAlign = 'center'
-          ctx.fillText(band.name, x + barWidth / 2, canvas.height - 5)
-
-          // Draw power value
-          ctx.fillStyle = band.dominant ? '#ffffff' : '#cccccc'
-          ctx.font = '10px Arial'
-          ctx.fillText(`${band.power.toFixed(1)}%`, x + barWidth / 2, y - 5)
-        })
-      }
-    }
-
-    const drawFFT = () => {
-      const canvas = canvasRef.current
-      if (!canvas) return
-
-      const ctx = canvas.getContext('2d')
-      if (!ctx) return
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      if (isAnalyzing) {
-        // Draw FFT visualization
-        ctx.strokeStyle = '#8b5cf6'
-        ctx.lineWidth = 2
-        ctx.beginPath()
-
-        for (let i = 0; i < canvas.width; i++) {
-          const frequency = (i / canvas.width) * 50 // 0-50 Hz
-          const amplitude = Math.random() * Math.exp(-frequency / 20) * canvas.height * 0.5
-          const y = canvas.height - amplitude
-
-          if (i === 0) {
-            ctx.moveTo(i, y)
-          } else {
-            ctx.lineTo(i, y)
-          }
-        }
-
-        ctx.stroke()
-
-        // Draw frequency markers
-        ctx.fillStyle = '#6b7280'
-        ctx.font = '10px Arial'
-        for (let freq = 0; freq <= 50; freq += 10) {
-          const x = (freq / 50) * canvas.width
-          ctx.fillText(`${freq}Hz`, x, canvas.height - 2)
-        }
-      }
-    }
-
+  useEffect(() => {
+    if (!autoRefresh) return;
     const interval = setInterval(() => {
-      updateSpectrum()
-      drawSpectrum()
-      drawFFT()
-    }, 100)
+      executeRequest(selectedEndpoint);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [autoRefresh, selectedEndpoint, executeRequest]);
 
-    return () => clearInterval(interval)
-  }, [isAnalyzing, frequencyBands])
+  const getStatusColor = (status: number) => {
+    if (status >= 200 && status < 300) return 'text-blue-700';
+    if (status >= 400 && status < 500) return 'text-amber-400';
+    return 'text-red-400';
+  };
 
-  const startAnalysis = () => {
-    setIsAnalyzing(true)
-  }
+  const getStatusBadge = (status: number) => {
+    if (status >= 200 && status < 300) return 'bg-blue-800/20 text-blue-700 border-blue-800/30';
+    if (status >= 400 && status < 500) return 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+    return 'bg-red-500/20 text-red-400 border-red-500/30';
+  };
 
-  const stopAnalysis = () => {
-    setIsAnalyzing(false)
-  }
-
-  const exportReport = (format: 'PDF' | 'JSON' | 'CSV') => {
-    alert(`Exporting analysis report as ${format}...`)
-  }
-
-  const compareSessions = () => {
-    if (selectedSessions.length < 2) {
-      alert('Please select at least 2 sessions to compare')
-      return
-    }
-    alert(`Comparing sessions: ${selectedSessions.join(', ')}`)
-  }
+  const getBandColor = (name: string) => {
+    return BAND_COLORS[name.toLowerCase()] || 'bg-slate-500';
+  };
 
   return (
-    <div className="space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-950 text-white p-6">
       {/* Header */}
-      <div className="flex items-center justify-between bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-        <div>
-          <h1 className="text-3xl font-bold text-white mb-2 flex items-center">
-            📊 Spectrum Analyzer
-          </h1>
-          <p className="text-gray-300">Multi-band EEG Frequency Analysis</p>
-          <div className="text-sm text-gray-400 mt-1">
-            Real-time FFT • Delta, Theta, Alpha, Beta, Gamma analysis
+      <div className="max-w-7xl mx-auto mb-8">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-gradient-to-br from-blue-800/20 to-violet-500/20 border border-blue-800/30">
+              <BarChart3 className="w-8 h-8 text-blue-700" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-violet-400 bg-clip-text text-transparent">
+                Spectrum Analyzer
+              </h1>
+              <p className="text-slate-400 text-sm">Multi-band EEG FFT Analysis • Postman-Style API Interface</p>
+            </div>
           </div>
-        </div>
-        <div className="text-right">
-          <div className={`text-lg font-semibold ${isAnalyzing ? 'text-green-400' : 'text-gray-400'}`}>
-            {isAnalyzing ? 'ANALYZING' : 'STANDBY'}
-          </div>
-          <div className="text-sm text-gray-400">
-            Sample Rate: 250 Hz
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <div className="flex space-x-2 text-sm">
-        <Link href="/modules" className="text-cyan-400 hover:text-cyan-300">
-          Modules
-        </Link>
-        <span className="text-gray-500">/</span>
-        <span className="text-white">Spectrum Analyzer</span>
-      </div>
-
-      {/* Analysis Type Selection */}
-      <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-        <h3 className="text-xl font-semibold text-white mb-4">Analysis Mode</h3>
-        
-        <div className="grid grid-cols-3 gap-4">
-          {(['realtime', 'comparative', 'historical'] as const).map((type) => (
+          <div className="flex items-center gap-3">
             <button
-              key={type}
-              onClick={() => setAnalysisType(type)}
-              className={`p-4 rounded-lg font-medium transition-all ${
-                analysisType === type
-                  ? 'bg-cyan-500/30 text-cyan-300 border border-cyan-500/50'
-                  : 'bg-gray-600/30 text-gray-400 border border-gray-600/50 hover:bg-gray-500/30'
-              }`}
+              onClick={() => setAutoRefresh(!autoRefresh)}
+              className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-all ${autoRefresh
+                  ? 'bg-blue-800/20 text-blue-700 border border-blue-800/30'
+                  : 'bg-slate-800/50 text-slate-400 border border-slate-700/50 hover:bg-slate-700/50'
+                }`}
             >
-              <div className="text-lg">
-                {type === 'realtime' && '🔴 Real-time'}
-                {type === 'comparative' && '📈 Comparative'}
-                {type === 'historical' && '📚 Historical'}
-              </div>
-              <div className="text-xs mt-2">
-                {type === 'realtime' && 'Live frequency analysis'}
-                {type === 'comparative' && 'Compare multiple sessions'}
-                {type === 'historical' && 'Analyze past recordings'}
-              </div>
+              <RefreshCw className={`w-4 h-4 ${autoRefresh ? 'animate-spin' : ''}`} />
+              {autoRefresh ? 'Live' : 'Auto'}
             </button>
-          ))}
+          </div>
         </div>
       </div>
 
-      {/* Real-time Analysis */}
-      {analysisType === 'realtime' && (
-        <>
-          {/* Frequency Bands */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-            <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
-              <span className={`w-3 h-3 rounded-full mr-3 ${isAnalyzing ? 'bg-green-500 animate-pulse' : 'bg-gray-500'}`}></span>
-              Frequency Band Analysis
+      <div className="max-w-7xl mx-auto grid grid-cols-12 gap-6">
+        {/* Sidebar - Endpoints */}
+        <div className="col-span-3 space-y-3">
+          <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl border border-slate-800/50 p-4">
+            <h3 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+              <Radio className="w-4 h-4 text-blue-700" />
+              API Endpoints
             </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-              {frequencyBands.map((band) => (
-                <div 
-                  key={band.name}
-                  className={`bg-black/30 rounded-lg p-4 border-2 transition-all ${
-                    band.dominant ? 'border-yellow-500 bg-yellow-500/10' : 'border-gray-600'
-                  }`}
+            <div className="space-y-2">
+              {ENDPOINTS.map((endpoint) => (
+                <button
+                  key={endpoint.path}
+                  onClick={() => {
+                    setSelectedEndpoint(endpoint);
+                    executeRequest(endpoint);
+                  }}
+                  className={`w-full text-left p-3 rounded-lg transition-all ${selectedEndpoint.path === endpoint.path
+                      ? 'bg-blue-800/20 border border-blue-800/30'
+                      : 'bg-slate-800/30 border border-slate-700/30 hover:bg-slate-800/50'
+                    }`}
                 >
-                  <div className="text-center">
-                    <div 
-                      className="w-4 h-4 rounded-full mx-auto mb-2"
-                      style={{ backgroundColor: band.color }}
-                    ></div>
-                    <div className="font-semibold text-white">{band.name}</div>
-                    <div className="text-xs text-gray-400">
-                      {band.range[0]}-{band.range[1]} Hz
-                    </div>
-                    <div className="text-lg font-bold mt-2" style={{ color: band.color }}>
-                      {band.power.toFixed(1)}%
-                    </div>
-                    {band.dominant && (
-                      <div className="text-xs text-yellow-400 mt-1">DOMINANT</div>
-                    )}
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="px-2 py-0.5 text-xs font-mono rounded bg-blue-800/20 text-blue-700 border border-blue-800/30">
+                      {endpoint.method}
+                    </span>
+                    <span className="text-sm font-medium text-white">{endpoint.name}</span>
                   </div>
-                </div>
+                  <p className="text-xs text-slate-500 font-mono truncate">{endpoint.path}</p>
+                </button>
               ))}
             </div>
-
-            <div className="flex space-x-4">
-              <button
-                onClick={startAnalysis}
-                disabled={isAnalyzing}
-                className={`px-6 py-3 rounded-lg font-medium transition-all ${
-                  isAnalyzing
-                    ? 'bg-gray-500/20 text-gray-500 cursor-not-allowed'
-                    : 'bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30'
-                }`}
-              >
-                ▶️ Start Analysis
-              </button>
-              
-              <button
-                onClick={stopAnalysis}
-                disabled={!isAnalyzing}
-                className={`px-6 py-3 rounded-lg font-medium transition-all ${
-                  !isAnalyzing
-                    ? 'bg-gray-500/20 text-gray-500 cursor-not-allowed'
-                    : 'bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30'
-                }`}
-              >
-                ⏹️ Stop Analysis
-              </button>
-            </div>
           </div>
 
-          {/* Spectrum Visualization */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-              <h3 className="text-xl font-semibold text-white mb-4">
-                📊 Power Spectrum
-              </h3>
-              <canvas 
-                ref={spectrumRef}
-                width={400}
-                height={200}
-                className="w-full h-48 bg-black/30 rounded border border-gray-600"
-              />
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-              <h3 className="text-xl font-semibold text-white mb-4">
-                🌊 FFT Visualization
-              </h3>
-              <canvas 
-                ref={canvasRef}
-                width={400}
-                height={200}
-                className="w-full h-48 bg-black/30 rounded border border-gray-600"
-              />
-            </div>
-          </div>
-        </>
-      )}
-
-      {/* Comparative Analysis */}
-      {analysisType === 'comparative' && (
-        <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-          <h3 className="text-xl font-semibold text-white mb-4">
-            📈 Session Comparison
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="text-lg font-medium text-white mb-3">Select Sessions to Compare</h4>
-              <div className="space-y-2">
-                {sessions.map((session) => (
-                  <label key={session.id} className="flex items-center space-x-3 p-3 bg-black/30 rounded-lg hover:bg-black/40 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={selectedSessions.includes(session.id)}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setSelectedSessions(prev => [...prev, session.id])
-                        } else {
-                          setSelectedSessions(prev => prev.filter(id => id !== session.id))
-                        }
-                      }}
-                      className="w-4 h-4 text-cyan-400 bg-gray-700 border-gray-600 rounded focus:ring-cyan-500"
-                    />
-                    <div className="flex-1">
-                      <div className="text-white font-medium">{session.name}</div>
-                      <div className="text-sm text-gray-400">
-                        {new Date(session.timestamp).toLocaleString()} • {Math.floor(session.duration / 60)}m • {session.averagePower}% avg power
-                      </div>
+          {/* Request History */}
+          <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl border border-slate-800/50 p-4">
+            <h3 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+              <Clock className="w-4 h-4 text-blue-700" />
+              Request History
+            </h3>
+            <div className="space-y-2 max-h-64 overflow-y-auto">
+              {requestHistory.length === 0 ? (
+                <p className="text-xs text-slate-500 text-center py-4">No requests yet</p>
+              ) : (
+                requestHistory.map((req, idx) => (
+                  <div key={idx} className="p-2 rounded-lg bg-slate-800/30 border border-slate-700/30">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className={`text-xs font-mono ${getStatusColor(req.status)}`}>
+                        {req.status || 'ERR'}
+                      </span>
+                      <span className="text-xs text-slate-500">{req.responseTime}ms</span>
                     </div>
-                  </label>
-                ))}
+                    <p className="text-xs text-slate-400">
+                      {new Date(req.timestamp).toLocaleTimeString()}
+                    </p>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="col-span-9 space-y-6">
+          {/* Request Bar */}
+          <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl border border-slate-800/50 p-4">
+            <div className="flex items-center gap-3">
+              <span className="px-3 py-1.5 text-sm font-mono rounded-lg bg-blue-800/20 text-blue-700 border border-blue-800/30">
+                {selectedEndpoint.method}
+              </span>
+              <div className="flex-1 px-4 py-2 bg-slate-800/50 rounded-lg border border-slate-700/50 font-mono text-sm text-slate-300">
+                {selectedEndpoint.path}
               </div>
-              
               <button
-                onClick={compareSessions}
-                disabled={selectedSessions.length < 2}
-                className={`mt-4 w-full py-3 rounded-lg font-medium transition-all ${
-                  selectedSessions.length >= 2
-                    ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/30'
-                    : 'bg-gray-500/20 text-gray-500 cursor-not-allowed'
-                }`}
+                onClick={() => executeRequest(selectedEndpoint)}
+                disabled={isLoading}
+                className="px-6 py-2 bg-gradient-to-r from-blue-800 to-violet-500 text-white font-semibold rounded-lg hover:from-blue-900 hover:to-violet-600 transition-all disabled:opacity-50 flex items-center gap-2"
               >
-                🔍 Compare Selected Sessions
+                {isLoading ? (
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Zap className="w-4 h-4" />
+                )}
+                Send
               </button>
             </div>
+          </div>
 
-            <div>
-              <h4 className="text-lg font-medium text-white mb-3">Comparison Results</h4>
-              <div className="bg-black/30 rounded-lg p-4">
-                {selectedSessions.length >= 2 ? (
-                  <div className="space-y-3">
-                    <div className="text-sm text-gray-400">Correlation Analysis</div>
-                    <div className="text-2xl font-bold text-green-400">87.3%</div>
-                    <div className="text-sm text-gray-300">Strong positive correlation between selected sessions</div>
-                    
-                    <div className="mt-4 space-y-2">
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Delta Band Difference:</span>
-                        <span className="text-cyan-400">+12.4%</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Alpha Band Difference:</span>
-                        <span className="text-green-400">+8.7%</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Beta Band Difference:</span>
-                        <span className="text-red-400">-5.2%</span>
-                      </div>
+          {/* Response Section */}
+          {response && (
+            <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl border border-slate-800/50 overflow-hidden">
+              {/* Response Header */}
+              <div className="px-4 py-3 border-b border-slate-800/50 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <span className={`px-3 py-1 text-sm font-mono rounded-lg border ${getStatusBadge(response.status)}`}>
+                    {response.status || 'Error'}
+                  </span>
+                  <span className="text-sm text-slate-400">
+                    <Clock className="w-4 h-4 inline mr-1" />
+                    {response.responseTime}ms
+                  </span>
+                  {response.success ? (
+                    <span className="text-blue-700 flex items-center gap-1 text-sm">
+                      <CheckCircle className="w-4 h-4" /> Success
+                    </span>
+                  ) : (
+                    <span className="text-red-400 flex items-center gap-1 text-sm">
+                      <AlertCircle className="w-4 h-4" /> Failed
+                    </span>
+                  )}
+                </div>
+                <span className="text-xs text-slate-500">
+                  {new Date(response.timestamp).toLocaleString()}
+                </span>
+              </div>
+
+              {/* Response Body */}
+              <div className="p-4">
+                {response.error ? (
+                  <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400">
+                    <p className="font-mono text-sm">{response.error}</p>
+                  </div>
+                ) : response.data ? (
+                  <div className="space-y-6">
+                    {/* Spectrum Metrics */}
+                    {(response.data as SpectrumData).frequency_bands && (
+                      <>
+                        <div className="grid grid-cols-4 gap-4">
+                          <div className="p-4 rounded-xl bg-gradient-to-br from-blue-800/10 to-violet-500/10 border border-blue-800/20">
+                            <div className="flex items-center gap-2 mb-2">
+                              <BarChart3 className="w-5 h-5 text-blue-700" />
+                              <span className="text-sm text-slate-400">Total Power</span>
+                            </div>
+                            <p className="text-2xl font-bold text-blue-700">
+                              {(response.data as SpectrumData).total_power?.toFixed(1) || 0} dB
+                            </p>
+                          </div>
+                          <div className="p-4 rounded-xl bg-gradient-to-br from-violet-500/10 to-violet-500/10 border border-violet-500/20">
+                            <div className="flex items-center gap-2 mb-2">
+                              <Waves className="w-5 h-5 text-violet-400" />
+                              <span className="text-sm text-slate-400">Dominant</span>
+                            </div>
+                            <p className="text-2xl font-bold text-violet-400 capitalize">
+                              {(response.data as SpectrumData).dominant_band || 'N/A'}
+                            </p>
+                          </div>
+                          <div className="p-4 rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20">
+                            <div className="flex items-center gap-2 mb-2">
+                              <Activity className="w-5 h-5 text-purple-400" />
+                              <span className="text-sm text-slate-400">Signal Quality</span>
+                            </div>
+                            <p className="text-2xl font-bold text-purple-400">
+                              {(response.data as SpectrumData).signal_quality || 0}%
+                            </p>
+                          </div>
+                          <div className="p-4 rounded-xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20">
+                            <div className="flex items-center gap-2 mb-2">
+                              <Clock className="w-5 h-5 text-amber-400" />
+                              <span className="text-sm text-slate-400">Analysis Time</span>
+                            </div>
+                            <p className="text-2xl font-bold text-amber-400">
+                              {(response.data as SpectrumData).analysis_duration_ms || 0} ms
+                            </p>
+                          </div>
+                        </div>
+
+                          {/* Frequency Bands Visualization */}
+                          <div className="p-4 rounded-xl bg-slate-800/30 border border-slate-700/30">
+                            <h4 className="text-sm font-semibold text-slate-300 mb-4 flex items-center gap-2">
+                              <BarChart3 className="w-4 h-4 text-blue-700" />
+                              Frequency Bands Analysis
+                            </h4>
+                            <div className="space-y-4">
+                              {(response.data as SpectrumData).frequency_bands.map((band, idx) => (
+                                <div key={idx} className="flex items-center gap-4">
+                                  <div className="w-20 flex items-center gap-2">
+                                    {band.dominant && <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>}
+                                    <span className="text-sm font-medium text-slate-300 capitalize">{band.name}</span>
+                                </div>
+                                <div className="text-xs text-slate-500 w-24">{band.range}</div>
+                                <div className="flex-1 h-6 bg-slate-700/50 rounded-lg overflow-hidden">
+                                  <div
+                                    className={`h-full ${getBandColor(band.name)} transition-all duration-500 flex items-center justify-end pr-2`}
+                                    style={{ width: `${Math.min(band.power, 100)}%` }}
+                                  >
+                                    {band.power > 20 && (
+                                      <span className="text-xs font-mono text-white">{band.power.toFixed(1)}%</span>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="w-16 text-right text-sm font-mono text-slate-400">
+                                  {band.power.toFixed(1)}%
+                                </div>
+                              </div>
+                            ))}
+                            </div>
+                          </div>
+                        </>
+                      )}
+
+                      {/* Historical Sessions */}
+                      {Array.isArray(response.data) && response.data.length > 0 && (
+                        <div className="p-4 rounded-xl bg-slate-800/30 border border-slate-700/30">
+                          <h4 className="text-sm font-semibold text-slate-300 mb-4 flex items-center gap-2">
+                            <Clock className="w-4 h-4 text-blue-700" />
+                            Historical Sessions ({response.data.length})
+                          </h4>
+                          <div className="space-y-2">
+                            {(response.data as HistoricalSession[]).map((session, idx) => (
+                              <div key={idx} className="flex items-center justify-between p-3 rounded-lg bg-slate-900/50 border border-slate-700/30">
+                              <div>
+                                <p className="text-sm font-medium text-white">{session.name}</p>
+                                <p className="text-xs text-slate-500">
+                                  {new Date(session.timestamp).toLocaleString()} • {session.duration_seconds}s
+                                </p>
+                              </div>
+                              <div className="flex items-center gap-4">
+                                <span className="text-sm text-blue-700 font-mono">{session.average_power.toFixed(1)} dB</span>
+                                <span className="text-xs px-2 py-1 rounded bg-violet-500/20 text-violet-400 capitalize">
+                                  {session.dominant_frequency}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Raw JSON Response */}
+                      <div className="p-4 rounded-xl bg-slate-800/30 border border-slate-700/30">
+                        <h4 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                          <Zap className="w-4 h-4 text-blue-700" />
+                          Raw JSON Response
+                        </h4>
+                        <pre className="p-4 bg-slate-950/50 rounded-lg overflow-x-auto text-xs font-mono text-slate-300 max-h-96 overflow-y-auto">
+                          {JSON.stringify(response.data, null, 2)}
+                        </pre>
                     </div>
                   </div>
                 ) : (
-                  <div className="text-center text-gray-500 py-8">
-                    Select at least 2 sessions to see comparison results
-                  </div>
+                      <p className="text-slate-500 text-center py-8">No data received</p>
                 )}
               </div>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* Export Options */}
-      <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-        <h3 className="text-xl font-semibold text-white mb-4">
-          📤 Export Analysis Reports
-        </h3>
-        
-        <div className="grid grid-cols-3 gap-4">
-          <button 
-            onClick={() => exportReport('PDF')}
-            className="bg-gradient-to-r from-red-500/20 to-pink-500/20 hover:from-red-500/30 hover:to-pink-500/30 rounded-lg p-4 border border-red-500/30 transition-all duration-300"
-          >
-            <div className="text-lg font-semibold text-red-400">📄 Export PDF</div>
-            <div className="text-sm text-gray-400 mt-1">Detailed visual report</div>
-          </button>
-          
-          <button 
-            onClick={() => exportReport('JSON')}
-            className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 hover:from-blue-500/30 hover:to-cyan-500/30 rounded-lg p-4 border border-blue-500/30 transition-all duration-300"
-          >
-            <div className="text-lg font-semibold text-blue-400">📊 Export JSON</div>
-            <div className="text-sm text-gray-400 mt-1">Raw data format</div>
-          </button>
-          
-          <button 
-            onClick={() => exportReport('CSV')}
-            className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 hover:from-green-500/30 hover:to-emerald-500/30 rounded-lg p-4 border border-green-500/30 transition-all duration-300"
-          >
-            <div className="text-lg font-semibald text-green-400">📈 Export CSV</div>
-            <div className="text-sm text-gray-400 mt-1">Spreadsheet format</div>
-          </button>
+          )}
         </div>
       </div>
+
+      {/* Footer */}
+      <div className="max-w-7xl mx-auto mt-8 text-center">
+        <p className="text-xs text-slate-600">
+          Spectrum Analyzer Module • Real API Data • No Mock Values
+        </p>
+      </div>
     </div>
-  )
+  );
 }
+
+
+
+
+
+
+
 

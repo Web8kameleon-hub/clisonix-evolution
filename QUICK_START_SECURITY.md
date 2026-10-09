@@ -133,7 +133,7 @@ sudo ufw deny from any
 docker-compose logs > breach-$(date +%Y%m%d-%H%M%S).log
 
 # 4. Contact security team
-echo "BREACH at $(date)" | mail -s "URGENT: Security Incident" security@clisonix.com
+echo "BREACH at $(date)" | mail -s "URGENT: Security Incident" clisonix@pm.me
 ```
 
 ---
@@ -221,11 +221,12 @@ docker exec -i clisonix-postgres psql -U clisonix clisonixdb < backup-20251216.s
 
 ## 📞 Support
 
-**Security Issues**: security@clisonix.com  
-**General Support**: support@clisonix.com  
+**Security Issues**: clisonix@pm.me  
+**General Support**: clisonix@pm.me  
 **Documentation**: See `docs/` folder
 
 ---
 
 **Last Updated**: December 16, 2025  
 **Version**: 1.0.0
+

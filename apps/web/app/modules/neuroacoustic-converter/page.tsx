@@ -1,429 +1,503 @@
-﻿/**
- * 🧠 Neuroacoustic Converter
- * Real-time EEG to Audio signal conversion with advanced processing
- */
+'use client';
 
-"use client"
+import { useState, useEffect, useCallback } from 'react';
+import { Music2, Waves, Radio, RefreshCw, Clock, CheckCircle, AlertCircle, Zap, Volume2, Settings, Download } from 'lucide-react';
 
-import { useState, useEffect, useRef } from 'react'
-import Link from 'next/link'
-
+// API Response Types
 interface ConversionSettings {
-  inputChannel: string
-  outputFormat: 'WAV' | 'MP3' | 'MIDI'
-  frequencyMapping: 'linear' | 'logarithmic' | 'custom'
-  spatialAudio: boolean
-  realtimeProcessing: boolean
+  input_channel: string;
+  output_format: string;
+  frequency_mapping: string;
+  spatial_audio: boolean;
+  realtime_processing: boolean;
 }
 
 interface AudioOutput {
-  isConverting: boolean
-  currentFrequency: number
-  outputLevel: number
-  mappedNote: string
-  spatialPosition: { x: number, y: number, z: number }
+  is_converting: boolean;
+  current_frequency: number;
+  output_level: number;
+  mapped_note: string;
+  spatial_position: { x: number; y: number; z: number };
 }
 
 interface ConversionStats {
-  totalConversions: number
-  averageLatency: number
-  conversionQuality: number
-  exportedFiles: number
+  total_conversions: number;
+  average_latency_ms: number;
+  conversion_quality: number;
+  exported_files: number;
 }
 
+interface ConverterStatus {
+  service: string;
+  status: string;
+  settings: ConversionSettings;
+  current_output: AudioOutput;
+  stats: ConversionStats;
+  supported_formats: string[];
+  supported_mappings: string[];
+}
+
+interface APIResponse {
+  success: boolean;
+  data: ConverterStatus | ConversionStats | AudioOutput | null;
+  error: string | null;
+  status: number;
+  responseTime: number;
+  timestamp: string;
+}
+
+interface EndpointConfig {
+  name: string;
+  method: string;
+  path: string;
+  description: string;
+}
+
+const ENDPOINTS: EndpointConfig[] = [
+  { name: 'JONA Metrics', method: 'GET', path: '/api/asi/jona/metrics', description: 'JONA audio synthesis metrics' },
+  { name: 'ASI Status', method: 'GET', path: '/api/asi/status', description: 'ASI Trinity system status' },
+  { name: 'ASI Health', method: 'GET', path: '/api/asi/health', description: 'System health check' },
+  { name: 'ALBI Metrics', method: 'GET', path: '/api/asi/albi/metrics', description: 'ALBI neural metrics' },
+  { name: 'ALBA Metrics', method: 'GET', path: '/api/asi/alba/metrics', description: 'ALBA network metrics' },
+];
+
+// Use relative paths for security - proxied through Next.js API routes
+const API_BASE = '';
+
 export default function NeuroacousticConverterPage() {
-  const [settings, setSettings] = useState<ConversionSettings>({
-    inputChannel: 'EEG_Channel_1',
-    outputFormat: 'WAV',
-    frequencyMapping: 'logarithmic',
-    spatialAudio: true,
-    realtimeProcessing: false
-  })
+  const [selectedEndpoint, setSelectedEndpoint] = useState<EndpointConfig>(ENDPOINTS[0]);
+  const [response, setResponse] = useState<APIResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [autoRefresh, setAutoRefresh] = useState(false);
+  const [requestHistory, setRequestHistory] = useState<APIResponse[]>([]);
 
-  const [audioOutput, setAudioOutput] = useState<AudioOutput>({
-    isConverting: false,
-    currentFrequency: 0,
-    outputLevel: 0,
-    mappedNote: 'C4',
-    spatialPosition: { x: 0, y: 0, z: 0 }
-  })
+  const executeRequest = useCallback(async (endpoint: EndpointConfig) => {
+    setIsLoading(true);
+    const startTime = performance.now();
 
-  const [stats, setStats] = useState<ConversionStats>({
-    totalConversions: 1247,
-    averageLatency: 12.5,
-    conversionQuality: 98.2,
-    exportedFiles: 89
-  })
+    try {
+      const res = await fetch(`${API_BASE}${endpoint.path}`, {
+        method: endpoint.method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        cache: 'no-store',
+      });
 
-  const [isRecording, setIsRecording] = useState(false)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+      const endTime = performance.now();
+      const responseTime = Math.round(endTime - startTime);
+
+      let data = null;
+      let error = null;
+
+      try {
+        const jsonData = await res.json();
+        if (res.ok) {
+          data = jsonData;
+        } else {
+          error = jsonData.detail || jsonData.message || `HTTP ${res.status}`;
+        }
+      } catch {
+        error = 'Invalid JSON response';
+      }
+
+      const apiResponse: APIResponse = {
+        success: res.ok,
+        data,
+        error,
+        status: res.status,
+        responseTime,
+        timestamp: new Date().toISOString(),
+      };
+
+      setResponse(apiResponse);
+      setRequestHistory(prev => [apiResponse, ...prev].slice(0, 10));
+
+    } catch (err) {
+      const endTime = performance.now();
+      const apiResponse: APIResponse = {
+        success: false,
+        data: null,
+        error: err instanceof Error ? err.message : 'Network error',
+        status: 0,
+        responseTime: Math.round(endTime - startTime),
+        timestamp: new Date().toISOString(),
+      };
+      setResponse(apiResponse);
+      setRequestHistory(prev => [apiResponse, ...prev].slice(0, 10));
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    // Simulate real-time conversion
-    const updateConversion = () => {
-      if (settings.realtimeProcessing) {
-        const frequency = 8 + Math.sin(Date.now() / 1000) * 10 // 8-18 Hz simulation
-        const note = frequencyToNote(frequency)
-        
-        setAudioOutput(prev => ({
-          ...prev,
-          isConverting: true,
-          currentFrequency: frequency,
-          outputLevel: 60 + Math.random() * 40,
-          mappedNote: note,
-          spatialPosition: {
-            x: Math.sin(Date.now() / 2000) * 50,
-            y: Math.cos(Date.now() / 1500) * 30,
-            z: Math.sin(Date.now() / 3000) * 20
-          }
-        }))
-      } else {
-        setAudioOutput(prev => ({ ...prev, isConverting: false }))
-      }
-    }
+    executeRequest(selectedEndpoint);
+  }, []);
 
-    // Draw waveform visualization
-    const drawWaveform = () => {
-      const canvas = canvasRef.current
-      if (!canvas) return
-
-      const ctx = canvas.getContext('2d')
-      if (!ctx) return
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
-      if (settings.realtimeProcessing) {
-        ctx.strokeStyle = '#8b5cf6'
-        ctx.lineWidth = 2
-        ctx.beginPath()
-
-        for (let i = 0; i < canvas.width; i++) {
-          const x = i
-          const y = canvas.height / 2 + Math.sin((i + Date.now() / 10) * 0.02) * 50 * (audioOutput.outputLevel / 100)
-          
-          if (i === 0) {
-            ctx.moveTo(x, y)
-          } else {
-            ctx.lineTo(x, y)
-          }
-        }
-        
-        ctx.stroke()
-      }
-    }
-
+  useEffect(() => {
+    if (!autoRefresh) return;
     const interval = setInterval(() => {
-      updateConversion()
-      drawWaveform()
-    }, 50)
+      executeRequest(selectedEndpoint);
+    }, 500);
+    return () => clearInterval(interval);
+  }, [autoRefresh, selectedEndpoint, executeRequest]);
 
-    return () => clearInterval(interval)
-  }, [settings.realtimeProcessing, audioOutput.outputLevel])
+  const getStatusColor = (status: number) => {
+    if (status >= 200 && status < 300) return 'text-blue-700';
+    if (status >= 400 && status < 500) return 'text-amber-400';
+    return 'text-red-400';
+  };
 
-  const frequencyToNote = (frequency: number): string => {
-    const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-    const noteIndex = Math.floor(frequency / 3) % 12
-    const octave = Math.floor(frequency / 36) + 3
-    return `${notes[noteIndex]}${octave}`
-  }
+  const getStatusBadge = (status: number) => {
+    if (status >= 200 && status < 300) return 'bg-blue-800/20 text-blue-700 border-blue-800/30';
+    if (status >= 400 && status < 500) return 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+    return 'bg-red-500/20 text-red-400 border-red-500/30';
+  };
 
-  const startConversion = () => {
-    setSettings(prev => ({ ...prev, realtimeProcessing: true }))
-    setIsRecording(true)
-  }
-
-  const stopConversion = () => {
-    setSettings(prev => ({ ...prev, realtimeProcessing: false }))
-    setIsRecording(false)
-  }
-
-  const exportAudio = (format: 'WAV' | 'MP3' | 'MIDI') => {
-    setSettings(prev => ({ ...prev, outputFormat: format }))
-    setStats(prev => ({ ...prev, exportedFiles: prev.exportedFiles + 1 }))
-    // Simulate export process
-    alert(`Exporting as ${format}... File will be saved to Downloads folder.`)
-  }
+  const getMethodBadge = (method: string) => {
+    if (method === 'GET') return 'bg-blue-800/20 text-blue-700 border-blue-800/30';
+    if (method === 'POST') return 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+    return 'bg-violet-500/20 text-violet-400 border-violet-500/30';
+  };
 
   return (
-    <div className="space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-violet-950 to-slate-950 text-white p-6">
       {/* Header */}
-      <div className="flex items-center justify-between bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-        <div>
-          <h1 className="text-3xl font-bold text-white mb-2 flex items-center">
-            🧠 Neuroacoustic Converter
-          </h1>
-          <p className="text-gray-300">Real-time EEG to Audio Signal Conversion</p>
-          <div className="text-sm text-gray-400 mt-1">
-            Brain waves → Sound frequencies with spatial audio processing
-          </div>
-        </div>
-        <div className="text-right">
-          <div className={`text-lg font-semibold ${settings.realtimeProcessing ? 'text-green-400' : 'text-gray-400'}`}>
-            {settings.realtimeProcessing ? 'CONVERTING' : 'STANDBY'}
-          </div>
-          <div className="text-sm text-gray-400">
-            Quality: {stats.conversionQuality}%
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <div className="flex space-x-2 text-sm">
-        <Link href="/modules" className="text-cyan-400 hover:text-cyan-300">
-          Modules
-        </Link>
-        <span className="text-gray-500">/</span>
-        <span className="text-white">Neuroacoustic Converter</span>
-      </div>
-
-      {/* Conversion Interface */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Input Settings */}
-        <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-          <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
-            ⚙️ Conversion Settings
-          </h3>
-          
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Input Channel
-              </label>
-              <select 
-                value={settings.inputChannel}
-                onChange={(e) => setSettings(prev => ({ ...prev, inputChannel: e.target.value }))}
-                className="w-full bg-black/30 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-cyan-400 focus:outline-none"
-              >
-                <option value="EEG_Channel_1">EEG Channel 1 (Frontal)</option>
-                <option value="EEG_Channel_2">EEG Channel 2 (Parietal)</option>
-                <option value="EEG_Channel_3">EEG Channel 3 (Occipital)</option>
-                <option value="EEG_Channel_4">EEG Channel 4 (Temporal)</option>
-              </select>
+      <div className="max-w-7xl mx-auto mb-8">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-gradient-to-br from-violet-500/20 to-purple-500/20 border border-violet-500/30">
+              <Music2 className="w-8 h-8 text-violet-400" />
             </div>
-
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Frequency Mapping
-              </label>
-              <select 
-                value={settings.frequencyMapping}
-                onChange={(e) => setSettings(prev => ({ ...prev, frequencyMapping: e.target.value as any }))}
-                className="w-full bg-black/30 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-cyan-400 focus:outline-none"
-              >
-                <option value="linear">Linear Mapping</option>
-                <option value="logarithmic">Logarithmic Mapping</option>
-                <option value="custom">Custom Mapping</option>
-              </select>
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">
+                Neuroacoustic Converter
+              </h1>
+              <p className="text-slate-400 text-sm">EEG to Audio Conversion • Postman-Style API Interface</p>
             </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Output Format
-              </label>
-              <div className="grid grid-cols-3 gap-2">
-                {(['WAV', 'MP3', 'MIDI'] as const).map((format) => (
-                  <button
-                    key={format}
-                    onClick={() => setSettings(prev => ({ ...prev, outputFormat: format }))}
-                    className={`py-2 px-3 rounded-lg text-sm font-medium transition-all ${
-                      settings.outputFormat === format
-                        ? 'bg-cyan-500/30 text-cyan-300 border border-cyan-500/50'
-                        : 'bg-gray-600/30 text-gray-400 border border-gray-600/50 hover:bg-gray-500/30'
-                    }`}
-                  >
-                    {format}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-gray-300">3D Spatial Audio</span>
-              <button
-                onClick={() => setSettings(prev => ({ ...prev, spatialAudio: !prev.spatialAudio }))}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                  settings.spatialAudio ? 'bg-cyan-500' : 'bg-gray-600'
+          </div>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setAutoRefresh(!autoRefresh)}
+              className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-all ${autoRefresh
+                  ? 'bg-violet-500/20 text-violet-400 border border-violet-500/30'
+                  : 'bg-slate-800/50 text-slate-400 border border-slate-700/50 hover:bg-slate-700/50'
                 }`}
+            >
+              <RefreshCw className={`w-4 h-4 ${autoRefresh ? 'animate-spin' : ''}`} />
+              {autoRefresh ? 'Live' : 'Auto'}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto grid grid-cols-12 gap-6">
+        {/* Sidebar - Endpoints */}
+        <div className="col-span-3 space-y-3">
+          <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl border border-slate-800/50 p-4">
+            <h3 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+              <Radio className="w-4 h-4 text-violet-400" />
+              API Endpoints
+            </h3>
+            <div className="space-y-2">
+              {ENDPOINTS.map((endpoint) => (
+                <button
+                  key={endpoint.path}
+                  onClick={() => {
+                    setSelectedEndpoint(endpoint);
+                    executeRequest(endpoint);
+                  }}
+                  className={`w-full text-left p-3 rounded-lg transition-all ${selectedEndpoint.path === endpoint.path
+                      ? 'bg-violet-500/20 border border-violet-500/30'
+                      : 'bg-slate-800/30 border border-slate-700/30 hover:bg-slate-800/50'
+                    }`}
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className={`px-2 py-0.5 text-xs font-mono rounded border ${getMethodBadge(endpoint.method)}`}>
+                      {endpoint.method}
+                    </span>
+                    <span className="text-sm font-medium text-white">{endpoint.name}</span>
+                  </div>
+                  <p className="text-xs text-slate-500 font-mono truncate">{endpoint.path}</p>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Request History */}
+          <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl border border-slate-800/50 p-4">
+            <h3 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+              <Clock className="w-4 h-4 text-violet-400" />
+              Request History
+            </h3>
+            <div className="space-y-2 max-h-64 overflow-y-auto">
+              {requestHistory.length === 0 ? (
+                <p className="text-xs text-slate-500 text-center py-4">No requests yet</p>
+              ) : (
+                requestHistory.map((req, idx) => (
+                  <div key={idx} className="p-2 rounded-lg bg-slate-800/30 border border-slate-700/30">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className={`text-xs font-mono ${getStatusColor(req.status)}`}>
+                        {req.status || 'ERR'}
+                      </span>
+                      <span className="text-xs text-slate-500">{req.responseTime}ms</span>
+                    </div>
+                    <p className="text-xs text-slate-400">
+                      {new Date(req.timestamp).toLocaleTimeString()}
+                    </p>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="col-span-9 space-y-6">
+          {/* Request Bar */}
+          <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl border border-slate-800/50 p-4">
+            <div className="flex items-center gap-3">
+              <span className={`px-3 py-1.5 text-sm font-mono rounded-lg border ${getMethodBadge(selectedEndpoint.method)}`}>
+                {selectedEndpoint.method}
+              </span>
+              <div className="flex-1 px-4 py-2 bg-slate-800/50 rounded-lg border border-slate-700/50 font-mono text-sm text-slate-300">
+                {selectedEndpoint.path}
+              </div>
+              <button
+                onClick={() => executeRequest(selectedEndpoint)}
+                disabled={isLoading}
+                className="px-6 py-2 bg-gradient-to-r from-violet-500 to-purple-500 text-white font-semibold rounded-lg hover:from-violet-600 hover:to-purple-600 transition-all disabled:opacity-50 flex items-center gap-2"
               >
-                <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                  settings.spatialAudio ? 'translate-x-6' : 'translate-x-1'
-                }`} />
+                {isLoading ? (
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Zap className="w-4 h-4" />
+                )}
+                Send
               </button>
             </div>
           </div>
-        </div>
 
-        {/* Live Output */}
-        <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-          <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
-            <span className={`w-3 h-3 rounded-full mr-3 ${audioOutput.isConverting ? 'bg-green-500 animate-pulse' : 'bg-gray-500'}`}></span>
-            Audio Output
-          </h3>
-          
-          <div className="space-y-4">
-            <div className="bg-black/30 rounded-lg p-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <div className="text-sm text-gray-400">Current Frequency</div>
-                  <div className="text-xl font-bold text-cyan-400">
-                    {audioOutput.currentFrequency.toFixed(2)} Hz
+          {/* Response Section */}
+          {response && (
+            <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl border border-slate-800/50 overflow-hidden">
+              {/* Response Header */}
+              <div className="px-4 py-3 border-b border-slate-800/50 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <span className={`px-3 py-1 text-sm font-mono rounded-lg border ${getStatusBadge(response.status)}`}>
+                    {response.status || 'Error'}
+                  </span>
+                  <span className="text-sm text-slate-400">
+                    <Clock className="w-4 h-4 inline mr-1" />
+                    {response.responseTime}ms
+                  </span>
+                  {response.success ? (
+                    <span className="text-blue-700 flex items-center gap-1 text-sm">
+                      <CheckCircle className="w-4 h-4" /> Success
+                    </span>
+                  ) : (
+                    <span className="text-red-400 flex items-center gap-1 text-sm">
+                      <AlertCircle className="w-4 h-4" /> Failed
+                    </span>
+                  )}
+                </div>
+                <span className="text-xs text-slate-500">
+                  {new Date(response.timestamp).toLocaleString()}
+                </span>
+              </div>
+
+              {/* Response Body */}
+              <div className="p-4">
+                {response.error ? (
+                  <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400">
+                    <p className="font-mono text-sm">{response.error}</p>
                   </div>
-                </div>
-                <div>
-                  <div className="text-sm text-gray-400">Mapped Note</div>
-                  <div className="text-xl font-bold text-purple-400">
-                    {audioOutput.mappedNote}
-                  </div>
-                </div>
-              </div>
-              
-              <div className="mt-4">
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="text-gray-400">Output Level</span>
-                  <span className="text-white">{audioOutput.outputLevel.toFixed(1)}%</span>
-                </div>
-                <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div 
-                    className="bg-gradient-to-r from-green-500 to-cyan-500 h-2 rounded-full transition-all duration-300"
-                    style={{ width: `${audioOutput.outputLevel}%` }}
-                  ></div>
-                </div>
+                ) : response.data ? (
+                  <div className="space-y-6">
+                    {/* Converter Status Cards */}
+                    {(response.data as ConverterStatus).service && (
+                      <>
+                        <div className="grid grid-cols-4 gap-4">
+                          <div className="p-4 rounded-xl bg-gradient-to-br from-violet-500/10 to-purple-500/10 border border-violet-500/20">
+                            <div className="flex items-center gap-2 mb-2">
+                              <Music2 className="w-5 h-5 text-violet-400" />
+                              <span className="text-sm text-slate-400">Status</span>
+                              </div>
+                              <p className={`text-xl font-bold capitalize ${(response.data as ConverterStatus).status === 'online' ? 'text-blue-700' :
+                                  (response.data as ConverterStatus).status === 'converting' ? 'text-violet-400' :
+                                    'text-slate-400'
+                                }`}>
+                                {(response.data as ConverterStatus).status || 'Unknown'}
+                              </p>
+                            </div>
+                            <div className="p-4 rounded-xl bg-gradient-to-br from-violet-500/10 to-violet-500/10 border border-violet-500/20">
+                              <div className="flex items-center gap-2 mb-2">
+                                <Waves className="w-5 h-5 text-violet-400" />
+                                <span className="text-sm text-slate-400">Frequency</span>
+                              </div>
+                              <p className="text-xl font-bold text-violet-400">
+                                {(response.data as ConverterStatus).current_output?.current_frequency?.toFixed(1) || 0} Hz
+                              </p>
+                            </div>
+                            <div className="p-4 rounded-xl bg-gradient-to-br from-blue-800/10 to-green-500/10 border border-blue-800/20">
+                              <div className="flex items-center gap-2 mb-2">
+                                <Volume2 className="w-5 h-5 text-blue-700" />
+                                <span className="text-sm text-slate-400">Output Level</span>
+                              </div>
+                              <p className="text-xl font-bold text-blue-700">
+                                {(response.data as ConverterStatus).current_output?.output_level?.toFixed(0) || 0}%
+                              </p>
+                            </div>
+                            <div className="p-4 rounded-xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20">
+                              <div className="flex items-center gap-2 mb-2">
+                                <Download className="w-5 h-5 text-amber-400" />
+                                <span className="text-sm text-slate-400">Exported</span>
+                              </div>
+                              <p className="text-xl font-bold text-amber-400">
+                                {(response.data as ConverterStatus).stats?.exported_files || 0}
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Current Output */}
+                          {(response.data as ConverterStatus).current_output && (
+                            <div className="p-4 rounded-xl bg-gradient-to-r from-violet-500/10 to-purple-500/10 border border-violet-500/20">
+                              <h4 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                                <Music2 className="w-4 h-4 text-violet-400" />
+                                Current Audio Output
+                              </h4>
+                              <div className="grid grid-cols-4 gap-4 text-center">
+                                <div>
+                                  <p className="text-2xl font-bold text-violet-400">
+                                    {(response.data as ConverterStatus).current_output?.mapped_note || 'N/A'}
+                                  </p>
+                                  <p className="text-xs text-slate-500">Mapped Note</p>
+                                </div>
+                                <div>
+                                  <p className="text-2xl font-bold text-violet-400">
+                                    {(response.data as ConverterStatus).current_output?.current_frequency?.toFixed(1) || 0} Hz
+                                  </p>
+                                  <p className="text-xs text-slate-500">Frequency</p>
+                                </div>
+                                <div>
+                                  <p className="text-2xl font-bold text-blue-700">
+                                    {(response.data as ConverterStatus).current_output?.output_level?.toFixed(0) || 0}%
+                                  </p>
+                                  <p className="text-xs text-slate-500">Level</p>
+                                </div>
+                                <div>
+                                  <p className={`text-2xl font-bold ${(response.data as ConverterStatus).current_output?.is_converting ? 'text-blue-700' : 'text-slate-400'}`}>
+                                    {(response.data as ConverterStatus).current_output?.is_converting ? 'Active' : 'Idle'}
+                                  </p>
+                                  <p className="text-xs text-slate-500">Converting</p>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Settings */}
+                          {(response.data as ConverterStatus).settings && (
+                            <div className="p-4 rounded-xl bg-slate-800/30 border border-slate-700/30">
+                              <h4 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                                <Settings className="w-4 h-4 text-violet-400" />
+                                Conversion Settings
+                              </h4>
+                              <div className="grid grid-cols-3 gap-4">
+                                <div className="p-3 rounded-lg bg-slate-900/50">
+                                  <p className="text-xs text-slate-500 mb-1">Input Channel</p>
+                                  <p className="text-sm font-mono text-white">
+                                    {(response.data as ConverterStatus).settings?.input_channel || 'N/A'}
+                                  </p>
+                                </div>
+                                <div className="p-3 rounded-lg bg-slate-900/50">
+                                  <p className="text-xs text-slate-500 mb-1">Output Format</p>
+                                  <p className="text-sm font-mono text-white">
+                                    {(response.data as ConverterStatus).settings?.output_format || 'N/A'}
+                                  </p>
+                                </div>
+                                <div className="p-3 rounded-lg bg-slate-900/50">
+                                  <p className="text-xs text-slate-500 mb-1">Frequency Mapping</p>
+                                  <p className="text-sm font-mono text-white capitalize">
+                                    {(response.data as ConverterStatus).settings?.frequency_mapping || 'N/A'}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Stats */}
+                          {(response.data as ConverterStatus).stats && (
+                            <div className="p-4 rounded-xl bg-slate-800/30 border border-slate-700/30">
+                              <h4 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                                <Zap className="w-4 h-4 text-violet-400" />
+                                Conversion Statistics
+                              </h4>
+                              <div className="grid grid-cols-4 gap-4">
+                                <div className="text-center">
+                                  <p className="text-xl font-bold text-violet-400">
+                                    {(response.data as ConverterStatus).stats?.total_conversions?.toLocaleString() || 0}
+                                  </p>
+                                  <p className="text-xs text-slate-500">Total Conversions</p>
+                                </div>
+                                <div className="text-center">
+                                  <p className="text-xl font-bold text-violet-400">
+                                    {(response.data as ConverterStatus).stats?.average_latency_ms?.toFixed(1) || 0} ms
+                                  </p>
+                                  <p className="text-xs text-slate-500">Avg Latency</p>
+                                </div>
+                                <div className="text-center">
+                                  <p className="text-xl font-bold text-blue-700">
+                                    {(response.data as ConverterStatus).stats?.conversion_quality?.toFixed(1) || 0}%
+                                  </p>
+                                  <p className="text-xs text-slate-500">Quality</p>
+                                </div>
+                                <div className="text-center">
+                                  <p className="text-xl font-bold text-amber-400">
+                                    {(response.data as ConverterStatus).stats?.exported_files || 0}
+                                  </p>
+                                  <p className="text-xs text-slate-500">Exported Files</p>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      )}
+
+                      {/* Raw JSON Response */}
+                      <div className="p-4 rounded-xl bg-slate-800/30 border border-slate-700/30">
+                        <h4 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                          <Zap className="w-4 h-4 text-violet-400" />
+                          Raw JSON Response
+                        </h4>
+                        <pre className="p-4 bg-slate-950/50 rounded-lg overflow-x-auto text-xs font-mono text-slate-300 max-h-96 overflow-y-auto">
+                          {JSON.stringify(response.data, null, 2)}
+                        </pre>
+                      </div>
+                    </div>
+                ) : (
+                  <p className="text-slate-500 text-center py-8">No data received</p>
+                )}
               </div>
             </div>
-
-            {settings.spatialAudio && (
-              <div className="bg-black/30 rounded-lg p-4">
-                <div className="text-sm text-gray-400 mb-2">3D Spatial Position</div>
-                <div className="grid grid-cols-3 gap-2 text-xs">
-                  <div>X: <span className="text-cyan-400">{audioOutput.spatialPosition.x.toFixed(1)}</span></div>
-                  <div>Y: <span className="text-purple-400">{audioOutput.spatialPosition.y.toFixed(1)}</span></div>
-                  <div>Z: <span className="text-green-400">{audioOutput.spatialPosition.z.toFixed(1)}</span></div>
-                </div>
-              </div>
-            )}
-          </div>
+          )}
         </div>
       </div>
 
-      {/* Waveform Visualization */}
-      <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-        <h3 className="text-xl font-semibold text-white mb-4">
-          🌊 Real-time Audio Waveform
-        </h3>
-        
-        <div className="bg-black/30 rounded-lg p-4">
-          <canvas 
-            ref={canvasRef}
-            width={800}
-            height={200}
-            className="w-full h-32 border border-gray-600 rounded"
-          />
-          <div className="text-xs text-gray-500 text-center mt-2">
-            {settings.realtimeProcessing ? 'Live neuroacoustic conversion active' : 'Conversion stopped'}
-          </div>
-        </div>
-      </div>
-
-      {/* Conversion Controls */}
-      <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-        <h3 className="text-xl font-semibold text-white mb-4">
-          🎛️ Conversion Controls
-        </h3>
-        
-        <div className="flex flex-wrap gap-4 mb-6">
-          <button
-            onClick={startConversion}
-            disabled={settings.realtimeProcessing}
-            className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-              settings.realtimeProcessing
-                ? 'bg-gray-500/20 text-gray-500 cursor-not-allowed'
-                : 'bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30'
-            }`}
-          >
-            ▶️ Start Conversion
-          </button>
-          
-          <button
-            onClick={stopConversion}
-            disabled={!settings.realtimeProcessing}
-            className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-              !settings.realtimeProcessing
-                ? 'bg-gray-500/20 text-gray-500 cursor-not-allowed'
-                : 'bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30'
-            }`}
-          >
-            ⏹️ Stop Conversion
-          </button>
-          
-          <button className="px-6 py-3 rounded-lg font-medium bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/30 transition-all duration-300">
-            ⏸️ Pause Recording
-          </button>
-        </div>
-
-        <div className="grid grid-cols-3 gap-4">
-          <button 
-            onClick={() => exportAudio('WAV')}
-            className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 hover:from-blue-500/30 hover:to-cyan-500/30 rounded-lg p-4 border border-blue-500/30 transition-all duration-300"
-          >
-            <div className="text-lg font-semibold text-blue-400">📁 Export WAV</div>
-            <div className="text-sm text-gray-400 mt-1">Uncompressed audio</div>
-          </button>
-          
-          <button 
-            onClick={() => exportAudio('MP3')}
-            className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 hover:from-purple-500/30 hover:to-pink-500/30 rounded-lg p-4 border border-purple-500/30 transition-all duration-300"
-          >
-            <div className="text-lg font-semibold text-purple-400">🎵 Export MP3</div>
-            <div className="text-sm text-gray-400 mt-1">Compressed audio</div>
-          </button>
-          
-          <button 
-            onClick={() => exportAudio('MIDI')}
-            className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 hover:from-green-500/30 hover:to-emerald-500/30 rounded-lg p-4 border border-green-500/30 transition-all duration-300"
-          >
-            <div className="text-lg font-semibold text-green-400">🎹 Export MIDI</div>
-            <div className="text-sm text-gray-400 mt-1">Musical notation</div>
-          </button>
-        </div>
-      </div>
-
-      {/* Statistics */}
-      <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-        <h3 className="text-xl font-semibold text-white mb-4">
-          📊 Conversion Statistics
-        </h3>
-        
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-black/30 rounded-lg p-4 text-center">
-            <div className="text-2xl font-bold text-cyan-400">
-              {stats.totalConversions.toLocaleString()}
-            </div>
-            <div className="text-sm text-gray-400">Total Conversions</div>
-          </div>
-          
-          <div className="bg-black/30 rounded-lg p-4 text-center">
-            <div className="text-2xl font-bold text-green-400">
-              {stats.averageLatency}ms
-            </div>
-            <div className="text-sm text-gray-400">Average Latency</div>
-          </div>
-          
-          <div className="bg-black/30 rounded-lg p-4 text-center">
-            <div className="text-2xl font-bold text-purple-400">
-              {stats.conversionQuality}%
-            </div>
-            <div className="text-sm text-gray-400">Conversion Quality</div>
-          </div>
-          
-          <div className="bg-black/30 rounded-lg p-4 text-center">
-            <div className="text-2xl font-bold text-yellow-400">
-              {stats.exportedFiles}
-            </div>
-            <div className="text-sm text-gray-400">Exported Files</div>
-          </div>
-        </div>
+      {/* Footer */}
+      <div className="max-w-7xl mx-auto mt-8 text-center">
+        <p className="text-xs text-slate-600">
+          Neuroacoustic Converter • Real API Data • No Mock Values
+        </p>
       </div>
     </div>
-  )
+  );
 }
+
+
+
+
+
+
+
 

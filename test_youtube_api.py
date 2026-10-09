@@ -2,13 +2,20 @@
 """Quick test of YouTube API integration"""
 import os
 from googleapiclient.discovery import build
+from dotenv import load_dotenv
 
-# Set API key
-os.environ['YOUTUBE_API_KEY'] = 'AIzaSyDILX5WSVasL9CaBl8wtvQJlvD5MFzmIGc'
+# Load API key from .env file (NEVER hardcode secrets!)
+load_dotenv()
+YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
+
+if not YOUTUBE_API_KEY:
+    print("❌ ERROR: YOUTUBE_API_KEY not found in .env file")
+    print("Add this to your .env file: YOUTUBE_API_KEY=your_key_here")
+    exit(1)
 
 try:
     # Initialize YouTube API client
-    youtube = build('youtube', 'v3', developerKey=os.environ['YOUTUBE_API_KEY'])
+    youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
     
     # Test with a known video (Rick Astley - Never Gonna Give You Up)
     request = youtube.videos().list(

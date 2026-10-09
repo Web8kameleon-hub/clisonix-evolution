@@ -3,15 +3,25 @@ Copyright (c) Clisonix Cloud. All rights reserved.
 Closed Source License.
 """
 
-from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
-import psutil
 import logging
 import time
+
+import psutil
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from industrial_data import router as industrial_router
+
+try:
+    from apps.api.routes.model_governance_routes import (
+        router as model_governance_router,
+    )
+except Exception:
+    model_governance_router = None
 
 app = FastAPI(title="Clisonix Industrial API", description="Industrial backend for monitoring, logging, and control.")
 app.include_router(industrial_router)
+if model_governance_router is not None:
+    app.include_router(model_governance_router)
 
 @app.get("/status")
 def get_status():

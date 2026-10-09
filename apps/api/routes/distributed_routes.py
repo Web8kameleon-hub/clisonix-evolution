@@ -12,7 +12,6 @@ NETWORK_NODES = {
         "id": "node_001",
         "name": "Primary AGI Node",
         "status": "active",
-        "cpu_usage": 45.2,
         "memory_usage": 62.8,
         "tasks_completed": 1247,
         "uptime": "12d 4h 23m",

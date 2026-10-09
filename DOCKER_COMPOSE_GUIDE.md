@@ -20,7 +20,7 @@ This docker-compose configuration provides a complete local development and prod
 ```bash
 # Verify Docker and Docker Compose installed
 docker --version
-docker-compose --version
+docker compose version
 
 # Ensure ports are available
 # Required: 80, 443, 3000, 5432, 5601, 6379, 8000, 9000, 9001, 9200
@@ -29,17 +29,22 @@ docker-compose --version
 ### 1. Setup Environment
 
 ```bash
-# Copy environment template
-cp .env.example .env
+# Copy production template
+cp .env.production.template .env.production
 
-# Edit .env with your values (especially secrets)
+# Edit .env.production with your values (especially secrets)
 # REQUIRED changes:
-# - JWT_SECRET_KEY
-# - API_KEY_SECRET
-# - STRIPE keys (if using)
-# - SLACK_WEBHOOK_URL (if using)
+# - POSTGRES_PASSWORD
+# - MONGO_ROOT_PASSWORD
+# - NEO4J_PASSWORD
+# - MINIO_ROOT_PASSWORD
+# - GRAFANA_ADMIN_PASSWORD
+# - KITCHEN_RUN_API_KEY
 
-nano .env  # or your preferred editor
+# Validate env file before startup
+bash ./scripts/preflight-env.sh .env.production
+
+nano .env.production  # or your preferred editor
 ```
 
 ### 2. Create Required Directories
@@ -60,21 +65,21 @@ openssl req -x509 -newkey rsa:2048 -keyout nginx\ssl\clisonix.key -out nginx\ssl
 
 ```bash
 # Start all services in background
-docker-compose up -d
+docker compose --env-file .env.production up -d
 
 # View logs
-docker-compose logs -f
+docker compose --env-file .env.production logs -f
 
 # Watch specific service
-docker-compose logs -f api
-docker-compose logs -f postgres
+docker compose --env-file .env.production logs -f api
+docker compose --env-file .env.production logs -f postgres
 ```
 
 ### 4. Verify Services
 
 ```bash
 # Check all containers running
-docker-compose ps
+docker compose --env-file .env.production ps
 
 # Test API
 curl http://localhost:8000/docs  # Swagger UI
@@ -84,10 +89,10 @@ curl http://localhost:8000/health
 curl http://localhost:3000
 
 # Test Database
-docker-compose exec postgres psql -U clisonix -d clisonix_db -c "SELECT version();"
+docker compose --env-file .env.production exec postgres psql -U clisonix -d clisonixdb -c "SELECT version();"
 
 # Test Redis
-docker-compose exec redis redis-cli ping
+docker compose --env-file .env.production exec redis redis-cli ping
 
 # Test MinIO
 curl http://localhost:9000/minio/health/live
@@ -304,6 +309,7 @@ docker inspect clisonix-api
 ### Before Deploying to Production
 
 1. **Change ALL secrets in .env**
+
    ```bash
    # Generate strong keys
    openssl rand -base64 32  # JWT_SECRET_KEY
@@ -311,12 +317,14 @@ docker inspect clisonix-api
    ```
 
 2. **Update Database Credentials**
+
    ```
    DB_USER=prod_user
    DB_PASSWORD=<very_secure_password>
    ```
 
 3. **Configure SSL Certificates**
+
    ```bash
    # Use real certificates (Let's Encrypt recommended)
    # Copy to nginx/ssl/
@@ -325,12 +333,14 @@ docker inspect clisonix-api
    ```
 
 4. **Enable Database Backups**
+
    ```bash
    # Add to crontab
    0 2 * * * /path/to/backup.sh
    ```
 
 5. **Configure Monitoring**
+
    ```bash
    # Set SLACK_WEBHOOK_URL in .env
    # Configure Sentry for error tracking
@@ -338,6 +348,7 @@ docker inspect clisonix-api
    ```
 
 6. **Set Resource Limits**
+
    ```yaml
    # In docker-compose.yml
    deploy:

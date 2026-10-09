@@ -30,15 +30,16 @@ dashboard   IN  A   76.76.21.21
 
 ; --- TXT & Security ---
 @           IN  TXT "v=spf1 include:_spf.google.com ~all"
-_dmarc      IN  TXT "v=DMARC1; p=none; rua=mailto:postmaster@clisonix.com"
+_dmarc      IN  TXT "v=DMARC1; p=none; rua=mailto:clisonix@pm.me"
 selector1._domainkey IN TXT "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCt7"
 
 ; --- CAA (SSL Certificate Authority Authorization) ---
 @       IN  CAA 0 issue "letsencrypt.org"
 @       IN  CAA 0 issuewild "letsencrypt.org"
-@       IN  CAA 0 iodef "mailto:admin@clisonix.com"
+@       IN  CAA 0 iodef "mailto:clisonix@pm.me"
 
 ; --- Optional Subdomains (Future Services) ---
 status      IN  A 76.76.21.21
 system      IN  A 76.76.21.21
 neuro       IN  A 76.76.21.21
+

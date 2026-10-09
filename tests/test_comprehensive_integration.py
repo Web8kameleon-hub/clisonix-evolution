@@ -30,7 +30,7 @@ def alba_url():
 @pytest.fixture
 def albi_url():
     """ALBI service endpoint"""
-    return "http://localhost:6666"
+    return "http://localhost:6680"
 
 @pytest.fixture
 def jona_url():

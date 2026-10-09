@@ -17,35 +17,35 @@ metadata:
     nginx.ingress.kubernetes.io/rate-limit: "100"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    
+
     # CORS annotations
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, OPTIONS, PATCH"
     nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
-    
+
     # Security headers
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "X-Frame-Options: SAMEORIGIN";
       more_set_headers "X-Content-Type-Options: nosniff";
       more_set_headers "X-XSS-Protection: 1; mode=block";
       more_set_headers "Referrer-Policy: strict-origin-when-cross-origin";
-    
+
     # Cert manager for automatic SSL
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    
+
     # Prometheus monitoring
     prometheus.io/probe: "true"
 
 spec:
   ingressClassName: nginx
-  
+
   tls:
     - hosts:
         - clisonix.com
         - api.clisonix.com
         - app.clisonix.com
       secretName: clisonix-tls-cert
-  
+
   rules:
     # API routes
     - host: api.clisonix.com
@@ -58,7 +58,7 @@ spec:
                 name: clisonix-api-service
                 port:
                   number: 8000
-    
+
     # Frontend routes
     - host: app.clisonix.com
       http:
@@ -70,7 +70,7 @@ spec:
                 name: clisonix-frontend-service
                 port:
                   number: 3000
-    
+
     # Main domain - serve frontend
     - host: clisonix.com
       http:
@@ -89,7 +89,7 @@ spec:
                 name: clisonix-frontend-service
                 port:
                   number: 3000
-    
+
     # Metrics endpoint
     - host: metrics.clisonix.com
       http:
@@ -111,7 +111,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: admin@clisonix.com
+    email: clisonix@pm.me
     privateKeySecretRef:
       name: letsencrypt-prod-key
     solvers:
@@ -128,7 +128,7 @@ metadata:
 spec:
   acme:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
-    email: admin@clisonix.com
+    email: clisonix@pm.me
     privateKeySecretRef:
       name: letsencrypt-staging-key
     solvers:
@@ -169,12 +169,12 @@ data:
       server clisonix-api-service:8000;
       keepalive 32;
     }
-    
+
     upstream frontend_backend {
       server clisonix-frontend-service:3000;
       keepalive 32;
     }
-    
+
     proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=api_cache:10m max_size=1g inactive=60m use_temp_path=off;
 
 ---
@@ -248,4 +248,3 @@ spec:
       backendRefs:
         - name: clisonix-frontend-service
           port: 3000
-

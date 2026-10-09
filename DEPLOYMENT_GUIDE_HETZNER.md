@@ -1,7 +1,7 @@
 # Clisonix Cloud - Hetzner Deployment Guide
 
 **Server Provider:** Hetzner Cloud (console.hetzner.com)  
-**Account:** K1266374525 (amati.ledian@gmail.com)  
+**Account:** K1266374525 (clisonix@pm.me)  
 **Domain:** clisonix.com (managed via STRATO)  
 **Date:** December 11, 2025
 
@@ -161,7 +161,7 @@ nslookup clisonix.com
 su - clisonix
 
 # Clone repo
-git clone https://github.com/LedjanAhmati/Clisonix-cloud.git
+git clone https://github.com/Web8kameleon-hub/clisonix.com.git
 cd Clisonix-cloud
 ```
 
@@ -196,7 +196,7 @@ GRAFANA_ADMIN_PASSWORD=SECURE_PASSWORD
 # Email (Optional - for notifications)
 SMTP_HOST=smtp.strato.de
 SMTP_PORT=465
-SMTP_USER=info@clisonix.com
+SMTP_USER=clisonix@pm.me
 SMTP_PASSWORD=YOUR_EMAIL_PASSWORD
 EOF
 
@@ -397,19 +397,6 @@ systemctl restart docker
 ## 📊 Production URLs
 
 After deployment, these URLs will be live:
-
-```
-🌐 Main Website:       https://clisonix.com
-📡 API:                https://clisonix.com/api
-📖 API Docs:           https://clisonix.com/api/docs
-📊 Grafana:            https://clisonix.com/grafana
-🔍 Prometheus:         https://clisonix.com/prometheus
-
-AI Agents (Internal):
-- ALBA:  http://localhost:5555
-- ALBI:  http://localhost:6666
-- JONA:  http://localhost:7777
-- Master: http://localhost:9999
 ```
 
 ---
@@ -417,16 +404,18 @@ AI Agents (Internal):
 ## 💰 Cost Breakdown
 
 ### Hetzner Cloud
+
 - **CX32 Server:** €8.21/month
 - **Bandwidth:** 20TB included
 - **Backups (optional):** +20% (+€1.64/month)
 
 ### STRATO
-- **Hosting Basic:** €1/month (first 12 months)
+
 - **clisonix.com domain:** Included
 - **Email:** 4 mailboxes included
 
 ### Third-Party Services
+
 - **Stripe:** 1.4% + €0.25 per transaction
 - **Monitoring:** Free (self-hosted)
 
@@ -437,6 +426,7 @@ AI Agents (Internal):
 ## 🚨 Troubleshooting
 
 ### Service Won't Start
+
 ```bash
 # Check Docker logs
 docker compose logs [service_name]
@@ -449,6 +439,7 @@ netstat -tulpn | grep LISTEN
 ```
 
 ### DNS Not Resolving
+
 ```bash
 # Check DNS propagation
 dig clisonix.com
@@ -459,6 +450,7 @@ systemctl restart systemd-resolved
 ```
 
 ### SSL Certificate Issues
+
 ```bash
 # Check certificate
 certbot certificates
@@ -471,6 +463,7 @@ nginx -t
 ```
 
 ### Database Connection Errors
+
 ```bash
 # Check PostgreSQL
 docker compose exec postgres psql -U clisonix -d clisonix_prod
@@ -483,14 +476,14 @@ docker compose exec redis redis-cli ping
 
 ## 📞 Support Contacts
 
-**Hetzner Support:** support@hetzner.com  
-**STRATO Support:** https://www.strato.de/kontakt
+**Hetzner Support:** <support@hetzner.com>  
+**STRATO Support:** <https://www.strato.de/kontakt>
 
 **Clisonix SRE Team:** (your internal team contact)
 
 ---
 
-## ✅ Deployment Complete!
+## ✅ Deployment Complete
 
 After completing all steps:
 
@@ -503,10 +496,11 @@ After completing all steps:
 7. ✅ Monitoring active
 8. ✅ Backups configured
 
-**Platform is LIVE at:** https://clisonix.com 🚀
+**Platform is LIVE at:** <https://clisonix.com> 🚀
 
 ---
 
 **Deployed:** December 11, 2025  
 **Version:** v1.0.0  
 **Environment:** Production
+

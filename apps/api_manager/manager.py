@@ -52,11 +52,29 @@ class PolicyRequest(BaseModel):
     policy: Dict[str, Any]
 
 
+ALLOWED_PRODUCER_HOSTS = frozenset(["api.clisonix.com", "producer.clisonix.com", "localhost", "127.0.0.1"])
+
+def validate_producer_url(url: str) -> bool:
+    """Validate producer URL to prevent SSRF attacks"""
+    try:
+        from urllib.parse import urlparse
+        parsed = urlparse(url)
+        if parsed.scheme not in ("http", "https"):
+            return False
+        if parsed.hostname not in ALLOWED_PRODUCER_HOSTS:
+            return False
+        return True
+    except Exception:
+        return False
+
 @app.post("/sync_from_producer")
 def sync_from_producer(req: SyncRequest, x_sync_token: Optional[str] = Header(None)):
     """Fetch published APIs from a Producer and store them in the Manager catalog."""
     if x_sync_token != SYNC_TOKEN:
         raise HTTPException(status_code=401, detail="Invalid sync token")
+    # SECURITY: Validate URL to prevent SSRF
+    if not validate_producer_url(req.producer_url):
+        raise HTTPException(status_code=400, detail="Invalid or untrusted producer URL")
     try:
         resp = requests.get(req.producer_url.rstrip("/") + "/apis?public_only=true", timeout=5)
     except Exception as e:

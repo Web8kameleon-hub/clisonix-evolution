@@ -3,34 +3,49 @@
 🧠 ADVANCED ANALYTICS API
 ==========================
 API për analiza të avancuara dhe insights inteligjente
-Pjesë e NeuroSonix Industrial Backend
+Pjesë e Clisonix Industrial Backend
 """
 
 from __future__ import annotations
+
 import asyncio
 import json
 import uuid
-from datetime import datetime, timezone, timedelta
-from typing import Dict, List, Any, Optional
-from fastapi import APIRouter, HTTPException, BackgroundTasks
+from datetime import datetime, timedelta, timezone
+from typing import Any, Dict, List, Optional
+
+from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel
 
 # Import cycle engine
 try:
-    from cycle_engine import CycleEngine, CycleType, CycleStatus
-except:
-    CycleEngine = None
+    from cycle_engine import CycleEngine, CycleStatus, CycleType
+except ImportError:
+    CycleEngine = None  # type: ignore[assignment,misc]
 
 # Import ALBA and ASI cores
 try:
     from alba_core import AlbaCore
-except:
-    AlbaCore = None
+except ImportError:
+    AlbaCore = None  # type: ignore[assignment,misc]
 
 try:
     from asi_core import ASICore
-except:
-    ASICore = None
+except ImportError:
+    ASICore = None  # type: ignore[assignment,misc]
+
+# Import compliance modules
+try:
+    from ai_model_versioning import AIComplianceChecker, AIModelRegistry
+    from database_encryption_config import DatabaseEncryption, get_encrypted_db_url
+    from monitoring_system_config import (
+        ComplianceMonitor,
+        ServiceMonitor,
+        SystemMonitor,
+    )
+    from payment_gateway_config import PaymentGatewayConfig, StripePaymentManager
+except ImportError as e:
+    print(f"Warning: Compliance modules not fully loaded: {e}")
 
 router = APIRouter(prefix="/analytics", tags=["Advanced Analytics"])
 
@@ -59,13 +74,13 @@ class AnalyticsResult(BaseModel):
     query_id: str
     results: Dict[str, Any]
     insights: List[str]
-    confidence: float
+    confidence: Optional[float]
     processing_time: float
     timestamp: datetime
 
 # Global analytics state
-analytics_models = {}
-active_analyses = {}
+analytics_models: Dict[str, Dict[str, Any]] = {}
+active_analyses: Dict[str, Any] = {}
 
 @router.post("/query", response_model=AnalyticsResult)
 async def run_analytics_query(query: AnalyticsQuery, background_tasks: BackgroundTasks):
@@ -102,7 +117,7 @@ async def get_analytics_result(query_id: str):
 async def generate_insights(request: InsightRequest):
     """Gjenero insights inteligjente nga të dhënat"""
     try:
-        insights = await generate_intelligent_insights(request.domain, request.context, request.depth)
+        insights = await generate_intelligent_insights(request.domain, request.context, request.depth or "standard")
 
         return {
             "domain": request.domain,
@@ -199,14 +214,15 @@ async def process_analytics_query(query_id: str, query: AnalyticsQuery):
         processing_time = (datetime.now(timezone.utc) - start_time).total_seconds()
 
         # Store results
-        active_analyses[query_id] = AnalyticsResult(
+        result_obj: AnalyticsResult = AnalyticsResult(
             query_id=query_id,
             results=results,
             insights=insights,
-            confidence=0.87,
+            confidence=None,
             processing_time=processing_time,
             timestamp=datetime.now(timezone.utc)
         )
+        active_analyses[query_id] = result_obj
 
     except Exception as e:
         active_analyses[query_id] = {
@@ -216,163 +232,84 @@ async def process_analytics_query(query_id: str, query: AnalyticsQuery):
         }
 
 async def generate_intelligent_insights(domain: str, context: Dict[str, Any], depth: str) -> List[str]:
-    """Generate intelligent insights based on domain and context"""
-    insights = []
-
-    # Domain-specific insights
-    if domain == "eeg":
-        insights.extend([
-            "Neural patterns show increased gamma activity during creative tasks",
-            "Alpha wave synchronization indicates deep focus states",
-            "Beta wave anomalies may suggest cognitive load issues"
-        ])
-    elif domain == "audio":
-        insights.extend([
-            "Frequency analysis reveals emotional content in voice patterns",
-            "Spectral centroid changes correlate with stress levels",
-            "Harmonic content analysis shows vocal health indicators"
-        ])
-    elif domain == "industrial":
-        insights.extend([
-            "Equipment vibration patterns predict maintenance needs",
-            "Energy consumption spikes indicate process inefficiencies",
-            "Temperature fluctuations correlate with quality variations"
-        ])
-
-    # Depth-based additional insights
-    if depth == "deep":
-        insights.extend([
-            "Cross-domain correlations reveal systemic optimization opportunities",
-            "Temporal pattern analysis shows cyclical performance trends",
-            "Anomaly detection algorithms identify emerging risk factors"
-        ])
-
-    return insights
+    """Generate insights from real domain data — returns empty list until real analysis engine is connected."""
+    return []
 
 async def generate_analytics_dashboard() -> Dict[str, Any]:
-    """Generate comprehensive analytics dashboard data"""
+    """Return real analytics dashboard data — metrics sourced from live system state."""
     return {
         "metrics": {
-            "total_queries": 1247,
-            "active_models": 8,
-            "prediction_accuracy": 0.91,
-            "processing_throughput": 45.2
+            "total_queries": len(active_analyses),
+            "active_models": len([m for m in analytics_models.values() if m.get("status") == "completed"]),
+            "prediction_accuracy": None,
+            "processing_throughput": None
         },
-        "insights": [
-            "Neural network accuracy improved by 12% this week",
-            "New anomaly detection patterns identified in EEG streams",
-            "Predictive maintenance reduced downtime by 23%"
-        ],
-        "predictions": [
-            {
-                "type": "equipment_failure",
-                "probability": 0.15,
-                "timeframe": "48 hours",
-                "affected_system": "EEG Processor Unit 3"
-            }
-        ],
-        "alerts": [
-            {
-                "level": "warning",
-                "message": "Model accuracy dropping on audio classification",
-                "action_required": "Retrain model with new dataset"
-            }
-        ]
+        "insights": [],
+        "predictions": [],
+        "alerts": []
     }
 
 # Analysis functions
 async def run_predictive_analysis(query: AnalyticsQuery) -> Dict[str, Any]:
-    """Run predictive analytics"""
-    return {
-        "predictions": [
-            {"metric": "system_load", "value": 78.5, "confidence": 0.89},
-            {"metric": "error_rate", "value": 2.1, "confidence": 0.76}
-        ],
-        "time_series": {
-            "timestamps": ["2025-12-30T08:00", "2025-12-30T09:00", "2025-12-30T10:00"],
-            "values": [65.2, 72.8, 78.5]
-        }
-    }
+    """Run predictive analytics — returns empty result until real model is connected."""
+    return {"predictions": [], "time_series": {}}
 
 async def run_diagnostic_analysis(query: AnalyticsQuery) -> Dict[str, Any]:
-    """Run diagnostic analytics"""
-    return {
-        "diagnostics": [
-            {"component": "EEG Processor", "status": "optimal", "issues": []},
-            {"component": "Audio Pipeline", "status": "warning", "issues": ["latency_spike"]}
-        ],
-        "root_causes": [
-            "Network congestion causing audio pipeline delays",
-            "Memory fragmentation in EEG processing buffers"
-        ]
-    }
+    """Run diagnostic analytics — returns empty result until real diagnostics engine is connected."""
+    return {"diagnostics": [], "root_causes": []}
 
 async def run_prescriptive_analysis(query: AnalyticsQuery) -> Dict[str, Any]:
-    """Run prescriptive analytics"""
-    return {
-        "recommendations": [
-            {
-                "action": "Increase buffer size",
-                "component": "Audio Pipeline",
-                "expected_impact": "Reduce latency by 40%",
-                "priority": "high"
-            },
-            {
-                "action": "Optimize memory allocation",
-                "component": "EEG Processor",
-                "expected_impact": "Improve throughput by 25%",
-                "priority": "medium"
-            }
-        ]
-    }
+    """Run prescriptive analytics — returns empty result until real prescriptive engine is connected."""
+    return {"recommendations": []}
 
 async def run_exploratory_analysis(query: AnalyticsQuery) -> Dict[str, Any]:
-    """Run exploratory analytics"""
-    return {
-        "correlations": [
-            {"variables": ["eeg_gamma", "cognitive_load"], "correlation": 0.78},
-            {"variables": ["audio_frequency", "emotional_state"], "correlation": 0.65}
-        ],
-        "clusters": [
-            {"cluster_id": 1, "size": 245, "characteristics": ["high_gamma", "low_alpha"]},
-            {"cluster_id": 2, "size": 189, "characteristics": ["balanced_waves", "normal_range"]}
-        ]
-    }
+    """Run exploratory analytics — returns empty result until real exploratory engine is connected."""
+    return {"correlations": [], "clusters": []}
 
 async def generate_query_insights(results: Dict[str, Any], query_type: str) -> List[str]:
-    """Generate insights from query results"""
-    insights = []
-
-    if query_type == "predictive":
-        insights.append("System load predicted to increase 15% in next 24 hours")
-        insights.append("Error rate trending downward, indicating improving stability")
-
-    elif query_type == "diagnostic":
-        insights.append("Audio pipeline experiencing intermittent latency issues")
-        insights.append("EEG processor operating within optimal parameters")
-
-    elif query_type == "prescriptive":
-        insights.append("Buffer size optimization could reduce system latency by 40%")
-        insights.append("Memory allocation improvements recommended for better performance")
-
-    else:  # exploratory
-        insights.append("Strong correlation found between gamma waves and cognitive load")
-        insights.append("Two distinct neural pattern clusters identified in dataset")
-
-    return insights
+    """Generate insights from real query results"""
+    return []
 
 async def train_model_background(model_id: str, config: Dict[str, Any]):
     """Train predictive model in background"""
     try:
-        # Simulate training process
-        await asyncio.sleep(5)  # Simulate training time
-
         # Update model status
         analytics_models[model_id].update({
             "status": "completed",
-            "accuracy": 0.89,
+            "accuracy": None,
             "training_completed_at": datetime.now(timezone.utc)
         })
 
     except Exception as e:
         analytics_models[model_id]["status"] = f"failed: {str(e)}"
+
+
+# ============================================================================
+# STANDALONE APP (for Docker deployment)
+# ============================================================================
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI(
+    title="Clisonix Advanced Analytics API",
+    version="1.0.0",
+    description="Advanced analytics and insights API"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(router)
+
+@app.get("/health")
+async def health():
+    return {"status": "healthy", "service": "analytics"}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8007)

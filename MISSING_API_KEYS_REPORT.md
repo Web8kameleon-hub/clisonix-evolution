@@ -45,17 +45,17 @@ YOUTUBE_API_KEY=AIzaSy...              # Get from: https://console.cloud.google.
 
 ---
 
-### 3. **OpenAI API** 🟡 OPTIONAL (For AI Agent Enhancements)
-**Service**: AI agents (Alba, Albi, Jona) - for advanced language processing
+### 3. **Local AI Runtime** ✅ ACTIVE
+**Service**: AI agents (Alba, Albi, Jona) - local processing mode
 
 **Missing Key**:
 ```bash
-OPENAI_API_KEY=sk-proj-...             # Get from: https://platform.openai.com/api-keys
+No external AI key required
 ```
 
-**Impact**: ⚠️ Advanced AI features disabled (basic functionality works)  
-**Current**: Uses fallback/local models  
-**Action**: Only needed if enabling GPT-4 integration for agents
+**Impact**: ✅ Advanced AI flows available in local mode  
+**Current**: Uses local models/runtime  
+**Action**: Keep external paid AI keys disabled
 
 ---
 
@@ -130,7 +130,7 @@ JWT_SECRET_KEY=$(openssl rand -hex 32)
 ### ⚠️ Limited Functionality (External Keys Required):
 - **Billing/Payments**: Requires Stripe keys
 - **YouTube Integration**: Requires YouTube Data API key
-- **Advanced AI**: Requires OpenAI key (optional)
+- **Advanced AI**: Uses local runtime (no paid AI key)
 
 ---
 
@@ -144,7 +144,7 @@ JWT_SECRET_KEY=$(openssl rand -hex 32)
 
 ### Priority 2 - Optional Features:
 1. Get YouTube API key (if using video features)
-2. Consider OpenAI key (for enhanced AI capabilities)
+2. Monitor local AI runtime health/capacity
 
 ---
 
@@ -162,12 +162,11 @@ JWT_SECRET_KEY=$(openssl rand -hex 32)
 If you need help setting up any of these services:
 - Stripe: https://stripe.com/docs
 - YouTube API: https://developers.google.com/youtube/v3
-- OpenAI: https://platform.openai.com/docs
 
 ---
 
 **Status Summary**:
 - 🔴 **Stripe**: REQUIRED for production (payments)
 - 🟡 **YouTube**: OPTIONAL (video integration only)
-- 🟡 **OpenAI**: OPTIONAL (AI enhancements)
+- ✅ **Local AI Runtime**: ACTIVE (no external paid key)
 - ✅ **All core services**: Working without external keys

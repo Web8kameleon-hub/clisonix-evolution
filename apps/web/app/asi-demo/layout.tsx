@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ASI Demo Layout
  * ===============
  * 
@@ -10,7 +10,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Clisonix ASI Demo',
   description: 'Interactive demonstration of Clisonix Artificial Superintelligence system with Trinity architecture',
-  keywords: ['ASI', 'AI', 'Clisonix', 'Alba', 'Albi', 'Jona', 'Trinity'],
+  keywords: ['ASI', 'AI', 'Clisonix', 'Neural', 'Trinity', 'Intelligence'],
 };
 
 export default function ASIDemoLayout({
@@ -20,4 +20,11 @@ export default function ASIDemoLayout({
 }) {
   return children;
 }
+
+
+
+
+
+
+
 

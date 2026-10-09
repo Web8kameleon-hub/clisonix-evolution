@@ -1,283 +1,552 @@
-﻿/**
- * Clisonix Modules Hub - Industrial Dashboard Access
- * ALBI (EEG Processing) + ALBA (Data Collection) + JONA (Neural Alignment & Audio Synthesis)
+/**
+ * Clisonix Dashboard
+ * Professional UI inspired by Figma, Postman, Datadog, Opera
+ * No emoji - clean Lucide icons only
  */
 
-"use client"
+'use client';
 
-import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import {
+  Brain,
+  Settings,
+  Waves,
+  GraduationCap,
+  Plane,
+  Activity,
+  Zap,
+  Cloud,
+  User,
+  BarChart3,
+  Layout,
+  Code2,
+  ChevronRight,
+  Search,
+  Command,
+  ExternalLink,
+  MessageSquare,
+  Globe,
+  Archive,
+  Target,
+  Users,
+  Shield
+} from 'lucide-react';
+import {
+  PLATFORM_LABELS,
+  getModulePlatformById,
+  getModulePlatformByRoute,
+} from '../../src/lib/modules/platform-map';
 
-interface ModuleStatus {
-  albi: 'active' | 'processing' | 'offline'
-  alba: 'collecting' | 'analyzing' | 'offline'  
-  jona: 'monitoring' | 'synthesizing' | 'offline'
+interface SessionUser {
+  id: string;
+  name: string;
+  email: string;
 }
 
-export default function ModulesPage() {
-  const [moduleStatus, setModuleStatus] = useState<ModuleStatus>({
-    albi: 'offline',
-    alba: 'offline', 
-    jona: 'offline'
-  })
+const SUPPORT_EMAIL = process.env.NEXT_PUBLIC_SUPPORT_EMAIL || '';
+
+// Module definitions with Lucide icons
+const moduleCatalog = [
+  {
+    id: 'zurich',
+    name: 'Zürich Engine',
+    description: 'Deterministic 9-stage reasoning without AI randomness',
+    icon: Target,
+    category: 'AI Reasoning',
+    href: '/zurich',
+    accent: 'slate'
+  },
+  {
+    id: 'debate',
+    name: 'Trinity Debate',
+    description: '5 AI personas debate any topic from different perspectives',
+    icon: Users,
+    category: 'AI Reasoning',
+    href: '/debate',
+    accent: 'slate'
+  },
+  {
+    id: 'curiosity-ocean',
+    name: 'Curiosity Ocean',
+    description: 'AI-powered chat interface for exploring knowledge',
+    icon: Waves,
+    category: 'AI Chat',
+    href: '/modules/curiosity-ocean',
+    accent: 'slate'
+  },
+  {
+    id: 'web-reader',
+    name: 'Web Reader',
+    description: 'Browse any webpage, search the web, and chat with page content',
+    icon: Globe,
+    category: 'AI Chat',
+    href: '/modules/web-reader',
+    accent: 'slate'
+  },
+  {
+    id: 'archive',
+    name: 'Archive & Research',
+    description: 'Search ArXiv, Wikipedia, PubMed and 5000+ global data sources',
+    icon: Archive,
+    category: 'Research',
+    href: '/modules/archive',
+    accent: 'slate'
+  },
+  {
+    id: 'social-intelligence',
+    name: 'Social Intelligence',
+    description: 'Direct social search for video, photos, figures and statuses',
+    icon: Globe,
+    category: 'Research',
+    href: '/modules/social-intelligence',
+    accent: 'slate'
+  },
+  {
+    id: 'specialized-chat',
+    name: 'Specialized Expert Chat',
+    description: 'Expert-level AI conversations in advanced domains',
+    icon: GraduationCap,
+    category: 'AI Chat',
+    href: '/modules/specialized-chat',
+    accent: 'slate'
+  },
+  {
+    id: 'specialized-chat-backend',
+    name: 'Specialized Chat (Backend)',
+    description: 'Direct access to Ocean Core Specialized Chat HTML',
+    icon: MessageSquare,
+    category: 'AI Chat',
+    href: 'http://localhost:8030/chat',
+    accent: 'slate',
+    external: true
+  },
+  {
+    id: 'aviation-weather',
+    name: 'Aviation Weather',
+    description: 'METAR, TAF and real-time flight conditions',
+    icon: Plane,
+    category: 'Environment',
+    href: '/modules/aviation-weather',
+    accent: 'slate'
+  },
+  {
+    id: 'eeg-analysis',
+    name: 'EEG Analysis',
+    description: 'Real-time brainwave pattern analysis',
+    icon: Activity,
+    category: 'Neuroscience',
+    href: '/modules/eeg-analysis',
+    accent: 'slate'
+  },
+  {
+    id: 'neural-synthesis',
+    name: 'Neural Synthesis',
+    description: 'Synthesize neural patterns and waveforms',
+    icon: Zap,
+    category: 'Neuroscience',
+    href: '/modules/neural-synthesis',
+    accent: 'slate'
+  },
+  {
+    id: 'nanogrid-zeiss',
+    name: 'NanoGrid + ZEISS',
+    description: 'Unified limit-mode control for ZEISS Vision Ultra workflows',
+    icon: Brain,
+    category: 'Neuroscience',
+    href: '/modules/nanogrid-zeiss',
+    accent: 'slate'
+  },
+  {
+    id: 'kloud-bridge',
+    name: 'Kloud Bridge',
+    description: 'Isolated sovereign fabric gateway for secure routing, sync and telemetry handoff',
+    icon: Shield,
+    category: 'Infrastructure',
+    href: '/modules/kloud-bridge',
+    accent: 'slate'
+  },
+  {
+    id: 'weather-dashboard',
+    name: 'Weather & Cognitive',
+    description: 'How weather impacts cognitive performance',
+    icon: Cloud,
+    category: 'Environment',
+    href: '/modules/weather-dashboard',
+    accent: 'slate'
+  },
+  {
+    id: 'account',
+    name: 'Account & Billing',
+    description: 'Manage your profile, subscriptions, payment methods and settings',
+    icon: User,
+    category: 'Account',
+    href: '/modules/account',
+    accent: 'slate'
+  },
+  {
+    id: 'my-data-dashboard',
+    name: 'My Data Dashboard',
+    description: 'IoT devices, API integrations, LoRa/GSM networks',
+    icon: BarChart3,
+    category: 'Data',
+    href: '/modules/my-data-dashboard',
+    accent: 'slate'
+  },
+  {
+    id: 'mymirror-now',
+    name: 'MyMirror Now',
+    description: 'Real-time client admin portal with live metrics & data sources',
+    icon: Layout,
+    category: 'Admin',
+    href: '/modules/mymirror-now',
+    accent: 'slate'
+  },
+  {
+    id: 'developer-docs',
+    name: 'Developer Documentation',
+    description: 'API Reference, SDKs, Quick Start Guide',
+    icon: Code2,
+    category: 'Developer',
+    href: '/developers',
+    accent: 'slate'
+  }
+];
+
+const PRIVATE_MODULE_IDS = new Set(['account', 'my-data-dashboard', 'mymirror-now']);
+
+// Accent color mapping
+const accentColors = {
+  slate: {
+    bg: 'bg-gray-100',
+    border: 'border-black',
+    borderHover: 'hover:border-gray-600',
+    text: 'text-black',
+    icon: 'text-black',
+    badge: 'bg-gray-100 text-black'
+  },
+  violet: {
+    bg: 'bg-gray-100',
+    border: 'border-black',
+    borderHover: 'hover:border-gray-600',
+    text: 'text-black',
+    icon: 'text-black',
+    badge: 'bg-gray-100 text-black'
+  },
+  orange: {
+    bg: 'bg-gray-100',
+    border: 'border-black',
+    borderHover: 'hover:border-gray-600',
+    text: 'text-black',
+    icon: 'text-black',
+    badge: 'bg-gray-100 text-black'
+  },
+  green: {
+    bg: 'bg-gray-100',
+    border: 'border-black',
+    borderHover: 'hover:border-gray-600',
+    text: 'text-black',
+    icon: 'text-black',
+    badge: 'bg-gray-100 text-black'
+  },
+  neutral: {
+    bg: 'bg-gray-100',
+    border: 'border-black',
+    borderHover: 'hover:border-gray-600',
+    text: 'text-black',
+    icon: 'text-black',
+    badge: 'bg-gray-100 text-black'
+  }
+};
+
+export default function DashboardPage() {
+  const [currentUser, setCurrentUser] = useState<SessionUser | null>(null);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    // Simulate checking module status
-    const checkModuleStatus = async () => {
+    let active = true;
+
+    const loadProfile = async () => {
       try {
-        // Will connect to actual backend endpoints
-        setModuleStatus({
-          albi: 'active',
-          alba: 'collecting',
-          jona: 'monitoring'
-        })
-      } catch (error) {
-        console.error('Module status check failed:', error)
+        const response = await fetch('/api/user/profile', {
+          cache: 'no-store',
+        });
+
+        if (!response.ok) {
+          if (active) {
+            setCurrentUser(null);
+          }
+          return;
+        }
+
+        const payload = await response.json();
+        const data =
+          payload && typeof payload === 'object' && 'data' in payload
+            ? (payload as { data?: SessionUser }).data
+            : (payload as SessionUser);
+
+        if (active && data?.id) {
+          setCurrentUser(data);
+        }
+      } catch {
+        if (active) {
+          setCurrentUser(null);
+        }
       }
-    }
+    };
 
-    checkModuleStatus()
-    const interval = setInterval(checkModuleStatus, 5000)
-    return () => clearInterval(interval)
-  }, [])
+    loadProfile();
 
-  const modules = [
-    {
-      id: 'eeg-analysis',
-      name: '🧠 ALBI - EEG Analysis',
-      description: 'Neural Frequency Laboratory Director - EEG Processing & Brain Signal Analysis',
-      status: moduleStatus.albi,
-      capabilities: [
-        'Real-time EEG signal processing',
-        'Neural frequency analysis (FFT)',
-        'Brain state interpretation',
-        'Neural pattern recognition',
-        'Dominant frequency detection'
-      ],
-      route: '/modules/eeg-analysis'
-    },
-    {
-      id: 'data-collection',
-      name: '📊 ALBA - Data Collection',
-      description: 'Advanced data collection and processing coordinator',
-      status: moduleStatus.alba,
-      capabilities: [
-        'Multi-source data integration',
-        'Real-time data streaming',
-        'Pattern analysis coordination',
-        'Neural pattern discussions',
-        'Data validation and cleanup'
-      ],
-      route: '/modules/data-collection'
-    },
-    {
-      id: 'neural-synthesis', 
-      name: '🎵 JONA - Neural Audio Synthesis',
-      description: 'Joyful Overseer of Neural Alignment - Brain-Data Art & Real-time Monitoring',
-      status: moduleStatus.jona,
-      capabilities: [
-        'EEG to audio synthesis',
-        'Real-time neural monitoring',
-        'Brain-data art creation',
-        'Neural symphony generation',
-        'Biofeedback audio output'
-      ],
-      route: '/modules/neural-synthesis'
-    },
-    {
-      id: 'industrial-dashboard',
-      name: '🏭 Industrial Dashboard',
-      description: 'Complete industrial monitoring and control interface',
-      status: 'active' as const,
-      capabilities: [
-        'Live system monitoring',
-        'Performance metrics',
-        'Real-time data visualization',
-        'System health checks',
-        'Industrial-grade controls'
-      ],
-      route: '/modules/industrial-dashboard'
-    },
-    {
-      id: 'reporting-dashboard',
-      name: '📈 ULTRA Reporting Center',
-      description: 'Excel-style executive dashboard blending Grafana, Prometheus, Datadog and Victoria metrics',
-      status: 'active' as const,
-      capabilities: [
-        'Unified KPI grid with trends',
-        'Live Prometheus history sparklines',
-        'Executive-ready export buttons',
-        'Alert rundown synced with AlertManager',
-        'Synthetic Datadog signal bridge'
-      ],
-      route: '/modules/reporting-dashboard'
-    },
-    {
-      id: 'phone-monitor',
-      name: '📱 Phone Monitor',
-      description: 'Mobile device monitoring and neural interface',
-      status: 'active' as const,
-      capabilities: [
-        'Mobile EEG interfaces',
-        'Remote monitoring',
-        'Cloud connectivity',
-        'Real-time sync',
-        'Mobile biofeedback'
-      ],
-      route: '/modules/phone-monitor'
-    },
-    {
-      id: 'spectrum-analyzer',
-      name: '📊 Spectrum Analyzer',
-      description: 'Advanced frequency domain analysis and visualization',
-      status: 'active' as const,
-      capabilities: [
-        'FFT analysis',
-        'Frequency visualization',
-        'Spectral analysis',
-        'Signal processing',
-        'Real-time spectrum display'
-      ],
-      route: '/modules/spectrum-analyzer'
-    }
-  ]
+    return () => {
+      active = false;
+    };
+  }, []);
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'active':
-      case 'collecting':
-      case 'monitoring':
-        return 'bg-green-500'
-      case 'processing':
-      case 'analyzing':
-      case 'synthesizing':
-        return 'bg-yellow-500'
-      default:
-        return 'bg-red-500'
-    }
-  }
+  const visibleModules = currentUser
+    ? moduleCatalog
+    : moduleCatalog.filter((module) => !PRIVATE_MODULE_IDS.has(module.id));
 
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'active': return 'Active'
-      case 'processing': return 'Processing'
-      case 'collecting': return 'Collecting Data'
-      case 'analyzing': return 'Analyzing'
-      case 'monitoring': return 'Monitoring'
-      case 'synthesizing': return 'Synthesizing'
-      default: return 'Offline'
-    }
-  }
+  const categories = ['all', ...new Set(visibleModules.map(m => m.category))];
+
+  const filteredModules = visibleModules.filter(m => {
+    const matchesCategory = activeCategory === 'all' || m.category === activeCategory;
+    const matchesSearch = m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         m.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div className="text-center bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
-        <h1 className="text-4xl font-bold text-white mb-4 bg-gradient-to-r from-cyan-400 via-violet-400 to-emerald-400 bg-clip-text text-transparent">
-          🧠 Clisonix Industrial Modules
-        </h1>
-        <p className="text-lg text-gray-300">
-          Advanced neuroacoustic processing, EEG analysis, and industrial-grade monitoring
-        </p>
-        <div className="flex items-center justify-center mt-4 space-x-2">
-          <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-          <span className="text-sm text-gray-400">Live Industrial Backend Monitoring • Real Data Only</span>
-        </div>
-      </div>
-
-      {/* Modules Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {modules.map((module) => (
-          <Link
-            key={module.id}
-            href={module.route}
-            className="group bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105"
-          >
-            <div className="flex items-start justify-between mb-4">
-              <h3 className="text-xl font-semibold text-white group-hover:text-cyan-400 transition-colors">
-                {module.name}
-              </h3>
-              <div className="flex items-center space-x-2">
-                <div className={`w-2 h-2 rounded-full ${getStatusColor(module.status)} animate-pulse`}></div>
-                <span className="text-xs text-gray-400">
-                  {getStatusText(module.status)}
-                </span>
-              </div>
+    <div className="min-h-screen bg-white text-slate-900">
+      {/* Sidebar */}
+      <aside className="fixed left-0 top-0 h-full w-64 bg-gray-50 border-r border-slate-200 z-50">
+        {/* Logo */}
+        <div className="h-16 flex items-center px-5 border-b border-slate-200">
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
+              <Brain className="w-5 h-5 text-white" />
             </div>
-            
-            <p className="text-gray-300 text-sm mb-4">
-              {module.description}
+            <span className="text-lg font-semibold tracking-tight">Clisonix</span>
+          </Link>
+        </div>
+
+        {/* Navigation */}
+        <nav className="p-4 space-y-1">
+          <div className="text-[11px] font-medium text-black uppercase tracking-wider px-3 mb-3">
+            Modules
+          </div>
+          {categories.map(cat => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                activeCategory === cat
+                  ? 'bg-gray-100 text-black border-2 border-black'
+                  : 'text-black hover:text-black hover:bg-gray-100'
+              }`}
+            >
+              {cat === 'all' ? 'All Modules' : cat}
+            </button>
+          ))}
+        </nav>
+
+        {/* Bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-slate-200">
+          {currentUser ? (
+            <Link
+              href="/modules/account"
+              className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-black hover:text-black hover:bg-gray-100 transition-all"
+            >
+              <Settings className="w-4 h-4" />
+              Settings
+            </Link>
+          ) : (
+            <Link
+              href="/sign-in"
+              className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-black hover:text-black hover:bg-gray-100 transition-all"
+            >
+              <User className="w-4 h-4" />
+              Sign in
+            </Link>
+          )}
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="ml-64">
+        {/* Top Bar */}
+        <header className="h-16 flex items-center justify-between px-8 border-b border-slate-200 bg-white/80 backdrop-blur-xl sticky top-0 z-40">
+          {/* Search */}
+          <div className="relative w-96">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-black" />
+            <input
+              type="text"
+              placeholder="Search modules..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full h-10 pl-10 pr-4 bg-slate-50 border border-slate-200 rounded-lg text-sm text-black placeholder:text-black/50 focus:outline-none focus:border-black transition-colors"
+            />
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-black">
+              <Command className="w-3 h-3" />
+              <span className="text-xs">K</span>
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="flex items-center gap-4">
+            {currentUser ? (
+              <Link
+                href="/modules/account"
+                className="flex items-center gap-3 rounded-lg border border-slate-200 px-3 py-2 text-sm hover:bg-slate-50 transition-colors"
+              >
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-sm font-medium text-white">
+                  {currentUser.name?.trim()?.charAt(0)?.toUpperCase() || 'U'}
+                </div>
+                <div className="text-left leading-tight">
+                  <div className="font-medium text-black">{currentUser.name || currentUser.email}</div>
+                  <div className="text-xs text-black/60">Account</div>
+                </div>
+              </Link>
+            ) : (
+              <Link
+                href="/sign-in"
+                className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-black hover:bg-slate-50 transition-colors"
+              >
+                Sign in
+              </Link>
+            )}
+          </div>
+        </header>
+
+        {/* Content */}
+        <div className="p-8">
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="text-2xl font-semibold tracking-tight mb-2">
+              {activeCategory === 'all' ? 'All Modules' : activeCategory}
+            </h1>
+            <p className="text-black text-sm">
+              {filteredModules.length} {filteredModules.length === 1 ? 'module' : 'modules'} available
             </p>
-
-            <div className="space-y-2">
-              <h4 className="text-sm font-medium text-gray-400 uppercase tracking-wide">
-                Capabilities
-              </h4>
-              <ul className="space-y-1">
-                {module.capabilities.slice(0, 3).map((capability, idx) => (
-                  <li key={idx} className="text-xs text-gray-500 flex items-center">
-                    <span className="w-1 h-1 bg-cyan-400 rounded-full mr-2"></span>
-                    {capability}
-                  </li>
-                ))}
-                {module.capabilities.length > 3 && (
-                  <li className="text-xs text-gray-600 italic">
-                    +{module.capabilities.length - 3} more...
-                  </li>
-                )}
-              </ul>
+            <div className="mt-3">
+              <Link
+                href="/modules/how-to-use"
+                className="inline-flex items-center gap-2 text-sm font-medium text-black hover:text-black/70 transition-colors"
+              >
+                Module how-to documentation
+                <ChevronRight className="w-4 h-4" />
+              </Link>
             </div>
+          </div>
 
-            <div className="mt-4 pt-4 border-t border-white/10">
-              <span className="text-xs text-cyan-400 group-hover:text-cyan-300 transition-colors">
-                Click to access module →
-              </span>
+          {/* Modules Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {filteredModules.map(module => {
+              const colors = accentColors[module.accent as keyof typeof accentColors];
+              const Icon = module.icon;
+              const isExternal = 'external' in module && module.external;
+              const platformInfo = getModulePlatformById(module.id) || getModulePlatformByRoute(module.href);
+              const platformLabel = platformInfo ? PLATFORM_LABELS[platformInfo.platform] : 'Unmapped';
+
+              const CardContent = (
+                <>
+                  {/* Icon & Category */}
+                  <div className="flex items-start justify-between mb-4">
+                    <div className={`w-10 h-10 rounded-lg ${colors.bg} flex items-center justify-center`}>
+                      <Icon className={`w-5 h-5 ${colors.icon}`} />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {isExternal && <ExternalLink className="w-3 h-3 text-slate-500" />}
+                      <span className={`px-2 py-1 rounded text-[11px] font-medium ${colors.badge}`}>
+                        {module.category}
+                      </span>
+                      <span className="px-2 py-1 rounded text-[11px] font-medium bg-gray-200 text-black">
+                        {platformLabel}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Title & Description */}
+                  <h3 className="text-[15px] font-medium mb-1.5 group-hover:text-white transition-colors">
+                    {module.name}
+                  </h3>
+                  <p className="text-sm text-black leading-relaxed mb-4">
+                    {module.description}
+                  </p>
+
+                  {/* Action */}
+                  <div className={`flex items-center gap-1 text-sm font-medium ${colors.text} opacity-0 group-hover:opacity-100 transition-opacity`}>
+                    <span>{isExternal ? 'Open in new tab' : 'Open'}</span>
+                    {isExternal ? <ExternalLink className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+                  </div>
+                </>
+              );
+
+              return isExternal ? (
+                <a
+                  key={module.id}
+                  href={module.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group relative p-5 rounded-lg border-2 border-black bg-white shadow-sm ${colors.border} ${colors.borderHover} transition-all duration-200 hover:bg-gray-100`}
+                >
+                  {CardContent}
+                </a>
+              ) : (
+                <Link
+                  key={module.id}
+                  href={module.href}
+                  className={`group relative p-5 rounded-lg border-2 border-black bg-white shadow-sm ${colors.border} ${colors.borderHover} transition-all duration-200 hover:bg-gray-100`}
+                >
+                  {CardContent}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Empty State */}
+          {filteredModules.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-16">
+              <div className="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center mb-4">
+                <Search className="w-6 h-6 text-black" />
+              </div>
+              <h3 className="text-lg font-medium mb-2">No modules found</h3>
+              <p className="text-black text-sm">
+                Try adjusting your search or filter criteria
+              </p>
             </div>
-          </Link>
-        ))}
-      </div>
-
-      {/* Quick Actions */}
-      <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-        <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
-          <span className="w-2 h-2 bg-yellow-500 rounded-full mr-3 animate-pulse"></span>
-          Quick Actions
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-          <Link
-            href="/modules/reporting-dashboard"
-            className="bg-gradient-to-r from-cyan-600/20 to-blue-600/20 hover:from-cyan-600/30 hover:to-blue-600/30 rounded-lg p-4 border border-cyan-500/30 hover:border-cyan-400/50 transition-all duration-300"
-          >
-            <div className="text-sm font-medium text-white">📈 Launch ULTRA Reporting</div>
-            <div className="text-xs text-gray-400 mt-1">Excel-style dashboard & exports</div>
-          </Link>
-
-          <Link
-            href="/modules/neural-synthesis"
-            className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 rounded-lg p-4 border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300"
-          >
-            <div className="text-sm font-medium text-white">🎵 Start Neural Synthesis</div>
-            <div className="text-xs text-gray-400 mt-1">Begin EEG to audio conversion</div>
-          </Link>
-          
-          <Link
-            href="/modules/eeg-analysis"
-            className="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 hover:from-blue-600/30 hover:to-cyan-600/30 rounded-lg p-4 border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300"
-          >
-            <div className="text-sm font-medium text-white">🧠 Analyze Brain Signals</div>
-            <div className="text-xs text-gray-400 mt-1">Real-time EEG processing</div>
-          </Link>
-          
-          <Link
-            href="/modules/industrial-dashboard"
-            className="bg-gradient-to-r from-emerald-600/20 to-teal-600/20 hover:from-emerald-600/30 hover:to-teal-600/30 rounded-lg p-4 border border-emerald-500/30 hover:border-emerald-400/50 transition-all duration-300"
-          >
-            <div className="text-sm font-medium text-white">🏭 Industrial Monitor</div>
-            <div className="text-xs text-gray-400 mt-1">Full system oversight</div>
-          </Link>
+          )}
         </div>
-      </div>
-    </div>
-  )
-}
 
+        {/* Footer */}
+        <footer className="border-t border-slate-200 mt-8">
+          <div className="px-8 py-6 flex items-center justify-between text-sm text-black">
+            <div className="flex items-center gap-6">
+              <Link href="/developers" className="hover:text-black transition-colors">
+                Documentation
+              </Link>
+              <Link href="/modules/how-to-use" className="hover:text-black transition-colors">
+                How to Use Modules
+              </Link>
+              <a href="https://github.com/Web8kameleon-hub/clisonix.com" className="hover:text-black transition-colors">
+                GitHub
+              </a>
+              {SUPPORT_EMAIL ? (
+                <a href={`mailto:${SUPPORT_EMAIL}`} className="hover:text-black transition-colors">
+                  {SUPPORT_EMAIL}
+                </a>
+              ) : (
+                <span className="text-black/60">Support unavailable</span>
+              )}
+            </div>
+            <div className="flex items-center gap-2">
+              <span>Clisonix</span>
+              <span className="text-black">·</span>
+              <span className="text-black">© 2026</span>
+            </div>
+          </div>
+        </footer>
+      </main>
+    </div>
+  );
+}

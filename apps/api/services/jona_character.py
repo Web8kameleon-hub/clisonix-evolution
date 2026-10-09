@@ -12,17 +12,33 @@ Joyful Overseer of Neural Alignment
 """
 
 import asyncio
-from datetime import datetime, timedelta
-from typing import Dict, List, Any, Optional, Callable, Coroutine
-from dataclasses import dataclass, field
-from enum import Enum
-import uuid
-import numpy as np
 import logging
+import uuid
+from dataclasses import dataclass, field
+from datetime import datetime, timedelta
+from enum import Enum
+from typing import Any, Callable, Coroutine, Dict, List, Optional
 
-from fastapi import FastAPI, Depends, BackgroundTasks, HTTPException
+import numpy as np
+from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
+HAS_SIGNAL_FABRIC = False
+FabricSignalEvent: Any = None
+FabricSignalLevel: Any = None
+get_signal_fabric: Any = None
+try:
+    from signal_fabric import SignalEvent as _FabricSignalEvent
+    from signal_fabric import SignalLevel as _FabricSignalLevel
+    from signal_fabric import get_signal_fabric as _get_signal_fabric
+
+    FabricSignalEvent = _FabricSignalEvent
+    FabricSignalLevel = _FabricSignalLevel
+    get_signal_fabric = _get_signal_fabric
+    HAS_SIGNAL_FABRIC = True
+except Exception:
+    HAS_SIGNAL_FABRIC = False
 
 # -----------------------------------------------------
 # Logging
@@ -402,6 +418,24 @@ class JONA_Character:
         logger.warning(f"🚨 JONA Alert [{level.value.upper()}]: {title}")
         await self.event_bus.publish("jona.alert", alert)
 
+        if HAS_SIGNAL_FABRIC:
+            try:
+                fabric_level = FabricSignalLevel.INFO
+                if level in (AlertLevel.WARNING, AlertLevel.CRITICAL, AlertLevel.EMERGENCY):
+                    fabric_level = FabricSignalLevel.WARNING
+                await get_signal_fabric().publish(
+                    FabricSignalEvent(
+                        source="JONA",
+                        kind="alert",
+                        level=fabric_level,
+                        message=title,
+                        payload=alert,
+                        tags=["jona", "alert"],
+                    )
+                )
+            except Exception:
+                pass
+
     async def _handle_monitoring_error(self, error: Exception):
         await self._create_alert(
             AlertLevel.CRITICAL,
@@ -660,4 +694,4 @@ if __name__ == "__main__":
 
     logger.info("Running JONA Super Version directly...")
     uvicorn.run("jona_super:app", host="0.0.0.0", port=8000, reload=True)
-    
+

@@ -20,7 +20,7 @@ Write-Host "╚═════════════════════�
 $Services = @{
     'docker' = @{Name='🐳 Docker Stack'; Cmd='docker-compose up'; Group='Infrastructure'}
     'alba' = @{Name='📡 ALBA (5555)'; Cmd='python alba_core.py'; Group='Microservices'}
-    'albi' = @{Name='🧠 ALBI (6666)'; Cmd='python albi_core.py'; Group='Microservices'}
+    'albi' = @{Name='🧠 ALBI (6680)'; Cmd='python albi_core.py'; Group='Microservices'}
     'jona' = @{Name='🎵 JONA (7777)'; Cmd='python jona_service_7777.py'; Group='Microservices'}
     'api' = @{Name='⚡ API (8000)'; Cmd='python alba_api_server.py'; Group='Core'}
     'frontend' = @{Name='🎨 Frontend (3000)'; Cmd='cd apps\web; npm run dev'; Group='Core'}

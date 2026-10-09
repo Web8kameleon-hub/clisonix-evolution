@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=75.0.0", "wheel>=0.46.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,41 +8,98 @@ version = "0.1.0"
 description = "Cloud platform for Clisonix EEG-to-Audio and Brain Symphony"
 authors = [{name="Ledjan Ahmati"}]
 license = {text = "MIT"}
-requires-python = ">=3.9"
+requires-python = ">=3.11"
+
+# Core dependencies only - see requirements/ for isolated deps
 dependencies = [
-    "fastapi>=0.104.1",
-    "uvicorn[standard]>=0.24.0",
-    "sqlalchemy[asyncio]>=2.0.23",
-    "asyncpg>=0.29.0",
-    "alembic>=1.12.1",
-    "redis[hiredis]>=5.0.1",
-    "python-jose[cryptography]>=3.3.0",
+    "fastapi>=0.115.6",
+    "uvicorn[standard]>=0.32.1",
+    "pydantic>=2.10.4",
+    "pydantic-settings>=2.7.0",
+    "python-multipart>=0.0.22",
+    "python-dotenv>=1.0.1",
+    "httpx>=0.28.1",
+    "structlog>=24.4.0",
+]
+
+[project.optional-dependencies]
+# API services (backend, alba, albi, etc.)
+api = [
+    "sqlalchemy[asyncio]>=2.0.36",
+    "asyncpg>=0.30.0",
+    "alembic>=1.14.0",
+    "redis[hiredis]>=5.2.0",
+    "PyJWT[crypto]>=2.10.1",
     "passlib[bcrypt]>=1.7.4",
-    "python-multipart>=0.0.6",
-    "stripe>=7.8.0",
-    "pydantic[email]>=2.5.0",
-    "pydantic-settings>=2.1.0",
-    "boto3>=1.34.0",
-    "botocore>=1.34.0",
-    "numpy>=1.25.0",
-    "scipy>=1.11.0",
-    "librosa>=0.10.1",
-    "mne>=1.5.0",
-    "psutil>=5.9.0",
-    "opentelemetry-api>=1.21.0",
-    "opentelemetry-sdk>=1.21.0",
-    "opentelemetry-exporter-jaeger>=1.21.0",
-    "opentelemetry-instrumentation-fastapi>=0.42b0",
-    "opentelemetry-instrumentation-redis>=0.42b0",
-    "opentelemetry-instrumentation-sqlalchemy>=0.42b0",
-    "celery[redis]>=5.3.4",
-    "fastapi-mail>=1.4.1",
-    "email-validator>=2.1.0",
-    "python-dateutil>=2.8.2",
-    "pytz>=2023.3",
-    "structlog>=23.2.0",
-    "sentry-sdk[fastapi]>=1.38.0",
-    "python-dotenv>=1.0.0"
+    "psutil>=6.1.0",
+    "prometheus-client>=0.21.1",
+    "aiofiles>=24.1.0",
+    "tenacity>=9.0.0",
+]
+
+# Data processing (requires numpy/pandas)
+data = [
+    "pandas>=2.2.0",
+    "numpy>=2.0.0",
+]
+
+# Ocean engine (lightweight - NO pandas/numpy)
+ocean = [
+    "duckdb>=1.1.0",
+    "duckdb-engine>=0.14.0",
+    "orjson>=3.10.0",
+    "msgpack>=1.1.0",
+    "cbor2>=5.6.5",
+]
+
+# Excel processing (ISOLATED - separate venv recommended)
+excel = [
+    "openpyxl>=3.1.5",
+    "XlsxWriter>=3.2.9",
+    "python-pptx>=1.0.2",
+    "Pillow>=11.1.0",
+    "lxml>=5.0.0",
+]
+
+# ML/AI (ISOLATED - separate venv/container)
+ml = [
+    "scipy>=1.14.0",
+    "scikit-learn>=1.6.0",
+    "librosa>=0.10.2",
+    "mne>=1.8.0",
+]
+
+# Payments
+payments = [
+    "stripe>=12.0.0",
+    "paypalrestsdk>=1.7.1",
+]
+
+# Observability
+observability = [
+    "opentelemetry-api>=1.29.0",
+    "opentelemetry-sdk>=1.29.0",
+    "opentelemetry-exporter-otlp>=1.29.0",
+    "opentelemetry-instrumentation-fastapi>=0.50b0",
+    "opentelemetry-instrumentation-redis>=0.50b0",
+    "opentelemetry-instrumentation-sqlalchemy>=0.50b0",
+    "sentry-sdk[fastapi]>=2.19.0",
+]
+
+# Development
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.8.0",
+    "black>=24.10.0",
+    "mypy>=1.13.0",
+    "pip-audit>=2.7.0",
+]
+
+# Full installation (excluding ML for conflicts)
+full = [
+    "Clisonix-cloud[api,data,ocean,payments,observability]",
 ]
 
 [tool.black]
@@ -85,9 +142,46 @@ exclude = '''
   | \.mypy_cache
   | \.tox
   | \.venv
+  | \.venv-excel
+  | \.venv-ml
   | _build
   | buck-out
   | build
   | dist
+  | node_modules
 )/
 '''
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = false
+warn_unused_ignores = false
+check_untyped_defs = false
+ignore_missing_imports = true
+disable_error_code = ["annotation-unchecked"]
+exclude = '''(?x)(
+        ^\.venv/
+    | ^venv/
+    | ^env/
+    | ^env1/
+    | ^env2/
+    | ^env3/
+    | ^node_modules/
+    | ^_imports/
+    | ^_profile_repos/
+    | ^\.git_ocean_core_full\.py$
+)'''
+
+[tool.ruff]
+extend-exclude = [
+    ".venv",
+    "venv",
+    "env",
+    "env1",
+    "env2",
+    "env3",
+    "node_modules",
+    "_imports",
+    "_profile_repos",
+    ".git_ocean_core_full.py",
+]

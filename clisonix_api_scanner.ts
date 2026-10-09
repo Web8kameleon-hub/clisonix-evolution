@@ -67,7 +67,7 @@ class ClisonixAPIScanner extends EventEmitter {
         super();
 
         this.config = {
-            baseUrl: config.baseUrl || 'https://api.clisonix.cloud',
+            baseUrl: config.baseUrl || 'https://api.clisonix.com',
             timeout: config.timeout || 30000,
             maxConcurrency: config.maxConcurrency || 10,
             includeAuth: config.includeAuth || false,

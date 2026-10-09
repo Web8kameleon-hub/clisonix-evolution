@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import { cn } from '@/lib/utils'
 import { AlertTriangle, CheckCircle, Info, X, AlertCircle } from 'lucide-react'
 
@@ -16,7 +16,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       destructive: 'border-red-200 bg-red-50 text-red-800',
       warning: 'border-orange-200 bg-orange-50 text-orange-800',
       success: 'border-green-200 bg-green-50 text-green-800',
-      info: 'border-blue-200 bg-blue-50 text-blue-800'
+      info: 'border-violet-200 bg-violet-50 text-neutral-800'
     }
 
     const icons = {

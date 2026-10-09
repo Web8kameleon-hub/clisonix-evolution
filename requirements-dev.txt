@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Development dependencies for CI/CD pipeline
 # Install with: pip install -r requirements-dev.txt
 
@@ -34,3 +35,10 @@ types-all>=1.0.0
 # Existing dependencies
 uvicorn[standard]
 requests
+=======
+pytest>=8.3.0
+uvicorn[standard]>=0.32.1
+requests>=2.32.3
+ruff>=0.8.0
+httpx>=0.28.1
+>>>>>>> c1f6cec4fc9d5b7cab11712c7a2c12433881c0d0

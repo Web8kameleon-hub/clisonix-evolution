@@ -11,18 +11,18 @@ info:
     - Business intelligence insights
     - Data correlation analysis
     
-    **Port:** 6666  
+    **Port:** 6680  
     **Health Check:** `GET /health`
   contact:
     name: Clisonix Engineering
-    url: https://github.com/LedjanAhmati/Clisonix-cloud
+    url: https://github.com/Web8kameleon-hub/clisonix.com
   license:
     name: MIT
     
 servers:
-  - url: http://localhost:6666
+  - url: http://localhost:6680
     description: Development server
-  - url: http://192.168.2.122:6666
+  - url: http://192.168.2.122:6680
     description: Local network
   - url: https://api.clisonix.com/albi
     description: Production server

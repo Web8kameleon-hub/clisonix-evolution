@@ -32,8 +32,11 @@ cp .env.production.template .env.production
 # 2. Edit with secure values
 nano .env.production
 
-# 3. Deploy with environment file
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml up -d
+# 3. Validate env before deploy
+bash ./scripts/preflight-env.sh .env.production
+
+# 4. Deploy with environment file
+docker compose --env-file .env.production up -d
 ```
 
 **Security Features:**
@@ -144,7 +147,7 @@ python3 -c "import secrets; print(secrets.token_urlsafe(32))"
 ```bash
 # Use .env.development (weak credentials OK for local dev)
 cp .env.development .env
-docker-compose up -d
+docker compose --env-file .env.development up -d
 ```
 
 **Characteristics:**
@@ -160,7 +163,8 @@ docker-compose up -d
 # Use .env.staging (production-like but isolated)
 cp .env.production.template .env.staging
 # Edit with staging-specific values
-docker-compose --env-file .env.staging -f docker-compose.prod.secure.yml up -d
+bash ./scripts/preflight-env.sh .env.staging
+docker compose --env-file .env.staging up -d
 ```
 
 **Characteristics:**
@@ -178,7 +182,8 @@ docker-compose --env-file .env.staging -f docker-compose.prod.secure.yml up -d
 # Use .env.production (maximum security)
 cp .env.production.template .env.production
 # Fill with production secrets
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml up -d
+bash ./scripts/preflight-env.sh .env.production
+docker compose --env-file .env.production up -d
 ```
 
 **Characteristics:**
@@ -248,11 +253,12 @@ nano .env.production
 # Scan for exposed secrets
 python scripts/scan-secrets.py
 
-# Validate docker-compose
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml config
+# Validate env + compose
+bash ./scripts/preflight-env.sh .env.production
+docker compose --env-file .env.production config
 
 # Check environment variables are loaded
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml config | grep PASSWORD
+docker compose --env-file .env.production config | grep PASSWORD
 # Should show: ${POSTGRES_PASSWORD} or loaded values (not hardcoded)
 ```
 
@@ -260,16 +266,16 @@ docker-compose --env-file .env.production -f docker-compose.prod.secure.yml conf
 
 ```bash
 # Pull images
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml pull
+docker compose --env-file .env.production pull
 
 # Build custom images
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml build
+docker compose --env-file .env.production build
 
 # Start services
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml up -d
+docker compose --env-file .env.production up -d
 
 # Check health
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml ps
+docker compose --env-file .env.production ps
 ```
 
 ### 6. Verify Deployment
@@ -285,7 +291,7 @@ docker exec clisonix-postgres pg_isready -U clisonix
 docker exec clisonix-redis redis-cli ping
 
 # View logs
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml logs -f --tail=50
+docker compose --env-file .env.production logs -f --tail=50
 ```
 
 ---
@@ -306,8 +312,8 @@ docker exec clisonix-postgres psql -U clisonix -c "ALTER USER clisonix PASSWORD 
 sed -i "s/POSTGRES_PASSWORD=.*/POSTGRES_PASSWORD=$NEW_POSTGRES_PASSWORD/" .env.production
 
 # 4. Restart services (zero-downtime)
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml up -d --no-deps postgres
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml restart api alba albi jona worker
+docker compose --env-file .env.production up -d --no-deps postgres
+docker compose --env-file .env.production restart api alba albi jona worker
 ```
 
 ### Emergency Rotation (Breach Suspected)
@@ -317,13 +323,13 @@ docker-compose --env-file .env.production -f docker-compose.prod.secure.yml rest
 ./scripts/emergency-rotate-secrets.sh
 
 # 2. Restart all services
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml restart
+docker compose --env-file .env.production restart
 
 # 3. Notify team
-echo "SECURITY BREACH: All secrets rotated at $(date)" | mail -s "URGENT: Secret Rotation" security@clisonix.com
+echo "SECURITY BREACH: All secrets rotated at $(date)" | mail -s "URGENT: Secret Rotation" clisonix@pm.me
 
 # 4. Audit logs
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml logs --since 24h > breach-audit.log
+docker compose --env-file .env.production logs --since 24h > breach-audit.log
 ```
 
 ---
@@ -387,24 +393,24 @@ python scripts/scan-secrets.py > post-cleanup-audit.txt
 
 ```bash
 # Check which services have access to secrets
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml config | grep -A5 "environment:"
+docker compose --env-file .env.production config | grep -A5 "environment:"
 
 # Monitor environment variable usage
 docker inspect clisonix-api | jq '.[0].Config.Env'
 
 # Check for secrets in logs (should be none!)
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml logs | grep -i "password\|secret\|key" | wc -l
+docker compose --env-file .env.production logs | grep -i "password\|secret\|key" | wc -l
 ```
 
 ### Set Up Alerts
 
 ```bash
 # Monitor failed authentication attempts
-docker-compose --env-file .env.production -f docker-compose.prod.secure.yml logs api | grep "401 Unauthorized" | wc -l
+docker compose --env-file .env.production logs api | grep "401 Unauthorized" | wc -l
 
 # Alert if secrets appear in logs
 if docker-compose logs | grep -qE "(password|secret|key)="; then
-  echo "WARNING: Secrets detected in logs!" | mail -s "Security Alert" security@clisonix.com
+  echo "WARNING: Secrets detected in logs!" | mail -s "Security Alert" clisonix@pm.me
 fi
 ```
 
@@ -418,7 +424,7 @@ echo "=== SECURITY VALIDATION ==="
 
 # 1. No hardcoded secrets in compose files
 echo "[1/7] Checking docker-compose files..."
-grep -r "password.*:" docker-compose.prod.secure.yml && echo "❌ FAIL" || echo "✅ PASS"
+grep -r "password.*:" docker-compose.yml && echo "❌ FAIL" || echo "✅ PASS"
 
 # 2. .env.production not in git
 echo "[2/7] Checking .gitignore..."
@@ -434,7 +440,7 @@ python scripts/scan-secrets.py | grep -q "No exposed secrets" && echo "✅ PASS"
 
 # 5. Services are healthy
 echo "[5/7] Checking service health..."
-docker-compose --env-file .env.production ps | grep -q "unhealthy" && echo "❌ FAIL" || echo "✅ PASS"
+docker compose --env-file .env.production ps | grep -q "unhealthy" && echo "❌ FAIL" || echo "✅ PASS"
 
 # 6. TLS enabled (if applicable)
 echo "[6/7] Checking HTTPS..."
@@ -461,3 +467,4 @@ echo "=== VALIDATION COMPLETE ==="
 **Last Updated**: December 16, 2025  
 **Version**: 1.0.0  
 **Maintained by**: Clisonix Security Team
+

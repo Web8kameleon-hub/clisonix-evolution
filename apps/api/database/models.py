@@ -2,13 +2,27 @@
 # Industrial-Grade SQLAlchemy Models with Real Relationships
 # Production PostgreSQL Schema, Real Business Logic
 
-from sqlalchemy import Column, Integer, String, DateTime, Text, Boolean, Float, ForeignKey, JSON, Enum as SQLEnum, Index, UniqueConstraint
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, Session
-from sqlalchemy.dialects.postgresql import UUID, JSONB, ARRAY
+import uuid
 from datetime import datetime, timedelta
 from enum import Enum
-import uuid
+
+from sqlalchemy import (
+    JSON,
+    Boolean,
+    Column,
+    DateTime,
+    Float,
+    ForeignKey,
+    Index,
+    Integer,
+    String,
+    Text,
+    UniqueConstraint,
+)
+from sqlalchemy import Enum as SQLEnum
+from sqlalchemy.dialects.postgresql import ARRAY, JSONB, UUID
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import Session, relationship
 
 Base = declarative_base()
 
@@ -56,10 +70,15 @@ class JobType(str, Enum):
     THUMBNAIL_GENERATION = "thumbnail_generation"
     CONTENT_MODERATION = "content_moderation"
 
+class GovernanceApprovalDecision(str, Enum):
+    APPROVED = "approved"
+    REJECTED = "rejected"
+    NEEDS_CHANGES = "needs_changes"
+
 # ðŸ‘¤ USER MANAGEMENT
 class User(Base):
     __tablename__ = "users"
-    
+
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     email = Column(String(255), unique=True, nullable=False, index=True)
     username = Column(String(50), unique=True, nullable=False, index=True)
@@ -69,23 +88,23 @@ class User(Base):
     role = Column(SQLEnum(UserRole), default=UserRole.USER, nullable=False)
     is_active = Column(Boolean, default=True, nullable=False)
     is_verified = Column(Boolean, default=False, nullable=False)
-    
+
     # Timestamps
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     last_login = Column(DateTime)
-    
+
     # Profile information
     avatar_url = Column(String(500))
     bio = Column(Text)
     preferences = Column(JSONB)
-    
+
     # Relationships
     file_uploads = relationship("FileUpload", back_populates="user", cascade="all, delete-orphan")
     payments = relationship("Payment", back_populates="user", cascade="all, delete-orphan")
     sessions = relationship("UserSession", back_populates="user", cascade="all, delete-orphan")
     jobs = relationship("Job", back_populates="user", cascade="all, delete-orphan")
-    
+
     # Indexes
     __table_args__ = (
         Index('idx_users_email_active', 'email', 'is_active'),
@@ -95,29 +114,29 @@ class User(Base):
 
 class UserSession(Base):
     __tablename__ = "user_sessions"
-    
+
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     token = Column(String(500), unique=True, nullable=False, index=True)
     refresh_token = Column(String(500), unique=True, nullable=False, index=True)
-    
+
     # Session metadata
     ip_address = Column(String(45))  # IPv6 compatible
     user_agent = Column(Text)
     device_info = Column(JSONB)
-    
+
     # Timestamps
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     expires_at = Column(DateTime, nullable=False)
     last_used = Column(DateTime, default=datetime.utcnow)
-    
+
     # Security
     is_active = Column(Boolean, default=True, nullable=False)
     revoked_at = Column(DateTime)
-    
+
     # Relationships
     user = relationship("User", back_populates="sessions")
-    
+
     # Indexes
     __table_args__ = (
         Index('idx_sessions_user_active', 'user_id', 'is_active'),
@@ -127,40 +146,40 @@ class UserSession(Base):
 # ðŸ’° PAYMENT SYSTEM
 class Payment(Base):
     __tablename__ = "payments"
-    
+
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    
+
     # Payment details
     amount = Column(Float, nullable=False)
     currency = Column(String(3), default="EUR", nullable=False)
     method = Column(SQLEnum(PaymentMethod), nullable=False)
     status = Column(SQLEnum(PaymentStatus), default=PaymentStatus.PENDING, nullable=False)
-    
+
     # External references
     external_id = Column(String(255), index=True)  # PayPal, Klarna, etc. transaction ID
     gateway_reference = Column(String(255))
-    
+
     # Payment method specific data
     payment_data = Column(JSONB)  # SEPA IBAN, PayPal details, etc.
-    
+
     # Metadata
     description = Column(String(500))
     payment_metadata = Column(JSONB)
-    
+
     # Webhook verification
     webhook_received = Column(Boolean, default=False)
     webhook_verified = Column(Boolean, default=False)
     webhook_data = Column(JSONB)
-    
+
     # Timestamps
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     processed_at = Column(DateTime)
-    
+
     # Relationships
     user = relationship("User", back_populates="payments")
-    
+
     # Indexes
     __table_args__ = (
         Index('idx_payments_user_status', 'user_id', 'status'),
@@ -172,44 +191,44 @@ class Payment(Base):
 # ðŸ“ FILE MANAGEMENT
 class FileUpload(Base):
     __tablename__ = "file_uploads"
-    
+
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    
+
     # File information
     original_name = Column(String(255), nullable=False)
     filename = Column(String(255), nullable=False, index=True)
     mimetype = Column(String(100), nullable=False, index=True)
     file_size = Column(Integer, nullable=False)
-    
+
     # Storage information
     file_path = Column(String(1000))
     s3_key = Column(String(1000), index=True)
     s3_bucket = Column(String(100))
     s3_region = Column(String(50))
-    
+
     # File integrity
     checksum_md5 = Column(String(32))
     checksum_sha256 = Column(String(64), index=True)
-    
+
     # Status and metadata
     status = Column(SQLEnum(FileUploadStatus), default=FileUploadStatus.UPLOADING, nullable=False)
     file_metadata = Column(JSONB)  # File-specific metadata (dimensions, duration, etc.)
-    
+
     # Processing results
     thumbnails = Column(JSONB)  # Array of thumbnail info
     processing_results = Column(JSONB)
     processing_errors = Column(JSONB)
-    
+
     # Timestamps
     uploaded_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     processed_at = Column(DateTime)
     expires_at = Column(DateTime)  # For temporary files
-    
+
     # Relationships
     user = relationship("User", back_populates="file_uploads")
     jobs = relationship("Job", back_populates="file_upload", cascade="all, delete-orphan")
-    
+
     # Indexes
     __table_args__ = (
         Index('idx_files_user_status', 'user_id', 'status'),
@@ -221,43 +240,43 @@ class FileUpload(Base):
 # ðŸ”§ JOB PROCESSING
 class Job(Base):
     __tablename__ = "jobs"
-    
+
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     file_upload_id = Column(UUID(as_uuid=True), ForeignKey("file_uploads.id", ondelete="CASCADE"))
-    
+
     # Job details
     job_type = Column(SQLEnum(JobType), nullable=False, index=True)
     status = Column(SQLEnum(JobStatus), default=JobStatus.QUEUED, nullable=False, index=True)
     priority = Column(Integer, default=0)  # Higher number = higher priority
-    
+
     # Job configuration
     parameters = Column(JSONB)  # Job-specific parameters
-    
+
     # Processing information
     worker_id = Column(String(100))  # Which worker is processing this job
     attempts = Column(Integer, default=0)
     max_attempts = Column(Integer, default=3)
-    
+
     # Results and errors
     result = Column(JSONB)
     error_message = Column(Text)
     error_details = Column(JSONB)
-    
+
     # Progress tracking
     progress_percentage = Column(Float, default=0.0)
     progress_message = Column(String(500))
-    
+
     # Timestamps
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     started_at = Column(DateTime)
     completed_at = Column(DateTime)
     retry_after = Column(DateTime)
-    
+
     # Relationships
     user = relationship("User", back_populates="jobs")
     file_upload = relationship("FileUpload", back_populates="jobs")
-    
+
     # Indexes
     __table_args__ = (
         Index('idx_jobs_status_priority', 'status', 'priority'),
@@ -269,28 +288,28 @@ class Job(Base):
 # ðŸ“Š SYSTEM MONITORING
 class SystemMetric(Base):
     __tablename__ = "system_metrics"
-    
+
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    
+
     # Metric identification
     metric_name = Column(String(100), nullable=False, index=True)
     metric_type = Column(String(50), nullable=False)  # cpu, memory, disk, network, custom
-    
+
     # Metric values
     value = Column(Float, nullable=False)
     unit = Column(String(20))  # %, bytes, count, seconds, etc.
-    
+
     # Context
     hostname = Column(String(100), index=True)
     service = Column(String(50), index=True)
     environment = Column(String(20), default="production")
-    
+
     # Additional data
     labels = Column(JSONB)  # Additional labels for filtering/grouping
-    
+
     # Timestamp
     timestamp = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
-    
+
     # Indexes
     __table_args__ = (
         Index('idx_metrics_name_time', 'metric_name', 'timestamp'),
@@ -301,32 +320,32 @@ class SystemMetric(Base):
 # ðŸ“‹ AUDIT LOGS
 class AuditLog(Base):
     __tablename__ = "audit_logs"
-    
+
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="SET NULL"))
-    
+
     # Action details
     action = Column(String(100), nullable=False, index=True)
     entity_type = Column(String(50), nullable=False, index=True)
     entity_id = Column(String(100), index=True)
-    
+
     # Request context
     ip_address = Column(String(45))
     user_agent = Column(Text)
     request_id = Column(String(100), index=True)
-    
+
     # Changes
     old_values = Column(JSONB)
     new_values = Column(JSONB)
-    
+
     # Metadata
     success = Column(Boolean, default=True, nullable=False)
     error_message = Column(Text)
     duration_ms = Column(Integer)
-    
+
     # Timestamp
     timestamp = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
-    
+
     # Indexes
     __table_args__ = (
         Index('idx_audit_action_time', 'action', 'timestamp'),
@@ -334,37 +353,120 @@ class AuditLog(Base):
         Index('idx_audit_user_time', 'user_id', 'timestamp'),
     )
 
+# ðŸ§­ MODEL GOVERNANCE
+class ModelGovernanceRecord(Base):
+    __tablename__ = "model_governance_records"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    model_id = Column(String(255), nullable=False, index=True)
+    model_version = Column(String(100), nullable=False)
+
+    # Lifecycle state
+    risk_level = Column(String(20), nullable=False, index=True)
+    approval_stage = Column(String(50), nullable=False, index=True)
+    deployment_target = Column(String(20), nullable=False, index=True)
+    intended_use = Column(Text)
+    domain_tags = Column(ARRAY(String(100)), default=list)
+
+    # Controls
+    requires_specialized_reviewer = Column(Boolean, default=False, nullable=False)
+    requires_licensed_approver = Column(Boolean, default=False, nullable=False)
+    evidence_bundle = Column(JSONB)
+    registry_snapshot = Column(JSONB)
+
+    # Timestamps
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+
+    approvals = relationship("ModelGovernanceApproval", back_populates="record", cascade="all, delete-orphan")
+    events = relationship("ModelGovernanceEvent", back_populates="record", cascade="all, delete-orphan")
+
+    __table_args__ = (
+        UniqueConstraint('model_id', 'model_version', name='uq_model_governance_record_version'),
+        Index('idx_model_governance_stage', 'approval_stage', 'deployment_target'),
+        Index('idx_model_governance_risk', 'risk_level', 'updated_at'),
+    )
+
+
+class ModelGovernanceApproval(Base):
+    __tablename__ = "model_governance_approvals"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    record_id = Column(UUID(as_uuid=True), ForeignKey("model_governance_records.id", ondelete="CASCADE"), nullable=False)
+    reviewer_user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="SET NULL"))
+
+    reviewer_id = Column(String(255), nullable=False, index=True)
+    reviewer_role = Column(String(50), nullable=False, index=True)
+    reviewer_name = Column(String(255))
+    reviewer_license_id = Column(String(255), index=True)
+    decision = Column(SQLEnum(GovernanceApprovalDecision), nullable=False, index=True)
+    notes = Column(Text)
+    evidence_refs = Column(JSONB)
+
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+
+    record = relationship("ModelGovernanceRecord", back_populates="approvals")
+
+    __table_args__ = (
+        Index('idx_model_governance_approval_record', 'record_id', 'created_at'),
+        Index('idx_model_governance_approval_role', 'reviewer_role', 'decision'),
+    )
+
+
+class ModelGovernanceEvent(Base):
+    __tablename__ = "model_governance_events"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    record_id = Column(UUID(as_uuid=True), ForeignKey("model_governance_records.id", ondelete="CASCADE"), nullable=False)
+    audit_log_id = Column(UUID(as_uuid=True), ForeignKey("audit_logs.id", ondelete="SET NULL"))
+
+    action = Column(String(100), nullable=False, index=True)
+    actor_id = Column(String(255), index=True)
+    actor_role = Column(String(50), index=True)
+    from_stage = Column(String(50))
+    to_stage = Column(String(50))
+    success = Column(Boolean, default=True, nullable=False)
+    details = Column(JSONB)
+    occurred_at = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+
+    record = relationship("ModelGovernanceRecord", back_populates="events")
+
+    __table_args__ = (
+        Index('idx_model_governance_event_record', 'record_id', 'occurred_at'),
+        Index('idx_model_governance_event_action', 'action', 'occurred_at'),
+    )
+
 # ðŸ”— API INTEGRATIONS
 class APIIntegration(Base):
     __tablename__ = "api_integrations"
-    
+
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    
+
     # Integration details
     name = Column(String(100), nullable=False, unique=True)
     provider = Column(String(50), nullable=False)  # paypal, aws, google, etc.
-    
+
     # Configuration
     config = Column(JSONB, nullable=False)  # API keys, endpoints, etc.
-    
+
     # Status
     is_active = Column(Boolean, default=True, nullable=False)
     is_healthy = Column(Boolean, default=True, nullable=False)
-    
+
     # Health check
     last_health_check = Column(DateTime)
     health_check_interval = Column(Integer, default=300)  # seconds
     error_count = Column(Integer, default=0)
     last_error = Column(Text)
-    
+
     # Usage statistics
     request_count = Column(Integer, default=0)
     last_used = Column(DateTime)
-    
+
     # Timestamps
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    
+
     # Indexes
     __table_args__ = (
         Index('idx_integrations_provider', 'provider'),

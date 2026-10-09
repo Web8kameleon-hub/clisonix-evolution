@@ -28,7 +28,7 @@ $Services += @(
 # TRINITY
 $Services += @(
     @{ Name='Alba (5555)'; Port=5555; Cmd='python alba_service_5555.py'; Wait=3 }
-    @{ Name='Albi (6666)'; Port=6666; Cmd='python albi_service_6666.py'; Wait=3 }
+    @{ Name='Albi (6680)'; Port=6680; Cmd='python albi_service_6680.py'; Wait=3 }
     @{ Name='Jona (7777)'; Port=7777; Cmd='python jona_service_7777.py'; Wait=3 }
 )
 
@@ -77,5 +77,5 @@ foreach ($Service in $Services) {
 }
 
 Write-Host "`n? ALL SERVICES LAUNCHED`n" -ForegroundColor Green
-Write-Host "PORTS: API(8000) FE(3000) Alba(5555) Albi(6666) Jona(7777) Orch(9999)" -ForegroundColor Cyan
+Write-Host "PORTS: API(8000) FE(3000) Alba(5555) Albi(6680) Jona(7777) Orch(9999)" -ForegroundColor Cyan
 Write-Host "`nMonitor terminals - paste errors here for fixing`n" -ForegroundColor Yellow

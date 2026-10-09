@@ -1,29 +1,68 @@
-fastapi==0.104.1
-uvicorn
-pydantic==2.5.0
-pydantic-settings
-psutil
-numpy
-librosa
-soundfile
-mne
-asyncpg
-redis
-boto3
-deep-translator
-SpeechRecognition
-pydub
-edge-tts
-requests
-reportlab
-httpx
-cbor2
-opentelemetry-api
-opentelemetry-sdk
-opentelemetry-instrumentation-fastapi
-opentelemetry-instrumentation-httpx
-opentelemetry-instrumentation-requests
-opentelemetry-instrumentation-aiohttp-client
-opentelemetry-instrumentation-logging
-opentelemetry-exporter-otlp
-opentelemetry-exporter-otlp-proto-http
+# ═══════════════════════════════════════════════════════════════
+# Clisonix Main Requirements - Updated Feb 2026
+# ═══════════════════════════════════════════════════════════════
+
+fastapi>=0.115.6
+uvicorn>=0.34.0
+pydantic>=2.10.4
+pydantic-settings>=2.7.0
+psutil>=6.1.0
+
+# Data
+numpy>=2.2.0
+pandas>=2.2.3
+
+# Audio Processing
+librosa>=0.10.2
+soundfile>=0.13.0
+mne>=1.8.0
+
+# Database
+asyncpg>=0.30.0
+redis>=5.2.1
+sqlalchemy>=2.0.36
+
+# Security & Encryption (Compliance)
+cryptography>=42.0.0
+pyOpenSSL>=26.0.0
+stripe>=10.0.0
+
+# Cloud
+boto3>=1.36.0
+
+# Docker
+docker>=7.1.0
+
+# HTTP
+requests>=2.32.3
+httpx>=0.28.1
+
+# Speech
+SpeechRecognition>=3.14.0
+faster-whisper>=1.1.0
+pydub>=0.25.1
+edge-tts>=7.0.0
+
+# PDF
+reportlab>=4.2.5
+
+# Binary encoding
+cbor2>=5.6.5
+msgpack>=1.1.2
+orjson>=3.10.14
+
+# Observability
+opentelemetry-api>=1.30.0
+opentelemetry-sdk>=1.30.0
+opentelemetry-instrumentation-fastapi>=0.51b0
+opentelemetry-instrumentation-httpx>=0.51b0
+opentelemetry-instrumentation-requests>=0.51b0
+opentelemetry-instrumentation-aiohttp-client>=0.51b0
+opentelemetry-instrumentation-logging>=0.51b0
+opentelemetry-exporter-otlp>=1.30.0
+opentelemetry-exporter-otlp-proto-http>=1.30.0
+
+# Payments
+stripe>=12.1.0
+pydantic-extra-types>=2.10.1
+

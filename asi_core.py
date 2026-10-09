@@ -9,15 +9,43 @@ Përfshin:
 """
 
 from __future__ import annotations
-import json, datetime, time, socket, platform, os
-from typing import Dict, Any
+
+import asyncio
+import datetime
+import json
+import os
+import platform
+import socket
+import time
+import unicodedata
+from dataclasses import dataclass
+from typing import Any, Dict
 
 from asi_realtime_engine import ASIRealtimeEngine
 
+HAS_SIGNAL_FABRIC = False
+FabricSignalEvent: Any = None
+FabricSignalLevel: Any = None
+get_signal_fabric: Any = None
 try:
-    import requests
+    from signal_fabric import SignalEvent as _FabricSignalEvent
+    from signal_fabric import SignalLevel as _FabricSignalLevel
+    from signal_fabric import get_signal_fabric as _get_signal_fabric
+
+    FabricSignalEvent = _FabricSignalEvent
+    FabricSignalLevel = _FabricSignalLevel
+    get_signal_fabric = _get_signal_fabric
+    HAS_SIGNAL_FABRIC = True
+except Exception:
+    HAS_SIGNAL_FABRIC = False
+
+REQUESTS: Any
+
+try:
+    import requests as _requests
+    REQUESTS = _requests
 except ImportError:
-    requests = None
+    REQUESTS = None
 
 try:
     import psutil
@@ -25,16 +53,54 @@ except ImportError:
     psutil = None
 
 
+IS_IN_DOCKER = os.path.exists("/.dockerenv") or os.getenv("DOCKER_ENV") == "1"
+DEFAULT_MESH_BASE_URL = "http://clisonix-api:8000" if IS_IN_DOCKER else "http://localhost:8000"
+
+
+_ASI_NODE_ALIASES = {
+    "alba": "ALBA",
+    "albi": "ALBI",
+    "jona": "JONA",
+    "asi": "ASI",
+}
+
+
+def _normalize_node_name(value: str) -> str:
+    normalized = unicodedata.normalize("NFKC", value or "").strip()
+    if not normalized:
+        return ""
+    collapsed = "".join(
+        ch for ch in unicodedata.normalize("NFKD", normalized)
+        if not unicodedata.combining(ch)
+    )
+    key = "".join(ch for ch in collapsed.casefold() if ch.isalnum())
+    return _ASI_NODE_ALIASES.get(key, normalized.upper())
+
+
+@dataclass
+class ASIConfig:
+    hq_event_url: str = os.getenv("ASI_HQ_EVENT_URL", f"{DEFAULT_MESH_BASE_URL}/mesh/status")
+    hq_register_url: str = os.getenv("ASI_HQ_REGISTER_URL", f"{DEFAULT_MESH_BASE_URL}/mesh/register")
+    hq_status_url: str = os.getenv("ASI_HQ_STATUS_URL", f"{DEFAULT_MESH_BASE_URL}/mesh/status")
+    api_audio_url: str = os.getenv("ASI_AUDIO_UPLOAD_URL", "https://clisonix.com/api/uploads/audio/process")
+    api_eeg_url: str = os.getenv("ASI_EEG_UPLOAD_URL", "https://clisonix.com/api/uploads/eeg/process")
+    request_timeout_seconds: float = float(os.getenv("ASI_REQUEST_TIMEOUT_SECONDS", "5"))
+    max_retries: int = int(os.getenv("ASI_REQUEST_MAX_RETRIES", "3"))
+    retry_backoff_seconds: float = float(os.getenv("ASI_REQUEST_RETRY_BACKOFF_SECONDS", "0.5"))
+
+
 class ASICore:
     """Bërthama reale e ASI – telemetri dhe status node-sh."""
 
     def __init__(
         self,
-        hq_url: str = "http://localhost:7777/mesh/event",
+        hq_url: str = "",
+        config: ASIConfig | None = None,
         language: str = "sq",
     ) -> None:
         self.status = "active"
-        self.hq_url = hq_url
+        self.config = config or ASIConfig()
+        self.hq_url = hq_url or self.config.hq_event_url
         self.language = language
         self.nodes: Dict[str, Dict[str, Any]] = {
             "ALBA": {"status": "active", "role": "data_collector"},
@@ -52,6 +118,7 @@ class ASICore:
 
     # ---------------- Logging & HQ transmission ----------------
     def log_event(self, source: str, event: str, level: str = "INFO") -> None:
+        source_key = _normalize_node_name(source)
         hints = {
             "ALBA": "Mbledhje e të dhënave dhe sinjaleve fizike.",
             "ALBI": "Analizë e sinjaleve dhe përpunim neural.",
@@ -59,33 +126,85 @@ class ASICore:
         }
         entry = {
             "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
-            "source": source,
+            "source": source_key,
             "event": event,
-            "hint": hints.get(source, ""),
+            "hint": hints.get(source_key, ""),
             "level": level,
         }
         self.logs.append(entry)
-        print(f"[{source}] {level}: {event}")
+        print(f"[{source_key}] {level}: {event}")
         if entry["hint"]:
             print(f"💡 {entry['hint']}")
         self._send_to_hq(entry)
+        self._publish_to_signal_fabric(source_key, event, level, entry)
+
+    def _publish_to_signal_fabric(self, source: str, event: str, level: str, payload: Dict[str, Any]) -> None:
+        if not HAS_SIGNAL_FABRIC:
+            return
+
+        normalized_level = level.upper()
+        if normalized_level == "WARN":
+            normalized_level = "WARNING"
+        if normalized_level not in FabricSignalLevel.__members__:
+            normalized_level = "INFO"
+
+        signal_level = FabricSignalLevel[normalized_level]
+        signal_event = FabricSignalEvent(
+            source=source,
+            kind="asi_log",
+            level=signal_level,
+            message=event,
+            payload=payload,
+            tags=["asi", source.lower()],
+        )
+
+        try:
+            loop = asyncio.get_running_loop()
+            loop.create_task(get_signal_fabric().publish(signal_event))
+        except RuntimeError:
+            return
+        except Exception:
+            return
+
+    def _post_with_retries(self, url: str, **kwargs: Any):
+        if not REQUESTS:
+            return None
+
+        last_exc: Exception | None = None
+        timeout = kwargs.pop("timeout", self.config.request_timeout_seconds)
+        for attempt in range(1, self.config.max_retries + 1):
+            try:
+                response = REQUESTS.post(url, timeout=timeout, **kwargs)
+                if response.status_code < 500:
+                    return response
+                last_exc = RuntimeError(f"HTTP {response.status_code} from {url}")
+            except Exception as exc:
+                last_exc = exc
+
+            if attempt < self.config.max_retries:
+                time.sleep(self.config.retry_backoff_seconds * attempt)
+
+        if last_exc is not None:
+            raise last_exc
+        return None
 
     def _send_to_hq(self, entry: Dict[str, Any]) -> None:
-        if not requests:
+        if not REQUESTS:
             return
         try:
-            requests.post(self.hq_url, json=entry, timeout=5)
+            self._post_with_retries(self.hq_url, json=entry)
         except Exception as exc:
             print(f"[ASI] ⚠️ HQ i paarritshëm: {exc}")
 
     # ---------------- Node health ----------------
     def update_node_status(self, node: str, status: str) -> None:
-        if node not in self.nodes:
+        node_key = _normalize_node_name(node)
+        if node_key not in self.nodes:
             self.log_event("ASI", f"Node i panjohur: {node}", "WARN")
             return
-        self.nodes[node]["status"] = status
+        self.nodes[node_key]["status"] = status
         self._recalculate_health()
-        self.log_event(node, f"Statusi u përditësua në {status}")
+        self.log_event(node_key, f"Statusi u përditësua në {status}")
 
     def _recalculate_health(self) -> None:
         active = sum(1 for n in self.nodes.values() if n["status"] == "active")
@@ -108,6 +227,20 @@ class ASICore:
             "realtime": self.realtime_engine.status(),
         }
 
+    def get_health_snapshot(self) -> Dict[str, Any]:
+        return {
+            "service": "ASI Real Core",
+            "status": self.status,
+            "health_score": self.health_score,
+            "nodes": self.nodes,
+            "realtime": self.realtime_engine.status(),
+            "logs": {
+                "count": len(self.logs),
+                "recent": self.logs[-20:],
+            },
+            "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+        }
+
     def export_logs(self, filename: str = "asi_logs.json") -> None:
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(self.logs, f, indent=2, ensure_ascii=False)
@@ -118,6 +251,9 @@ class ASICore:
 
         return self.realtime_engine.status()
 
+    def get_realtime_status(self) -> Dict[str, Any]:
+        return self.realtime_status()
+
 
 class ClisonixNodeReal:
     """Node real që ngarkon file dhe raporton metrika të sistemit."""
@@ -125,12 +261,16 @@ class ClisonixNodeReal:
     def __init__(self, asi_core: ASICore, node_id: str = "CLX-REAL") -> None:
         self.id = node_id
         self.asi = asi_core
-        self.api_audio = "https://clisonix.com/api/uploads/audio/process"
-        self.api_eeg = "https://clisonix.com/api/uploads/eeg/process"
+        self.api_audio = self.asi.config.api_audio_url
+        self.api_eeg = self.asi.config.api_eeg_url
 
     def collect_system_metrics(self) -> Dict[str, Any]:
         if not psutil:
-            raise RuntimeError("psutil nuk është i instaluar – kërkohet për metrika reale.")
+            self.asi.log_event("ASI", "psutil mungon – nuk ka metrika reale", "ERROR")
+            return {
+                "error": "psutil_missing",
+                "timestamp": time.time(),
+            }
         net = psutil.net_io_counters()
         return {
             "cpu_percent": psutil.cpu_percent(interval=1),
@@ -145,23 +285,31 @@ class ClisonixNodeReal:
         if not os.path.exists(filepath):
             self.asi.log_event("ALBA", f"Audio file mungon: {filepath}", "WARN")
             return
-        if not requests:
+        if not REQUESTS:
             self.asi.log_event("ALBA", "requests mungon – s'mund të ngarkohet audio", "ERROR")
             return
-        with open(filepath, "rb") as f:
-            res = requests.post(self.api_audio, files={"file": f}, timeout=10)
-            self.asi.log_event("ALBA", f"Ngarkuar {os.path.basename(filepath)} → {res.status_code}")
+        try:
+            with open(filepath, "rb") as f:
+                res = self.asi._post_with_retries(self.api_audio, files={"file": f}, timeout=10)
+                status_code = res.status_code if res is not None else "unknown"
+                self.asi.log_event("ALBA", f"Ngarkuar {os.path.basename(filepath)} → {status_code}")
+        except Exception as exc:
+            self.asi.log_event("ALBA", f"Dështoi upload audio: {exc}", "ERROR")
 
     def transmit_eeg_file(self, filepath: str) -> None:
         if not os.path.exists(filepath):
             self.asi.log_event("ALBI", f"EEG file mungon: {filepath}", "WARN")
             return
-        if not requests:
+        if not REQUESTS:
             self.asi.log_event("ALBI", "requests mungon – s'mund të ngarkohet EEG", "ERROR")
             return
-        with open(filepath, "rb") as f:
-            res = requests.post(self.api_eeg, files={"file": f}, timeout=10)
-            self.asi.log_event("ALBI", f"Ngarkuar EEG {os.path.basename(filepath)} → {res.status_code}")
+        try:
+            with open(filepath, "rb") as f:
+                res = self.asi._post_with_retries(self.api_eeg, files={"file": f}, timeout=10)
+                status_code = res.status_code if res is not None else "unknown"
+                self.asi.log_event("ALBI", f"Ngarkuar EEG {os.path.basename(filepath)} → {status_code}")
+        except Exception as exc:
+            self.asi.log_event("ALBI", f"Dështoi upload EEG: {exc}", "ERROR")
 
     def report_system(self) -> None:
         metrics = self.collect_system_metrics()
@@ -175,8 +323,8 @@ class ClisonixMeshNode:
         self.asi = asi_core
         self.node_id = node_id
         self.location = location
-        self.hq_url = "http://localhost:7777/mesh/register"
-        self.status_url = "http://localhost:7777/mesh/status"
+        self.hq_url = self.asi.config.hq_register_url
+        self.status_url = self.asi.config.hq_status_url
         self.hostname = socket.gethostname()
         try:
             self.ip = socket.gethostbyname(self.hostname)
@@ -202,7 +350,7 @@ class ClisonixMeshNode:
         }
 
     def register_node(self) -> None:
-        if not requests:
+        if not REQUESTS:
             self.asi.log_event("JONA", "requests mungon – s'mund të regjistrohet node", "ERROR")
             return
         payload = {
@@ -212,17 +360,25 @@ class ClisonixMeshNode:
             "hostname": self.hostname,
             "status": self.status,
         }
-        res = requests.post(self.hq_url, json=payload, timeout=5)
-        self.asi.log_event("JONA", f"Node i regjistruar në Mesh HQ → {res.status_code}")
+        try:
+            res = self.asi._post_with_retries(self.hq_url, json=payload)
+            status_code = res.status_code if res is not None else "unknown"
+            self.asi.log_event("JONA", f"Node i regjistruar në Mesh HQ → {status_code}")
+        except Exception as exc:
+            self.asi.log_event("JONA", f"Dështoi regjistrimi në Mesh HQ: {exc}", "ERROR")
 
     def send_status(self) -> None:
-        if not requests:
+        if not REQUESTS:
             self.asi.log_event("ASI", "requests mungon – s'mund të dërgohet telemetry", "ERROR")
             return
         metrics = self.collect_metrics()
         payload = {"id": self.node_id, "status": self.status, "metrics": metrics}
-        res = requests.post(self.status_url, json=payload, timeout=5)
-        self.asi.log_event("ASI", f"Telemetry reale dërguar → {res.status_code}")
+        try:
+            res = self.asi._post_with_retries(self.status_url, json=payload)
+            status_code = res.status_code if res is not None else "unknown"
+            self.asi.log_event("ASI", f"Telemetry reale dërguar → {status_code}")
+        except Exception as exc:
+            self.asi.log_event("ASI", f"Dështoi dërgimi i telemetry: {exc}", "ERROR")
 
 
 def _cli():

@@ -35,23 +35,23 @@ apt install -y docker.io docker-compose git curl wget nginx certbot python3-cert
 
 ### STEP 3: Clone Repository
 \\\ash
-cd /opt && git clone https://github.com/LedjanAhmati/Clisonix-cloud.git clisonix && cd clisonix
+cd /opt && git clone https://github.com/Web8kameleon-hub/clisonix.com.git clisonix && cd clisonix
 \\\
 
 ### STEP 4: Create Production Environment
 \\\ash
 cat > .env << 'ENVEOF'
 POSTGRES_USER=clisonix
-POSTGRES_PASSWORD=SuperSecure123!@#
+POSTGRES_PASSWORD=<GENERATE_SECURE_32_CHAR_PASSWORD>
 POSTGRES_DB=clisonixdb
-REDIS_PASSWORD=RedisSecure456!@#
+REDIS_PASSWORD=<GENERATE_SECURE_32_CHAR_PASSWORD>
 API_ENVIRONMENT=production
 API_HOST=0.0.0.0
 API_PORT=8000
-STRIPE_SECRET_KEY=sk_live_YOUR_KEY
-STRIPE_PUBLISHABLE_KEY=pk_live_YOUR_KEY
+STRIPE_SECRET_KEY=<YOUR_STRIPE_SECRET_KEY>
+STRIPE_PUBLISHABLE_KEY=<YOUR_STRIPE_PUBLISHABLE_KEY>
 NEXT_PUBLIC_API_URL=https://api.clisonix.com
-GRAFANA_ADMIN_PASSWORD=GrafanaAdmin789!@#
+GRAFANA_ADMIN_PASSWORD=<GENERATE_SECURE_32_CHAR_PASSWORD>
 ENVEOF
 \\\
 

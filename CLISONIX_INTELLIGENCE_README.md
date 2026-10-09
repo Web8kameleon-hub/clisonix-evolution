@@ -232,13 +232,13 @@ import { scanClisonixAPI, ClisonixAPIScanner } from './clisonix_api_scanner';
 
 // Skanim i shpejtë
 const result = await scanClisonixAPI({
-    baseUrl: 'https://api.clisonix.cloud',
+    baseUrl: 'https://api.clisonix.com',
     timeout: 30000
 });
 
 // Skaner i avancuar
 const scanner = new ClisonixAPIScanner({
-    baseUrl: 'https://api.clisonix.cloud',
+    baseUrl: 'https://api.clisonix.com',
     includeAuth: true,
     authToken: 'your-jwt-token'
 });
@@ -401,7 +401,7 @@ Ky projekt është licencuar nën MIT License - shiko [LICENSE](LICENSE) për de
 
 ## 📞 Support
 
-- **Email**: support@clisonix.cloud
+- **Email**: clisonix@pm.me
 - **Documentation**: https://docs.clisonix.cloud
 - **Issues**: https://github.com/clisonix/clisonix-cloud/issues
 - **Discussions**: https://github.com/clisonix/clisonix-cloud/discussions
@@ -411,3 +411,4 @@ Ky projekt është licencuar nën MIT License - shiko [LICENSE](LICENSE) për de
 **Built with ❤️ by Clisonix Team**
 
 *Për një të ardhme më inteligjente dhe etike.*
+

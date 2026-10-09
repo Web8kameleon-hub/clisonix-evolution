@@ -6,19 +6,23 @@ All endpoints use real data sources (database, files, external APIs).
 No mock, no random, no placeholder values.
 """
 
+import logging
+import os
+
+import asyncpg
+import httpx
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
-import asyncpg
-import os
-import logging
 
 router = APIRouter()
 logger = logging.getLogger("curiosity_ocean_api")
 
-# Example: Real industrial data from PostgreSQL
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost:5432/industrial_db")
+# Real industrial data from PostgreSQL (must be configured by environment)
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 async def fetch_real_sensor_data():
+    if not DATABASE_URL:
+        raise HTTPException(status_code=500, detail="DATABASE_URL is not configured")
     try:
         conn = await asyncpg.connect(DATABASE_URL)
         rows = await conn.fetch("SELECT id, sensor_type, value, timestamp FROM industrial_sensors ORDER BY timestamp DESC LIMIT 10")
@@ -34,7 +38,7 @@ async def get_sensors():
     data = await fetch_real_sensor_data()
     return {"sensors": data}
 
-# Example: Real file-based industrial data
+# Real file-based industrial data
 @router.get("/curiosity-ocean/logs", response_class=JSONResponse)
 async def get_logs():
     """Get latest industrial logs from real file."""
@@ -49,16 +53,18 @@ async def get_logs():
         logger.error(f"Log file error: {e}")
         raise HTTPException(status_code=500, detail="Log file error")
 
-# Example: Real external API integration
-import requests
+# Real external API integration
 @router.get("/curiosity-ocean/external-status", response_class=JSONResponse)
 async def get_external_status():
     """Get real status from external industrial API."""
-    api_url = os.getenv("EXTERNAL_API_URL", "https://industrial-api.example.com/status")
+    api_url = os.getenv("EXTERNAL_API_URL")
+    if not api_url:
+        raise HTTPException(status_code=500, detail="EXTERNAL_API_URL is not configured")
     try:
-        resp = requests.get(api_url, timeout=5)
-        resp.raise_for_status()
-        return resp.json()
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            resp = await client.get(api_url)
+            resp.raise_for_status()
+            return resp.json()
     except Exception as e:
         logger.error(f"External API error: {e}")
         raise HTTPException(status_code=502, detail="External API unavailable")

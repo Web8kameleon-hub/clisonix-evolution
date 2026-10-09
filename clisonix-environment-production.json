@@ -1,39 +1,29 @@
 {
-  "id": "550e8400-e29b-41d4-a716-446655440001",
-  "name": "UltraWebThinking – Clisonix (Production)",
+  "id": "clisonix-production",
+  "name": "Clisonix Production",
   "values": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.clisonix.com",
+      "enabled": true
+    },
     {
       "key": "base_url",
       "value": "https://api.clisonix.com",
-      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "token",
+      "value": "",
       "enabled": true
     },
     {
       "key": "auth_token",
       "value": "",
-      "type": "secret",
-      "enabled": true
-    },
-    {
-      "key": "stream_id",
-      "value": "demo-stream-001",
-      "type": "default",
-      "enabled": true
-    },
-    {
-      "key": "video_id",
-      "value": "dQw4w9WgXcQ",
-      "type": "default",
-      "enabled": true
-    },
-    {
-      "key": "order_id",
-      "value": "",
-      "type": "default",
       "enabled": true
     }
   ],
   "_postman_variable_scope": "environment",
-  "_postman_exported_using": "Postman/10.x"
+  "_postman_exported_at": "2026-03-14T00:00:00.000Z",
+  "_postman_exported_using": "Clisonix-CLI"
 }
-

@@ -59,6 +59,40 @@ groups:
           summary: "AI Agent {{ $labels.agent_type }} High Error Rate"
           description: "Error rate is {{ $value | humanizePercentage }}"
 
+      # TRINITY HEALTH THRESHOLDS
+      - alert: JonaHealthLow
+        expr: |
+          clisonix_jona_health{component="jona",role="data_coordinator"} < 0.70
+        for: 2m
+        labels:
+          severity: warning
+          service: jona
+        annotations:
+          summary: "JONA health below 70%"
+          description: "JONA health is {{ $value | humanizePercentage }}"
+
+      - alert: AlbiHealthLow
+        expr: |
+          clisonix_albi_health{component="albi",role="neural_processor"} < 0.75
+        for: 2m
+        labels:
+          severity: warning
+          service: albi
+        annotations:
+          summary: "ALBI health below 75%"
+          description: "ALBI health is {{ $value | humanizePercentage }}"
+
+      - alert: AlbaHealthLow
+        expr: |
+          clisonix_alba_health{component="alba",role="network_monitor"} < 0.85
+        for: 2m
+        labels:
+          severity: warning
+          service: alba
+        annotations:
+          summary: "ALBA health below 85%"
+          description: "ALBA health is {{ $value | humanizePercentage }}"
+
       # DOCUMENT GENERATION
       - alert: DocumentGenerationErrors
         expr: |
@@ -368,5 +402,3 @@ groups:
         annotations:
           summary: "Redis High Client Connections ({{ $value }})"
           description: "Redis has {{ $value }} connected clients"
-
-

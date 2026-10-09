@@ -140,12 +140,13 @@ class AlbiCore:
 		uptime = 0.0
 		if self._status == "running" and self._started_at:
 			uptime = time.time() - self._started_at
+		latest = self.latest()
 		return {
 			"module": "ALBI",
 			"status": self._status,
 			"uptime_seconds": uptime,
 			"insight_count": len(self._insights),
-			"latest": self.latest().summary if self.latest() else {},
+			"latest": latest.summary if latest else {},
 		}
 
 

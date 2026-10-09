@@ -83,7 +83,7 @@ $Services = @(
     }
     @{ 
         Name = 'ALBI (Neural)'; 
-        Port = 6666; 
+        Port = 6680; 
         Icon = '🧠'; 
         Color = 'Magenta'
         Command = 'python albi_core.py'
@@ -270,7 +270,7 @@ function Invoke-HealthChecks {
         @{ Name = 'API'; URL = 'http://localhost:8000/health'; Port = 8000 }
         @{ Name = 'Frontend'; URL = 'http://localhost:3000'; Port = 3000 }
         @{ Name = 'ALBA'; URL = 'http://localhost:5555/health'; Port = 5555 }
-        @{ Name = 'ALBI'; URL = 'http://localhost:6666/health'; Port = 6666 }
+        @{ Name = 'ALBI'; URL = 'http://localhost:6680/health'; Port = 6680 }
         @{ Name = 'JONA'; URL = 'http://localhost:7777/health'; Port = 7777 }
         @{ Name = 'Orchestrator'; URL = 'http://localhost:9999/health'; Port = 9999 }
         @{ Name = 'Prometheus'; URL = 'http://localhost:9090'; Port = 9090 }
@@ -305,7 +305,7 @@ function Show-ServiceMap {
     
     Write-Host "`n  🧠 MICROSERVICES LAYER:" -ForegroundColor $Colors.Section
     Write-Host "     4. ALBA (5555)        - Network telemetry" -ForegroundColor $Colors.Info
-    Write-Host "     5. ALBI (6666)        - Neural processing" -ForegroundColor $Colors.Info
+    Write-Host "     5. ALBI (6680)        - Neural processing" -ForegroundColor $Colors.Info
     Write-Host "     6. JONA (7777)        - Data synthesis" -ForegroundColor $Colors.Info
     Write-Host "     7. Mesh (9999)        - Service orchestration" -ForegroundColor $Colors.Info
     
@@ -335,7 +335,7 @@ function Show-Dashboard {
     Write-Host "║                                                                               ║" -ForegroundColor $Colors.Title
     Write-Host "║  🔧 SERVICE PORTS                                                             ║" -ForegroundColor $Colors.Title
     Write-Host "║  ├─ ALBA:          http://localhost:5555                                      ║" -ForegroundColor $Colors.Success
-    Write-Host "║  ├─ ALBI:          http://localhost:6666                                      ║" -ForegroundColor $Colors.Success
+    Write-Host "║  ├─ ALBI:          http://localhost:6680                                      ║" -ForegroundColor $Colors.Success
     Write-Host "║  ├─ JONA:          http://localhost:7777                                      ║" -ForegroundColor $Colors.Success
     Write-Host "║  ├─ Orchestrator:  http://localhost:9999                                      ║" -ForegroundColor $Colors.Success
     Write-Host "║  └─ PostgreSQL:    localhost:5432 (postgres/postgres)                         ║" -ForegroundColor $Colors.Success

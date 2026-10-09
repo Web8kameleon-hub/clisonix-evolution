@@ -40,7 +40,7 @@ Të gjithë 3 formatet profesionale kanë përfunduar:
 ### 📚 Server Environments
 
 - ✅ Local development (`localhost:8000`)
-- ✅ Production (`api.clisonix.cloud`)
+- ✅ Production (`api.clisonix.com`)
 - ✅ Sandbox (`sandbox.clisonix.cloud`)
 
 ---
@@ -174,7 +174,7 @@ import datetime
 secret = "your-secret-key"
 payload = {
     'user_id': '123',
-    'email': 'dev@clisonix.cloud',
+    'email': 'clisonix@pm.me',
     'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)
 }
 token = jwt.encode(payload, secret, algorithm='HS256')
@@ -431,3 +431,4 @@ const answer = await client.ask('What modules are running?');
 Të tre format specifikime janë validuar dhe gata për use immediate!
 
 🚀 **Filloni me Postman collection ose SDK generation**
+

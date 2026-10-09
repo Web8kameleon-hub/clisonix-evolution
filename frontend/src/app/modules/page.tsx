@@ -1,4 +1,4 @@
-﻿// Clisonix Modules Industrial Dashboard
+// Clisonix Modules Industrial Dashboard
 // Author: Ledjan Ahmati
 
 import React from 'react'

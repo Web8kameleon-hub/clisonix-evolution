@@ -101,7 +101,7 @@ python generate_observability_docs.py --format all
 
 ### For GitHub
 - HTML is automatically committed via CI/CD
-- Available at: `https://github.com/LedjanAhmati/Clisonix-cloud/blob/main/docs/observability/exports/observability-docs.html`
+- Available at: `https://github.com/Web8kameleon-hub/clisonix.com/blob/main/docs/observability/exports/observability-docs.html`
 - GitHub renders HTML files (limited styling)
 
 ## 🎨 Customization

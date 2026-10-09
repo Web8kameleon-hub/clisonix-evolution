@@ -11,7 +11,7 @@ dependencies = [
   "influxdb-client",
   "neo4j",
   "weaviate-client>=4.6.4",
-  "python-jose[cryptography]",
+  "PyJWT[crypto]>=2.10.1",
 ]
 
 [project.optional-dependencies]

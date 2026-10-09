@@ -68,7 +68,7 @@ if (Test-Path "apps/api/main.py") {
 
 # 6. Agent Services
 Write-Host "`n[6/15] AI Agent Services..." -ForegroundColor Yellow
-$agents = @("alba_service_5555.py", "albi_service_6666.py", "jona_service_7777.py", "master.py")
+$agents = @("alba_service_5555.py", "albi_service_6680.py", "jona_service_7777.py", "master.py")
 $agentCount = 0
 foreach ($agent in $agents) {
     if (Test-Path $agent) {

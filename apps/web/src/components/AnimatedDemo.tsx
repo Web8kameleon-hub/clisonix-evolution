@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -37,9 +37,9 @@ const AnimatedDemo: React.FC<AnimatedDemoProps> = ({ theme = "albi" }) => {
   return (
     <div className={cn(
       "min-h-screen p-6",
-      theme === "albi" && "bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900",
-      theme === "jona" && "bg-gradient-to-br from-slate-900 via-red-900 to-slate-900", 
-      theme === "harmony" && "bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+      theme === "albi" && "bg-gradient-to-br from-neutral-900 via-neutral-900 to-neutral-900",
+      theme === "jona" && "bg-gradient-to-br from-neutral-900 via-red-900 to-neutral-900", 
+      theme === "harmony" && "bg-gradient-to-br from-neutral-900 via-purple-900 to-neutral-900"
     )}>
       <motion.div
         initial="initial"
@@ -55,14 +55,14 @@ const AnimatedDemo: React.FC<AnimatedDemoProps> = ({ theme = "albi" }) => {
           <motion.h1 
             className={cn(
               "text-4xl font-bold mb-4",
-              theme === "albi" && "text-blue-100",
+              theme === "albi" && "text-violet-100",
               theme === "jona" && "text-red-100",
               theme === "harmony" && "text-purple-100"
             )}
             variants={scaleIn}
           >
-            {theme === "albi" && "💙 Alba Motion Demo"}
-            {theme === "jona" && "❤️ Jona Motion Demo"}  
+            {theme === "albi" && "💙 Creative Motion Demo"}
+            {theme === "jona" && "❤️ Coordinator Motion Demo"}  
             {theme === "harmony" && "🌟 Harmony Motion Demo"}
           </motion.h1>
           

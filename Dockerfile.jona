@@ -1,7 +1,21 @@
-FROM python:3.11-slim
+FROM python:3.13
 WORKDIR /app
+
+# Install curl for healthcheck
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+
+# API versioning
+ENV API_V1="/api/v1"
+
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt 2>/dev/null || pip install --no-cache-dir uvicorn fastapi 2>/dev/null || true
-COPY . .
+RUN pip install --no-cache-dir -r requirements.txt 2>/dev/null || pip install --no-cache-dir uvicorn fastapi httpx 2>/dev/null || true
+
+# Copy JONA service files
+COPY jona_server.py .
+COPY jona_neural_api.py .
+
 EXPOSE 7777
-CMD ["python", "cycle_engine.py"]
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD curl -f http://localhost:7777/health || exit 1
+
+CMD ["python", "jona_neural_api.py"]

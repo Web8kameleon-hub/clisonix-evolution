@@ -16,14 +16,12 @@ Combines:
 import os
 import asyncio
 import logging
-import json
 import time
 import uuid
 from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
-from collections import defaultdict
 
-from fastapi import FastAPI, HTTPException, BackgroundTasks, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
@@ -35,6 +33,17 @@ try:
     TRACING_ENABLED = True
 except ImportError:
     TRACING_ENABLED = False
+    
+    # Fallback stub functions when tracing is unavailable
+    def setup_tracing(service_name: str, environment: str = "production", tempo_endpoint: str | None = None):
+        return None
+    
+    def instrument_fastapi_app(app: Any, service_name: str) -> None:
+        pass
+    
+    def instrument_http_clients() -> None:
+        pass
+    
     logger = logging.getLogger("Orchestrator")
     logger.warning("OpenTelemetry tracing not available - running without tracing")
 
@@ -74,7 +83,7 @@ app = FastAPI(
 # Initialize tracing if available
 if TRACING_ENABLED:
     tracer = setup_tracing("orchestrator")
-    instrument_fastapi_app(app, "orchestrator")
+    instrument_fastapi_app(app, service_name="orchestrator")
     instrument_http_clients()
 else:
     tracer = None
@@ -352,7 +361,7 @@ async def generate_api_docs(agent_id: str, doc_request: Dict[str, Any]):
     endpoints = doc_request.get("endpoints", [])
     
     # Generate OpenAPI spec
-    openapi_spec = {
+    openapi_spec: Dict[str, Any] = {
         "openapi": "3.1.0",
         "info": {
             "title": f"{agent['agent_name']} API",

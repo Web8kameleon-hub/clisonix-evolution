@@ -46,7 +46,7 @@ $ServicePorts = @{
     'API'              = 8000
     'Frontend'         = 3000
     'ALBA'             = 5555
-    'ALBI'             = 6666
+    'ALBI'             = 6680
     'JONA'             = 7777
     'Orchestrator'     = 9999
     'PostgreSQL'       = 5432
@@ -397,7 +397,7 @@ function Start-SaaSMode {
     
     if ($DryRun) {
         Show-Status "[DRY RUN] Would start ALBA (5555)" 'INFO'
-        Show-Status "[DRY RUN] Would start ALBI (6666)" 'INFO'
+        Show-Status "[DRY RUN] Would start ALBI (6680)" 'INFO'
         Show-Status "[DRY RUN] Would start JONA (7777)" 'INFO'
         Show-Status "[DRY RUN] Would start Orchestrator (9999)" 'INFO'
         Write-Host "└────────────────────────────────────────────────────────────────────────────────┘`n" -ForegroundColor $Colors.Section
@@ -408,7 +408,7 @@ function Start-SaaSMode {
     
     $services = @(
         @{ Name = 'ALBA'; Port = 5555; Script = 'alba_core.py' }
-        @{ Name = 'ALBI'; Port = 6666; Script = 'albi_core.py' }
+        @{ Name = 'ALBI'; Port = 6680; Script = 'albi_core.py' }
         @{ Name = 'JONA'; Port = 7777; Script = 'alba_frame_generator.py' }
         @{ Name = 'Orchestrator'; Port = 9999; Script = 'mesh_cluster_startup.py' }
     )
