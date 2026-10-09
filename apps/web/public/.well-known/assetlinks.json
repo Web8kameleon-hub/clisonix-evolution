@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.clisonix.app",
+    "sha256_cert_fingerprints": [
+      "A4:AF:B8:BF:74:20:50:60:D2:65:6C:42:D4:DF:32:D9:C1:69:06:97:2B:C0:9E:36:2F:FF:F9:7E:BD:02:F3:C2"
+    ]
+  }
+}]

@@ -276,3 +276,24 @@ OK
 
 # Decoupled external repos - no longer submodules
 external/
+
+# ═══ Android / Gradle — TË HEQURA ═══
+apps/android-clisonix/
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+*.apk
+*.aab
+*.jks
+*.keystore
+
+# Android TWA build artifacts
+apps/android-twa/android
+apps/android-twa/android.keystore
+apps/android-twa/*.apk
+apps/android-twa/*.aab
+apps/android-twa/*.jks
+apps/android-twa/app/build/
+apps/android-twa/.gradle/
+apps/android-twa/build/
