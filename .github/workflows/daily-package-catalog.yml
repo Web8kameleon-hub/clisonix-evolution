@@ -1,0 +1,102 @@
+name: Daily Public Package Catalog
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Generate Package Catalog
+        run: |
+          python .github/scripts/daily_packages_catalog.py --root . --out .github/reports/daily-package-catalog.md --json-out .github/reports/daily-package-catalog.json
+
+      - name: Publish Catalog In Repo (Public Path)
+        run: |
+          mkdir -p public/catalog
+          cp .github/reports/daily-package-catalog.md public/catalog/latest.md
+          cp .github/reports/daily-package-catalog.json public/catalog/latest.json
+          DATE_TAG=$(date -u +%Y-%m-%d)
+          cp .github/reports/daily-package-catalog.md public/catalog/catalog-${DATE_TAG}.md
+          cp .github/reports/daily-package-catalog.json public/catalog/catalog-${DATE_TAG}.json
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if [ -n "$(git status --porcelain public/catalog)" ]; then
+            git add public/catalog
+            git commit -m "chore(catalog): publish daily public package catalog [skip ci]"
+            git push
+          else
+            echo "No catalog changes to commit"
+          fi
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-package-catalog
+          path: |
+            .github/reports/daily-package-catalog.md
+            .github/reports/daily-package-catalog.json
+
+      - name: Add Summary
+        run: |
+          cat .github/reports/daily-package-catalog.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Create Or Update Daily Issue
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const labelName = 'daily-package-catalog';
+            const title = 'Daily Public Package Catalog';
+            const branch = (context.ref || '').replace('refs/heads/', '') || 'main';
+            const report = fs.readFileSync('.github/reports/daily-package-catalog.md', 'utf8');
+            const publicMd = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/catalog/latest.md`;
+            const publicJson = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/catalog/latest.json`;
+            const body = `${report}\n\n## Public Access\n- Markdown: ${publicMd}\n- JSON API-like feed: ${publicJson}`;
+
+            const labelsResp = await github.rest.issues.listLabelsForRepo({ owner, repo, per_page: 100 });
+            if (!labelsResp.data.find(l => l.name === labelName)) {
+              await github.rest.issues.createLabel({
+                owner,
+                repo,
+                name: labelName,
+                color: '1D76DB',
+                description: 'Automated daily public package catalog'
+              });
+            }
+
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'open',
+              labels: labelName,
+              per_page: 100,
+            });
+
+            const existing = issues.find(i => i.title === title);
+            if (existing) {
+              await github.rest.issues.update({ owner, repo, issue_number: existing.number, title, body });
+              core.info(`Updated issue #${existing.number}`);
+            } else {
+              const created = await github.rest.issues.create({ owner, repo, title, body, labels: [labelName] });
+              core.info(`Created issue #${created.data.number}`);
+            }

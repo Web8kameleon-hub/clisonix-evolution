@@ -1,0 +1,97 @@
+name: "📰 Deploy Newsroom + Blog Publisher"
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_publish_now:
+        description: "Trigger /publish-now after deploy"
+        required: true
+        default: true
+        type: boolean
+
+concurrency:
+  group: deploy-newsroom-social-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  HETZNER_IP: 46.225.14.83
+  DEPLOY_PATH: /root/Clisonix-cloud
+
+jobs:
+  deploy-newsroom-social:
+    name: "Deploy newsroom social pipeline"
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Check required secret
+        run: |
+          if [ -z "${{ secrets.HETZNER_SSH_KEY }}" ]; then
+            echo "::error::HETZNER_SSH_KEY secret is not set"
+            exit 1
+          fi
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.HETZNER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ env.HETZNER_IP }} >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Deploy latest main (newsroom + blog_publisher)
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -e
+          cd ${{ env.DEPLOY_PATH }}
+          git fetch origin main
+          git reset --hard origin/main
+          docker compose up -d --build blog_publisher newsroom
+          ENDSSH
+
+      - name: Verify service health
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -e
+          cd ${{ env.DEPLOY_PATH }}
+          docker compose ps blog_publisher newsroom
+          echo "\nblog_publisher /health:"
+          curl -fsS http://localhost:8041/health | head -c 400 && echo
+          echo "\nnewsroom /health:"
+          curl -fsS http://localhost:9800/health | head -c 400 && echo
+          echo "\nnewsroom /publish-config:"
+          curl -fsS http://localhost:9800/publish-config | head -c 800 && echo
+          ENDSSH
+
+      - name: Trigger publish-now
+        if: ${{ inputs.run_publish_now }}
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -e
+          echo "publish-now response:"
+          curl -fsS -X POST http://localhost:9800/publish-now | head -c 800 && echo
+          ENDSSH
+
+      - name: Show latest logs
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -e
+          cd ${{ env.DEPLOY_PATH }}
+          echo "\n=== newsroom logs (last 120) ==="
+          docker compose logs --tail=120 newsroom
+          echo "\n=== blog_publisher logs (last 120) ==="
+          docker compose logs --tail=120 blog_publisher
+          ENDSSH
+
+      - name: Write summary
+        run: |
+          echo "## 📰 Newsroom Social Deploy" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Server: ${{ env.HETZNER_IP }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Commit: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Services: blog_publisher, newsroom" >> $GITHUB_STEP_SUMMARY
+          echo "- publish-now triggered: ${{ inputs.run_publish_now }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "If Facebook still returns 403 (#200), update FB Page token + page permissions in production env." >> $GITHUB_STEP_SUMMARY

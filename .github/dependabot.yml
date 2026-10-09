@@ -1,0 +1,175 @@
+# Dependabot Configuration for Clisonix Cloud
+# Automatically updates dependencies and checks for vulnerabilities
+# Auto-rebase enabled to keep PRs in sync with main branch
+
+version: 2
+
+updates:
+  # Python dependencies (isolated requirements folder)
+  - package-ecosystem: "pip"
+    directory: "/requirements"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 5
+    rebase-strategy: "auto"
+    labels:
+      - "dependencies"
+      - "python"
+      - "security"
+    commit-message:
+      prefix: "deps(python)"
+    assignees:
+      - "Web8kameleon-hub"
+    groups:
+      python-security:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+          - "minor"
+
+  # Python dependencies (API app)
+  - package-ecosystem: "pip"
+    directory: "/apps/api"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 5
+    rebase-strategy: "auto"
+    labels:
+      - "dependencies"
+      - "python"
+      - "security"
+    commit-message:
+      prefix: "deps(python)"
+    assignees:
+      - "Web8kameleon-hub"
+    groups:
+      python-security:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+          - "minor"
+
+  # Node.js dependencies (web app)
+  - package-ecosystem: "npm"
+    directory: "/apps/web"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 5
+    rebase-strategy: "auto"
+    labels:
+      - "dependencies"
+      - "javascript"
+      - "security"
+    commit-message:
+      prefix: "deps(npm)"
+    assignees:
+      - "Web8kameleon-hub"
+    groups:
+      npm-security:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+          - "minor"
+
+  # Root package.json (if exists)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 3
+    rebase-strategy: "auto"
+    labels:
+      - "dependencies"
+      - "root"
+
+  # Frontend app (Next.js)
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:15"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 5
+    rebase-strategy: "auto"
+    labels:
+      - "dependencies"
+      - "javascript"
+      - "frontend"
+    commit-message:
+      prefix: "deps(frontend)"
+    assignees:
+      - "Web8kameleon-hub"
+    groups:
+      frontend-security:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+          - "minor"
+
+  # Hello-AI app (Next.js + Cloudflare)
+  - package-ecosystem: "npm"
+    directory: "/hello-ai"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:30"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 5
+    rebase-strategy: "auto"
+    labels:
+      - "dependencies"
+      - "javascript"
+      - "hello-ai"
+    commit-message:
+      prefix: "deps(hello-ai)"
+    assignees:
+      - "Web8kameleon-hub"
+    groups:
+      hello-ai-security:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+          - "minor"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    rebase-strategy: "auto"
+    labels:
+      - "dependencies"
+      - "ci"
+    commit-message:
+      prefix: "ci(actions)"
+    # Ignore unreachable/private actions
+    ignore:
+      - dependency-name: "open-policy-agent/conftest-action"
+        versions: ["*"]
+
+  # Docker dependencies
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    rebase-strategy: "auto"
+    labels:
+      - "dependencies"
+      - "docker"

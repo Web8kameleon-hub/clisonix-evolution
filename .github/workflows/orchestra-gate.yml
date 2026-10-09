@@ -1,0 +1,184 @@
+name: Orchestra Division — Signal Gate
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "orchestra/**"
+      - ".github/workflows/orchestra-gate.yml"
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  HETZNER_IP: 46.225.14.83
+  REMOTE_DIR: /root/Clisonix-cloud
+  NON_BLOCKING_SCHEDULE: ${{ github.event_name == 'schedule' && 'true' || 'false' }}
+
+permissions:
+  contents: read
+
+jobs:
+  # ── 1. build check ──────────────────────────────────────────────────────────
+  build-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install orchestra deps
+        run: pip install fastapi uvicorn[standard]
+
+      - name: Syntax / import check
+        run: python -c "from orchestra import OrchestraDivision; print('import OK')"
+
+  # ── 2. live signal probes ───────────────────────────────────────────────────
+  orchestra-probe:
+    needs: build-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        domain:
+          - { name: "hetzner",     allow_failure: true  }   # unreachable from GH runners (IP 46.225.14.83)
+          - { name: "repo",        allow_failure: false }
+          - { name: "cloudflare",  allow_failure: true  }   # needs CF_API_TOKEN
+          - { name: "git_profile", allow_failure: false }
+          - { name: "gitignore",   allow_failure: false }
+          - { name: "cache",       allow_failure: true  }   # Redis not in CI net
+          - { name: "clients",     allow_failure: true  }   # needs API_KEY
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install fastapi uvicorn[standard]
+
+      - name: Run ${{ matrix.domain.name }} probe
+        env:
+          GITHUB_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO:            ${{ github.repository }}
+          CF_API_TOKEN:           ""
+          CF_ZONE_ID:             ""
+          CF_ACCOUNT_ID:          ""
+          ORCHESTRA_HETZNER_IP:   ${{ env.HETZNER_IP }}
+          REDIS_URL:              "redis://localhost:6379"
+          CLISONIX_API_URL:       "http://localhost:8000"
+          CLISONIX_INTERNAL_KEY:  ""
+          ORCHESTRA_DOMAINS:      ${{ matrix.domain.name }}
+        run: |
+          fail_or_warn() {
+            local msg="$1"
+            if [ "${{ env.NON_BLOCKING_SCHEDULE }}" = "true" ]; then
+              echo "::warning::${msg} (schedule non-blocking)"
+              return 0
+            fi
+            echo "::error::${msg}"
+            return 1
+          }
+
+          python -m orchestra ${{ matrix.domain.name }} > /tmp/probe-${{ matrix.domain.name }}.json || EXITCODE=$?
+
+          # Parse result
+          STATUS=$(python -c "
+          import json, sys
+          data = json.load(open('/tmp/probe-${{ matrix.domain.name }}.json'))
+          probes = data.get('probes', [])
+          if probes:
+              s = probes[0].get('status','unknown')
+          else:
+              s = data.get('overall','unknown')
+          print(s)
+          sys.exit(0)
+          " 2>/dev/null || echo "unknown")
+
+          echo "domain=${{ matrix.domain.name }} status=$STATUS"
+
+          if [ "$STATUS" = "error" ]; then
+            if [ "${{ matrix.domain.allow_failure }}" = "true" ]; then
+              echo "::warning::${{ matrix.domain.name }} probe returned ERROR — non-blocking"
+            else
+              fail_or_warn "${{ matrix.domain.name }} probe FAILED (status=error)" || exit 1
+            fi
+          elif [ "$STATUS" = "warning" ]; then
+            echo "::warning::${{ matrix.domain.name }} probe has warnings"
+          fi
+
+      - name: Upload probe artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: orchestra-probe-${{ matrix.domain.name }}-${{ github.run_id }}
+          path: /tmp/probe-${{ matrix.domain.name }}.json
+          if-no-files-found: ignore
+
+  # ── 3. remote ocean smoke ───────────────────────────────────────────────────
+  ocean-smoke-over-ssh:
+    name: Ocean smoke over SSH
+    needs: orchestra-probe
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Validate SSH secret
+        run: |
+          if [ -z "${{ secrets.HETZNER_SSH_KEY }}" ]; then
+            if [ "${{ env.NON_BLOCKING_SCHEDULE }}" = "true" ]; then
+              echo "::warning::HETZNER_SSH_KEY missing (schedule non-blocking)"
+              exit 0
+            fi
+            echo "::error::HETZNER_SSH_KEY secret is required for Hetzner smoke checks"
+            exit 1
+          fi
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          cat > ~/.ssh/id_rsa << 'EOFKEY'
+          ${{ secrets.HETZNER_SSH_KEY }}
+          EOFKEY
+          chmod 600 ~/.ssh/id_rsa
+          ssh-add -D >/dev/null 2>&1 || true
+          ssh-keyscan -H ${{ env.HETZNER_IP }} >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Run remote Ocean + Video smoke scripts
+        run: |
+          if ssh -F /dev/null \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=~/.ssh/known_hosts \
+            -o ConnectTimeout=45 \
+            -o ConnectionAttempts=3 \
+            -o IdentitiesOnly=yes \
+            -o IdentityAgent=none \
+            -o PreferredAuthentications=publickey \
+            -o PubkeyAuthentication=yes \
+            -o PasswordAuthentication=no \
+            -o KbdInteractiveAuthentication=no \
+            -o NumberOfPasswordPrompts=0 \
+            -i ~/.ssh/id_rsa \
+            root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          cd "${{ env.REMOTE_DIR }}"
+          chmod +x scripts/hetzner/post_deploy_ocean_smoke.sh
+          chmod +x scripts/hetzner/post_deploy_video_smoke.sh
+          ./scripts/hetzner/post_deploy_ocean_smoke.sh http://127.0.0.1:3000
+          ./scripts/hetzner/post_deploy_video_smoke.sh http://127.0.0.1:3000
+          ENDSSH
+          then
+            echo "✅ Ocean + Video smoke SSH passed"
+          else
+            if [ "${{ env.NON_BLOCKING_SCHEDULE }}" = "true" ]; then
+              echo "::warning::Ocean/Video smoke SSH failed (schedule non-blocking)"
+              exit 0
+            fi
+            echo "::error::Ocean/Video smoke SSH failed"
+            exit 1
+          fi

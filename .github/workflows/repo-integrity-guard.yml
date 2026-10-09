@@ -1,0 +1,51 @@
+name: "🛡️ Repo Integrity Guard"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  guardrails:
+    name: "Repo-Wide Guardrails"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Run no-fake fallback gate
+        run: |
+          bash scripts/guardrails/no_fake_fallback_gate.sh
+
+      - name: Run repo integrity guard
+        run: |
+          python scripts/guardrails/repo_integrity_guard.py
+
+      - name: Run routes history guard
+        run: |
+          python scripts/guardrails/routes_history_guard.py
+
+      - name: Upload guard report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: repo-integrity-guard-report
+          path: |
+            docs/production/canonical/repo_integrity_guard_report.json
+            docs/production/canonical/routes_history_guard_report.json

@@ -1,0 +1,279 @@
+name: Clean Chain Git-Cloudflare-Hetzner-AI
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_scope:
+        description: Deploy scope on Hetzner
+        required: true
+        default: critical
+        type: choice
+        options:
+          - critical
+          - full
+      cloudflare_mode:
+        description: Cloudflare post-deploy action
+        required: true
+        default: purge-api-and-root
+        type: choice
+        options:
+          - skip
+          - purge-api-and-root
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/clean-chain-git-cloudflare-hetzner-ai.yml
+      - agents.yml
+      - docs/ops/GEX44_CLEAN_DEPLOY_ULTRA_CHECKLIST.md
+      - scripts/hetzner/post_deploy_verify_auth_billing_ocean.sh
+      - docs/openapi/clisonix-auth-billing-paywall-ocean.openapi.yaml
+
+concurrency:
+  group: clean-chain-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  HETZNER_IP: 178.63.89.121
+  REMOTE_DIR: /root/Clisonix-cloud
+  REMOTE_REPO: https://github.com/Web8kameleon-hub/clisonix.com.git
+
+jobs:
+  stepstone-preflight:
+    name: Stepstone 1 - Preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Validate agents manifest
+        run: |
+          python - <<'PY'
+          import yaml
+
+          with open('agents.yml', 'r', encoding='utf-8') as f:
+              data = yaml.safe_load(f)
+
+          assert isinstance(data, dict), 'agents.yml must be a mapping'
+          assert 'stepstone' in data and isinstance(data['stepstone'], list), 'missing stepstone list'
+          assert 'ai_agents' in data and isinstance(data['ai_agents'], list), 'missing ai_agents list'
+          assert 'pipelines' in data and isinstance(data['pipelines'], dict), 'missing pipelines mapping'
+          print('agents.yml manifest is valid')
+          PY
+
+      - name: Validate OpenAPI syntax
+        run: |
+          python - <<'PY'
+          import yaml
+          yaml.safe_load(open('docs/openapi/clisonix-auth-billing-paywall-ocean.openapi.yaml', 'r', encoding='utf-8'))
+          print('openapi yaml syntax ok')
+          PY
+
+      - name: Validate verify script syntax
+        run: bash -n scripts/hetzner/post_deploy_verify_auth_billing_ocean.sh
+
+  stepstone-quality-gate:
+    name: Stepstone 2 - Quality Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: stepstone-preflight
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Agent registry import check
+        run: python -c "from agents import AgentOrchestrator; print('agents.py import ok')"
+
+      - name: Enforce no fake data policy (1-5)
+        run: python scripts/guardrails/no_fake_data_policy_gate.py
+
+  stepstone-hetzner-deploy:
+    name: Stepstone 3 - Deploy Hetzner
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    needs: stepstone-quality-gate
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Validate SSH secret
+        run: |
+          if [ -z "${{ secrets.HETZNER_SSH_KEY }}" ]; then
+            echo "HETZNER_SSH_KEY is required"
+            exit 1
+          fi
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          cat > ~/.ssh/id_rsa << 'EOFKEY'
+          ${{ secrets.HETZNER_SSH_KEY }}
+          EOFKEY
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ env.HETZNER_IP }} >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Remote deploy critical services
+        if: github.event_name == 'push' || inputs.deploy_scope == 'critical'
+        run: |
+          ssh -F /dev/null \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=~/.ssh/known_hosts \
+            -o ConnectTimeout=45 \
+            -o ConnectionAttempts=3 \
+            -o IdentitiesOnly=yes \
+            -o IdentityAgent=none \
+            -o PreferredAuthentications=publickey \
+            -o PubkeyAuthentication=yes \
+            -o PasswordAuthentication=no \
+            -o KbdInteractiveAuthentication=no \
+            -o NumberOfPasswordPrompts=0 \
+            -i ~/.ssh/id_rsa \
+            root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          if ! command -v docker >/dev/null 2>&1; then
+            apt-get update -qq
+            apt-get install -y -qq docker.io docker-compose-plugin git curl jq
+            systemctl enable --now docker
+          fi
+
+          mkdir -p "${{ env.REMOTE_DIR }}"
+          cd "${{ env.REMOTE_DIR }}"
+
+          if [ ! -d .git ]; then
+            git clone "${{ env.REMOTE_REPO }}" .
+          fi
+
+          git fetch origin main --prune
+          git checkout main
+          git pull --ff-only origin main
+
+          if [ -f .env.production ]; then
+            ENV_FILE="--env-file .env.production"
+          elif [ -f .env ]; then
+            ENV_FILE="--env-file .env"
+          else
+            echo "No .env.production or .env file found"
+            exit 1
+          fi
+
+          docker compose -f docker-compose.unified.yml ${ENV_FILE} config >/tmp/compose.clean-chain.validated.yml
+          docker compose -f docker-compose.unified.yml ${ENV_FILE} up -d postgres redis web api ocean-core user-management blog-paywall
+
+          chmod +x scripts/hetzner/post_deploy_verify_auth_billing_ocean.sh
+          ./scripts/hetzner/post_deploy_verify_auth_billing_ocean.sh
+          ENDSSH
+
+      - name: Remote deploy full stack
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy_scope == 'full'
+        run: |
+          ssh -F /dev/null \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=~/.ssh/known_hosts \
+            -o ConnectTimeout=45 \
+            -o ConnectionAttempts=3 \
+            -o IdentitiesOnly=yes \
+            -o IdentityAgent=none \
+            -o PreferredAuthentications=publickey \
+            -o PubkeyAuthentication=yes \
+            -o PasswordAuthentication=no \
+            -o KbdInteractiveAuthentication=no \
+            -o NumberOfPasswordPrompts=0 \
+            -i ~/.ssh/id_rsa \
+            root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          cd "${{ env.REMOTE_DIR }}"
+
+          if [ -f .env.production ]; then
+            ENV_FILE="--env-file .env.production"
+          elif [ -f .env ]; then
+            ENV_FILE="--env-file .env"
+          else
+            echo "No .env.production or .env file found"
+            exit 1
+          fi
+
+          docker compose -f docker-compose.unified.yml ${ENV_FILE} up -d
+          chmod +x scripts/hetzner/post_deploy_verify_auth_billing_ocean.sh
+          ./scripts/hetzner/post_deploy_verify_auth_billing_ocean.sh
+          ENDSSH
+
+  stepstone-cloudflare-sync:
+    name: Stepstone 4 - Cloudflare Sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    needs: stepstone-hetzner-deploy
+    steps:
+      - name: Skip cloudflare if selected
+        if: github.event_name == 'workflow_dispatch' && inputs.cloudflare_mode == 'skip'
+        run: echo "Cloudflare action skipped by input"
+
+      - name: Purge API and root cache
+        if: github.event_name == 'push' || inputs.cloudflare_mode == 'purge-api-and-root'
+        env:
+          CF_API_TOKEN: ${{ secrets['CF_API_TOKEN'] }}
+          CF_ZONE_ID: ${{ secrets['CF_ZONE_ID'] }}
+        run: |
+          if [ -z "${CF_API_TOKEN}" ] || [ -z "${CF_ZONE_ID}" ]; then
+            echo "CF_API_TOKEN and CF_ZONE_ID are required for cloudflare sync"
+            exit 1
+          fi
+
+          curl -fsS -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
+            -H "Authorization: Bearer ${CF_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{"files":["https://clisonix.com/","https://clisonix.com/api/ocean","https://api.clisonix.com/health"]}' > /tmp/cf_purge.json
+
+          grep -q '"success":true' /tmp/cf_purge.json
+
+  stepstone-ai-agent-gate:
+    name: Stepstone 5 - AI Agent Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    needs: stepstone-cloudflare-sync
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Validate required agent endpoints map
+        run: |
+          python - <<'PY'
+          import yaml
+
+          data = yaml.safe_load(open('agents.yml', 'r', encoding='utf-8'))
+          agents = {a['id']: a for a in data.get('ai_agents', [])}
+          required = ['ocean_guardian', 'billing_guardian', 'paywall_guardian']
+
+          missing = [aid for aid in required if aid not in agents]
+          if missing:
+              raise SystemExit(f'Missing required ai_agents: {missing}')
+
+          for aid in required:
+              endpoint = agents[aid].get('health_endpoint', '')
+              if not endpoint:
+                  raise SystemExit(f'health_endpoint missing for {aid}')
+
+          print('AI agent gate map is valid')
+          PY
+
+      - name: Final marker
+        run: echo "Clean chain completed successfully"

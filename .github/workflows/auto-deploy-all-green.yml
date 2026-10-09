@@ -1,0 +1,193 @@
+name: "🚦 Auto Deploy (All Green)"
+
+on:
+  workflow_run:
+    workflows: ["CI - Enterprise Security (Free Tier)"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      services:
+        description: "Comma-separated services to rebuild/restart"
+        required: true
+        default: "web"
+        type: string
+      compose_file:
+        description: "Compose file path on server"
+        required: true
+        default: "docker-compose.75-services.yml"
+        type: string
+      env_file:
+        description: "Preferred env file path on server"
+        required: true
+        default: ".env"
+        type: string
+
+concurrency:
+  group: auto-deploy-main
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  HETZNER_IP: 178.63.89.121
+  SERVER_USER: root
+  DEPLOY_PATH: /opt/clisonix.com
+
+jobs:
+  preflight:
+    name: "🧪 Preflight"
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Validate required files
+        run: |
+          set -euo pipefail
+          test -f docker-compose.75-services.yml
+          test -f apps/web/Dockerfile
+          test -f ocean-core/requirements.txt
+          test -f scripts/hetzner-autodeploy.sh
+          echo "✅ Required deployment files exist"
+
+      - name: Validate compose YAML shape
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import sys
+          from pathlib import Path
+          import yaml
+
+          p = Path("docker-compose.75-services.yml")
+          data = yaml.safe_load(p.read_text(encoding="utf-8"))
+          if not isinstance(data, dict):
+              raise SystemExit("compose file is not a valid mapping")
+          services = data.get("services")
+          if not isinstance(services, dict) or not services:
+              raise SystemExit("compose file has no services")
+          required = ["web", "api", "ocean-core"]
+          missing = [s for s in required if s not in services]
+          if missing:
+              raise SystemExit(f"missing required services: {missing}")
+          print("✅ Compose structure validated")
+          PY
+
+  deploy:
+    name: "🚀 Deploy + Health Gate"
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-latest
+    needs: preflight
+    timeout-minutes: 35
+    steps:
+      - name: Validate SSH secret
+        run: |
+          KEY='${{ secrets.HETZNER_SSH_KEY }}'
+          if [ -z "$KEY" ]; then
+            echo "::error::Missing SSH private key secret. Set HETZNER_SSH_KEY."
+            exit 1
+          fi
+
+      - name: Setup SSH
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          KEY_RAW='${{ secrets.HETZNER_SSH_KEY }}'
+          KEY_RAW="${KEY_RAW//$'\r'/}"
+
+          # Support both multiline private keys and one-line keys pasted with literal \n
+          if printf '%s' "$KEY_RAW" | grep -q '\\n'; then
+            KEY_RAW="${KEY_RAW//\\n/$'\n'}"
+          fi
+
+          printf '%s\n' "$KEY_RAW" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+          if ! ssh-keygen -lf ~/.ssh/id_rsa >/dev/null 2>&1; then
+            echo "::error::HETZNER_SSH_KEY is not a valid private key format"
+            exit 1
+          fi
+
+          echo "SSH target: ${{ env.SERVER_USER }}@${{ env.HETZNER_IP }}"
+          echo "SSH key fingerprint:"
+          ssh-keygen -lf ~/.ssh/id_rsa
+
+          ssh-keyscan -H ${{ env.HETZNER_IP }} >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: SSH auth preflight
+        run: |
+          set -euo pipefail
+          ssh -F /dev/null \
+            -o StrictHostKeyChecking=accept-new \
+            -o UserKnownHostsFile=~/.ssh/known_hosts \
+            -o ConnectTimeout=20 \
+            -o ConnectionAttempts=2 \
+            -o IdentitiesOnly=yes \
+            -o IdentityAgent=none \
+            -o PreferredAuthentications=publickey \
+            -o PubkeyAuthentication=yes \
+            -o PasswordAuthentication=no \
+            -o KbdInteractiveAuthentication=no \
+            -o NumberOfPasswordPrompts=0 \
+            -i ~/.ssh/id_rsa \
+            ${{ env.SERVER_USER }}@${{ env.HETZNER_IP }} "echo '✅ SSH auth ok'"
+
+      - name: Deploy on Hetzner
+        run: |
+          INPUT_SERVICES="${{ github.event_name == 'workflow_dispatch' && github.event.inputs.services || 'web,api,ocean-core,ocean-core-multimodal,kloud-upstream-runtime,kloud-bridge,curiosity,user-management' }}"
+          INPUT_COMPOSE="${{ github.event_name == 'workflow_dispatch' && github.event.inputs.compose_file || 'docker-compose.75-services.yml' }}"
+          INPUT_ENV_FILE="${{ github.event_name == 'workflow_dispatch' && github.event.inputs.env_file || '.env' }}"
+          DEPLOY_ENV_B64="${{ secrets.DEPLOY_ENV_B64 }}"
+
+          ssh -F /dev/null \
+            -o StrictHostKeyChecking=accept-new \
+            -o UserKnownHostsFile=~/.ssh/known_hosts \
+            -o ConnectTimeout=45 \
+            -o ConnectionAttempts=3 \
+            -o IdentitiesOnly=yes \
+            -o IdentityAgent=none \
+            -o PreferredAuthentications=publickey \
+            -o PubkeyAuthentication=yes \
+            -o PasswordAuthentication=no \
+            -o KbdInteractiveAuthentication=no \
+            -o NumberOfPasswordPrompts=0 \
+            -i ~/.ssh/id_rsa \
+            ${{ env.SERVER_USER }}@${{ env.HETZNER_IP }} <<ENDSSH
+          set -euo pipefail
+          cd ${{ env.DEPLOY_PATH }}
+
+          # Sync server repo with latest main before running deploy script.
+          git fetch --prune origin
+          git checkout main
+          git pull --ff-only origin main
+
+          if [ -n "${DEPLOY_ENV_B64}" ]; then
+            printf '%s' "${DEPLOY_ENV_B64}" | base64 -d > .env.autodeploy
+            chmod 600 .env.autodeploy
+          fi
+
+          chmod +x scripts/hetzner-autodeploy.sh
+          AUTO_DEPLOY_SERVICES='${INPUT_SERVICES}' \
+          AUTO_DEPLOY_COMPOSE_FILE='${INPUT_COMPOSE}' \
+          AUTO_DEPLOY_ENV_FILE='${INPUT_ENV_FILE}' \
+          DEPLOY_PATH='${{ env.DEPLOY_PATH }}' \
+          bash scripts/hetzner-autodeploy.sh
+          ENDSSH
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## 🚦 Auto Deploy (All Green)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Server: ${{ env.HETZNER_IP }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Path: ${{ env.DEPLOY_PATH }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Trigger: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Services: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.services || 'web,api,ocean-core,ocean-core-multimodal,kloud-upstream-runtime,kloud-bridge,curiosity,user-management' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Compose: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.compose_file || 'docker-compose.75-services.yml' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Preferred env file: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.env_file || '.env' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Result: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,299 @@
+# =============================================================================
+# CLISONIX CLOUD - DOCKER COMPOSE DEPLOYMENT VIA SSH
+# =============================================================================
+# Deploys to Hetzner server using SSH and Docker Compose
+# Server: 46.225.14.83 (hetzner-new)
+#
+# This workflow:
+# 1. SSHs to Hetzner and runs git pull
+# 2. Builds Docker images on server
+# 3. Restarts containers with new images
+# =============================================================================
+
+name: "🚀 Deploy via SSH (Docker Compose)"
+
+on:
+  push:
+    branches:
+      - main
+
+  # Manual dispatch for full control
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: 'Deployment scope'
+        required: true
+        default: 'rebuild-web'
+        type: choice
+        options:
+          - pull-only        # Just git pull, no rebuild
+          - rebuild-web      # Rebuild ONLY web + nginx (safe default)
+          - rebuild-core     # Rebuild core containers
+          - rebuild-ocean-core # Rebuild ONLY ocean-core service
+          - rebuild-aviation # Rebuild ONLY aviation-weather service
+          - full-rebuild     # Rebuild all containers
+
+concurrency:
+  group: ssh-deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  HETZNER_IP: 178.63.89.121
+  DEPLOY_PATH: /opt/clisonix.com
+
+jobs:
+  deploy-ssh:
+    name: "🚀 Deploy to Hetzner via SSH"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check for required secrets
+        run: |
+          if [ -z "${{ secrets.HETZNER_SSH_KEY }}" ]; then
+            echo "⚠️ HETZNER_SSH_KEY secret not set"
+            echo "::warning::HETZNER_SSH_KEY secret is required for SSH deployment"
+            exit 1
+          fi
+          echo "✅ Required secrets are present"
+
+      - name: Bootstrap SSH key on Hetzner (password fallback)
+        continue-on-error: true
+        env:
+          HETZNER_ROOT_PASSWORD: ${{ secrets.HETZNER_ROOT_PASSWORD }}
+          HETZNER_SSH_PUBLIC_KEY: ${{ secrets.HETZNER_SSH_PUBLIC_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${HETZNER_ROOT_PASSWORD}" ] || [ -z "${HETZNER_SSH_PUBLIC_KEY}" ]; then
+            echo "ℹ️ Skipping bootstrap (HETZNER_ROOT_PASSWORD or HETZNER_SSH_PUBLIC_KEY missing)"
+            exit 0
+          fi
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+          PUB_B64=$(printf '%s' "${HETZNER_SSH_PUBLIC_KEY}" | base64 -w0)
+          sshpass -p "${HETZNER_ROOT_PASSWORD}" ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=30 -o PreferredAuthentications=password -o PubkeyAuthentication=no root@${{ env.HETZNER_IP }} "set -euo pipefail; mkdir -p /root/.ssh; chmod 700 /root/.ssh; KEY=\$(echo '${PUB_B64}' | base64 -d); touch /root/.ssh/authorized_keys; chmod 600 /root/.ssh/authorized_keys; grep -qxF \"\$KEY\" /root/.ssh/authorized_keys || printf '%s\\n' \"\$KEY\" >> /root/.ssh/authorized_keys; echo '✅ Bootstrap key present on Hetzner'"
+
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.HETZNER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-add -D >/dev/null 2>&1 || true
+          ssh-keyscan -H ${{ env.HETZNER_IP }} >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: First Time Server Setup
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          # Install git if not present
+          if ! command -v git &>/dev/null; then
+            apt-get update -qq && apt-get install -y -qq git
+          fi
+          # Clone repo if not present
+          if [ ! -d "${{ env.DEPLOY_PATH }}/.git" ]; then
+            echo "📦 Fresh clone of repo..."
+            git clone https://github.com/Web8kameleon-hub/clisonix.com.git ${{ env.DEPLOY_PATH }}
+          fi
+          cd ${{ env.DEPLOY_PATH }}
+          if [ ! -f .env ] && [ -f .env.unified ]; then
+            echo "🧩 Seeding .env from .env.unified..."
+            cp .env.unified .env
+          fi
+          if ! docker network inspect clisonix-net >/dev/null 2>&1; then
+            echo "🕸️ Creating external Docker network clisonix-net..."
+            docker network create clisonix-net
+          fi
+          echo "✅ Server setup complete"
+          ENDSSH
+
+      - name: Git Pull on Server
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          cd ${{ env.DEPLOY_PATH }}
+          echo "📥 Syncing latest code..."
+          git fetch origin main --prune
+          git reset --hard origin/main
+          echo "✅ Code updated to $(git rev-parse --short HEAD)"
+          ENDSSH
+
+      - name: Deploy - Auto on Push (API no-deps)
+        if: github.event_name == 'push'
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          cd ${{ env.DEPLOY_PATH }}
+          if docker compose version >/dev/null 2>&1; then
+            COMPOSE="docker compose"
+          else
+            COMPOSE="docker-compose"
+          fi
+          echo "⚡ Auto-deploy on push: rebuild API with minimal impact (--no-deps)"
+          $COMPOSE build api
+          $COMPOSE up -d --no-deps api
+          echo "✅ Auto-deploy API complete"
+          ENDSSH
+
+      - name: Deploy - Pull Only
+        if: inputs.scope == 'pull-only'
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          cd ${{ env.DEPLOY_PATH }}
+          if docker compose version >/dev/null 2>&1; then
+            COMPOSE="docker compose"
+          else
+            COMPOSE="docker-compose"
+          fi
+          echo "🔄 Restarting services with new code..."
+          $COMPOSE restart web api ocean-core
+          echo "✅ Services restarted"
+          ENDSSH
+
+      - name: Deploy - Rebuild Core
+        if: inputs.scope == 'rebuild-core'
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          cd ${{ env.DEPLOY_PATH }}
+          if docker compose version >/dev/null 2>&1; then
+            COMPOSE="docker compose"
+          else
+            COMPOSE="docker-compose"
+          fi
+          echo "🔨 Rebuilding core containers..."
+          $COMPOSE build --no-cache api ocean-core
+          $COMPOSE up -d api ocean-core
+          echo "✅ Core containers rebuilt"
+          ENDSSH
+
+      - name: Deploy - Rebuild Web Only
+        if: inputs.scope == 'rebuild-web'
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          cd ${{ env.DEPLOY_PATH }}
+          if docker compose version >/dev/null 2>&1; then
+            COMPOSE="docker compose"
+          else
+            COMPOSE="docker-compose"
+          fi
+          echo "🧩 Rebuilding web/nginx only (no ocean-core restart)..."
+          $COMPOSE build --no-cache web
+          $COMPOSE up -d --no-deps web
+          $COMPOSE up -d nginx
+          echo "✅ Web/nginx rebuilt without touching ocean-core"
+          ENDSSH
+
+      - name: Deploy - Rebuild Ocean Core Only
+        if: inputs.scope == 'rebuild-ocean-core'
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          cd ${{ env.DEPLOY_PATH }}
+          if docker compose version >/dev/null 2>&1; then
+            COMPOSE="docker compose"
+          else
+            COMPOSE="docker-compose"
+          fi
+          echo "🌊 Rebuilding ocean-core only..."
+          $COMPOSE build --no-cache ocean-core
+          $COMPOSE up -d ocean-core
+          echo "✅ Ocean-core rebuilt"
+          ENDSSH
+
+      - name: Deploy - Rebuild Aviation Weather
+        if: inputs.scope == 'rebuild-aviation'
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          cd ${{ env.DEPLOY_PATH }}
+          if docker compose version >/dev/null 2>&1; then
+            COMPOSE="docker compose"
+          else
+            COMPOSE="docker-compose"
+          fi
+          echo "🛫 Rebuilding aviation-weather service..."
+          $COMPOSE build --no-cache aviation
+          $COMPOSE up -d aviation
+          echo "✅ Aviation weather service rebuilt"
+          ENDSSH
+
+      - name: Deploy - Full Rebuild
+        if: inputs.scope == 'full-rebuild'
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          cd ${{ env.DEPLOY_PATH }}
+          if docker compose version >/dev/null 2>&1; then
+            COMPOSE="docker compose"
+          else
+            COMPOSE="docker-compose"
+          fi
+          echo "🔨 Full rebuild in progress..."
+          $COMPOSE build --no-cache
+          $COMPOSE up -d
+          echo "✅ All containers rebuilt"
+          ENDSSH
+
+      - name: Ensure Origin TLS Certificate
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          cd ${{ env.DEPLOY_PATH }}
+          if docker compose version >/dev/null 2>&1; then
+            COMPOSE="docker compose"
+          else
+            COMPOSE="docker-compose"
+          fi
+          if ! command -v certbot >/dev/null 2>&1; then
+            apt-get update -qq
+            DEBIAN_FRONTEND=noninteractive apt-get install -y -qq certbot
+          fi
+          if ! docker network inspect clisonix-net >/dev/null 2>&1; then
+            docker network create clisonix-net
+          fi
+          mkdir -p certs
+          CERT_PATH="/etc/letsencrypt/live/clisonix.com/fullchain.pem"
+          if [ ! -f "$CERT_PATH" ] || ! openssl x509 -checkend 2592000 -noout -in "$CERT_PATH" >/dev/null 2>&1; then
+            docker stop clisonix-nginx >/dev/null 2>&1 || true
+            certbot certonly --standalone --preferred-challenges http --non-interactive --agree-tos --register-unsafely-without-email -d clisonix.com -d www.clisonix.com -d api.clisonix.com
+          fi
+          cp /etc/letsencrypt/live/clisonix.com/fullchain.pem certs/cert.pem
+          cp /etc/letsencrypt/live/clisonix.com/privkey.pem certs/key.pem
+          chmod 600 certs/key.pem
+          $COMPOSE up -d nginx
+          echo "✅ Origin TLS certificate ready"
+          ENDSSH
+
+      - name: Verify Deployment
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          cd ${{ env.DEPLOY_PATH }}
+          echo "📊 Container Status:"
+          docker ps --format 'table {{.Names}}\t{{.Status}}' | grep -E 'healthy|Up' || true
+          echo ""
+          echo "🌐 Testing endpoints..."
+          curl -fsS http://localhost:8000/health | head -c 100 && echo ""
+          curl -fsS http://localhost:8030/health | head -c 100 && echo ""
+          curl -fsS -o /dev/null -w "Website: HTTP %{http_code}\n" http://localhost:80/
+          ENDSSH
+
+      - name: Generate Summary
+        run: |
+          echo "## 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Setting | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|---------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Server | ${{ env.HETZNER_IP }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Scope | ${{ github.event_name == 'push' && 'auto-push-api' || inputs.scope }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit | ${{ github.sha }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🌐 Access Points" >> $GITHUB_STEP_SUMMARY
+          echo "- **Website:** https://clisonix.com" >> $GITHUB_STEP_SUMMARY
+          echo "- **API:** https://clisonix.com/api" >> $GITHUB_STEP_SUMMARY
+          echo "- **Ocean:** Port 8030" >> $GITHUB_STEP_SUMMARY

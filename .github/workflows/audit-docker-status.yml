@@ -1,0 +1,95 @@
+name: "🔎 Audit Docker Status"
+
+on:
+  workflow_dispatch:
+    inputs:
+      host:
+        description: 'Target host IP or DNS'
+        required: true
+        default: '46.225.14.83'
+        type: string
+      deploy_path:
+        description: 'Project path on server'
+        required: true
+        default: '/root/Clisonix-cloud'
+        type: string
+
+concurrency:
+  group: docker-audit-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: "📋 Docker Runtime Audit"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Validate SSH secret
+        run: |
+          if [ -z "${{ secrets.HETZNER_SSH_KEY }}" ]; then
+            echo "::error::HETZNER_SSH_KEY secret is not set"
+            exit 1
+          fi
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.HETZNER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-add -D >/dev/null 2>&1 || true
+          ssh-keyscan -H ${{ inputs.host }} >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Run status audit (no deploy)
+        run: |
+          ssh -F /dev/null \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=~/.ssh/known_hosts \
+            -o ConnectTimeout=45 \
+            -o ConnectionAttempts=3 \
+            -o IdentitiesOnly=yes \
+            -o IdentityAgent=none \
+            -o PreferredAuthentications=publickey \
+            -o PubkeyAuthentication=yes \
+            -o PasswordAuthentication=no \
+            -o KbdInteractiveAuthentication=no \
+            -o NumberOfPasswordPrompts=0 \
+            -i ~/.ssh/id_rsa \
+            root@${{ inputs.host }} << 'ENDSSH'
+          cd ${{ inputs.deploy_path }}
+
+          echo "📍 Host: $(hostname)"
+          echo "📂 Path: $(pwd)"
+          echo ""
+
+          echo "🟢 RUNNING CONTAINERS"
+          echo "======================"
+          docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Image}}\t{{.Ports}}'
+          echo ""
+
+          echo "⛔ NON-RUNNING CONTAINERS (exited/dead/created)"
+          echo "==============================================="
+          docker ps -a --filter "status=exited" --filter "status=dead" --filter "status=created" --format 'table {{.Names}}\t{{.Status}}\t{{.Image}}' || true
+          echo ""
+
+          if command -v docker-compose >/dev/null 2>&1; then
+            COMPOSE="docker-compose"
+          else
+            COMPOSE="docker compose"
+          fi
+
+          echo "🐳 COMPOSE SERVICE STATUS"
+          echo "========================="
+          $COMPOSE ps || true
+          ENDSSH
+
+      - name: Write summary
+        run: |
+          echo "## 🔎 Docker Runtime Audit" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Host: \\`${{ inputs.host }}\\`" >> $GITHUB_STEP_SUMMARY
+          echo "- Path: \\`${{ inputs.deploy_path }}\\`" >> $GITHUB_STEP_SUMMARY
+          echo "- Action: status-only (no deploy, no restart)" >> $GITHUB_STEP_SUMMARY

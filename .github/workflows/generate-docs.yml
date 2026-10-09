@@ -16,38 +16,38 @@ jobs:
   generate-docs:
     name: Generate HTML/PDF Documentation
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
-      
+        uses: actions/checkout@v5
+
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.13'
-      
+
       - name: Install dependencies
         run: |
           pip install markdown2 beautifulsoup4 weasyprint
-      
+
       - name: Generate documentation
         run: |
           python generate_observability_docs.py --format all
-      
+
       - name: Upload HTML artifact
         uses: actions/upload-artifact@v4
         with:
           name: observability-docs-html
           path: docs/observability/exports/observability-docs.html
           retention-days: 90
-      
+
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: observability-docs-pdf
           path: docs/observability/exports/observability-docs.pdf
           retention-days: 90
-      
+
       - name: Comment on PR with download links
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
@@ -56,25 +56,25 @@ jobs:
             const fs = require('fs');
             const comment = `
             ## 📚 Observability Documentation Generated
-            
+
             The documentation has been successfully generated from your changes.
-            
+
             **Download:**
             - 📄 [HTML Version](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
             - 📕 [PDF Version](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            
+
             **Files:**
             - \`docs/observability/exports/observability-docs.html\`
             - \`docs/observability/exports/observability-docs.pdf\`
             `;
-            
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: comment
             });
-      
+
       - name: Deploy to GitHub Pages (optional)
         if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4

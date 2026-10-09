@@ -1,0 +1,45 @@
+name: Python Version Matrix
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - "**/*.py"
+      - ".github/workflows/python-version-matrix.yml"
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "**/*.py"
+      - ".github/workflows/python-version-matrix.yml"
+
+jobs:
+  python-matrix-smoke:
+    name: Python ${{ matrix.python-version }} smoke
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13", "3.14"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install minimal deps
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt || true
+          fi
+
+      - name: Compile smoke
+        run: |
+          python -m py_compile ocean-core/ocean_mission_service.py
+          python -m py_compile investor-pack/send_investor_package_email.py
+          python -c "import sys; print('python', sys.version)"

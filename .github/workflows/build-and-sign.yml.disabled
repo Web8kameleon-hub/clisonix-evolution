@@ -16,7 +16,7 @@ permissions:
 env:
   # Përcakton emrin e regjistrit dhe imazhit
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }} # Emri i imazhit do të jetë <owner>/<repo>
+  # IMAGE_NAME will be set dynamically to ensure lowercase
 
 jobs:
   build-sign-publish:
@@ -25,16 +25,21 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Convert repository name to lowercase
+        id: lowercase
+        run: |
+          echo "image_name=${GITHUB_REPOSITORY,,}" >> $GITHUB_OUTPUT
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
         
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -42,9 +47,9 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ steps.lowercase.outputs.image_name }}
           tags: |
             # Përdor versionin e release si tag
             type=ref,event=release
@@ -53,7 +58,7 @@ jobs:
 
       - name: Build and push Docker image
         id: build-and-push
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           context: .
           # Specifikon Dockerfile-in që do të përdoret. Ndryshoje sipas nevojës.
@@ -65,12 +70,12 @@ jobs:
           provenance: true
 
       - name: Install Cosign
-        uses: sigstore/cosign-installer@v3.1.1
+        uses: sigstore/cosign-installer@v3.7.0
 
       - name: Sign the container image with Cosign (Keyless)
         # Nënshkruan imazhin pa pasur nevojë për çelësa privatë
         run: |
-          cosign sign --yes "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-and-push.outputs.digest }}"
+          cosign sign --yes "${{ env.REGISTRY }}/${{ steps.lowercase.outputs.image_name }}@${{ steps.build-and-push.outputs.digest }}"
         env:
           COSIGN_EXPERIMENTAL: "true"
 
@@ -82,4 +87,4 @@ jobs:
       - name: Verify signature
         # Verifikon që nënshkrimi është i vlefshëm dhe i lidhur me këtë repo/workflow
         run: |
-          cosign verify --certificate-identity-regexp "https://github.com/${{ github.repository_owner }}/" --certificate-oidc-issuer-regexp "https://token.actions.githubusercontent.com" "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-and-push.outputs.digest }}"
+          cosign verify --certificate-identity-regexp "https://github.com/${{ github.repository_owner }}/" --certificate-oidc-issuer-regexp "https://token.actions.githubusercontent.com" "${{ env.REGISTRY }}/${{ steps.lowercase.outputs.image_name }}@${{ steps.build-and-push.outputs.digest }}"

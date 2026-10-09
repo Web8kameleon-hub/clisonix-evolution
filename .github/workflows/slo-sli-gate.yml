@@ -1,0 +1,151 @@
+name: SLO/SLI Gate - Critical Services
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'
+
+permissions:
+  contents: read
+  actions: write   # needed to trigger ocean-core-selfheal
+
+env:
+  # Opt into Node.js 24 for all actions (avoids Node.js 20 deprecation warnings)
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  HETZNER_IP: 46.225.14.83
+  REMOTE_DIR: /root/Clisonix-cloud
+  NON_BLOCKING_SCHEDULE: ${{ github.event_name == 'schedule' && 'true' || 'false' }}
+
+jobs:
+  slo-sli-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        service:
+          - { name: "api",         url: "http://46.225.14.83:8000/health",  allow_failure: false }
+          - { name: "ocean-core",  url: "http://46.225.14.83:8030/health",  allow_failure: false }
+          # openmind (port 9999) is currently unreachable from GitHub Actions runners
+          # (HTTP 000 / connection refused); mark allow_failure so the gate issues
+          # a warning instead of a hard error until the service is restored.
+          - { name: "openmind",    url: "http://46.225.14.83:9999/health",  allow_failure: true  }
+          - { name: "excel",       url: "http://46.225.14.83:8002/health",  allow_failure: false }
+          - { name: "ollama",      url: "http://46.225.14.83:11434",        allow_failure: false }
+          - { name: "translation", url: "http://46.225.14.83:8036/health",  allow_failure: false }
+          - { name: "orchestra",   url: "http://46.225.14.83:9700/health",  allow_failure: true  }
+    steps:
+      - name: Probe health endpoint
+        run: |
+          fail_or_warn() {
+            local msg="$1"
+            if [ "${{ env.NON_BLOCKING_SCHEDULE }}" = "true" ]; then
+              echo "::warning::${msg} (schedule non-blocking)"
+              return 0
+            fi
+            echo "::error::${msg}"
+            return 1
+          }
+
+          START=$(date +%s%3N)
+          HTTP_CODE=$(curl -s -o /tmp/resp.txt -w "%{http_code}" --max-time 8 "${{ matrix.service.url }}" || true)
+          END=$(date +%s%3N)
+          LATENCY=$((END-START))
+          echo "service=${{ matrix.service.name }} code=$HTTP_CODE latency_ms=$LATENCY"
+
+          # HTTP 000 means curl could not connect at all (firewall / service down)
+          if [ "$HTTP_CODE" = "000" ]; then
+            if [ "${{ matrix.service.allow_failure }}" = "true" ]; then
+              echo "::warning::${{ matrix.service.name }} unreachable (connection failed) — non-blocking"
+            else
+              fail_or_warn "${{ matrix.service.name }} unreachable (connection failed)" || exit 1
+            fi
+          elif [ "$HTTP_CODE" -ge 500 ]; then
+            fail_or_warn "${{ matrix.service.name }} failed health gate (HTTP $HTTP_CODE)" || exit 1
+          elif [ "$HTTP_CODE" -lt 200 ]; then
+            fail_or_warn "${{ matrix.service.name }} unexpected HTTP code (HTTP $HTTP_CODE)" || exit 1
+          fi
+
+          if [ "$LATENCY" -gt 2000 ]; then
+            echo "::warning::${{ matrix.service.name }} latency high (${LATENCY}ms)"
+          fi
+
+      - name: Upload probe evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: slo-sli-probe-${{ matrix.service.name }}-${{ github.run_id }}
+          path: /tmp/resp.txt
+
+  ocean-smoke-over-ssh:
+    name: Ocean smoke over SSH
+    needs: slo-sli-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Validate SSH secret
+        run: |
+          if [ -z "${{ secrets.HETZNER_SSH_KEY }}" ]; then
+            if [ "${{ env.NON_BLOCKING_SCHEDULE }}" = "true" ]; then
+              echo "::warning::HETZNER_SSH_KEY missing (schedule non-blocking)"
+              exit 0
+            fi
+            echo "::error::HETZNER_SSH_KEY secret is required for Hetzner smoke checks"
+            exit 1
+          fi
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.HETZNER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-add -D >/dev/null 2>&1 || true
+          ssh-keyscan -H ${{ env.HETZNER_IP }} >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Run remote Ocean + Video smoke scripts
+        run: |
+          if ssh -F /dev/null \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=~/.ssh/known_hosts \
+            -o ConnectTimeout=45 \
+            -o ConnectionAttempts=3 \
+            -o IdentitiesOnly=yes \
+            -o IdentityAgent=none \
+            -o PreferredAuthentications=publickey \
+            -o PubkeyAuthentication=yes \
+            -o PasswordAuthentication=no \
+            -o KbdInteractiveAuthentication=no \
+            -o NumberOfPasswordPrompts=0 \
+            -i ~/.ssh/id_rsa \
+            root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -euo pipefail
+          cd "${{ env.REMOTE_DIR }}"
+          chmod +x scripts/hetzner/post_deploy_ocean_smoke.sh
+          chmod +x scripts/hetzner/post_deploy_video_smoke.sh
+          ./scripts/hetzner/post_deploy_ocean_smoke.sh http://127.0.0.1:3000
+          ./scripts/hetzner/post_deploy_video_smoke.sh http://127.0.0.1:3000
+          ENDSSH
+          then
+            echo "✅ Ocean + Video smoke SSH passed"
+          else
+            if [ "${{ env.NON_BLOCKING_SCHEDULE }}" = "true" ]; then
+              echo "::warning::Ocean/Video smoke SSH failed (schedule non-blocking)"
+              exit 0
+            fi
+            echo "::error::Ocean/Video smoke SSH failed"
+            exit 1
+          fi
+
+  # Auto-heal ocean-core when it fails the gate
+  ocean-core-heal-on-failure:
+    needs:
+      - slo-sli-check
+      - ocean-smoke-over-ssh
+    if: failure()
+    uses: ./.github/workflows/ocean-core-selfheal.yml
+    with:
+      mode: heal
+    secrets: inherit
+

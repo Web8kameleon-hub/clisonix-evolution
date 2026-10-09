@@ -1,0 +1,164 @@
+name: Terraform CDS GCP
+
+on:
+  pull_request:
+    paths:
+      - infra/terraform/cloudflare-cds-gcp/**
+      - .github/workflows/terraform-cds-gcp.yml
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Select terraform action"
+        required: true
+        type: choice
+        options:
+          - plan
+          - apply
+      apply_confirmation:
+        description: "Type APPLY to confirm manual apply"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+
+env:
+  TF_DIR: infra/terraform/cloudflare-cds-gcp
+  TF_CLI_ARGS: -no-color -input=false
+  WIF_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+  WIF_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+jobs:
+  terraform-plan:
+    name: Terraform Plan
+    if: github.event_name == 'pull_request' || github.event.inputs.action == 'plan'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.3
+
+      - name: Check auth configuration
+        id: auth_config
+        run: |
+          if [ -n "${WIF_PROVIDER}" ] && [ -n "${WIF_SERVICE_ACCOUNT}" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "ready=false" >> "$GITHUB_OUTPUT"
+          echo "## Terraform Plan Skipped" >> "$GITHUB_STEP_SUMMARY"
+          echo "Missing required secrets: GCP_WORKLOAD_IDENTITY_PROVIDER and/or GCP_SERVICE_ACCOUNT" >> "$GITHUB_STEP_SUMMARY"
+
+          # For manual workflow runs, fail fast so operators see an explicit gate failure.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            exit 1
+          fi
+
+      - name: Authenticate to Google Cloud (WIF)
+        id: auth
+        if: steps.auth_config.outputs.ready == 'true'
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.WIF_SERVICE_ACCOUNT }}
+
+      - name: Terraform Init
+        if: steps.auth_config.outputs.ready == 'true'
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform init
+
+      - name: Terraform Validate
+        if: steps.auth_config.outputs.ready == 'true'
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform validate
+
+      - name: Terraform Plan
+        if: steps.auth_config.outputs.ready == 'true'
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform plan -parallelism=1 -out=tfplan
+
+      - name: Enforce known-drift allowlist
+        if: steps.auth_config.outputs.ready == 'true'
+        working-directory: ${{ env.TF_DIR }}
+        run: |
+          terraform show -no-color tfplan > tfplan.txt
+
+          # Hard fail for any destroy action.
+          if grep -Eq "Plan: [0-9]+ to add, [0-9]+ to change, [1-9][0-9]* to destroy" tfplan.txt; then
+            echo "::error::Destroy action detected in Terraform plan."
+            exit 1
+          fi
+
+          # If there are changes, only allow known-safe drift patterns.
+          if grep -Eq "Plan: [0-9]+ to add, [1-9][0-9]* to change, 0 to destroy" tfplan.txt; then
+            if grep -Eq "min_instance_count = 0 -> null|audience[[:space:]]*= .* -> null" tfplan.txt; then
+              echo "Known-safe drift detected (Cloud Run scaling null-normalization / Scheduler OIDC audience normalization)."
+            else
+              echo "::error::Plan includes non-allowlisted changes. Manual review required."
+              exit 1
+            fi
+          fi
+
+      - name: Show Plan Summary
+        if: steps.auth_config.outputs.ready == 'true'
+        working-directory: ${{ env.TF_DIR }}
+        run: |
+          test -f tfplan.txt || terraform show -no-color tfplan > tfplan.txt
+          {
+            echo "## Terraform Plan Result"
+            echo
+            echo '```text'
+            tail -n 80 tfplan.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Plan Artifact
+        if: steps.auth_config.outputs.ready == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-cds-plan-${{ github.run_id }}
+          path: |
+            ${{ env.TF_DIR }}/tfplan
+            ${{ env.TF_DIR }}/tfplan.txt
+
+  terraform-apply:
+    name: Terraform Apply (Manual)
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'apply' && github.event.inputs.apply_confirmation == 'APPLY' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.3
+
+      - name: Authenticate to Google Cloud (WIF)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.WIF_SERVICE_ACCOUNT }}
+
+      - name: Terraform Init
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform init
+
+      - name: Terraform Plan (Apply Gate)
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform plan -parallelism=1 -out=tfplan
+
+      - name: Terraform Apply
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform apply tfplan
+
+      - name: Post Apply Drift Check
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform plan -parallelism=1

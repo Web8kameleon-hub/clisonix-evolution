@@ -1,0 +1,127 @@
+name: "🧪 Kloud Edge CI"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/kloud-edge-ci.yml"
+      - "apps/web/app/modules/kloud-bridge/**"
+      - "hardware/kloud-soc/**"
+      - "scripts/hardware/profiles/oceancore_lab_*.json"
+      - "scripts/hardware/rust_node_agent/**"
+      - "services/kloud_bridge/**"
+      - "tests/unit/test_kloud_bridge_status.py"
+  pull_request:
+    paths:
+      - ".github/workflows/kloud-edge-ci.yml"
+      - "apps/web/app/modules/kloud-bridge/**"
+      - "hardware/kloud-soc/**"
+      - "scripts/hardware/profiles/oceancore_lab_*.json"
+      - "scripts/hardware/rust_node_agent/**"
+      - "services/kloud_bridge/**"
+      - "tests/unit/test_kloud_bridge_status.py"
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  kloud-bridge-status:
+    name: "🌉 Kloud Bridge status tests"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install bridge dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r services/kloud_bridge/requirements.txt pytest
+
+      - name: Run unit tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: pytest -q tests/unit/test_kloud_bridge_status.py
+
+  rust-node-agent:
+    name: "🦀 Rust node agent check"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cargo check
+        run: cargo check --manifest-path scripts/hardware/rust_node_agent/Cargo.toml
+
+  kloud-soc-build:
+    name: "⚙️ KLOUd SoC firmware + bitstream"
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install FPGA and RISC-V toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            binutils-riscv64-unknown-elf \
+            fpga-icestorm \
+            gcc-riscv64-unknown-elf \
+            nextpnr-ecp5 \
+            yosys
+          # Install ecptools for ecppack command (bitstream packing)
+          cd /tmp && git clone https://github.com/YosysHQ/prjlattice.git
+          cd prjlattice && cmake -B build && cmake --build build
+          sudo cp build/tools/ecptools/ecppack /usr/local/bin/ecppack
+          cd - && rm -rf /tmp/prjlattice
+          mkdir -p "$HOME/.local/bin"
+          ln -sf /usr/bin/riscv64-unknown-elf-gcc "$HOME/.local/bin/riscv32-unknown-elf-gcc"
+          ln -sf /usr/bin/riscv64-unknown-elf-objcopy "$HOME/.local/bin/riscv32-unknown-elf-objcopy"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Build firmware image
+        run: make -C hardware/kloud-soc/firmware clean all
+
+      - name: Synthesize and route ULX3S image
+        run: |
+          yosys -p "synth_ecp5 -top ulx3s_top -json hardware/kloud-soc/kloud_soc.json" \
+            hardware/kloud-soc/rtl/*.v \
+            hardware/kloud-soc/fpga/ulx3s_top.v
+          nextpnr-ecp5 --25k --package CABGA256 \
+            --json hardware/kloud-soc/kloud_soc.json \
+            --lpf hardware/kloud-soc/fpga/ulx3s.lpf \
+            --textcfg hardware/kloud-soc/kloud_soc.config
+          ecppack hardware/kloud-soc/kloud_soc.config hardware/kloud-soc/kloud_soc.bit
+
+      - name: Upload SoC artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: kloud-soc-build
+          path: |
+            hardware/kloud-soc/firmware/firmware.hex
+            hardware/kloud-soc/kloud_soc.json
+            hardware/kloud-soc/kloud_soc.config
+            hardware/kloud-soc/kloud_soc.bit

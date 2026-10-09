@@ -1,0 +1,45 @@
+name: Config Drift Detection
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  detect-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Baseline hash for critical configs
+        id: baseline
+        run: |
+          FILES=$(cat << 'EOF'
+          docker-compose.yml
+          docker-compose.75-services.yml
+          ocean-core/service_registry.py
+          ocean-core/signal_schema.py
+          ocean-core/bridge_engine.py
+          EOF
+          )
+          mkdir -p drift-report
+          echo "$FILES" | while read -r f; do
+            if [ -f "$f" ]; then
+              sha256sum "$f" >> drift-report/current-hashes.txt
+            fi
+          done
+          cat drift-report/current-hashes.txt
+
+      - name: Upload drift snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: drift-snapshot-${{ github.run_id }}
+          path: drift-report/current-hashes.txt
+
+      - name: Summary
+        run: |
+          echo "## Zero Config Drift Snapshot" >> $GITHUB_STEP_SUMMARY
+          echo "- Checked critical files for deterministic hash baseline" >> $GITHUB_STEP_SUMMARY
+          echo "- Use this snapshot to compare against server runtime hashes" >> $GITHUB_STEP_SUMMARY

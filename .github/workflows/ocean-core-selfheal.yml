@@ -1,0 +1,207 @@
+# =============================================================================
+# OCEAN CORE SELF-HEAL
+# =============================================================================
+# SSHes into the Hetzner server, inspects the clisonix-ocean-core container,
+# and restarts it if it is not running.
+#
+# Triggered:
+#   • Automatically by the slo-sli-live-alerter workflow when ocean-core is
+#     detected as SEV-1 or SEV-2.
+#   • Manually from the Actions UI (mode: heal | logs | status).
+#
+# Secrets required:
+#   HETZNER_SSH_KEY   — private key for root@HETZNER_IP
+#
+# No fake data. No mocks. All commands run against the real production server.
+# =============================================================================
+
+name: "🔧 Ocean Core Self-Heal"
+
+on:
+  # Manual trigger with explicit mode selection
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "heal = check + restart if down | logs = tail last 200 lines | status = inspect only"
+        required: false
+        default: "heal"
+        type: choice
+        options:
+          - heal
+          - logs
+          - status
+
+  # Called by slo-sli-live-alerter when ocean-core breach detected
+  workflow_call:
+    inputs:
+      mode:
+        description: "heal | logs | status"
+        required: false
+        default: "heal"
+        type: string
+
+concurrency:
+  group: ocean-core-selfheal
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  HETZNER_IP: "46.225.14.83"
+  CONTAINER_NAME: "clisonix-ocean-core"
+  DEPLOY_PATH: "/root/Clisonix-cloud"
+  HEALTH_URL: "http://localhost:8030/health"
+  MAX_RESTART_WAIT_SEC: 60
+
+jobs:
+  selfheal:
+    name: "🔧 Ocean Core — ${{ inputs.mode || 'heal' }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: "🔑 Validate SSH secret"
+        run: |
+          if [ -z "${{ secrets.HETZNER_SSH_KEY }}" ]; then
+            echo "::error::HETZNER_SSH_KEY secret is not set. Cannot SSH to production server."
+            exit 1
+          fi
+          echo "✅ SSH key present"
+
+      - name: "🔑 Setup SSH"
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.HETZNER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-add -D >/dev/null 2>&1 || true
+          ssh-keyscan -H "${{ env.HETZNER_IP }}" >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      # ─────────────────────────────────────────────────────────────────
+      # STATUS — always collected regardless of mode
+      # ─────────────────────────────────────────────────────────────────
+      - name: "📋 Collect container status"
+        id: status
+        run: |
+          CONTAINER_STATE=$(
+            ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa \
+              root@${{ env.HETZNER_IP }} \
+              "docker inspect --format='{{.State.Status}}' ${{ env.CONTAINER_NAME }} 2>/dev/null || echo 'not_found'"
+          )
+          echo "state=${CONTAINER_STATE}" >> "$GITHUB_OUTPUT"
+          echo "🐳 Container state: ${CONTAINER_STATE}"
+
+          HEALTH_CODE=$(
+            ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa \
+              root@${{ env.HETZNER_IP }} \
+              "curl -s -o /dev/null -w '%{http_code}' --max-time 5 ${{ env.HEALTH_URL }} 2>/dev/null || echo '000'"
+          )
+          echo "health_code=${HEALTH_CODE}" >> "$GITHUB_OUTPUT"
+          echo "🏥 Health HTTP code: ${HEALTH_CODE}"
+
+      # ─────────────────────────────────────────────────────────────────
+      # LOGS — always collected so they appear in the summary
+      # ─────────────────────────────────────────────────────────────────
+      - name: "📜 Collect container logs (last 200 lines)"
+        run: |
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa \
+            root@${{ env.HETZNER_IP }} \
+            "docker logs --tail 200 ${{ env.CONTAINER_NAME }} 2>&1 || echo '(no logs — container may not exist)'" \
+            | tee /tmp/ocean_core_logs.txt
+
+      # ─────────────────────────────────────────────────────────────────
+      # HEAL — restart only when state != running or health endpoint fails
+      # ─────────────────────────────────────────────────────────────────
+      - name: "🔧 Restart ocean-core (heal mode only)"
+        if: |
+          (inputs.mode == 'heal' || inputs.mode == '') &&
+          (steps.status.outputs.state != 'running' || steps.status.outputs.health_code != '200')
+        run: |
+          echo "⚠️  Container state='${{ steps.status.outputs.state }}' health='${{ steps.status.outputs.health_code }}' — initiating restart"
+
+          ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa \
+            root@${{ env.HETZNER_IP }} << 'ENDSSH'
+          set -e
+          cd ${{ env.DEPLOY_PATH }}
+
+          # Use docker compose v2 if available, fall back to v1
+          if docker compose version >/dev/null 2>&1; then
+            COMPOSE="docker compose"
+          else
+            COMPOSE="docker-compose"
+          fi
+
+          echo "🔄 Restarting ocean-core..."
+          $COMPOSE restart ocean-core
+
+          echo "⏳ Waiting up to ${{ env.MAX_RESTART_WAIT_SEC }}s for health..."
+          deadline=$(( $(date +%s) + ${{ env.MAX_RESTART_WAIT_SEC }} ))
+          until curl -sf --max-time 5 http://localhost:8030/health > /tmp/health_resp.txt 2>&1; do
+            if [ "$(date +%s)" -ge "$deadline" ]; then
+              echo "::error::ocean-core did not become healthy within ${{ env.MAX_RESTART_WAIT_SEC }}s"
+              echo "=== Last health attempt ===" && cat /tmp/health_resp.txt || true
+              echo "=== Container logs (last 50) ===" && docker logs --tail 50 clisonix-ocean-core
+              exit 1
+            fi
+            echo "  ... still waiting ($(date '+%H:%M:%S'))"
+            sleep 5
+          done
+
+          echo "✅ ocean-core is healthy"
+          cat /tmp/health_resp.txt
+          ENDSSH
+
+      - name: "✅ Verify health after heal"
+        if: inputs.mode == 'heal' || inputs.mode == ''
+        run: |
+          POST_STATE=$(
+            ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa \
+              root@${{ env.HETZNER_IP }} \
+              "docker inspect --format='{{.State.Status}}' ${{ env.CONTAINER_NAME }} 2>/dev/null || echo 'not_found'"
+          )
+          POST_CODE=$(
+            ssh -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts -o ConnectTimeout=45 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PubkeyAuthentication=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -i ~/.ssh/id_rsa \
+              root@${{ env.HETZNER_IP }} \
+              "curl -s -o /dev/null -w '%{http_code}' --max-time 5 ${{ env.HEALTH_URL }} 2>/dev/null || echo '000'"
+          )
+          echo "Post-heal state: ${POST_STATE}  HTTP: ${POST_CODE}"
+          if [ "${POST_CODE}" != "200" ]; then
+            echo "::error::ocean-core health check still failing after restart (HTTP ${POST_CODE})"
+            exit 1
+          fi
+          echo "✅ ocean-core fully healthy after self-heal"
+
+      # ─────────────────────────────────────────────────────────────────
+      # UPLOAD LOGS AS ARTIFACT
+      # ─────────────────────────────────────────────────────────────────
+      - name: "📎 Upload logs artifact"
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: "ocean-core-logs-${{ github.run_id }}"
+          path: /tmp/ocean_core_logs.txt
+          retention-days: 7
+
+      # ─────────────────────────────────────────────────────────────────
+      # JOB SUMMARY
+      # ─────────────────────────────────────────────────────────────────
+      - name: "📊 Write job summary"
+        if: always()
+        run: |
+          {
+            echo "## 🔧 Ocean Core Self-Heal Summary"
+            echo ""
+            echo "| Field | Value |"
+            echo "|---|---|"
+            echo "| Mode | \`${{ inputs.mode || 'heal' }}\` |"
+            echo "| Server | \`${{ env.HETZNER_IP }}\` |"
+            echo "| Container | \`${{ env.CONTAINER_NAME }}\` |"
+            echo "| Pre-heal state | \`${{ steps.status.outputs.state }}\` |"
+            echo "| Pre-heal HTTP | \`${{ steps.status.outputs.health_code }}\` |"
+            echo "| Triggered at | $(date -u '+%Y-%m-%dT%H:%M:%SZ') |"
+            echo ""
+            echo "### Last 30 log lines"
+            echo "\`\`\`"
+            tail -30 /tmp/ocean_core_logs.txt 2>/dev/null || echo "(no logs collected)"
+            echo "\`\`\`"
+          } >> "$GITHUB_STEP_SUMMARY"

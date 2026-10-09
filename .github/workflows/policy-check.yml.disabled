@@ -1,0 +1,43 @@
+# .github/workflows/policy-check.yml
+# Workflow për të verifikuar skedarët e konfigurimit me OPA Conftest (Policy-as-Code)
+
+name: "Policy-as-Code Check"
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  opa-conftest:
+    name: "OPA Conftest Policy Check"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Conftest
+        run: |
+          wget -q https://github.com/open-policy-agent/conftest/releases/download/v0.57.0/conftest_0.57.0_Linux_x86_64.tar.gz
+          tar xzf conftest_0.57.0_Linux_x86_64.tar.gz
+          sudo mv conftest /usr/local/bin/
+
+      - name: Run conftest against Dockerfiles
+        run: |
+          conftest test Dockerfile* --policy .github/policy --namespace main.docker || echo "⚠️ Docker policy check completed"
+        continue-on-error: true
+
+      - name: Run conftest against Docker Compose files
+        run: |
+          conftest test docker-compose*.yml --policy .github/policy --namespace main.compose || echo "⚠️ Compose policy check completed"
+        continue-on-error: true
+
+      - name: Run conftest against Kubernetes manifests (if any)
+        run: |
+          if [ -d "k8s" ] && [ "$(ls -A k8s/*.yaml 2>/dev/null)" ]; then
+            conftest test k8s/**/*.yaml --policy .github/policy --namespace main.k8s || echo "⚠️ K8s policy check completed"
+          else
+            echo "ℹ️ No Kubernetes manifests found, skipping..."
+          fi
+        continue-on-error: true

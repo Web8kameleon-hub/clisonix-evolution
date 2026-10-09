@@ -1,0 +1,123 @@
+name: News Branch CI
+
+on:
+  push:
+    branches:
+      - news
+    paths:
+      - 'services/newsroom/**'
+      - 'docs/**'
+      - 'NEWSROOM_DEPLOYMENT.md'
+      - 'NEWSROOM_90DAY_ROADMAP.md'
+      - 'docs/FACEBOOK_PAGE_CLISONIX.md'
+      - '.github/workflows/news-branch.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'services/newsroom/**'
+      - 'docs/**'
+      - 'NEWSROOM_DEPLOYMENT.md'
+      - 'NEWSROOM_90DAY_ROADMAP.md'
+      - 'docs/FACEBOOK_PAGE_CLISONIX.md'
+      - '.github/workflows/news-branch.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  newsroom-quality:
+    name: Newsroom Quality Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install newsroom dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r services/newsroom/requirements.txt
+
+      - name: Validate Python syntax (newsroom)
+        run: |
+          python -m py_compile services/newsroom/main.py
+
+      - name: Validate imports (newsroom)
+        run: |
+          python - <<'PY'
+          import importlib.util
+          import sys
+
+          spec = importlib.util.spec_from_file_location("newsroom_main", "services/newsroom/main.py")
+          mod = importlib.util.module_from_spec(spec)
+          sys.modules[spec.name] = mod
+          spec.loader.exec_module(mod)
+          print("newsroom import OK")
+          PY
+
+      - name: Validate Facebook publishing config keys
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          config_file=""
+          if [ -f services/newsroom/.env ]; then
+            config_file="services/newsroom/.env"
+          elif [ -f services/newsroom/.env.sample ]; then
+            config_file="services/newsroom/.env.sample"
+          elif [ -f services/newsroom/.env.example ]; then
+            config_file="services/newsroom/.env.example"
+          fi
+
+          if [ -n "$config_file" ]; then
+            grep -q '^FB_PAGE_ID=' "$config_file"
+            grep -q '^FB_PAGE_TOKEN=' "$config_file"
+            echo "Facebook config keys present in $config_file"
+          else
+            echo "::warning::No newsroom env file is committed; validating code references only."
+          fi
+
+          grep -q 'FB_PAGE_ID' services/newsroom/main.py
+          grep -q 'FB_PAGE_TOKEN' services/newsroom/main.py
+          echo "Facebook config references present in code"
+
+      - name: Markdown sanity checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=$(git ls-files '*.md')
+          if [ -z "$files" ]; then
+            echo "No markdown files found"
+            exit 0
+          fi
+          while IFS= read -r f; do
+            if [ ! -s "$f" ]; then
+              echo "Empty markdown file: $f"
+              exit 1
+            fi
+            head -n 1 "$f" | grep -Eq '^#|^\S' || {
+              echo "Invalid markdown header/start in: $f"
+              exit 1
+            }
+          done <<< "$files"
+          echo "Markdown sanity checks passed"
+
+      - name: Upload run metadata
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: news-branch-ci-${{ github.run_id }}
+          path: |
+            .github/workflows/news-branch.yml
+            docs/NEWS_BRANCH_GUIDE.md
+            docs/FACEBOOK_PAGE_CLISONIX.md
+            docs/PUBLICATION_LAWS_CLISONIX.md
+          if-no-files-found: ignore

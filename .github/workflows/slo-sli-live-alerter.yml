@@ -1,0 +1,192 @@
+# =============================================================================
+# SLO/SLI AUTONOMOUS CYCLE — Real Hetzner Production
+# =============================================================================
+# Runs the full 5-stage autonomous pipeline against the live server:
+#   collect → alert → budget → remediate → tune
+#
+# Uses slo_sli_cycle.py --once (single authoritative entry point).
+# No inline Python, no duplicated logic.
+#
+# When ocean-core is SEV-1, the ocean-core-heal job runs automatically.
+#
+# Secrets required:
+#   SLACK_WEBHOOK_URL      Slack incoming-webhook for #critical-alerts
+#   OCEAN_ADMIN_API_TOKEN  ocean-core admin token (for remediation + tuning)
+#   API_ADMIN_TOKEN        backend-api admin token (for key rotation)
+#   HETZNER_SSH_KEY        (used only by ocean-core-selfheal workflow call)
+#
+# All hosts resolve to the real Hetzner IP 46.225.14.83.
+# =============================================================================
+
+name: "🔄 SLO/SLI Autonomous Cycle (Hetzner)"
+
+on:
+  workflow_dispatch:
+    inputs:
+      probe_count:
+        description: "HTTP probes per service (default: 10)"
+        required: false
+        default: "10"
+      probe_timeout:
+        description: "Per-probe timeout seconds (default: 3)"
+        required: false
+        default: "3"
+      dry_run:
+        description: "true = no Slack/remediation/tuning HTTP calls"
+        required: false
+        default: "false"
+  schedule:
+    - cron: '17 * * * *'
+
+concurrency:
+  group: slo-sli-autonomous-cycle
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  actions: write    # needed to trigger ocean-core-selfheal
+
+env:
+  HETZNER_IP: "46.225.14.83"
+  OCEAN_HOST:   "46.225.14.83"
+  API_HOST:     "46.225.14.83"
+  OPENMIND_HOST: "46.225.14.83"
+  EXCEL_HOST:   "46.225.14.83"
+  OLLAMA_HOST:  "46.225.14.83"
+  TRANS_HOST:   "46.225.14.83"
+  NON_BLOCKING_SCHEDULE: ${{ github.event_name == 'schedule' && 'true' || 'false' }}
+
+jobs:
+  autonomous-cycle:
+    name: "🔄 Autonomous Cycle"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      ocean_core_sev: ${{ steps.cycle.outputs.ocean_core_sev }}
+      any_sev1:       ${{ steps.cycle.outputs.any_sev1 }}
+
+    steps:
+      - name: "📥 Checkout"
+        uses: actions/checkout@v5
+
+      - name: "🐍 Setup Python 3.12"
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: "📦 Install dependencies"
+        run: pip install --quiet --upgrade pip fastapi pydantic
+
+      - name: "🔄 Run autonomous cycle"
+        id: cycle
+        env:
+          OCEAN_HOST:            ${{ env.OCEAN_HOST }}
+          API_HOST:              ${{ env.API_HOST }}
+          OPENMIND_HOST:         ${{ env.OPENMIND_HOST }}
+          EXCEL_HOST:            ${{ env.EXCEL_HOST }}
+          OLLAMA_HOST:           ${{ env.OLLAMA_HOST }}
+          TRANS_HOST:            ${{ env.TRANS_HOST }}
+          PROBE_COUNT:           ${{ inputs.probe_count || '10' }}
+          PROBE_TIMEOUT:         ${{ inputs.probe_timeout || '3' }}
+          SLACK_WEBHOOK_URL:     ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_DRY_RUN:         ${{ inputs.dry_run || 'false' }}
+          REMEDIATION_DRY_RUN:   ${{ inputs.dry_run || 'false' }}
+          OCEAN_ADMIN_API_TOKEN: ${{ secrets.OCEAN_ADMIN_API_TOKEN }}
+          API_ADMIN_TOKEN:       ${{ secrets.API_ADMIN_TOKEN }}
+          BUDGET_LEDGER_PATH:    /tmp/slo_budget_ledger.json
+          TUNING_HISTORY_PATH:   /tmp/slo_tuning_history.json
+          SLACK_CHANNEL_CRITICAL:   "#critical-alerts"
+          SLACK_CHANNEL_MONITORING: "#clisonix-monitoring"
+        run: |
+          # Run the full 5-stage autonomous cycle (single authoritative entry point)
+          set +e
+          python slo_sli_cycle.py --once \
+            --probe-count "$PROBE_COUNT" \
+            --probe-timeout "$PROBE_TIMEOUT" \
+            --ledger "$BUDGET_LEDGER_PATH" \
+            --tuning-history "$TUNING_HISTORY_PATH" \
+            2>&1 | tee /tmp/cycle_output.txt
+          CYCLE_EXIT=$?
+          set -e
+
+          if [ "$CYCLE_EXIT" -ne 0 ]; then
+            if [ "${{ env.NON_BLOCKING_SCHEDULE }}" = "true" ]; then
+              echo "::warning::Autonomous cycle failed with exit code $CYCLE_EXIT (schedule non-blocking)"
+            else
+              echo "::error::Autonomous cycle failed with exit code $CYCLE_EXIT"
+              exit "$CYCLE_EXIT"
+            fi
+          fi
+
+          # Parse outputs for downstream jobs
+          python - << 'PYEOF'
+          import json, os, sys
+
+          ledger_path = os.environ.get("BUDGET_LEDGER_PATH", "/tmp/slo_budget_ledger.json")
+          try:
+              with open(ledger_path) as f:
+                  ledger = json.load(f)
+              runs = ledger.get("runs", [])
+              last_run = runs[-1] if runs else {}
+              services = last_run.get("services", {})
+
+              ocean_sev = services.get("ocean_core", {}).get("severity", "OK")
+              any_sev1  = any(
+                  s.get("severity") == "SEV-1"
+                  for s in services.values()
+              )
+          except Exception:
+              ocean_sev = "UNKNOWN"
+              any_sev1 = False
+
+          gh_out = os.environ.get("GITHUB_OUTPUT", "")
+          if gh_out:
+              with open(gh_out, "a") as f:
+                  f.write(f"ocean_core_sev={ocean_sev}\n")
+                  f.write(f"any_sev1={'true' if any_sev1 else 'false'}\n")
+          PYEOF
+
+      - name: "📊 Write job summary"
+        if: always()
+        run: |
+          {
+            echo "## 🔄 SLO/SLI Autonomous Cycle"
+            echo ""
+            echo "| Field | Value |"
+            echo "|---|---|"
+            echo "| Server | \`${{ env.HETZNER_IP }}\` |"
+            echo "| Mode | \`${{ inputs.dry_run == 'true' && 'DRY RUN' || 'LIVE' }}\` |"
+            echo "| Triggered at | $(date -u '+%Y-%m-%dT%H:%M:%SZ') |"
+            echo ""
+            echo "### Cycle Output"
+            echo "\`\`\`"
+            grep -v "^\[DRY RUN\] Slack" /tmp/cycle_output.txt 2>/dev/null | tail -60 || echo "(no output)"
+            echo "\`\`\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "📎 Upload artifacts"
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: "cycle-artifacts-${{ github.run_id }}"
+          path: |
+            /tmp/slo_budget_ledger.json
+            /tmp/slo_tuning_history.json
+            /tmp/cycle_output.txt
+          retention-days: 7
+
+  # ─────────────────────────────────────────────────────────────────
+  # Auto-heal ocean-core when it's SEV-1 (job level — not a step)
+  # ─────────────────────────────────────────────────────────────────
+  ocean-core-heal:
+    name: "🔧 Ocean Core Self-Heal (SEV-1)"
+    needs: autonomous-cycle
+    if: |
+      failure() &&
+      needs.autonomous-cycle.outputs.ocean_core_sev == 'SEV-1'
+    uses: ./.github/workflows/ocean-core-selfheal.yml
+    with:
+      mode: heal
+    secrets: inherit
+
