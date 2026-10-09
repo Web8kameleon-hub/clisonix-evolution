@@ -4,9 +4,9 @@ import { fileURLToPath } from "url";
 import { AlbaCore } from "../../backend/layers/layer4-alba";
 import { ALBISystem } from "../../backend/layers/layer5-albi";
 import { emitSignal, nodeDiagnostics, initSignalCore, shutdownSignalCore } from "../../backend/layers/_shared/signal";
-import { AudioSynthesizer } from "../Clisonix/audio_synthesizer";
+import { AudioSynthesizer } from "./audio_synthesizer";
 import { loadConfig, type AppConfig } from "../../backend/config";
-import { buildLaborInput, summarizeLaborInput } from "./balpha_theta_beta";
+import { buildLaborInput, summarizeLaborInput } from "./alpha_theta_beta";
 
 type AlbaStream = ReturnType<AlbaCore["getStreams"]>[number];
 

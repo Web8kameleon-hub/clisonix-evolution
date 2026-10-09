@@ -19,12 +19,29 @@ export interface ConversionOptions {
   format: "wav" | "mp3" | "flac";
 }
 
+// SECURITY: Allowed directories for file operations
+const ALLOWED_INPUT_DIRS = [
+  path.resolve(process.cwd(), 'data'),
+  path.resolve(process.cwd(), 'uploads'),
+  '/tmp/clisonix'
+];
+
+function isPathSafe(filePath: string, allowedDirs: string[]): boolean {
+  const resolvedPath = path.resolve(filePath);
+  return allowedDirs.some(baseDir => resolvedPath.startsWith(baseDir));
+}
+
 export async function eegToAudio(
   cfg: AppConfig, 
   eegFile: string, 
   options: ConversionOptions
 ): Promise<AudioConversionResult> {
   return new Promise((resolve) => {
+    // SECURITY: Validate input path to prevent path traversal
+    if (!isPathSafe(eegFile, ALLOWED_INPUT_DIRS)) {
+      return resolve({ ok: false, detail: "Access denied: input path outside allowed directories" });
+    }
+    
     // Verify input file exists
     if (!fs.existsSync(eegFile)) {
       return resolve({ ok: false, detail: "Input file not found" });

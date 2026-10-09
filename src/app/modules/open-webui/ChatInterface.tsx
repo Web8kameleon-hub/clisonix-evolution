@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 export default function OpenWebUIChat() {
   const [messages, setMessages] = useState([
-    { id: 1, text: "Hello! I'm NeuroSonix AI Assistant. How can I help you with EEG analysis, neural synthesis, or system monitoring?", sender: 'bot' }
+    { id: 1, text: "Hello! I'm Clisonix AI Assistant. How can I help you with EEG analysis, neural synthesis, or system monitoring?", sender: 'bot' }
   ])
   const [input, setInput] = useState('')
 
@@ -18,7 +18,7 @@ export default function OpenWebUIChat() {
       setTimeout(() => {
         const botResponse = { 
           id: Date.now(), 
-          text: I understand you're asking about: "". Let me process this with our NeuroSonix modules..., 
+          text: I understand you're asking about: "". Let me process this with our Clisonix modules..., 
           sender: 'bot' 
         }
         setMessages(prev => [...prev, botResponse])
@@ -28,9 +28,9 @@ export default function OpenWebUIChat() {
 
   return (
     <div className="min-h-screen bg-white flex">
-      {/* Sidebar - NeuroSonix Modules */}
+      {/* Sidebar - Clisonix Modules */}
       <div className="w-80 bg-gradient-to-b from-slate-900 to-blue-900 text-white p-6">
-        <h1 className="text-2xl font-bold mb-2">?? NeuroSonix</h1>
+        <h1 className="text-2xl font-bold mb-2">?? Clisonix</h1>
         <p className="text-gray-300 mb-6">AI Chat Interface</p>
         
         <div className="space-y-3">
@@ -72,7 +72,7 @@ export default function OpenWebUIChat() {
                 <div className="flex items-center space-x-2 mb-1">
                   {message.sender === 'bot' && <span className="text-lg">??</span>}
                   <span className="text-sm font-medium">
-                    {message.sender === 'user' ? 'You' : 'NeuroSonix AI'}
+                    {message.sender === 'user' ? 'You' : 'Clisonix AI'}
                   </span>
                 </div>
                 <div className="text-sm">{message.text}</div>
@@ -101,7 +101,7 @@ export default function OpenWebUIChat() {
             </button>
           </div>
           <div className="text-center mt-3 text-sm text-gray-500">
-            Ask about: EEG Analysis • Neural Synthesis • Data Streams • System Status
+            Ask about: EEG Analysis ï¿½ Neural Synthesis ï¿½ Data Streams ï¿½ System Status
           </div>
         </div>
       </div>

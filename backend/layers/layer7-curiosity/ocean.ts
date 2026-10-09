@@ -1,5 +1,8 @@
 import { signalPush, nodeInfo } from "../_shared/signal";
 
+const OCEAN_CORE_URL =
+  process.env.OCEAN_CORE_URL || "http://clisonix-ocean-core:8030";
+
 export interface CuriosityQuery {
   question: string;
   domain: string;
@@ -24,27 +27,31 @@ let isExploring = false;
 export function initCuriosityEngine() {
   explorations = [];
   console.log("[Curiosity Ocean] Deep exploration engine initialized");
-  
+
   // Start background curiosity process
   setInterval(backgroundExploration, 30000); // Every 30 seconds
 }
 
-export async function askCuriosity(query: CuriosityQuery): Promise<ExplorationResult> {
+export async function askCuriosity(
+  query: CuriosityQuery,
+): Promise<ExplorationResult> {
   // Add to explorations queue
   explorations.push(query);
-  
+
   // Keep only last 1000 explorations
   if (explorations.length > 1000) {
     explorations = explorations.slice(-1000);
   }
 
-  // Simulate deep thinking process
+  // Real Ocean Core response (0 fake answers)
+  const ocean = await queryOceanCore(query.question);
+
   const result: ExplorationResult = {
-    confidence: 0.75 + Math.random() * 0.2, // 75-95% confidence
-    sources: generateSources(query.domain),
+    confidence: ocean.confidence,
+    sources: ocean.sources,
     follow_up_questions: generateFollowUpQuestions(query.question),
     philosophical_depth: calculatePhilosophicalDepth(query.question),
-    answer: await generateCuriousAnswer(query.question, query.domain)
+    answer: ocean.answer,
   };
 
   // Mark query as completed
@@ -58,82 +65,121 @@ export function getExplorations(): CuriosityQuery[] {
   return explorations.slice(); // Return copy
 }
 
-async function generateCuriousAnswer(question: string, domain: string): Promise<string> {
-  // Simulate deep analysis time
-  await new Promise(resolve => setTimeout(resolve, Math.random() * 2000 + 500));
-  
-  const domainAnswers: Record<string, string[]> = {
-    neuroscience: [
-      "Neural oscillations in the gamma range suggest consciousness emerges from synchronized firing patterns...",
-      "The relationship between synaptic plasticity and memory formation reveals...",
-      "Brainwave entrainment through external stimuli demonstrates the malleability of consciousness..."
-    ],
-    physics: [
-      "Quantum entanglement at biological scales suggests consciousness might operate beyond classical physics...",
-      "The measurement problem in quantum mechanics parallels the hard problem of consciousness...",
-      "Quantum coherence in microtubules could explain the unity of conscious experience..."
-    ],
-    philosophy: [
-      "The mind-body problem reveals fundamental questions about the nature of reality...",
-      "Phenomenological analysis suggests consciousness has irreducible qualitative aspects...",
-      "The explanatory gap between neural activity and subjective experience remains..."
-    ],
-    general: [
-      "Deep analysis reveals interconnected patterns across multiple domains of knowledge...",
-      "The question touches on fundamental aspects of existence and understanding...",
-      "Cross-domain synthesis suggests novel approaches to this inquiry..."
-    ]
-  };
-
-  const answers = domainAnswers[domain] || domainAnswers.general;
-  return answers[Math.floor(Math.random() * answers.length)];
+async function generateCuriousAnswer(
+  question: string,
+  domain: string,
+): Promise<string> {
+  const ocean = await queryOceanCore(question);
+  return ocean.answer;
 }
 
-function generateSources(domain: string): string[] {
-  const sources = [
-    "Integrated Information Theory (IIT)",
-    "Global Workspace Theory",
-    "Predictive Processing Framework",
-    "Quantum Biology Research",
-    "Phenomenological Studies",
-    "Computational Neuroscience Models"
-  ];
-  
-  return sources.slice(0, Math.floor(Math.random() * 3) + 2);
+async function queryOceanCore(
+  question: string,
+): Promise<{ answer: string; confidence: number; sources: string[] }> {
+  const language = detectLanguageFromText(question);
+
+  const response = await fetch(`${OCEAN_CORE_URL}/api/v1/chat`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      message: question,
+      language,
+      messages: [{ role: "user", content: question }],
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Ocean Core error ${response.status}`);
+  }
+
+  const payload = await response.json();
+  const answer = String(payload?.response || payload?.answer || "").trim();
+  const sources = Array.isArray(payload?.sources)
+    ? payload.sources.map((s: unknown) => String(s))
+    : ["ocean-core"];
+  const confidenceRaw = Number(payload?.confidence);
+  const confidence = Number.isFinite(confidenceRaw) ? confidenceRaw : 0.82;
+
+  if (!answer) {
+    throw new Error("Ocean Core returned an empty response");
+  }
+
+  return {
+    answer,
+    confidence,
+    sources,
+  };
 }
 
 function generateFollowUpQuestions(originalQuestion: string): string[] {
+  const normalized = originalQuestion.trim();
   const followUps = [
-    "What are the implications for artificial consciousness?",
-    "How does this relate to the hard problem of consciousness?",
-    "What experimental approaches could test this hypothesis?",
-    "How might this change our understanding of intelligence?",
-    "What are the ethical considerations of this insight?"
+    `Can you expand this with concrete examples related to: ${normalized}?`,
+    "What evidence supports this answer?",
+    "What are practical next steps?",
   ];
-  
-  return followUps.slice(0, Math.floor(Math.random() * 3) + 1);
+
+  return followUps;
 }
 
 function calculatePhilosophicalDepth(question: string): number {
   // Simple heuristic for philosophical depth
-  const deepWords = ["consciousness", "meaning", "existence", "reality", "being", "mind", "soul", "purpose"];
-  const wordCount = deepWords.filter(word => question.toLowerCase().includes(word)).length;
-  return Math.min(10, wordCount * 2 + Math.random() * 3);
+  const deepWords = [
+    "consciousness",
+    "meaning",
+    "existence",
+    "reality",
+    "being",
+    "mind",
+    "soul",
+    "purpose",
+  ];
+  const wordCount = deepWords.filter((word) =>
+    question.toLowerCase().includes(word),
+  ).length;
+  return Math.min(10, Math.max(1, wordCount * 2 + 2));
 }
 
 function extractInsights(result: ExplorationResult): string[] {
-  return [
-    "Pattern recognition reveals deeper connections",
-    "Cross-domain analysis suggests novel perspectives",
-    "The question opens new avenues for exploration"
-  ];
+  const answer = (result.answer || "").trim();
+  if (!answer) {
+    return [];
+  }
+  const chunks = answer
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .slice(0, 3);
+  return chunks.length ? chunks : [answer.slice(0, 180)];
+}
+
+function detectLanguageFromText(text: string): string {
+  const t = text.toLowerCase();
+  if (/[\u4e00-\u9fff]/.test(text)) return "zh";
+  if (/[\u3040-\u30ff]/.test(text)) return "ja";
+  if (/[\uac00-\ud7af]/.test(text)) return "ko";
+  if (/[\u0370-\u03ff]/.test(text)) return "el";
+  if (/[\u0590-\u05ff]/.test(text)) return "he";
+  if (/[\u0600-\u06ff]/.test(text)) return "ar";
+  if (/\b(guten|hallo|danke|bitte|tschüss|wie|ist)\b/i.test(t)) return "de";
+  if (
+    /\b(përshëndetje|pershendetje|mirëdita|faleminderit|çfarë|është)\b/i.test(t)
+  )
+    return "sq";
+  if (/\b(hola|gracias|buenos|adiós|cómo)\b/i.test(t)) return "es";
+  if (/\b(bonjour|merci|salut|comment)\b/i.test(t)) return "fr";
+  if (/\b(ciao|grazie|buongiorno|come)\b/i.test(t)) return "it";
+  if (/\b(merhaba|teşekkür|nasılsın)\b/i.test(t)) return "tr";
+  return "en";
 }
 
 async function backgroundExploration() {
   if (isExploring) return;
-  
+
   isExploring = true;
-  
+
   try {
     // Generate spontaneous curiosity
     const spontaneousQuestions = [
@@ -142,17 +188,24 @@ async function backgroundExploration() {
       "What role does information integration play in awareness?",
       "How might artificial systems develop genuine understanding?"
     ];
-    
+
     if (Math.random() < 0.1) { // 10% chance every 30 seconds
       const question = spontaneousQuestions[Math.floor(Math.random() * spontaneousQuestions.length)];
-      
-      await askCuriosity({
-        question,
-        domain: "philosophy",
-        priority: "low",
-        timestamp: new Date().toISOString(),
-        status: "exploring"
-      });
+
+      try {
+        await askCuriosity({
+          question,
+          domain: "philosophy",
+          priority: "low",
+          timestamp: new Date().toISOString(),
+          status: "exploring",
+        });
+      } catch (error) {
+        console.warn(
+          "[Curiosity Ocean] Background exploration skipped:",
+          error,
+        );
+      }
     }
   } finally {
     isExploring = false;

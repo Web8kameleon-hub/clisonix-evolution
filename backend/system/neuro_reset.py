@@ -74,8 +74,26 @@ class NeuroReset:
         self.sessions_path.write_text(json.dumps(self.sessions, indent=2), encoding="utf-8")
 
     # ---------- metrics ----------
+    ALLOWED_LATENCY_HOSTS = frozenset(["api.clisonix.com", "localhost", "127.0.0.1"])
+    
+    def _validate_url(self, url: str) -> bool:
+        """Validate URL to prevent SSRF attacks"""
+        try:
+            from urllib.parse import urlparse
+            parsed = urlparse(url)
+            if parsed.scheme not in ("http", "https"):
+                return False
+            if parsed.hostname not in self.ALLOWED_LATENCY_HOSTS:
+                return False
+            return True
+        except Exception:
+            return False
+    
     def _latency(self, url: Optional[str]) -> Optional[float]:
         if not url or requests is None:
+            return None
+        # SECURITY: Validate URL to prevent SSRF
+        if not self._validate_url(url):
             return None
         t0 = time.time()
         try:

@@ -3,23 +3,23 @@ Multilingual Module for Clisonix Cloud
 Real implementation with actual APIs and services
 """
 
-import os
-import logging
-from typing import Dict, List, Optional, Tuple
-from dataclasses import dataclass
+import asyncio
 import json
-import requests
-from datetime import datetime, timedelta
+import logging
+import os
 import uuid
+from dataclasses import dataclass
+from datetime import datetime, timedelta
+from typing import Dict, List, Optional, Tuple
 
 # Third-party imports for real services
 import boto3  # AWS Translate
-from google.cloud import translate_v2 as google_translate
-from deep_translator import GoogleTranslator
-import speech_recognition as sr
-from pydub import AudioSegment
 import edge_tts
-import asyncio
+import requests
+import speech_recognition as sr
+from google.cloud import translate_v2 as google_translate
+from googletrans import Translator as GoogleTranslator
+from pydub import AudioSegment
 
 logger = logging.getLogger(__name__)
 
@@ -240,7 +240,7 @@ class RealMultilingualService:
                 scores[lang] = matches / total_chars
         
         if scores:
-            best_lang = max(scores, key=scores.get)
+            best_lang = max(scores, key=lambda k: scores[k])
             return best_lang, scores[best_lang]
         
         return 'en', 0.5  # Default to English with low confidence
@@ -286,7 +286,7 @@ class RealMultilingualService:
             logger.error(f"Speech-to-text conversion failed: {e}")
             raise Exception(f"Speech recognition failed: {e}")
 
-    async def text_to_speech(self, text: str, language: str = 'en', output_file: str = None) -> str:
+    async def text_to_speech(self, text: str, language: str = 'en', output_file: Optional[str] = None) -> str:
         """
         Real text-to-speech conversion using Edge TTS
         """

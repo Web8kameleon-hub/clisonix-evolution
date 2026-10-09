@@ -52,17 +52,22 @@ export class AlbaCore extends EventEmitter {
   }
 
   private bootstrapStreams() {
-    const types: AlbaStream["type"][] = ["neural", "communication", "biometric", "telemetry"];
+    const types: AlbaStream["type"][] = [
+      "neural",
+      "communication",
+      "biometric",
+      "telemetry",
+    ];
     for (let i = 0; i < this.MAX_STREAMS; i++) {
       this.streams.push({
         id: `ALBA-STR-${crypto.randomUUID().split("-")[0]}`,
         source: `channel_${i + 1}`,
         type: types[i % types.length],
         status: "idle",
-        bandwidth: Number((Math.random() * 10).toFixed(2)),
-        latency: Number((Math.random() * 120).toFixed(1)),
-        signalQuality: Number((Math.random() * 100).toFixed(1)),
-        encryption: Number((Math.random() * 100).toFixed(1)),
+        bandwidth: 0,
+        latency: 0,
+        signalQuality: 0,
+        encryption: 0,
         lastUpdate: new Date(),
       });
     }
@@ -74,7 +79,9 @@ export class AlbaCore extends EventEmitter {
 
   getStatus(): AlbaSystemStatus {
     const active = this.streams.filter((s) => s.status === "active").length;
-    const degraded = this.streams.filter((s) => s.status === "error" || s.status === "reconnecting").length;
+    const degraded = this.streams.filter(
+      (s) => s.status === "error" || s.status === "reconnecting",
+    ).length;
     const cpu = os.loadavg()[0] / os.cpus().length;
     const mem = 1 - os.freemem() / os.totalmem();
     const sec = Math.min(100, Math.round(100 - degraded * 4));
@@ -92,34 +99,10 @@ export class AlbaCore extends EventEmitter {
   }
 
   refreshStreams() {
+    // Stream metrics are updated only from real telemetry ingestion, not simulated here.
+    // The status transitions (error → reconnecting → active) are driven by real connectivity events.
     for (const s of this.streams) {
-      if (s.status === "error" && Math.random() < this.RECOVERY_RATE) {
-        s.status = "reconnecting";
-        this.emit("log", `[ALBA] Recovering stream ${s.id}`);
-        setTimeout(() => {
-          s.status = "active";
-          s.signalQuality = Number((70 + Math.random() * 30).toFixed(1));
-          s.encryption = Number((80 + Math.random() * 20).toFixed(1));
-          s.lastUpdate = new Date();
-          this.emit("log", `[ALBA] Stream ${s.id} restored`);
-        }, 2000);
-      } else if (Math.random() < 0.05) {
-        s.status = "error";
-        s.signalQuality = Number((Math.random() * 30).toFixed(1));
-        this.emit("alert", {
-          id: crypto.randomUUID(),
-          level: "warning",
-          message: `Stream ${s.id} experienced signal drop`,
-          timestamp: new Date().toISOString(),
-        });
-      } else {
-        s.status = Math.random() > 0.2 ? "active" : "idle";
-        s.signalQuality = Number((Math.random() * 100).toFixed(1));
-        s.latency = Number((Math.random() * 120).toFixed(1));
-        s.bandwidth = Number((Math.random() * 10).toFixed(2));
-        s.encryption = Number((Math.random() * 100).toFixed(1));
-        s.lastUpdate = new Date();
-      }
+      s.lastUpdate = new Date();
     }
   }
 
@@ -128,7 +111,10 @@ export class AlbaCore extends EventEmitter {
       this.refreshStreams();
       const degraded = this.streams.filter((s) => s.status === "error").length;
       if (degraded > this.MAX_STREAMS * 0.25) {
-        this.createAlert("critical", "High degradation detected in stream integrity");
+        this.createAlert(
+          "critical",
+          "High degradation detected in stream integrity",
+        );
       }
     }, 5000);
   }
@@ -176,14 +162,17 @@ export class AlbaCore extends EventEmitter {
   }
 
   analyzePatterns() {
-    const avgSignal = this.streams.reduce((sum, s) => sum + s.signalQuality, 0) / this.streams.length;
-    const avgLatency = this.streams.reduce((sum, s) => sum + s.latency, 0) / this.streams.length;
+    const avgSignal =
+      this.streams.reduce((sum, s) => sum + s.signalQuality, 0) /
+      this.streams.length;
+    const avgLatency =
+      this.streams.reduce((sum, s) => sum + s.latency, 0) / this.streams.length;
     const trend =
       avgSignal > 70 && avgLatency < 60
         ? "stable"
         : avgSignal > 40
-        ? "fluctuating"
-        : "degraded";
+          ? "fluctuating"
+          : "degraded";
 
     return {
       trend,
@@ -195,14 +184,16 @@ export class AlbaCore extends EventEmitter {
 }
 
 // ============================
-// ðŸŒ Express Mount Function
+// Express mount function
 // ============================
 export function mountAlba(app: Express, cfg: AppConfig): AlbaCore {
-  console.log("ðŸ­ [L4] Initializing ALBA Industrial Core...");
+  console.log("[L4] Initializing ALBA Industrial Core...");
   const alba = new AlbaCore(cfg.ALBA_MAX_STREAMS ?? 24);
 
   alba.on("alert", async (alert: AlbaAlert) => {
-    console.log(`ðŸš¨ [ALBA ALERT] (${alert.level.toUpperCase()}): ${alert.message}`);
+    console.log(
+      `[ALBA ALERT] (${alert.level.toUpperCase()}): ${alert.message}`,
+    );
     try {
       await emitSignal("ALBA", "alert", alert);
     } catch (err) {
@@ -221,7 +212,9 @@ export function mountAlba(app: Express, cfg: AppConfig): AlbaCore {
 
   app.get("/alba/status", (_req, res) => res.json(alba.getStatus()));
 
-  app.get("/alba/streams", (_req, res) => res.json({ streams: alba.getStreams() }));
+  app.get("/alba/streams", (_req, res) =>
+    res.json({ streams: alba.getStreams() }),
+  );
 
   app.get("/alba/streams/:id", (req, res) => {
     const stream = alba.getStreams().find((s) => s.id === req.params.id);
@@ -257,17 +250,22 @@ export function mountAlba(app: Express, cfg: AppConfig): AlbaCore {
       version: "7.3",
       developer: "Clisonix / Trinity Systems",
       maxStreams: 24,
-      uptime: `${Math.round((Date.now() - alba['started']) / 1000)}s`,
+      uptime: `${Math.round((Date.now() - alba["started"]) / 1000)}s`,
       lastDiagnostics: alba.getStatus().timestamp,
     });
   });
 
   // Error middleware
-  app.use("/alba", (err: Error, _req: Request, res: Response, _next: NextFunction) => {
-    console.error("âŒ [ALBA ERROR]", err);
-    res.status(500).json({ error: err.message });
-  });
+  app.use(
+    "/alba",
+    (err: Error, _req: Request, res: Response, _next: NextFunction) => {
+      console.error("[ALBA ERROR]", err);
+      res.status(500).json({ error: err.message });
+    },
+  );
 
-  console.log(`âœ… [L4] ALBA Industrial Core mounted â€” monitoring ${cfg.ALBA_MAX_STREAMS ?? 24} streams`);
+  console.log(
+    `[L4] ALBA Industrial Core mounted - monitoring ${cfg.ALBA_MAX_STREAMS ?? 24} streams`,
+  );
   return alba;
 }

@@ -26,7 +26,7 @@ export function curiosityRoutes(cfg: AppConfig) {
   // Ask the Curiosity Ocean a question
   r.post("/curiosity/ask", async (req: any, res: any) => {
     const { question, domain, priority } = req.body || {};
-    
+
     if (!question) {
       return res.status(400).json({ error: "question_required" });
     }
@@ -39,22 +39,28 @@ export function curiosityRoutes(cfg: AppConfig) {
       status: "exploring"
     };
 
-    const result = await askCuriosity(query);
-    
-    await signalPush(cfg.SIGNAL_HTTP, "signals:curiosity", {
-      event: "new_exploration",
-      query,
-      result,
-      ...nodeInfo()
-    });
+    try {
+      const result = await askCuriosity(query);
 
-    res.json({ ok: true, query, result });
+      await signalPush(cfg.SIGNAL_HTTP, "signals:curiosity", {
+        event: "new_exploration",
+        query,
+        result,
+        ...nodeInfo(),
+      });
+
+      res.json({ ok: true, query, result });
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "curiosity_request_failed";
+      res.status(502).json({ ok: false, error: message });
+    }
   });
 
   // Get current explorations
   r.get("/curiosity/explorations", async (_req: any, res: any) => {
     const explorations = getExplorations();
-    
+
     res.json({
       total: explorations.length,
       active: explorations.filter(e => e.status === "exploring").length,
@@ -66,7 +72,7 @@ export function curiosityRoutes(cfg: AppConfig) {
   // Deep dive into a specific domain
   r.post("/curiosity/deep-dive", async (req: any, res: any) => {
     const { domain, focus_areas } = req.body || {};
-    
+
     if (!domain) {
       return res.status(400).json({ error: "domain_required" });
     }
@@ -98,7 +104,7 @@ export function curiosityRoutes(cfg: AppConfig) {
     ];
 
     const randomInsight = insights[Math.floor(Math.random() * insights.length)];
-    
+
     const response = {
       insight: randomInsight,
       domain: "philosophy_of_mind",
