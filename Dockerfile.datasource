@@ -1,0 +1,269 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# DOCKERFILE.DATASOURCE - Generic Data Source Container
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# This container serves data from open free data sources.
+# Configured per region (Europe, Americas, Asia+China, India, Africa, etc.)
+#
+# Environment Variables:
+#   DATASOURCE_REGION  - Region identifier
+#   DATASOURCE_SOURCES - Comma-separated source modules
+#   DATASOURCE_PORT    - Port number (9301-9307)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+FROM python:3.13
+
+LABEL maintainer="Clisonix Cloud Team"
+LABEL description="Data Source Container for Open Free Data"
+LABEL version="1.0.0"
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy data sources
+COPY data_sources/ ./data_sources/
+
+# Create data source service
+COPY <<EOF /app/datasource_service.py
+"""
+DATA SOURCE SERVICE
+Serves open free data from configured regional sources.
+"""
+
+import os
+import time
+import logging
+from datetime import datetime, timezone
+from typing import Dict, Any, List, Optional
+from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("DataSource")
+
+# Configuration
+REGION = os.getenv("DATASOURCE_REGION", "generic")
+SOURCES = os.getenv("DATASOURCE_SOURCES", "global_data_sources").split(",")
+
+# Port mapping based on region
+PORT_MAP = {
+    "europe": 9301,
+    "americas": 9302,
+    "asia_china": 9303,
+    "india_south_asia": 9304,
+    "africa_middle_east": 9305,
+    "oceania_pacific": 9306,
+    "central_asia": 9307
+}
+DATASOURCE_PORT = PORT_MAP.get(REGION, 9300)
+
+app = FastAPI(
+    title=f"Clisonix Data Source - {REGION.replace('_', ' ').title()}",
+    description=f"Open Free Data Sources for {REGION}",
+    version="1.0.0",
+    docs_url="/api/v1/docs",
+    redoc_url="/api/v1/redoc",
+    openapi_url="/api/v1/openapi.json"
+)
+
+# API Version prefix
+API_V1 = "/api/v1"
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+# Region metadata
+REGION_METADATA = {
+    "europe": {
+        "name": "Europe",
+        "countries": ["DE", "FR", "UK", "IT", "ES", "NL", "PL", "AL", "XK", "MK", "RS", "HR", "SI", "AT", "CH", "BE", "PT", "GR", "RO", "BG", "HU", "CZ", "SK", "IE", "DK", "SE", "NO", "FI"],
+        "categories": ["GOVERNMENT", "UNIVERSITY", "HOSPITAL", "BANK", "INDUSTRY", "NEWS", "CULTURE", "RESEARCH"],
+        "source_count": 1600
+    },
+    "americas": {
+        "name": "Americas",
+        "countries": ["US", "CA", "MX", "BR", "AR", "CL", "CO", "PE", "VE", "EC", "UY", "PY", "BO", "CR", "PA", "JM"],
+        "categories": ["GOVERNMENT", "UNIVERSITY", "HOSPITAL", "BANK", "TECHNOLOGY", "NEWS"],
+        "source_count": 800
+    },
+    "asia_china": {
+        "name": "Asia & China",
+        "countries": ["CN", "JP", "KR", "TW", "HK", "MN", "SG", "MY", "TH", "VN", "ID", "PH"],
+        "categories": ["GOVERNMENT", "UNIVERSITY", "TECHNOLOGY", "INDUSTRY", "RESEARCH"],
+        "source_count": 1400
+    },
+    "india_south_asia": {
+        "name": "India & South Asia",
+        "countries": ["IN", "PK", "BD", "LK", "NP", "BT", "MM", "AF"],
+        "categories": ["GOVERNMENT", "UNIVERSITY", "HOSPITAL", "TECHNOLOGY", "RESEARCH"],
+        "source_count": 800
+    },
+    "africa_middle_east": {
+        "name": "Africa & Middle East",
+        "countries": ["EG", "ZA", "NG", "KE", "MA", "TN", "DZ", "AE", "SA", "IL", "TR", "IR", "IQ"],
+        "categories": ["GOVERNMENT", "UNIVERSITY", "ENERGY", "INDUSTRY"],
+        "source_count": 500
+    },
+    "oceania_pacific": {
+        "name": "Oceania & Pacific",
+        "countries": ["AU", "NZ", "FJ", "PG", "WS", "TO", "VU"],
+        "categories": ["GOVERNMENT", "UNIVERSITY", "ENVIRONMENTAL", "RESEARCH"],
+        "source_count": 300
+    },
+    "central_asia": {
+        "name": "Central Asia & Caucasus",
+        "countries": ["KZ", "UZ", "TM", "KG", "TJ", "GE", "AM", "AZ"],
+        "categories": ["GOVERNMENT", "ENERGY", "INDUSTRY"],
+        "source_count": 200
+    }
+}
+
+metadata = REGION_METADATA.get(REGION, {
+    "name": REGION,
+    "countries": [],
+    "categories": [],
+    "source_count": 0
+})
+
+START_TIME = time.time()
+data_requests: List[Dict[str, Any]] = []
+
+
+class DataQuery(BaseModel):
+    country: Optional[str] = None
+    category: Optional[str] = None
+    keyword: Optional[str] = None
+    limit: int = 100
+
+
+@app.get(f"{API_V1}/health")
+@app.get("/health")  # Docker healthcheck
+async def health_check():
+    return {
+        "status": "healthy",
+        "region": REGION,
+        "sources_loaded": SOURCES,
+        "uptime_seconds": time.time() - START_TIME,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.get(f"{API_V1}/info")
+async def get_info():
+    """Get data source region information"""
+    return {
+        "region": REGION,
+        "name": metadata["name"],
+        "countries": metadata["countries"],
+        "categories": metadata["categories"],
+        "source_count": metadata["source_count"],
+        "sources_modules": SOURCES
+    }
+
+
+@app.get(f"{API_V1}/countries")
+async def list_countries():
+    """List countries in this region"""
+    return {
+        "region": REGION,
+        "total": len(metadata["countries"]),
+        "countries": metadata["countries"]
+    }
+
+
+@app.get(f"{API_V1}/categories")
+async def list_categories():
+    """List data categories"""
+    return {
+        "region": REGION,
+        "categories": metadata["categories"]
+    }
+
+
+@app.post(f"{API_V1}/query")
+async def query_data(query: DataQuery):
+    """Query data sources"""
+    request_id = f"req_{len(data_requests) + 1:04d}"
+    
+    result = {
+        "request_id": request_id,
+        "region": REGION,
+        "filters": {
+            "country": query.country,
+            "category": query.category,
+            "keyword": query.keyword
+        },
+        "results": [],
+        "total": 0,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+    
+    # Generate sample results based on query
+    sample_results = []
+    for i in range(min(query.limit, 10)):
+        sample_results.append({
+            "id": f"src_{REGION}_{i+1:04d}",
+            "name": f"Sample Data Source {i+1}",
+            "country": query.country or metadata["countries"][i % len(metadata["countries"])] if metadata["countries"] else "XX",
+            "category": query.category or metadata["categories"][i % len(metadata["categories"])] if metadata["categories"] else "GENERAL",
+            "url": f"https://data.{REGION.replace('_', '-')}.example.org/source{i+1}",
+            "api_available": i % 2 == 0,
+            "last_updated": datetime.now(timezone.utc).isoformat()
+        })
+    
+    result["results"] = sample_results
+    result["total"] = len(sample_results)
+    
+    data_requests.append({
+        "request_id": request_id,
+        "query": query.dict(),
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    })
+    
+    logger.info(f"Data query {request_id}: {query.dict()}")
+    
+    return result
+
+
+@app.get(f"{API_V1}/stats")
+async def get_stats():
+    """Get data source statistics"""
+    return {
+        "region": REGION,
+        "name": metadata["name"],
+        "total_sources": metadata["source_count"],
+        "total_countries": len(metadata["countries"]),
+        "total_categories": len(metadata["categories"]),
+        "requests_served": len(data_requests),
+        "uptime_hours": (time.time() - START_TIME) / 3600
+    }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    logger.info(f"🌍 Starting Data Source Service: {metadata['name']}")
+    logger.info(f"📊 Region: {REGION} | Sources: {metadata['source_count']} | Countries: {len(metadata['countries'])}")
+    uvicorn.run(app, host="0.0.0.0", port=DATASOURCE_PORT)
+EOF
+
+EXPOSE 9301-9307
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:${DATASOURCE_PORT:-9300}/health || exit 1
+
+CMD ["python", "datasource_service.py"]

@@ -1,0 +1,330 @@
+/**
+ * Clisonix Cloud - User Dashboard
+ *
+ * Protected dashboard with subscription info, usage stats, and quick actions
+ *
+ * @author Ledjan Ahmati
+ * @copyright 2026 Clisonix Cloud
+ */
+
+"use client";
+
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useUser, UserButton } from "@/lib/auth/client";
+
+interface UserStats {
+  apiCalls: number | null;
+  apiLimit: number | null;
+  storage: string | null;
+  projects: number | null;
+  plan: string | null;
+  billingCycle: string | null;
+}
+
+export default function UserDashboardPage() {
+  const { user, isLoaded } = useUser();
+  const [stats, setStats] = useState<UserStats | null>(null);
+  const [recentChats, setRecentChats] = useState<Array<{id: string, title: string, updatedAt: string}>>([]);
+
+  const formatCount = (value: number | null) => (typeof value === "number" && Number.isFinite(value) ? value.toLocaleString() : "Unavailable");
+  const formatQuota = (current: number | null, limit: number | null) => {
+    if (typeof current === "number" && Number.isFinite(current) && typeof limit === "number" && Number.isFinite(limit)) {
+      return `${current.toLocaleString()}/${limit.toLocaleString()}`;
+    }
+    return "Unavailable";
+  };
+
+  useEffect(() => {
+    if (isLoaded && user) {
+      // Fetch user stats
+      fetchUserStats();
+      fetchRecentChats();
+    } else if (isLoaded && !user) {
+      // Redirect to sign in if not authenticated
+      window.location.href = "/sign-in";
+    }
+  }, [isLoaded, user]);
+
+  const fetchUserStats = async () => {
+    try {
+      const [summaryRes, systemRes] = await Promise.all([
+        fetch("/api/proxy/user-summary", { cache: "no-store" }),
+        fetch("/api/proxy/system-metrics", { cache: "no-store" }),
+      ]);
+
+      const summary = summaryRes.ok ? await summaryRes.json().catch(() => null) : null;
+      const system = systemRes.ok ? await systemRes.json().catch(() => null) : null;
+
+      setStats({
+        apiCalls: typeof summary?.api_calls_today === "number" ? summary.api_calls_today : null,
+        apiLimit: null,
+        storage: null,
+        projects: typeof summary?.total_sources === "number" ? summary.total_sources : null,
+        plan: null,
+        billingCycle: typeof system?.uptime === "string" ? system.uptime : null,
+      });
+    } catch {
+      setStats({
+        apiCalls: null,
+        apiLimit: null,
+        storage: null,
+        projects: null,
+        plan: null,
+        billingCycle: null,
+      });
+    }
+  };
+
+  const fetchRecentChats = async () => {
+    try {
+      const response = await fetch("/api/chat");
+      if (response.ok) {
+        const data = await response.json();
+        setRecentChats(data.sessions || []);
+      }
+    } catch {
+      // Use empty array on error
+    }
+  };
+
+  if (!isLoaded) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Header */}
+      <header className="border-b border-slate-700 bg-slate-900/50 backdrop-blur-xl sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-4">
+              <Link href="/" className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">C</span>
+                </div>
+                <span className="text-white font-semibold hidden sm:block">Clisonix Cloud</span>
+              </Link>
+              <span className="text-slate-500">|</span>
+              <span className="text-slate-400 text-sm">Dashboard</span>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <Link href="/modules/open-webui" className="text-purple-400 hover:text-purple-300 text-sm">
+                🤖 AI Chat
+              </Link>
+              <Link href="/pricing" className="text-slate-400 hover:text-white text-sm">
+                Upgrade
+              </Link>
+              <UserButton afterSignOutUrl="/" />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Welcome Section */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-white mb-2">
+            Welcome back, {user?.firstName || "User"}! 👋
+          </h1>
+          <p className="text-slate-400">
+            Here&apos;s an overview of your Clisonix Cloud activity.
+          </p>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <StatCard
+            title="API Calls Today"
+            value={formatQuota(stats?.apiCalls ?? null, stats?.apiLimit ?? null)}
+            icon="📊"
+            color="purple"
+            progress={typeof stats?.apiCalls === "number" && typeof stats?.apiLimit === "number" && stats.apiLimit > 0
+              ? (stats.apiCalls / stats.apiLimit) * 100
+              : undefined}
+          />
+          <StatCard
+            title="Storage Used"
+            value={stats?.storage || "Unavailable"}
+            icon="💾"
+            color="blue"
+          />
+          <StatCard
+            title="Active Projects"
+            value={formatCount(stats?.projects ?? null)}
+            icon="📁"
+            color="green"
+          />
+          <StatCard
+            title="Current Plan"
+            value={stats?.plan || "Unavailable"}
+            icon="⭐"
+            color="yellow"
+            subtitle={stats?.billingCycle}
+          />
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Quick Actions */}
+          <div className="lg:col-span-2 space-y-6">
+            <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6">
+              <h2 className="text-xl font-semibold text-white mb-4">Quick Actions</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <QuickAction href="/modules/open-webui" icon="🤖" label="AI Assistant" />
+                <QuickAction href="/modules/aviation-weather" icon="✈️" label="Aviation Weather" />
+                <QuickAction href="/modules/openmind" icon="🧠" label="Behavioral AI" />
+                <QuickAction href="/modules/excel-dashboard" icon="📊" label="Excel Dashboard" />
+                <QuickAction href="/modules/user-data" icon="📈" label="My Data" />
+                <QuickAction href="/developers" icon="🔧" label="API Docs" />
+              </div>
+            </div>
+
+            {/* Recent Activity */}
+            <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6">
+              <h2 className="text-xl font-semibold text-white mb-4">Recent Conversations</h2>
+              {recentChats.length > 0 ? (
+                <div className="space-y-3">
+                  {recentChats.slice(0, 5).map((chat) => (
+                    <Link
+                      key={chat.id}
+                      href={`/modules/open-webui?session=${chat.id}`}
+                      className="flex items-center justify-between p-3 rounded-lg bg-slate-700/50 hover:bg-slate-700 transition-colors"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-xl">💬</span>
+                        <div>
+                          <p className="text-white text-sm font-medium">{chat.title}</p>
+                          <p className="text-slate-400 text-xs">
+                            {new Date(chat.updatedAt).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+                      <span className="text-slate-400">→</span>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <span className="text-4xl mb-4 block">💬</span>
+                  <p className="text-slate-400 mb-4">No conversations yet</p>
+                  <Link
+                    href="/modules/open-webui"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg text-white text-sm transition-colors"
+                  >
+                    Start Chatting
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            {/* Account Info */}
+            <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6">
+              <h2 className="text-xl font-semibold text-white mb-4">Account</h2>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold">
+                    {user?.firstName?.[0]}{user?.lastName?.[0]}
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">{user?.fullName}</p>
+                    <p className="text-slate-400 text-sm">{user?.emailAddresses[0]?.emailAddress}</p>
+                  </div>
+                </div>
+                <div className="pt-4 border-t border-slate-700 space-y-2">
+                  <Link href="/account" className="block text-slate-400 hover:text-white text-sm">
+                    ⚙️ Account Settings
+                  </Link>
+                  <Link href="/subscription" className="block text-slate-400 hover:text-white text-sm">
+                    💳 Subscription
+                  </Link>
+                  <Link href="/billing" className="block text-slate-400 hover:text-white text-sm">
+                    📄 Billing History
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Upgrade CTA */}
+            {stats?.plan === "Free" && (
+              <div className="bg-gradient-to-br from-purple-600/20 to-blue-600/20 rounded-xl border border-purple-500/30 p-6">
+                <h3 className="text-white font-semibold mb-2">🚀 Upgrade to Pro</h3>
+                <p className="text-slate-300 text-sm mb-4">
+                  Get 10x more API calls, advanced analytics, and priority support.
+                </p>
+                <Link
+                  href="/pricing"
+                  className="block w-full text-center py-2 bg-purple-600 hover:bg-purple-700 rounded-lg text-white text-sm transition-colors"
+                >
+                  View Plans
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+function StatCard({
+  title,
+  value,
+  icon,
+  color,
+  progress,
+  subtitle
+}: {
+  title: string;
+  value: string;
+  icon: string;
+  color: string;
+  progress?: number;
+  subtitle?: string;
+}) {
+  const colorClasses: Record<string, string> = {
+    purple: "from-purple-500/20 to-purple-600/10 border-purple-500/30",
+    blue: "from-blue-500/20 to-blue-600/10 border-blue-500/30",
+    green: "from-green-500/20 to-green-600/10 border-green-500/30",
+    yellow: "from-yellow-500/20 to-yellow-600/10 border-yellow-500/30",
+  };
+
+  return (
+    <div className={`bg-gradient-to-br ${colorClasses[color]} rounded-xl border p-4`}>
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-2xl">{icon}</span>
+        <span className="text-slate-400 text-xs">{subtitle}</span>
+      </div>
+      <p className="text-slate-400 text-sm">{title}</p>
+      <p className="text-white text-2xl font-bold">{value}</p>
+      {progress !== undefined && (
+        <div className="mt-2 h-1 bg-slate-700 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-purple-500 rounded-full transition-all"
+            style={{ width: `${Math.min(progress, 100)}%` }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function QuickAction({ href, icon, label }: { href: string; icon: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      className="flex flex-col items-center gap-2 p-4 rounded-lg bg-slate-700/50 hover:bg-slate-700 transition-colors"
+    >
+      <span className="text-2xl">{icon}</span>
+      <span className="text-slate-300 text-sm text-center">{label}</span>
+    </Link>
+  );
+}

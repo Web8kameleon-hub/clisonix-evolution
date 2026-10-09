@@ -1,0 +1,16 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm ci --only=production && npm cache clean --force
+
+COPY nanogridata_gateway.js ./
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:5679/health', r => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
+
+EXPOSE 5678 5679
+
+CMD ["node", "nanogridata_gateway.js"]

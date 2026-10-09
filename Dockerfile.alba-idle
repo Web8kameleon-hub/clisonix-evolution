@@ -1,0 +1,312 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# DOCKERFILE.ALBA-IDLE - Technical Status Chat Interface
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Alba IDLE is a technical chat interface for monitoring system status:
+# - Real-time service status
+# - Container health monitoring
+# - System metrics
+# - Quick diagnostics
+# ═══════════════════════════════════════════════════════════════════════════════
+
+FROM python:3.13
+
+LABEL maintainer="Clisonix Cloud Team"
+LABEL description="Alba IDLE - Technical Status Chat"
+LABEL version="1.0.0"
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Create Alba IDLE service
+COPY <<EOF /app/alba_idle_service.py
+"""
+ALBA IDLE - Technical Status Chat Interface
+Real-time monitoring and status chat for Clisonix system.
+"""
+
+import os
+import time
+import logging
+import asyncio
+from datetime import datetime, timezone
+from typing import Dict, Any, List, Optional
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+import httpx
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("AlbaIDLE")
+
+IDLE_PORT = int(os.getenv("IDLE_PORT", "8031"))
+
+# Service URLs
+SERVICES = {
+    "alba": os.getenv("ALBA_URL", "http://alba:5555"),
+    "albi": os.getenv("ALBI_URL", "http://albi:6666"),
+    "jona": os.getenv("JONA_URL", "http://jona:7777"),
+    "asi": os.getenv("ASI_URL", "http://asi:9094"),
+    "ocean": os.getenv("OCEAN_URL", "http://ocean-core:8030"),
+    "alphabet": os.getenv("ALPHABET_URL", "http://alphabet-layers:8061"),
+    "agiem": os.getenv("AGIEM_URL", "http://agiem:9300"),
+    "personas": os.getenv("PERSONAS_URL", "http://personas:9200"),
+    "blerina": os.getenv("BLERINA_URL", "http://blerina:8035")
+}
+
+app = FastAPI(
+    title="Alba IDLE - Technical Status Chat",
+    description="System monitoring and status chat interface",
+    version="1.0.0",
+    docs_url="/api/v1/docs",
+    redoc_url="/api/v1/redoc",
+    openapi_url="/api/v1/openapi.json"
+)
+
+# API Version prefix
+API_V1 = "/api/v1"
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+START_TIME = time.time()
+chat_history: List[Dict[str, Any]] = []
+service_status_cache: Dict[str, Any] = {}
+
+
+class ChatMessage(BaseModel):
+    message: str
+    language: str = "en"
+
+
+class StatusQuery(BaseModel):
+    service: Optional[str] = None
+    detailed: bool = False
+
+
+async def check_service_health(name: str, url: str) -> Dict[str, Any]:
+    """Check health of a service"""
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            response = await client.get(f"{url}/health")
+            if response.status_code == 200:
+                return {
+                    "name": name,
+                    "status": "healthy",
+                    "url": url,
+                    "response_time_ms": response.elapsed.total_seconds() * 1000,
+                    "details": response.json() if response.headers.get("content-type", "").startswith("application/json") else {}
+                }
+    except Exception as e:
+        pass
+    
+    return {
+        "name": name,
+        "status": "unreachable",
+        "url": url,
+        "error": str(type(e).__name__) if 'e' in dir() else "Connection failed"
+    }
+
+
+def parse_chat_command(message: str) -> Dict[str, Any]:
+    """Parse chat message for commands"""
+    msg_lower = message.lower().strip()
+    
+    # Status commands
+    if any(word in msg_lower for word in ["status", "health", "check", "gjendja", "statusi"]):
+        if any(svc in msg_lower for svc in SERVICES.keys()):
+            for svc in SERVICES.keys():
+                if svc in msg_lower:
+                    return {"command": "status", "service": svc}
+        return {"command": "status", "service": "all"}
+    
+    # Help commands
+    if any(word in msg_lower for word in ["help", "ndihme", "commands", "komandat"]):
+        return {"command": "help"}
+    
+    # System info
+    if any(word in msg_lower for word in ["info", "system", "sistemi", "about"]):
+        return {"command": "info"}
+    
+    # Metrics
+    if any(word in msg_lower for word in ["metrics", "metrika", "stats", "statistika"]):
+        return {"command": "metrics"}
+    
+    # List services
+    if any(word in msg_lower for word in ["services", "sherbime", "list", "lista"]):
+        return {"command": "list"}
+    
+    return {"command": "unknown", "message": message}
+
+
+async def generate_response(command: Dict[str, Any], language: str = "en") -> str:
+    """Generate response based on command"""
+    cmd = command.get("command")
+    
+    if cmd == "status":
+        service = command.get("service", "all")
+        if service == "all":
+            results = []
+            for name, url in SERVICES.items():
+                status = await check_service_health(name, url)
+                emoji = "✅" if status["status"] == "healthy" else "❌"
+                results.append(f"{emoji} {name}: {status['status']}")
+            return "📊 **System Status:**\n" + "\n".join(results)
+        else:
+            url = SERVICES.get(service, "")
+            if url:
+                status = await check_service_health(service, url)
+                emoji = "✅" if status["status"] == "healthy" else "❌"
+                if status["status"] == "healthy":
+                    return f"{emoji} **{service}** is healthy\n⏱️ Response: {status.get('response_time_ms', 0):.1f}ms\n🔗 URL: {url}"
+                return f"{emoji} **{service}** is unreachable\n🔗 URL: {url}"
+            return f"❓ Unknown service: {service}"
+    
+    elif cmd == "help":
+        return """📚 **Alba IDLE Commands:**
+• `status` - Check all services
+• `status <service>` - Check specific service (alba, albi, jona, asi, ocean, agiem, personas, blerina)
+• `info` - System information
+• `metrics` - Performance metrics
+• `services` - List all services
+• `help` - Show this help
+
+🗣️ Shqip: Mund të përdorni "statusi", "ndihme", "sherbime" etj."""
+    
+    elif cmd == "info":
+        return f"""ℹ️ **Clisonix Cloud System**
+• Ocean Core: 61 Alphabet Layers
+• ASI Trinity: Alba → Albi → Jona → ASI
+• Laboratories: 23 city-named labs
+• Personas: 14 specialist modules
+• AGIEM: AGI Ecosystem Manager
+• Blerina: Document Intelligence
+
+🕐 Uptime: {(time.time() - START_TIME) / 3600:.1f} hours
+📅 Time: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')} UTC"""
+    
+    elif cmd == "metrics":
+        return f"""📈 **System Metrics:**
+• Services monitored: {len(SERVICES)}
+• Chat messages: {len(chat_history)}
+• Uptime: {(time.time() - START_TIME) / 3600:.1f} hours
+• Memory usage: Minimal (Python service)
+• Last check: {datetime.now(timezone.utc).isoformat()}"""
+    
+    elif cmd == "list":
+        services_list = "\n".join([f"• **{name}**: {url}" for name, url in SERVICES.items()])
+        return f"🔧 **Monitored Services:**\n{services_list}"
+    
+    else:
+        return f"🤔 I didn't understand: '{command.get('message', '')}'\nType 'help' for available commands."
+
+
+@app.get(f"{API_V1}/health")
+@app.get("/health")  # Docker healthcheck
+async def health_check():
+    return {
+        "status": "healthy",
+        "service": "alba-idle",
+        "monitored_services": len(SERVICES),
+        "uptime_seconds": time.time() - START_TIME,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.post(f"{API_V1}/chat")
+async def chat(request: ChatMessage):
+    """Process a chat message"""
+    start = time.time()
+    
+    command = parse_chat_command(request.message)
+    response = await generate_response(command, request.language)
+    
+    chat_entry = {
+        "id": len(chat_history) + 1,
+        "user_message": request.message,
+        "command": command,
+        "response": response,
+        "processing_time": time.time() - start,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+    chat_history.append(chat_entry)
+    
+    return {
+        "response": response,
+        "command_detected": command.get("command"),
+        "processing_time_ms": (time.time() - start) * 1000
+    }
+
+
+@app.get(f"{API_V1}/status/all")
+async def get_all_status():
+    """Get status of all services"""
+    results = {}
+    for name, url in SERVICES.items():
+        results[name] = await check_service_health(name, url)
+    return {
+        "services": results,
+        "total": len(SERVICES),
+        "healthy": sum(1 for s in results.values() if s["status"] == "healthy"),
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.get(f"{API_V1}/status/{{service}}")
+async def get_service_status(service: str):
+    """Get status of specific service"""
+    if service not in SERVICES:
+        raise HTTPException(status_code=404, detail=f"Service {service} not found")
+    return await check_service_health(service, SERVICES[service])
+
+
+@app.get(f"{API_V1}/history")
+async def get_chat_history(limit: int = 20):
+    """Get recent chat history"""
+    return {
+        "total": len(chat_history),
+        "history": chat_history[-limit:]
+    }
+
+
+@app.websocket(f"{API_V1}/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    """WebSocket for real-time chat"""
+    await websocket.accept()
+    try:
+        while True:
+            data = await websocket.receive_text()
+            command = parse_chat_command(data)
+            response = await generate_response(command)
+            await websocket.send_text(response)
+    except WebSocketDisconnect:
+        pass
+
+
+if __name__ == "__main__":
+    import uvicorn
+    logger.info(f"🖥️ Starting Alba IDLE - Technical Status Chat on port {IDLE_PORT}")
+    logger.info(f"📡 Monitoring {len(SERVICES)} services")
+    uvicorn.run(app, host="0.0.0.0", port=IDLE_PORT)
+EOF
+
+EXPOSE 8031
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:8031/health || exit 1
+
+CMD ["python", "alba_idle_service.py"]

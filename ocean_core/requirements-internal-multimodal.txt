@@ -1,0 +1,7 @@
+# Internal multimodal profile
+opencv-python>=4.10.0
+faster-whisper>=1.1.0
+pydub>=0.25.1
+moviepy>=1.0.3
+diffusers>=0.31.0
+controlnet_aux>=0.0.9

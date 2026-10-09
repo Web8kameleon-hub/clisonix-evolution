@@ -1,0 +1,20 @@
+# Dockerfile.multi-tenant - Multi-tenant Service
+FROM python:3.13
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements ./requirements
+RUN pip install --no-cache-dir -r requirements/api.txt
+
+COPY multi_tenant*.py ./
+
+EXPOSE 8067
+
+CMD ["python", "multi_tenant_api.py"]

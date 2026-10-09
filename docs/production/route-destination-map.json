@@ -1,0 +1,1328 @@
+{
+  "generatedAt": "2026-04-18T08:12:34.931Z",
+  "summary": {
+    "appPageRoutes": 80,
+    "apiRoutes": 128,
+    "redirects": 6,
+    "rewrites": 39,
+    "total": 253
+  },
+  "appPageRoutes": [
+    {
+      "route": "/",
+      "destination": "apps/web/app/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/_offline",
+      "destination": "apps/web/app/_offline/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/about-us",
+      "destination": "apps/web/app/about-us/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/admin",
+      "destination": "apps/web/app/admin/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/admin/linkedin",
+      "destination": "apps/web/app/admin/linkedin/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/albi-settings-documentation",
+      "destination": "apps/web/app/albi-settings-documentation/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/asi-demo",
+      "destination": "apps/web/app/asi-demo/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/blog",
+      "destination": "apps/web/app/blog/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/blog/[...slug]",
+      "destination": "apps/web/app/blog/[...slug]/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/brand",
+      "destination": "apps/web/app/brand/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/company",
+      "destination": "apps/web/app/company/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/create",
+      "destination": "apps/web/app/create/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/dashboard",
+      "destination": "apps/web/app/dashboard/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/debate",
+      "destination": "apps/web/app/debate/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/developers",
+      "destination": "apps/web/app/developers/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/developers/docs-index",
+      "destination": "apps/web/app/developers/docs-index/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/docs",
+      "destination": "apps/web/app/docs/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/faq",
+      "destination": "apps/web/app/faq/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/jona-settings-documentation",
+      "destination": "apps/web/app/jona-settings-documentation/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/landing",
+      "destination": "apps/web/app/landing/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/marketplace",
+      "destination": "apps/web/app/marketplace/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules",
+      "destination": "apps/web/app/modules/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/about-us",
+      "destination": "apps/web/app/modules/about-us/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/account",
+      "destination": "apps/web/app/modules/account/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/albi-eeg-live",
+      "destination": "apps/web/app/modules/albi-eeg-live/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/archive",
+      "destination": "apps/web/app/modules/archive/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/aviation-weather",
+      "destination": "apps/web/app/modules/aviation-weather/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/crypto-dashboard",
+      "destination": "apps/web/app/modules/crypto-dashboard/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/curiosity-ocean",
+      "destination": "apps/web/app/modules/curiosity-ocean/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/daily-habits",
+      "destination": "apps/web/app/modules/daily-habits/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/data-collection",
+      "destination": "apps/web/app/modules/data-collection/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/developer-docs",
+      "destination": "apps/web/app/modules/developer-docs/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/eeg-analysis",
+      "destination": "apps/web/app/modules/eeg-analysis/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/excel-dashboard",
+      "destination": "apps/web/app/modules/excel-dashboard/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/fitness-dashboard",
+      "destination": "apps/web/app/modules/fitness-dashboard/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/focus-timer",
+      "destination": "apps/web/app/modules/focus-timer/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/functions-registry",
+      "destination": "apps/web/app/modules/functions-registry/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/how-to-use",
+      "destination": "apps/web/app/modules/how-to-use/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/hybrid-biometric-dashboard",
+      "destination": "apps/web/app/modules/hybrid-biometric-dashboard/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/industrial-dashboard",
+      "destination": "apps/web/app/modules/industrial-dashboard/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/jona-neural",
+      "destination": "apps/web/app/modules/jona-neural/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/kloud-bridge",
+      "destination": "apps/web/app/modules/kloud-bridge/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/matia",
+      "destination": "apps/web/app/modules/matia/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/mood-journal",
+      "destination": "apps/web/app/modules/mood-journal/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/music-studio",
+      "destination": "apps/web/app/modules/music-studio/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/my-data-dashboard",
+      "destination": "apps/web/app/modules/my-data-dashboard/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/mymirror-now",
+      "destination": "apps/web/app/modules/mymirror-now/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/nanogrid-zeiss",
+      "destination": "apps/web/app/modules/nanogrid-zeiss/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/neural-biofeedback",
+      "destination": "apps/web/app/modules/neural-biofeedback/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/neural-synthesis",
+      "destination": "apps/web/app/modules/neural-synthesis/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/neuroacoustic-converter",
+      "destination": "apps/web/app/modules/neuroacoustic-converter/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/omnitalk",
+      "destination": "apps/web/app/modules/omnitalk/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/openmind",
+      "destination": "apps/web/app/modules/openmind/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/phone-monitor",
+      "destination": "apps/web/app/modules/phone-monitor/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/phone-sensors",
+      "destination": "apps/web/app/modules/phone-sensors/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/protocol-kitchen",
+      "destination": "apps/web/app/modules/protocol-kitchen/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/reporting-dashboard",
+      "destination": "apps/web/app/modules/reporting-dashboard/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/shopping-therapy",
+      "destination": "apps/web/app/modules/shopping-therapy/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/social-intelligence",
+      "destination": "apps/web/app/modules/social-intelligence/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/specialized-chat",
+      "destination": "apps/web/app/modules/specialized-chat/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/spectrum-analyzer",
+      "destination": "apps/web/app/modules/spectrum-analyzer/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/user-data",
+      "destination": "apps/web/app/modules/user-data/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/weather-dashboard",
+      "destination": "apps/web/app/modules/weather-dashboard/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/web-reader",
+      "destination": "apps/web/app/modules/web-reader/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/modules/zurich-engine",
+      "destination": "apps/web/app/modules/zurich-engine/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/news",
+      "destination": "apps/web/app/news/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/news/reliability-not-rhetoric-industrial-ai",
+      "destination": "apps/web/app/news/reliability-not-rhetoric-industrial-ai/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/ocean",
+      "destination": "apps/web/app/ocean/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/offline",
+      "destination": "apps/web/app/offline/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/platform",
+      "destination": "apps/web/app/platform/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/pricing",
+      "destination": "apps/web/app/pricing/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/privacy",
+      "destination": "apps/web/app/privacy/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/security",
+      "destination": "apps/web/app/security/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/sign-in/[[...sign-in]]",
+      "destination": "apps/web/app/sign-in/[[...sign-in]]/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/sign-up/[[...sign-up]]",
+      "destination": "apps/web/app/sign-up/[[...sign-up]]/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/status",
+      "destination": "apps/web/app/status/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/terms",
+      "destination": "apps/web/app/terms/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/user/dashboard",
+      "destination": "apps/web/app/user/dashboard/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/why-clisonix",
+      "destination": "apps/web/app/why-clisonix/page.tsx",
+      "type": "app-page"
+    },
+    {
+      "route": "/zurich",
+      "destination": "apps/web/app/zurich/page.tsx",
+      "type": "app-page"
+    }
+  ],
+  "apiRoutes": [
+    {
+      "route": "/ads.txt",
+      "destination": "apps/web/app/ads.txt/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api",
+      "destination": "apps/web/app/api/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ads/config",
+      "destination": "apps/web/app/api/ads/config/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ads/track",
+      "destination": "apps/web/app/api/ads/track/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/alba/metrics",
+      "destination": "apps/web/app/api/alba/metrics/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/albi-user/[...path]",
+      "destination": "apps/web/app/api/albi-user/[...path]/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/albi/metrics",
+      "destination": "apps/web/app/api/albi/metrics/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/asi-status",
+      "destination": "apps/web/app/api/asi-status/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/asi/health",
+      "destination": "apps/web/app/api/asi/health/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/asi/status",
+      "destination": "apps/web/app/api/asi/status/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ask",
+      "destination": "apps/web/app/api/ask/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/auth/[...nextauth]",
+      "destination": "apps/web/app/api/auth/[...nextauth]/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/behavioral/focus/log",
+      "destination": "apps/web/app/api/behavioral/focus/log/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/behavioral/habits/log",
+      "destination": "apps/web/app/api/behavioral/habits/log/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/behavioral/habits/sync",
+      "destination": "apps/web/app/api/behavioral/habits/sync/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/behavioral/mood/log",
+      "destination": "apps/web/app/api/behavioral/mood/log/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/behavioral/mood/sync",
+      "destination": "apps/web/app/api/behavioral/mood/sync/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/billing/billing-address",
+      "destination": "apps/web/app/api/billing/billing-address/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/billing/checkout",
+      "destination": "apps/web/app/api/billing/checkout/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/billing/invoices",
+      "destination": "apps/web/app/api/billing/invoices/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/billing/payment-methods",
+      "destination": "apps/web/app/api/billing/payment-methods/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/billing/plans",
+      "destination": "apps/web/app/api/billing/plans/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/billing/portal",
+      "destination": "apps/web/app/api/billing/portal/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/billing/subscription",
+      "destination": "apps/web/app/api/billing/subscription/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/billing/webhook",
+      "destination": "apps/web/app/api/billing/webhook/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/chat",
+      "destination": "apps/web/app/api/chat/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/clinic/[id]/readings",
+      "destination": "apps/web/app/api/clinic/[id]/readings/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/connections/status",
+      "destination": "apps/web/app/api/connections/status/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/constants/countries",
+      "destination": "apps/web/app/api/constants/countries/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/constants/languages",
+      "destination": "apps/web/app/api/constants/languages/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/constants/themes",
+      "destination": "apps/web/app/api/constants/themes/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/constants/timezones",
+      "destination": "apps/web/app/api/constants/timezones/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/crypto/market",
+      "destination": "apps/web/app/api/crypto/market/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/csp-report",
+      "destination": "apps/web/app/api/csp-report/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/debate",
+      "destination": "apps/web/app/api/debate/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/debate/stream",
+      "destination": "apps/web/app/api/debate/stream/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/favicon",
+      "destination": "apps/web/app/api/favicon/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/health-check",
+      "destination": "apps/web/app/api/health-check/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/jona/[...path]",
+      "destination": "apps/web/app/api/jona/[...path]/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/jona/health",
+      "destination": "apps/web/app/api/jona/health/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/jona/metrics",
+      "destination": "apps/web/app/api/jona/metrics/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/kitchen/queue",
+      "destination": "apps/web/app/api/kitchen/queue/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/kitchen/reports/[runId]",
+      "destination": "apps/web/app/api/kitchen/reports/[runId]/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/kitchen/run",
+      "destination": "apps/web/app/api/kitchen/run/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/kitchen/run-tests",
+      "destination": "apps/web/app/api/kitchen/run-tests/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/kitchen/status/[runId]",
+      "destination": "apps/web/app/api/kitchen/status/[runId]/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/kitchen/sync-excel",
+      "destination": "apps/web/app/api/kitchen/sync-excel/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/kitchen/sync-postman",
+      "destination": "apps/web/app/api/kitchen/sync-postman/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/kloud-bridge/[...path]",
+      "destination": "apps/web/app/api/kloud-bridge/[...path]/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/linkedin/pending-articles",
+      "destination": "apps/web/app/api/linkedin/pending-articles/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/linkedin/post-article",
+      "destination": "apps/web/app/api/linkedin/post-article/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/linkedin/post-custom",
+      "destination": "apps/web/app/api/linkedin/post-custom/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/linkedin/post-daily",
+      "destination": "apps/web/app/api/linkedin/post-daily/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/linkedin/posted-articles",
+      "destination": "apps/web/app/api/linkedin/posted-articles/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/matia",
+      "destination": "apps/web/app/api/matia/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/mymirror/data-sources",
+      "destination": "apps/web/app/api/mymirror/data-sources/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/mymirror/data-sources/[id]",
+      "destination": "apps/web/app/api/mymirror/data-sources/[id]/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/mymirror/docker-containers",
+      "destination": "apps/web/app/api/mymirror/docker-containers/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/mymirror/export",
+      "destination": "apps/web/app/api/mymirror/export/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/mymirror/live-metrics",
+      "destination": "apps/web/app/api/mymirror/live-metrics/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/neural-symphony",
+      "destination": "apps/web/app/api/neural-symphony/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean",
+      "destination": "apps/web/app/api/ocean/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean_curiosity",
+      "destination": "apps/web/app/api/ocean_curiosity/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/[...path]",
+      "destination": "apps/web/app/api/ocean/[...path]/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/archive",
+      "destination": "apps/web/app/api/ocean/archive/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/audio",
+      "destination": "apps/web/app/api/ocean/audio/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/curiosity",
+      "destination": "apps/web/app/api/ocean/curiosity/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/document",
+      "destination": "apps/web/app/api/ocean/document/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/document/capabilities",
+      "destination": "apps/web/app/api/ocean/document/capabilities/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/helpers",
+      "destination": "apps/web/app/api/ocean/helpers/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/message/reaction",
+      "destination": "apps/web/app/api/ocean/message/reaction/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/omni",
+      "destination": "apps/web/app/api/ocean/omni/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/personas",
+      "destination": "apps/web/app/api/ocean/personas/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/realtime",
+      "destination": "apps/web/app/api/ocean/realtime/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/self-learning-status",
+      "destination": "apps/web/app/api/ocean/self-learning-status/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/social",
+      "destination": "apps/web/app/api/ocean/social/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/specialized",
+      "destination": "apps/web/app/api/ocean/specialized/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/stream",
+      "destination": "apps/web/app/api/ocean/stream/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/stream/warm",
+      "destination": "apps/web/app/api/ocean/stream/warm/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/tts",
+      "destination": "apps/web/app/api/ocean/tts/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/vision",
+      "destination": "apps/web/app/api/ocean/vision/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/voice",
+      "destination": "apps/web/app/api/ocean/voice/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/web-reader",
+      "destination": "apps/web/app/api/ocean/web-reader/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ocean/web-reader/stream",
+      "destination": "apps/web/app/api/ocean/web-reader/stream/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/open-excel",
+      "destination": "apps/web/app/api/open-excel/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/openmind",
+      "destination": "apps/web/app/api/openmind/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/openmind/[...path]",
+      "destination": "apps/web/app/api/openmind/[...path]/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/phone/sensor-reading",
+      "destination": "apps/web/app/api/phone/sensor-reading/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/ping",
+      "destination": "apps/web/app/api/ping/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/core-health",
+      "destination": "apps/web/app/api/proxy/core-health/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/docker-containers",
+      "destination": "apps/web/app/api/proxy/docker-containers/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/docker-stats",
+      "destination": "apps/web/app/api/proxy/docker-stats/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/excel-health",
+      "destination": "apps/web/app/api/proxy/excel-health/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/health",
+      "destination": "apps/web/app/api/proxy/health/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/kloud-bridge",
+      "destination": "apps/web/app/api/proxy/kloud-bridge/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/marketplace-health",
+      "destination": "apps/web/app/api/proxy/marketplace-health/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/reporting-dashboard",
+      "destination": "apps/web/app/api/proxy/reporting-dashboard/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/reporting-error-summary",
+      "destination": "apps/web/app/api/proxy/reporting-error-summary/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/reporting-errors",
+      "destination": "apps/web/app/api/proxy/reporting-errors/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/reporting-export-excel",
+      "destination": "apps/web/app/api/proxy/reporting-export-excel/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/reporting-export-pptx",
+      "destination": "apps/web/app/api/proxy/reporting-export-pptx/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/system-metrics",
+      "destination": "apps/web/app/api/proxy/system-metrics/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/user-data-sources",
+      "destination": "apps/web/app/api/proxy/user-data-sources/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/user-data-sources/[id]/test",
+      "destination": "apps/web/app/api/proxy/user-data-sources/[id]/test/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/user-metrics",
+      "destination": "apps/web/app/api/proxy/user-metrics/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/proxy/user-summary",
+      "destination": "apps/web/app/api/proxy/user-summary/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/regenerate-excel",
+      "destination": "apps/web/app/api/regenerate-excel/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/run-office-scripts",
+      "destination": "apps/web/app/api/run-office-scripts/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/security/api-keys",
+      "destination": "apps/web/app/api/security/api-keys/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/service-discovery",
+      "destination": "apps/web/app/api/service-discovery/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/service-info",
+      "destination": "apps/web/app/api/service-info/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/session/[id]/stop",
+      "destination": "apps/web/app/api/session/[id]/stop/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/session/start-hybrid",
+      "destination": "apps/web/app/api/session/start-hybrid/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/shopping-therapy",
+      "destination": "apps/web/app/api/shopping-therapy/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/stripe/checkout",
+      "destination": "apps/web/app/api/stripe/checkout/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/stripe/checkout/one-time",
+      "destination": "apps/web/app/api/stripe/checkout/one-time/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/stripe/one-time/bootstrap",
+      "destination": "apps/web/app/api/stripe/one-time/bootstrap/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/stripe/products",
+      "destination": "apps/web/app/api/stripe/products/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/system-status",
+      "destination": "apps/web/app/api/system-status/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/user/notification-categories",
+      "destination": "apps/web/app/api/user/notification-categories/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/user/notification-preferences",
+      "destination": "apps/web/app/api/user/notification-preferences/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/user/profile",
+      "destination": "apps/web/app/api/user/profile/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/video/generate",
+      "destination": "apps/web/app/api/video/generate/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/video/status/[id]",
+      "destination": "apps/web/app/api/video/status/[id]/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/weather",
+      "destination": "apps/web/app/api/weather/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/weather/multiple-cities",
+      "destination": "apps/web/app/api/weather/multiple-cities/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/webhooks/stripe",
+      "destination": "apps/web/app/api/webhooks/stripe/route.ts",
+      "type": "app-api"
+    },
+    {
+      "route": "/api/zurich",
+      "destination": "apps/web/app/api/zurich/route.ts",
+      "type": "app-api"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/modules/albi-eeg-analysis",
+      "destination": "/modules/albi-eeg-live",
+      "status": "308-permanent",
+      "type": "redirect"
+    },
+    {
+      "source": "/modules/behavioral",
+      "destination": "/modules/openmind",
+      "status": "307-temporary",
+      "type": "redirect"
+    },
+    {
+      "source": "/modules/clisonix-api-collection",
+      "destination": "/modules/my-data-dashboard",
+      "status": "308-permanent",
+      "type": "redirect"
+    },
+    {
+      "source": "/modules/marketplace",
+      "destination": "/developers",
+      "status": "307-temporary",
+      "type": "redirect"
+    },
+    {
+      "source": "/modules/specialized-expert-chat",
+      "destination": "/modules/specialized-chat",
+      "status": "308-permanent",
+      "type": "redirect"
+    },
+    {
+      "source": "/modules/trinity-debate",
+      "destination": "/debate",
+      "status": "307-temporary",
+      "type": "redirect"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/ai/:path*",
+      "destination": "http://clisonix-api:8000/api/ai/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/alba/:path*",
+      "destination": "http://clisonix-api:8000/api/alba/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/albi/:path*",
+      "destination": "http://clisonix-api:8000/api/albi/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/asi-health",
+      "destination": "http://clisonix-api:8000/asi/health",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/asi-status",
+      "destination": "http://clisonix-api:8000/asi/status",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/asi/:path*",
+      "destination": "http://clisonix-api:8000/api/asi/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/crypto/:path*",
+      "destination": "http://clisonix-api:8000/api/crypto/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/debate",
+      "destination": "http://clisonix-ocean-core:8030/api/v1/debate",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/debate/:path*",
+      "destination": "http://clisonix-ocean-core:8030/api/v1/debate/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/debate/stream",
+      "destination": "http://clisonix-ocean-core:8030/api/v1/debate/stream",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/docker-containers",
+      "destination": "http://clisonix-api:8000/api/reporting/docker-containers",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/docker-stats",
+      "destination": "http://clisonix-api:8000/api/reporting/docker-stats",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/health",
+      "destination": "http://clisonix-api:8000/health",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/jona/:path*",
+      "destination": "http://clisonix-api:8000/api/jona/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/monitoring/:path*",
+      "destination": "http://clisonix-api:8000/api/monitoring/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/ocean",
+      "destination": "http://clisonix-ocean-core:8030/api/v1/health",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/ocean/:path*",
+      "destination": "http://clisonix-ocean-core:8030/api/v1/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/ocean/health",
+      "destination": "http://clisonix-ocean-core:8030/health",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/realdata/:path*",
+      "destination": "http://clisonix-api:8000/api/realdata/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/reporting/:path*",
+      "destination": "http://clisonix-api:8000/api/reporting/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/security/:path*",
+      "destination": "http://clisonix-api:8000/api/security/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/system-metrics",
+      "destination": "http://clisonix-api:8000/api/reporting/system-metrics",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/system-status",
+      "destination": "http://clisonix-api:8000/api/system-status",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/system/:path*",
+      "destination": "http://clisonix-api:8000/api/system/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/weather/:path*",
+      "destination": "http://clisonix-api:8000/api/weather/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/zurich",
+      "destination": "http://clisonix-ocean-core:8030/api/v1/zurich",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/api/zurich/:path*",
+      "destination": "http://clisonix-ocean-core:8030/api/v1/zurich/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/asi/:path*",
+      "destination": "http://clisonix-api:8000/asi/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/audio/:path*",
+      "destination": "http://clisonix-api:8000/audio/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/backend/:path*",
+      "destination": "http://clisonix-api:8000/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/backend/status",
+      "destination": "http://clisonix-api:8000/health",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/files/:path*",
+      "destination": "http://clisonix-api:8000/files/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/health",
+      "destination": "http://clisonix-api:8000/health",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/images/:path*",
+      "destination": "http://clisonix-api:8000/images/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/media/:path*",
+      "destination": "http://clisonix-api:8000/media/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/media/ocean/:path*",
+      "destination": "http://clisonix-ocean-core:8030/media/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/uploads/:path*",
+      "destination": "http://clisonix-api:8000/uploads/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/video/:path*",
+      "destination": "http://clisonix-api:8000/video/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    },
+    {
+      "source": "/videos/ocean/:path*",
+      "destination": "http://clisonix-ocean-core:8030/videos/:path*",
+      "status": "rewrite",
+      "type": "rewrite"
+    }
+  ]
+}

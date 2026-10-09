@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clisonix Labs Quick Menu</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f7f7fa; margin: 0; padding: 0; }
+    .container { max-width: 600px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px #0001; padding: 32px; }
+    h1 { text-align: center; color: #2a3a4a; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 16px 0; }
+    a.lab-link { display: block; padding: 16px 24px; background: #e6f0fa; color: #1a2b3c; border-radius: 8px; text-decoration: none; font-size: 1.1em; transition: background 0.2s; }
+    a.lab-link:hover { background: #cce2f7; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Zgjidh Laboratorin</h1>
+    <ul id="labs-list">
+      <!-- Popullohet nga JavaScript -->
+    </ul>
+  </div>
+  <script>
+    // Lista e laboratorëve sipas ocean-core/laboratories.py
+    const labs = [
+      { id: "Elbasan_AI", name: "Elbasan AI Lab" },
+      { id: "Tirana_Medical", name: "Tirana Medical Lab" },
+      { id: "Durres_IoT", name: "Durrës IoT Lab" },
+      { id: "Shkoder_Marine", name: "Shkodër Marine Lab" },
+      { id: "Vlore_Environmental", name: "Vlorë Environmental Lab" },
+      { id: "Korce_Agricultural", name: "Korça Agricultural Lab" },
+      { id: "Sarrande_Underwater", name: "Sarandë Underwater Lab" },
+      { id: "Prishtina_Security", name: "Prishtina Security Lab" },
+      { id: "Kostur_Energy", name: "Kostur Energy Lab" },
+      { id: "Athens_Classical", name: "Athens Classical Lab" },
+      { id: "Rome_Architecture", name: "Rome Architecture Lab" },
+      { id: "Zurich_Finance", name: "Zurich Finance Lab" },
+      { id: "Beograd_Industrial", name: "Beograd Industrial Lab" },
+      { id: "Sofia_Chemistry", name: "Sofia Chemistry Lab" },
+      { id: "Zagreb_Biotech", name: "Zagreb Biotech Lab" },
+      { id: "Ljubljana_Quantum", name: "Ljubljana Quantum Lab" },
+      { id: "Vienna_Neuroscience", name: "Vienna Neuroscience Lab" },
+      { id: "Prague_Robotics", name: "Prague Robotics Lab" },
+      { id: "Budapest_Data", name: "Budapest Data Lab" },
+      { id: "Bucharest_Nanotechnology", name: "Bucharest Nanotechnology Lab" },
+      { id: "Istanbul_Trade", name: "Istanbul Trade Lab" },
+      { id: "Cairo_Archeology", name: "Cairo Archeology Lab" },
+      { id: "Jerusalem_Heritage", name: "Jerusalem Heritage Lab" }
+    ];
+    const ul = document.getElementById('labs-list');
+    labs.forEach(lab => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.className = 'lab-link';
+      a.href = `lab-ui/${lab.id.toLowerCase()}.html`;
+      a.textContent = lab.name;
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+  </script>
+</body>
+</html>

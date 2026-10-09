@@ -1,0 +1,51 @@
+{
+  "name": "@clisonix/sdk",
+  "version": "1.0.0",
+  "description": "Official TypeScript SDK for Clisonix Cloud API - Neural harmonic processing, EEG analysis, and ASI Trinity integration",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup clisonix-sdk.ts --format cjs,esm --dts",
+    "dev": "tsup clisonix-sdk.ts --format cjs,esm --dts --watch",
+    "test": "vitest",
+    "lint": "eslint . --ext .ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "clisonix",
+    "api",
+    "sdk",
+    "neural",
+    "eeg",
+    "brain",
+    "harmonic",
+    "asi",
+    "typescript"
+  ],
+  "author": "Clisonix Cloud <clisonix@pm.me>",
+  "license": "MIT",
+  "homepage": "https://clisonix.cloud/docs/sdk/typescript",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clisonix/sdk-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clisonix/sdk-typescript/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0",
+    "eslint": "^8.55.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0"
+  }
+}

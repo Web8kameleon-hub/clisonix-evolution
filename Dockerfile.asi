@@ -1,0 +1,27 @@
+FROM python:3.13
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies directly
+RUN pip install --no-cache-dir fastapi uvicorn pydantic httpx aiohttp redis psutil
+
+# Copy ASI service files and dependencies
+COPY asi_api_server.py .
+COPY asi_core.py .
+COPY asi_realtime_engine.py .
+COPY enhanced_asi.py .
+COPY localization.py .
+COPY agiem_core.py .
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+    CMD curl -f http://localhost:9094/health || exit 1
+
+EXPOSE 9094
+
+CMD ["python", "asi_api_server.py"]

@@ -1,0 +1,27 @@
+FROM python:3.13
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+RUN pip install --no-cache-dir fastapi uvicorn pydantic numpy cbor2 msgpack
+
+# Copy ALDA files
+COPY alda_core.py .
+COPY alda_server.py .
+
+# Environment
+ENV ALDA_PORT=8063
+ENV API_V1=/api/v1
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+    CMD curl -f http://localhost:8063/health || exit 1
+
+EXPOSE 8063
+
+CMD ["python", "alda_server.py"]

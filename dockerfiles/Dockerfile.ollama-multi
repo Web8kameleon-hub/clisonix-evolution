@@ -1,0 +1,6 @@
+﻿FROM python:3.13
+WORKDIR /app
+COPY ocean-core/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY ocean-core/ollama_multi_api.py .
+CMD ["python", "ollama_multi_api.py"]

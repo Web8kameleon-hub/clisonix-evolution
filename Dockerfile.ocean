@@ -1,0 +1,26 @@
+FROM python:3.13-bookworm
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements-ocean.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements-ocean.txt
+
+# Copy application
+COPY apps/api/services ./services
+COPY apps/api/ocean_api_v2.py .
+
+# Health check
+HEALTHCHECK --interval=10s --timeout=5s --retries=3 \
+    CMD curl -f http://localhost:8030/health || exit 1
+
+# Run Ocean Core
+CMD ["python", "-m", "uvicorn", "ocean_api_v2:app", "--host", "0.0.0.0", "--port", "8030", "--workers", "4"]

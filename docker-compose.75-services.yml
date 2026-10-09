@@ -1,0 +1,1374 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# CLISONIX CLOUD - 75 MICROSERVICES DOCKER COMPOSE
+# Enterprise Edition - Full Local Deployment
+#
+# Created: 2026-01-30
+# Author: Ledjan Ahmati / WEB8euroweb GmbH
+# ═══════════════════════════════════════════════════════════════════════════════
+
+x-python-service: &python-service
+  image: python:3.14
+  working_dir: /app
+  volumes:
+    - ./:/app
+    - pip-cache:/root/.cache/pip
+  environment:
+    - PYTHONUNBUFFERED=1
+    - PYTHONIOENCODING=UTF-8
+    - LANG=C.UTF-8
+    - REDIS_URL=redis://redis:6379/0
+    - DATABASE_URL=postgresql://clisonix:clisonix@postgres:5432/clisonixdb
+  restart: "no"
+  deploy:
+    resources:
+      limits:
+        memory: 256M
+        cpus: '0.25'
+  networks:
+    - clisonix-net
+
+services:
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # DATABASES & INFRASTRUCTURE (5 containers)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  # 1. PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    container_name: clisonix-postgres
+    environment:
+      POSTGRES_USER: clisonix
+      POSTGRES_PASSWORD: clisonix
+      POSTGRES_DB: clisonixdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U clisonix"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: "no"
+    networks:
+      - clisonix-net
+
+  # 2. Redis
+  redis:
+    image: redis:7-alpine
+    container_name: clisonix-redis
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: "no"
+    networks:
+      - clisonix-net
+
+  # 3. Neo4j Graph Database
+  neo4j:
+    image: neo4j:5-community
+    container_name: clisonix-neo4j
+    environment:
+      NEO4J_AUTH: neo4j/clisonix123
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j-data:/data
+    restart: "no"
+    networks:
+      - clisonix-net
+
+  # 4. VictoriaMetrics
+  victoriametrics:
+    image: victoriametrics/victoria-metrics:latest
+    container_name: clisonix-victoriametrics
+    ports:
+      - "8428:8428"
+    volumes:
+      - victoria-data:/victoria-metrics-data
+    command: -storageDataPath=/victoria-metrics-data -retentionPeriod=90d
+    restart: "no"
+    networks:
+      - clisonix-net
+
+  # 5. MinIO (S3-compatible storage)
+  minio:
+    image: minio/minio:latest
+    container_name: clisonix-minio
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: adminlocal
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+    command: server /data --console-address ":9001"
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # AI & OLLAMA (3 containers)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  # 6. Ollama AI Server
+  ollama:
+    image: ollama/ollama:latest
+    container_name: clisonix-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    environment:
+      OLLAMA_HOST: "0.0.0.0"
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list || exit 0"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # 7. Ollama Multi-Model API
+  ollama-multi-api:
+    <<: *python-service
+    container_name: clisonix-ollama-multi
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic aiohttp httpx &&
+      cd ocean-core && python ollama_multi_api.py"
+    ports:
+      - "4444:4444"
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    depends_on:
+      - ollama
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:4444/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # CLX Independent Agent
+  clx-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile.clx-agent
+    container_name: clisonix-clx-agent
+    ports:
+      - "7778:7778"
+    volumes:
+      - clx_memory:/data/.clx
+    environment:
+      PYTHONUNBUFFERED: "1"
+      PORT: "7778"
+      OLLAMA_HOST: http://clisonix-ollama:11434
+      OLLAMA_MODEL: llama3.1:8b
+      CLX_AUTO_LEARN: "true"
+      CLX_LEARN_DURATION: "14400"
+      CLX_LEARN_INTERVAL: "60"
+      CLX_MEMORY_PATH: /data/.clx/training-memory.json
+    depends_on:
+      ollama:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:7778/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+
+  # 8. Ocean Core AI Engine
+  ocean-core:
+    <<: *python-service
+    container_name: clisonix-ocean-core
+    command: >
+      bash -c "pip install --no-cache-dir -q -r ocean-core/requirements.txt &&
+      cd ocean-core && python ocean_core_full.py"
+    ports:
+      - "8030:8030"
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - CENTRAL_API_URL=http://clisonix-api:8000
+      - OPENMIND_URL=http://clisonix-openmind:9999
+      - EXCEL_CORE_URL=http://clisonix-excel:8002
+    depends_on:
+      - ollama
+      - ollama-multi-api
+      - redis
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8030/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 8b. Ocean Core Multimodal
+  ocean-core-multimodal:
+    build:
+      context: ./ocean-core
+      dockerfile: Dockerfile.multimodal
+    container_name: clisonix-ocean-core-multimodal
+    environment:
+      - OCEAN_PORT=8033
+      - OLLAMA_HOST=http://clisonix-ollama:11434
+    ports:
+      - "8033:8033"
+    depends_on:
+      - ollama
+      - ocean-core
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8033/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # 8c. Kloud Upstream Runtime
+  kloud-upstream-runtime:
+    build:
+      context: .
+      dockerfile: services/kloud_upstream_runtime/Dockerfile
+    container_name: clisonix-kloud-upstream-runtime
+    ports:
+      - "9080:9080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # 8d. Kloud Bridge
+  kloud-bridge:
+    build:
+      context: .
+      dockerfile: services/kloud_bridge/Dockerfile
+    container_name: clisonix-kloud-bridge
+    environment:
+      - KLOUD_UPSTREAM_URL=http://clisonix-kloud-upstream-runtime:9080
+      - OCEAN_CORE_URL=http://clisonix-ocean-core:8030
+      - KLOUD_ISOLATED_MODE=true
+    ports:
+      - "8889:8889"
+    depends_on:
+      - kloud-upstream-runtime
+      - ocean-core
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8889/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # 8e. Curiosity Ocean
+  curiosity:
+    build:
+      context: ./services/curiosity_ocean
+      dockerfile: Dockerfile
+    container_name: clisonix-curiosity
+    ports:
+      - "8011:8011"
+    depends_on:
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8011/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # ASI TRINITY (4 containers)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  # 9. ALBA - Analytical Intelligence
+  alba:
+    <<: *python-service
+    container_name: clisonix-alba
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python docker-stubs/service_stub.py alba 5555"
+    ports:
+      - "5555:5555"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # 10. ALBI - Creative Intelligence
+  albi:
+    <<: *python-service
+    container_name: clisonix-albi
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic requests aiohttp opentelemetry-api opentelemetry-sdk opentelemetry-exporter-otlp opentelemetry-instrumentation-fastapi opentelemetry-instrumentation-requests opentelemetry-instrumentation-aiohttp-client opentelemetry-instrumentation-logging opentelemetry-propagator-jaeger &&
+      python -m uvicorn albi_service_6680:app --host 0.0.0.0 --port 6680"
+    ports:
+      - "6680:6680"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # 11. JONA - Master Coordinator
+  jona:
+    <<: *python-service
+    container_name: clisonix-jona
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic pydantic-settings numpy &&
+      python -m uvicorn jona_neural_api:app --host 0.0.0.0 --port 7777"
+    ports:
+      - "7777:7777"
+    environment:
+      - ALBA_URL=http://alba:5555
+      - ALBI_URL=http://albi:6680
+    depends_on:
+      - alba
+      - albi
+
+  # 12. ASI - Artificial Super Intelligence
+  asi:
+    <<: *python-service
+    container_name: clisonix-asi
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python docker-stubs/service_stub.py asi 9094"
+    ports:
+      - "9094:9094"
+    depends_on:
+      - jona
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # CORE ENGINES (7 containers)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  # 13. Alphabet Layers
+  alphabet-layers:
+    <<: *python-service
+    container_name: clisonix-alphabet-layers
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic cbor2 msgpack numpy &&
+      python docker-stubs/service_stub.py alphabet-layers 8061"
+    ports:
+      - "8061:8061"
+
+  # 14. LIAM - Labor Intelligence Array Matrix
+  liam:
+    <<: *python-service
+    container_name: clisonix-liam
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python docker-stubs/service_stub.py liam 8062"
+    ports:
+      - "8062:8062"
+
+  # 15. ALDA - Artificial Labor Determined Array
+  alda:
+    <<: *python-service
+    container_name: clisonix-alda
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python docker-stubs/service_stub.py alda 8063"
+    ports:
+      - "8063:8063"
+
+  # 16. ALBA Idle Chat
+  alba-idle:
+    <<: *python-service
+    container_name: clisonix-alba-idle
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic httpx &&
+      python docker-stubs/service_stub.py alba-idle 8031"
+    ports:
+      - "8031:8031"
+
+  # 17. Blerina - Document Intelligence
+  blerina:
+    <<: *python-service
+    container_name: clisonix-blerina
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python docker-stubs/service_stub.py blerina 8035"
+    ports:
+      - "8035:8035"
+
+  # 18. Cycle Engine
+  cycle-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile.cycle
+    container_name: clisonix-cycle-engine
+    environment:
+      - PYTHONUNBUFFERED=1
+      - REDIS_URL=redis://redis:6379/0
+    ports:
+      - "1005:8005"
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8005/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # 19. SaaS Orchestrator
+  saas-orchestrator:
+    <<: *python-service
+    container_name: clisonix-saas-orchestrator
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic aiohttp httpx &&
+      python saas_services_orchestrator.py"
+    ports:
+      - "9998:9999"
+    environment:
+      - OPENMIND_URL=http://openmind:9999
+    depends_on:
+      - alba
+      - albi
+      - jona
+
+  # 20. OpenMind Gateway
+  openmind:
+    <<: *python-service
+    container_name: clisonix-openmind
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic httpx &&
+      python -m uvicorn services.openmind.main:app --host 0.0.0.0 --port 9999"
+    environment:
+      - OPENMIND_PORT=9999
+      - OLLAMA_URL=http://ollama:11434
+    ports:
+      - "9999:9999"
+
+  # 21. EAP Engine (Evresi -> Analysi -> Proposi)
+  eap-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile.eap-engine
+    container_name: clisonix-eap
+    ports:
+      - "9007:9501"
+    depends_on:
+      - blerina
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # 21. Lagter Publisher Orchestrator
+  lagter:
+    <<: *python-service
+    container_name: clisonix-lagter
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic httpx python-dotenv &&
+      python -m uvicorn services.lagter.main:app --host 0.0.0.0 --port 9500"
+    environment:
+      - LAGTER_PORT=9500
+      - BLOG_PUBLISHER_URL=http://blog_publisher:8041
+      - MIN_ARTICLES_PER_DAY=5
+      - MAX_ARTICLES_PER_DAY=9
+      - TARGET_QUALITY=0.90
+    ports:
+      - "9500:9500"
+    depends_on:
+      - blog_publisher
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PERSONAS ENGINE (1 container, 14 personas)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  # 20. Personas API
+  personas:
+    <<: *python-service
+    container_name: clisonix-personas
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python personas_api.py"
+    ports:
+      - "9200:9200"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # AGIEM + 8 DATA SOURCES (9 containers)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  # 21. AGIEM - AGI Ecosystem Manager
+  agiem:
+    build:
+      context: .
+      dockerfile: Dockerfile.agiem
+    container_name: clisonix-agiem
+    environment:
+      - PYTHONUNBUFFERED=1
+      - REDIS_URL=redis://redis:6379/0
+      - PORT=9300
+    ports:
+      - "9300:9300"
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9300/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # 22. DataSource Europe
+  datasource-europe:
+    <<: *python-service
+    container_name: clisonix-ds-europe
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic httpx &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='DataSource Europe', description='EU, ECB, Eurostat data'); health_route = app.get('/health')(lambda: {'status': 'healthy', 'region': 'europe'}); sources_route = app.get('/sources')(lambda: {'eurostat': True, 'ecb': True, 'balkans': True}); uvicorn.run(app, host='0.0.0.0', port=9301)\""
+    ports:
+      - "9301:9301"
+
+  # 23. DataSource Americas
+  datasource-americas:
+    <<: *python-service
+    container_name: clisonix-ds-americas
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic httpx &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='DataSource Americas', description='US, Canada, LATAM data'); health_route = app.get('/health')(lambda: {'status': 'healthy', 'region': 'americas'}); sources_route = app.get('/sources')(lambda: {'us_fed': True, 'canada': True, 'latam': True}); uvicorn.run(app, host='0.0.0.0', port=9302)\""
+    ports:
+      - "9302:9302"
+
+  # 24. DataSource Asia
+  datasource-asia:
+    <<: *python-service
+    container_name: clisonix-ds-asia
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic httpx &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='DataSource Asia', description='China, Japan, Korea data'); health_route = app.get('/health')(lambda: {'status': 'healthy', 'region': 'asia'}); sources_route = app.get('/sources')(lambda: {'china': True, 'japan': True, 'korea': True}); uvicorn.run(app, host='0.0.0.0', port=9303)\""
+    ports:
+      - "9303:9303"
+
+  # 25. DataSource India
+  datasource-india:
+    <<: *python-service
+    container_name: clisonix-ds-india
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic httpx &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='DataSource India', description='India RBI, NSE data'); health_route = app.get('/health')(lambda: {'status': 'healthy', 'region': 'india'}); sources_route = app.get('/sources')(lambda: {'rbi': True, 'nse': True, 'sebi': True}); uvicorn.run(app, host='0.0.0.0', port=9304)\""
+    ports:
+      - "9304:9304"
+
+  # 26. DataSource Africa
+  datasource-africa:
+    <<: *python-service
+    container_name: clisonix-ds-africa
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic httpx &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='DataSource Africa', description='African Union data'); health_route = app.get('/health')(lambda: {'status': 'healthy', 'region': 'africa'}); sources_route = app.get('/sources')(lambda: {'au': True, 'sadc': True, 'ecowas': True}); uvicorn.run(app, host='0.0.0.0', port=9305)\""
+    ports:
+      - "9305:9305"
+
+  # 27. DataSource Oceania
+  datasource-oceania:
+    <<: *python-service
+    container_name: clisonix-ds-oceania
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic httpx &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='DataSource Oceania', description='Australia, NZ data'); health_route = app.get('/health')(lambda: {'status': 'healthy', 'region': 'oceania'}); sources_route = app.get('/sources')(lambda: {'australia': True, 'new_zealand': True, 'pacific': True}); uvicorn.run(app, host='0.0.0.0', port=9306)\""
+    ports:
+      - "9306:9306"
+
+  # 28. DataSource Central Asia
+  datasource-central-asia:
+    <<: *python-service
+    container_name: clisonix-ds-central-asia
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic httpx &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='DataSource Central Asia', description='Kazakhstan, Uzbekistan data'); health_route = app.get('/health')(lambda: {'status': 'healthy', 'region': 'central_asia'}); sources_route = app.get('/sources')(lambda: {'kazakhstan': True, 'uzbekistan': True, 'turkmenistan': True}); uvicorn.run(app, host='0.0.0.0', port=9307)\""
+    ports:
+      - "9307:9307"
+
+  # 29. DataSource Antarctica
+  datasource-antarctica:
+    <<: *python-service
+    container_name: clisonix-ds-antarctica
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic httpx &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='DataSource Antarctica', description='Research station data'); health_route = app.get('/health')(lambda: {'status': 'healthy', 'region': 'antarctica'}); sources_route = app.get('/sources')(lambda: {'mcmurdo': True, 'amundsen': True, 'research': True}); uvicorn.run(app, host='0.0.0.0', port=9308)\""
+    ports:
+      - "9308:9308"
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  # 30. Elbasan AI Lab
+  lab-elbasan:
+    <<: *python-service
+    container_name: clisonix-lab-elbasan
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Elbasan AI Lab', description='AI & ML Research'); health_route = app.get('/health')(lambda: {'lab': 'Elbasan', 'specialty': 'AI/ML', 'country': 'Albania'}); uvicorn.run(app, host='0.0.0.0', port=9101)\""
+    ports:
+      - "9101:9101"
+
+  # 31. Tirana Medical Lab
+  lab-tirana:
+    <<: *python-service
+    container_name: clisonix-lab-tirana
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Tirana Medical Lab'); health_route = app.get('/health')(lambda: {'lab': 'Tirana', 'specialty': 'Medical', 'country': 'Albania'}); uvicorn.run(app, host='0.0.0.0', port=9102)\""
+    ports:
+      - "9102:9102"
+
+  # 32. Durrës IoT Lab
+  lab-durres:
+    <<: *python-service
+    container_name: clisonix-lab-durres
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Durres IoT Lab'); health_route = app.get('/health')(lambda: {'lab': 'Durres', 'specialty': 'IoT', 'country': 'Albania'}); uvicorn.run(app, host='0.0.0.0', port=9103)\""
+    ports:
+      - "9103:9103"
+
+  # 33. Vlorë Environmental Lab
+  lab-vlore:
+    <<: *python-service
+    container_name: clisonix-lab-vlore
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Vlore Environmental Lab'); health_route = app.get('/health')(lambda: {'lab': 'Vlore', 'specialty': 'Environment', 'country': 'Albania'}); uvicorn.run(app, host='0.0.0.0', port=9104)\""
+    ports:
+      - "9104:9104"
+
+  # 34. Shkodër Marine Lab
+  lab-shkoder:
+    <<: *python-service
+    container_name: clisonix-lab-shkoder
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Shkoder Marine Lab'); health_route = app.get('/health')(lambda: {'lab': 'Shkoder', 'specialty': 'Marine', 'country': 'Albania'}); uvicorn.run(app, host='0.0.0.0', port=9105)\""
+    ports:
+      - "9105:9105"
+
+  # 35. Korçë Agricultural Lab
+  lab-korce:
+    <<: *python-service
+    container_name: clisonix-lab-korce
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Korce Agricultural Lab'); health_route = app.get('/health')(lambda: {'lab': 'Korce', 'specialty': 'Agriculture', 'country': 'Albania'}); uvicorn.run(app, host='0.0.0.0', port=9106)\""
+    ports:
+      - "9106:9106"
+
+  # 36. Sarandë Underwater Lab
+  lab-saranda:
+    <<: *python-service
+    container_name: clisonix-lab-saranda
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Saranda Underwater Lab'); health_route = app.get('/health')(lambda: {'lab': 'Saranda', 'specialty': 'Underwater', 'country': 'Albania'}); uvicorn.run(app, host='0.0.0.0', port=9107)\""
+    ports:
+      - "9107:9107"
+
+  # 37. Prishtina Security Lab
+  lab-prishtina:
+    <<: *python-service
+    container_name: clisonix-lab-prishtina
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Prishtina Security Lab'); health_route = app.get('/health')(lambda: {'lab': 'Prishtina', 'specialty': 'Cybersecurity', 'country': 'Kosovo'}); uvicorn.run(app, host='0.0.0.0', port=9108)\""
+    ports:
+      - "9108:9108"
+
+  # 38. Kostur Energy Lab
+  lab-kostur:
+    <<: *python-service
+    container_name: clisonix-lab-kostur
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Kostur Energy Lab'); health_route = app.get('/health')(lambda: {'lab': 'Kostur', 'specialty': 'Energy', 'country': 'North Macedonia'}); uvicorn.run(app, host='0.0.0.0', port=9109)\""
+    ports:
+      - "9109:9109"
+
+  # 39. Athens Classical Lab
+  lab-athens:
+    <<: *python-service
+    container_name: clisonix-lab-athens
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Athens Classical Lab'); health_route = app.get('/health')(lambda: {'lab': 'Athens', 'specialty': 'Classical Studies', 'country': 'Greece'}); uvicorn.run(app, host='0.0.0.0', port=9110)\""
+    ports:
+      - "9110:9110"
+
+  # 40. Rome Architecture Lab
+  lab-rome:
+    <<: *python-service
+    container_name: clisonix-lab-rome
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Rome Architecture Lab'); health_route = app.get('/health')(lambda: {'lab': 'Rome', 'specialty': 'Architecture', 'country': 'Italy'}); uvicorn.run(app, host='0.0.0.0', port=9111)\""
+    ports:
+      - "9111:9111"
+
+  # 41. Zurich Finance Lab
+  lab-zurich:
+    <<: *python-service
+    container_name: clisonix-lab-zurich
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Zurich Finance Lab'); health_route = app.get('/health')(lambda: {'lab': 'Zurich', 'specialty': 'Finance', 'country': 'Switzerland'}); uvicorn.run(app, host='0.0.0.0', port=9112)\""
+    ports:
+      - "9112:9112"
+
+  # 42. Beograd Industrial Lab
+  lab-beograd:
+    <<: *python-service
+    container_name: clisonix-lab-beograd
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Beograd Industrial Lab'); health_route = app.get('/health')(lambda: {'lab': 'Beograd', 'specialty': 'Industrial', 'country': 'Serbia'}); uvicorn.run(app, host='0.0.0.0', port=9113)\""
+    ports:
+      - "9113:9113"
+
+  # 43. Sofia Chemistry Lab
+  lab-sofia:
+    <<: *python-service
+    container_name: clisonix-lab-sofia
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Sofia Chemistry Lab'); health_route = app.get('/health')(lambda: {'lab': 'Sofia', 'specialty': 'Chemistry', 'country': 'Bulgaria'}); uvicorn.run(app, host='0.0.0.0', port=9114)\""
+    ports:
+      - "9114:9114"
+
+  # 44. Zagreb Biotech Lab
+  lab-zagreb:
+    <<: *python-service
+    container_name: clisonix-lab-zagreb
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Zagreb Biotech Lab'); health_route = app.get('/health')(lambda: {'lab': 'Zagreb', 'specialty': 'Biotech', 'country': 'Croatia'}); uvicorn.run(app, host='0.0.0.0', port=9115)\""
+    ports:
+      - "9115:9115"
+
+  # 45. Ljubljana Quantum Lab
+  lab-ljubljana:
+    <<: *python-service
+    container_name: clisonix-lab-ljubljana
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Ljubljana Quantum Lab'); health_route = app.get('/health')(lambda: {'lab': 'Ljubljana', 'specialty': 'Quantum', 'country': 'Slovenia'}); uvicorn.run(app, host='0.0.0.0', port=9116)\""
+    ports:
+      - "9116:9116"
+
+  # 46. Vienna Neuroscience Lab
+  lab-vienna:
+    <<: *python-service
+    container_name: clisonix-lab-vienna
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Vienna Neuroscience Lab'); health_route = app.get('/health')(lambda: {'lab': 'Vienna', 'specialty': 'Neuroscience', 'country': 'Austria'}); uvicorn.run(app, host='0.0.0.0', port=9117)\""
+    ports:
+      - "9117:9117"
+
+  # 47. Prague Robotics Lab
+  lab-prague:
+    <<: *python-service
+    container_name: clisonix-lab-prague
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Prague Robotics Lab'); health_route = app.get('/health')(lambda: {'lab': 'Prague', 'specialty': 'Robotics', 'country': 'Czech Republic'}); uvicorn.run(app, host='0.0.0.0', port=9118)\""
+    ports:
+      - "9118:9118"
+
+  # 48. Budapest Data Lab
+  lab-budapest:
+    <<: *python-service
+    container_name: clisonix-lab-budapest
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Budapest Data Lab'); health_route = app.get('/health')(lambda: {'lab': 'Budapest', 'specialty': 'Big Data', 'country': 'Hungary'}); uvicorn.run(app, host='0.0.0.0', port=9119)\""
+    ports:
+      - "9119:9119"
+
+  # 49. Bucharest Nanotechnology Lab
+  lab-bucharest:
+    <<: *python-service
+    container_name: clisonix-lab-bucharest
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Bucharest Nanotechnology Lab'); health_route = app.get('/health')(lambda: {'lab': 'Bucharest', 'specialty': 'Nanotechnology', 'country': 'Romania'}); uvicorn.run(app, host='0.0.0.0', port=9120)\""
+    ports:
+      - "9120:9120"
+
+  # 50. Istanbul Trade Lab
+  lab-istanbul:
+    <<: *python-service
+    container_name: clisonix-lab-istanbul
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Istanbul Trade Lab'); health_route = app.get('/health')(lambda: {'lab': 'Istanbul', 'specialty': 'Trade', 'country': 'Turkey'}); uvicorn.run(app, host='0.0.0.0', port=9121)\""
+    ports:
+      - "9121:9121"
+
+  # 51. Cairo Archeology Lab
+  lab-cairo:
+    <<: *python-service
+    container_name: clisonix-lab-cairo
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Cairo Archeology Lab'); health_route = app.get('/health')(lambda: {'lab': 'Cairo', 'specialty': 'Archeology', 'country': 'Egypt'}); uvicorn.run(app, host='0.0.0.0', port=9122)\""
+    ports:
+      - "9122:9122"
+
+  # 52. Jerusalem Heritage Lab
+  lab-jerusalem:
+    <<: *python-service
+    container_name: clisonix-lab-jerusalem
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Jerusalem Heritage Lab'); health_route = app.get('/health')(lambda: {'lab': 'Jerusalem', 'specialty': 'Heritage', 'country': 'Palestine'}); uvicorn.run(app, host='0.0.0.0', port=9123)\""
+    ports:
+      - "9123:9123"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # SAAS & MARKETPLACE (3 containers)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  # 53. SaaS API
+  saas-api:
+    <<: *python-service
+    container_name: clisonix-saas-api
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python -m uvicorn apps.api.saas_signal_api:app --host 0.0.0.0 --port 8040"
+    ports:
+      - "8048:8040"
+    depends_on:
+      - excel
+      - saas-orchestrator
+
+  # 54. Marketplace API
+  marketplace:
+    <<: *python-service
+    container_name: clisonix-marketplace
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic httpx stripe &&
+      cd services/marketplace && python main.py"
+    ports:
+      - "8004:8004"
+
+  # 55. Economy Engine
+  economy:
+    <<: *python-service
+    container_name: clisonix-economy
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python economy_api_server.py"
+    ports:
+      - "9093:9093"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # SERVICES (8 containers)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  # 56. Reporting Service
+  reporting:
+    build:
+      context: .
+      dockerfile: Dockerfile.reporting-wrapper
+    container_name: clisonix-reporting
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - REPORTING_QUEUE_WARNING_THRESHOLD=50
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./reports:/app/reports
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - clisonix-net
+    restart: unless-stopped
+
+  # 57. Excel Service
+  excel:
+    <<: *python-service
+    container_name: clisonix-excel
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic openpyxl pandas httpx python-multipart numpy 2>/dev/null;
+      cd services/excel && python main.py"
+    ports:
+      - "8002:8002"
+
+  # 58. Behavioral Science
+  behavioral:
+    <<: *python-service
+    container_name: clisonix-behavioral
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python behavioral_science_api.py"
+    ports:
+      - "8003:8003"
+
+  # 59. Advanced Analytics
+  analytics:
+    <<: *python-service
+    container_name: clisonix-analytics
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic numpy pandas python-multipart &&
+      python advanced_analytics_api.py"
+    ports:
+      - "2005:8005"
+
+  # 60. NeuroSonix
+  neurosonix:
+    build:
+      context: .
+      dockerfile: Dockerfile.neurosonix
+    container_name: clisonix-neurosonix
+    environment:
+      PYTHONUNBUFFERED: "1"
+      PORT: "8006"
+    ports:
+      - "8015:8006"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8006/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: "no"
+    networks:
+      - clisonix-net
+
+  # DR. ALBANA - Medical Content Service
+  dr_albana:
+    build:
+      context: ./services/dr_albana
+      dockerfile: Dockerfile
+    container_name: clisonix-dr-albana
+    environment:
+      PYTHONUNBUFFERED: "1"
+      OLLAMA_URL: "http://clisonix-ollama:11434"
+      MEDICAL_MODEL: "llama3.2:1b"
+      DR_ALBANA_PORT: "8040"
+      MIN_ARTICLES_PER_DAY: "5"
+      MAX_ARTICLES_PER_DAY: "9"
+      ARTICLES_PER_DAY: "7"
+      DAILY_GENERATION_HOUR_UTC: "6"
+      BLOG_PUBLISHER_URL: "http://blog_publisher:8041"
+      BLERINA_URL: "http://blerina:8035"
+    ports:
+      - "8040:8040"
+    volumes:
+      - ./generated_medical_pillars:/app/generated_medical_pillars
+    depends_on:
+      - ollama
+      - blerina
+    restart: "no"
+    networks:
+      - clisonix-net
+
+  # Blog Auto Publisher
+  blog_publisher:
+    build:
+      context: ./services/blog_publisher
+      dockerfile: Dockerfile
+    container_name: clisonix-blog-publisher
+    environment:
+      PYTHONUNBUFFERED: "1"
+      PUBLISHER_PORT: "8041"
+      GITHUB_TOKEN: "${GITHUB_TOKEN:-}"
+      GITHUB_REPO: "Web8kameleon-hub/clisonix-blog"
+      GITHUB_BRANCH: "main"
+      POSTS_PER_DAY: "9"
+      BLERINA_PILLARS_DIR: "/app/blerina_pillars"
+      DR_ALBANA_PILLARS_DIR: "/app/medical_pillars"
+    ports:
+      - "8041:8041"
+    volumes:
+      - ./all_pillars:/app/blerina_pillars
+      - ./generated_medical_pillars:/app/medical_pillars
+    depends_on:
+      - blerina
+      - dr_albana
+    restart: "no"
+    networks:
+      - clisonix-net
+
+  # 61. Aviation Weather
+  aviation:
+    <<: *python-service
+    container_name: clisonix-aviation
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic httpx &&
+      cd services/aviation-weather && python main.py"
+    ports:
+      - "8080:8080"
+
+  # 62. Multi-Tenant Manager
+  multi-tenant:
+    <<: *python-service
+    container_name: clisonix-multi-tenant
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      python multi_tenant_manager.py"
+    ports:
+      - "8007:8007"
+
+  # 63. Quantum Computing
+  quantum:
+    build:
+      context: .
+      dockerfile: services/quantum-rust/Dockerfile
+    container_name: clisonix-quantum
+    environment:
+      - QUANTUM_UPSTREAM_URL=http://kloud-upstream-runtime:9080
+    depends_on:
+      - kloud-upstream-runtime
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # FRONTEND & GATEWAY (3 containers)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  # 64. Backend API
+  api:
+    <<: *python-service
+    container_name: clisonix-api
+    command: >
+      bash -c "pip install --no-cache-dir -q -r apps/api/requirements.txt &&
+      cd apps/api && uvicorn main:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "8000:8000"
+    environment:
+      - BILLING_CORE_URL=http://clisonix-billing-core:8095
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 65. Web Frontend
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: clisonix-web
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: "production"
+      PORT: "3000"
+      API_INTERNAL_URL: "http://clisonix-api:8000"
+      NEXT_PUBLIC_API_BASE: "/api"
+      OCEAN_INTERNAL_URL: "http://clisonix-ocean-core:8030"
+      OPENMIND_INTERNAL_URL: "http://clisonix-openmind:9999"
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:-${STRIPE_PUBLISHABLE_KEY:-}}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+    depends_on:
+      - api
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"fetch('http://127.0.0.1:3000/api/health-check').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\""]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # 66. Auth Service (User Management + Clerk Webhooks)
+  user-management:
+    build:
+      context: ./services/user-management
+      dockerfile: Dockerfile
+    container_name: clisonix-user-management
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - CLERK_WEBHOOK_SECRET=${CLERK_WEBHOOK_SECRET}
+    ports:
+      - "8071:8070"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8070/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # 67. Billing Core (Stripe Entitlements)
+  billing-core:
+    build:
+      context: ./services/billing_core
+      dockerfile: Dockerfile
+    container_name: clisonix-billing-core
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PORT=8095
+      - BILLING_DATA_DIR=/data
+      - BILLING_PUBLIC_URL=http://localhost:8095
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+    ports:
+      - "8095:8095"
+    volumes:
+      - billing-core-data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8095/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # 68. Blog Paywall (Stripe Subscriptions)
+  blog-paywall:
+    build:
+      context: .
+      dockerfile: services/blog-paywall/Dockerfile
+    container_name: clisonix-blog-paywall
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PORT=8020
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+    ports:
+      - "8020:8020"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8020/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # 69. Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: clisonix-nginx
+    depends_on:
+      - web
+      - api
+      - ocean-core
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.production.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # MONITORING & OBSERVABILITY (5 containers)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  # 70. Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: clisonix-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=30d'
+    restart: "no"
+    networks:
+      - clisonix-net
+
+  # 71. Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: clisonix-grafana
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=clisonix
+    restart: "no"
+    networks:
+      - clisonix-net
+
+  # 69. Loki (Logs)
+  loki:
+    image: grafana/loki:latest
+    container_name: clisonix-loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - loki-data:/loki
+    restart: "no"
+    networks:
+      - clisonix-net
+
+  # 70. Jaeger (Tracing)
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: clisonix-jaeger
+    ports:
+      - "16686:16686"
+      - "4317:4317"
+      - "4318:4318"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    restart: "no"
+    networks:
+      - clisonix-net
+
+  # 71. Tempo (Distributed Tracing)
+  tempo:
+    image: grafana/tempo:2.3.1
+    container_name: clisonix-tempo
+    user: root
+    ports:
+      - "3200:3200"
+      - "4319:4317"
+    volumes:
+      - tempo-data:/var/tempo
+      - ./tempo.yaml:/etc/tempo.yaml:ro
+    command: ["-config.file=/etc/tempo.yaml"]
+    restart: "no"
+    networks:
+      - clisonix-net
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # ADDITIONAL SERVICES (4 containers)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  # 72. Agent Telemetry
+  agent-telemetry:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent-telemetry
+    container_name: clisonix-agent-telemetry
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PORT=6680
+    ports:
+      - "8009:6680"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6680/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+  # 73. Cognitive Signature Engine
+  cognitive-engine:
+    <<: *python-service
+    container_name: clisonix-cognitive
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      cd ocean-core && python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Cognitive Signature Engine'); health_route = app.get('/health')(lambda: {'status': 'healthy', 'engine': 'cognitive'}); uvicorn.run(app, host='0.0.0.0', port=8010)\""
+    ports:
+      - "8010:8010"
+
+  # 74. Adaptive Persona Router
+  adaptive-router:
+    <<: *python-service
+    container_name: clisonix-adaptive-router
+    command: >
+      bash -c "pip install --no-cache-dir -q uvicorn fastapi pydantic &&
+      cd ocean-core && python -c \"import uvicorn; from fastapi import FastAPI; app = FastAPI(title='Adaptive Persona Router'); health_route = app.get('/health')(lambda: {'status': 'healthy', 'personas': 4}); uvicorn.run(app, host='0.0.0.0', port=8011)\""
+    ports:
+      - "2011:8011"
+
+  # 75. Health Monitor
+  health-monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile.health-monitor
+    container_name: clisonix-health-monitor
+    ports:
+      - "8099:8099"
+    depends_on:
+      - api
+      - alba
+      - ollama
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8099/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# NETWORKS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+networks:
+  clisonix-net:
+    external: true
+    name: clisonix-net
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VOLUMES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+volumes:
+  postgres-data:
+  redis-data:
+  neo4j-data:
+  victoria-data:
+  minio-data:
+  ollama-data:
+  clx_memory:
+  prometheus-data:
+  grafana-data:
+  loki-data:
+  tempo-data:
+  pip-cache:
+  billing-core-data:

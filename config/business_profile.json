@@ -1,0 +1,123 @@
+{
+  "company": {
+    "legal_name": "ABA GmbH",
+    "business_name": "Clisonix",
+    "country": "DE",
+    "established": "2025",
+    "business_type": "Technology/HealthTech",
+    "status": "ACTIVE"
+  },
+  "stripe": {
+    "account_id": "acct_1SMsVsJQa06Hh2HG",
+    "account_type": "standard",
+    "country": "DE",
+    "currency": "EUR",
+    "status": "VERIFIED",
+    "phone_verified": true,
+    "statement_descriptor": "WEB8EUROWEB",
+    "created": "2026-03-12"
+  },
+  "contact": {
+    "business_address": {
+      "street": "Wattencheider Hellweg 199",
+      "postal_code": "44867",
+      "city": "Bochum",
+      "state": "NRW",
+      "country": "Germany"
+    },
+    "website": "https://www.clisonix.com",
+    "support_email": "clisonix@pm.me",
+    "support_phone": "+49 171 3031616"
+  },
+  "management": {
+    "account_representative": {
+      "name": "Ledjan Ahmati",
+      "email": "amati.bau@gmail.com",
+      "phone": "+49 171 3031616",
+      "date_of_birth": "1980-02-11",
+      "role": ["Account Representative", "Owner", "Executive"],
+      "public_profile": {
+        "title": "Founder and CEO",
+        "professional_background": [
+          "Public safety engineer",
+          "Civil safety engineer",
+          "Self-employed specialist"
+        ],
+        "experience_years": 21,
+        "specializations": [
+          "ISO standards",
+          "EuroNorm standards",
+          "TUV-aligned compliance",
+          "Civil emergency readiness",
+          "Natural emergency response"
+        ]
+      },
+      "address": {
+        "street": "Lange Straße",
+        "postal_code": "44866",
+        "city": "Bochum",
+        "country": "Germany"
+      }
+    }
+  },
+  "revenue_channels": {
+    "api_subscriptions": {
+      "enabled": true,
+      "tiers": ["Free", "Pro", "Enterprise"],
+      "currency": "EUR"
+    },
+    "content_monetization": {
+      "tiktok": {
+        "enabled": true,
+        "status": "PENDING"
+      },
+      "youtube": {
+        "enabled": true,
+        "status": "PENDING"
+      },
+      "linkedin": {
+        "enabled": true,
+        "status": "PENDING"
+      }
+    },
+    "blog": {
+      "adsense": {
+        "enabled": false,
+        "status": "PENDING"
+      },
+      "affiliate": {
+        "enabled": false,
+        "status": "PENDING"
+      }
+    }
+  },
+  "compliance": {
+    "gdpr_compliant": true,
+    "pci_dss_certified": false,
+    "payment_method": "Stripe (PCI Level 1)",
+    "tax_jurisdiction": "Germany / EU",
+    "data_location": "EU"
+  },
+  "security": {
+    "2fa_enabled": true,
+    "webhook_verification": true,
+    "rate_limiting": true,
+    "api_rate_limit_free": 1000,
+    "api_rate_limit_pro": 10000,
+    "api_rate_limit_enterprise": 50000
+  },
+  "kpis": {
+    "target_revenue_month_1": 300,
+    "target_revenue_month_3": 2700,
+    "target_revenue_annual": 50000,
+    "target_customers_month_1": 5,
+    "target_customers_month_6": 50,
+    "currency": "EUR"
+  },
+  "metadata": {
+    "created_date": "2026-03-12T00:00:00Z",
+    "last_updated": "2026-03-12T00:00:00Z",
+    "version": "1.0"
+  }
+}
+

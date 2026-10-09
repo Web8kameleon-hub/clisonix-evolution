@@ -1,0 +1,64 @@
+# Clisonix Binary Schema - Time Response
+# Version: 1.0
+# Magic: CLSN
+
+name: TimeResponse
+version: 1
+type_id: 0x03
+
+fields:
+  - name: type
+    type: uint8
+    offset: 0
+    description: "Message type (0x03 = time)"
+  
+  - name: timestamp
+    type: uint64
+    offset: 1
+    description: "Unix timestamp in microseconds"
+  
+  - name: year
+    type: uint16
+    offset: 9
+    description: "Year"
+  
+  - name: month
+    type: uint8
+    offset: 11
+    description: "Month (1-12)"
+  
+  - name: day
+    type: uint8
+    offset: 12
+    description: "Day (1-31)"
+  
+  - name: hour
+    type: uint8
+    offset: 13
+    description: "Hour (0-23)"
+  
+  - name: minute
+    type: uint8
+    offset: 14
+    description: "Minute (0-59)"
+  
+  - name: second
+    type: uint8
+    offset: 15
+    description: "Second (0-59)"
+  
+  - name: microsecond
+    type: uint32
+    offset: 16
+    description: "Microseconds"
+  
+  - name: timezone_len
+    type: uint8
+    offset: 20
+    description: "Timezone string length"
+  
+  - name: timezone
+    type: string
+    offset: 21
+    length_field: timezone_len
+    description: "Timezone name"

@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  sofia-chemistry-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-sofia-chemistry
+    environment:
+      LAB_ID: "Sofia_Chemistry"
+      LAB_TYPE: "Chemistry"
+      LAB_NAME: "Sofia Chemistry Lab"
+      LAB_FUNCTION: "Chemical Research & Material Science"
+      API_KEY: "sekret-real"
+    ports:
+      - "8114:8100"
+    volumes:
+      - ../data/sofia-chemistry:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

@@ -1,0 +1,288 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# DOCKERFILE.LAB - Generic Laboratory Container
+# ═══════════════════════════════════════════════════════════════════════════════
+# 
+# This Dockerfile creates a generic laboratory container that can be configured
+# via environment variables for any of the 23 city-named laboratories.
+#
+# Environment Variables:
+#   LAB_ID       - Laboratory identifier (e.g., "Elbasan_AI")
+#   LAB_NAME     - Human-readable name
+#   LAB_FUNCTION - Primary function description
+#   LAB_LOCATION - Geographic location
+#   LAB_TYPE     - Laboratory type (AI, Medical, IoT, etc.)
+#   LAB_PORT     - Port number (9101-9123)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+FROM python:3.13
+
+LABEL maintainer="Clisonix Cloud Team"
+LABEL description="Generic Laboratory Container for 23 City Labs"
+LABEL version="1.0.0"
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first for caching
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY ocean-core/laboratories.py ./
+COPY data_sources/ ./data_sources/
+
+# Create the laboratory service
+COPY <<EOF /app/lab_service.py
+"""
+Generic Laboratory Service - Configurable via Environment Variables
+Supports all 23 city-named laboratories in the Clisonix network.
+"""
+
+import os
+import time
+import logging
+from datetime import datetime, timezone
+from typing import Dict, Any, List, Optional
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("LabService")
+
+# Configuration from environment
+LAB_ID = os.getenv("LAB_ID", "Generic_Lab")
+LAB_NAME = os.getenv("LAB_NAME", "Generic Laboratory")
+LAB_FUNCTION = os.getenv("LAB_FUNCTION", "Research & Development")
+LAB_LOCATION = os.getenv("LAB_LOCATION", "Unknown")
+LAB_TYPE = os.getenv("LAB_TYPE", "Research")
+LAB_PORT = int(os.getenv("LAB_PORT", "9100"))
+
+# FastAPI app with v1 versioning
+app = FastAPI(
+    title=f"{LAB_NAME} API",
+    description=f"Laboratory Service for {LAB_ID} - {LAB_FUNCTION}",
+    version="1.0.0",
+    docs_url="/api/v1/docs",
+    redoc_url="/api/v1/redoc",
+    openapi_url="/api/v1/openapi.json"
+)
+
+# API Version prefix
+API_V1 = "/api/v1"
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+# Laboratory state
+START_TIME = time.time()
+research_projects: List[Dict[str, Any]] = []
+data_collections: List[Dict[str, Any]] = []
+active_experiments: List[Dict[str, Any]] = []
+
+
+class ResearchProject(BaseModel):
+    name: str
+    description: str
+    domain: str
+    priority: str = "normal"
+
+
+class DataCollection(BaseModel):
+    source: str
+    data_type: str
+    samples: int
+
+
+@app.get(f"{API_V1}/health")
+@app.get("/health")  # Also allow root for Docker healthcheck
+async def health_check():
+    """Health check endpoint"""
+    return {
+        "status": "healthy",
+        "lab_id": LAB_ID,
+        "lab_name": LAB_NAME,
+        "uptime_seconds": time.time() - START_TIME,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.get(f"{API_V1}/info")
+async def get_lab_info():
+    """Get laboratory information"""
+    return {
+        "lab_id": LAB_ID,
+        "name": LAB_NAME,
+        "function": LAB_FUNCTION,
+        "location": LAB_LOCATION,
+        "type": LAB_TYPE,
+        "port": LAB_PORT,
+        "status": "operational",
+        "uptime_percentage": 99.5,
+        "active_projects": len(research_projects),
+        "data_collections": len(data_collections),
+        "active_experiments": len(active_experiments),
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.get(f"{API_V1}/status")
+async def get_status():
+    """Get detailed laboratory status"""
+    return {
+        "lab_id": LAB_ID,
+        "status": "operational",
+        "metrics": {
+            "cpu_usage": 45.2,
+            "memory_usage": 62.1,
+            "storage_usage": 34.8,
+            "network_io": 1024.5
+        },
+        "projects": {
+            "total": len(research_projects),
+            "active": sum(1 for p in research_projects if p.get("status") == "active"),
+            "completed": sum(1 for p in research_projects if p.get("status") == "completed")
+        },
+        "data_quality_score": 0.95,
+        "last_sync": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.post(f"{API_V1}/projects")
+async def create_project(project: ResearchProject):
+    """Create a new research project"""
+    new_project = {
+        "id": f"proj_{len(research_projects) + 1:04d}",
+        "name": project.name,
+        "description": project.description,
+        "domain": project.domain,
+        "priority": project.priority,
+        "status": "active",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "lab_id": LAB_ID
+    }
+    research_projects.append(new_project)
+    logger.info(f"[{LAB_ID}] Created project: {project.name}")
+    return new_project
+
+
+@app.get(f"{API_V1}/projects")
+async def list_projects():
+    """List all research projects"""
+    return {
+        "lab_id": LAB_ID,
+        "total": len(research_projects),
+        "projects": research_projects
+    }
+
+
+@app.post(f"{API_V1}/data/collect")
+async def collect_data(collection: DataCollection):
+    """Submit data collection"""
+    new_collection = {
+        "id": f"data_{len(data_collections) + 1:04d}",
+        "source": collection.source,
+        "data_type": collection.data_type,
+        "samples": collection.samples,
+        "collected_at": datetime.now(timezone.utc).isoformat(),
+        "lab_id": LAB_ID,
+        "quality_score": 0.92
+    }
+    data_collections.append(new_collection)
+    logger.info(f"[{LAB_ID}] Data collected from {collection.source}: {collection.samples} samples")
+    return new_collection
+
+
+@app.get(f"{API_V1}/data")
+async def list_data():
+    """List all data collections"""
+    return {
+        "lab_id": LAB_ID,
+        "total": len(data_collections),
+        "total_samples": sum(d.get("samples", 0) for d in data_collections),
+        "collections": data_collections
+    }
+
+
+@app.post(f"{API_V1}/experiments/start")
+async def start_experiment(config: Dict[str, Any]):
+    """Start a new experiment"""
+    experiment = {
+        "id": f"exp_{len(active_experiments) + 1:04d}",
+        "name": config.get("name", "Unnamed Experiment"),
+        "parameters": config.get("parameters", {}),
+        "status": "running",
+        "started_at": datetime.now(timezone.utc).isoformat(),
+        "lab_id": LAB_ID
+    }
+    active_experiments.append(experiment)
+    logger.info(f"[{LAB_ID}] Started experiment: {experiment['name']}")
+    return experiment
+
+
+@app.get(f"{API_V1}/experiments")
+async def list_experiments():
+    """List all experiments"""
+    return {
+        "lab_id": LAB_ID,
+        "total": len(active_experiments),
+        "running": sum(1 for e in active_experiments if e.get("status") == "running"),
+        "experiments": active_experiments
+    }
+
+
+@app.get(f"{API_V1}/analytics")
+async def get_analytics():
+    """Get laboratory analytics"""
+    return {
+        "lab_id": LAB_ID,
+        "lab_type": LAB_TYPE,
+        "analytics": {
+            "total_projects": len(research_projects),
+            "total_data_points": sum(d.get("samples", 0) for d in data_collections),
+            "total_experiments": len(active_experiments),
+            "success_rate": 0.87,
+            "avg_experiment_duration": 3600,
+            "data_quality_avg": 0.93
+        },
+        "trends": {
+            "projects_this_week": 3,
+            "data_collected_this_week": 15000,
+            "experiments_this_week": 5
+        },
+        "generated_at": datetime.now(timezone.utc).isoformat()
+    }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    logger.info(f"🔬 Starting {LAB_NAME} ({LAB_ID}) on port {LAB_PORT}")
+    logger.info(f"📍 Location: {LAB_LOCATION}")
+    logger.info(f"🧪 Function: {LAB_FUNCTION}")
+    uvicorn.run(app, host="0.0.0.0", port=LAB_PORT)
+EOF
+
+# Expose port (will be overridden by environment)
+EXPOSE 9100-9123
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:${LAB_PORT:-9100}/health || exit 1
+
+# Run the service
+CMD ["python", "lab_service.py"]

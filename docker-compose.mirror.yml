@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  mirror:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: clisonix-mirror
+    ports:
+      - "3050:3000"
+    environment:
+      NODE_ENV: production
+      API_INTERNAL_URL: https://www.clisonix.com
+      REPORTING_INTERNAL_URL: https://www.clisonix.com
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

@@ -1,0 +1,53 @@
+HTTP/1.1 200 OK
+Date: Fri, 01 May 2026 14:38:23 GMT
+Content-Type: text/plain; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Server: cloudflare
+vary: Accept-Encoding
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+x-dns-prefetch-control: off
+x-frame-options: DENY
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: accelerometer=(), autoplay=(), camera=(self), display-capture=(self), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(self), midi=(), payment=(), picture-in-picture=(self), publickey-credentials-get=(self), screen-wake-lock=(), sync-xhr=(self), usb=(), web-share=(), xr-spatial-tracking=()
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+cross-origin-opener-policy: same-origin
+cross-origin-resource-policy: same-site
+origin-agent-cluster: ?1
+x-permitted-cross-domain-policies: none
+Cache-Control: no-cache, no-store, must-revalidate, private
+content-security-policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; manifest-src 'self'; script-src 'self' 'nonce-rln2hKa8Wi3F2hxSYl2bYaqsqyi8zJVzRAO_jIXRVMg' 'strict-dynamic' https://vercel.live https://cdn.jsdelivr.net https://unpkg.com https://pagead2.googlesyndication.com; style-src 'self' 'nonce-rln2hKa8Wi3F2hxSYl2bYaqsqyi8zJVzRAO_jIXRVMg' https://fonts.googleapis.com; img-src 'self' data: blob: https://clisonix.com https://www.clisonix.com https://images.unsplash.com https://*.githubusercontent.com; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://clisonix.com https://www.clisonix.com https://api.clisonix.com https://*.clisonix.com wss://*.clisonix.com https://vercel.live; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; worker-src 'self' blob:; media-src 'self' data: blob:; script-src-attr 'none'; upgrade-insecure-requests; block-all-mixed-content; report-uri /api/csp-report; report-to csp-endpoint
+expires: 0
+pragma: no-cache
+reporting-endpoints: csp-endpoint="/api/csp-report"
+Set-Cookie: __Host-authjs.csrf-token=c6fe603c51834c5f5381794c536f656e50ac84dd9c3a2598981b60ddc4a67914%7C75a81a670219c9d1330092dbedf634fce9a0b8f2b56fd516f1cd3ddc640ceab3; Path=/; HttpOnly; Secure; SameSite=Lax
+Set-Cookie: __Secure-authjs.callback-url=https%3A%2F%2Fwww.clisonix.com; Path=/; HttpOnly; Secure; SameSite=Lax
+x-content-nonce: rln2hKa8Wi3F2hxSYl2bYaqsqyi8zJVzRAO_jIXRVMg
+x-defense-profile: default
+x-defense-timestamp: 2026-05-01T14:38:23.657Z
+x-download-options: noopen
+x-guardian-status: Active
+x-mirror-defense: Layer-7-Active
+x-security-level: Clisonix-Ultra-10/10
+x-xss-protection: 1; mode=block
+content-disposition: attachment; filename="curiosity-export-1777646303664.txt"
+x-export-error: Upstream did not return a binary export artifact. Document generation is available but file packaging is missing.
+x-export-fallback: local-transcript
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=nNGQ11Gyl5B%2BO6qD5sn3zIdbMuy%2BTz1MFQVOtREQRzJ2qhXAtR84yT%2F9s6mxYD%2FNxsWds5niARBZ%2BhEhreibxCuPNdKFzbJ03jmyRLLrSN%2Fv9Srn%2F8f8S98u%2Fy%2B2uRESaYHdHs%2B3sQbcdsrXWfc%3D"}]}
+cf-cache-status: DYNAMIC
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+CF-RAY: 9f4f8795ca4ff964-DUS
+alt-svc: h3=":443"; ma=86400
+
+Curiosity Ocean Conversation Export
+Timestamp: 2026-05-01T14:38:23.664Z
+Language: en
+
+Transcript:
+
+1. USER
+hello
+
+2. ASSISTANT
+hi

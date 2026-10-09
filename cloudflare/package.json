@@ -1,0 +1,26 @@
+{
+  "name": "clisonix-health-worker",
+  "version": "2.0.0",
+  "description": "Cloudflare Enterprise Zero-Trust Health Worker with RBAC for Clisonix Cloud",
+  "main": "health_worker.js",
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^4.80.0"
+  },
+  "keywords": [
+    "cloudflare",
+    "worker",
+    "health-check",
+    "zero-trust",
+    "rbac",
+    "monitoring"
+  ],
+  "dependencies": {
+    "jose": "^6.2.2"
+  }
+}

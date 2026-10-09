@@ -1,0 +1,192 @@
+{
+  "sessionId": "node_mkh3byj2",
+  "startedAt": "2026-01-16T16:26:18.639Z",
+  "duration": 0.001,
+  "results": {
+    "layers_checked": 12,
+    "npm_packages": 17,
+    "css_configs": 7,
+    "typescript_files": 15,
+    "components_found": 0
+  },
+  "layers": {
+    "1": {
+      "name": "Core",
+      "file": "layer1-core/index.ts",
+      "desc": "Core infrastructure & routing"
+    },
+    "2": {
+      "name": "DDoS Protection",
+      "file": "layer2-ddos/index.ts",
+      "desc": "Security & rate limiting"
+    },
+    "3": {
+      "name": "Mesh Network",
+      "file": "layer3-mesh/index.ts",
+      "desc": "Node orchestration & discovery"
+    },
+    "4": {
+      "name": "ALBA",
+      "file": "layer4-alba/index.ts",
+      "desc": "EEG streaming & neural data"
+    },
+    "5": {
+      "name": "ALBI",
+      "file": "layer5-albi/index.ts",
+      "desc": "Intelligence processing & NLP"
+    },
+    "6": {
+      "name": "JONA",
+      "file": "layer6-jona/index.ts",
+      "desc": "Supervision & ethics layer"
+    },
+    "7": {
+      "name": "Curiosity Ocean",
+      "file": "layer7-curiosity/index.ts",
+      "desc": "Knowledge exploration"
+    },
+    "8": {
+      "name": "Neuroacoustic",
+      "file": "layer8-neuroacoustic/index.ts",
+      "desc": "Audio-neural bridge"
+    },
+    "9": {
+      "name": "Memory",
+      "file": "layer9-memory/index.ts",
+      "desc": "State & session management"
+    },
+    "10": {
+      "name": "Quantum",
+      "file": "layer10-quantum/index.ts",
+      "desc": "Quantum simulation layer"
+    },
+    "11": {
+      "name": "AGI",
+      "file": "layer11-agi/index.ts",
+      "desc": "AGI governance & oversight"
+    },
+    "12": {
+      "name": "ASI",
+      "file": "layer12-asi/index.ts",
+      "desc": "ASI coordination & synthesis"
+    }
+  },
+  "npmPackages": {
+    "core": [
+      {
+        "name": "next",
+        "version": "^15.5.9",
+        "purpose": "React framework"
+      },
+      {
+        "name": "react",
+        "version": "^18.3.1",
+        "purpose": "UI library"
+      },
+      {
+        "name": "react-dom",
+        "version": "^18.3.1",
+        "purpose": "React DOM"
+      },
+      {
+        "name": "typescript",
+        "version": "^5.0.2",
+        "purpose": "Type safety"
+      }
+    ],
+    "styling": [
+      {
+        "name": "tailwindcss",
+        "version": "^3.4.18",
+        "purpose": "Utility-first CSS"
+      },
+      {
+        "name": "postcss",
+        "version": "^8.5.6",
+        "purpose": "CSS processing"
+      },
+      {
+        "name": "autoprefixer",
+        "version": "^10.4.22",
+        "purpose": "CSS prefixes"
+      },
+      {
+        "name": "@vanilla-extract/css",
+        "version": "^1.17.4",
+        "purpose": "CSS-in-TS"
+      }
+    ],
+    "ui": [
+      {
+        "name": "@radix-ui/react-slot",
+        "version": "^1.2.3",
+        "purpose": "UI primitives"
+      },
+      {
+        "name": "framer-motion",
+        "version": "^12.23.22",
+        "purpose": "Animations"
+      },
+      {
+        "name": "lucide-react",
+        "version": "^0.545.0",
+        "purpose": "Icons"
+      },
+      {
+        "name": "recharts",
+        "version": "^3.6.0",
+        "purpose": "Charts"
+      },
+      {
+        "name": "clsx",
+        "version": "^2.1.1",
+        "purpose": "Class utilities"
+      },
+      {
+        "name": "tailwind-merge",
+        "version": "^3.3.1",
+        "purpose": "Merge classes"
+      }
+    ],
+    "data": [
+      {
+        "name": "redis",
+        "version": "4.7.0",
+        "purpose": "Caching layer"
+      },
+      {
+        "name": "neo4j-driver",
+        "version": "^6.0.1",
+        "purpose": "Graph database"
+      },
+      {
+        "name": "zustand",
+        "version": "^5.0.8",
+        "purpose": "State management"
+      }
+    ]
+  },
+  "tailwindConfig": {
+    "theme": {
+      "extend": {
+        "colors": {
+          "clisonix-primary": "#6366f1",
+          "clisonix-secondary": "#8b5cf6",
+          "neural-blue": "#3b82f6",
+          "alba-green": "#10b981",
+          "albi-purple": "#8b5cf6",
+          "jona-gold": "#f59e0b",
+          "asi-red": "#ef4444"
+        },
+        "animation": {
+          "neural-pulse": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+          "layer-fade": "fadeIn 0.5s ease-out"
+        }
+      }
+    },
+    "plugins": [
+      "@tailwindcss/forms",
+      "@tailwindcss/typography"
+    ]
+  }
+}

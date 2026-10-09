@@ -1,0 +1,352 @@
+# ═══════════════════════════════════════════════════════════════════
+# OCEAN ORCHESTRATOR - SERVICES CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════
+# Add new services here - no code changes needed!
+# Just add the service and restart orchestrator.
+# ═══════════════════════════════════════════════════════════════════
+
+# Format for each service:
+# service_id:
+#   name: Human readable name
+#   host: Docker container name or hostname
+#   port: Service port
+#   endpoints:
+#     endpoint_name: /api/path
+#   capabilities: [list, of, capabilities]
+#   keywords: [words, that, trigger, this, service]
+#   priority: 1-10 (higher = preferred)
+#   timeout: seconds
+
+services:
+  # ═══════════════════════════════════════════════════════════════
+  # CORE AI SERVICES
+  # ═══════════════════════════════════════════════════════════════
+  ollama:
+    name: "Ollama LLM"
+    host: "clisonix-ollama"
+    port: 11434
+    endpoints:
+      chat: "/api/chat"
+      generate: "/api/generate"
+      models: "/api/tags"
+    health_path: "/api/tags"
+    capabilities: ["chat", "generate", "reasoning", "coding"]
+    keywords: ["chat", "ask", "explain", "help", "write", "code", "program"]
+    priority: 1
+    timeout: 300
+
+  # ═══════════════════════════════════════════════════════════════
+  # ASI TRINITY
+  # ═══════════════════════════════════════════════════════════════
+  alba:
+    name: "ALBA - Analytical Intelligence"
+    host: "clisonix-alba"
+    port: 5555
+    endpoints:
+      analyze: "/api/v1/analyze"
+      signals: "/api/v1/signals"
+      patterns: "/api/v1/patterns"
+      eeg: "/api/v1/eeg"
+    capabilities: ["eeg", "analysis", "signals", "patterns", "brain"]
+    keywords: ["eeg", "brain", "signal", "analyze", "pattern", "neural", "tru"]
+    priority: 5
+
+  albi:
+    name: "ALBI - Creative Intelligence"
+    host: "clisonix-albi"
+    port: 6680
+    endpoints:
+      create: "/api/v1/create"
+      learn: "/api/v1/learn"
+      adapt: "/api/v1/adapt"
+    capabilities: ["creativity", "learning", "adaptation", "art"]
+    keywords: ["create", "learn", "creative", "generate", "adapt", "art", "design"]
+    priority: 4
+
+  jona:
+    name: "JONA - Emotional Intelligence"
+    host: "clisonix-jona"
+    port: 6681
+    endpoints:
+      emotion: "/api/v1/emotion"
+      sentiment: "/api/v1/sentiment"
+      empathy: "/api/v1/empathy"
+    capabilities: ["emotion", "sentiment", "empathy", "psychology"]
+    keywords: ["emotion", "feel", "sentiment", "mood", "empathy", "ndjenjë"]
+    priority: 4
+
+  asi:
+    name: "ASI - Superintelligence Core"
+    host: "clisonix-asi"
+    port: 8020
+    endpoints:
+      think: "/api/v1/think"
+      reason: "/api/v1/reason"
+      solve: "/api/v1/solve"
+    capabilities: ["reasoning", "superintelligence", "complex_tasks", "planning"]
+    keywords: ["reason", "think", "complex", "solve", "superintelligent", "plan"]
+    priority: 5
+
+  # ═══════════════════════════════════════════════════════════════
+  # BINARY ALGEBRA
+  # ═══════════════════════════════════════════════════════════════
+  liam:
+    name: "LIAM - Binary Algebra"
+    host: "clisonix-liam"
+    port: 8025
+    endpoints:
+      encode: "/api/v1/encode"
+      decode: "/api/v1/decode"
+      transform: "/api/v1/transform"
+    capabilities: ["binary", "encoding", "compression", "algebra"]
+    keywords: ["binary", "encode", "decode", "compress", "algebra"]
+    priority: 3
+
+  alda:
+    name: "ALDA - Data Algebra"
+    host: "clisonix-alda"
+    port: 8026
+    endpoints:
+      process: "/api/v1/process"
+      transform: "/api/v1/transform"
+    capabilities: ["data", "algebra", "transformation"]
+    keywords: ["data", "transform", "algebra", "process"]
+    priority: 3
+
+  # ═══════════════════════════════════════════════════════════════
+  # TRANSLATION & LANGUAGE
+  # ═══════════════════════════════════════════════════════════════
+  translation:
+    name: "Translation Node"
+    host: "clisonix-translation"
+    port: 8036
+    endpoints:
+      translate: "/api/v1/translate"
+      detect: "/api/v1/detect"
+      languages: "/api/v1/languages"
+    capabilities: ["translation", "language_detection", "72_languages"]
+    keywords: ["translate", "language", "përkthe", "gjuhë", "english", "albanian", "german"]
+    priority: 6
+
+  # ═══════════════════════════════════════════════════════════════
+  # DOMAIN-SPECIFIC SERVICES
+  # ═══════════════════════════════════════════════════════════════
+  aviation:
+    name: "Aviation Weather"
+    host: "clisonix-aviation"
+    port: 8040
+    endpoints:
+      metar: "/api/v1/metar"
+      taf: "/api/v1/taf"
+      notam: "/api/v1/notam"
+      airport: "/api/v1/airport"
+    capabilities: ["metar", "taf", "aviation_weather", "notam"]
+    keywords: ["metar", "taf", "aviation", "flight", "airport", "notam", "pilot", "weather"]
+    priority: 7
+
+  fitness:
+    name: "Fitness Dashboard"
+    host: "clisonix-api"
+    port: 8000
+    endpoints:
+      workout: "/fitness/workouts"
+      biometrics: "/fitness/biometrics"
+      coaching: "/fitness/coaching"
+    capabilities: ["fitness", "workout", "biometrics", "coaching"]
+    keywords: ["fitness", "workout", "exercise", "gym", "health", "stërvitje"]
+    priority: 5
+
+  weather:
+    name: "Weather Service"
+    host: "clisonix-api"
+    port: 8000
+    endpoints:
+      current: "/weather/current"
+      forecast: "/weather/forecast"
+    capabilities: ["weather", "forecast", "climate"]
+    keywords: ["weather", "forecast", "temperature", "rain", "moti", "temperatura"]
+    priority: 5
+
+  crypto:
+    name: "Crypto Dashboard"
+    host: "clisonix-api"
+    port: 8000
+    endpoints:
+      prices: "/crypto/prices"
+      portfolio: "/crypto/portfolio"
+    capabilities: ["crypto", "bitcoin", "ethereum", "trading"]
+    keywords: ["crypto", "bitcoin", "ethereum", "btc", "eth", "price", "trading"]
+    priority: 5
+
+  # ═══════════════════════════════════════════════════════════════
+  # BUSINESS SERVICES
+  # ═══════════════════════════════════════════════════════════════
+  reporting:
+    name: "Reporting Service"
+    host: "clisonix-reporting"
+    port: 8010
+    endpoints:
+      generate: "/api/v1/report"
+      export: "/api/v1/export"
+      templates: "/api/v1/templates"
+    capabilities: ["reports", "pdf", "export", "analytics"]
+    keywords: ["report", "pdf", "export", "raport", "analytics", "document"]
+    priority: 4
+
+  excel:
+    name: "Excel Service"
+    host: "clisonix-excel"
+    port: 8011
+    endpoints:
+      process: "/api/v1/process"
+      analyze: "/api/v1/analyze"
+      convert: "/api/v1/convert"
+    capabilities: ["excel", "spreadsheet", "data", "csv"]
+    keywords: ["excel", "spreadsheet", "csv", "data", "tabela", "xlsx"]
+    priority: 4
+
+  behavioral:
+    name: "Behavioral Science"
+    host: "clisonix-behavioral"
+    port: 8012
+    endpoints:
+      analyze: "/api/v1/analyze"
+      predict: "/api/v1/predict"
+      profile: "/api/v1/profile"
+    capabilities: ["behavior", "psychology", "prediction", "profiling"]
+    keywords: ["behavior", "psychology", "predict", "human", "sjellje", "profile"]
+    priority: 4
+
+  economy:
+    name: "Economy Service"
+    host: "clisonix-economy"
+    port: 8013
+    endpoints:
+      market: "/api/v1/market"
+      forecast: "/api/v1/forecast"
+      indicators: "/api/v1/indicators"
+    capabilities: ["economy", "market", "forecast", "indicators"]
+    keywords: ["economy", "market", "stock", "finance", "ekonomi", "gdp"]
+    priority: 4
+
+  # ═══════════════════════════════════════════════════════════════
+  # LABORATORIES (23 city-named)
+  # ═══════════════════════════════════════════════════════════════
+  lab_tirana:
+    name: "Tirana Lab"
+    host: "clisonix-lab-tirana"
+    port: 9001
+    endpoints:
+      experiment: "/api/v1/experiment"
+      research: "/api/v1/research"
+    capabilities: ["research", "experiments", "albania"]
+    keywords: ["tirana", "lab", "research", "experiment"]
+    priority: 2
+
+  lab_berlin:
+    name: "Berlin Lab"
+    host: "clisonix-lab-berlin"
+    port: 9002
+    endpoints:
+      experiment: "/api/v1/experiment"
+      research: "/api/v1/research"
+    capabilities: ["research", "experiments", "germany"]
+    keywords: ["berlin", "lab", "research", "germany"]
+    priority: 2
+
+  lab_rome:
+    name: "Rome Lab"
+    host: "clisonix-lab-rome"
+    port: 9003
+    endpoints:
+      experiment: "/api/v1/experiment"
+      research: "/api/v1/research"
+    capabilities: ["research", "experiments", "italy"]
+    keywords: ["rome", "lab", "research", "italy"]
+    priority: 2
+
+  # ═══════════════════════════════════════════════════════════════
+  # AGIEM DATASOURCES
+  # ═══════════════════════════════════════════════════════════════
+  agiem:
+    name: "AGIEM Core"
+    host: "clisonix-agiem"
+    port: 8050
+    endpoints:
+      query: "/api/v1/query"
+      ingest: "/api/v1/ingest"
+      analyze: "/api/v1/analyze"
+    capabilities: ["data_collection", "aggregation", "analytics"]
+    keywords: ["agiem", "data", "collect", "aggregate", "ingest"]
+    priority: 3
+
+  agiem_europe:
+    name: "AGIEM Europe Datasource"
+    host: "clisonix-agiem-europe"
+    port: 8051
+    endpoints:
+      query: "/api/v1/query"
+      stats: "/api/v1/stats"
+    capabilities: ["europe", "eu_data", "statistics"]
+    keywords: ["europe", "eu", "european", "eurostat"]
+    priority: 3
+
+  agiem_americas:
+    name: "AGIEM Americas Datasource"
+    host: "clisonix-agiem-americas"
+    port: 8052
+    endpoints:
+      query: "/api/v1/query"
+      stats: "/api/v1/stats"
+    capabilities: ["americas", "usa", "latin_america"]
+    keywords: ["america", "usa", "us", "latin", "brazil", "canada"]
+    priority: 3
+
+  agiem_asia:
+    name: "AGIEM Asia Datasource"
+    host: "clisonix-agiem-asia"
+    port: 8053
+    endpoints:
+      query: "/api/v1/query"
+      stats: "/api/v1/stats"
+    capabilities: ["asia", "china", "japan", "korea"]
+    keywords: ["asia", "china", "japan", "korea", "asian"]
+    priority: 3
+
+# ═══════════════════════════════════════════════════════════════════
+# ROUTING RULES
+# ═══════════════════════════════════════════════════════════════════
+routing:
+  # Default service if no keywords match
+  default: "ollama"
+  
+  # Fallback chain - try these in order if primary fails
+  fallback_chain:
+    - "ollama"
+    - "asi"
+    - "alba"
+  
+  # Maximum number of services to try before giving up
+  max_retries: 3
+  
+  # Enable/disable health-based routing
+  health_aware: true
+
+# ═══════════════════════════════════════════════════════════════════
+# GLOBAL SETTINGS
+# ═══════════════════════════════════════════════════════════════════
+settings:
+  # Health check interval (seconds)
+  health_check_interval: 30
+  
+  # Default timeout for service calls (seconds)
+  default_timeout: 30
+  
+  # Enable request logging
+  request_logging: true
+  
+  # Enable metrics collection
+  metrics_enabled: true
+  
+  # Cache TTL for service discovery (seconds)
+  discovery_cache_ttl: 60

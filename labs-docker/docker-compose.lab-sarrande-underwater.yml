@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  sarrande-underwater-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-sarrande-underwater
+    environment:
+      LAB_ID: "Sarrande_Underwater"
+      LAB_TYPE: "Underwater"
+      LAB_NAME: "Sarandë Underwater Lab"
+      LAB_FUNCTION: "Underwater Exploration & Deep Sea Research"
+      API_KEY: "sekret-real"
+    ports:
+      - "8107:8100"
+    volumes:
+      - ../data/sarrande-underwater:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

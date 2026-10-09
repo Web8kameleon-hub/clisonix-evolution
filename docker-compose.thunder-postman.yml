@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  thunder-postman:
+    image: postman/newman:alpine
+    container_name: clisonix-thunder-postman
+    volumes:
+      - ./postman-collections:/etc/newman
+      - ./.thunder-client:/etc/thunder
+    command: ["newman", "run", "/etc/newman/POSTMAN_AI_AGENTS_COLLECTION.json"]
+    restart: unless-stopped
+    # No port exposed; runs jobs and exits

@@ -1,0 +1,6 @@
+# Ocean Core self-learning and evolution data
+# This directory persists between rebuilds
+# Do not commit to version control
+
+*
+!.gitignore

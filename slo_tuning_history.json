@@ -1,0 +1,619 @@
+[
+  {
+    "tuned_at": "2026-03-16T20:13:36.634099+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 60,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:13:36.637656+00:00",
+    "adjustments": [
+      {
+        "parameter": "probe_count",
+        "previous": 2,
+        "current": 4,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "ocean_core"
+      },
+      {
+        "parameter": "probe_count",
+        "previous": 4,
+        "current": 6,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "backend_api"
+      },
+      {
+        "parameter": "cycle_interval",
+        "previous": 60,
+        "current": 30,
+        "reason": "open incident detected — accelerating cycle",
+        "service": "global"
+      }
+    ],
+    "config_after": {
+      "probe_count": 6,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:13:36.639765+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:13:36.641702+00:00",
+    "adjustments": [
+      {
+        "parameter": "probe_count",
+        "previous": 2,
+        "current": 4,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "ocean_core"
+      }
+    ],
+    "config_after": {
+      "probe_count": 4,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:13:36.643535+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:13:36.644198+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:13:36.644965+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:13:36.646844+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:13:36.648635+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:14:47.817787+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:14:47.820643+00:00",
+    "adjustments": [
+      {
+        "parameter": "probe_count",
+        "previous": 2,
+        "current": 4,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "ocean_core"
+      },
+      {
+        "parameter": "probe_count",
+        "previous": 4,
+        "current": 6,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "backend_api"
+      }
+    ],
+    "config_after": {
+      "probe_count": 6,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:14:47.822507+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:14:47.824592+00:00",
+    "adjustments": [
+      {
+        "parameter": "probe_count",
+        "previous": 2,
+        "current": 4,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "ocean_core"
+      }
+    ],
+    "config_after": {
+      "probe_count": 4,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:14:47.826546+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:14:47.827339+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:14:47.828171+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:14:47.830831+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:14:47.832782+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:45:25.790783+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:45:25.794003+00:00",
+    "adjustments": [
+      {
+        "parameter": "probe_count",
+        "previous": 2,
+        "current": 4,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "ocean_core"
+      },
+      {
+        "parameter": "probe_count",
+        "previous": 4,
+        "current": 6,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "backend_api"
+      }
+    ],
+    "config_after": {
+      "probe_count": 6,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:45:25.795910+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:45:25.798222+00:00",
+    "adjustments": [
+      {
+        "parameter": "probe_count",
+        "previous": 2,
+        "current": 4,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "ocean_core"
+      }
+    ],
+    "config_after": {
+      "probe_count": 4,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:45:25.800137+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:45:25.801029+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:45:25.802048+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:45:25.804015+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-16T20:45:25.806004+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T05:22:22.326933+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T05:22:22.330560+00:00",
+    "adjustments": [
+      {
+        "parameter": "probe_count",
+        "previous": 2,
+        "current": 4,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "ocean_core"
+      },
+      {
+        "parameter": "probe_count",
+        "previous": 4,
+        "current": 6,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "backend_api"
+      }
+    ],
+    "config_after": {
+      "probe_count": 6,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T05:22:22.332569+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T05:22:22.334977+00:00",
+    "adjustments": [
+      {
+        "parameter": "probe_count",
+        "previous": 2,
+        "current": 4,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "ocean_core"
+      }
+    ],
+    "config_after": {
+      "probe_count": 4,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T05:22:22.337102+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T05:22:22.338184+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T05:22:22.339228+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T05:22:22.341418+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T05:22:22.343668+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T06:46:51.525383+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T06:46:51.529223+00:00",
+    "adjustments": [
+      {
+        "parameter": "probe_count",
+        "previous": 2,
+        "current": 4,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "ocean_core"
+      },
+      {
+        "parameter": "probe_count",
+        "previous": 4,
+        "current": 6,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "backend_api"
+      }
+    ],
+    "config_after": {
+      "probe_count": 6,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T06:46:51.531483+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T06:46:51.534661+00:00",
+    "adjustments": [
+      {
+        "parameter": "probe_count",
+        "previous": 2,
+        "current": 4,
+        "reason": "avg_burn_rate=2000.0× ≥ 14.0× (SEV-1 range) — need more probe samples",
+        "service": "ocean_core"
+      }
+    ],
+    "config_after": {
+      "probe_count": 4,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T06:46:51.537003+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T06:46:51.548967+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T06:46:51.550198+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T06:46:51.552707+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  },
+  {
+    "tuned_at": "2026-03-18T06:46:51.555086+00:00",
+    "adjustments": [],
+    "config_after": {
+      "probe_count": 2,
+      "probe_timeout": 1,
+      "cycle_interval": 30,
+      "chat_rate_limit": 40,
+      "stream_timeout_base_s": 90.0
+    }
+  }
+]

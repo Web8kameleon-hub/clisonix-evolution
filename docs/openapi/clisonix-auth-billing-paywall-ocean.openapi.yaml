@@ -1,0 +1,671 @@
+openapi: 3.0.3
+info:
+  title: Clisonix Critical APIs
+  version: 2026-05-05
+  description: |
+    Detailed API contract for production-critical routes:
+    authentication, billing, paywall, and Curiosity Ocean.
+servers:
+  - url: http://127.0.0.1:3000
+    description: Web gateway (Next.js API routes)
+  - url: http://127.0.0.1:8000
+    description: API gateway (Fastify/FastAPI auth endpoints)
+  - url: http://127.0.0.1:8020
+    description: Blog paywall service (compose default)
+  - url: http://127.0.0.1:8030
+    description: Ocean core service
+tags:
+  - name: Auth
+  - name: Billing
+  - name: Paywall
+  - name: Ocean
+
+paths:
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Register user
+      description: Proxies registration to user-management service.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "200":
+          description: Registration accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthProxyResponse"
+        "400":
+          description: Validation or business error
+        "503":
+          description: User-management unavailable
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Login user
+      description: Proxies login to user-management service.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Login response from user-management
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthProxyResponse"
+        "401":
+          description: Invalid credentials
+        "503":
+          description: User-management unavailable
+
+  /auth/me:
+    get:
+      tags: [Auth]
+      summary: Get current user
+      responses:
+        "200":
+          description: Current user profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthProxyResponse"
+        "401":
+          description: Not authenticated
+
+  /api/billing/plans:
+    get:
+      tags: [Billing]
+      summary: List Stripe plans
+      description: Returns recurring active Stripe prices with product metadata.
+      responses:
+        "200":
+          description: Plan list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlansResponse"
+        "503":
+          description: Stripe not configured
+
+  /api/billing/checkout:
+    post:
+      tags: [Billing]
+      summary: Create Stripe checkout session
+      description: Requires authenticated user context.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckoutRequest"
+      responses:
+        "200":
+          description: Checkout session created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckoutResponse"
+        "400":
+          description: Invalid plan or payload
+        "401":
+          description: Authentication required
+        "503":
+          description: Stripe not configured
+
+  /api/billing/subscription:
+    get:
+      tags: [Billing]
+      summary: Get active subscription
+      responses:
+        "200":
+          description: Subscription details or null
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionGetResponse"
+        "401":
+          description: Authentication required
+    delete:
+      tags: [Billing]
+      summary: Cancel subscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelSubscriptionRequest"
+      responses:
+        "200":
+          description: Cancellation accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+        "400":
+          description: Invalid request or Stripe not configured
+
+  /api/billing/payment-methods:
+    get:
+      tags: [Billing]
+      summary: List saved payment methods
+      responses:
+        "200":
+          description: Payment methods
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentMethodsResponse"
+        "401":
+          description: Authentication required
+    put:
+      tags: [Billing]
+      summary: Set default payment method
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetDefaultPaymentMethodRequest"
+      responses:
+        "200":
+          description: Default updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+    delete:
+      tags: [Billing]
+      summary: Remove payment method
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemovePaymentMethodRequest"
+      responses:
+        "200":
+          description: Payment method removed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  /api/billing/portal:
+    post:
+      tags: [Billing]
+      summary: Create Stripe billing portal session
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                returnUrl:
+                  type: string
+                  format: uri
+      responses:
+        "200":
+          description: Portal session URL
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BillingPortalResponse"
+        "401":
+          description: Authentication required
+        "404":
+          description: Stripe customer not found
+
+  /api/billing/webhook:
+    post:
+      tags: [Billing]
+      summary: Handle Stripe webhook events
+      description: Requires Stripe signature and configured webhook secret.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Event processed
+        "400":
+          description: Signature invalid or Stripe not configured
+
+  /api/ocean:
+    get:
+      tags: [Ocean]
+      summary: Curiosity Ocean status
+      responses:
+        "200":
+          description: Service status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OceanStatusResponse"
+    post:
+      tags: [Ocean]
+      summary: Curiosity Ocean query
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OceanRequest"
+      responses:
+        "200":
+          description: Curiosity answer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OceanResponse"
+        "400":
+          description: Missing question
+        "503":
+          description: Ocean upstream unavailable
+
+  /api/tiers:
+    get:
+      tags: [Paywall]
+      summary: List paywall tiers
+      servers:
+        - url: http://127.0.0.1:8020
+      responses:
+        "200":
+          description: Tier matrix
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaywallTiersResponse"
+
+  /api/subscribe:
+    post:
+      tags: [Paywall]
+      summary: Create paywall subscription checkout session
+      servers:
+        - url: http://127.0.0.1:8020
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaywallSubscribeRequest"
+      responses:
+        "200":
+          description: Checkout URL created
+        "400":
+          description: Invalid tier or Stripe error
+
+  /api/access/check:
+    post:
+      tags: [Paywall]
+      summary: Check content access by article and token/email
+      servers:
+        - url: http://127.0.0.1:8020
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaywallAccessRequest"
+      responses:
+        "200":
+          description: Access decision
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaywallAccessResponse"
+
+components:
+  schemas:
+    RegisterRequest:
+      type: object
+      required: [email, username, password]
+      properties:
+        email:
+          type: string
+          format: email
+        username:
+          type: string
+        password:
+          type: string
+
+    LoginRequest:
+      type: object
+      required: [username_or_email, password]
+      properties:
+        username_or_email:
+          type: string
+        password:
+          type: string
+
+    AuthProxyResponse:
+      type: object
+      additionalProperties: true
+      description: Pass-through response from user-management service.
+
+    Plan:
+      type: object
+      properties:
+        id:
+          type: string
+        productId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        interval:
+          type: string
+          enum: [month, year]
+        priceId:
+          type: string
+        features:
+          type: array
+          items:
+            type: string
+        popular:
+          type: boolean
+        rank:
+          type: integer
+
+    PlansResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            plans:
+              type: array
+              items:
+                $ref: "#/components/schemas/Plan"
+
+    CheckoutRequest:
+      type: object
+      required: [priceId]
+      properties:
+        priceId:
+          type: string
+        successUrl:
+          type: string
+          format: uri
+        cancelUrl:
+          type: string
+          format: uri
+
+    CheckoutResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            sessionId:
+              type: string
+            url:
+              type: string
+              format: uri
+
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+        plan:
+          type: string
+        status:
+          type: string
+        currentPeriodStart:
+          type: string
+          format: date-time
+        currentPeriodEnd:
+          type: string
+          format: date-time
+        cancelAtPeriodEnd:
+          type: boolean
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        interval:
+          type: string
+
+    SubscriptionGetResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            subscription:
+              oneOf:
+                - $ref: "#/components/schemas/Subscription"
+                - type: "null"
+            message:
+              type: string
+
+    CancelSubscriptionRequest:
+      type: object
+      required: [subscriptionId]
+      properties:
+        subscriptionId:
+          type: string
+        cancelAtPeriodEnd:
+          type: boolean
+          default: true
+
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [card]
+        last4:
+          type: string
+        brand:
+          type: string
+        expiryMonth:
+          type: integer
+          nullable: true
+        expiryYear:
+          type: integer
+          nullable: true
+        isDefault:
+          type: boolean
+
+    PaymentMethodsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            paymentMethods:
+              type: array
+              items:
+                $ref: "#/components/schemas/PaymentMethod"
+            total:
+              type: integer
+            message:
+              type: string
+
+    SetDefaultPaymentMethodRequest:
+      type: object
+      required: [paymentMethodId]
+      properties:
+        paymentMethodId:
+          type: string
+
+    RemovePaymentMethodRequest:
+      type: object
+      required: [paymentMethodId]
+      properties:
+        paymentMethodId:
+          type: string
+
+    BillingPortalResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+            customerId:
+              type: string
+
+    MessageResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+
+    OceanRequest:
+      type: object
+      properties:
+        question:
+          type: string
+          description: Preferred field name.
+        message:
+          type: string
+          description: Alias accepted by API.
+        language:
+          type: string
+        curiosity_level:
+          type: string
+          default: curious
+        messages:
+          type: array
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+              content:
+                type: string
+
+    OceanResponse:
+      type: object
+      properties:
+        ocean_response:
+          type: string
+        persona_answer:
+          type: string
+          nullable: true
+        persona_used:
+          type: string
+        rabbit_holes:
+          type: array
+          items:
+            type: string
+        next_questions:
+          type: array
+          items:
+            type: string
+        key_findings:
+          type: array
+          items:
+            type: string
+        mode:
+          type: string
+        source:
+          type: string
+        confidence:
+          type: number
+          format: float
+        intent:
+          type: string
+
+    OceanStatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        service:
+          type: string
+        message:
+          type: string
+        features:
+          type: array
+          items:
+            type: string
+
+    PaywallSubscribeRequest:
+      type: object
+      required: [email, tier]
+      properties:
+        email:
+          type: string
+          format: email
+        tier:
+          type: string
+          enum: [free, basic, pro, pro_yearly]
+
+    PaywallTiersResponse:
+      type: object
+      properties:
+        cancel_anytime:
+          type: boolean
+        tiers:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              name:
+                type: string
+              price:
+                type: number
+              currency:
+                type: string
+              billing_interval:
+                type: string
+              features:
+                type: array
+                items:
+                  type: string
+
+    PaywallAccessRequest:
+      type: object
+      required: [article_id, user_token]
+      properties:
+        article_id:
+          type: string
+        user_token:
+          type: string
+
+    PaywallAccessResponse:
+      type: object
+      additionalProperties: true

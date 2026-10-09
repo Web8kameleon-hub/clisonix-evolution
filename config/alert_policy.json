@@ -1,0 +1,26 @@
+{
+  "critical": {
+    "send": true,
+    "cooldown_sec": 0,
+    "digest": null,
+    "description": "Always send immediately - service down, security breach, etc."
+  },
+  "warning": {
+    "send": true,
+    "cooldown_sec": 1800,
+    "digest": null,
+    "description": "Send with 30min cooldown - CPU high, memory leak, queue backlog"
+  },
+  "info": {
+    "send": false,
+    "cooldown_sec": 0,
+    "digest": "daily",
+    "description": "Collect for daily digest - deployments, learning stats, billing"
+  },
+  "debug": {
+    "send": false,
+    "cooldown_sec": 0,
+    "digest": null,
+    "description": "Never send to Slack - only logs"
+  }
+}

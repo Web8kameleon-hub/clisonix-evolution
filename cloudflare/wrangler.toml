@@ -1,0 +1,30 @@
+# Cloudflare Worker — Clisonix Edge Health Monitor
+# =================================================
+# Deploy with:   wrangler deploy
+# Test locally:  wrangler dev
+
+name        = "clisonix-health-worker"
+main        = "health_worker.js"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Run every 5 minutes from Cloudflare's global PoP network
+[triggers]
+crons = ["*/5 * * * *"]
+
+# ─── AI Binding (Cloudflare Workers AI) ───────────────────────────────────────
+[ai]
+binding = "AI"
+
+# ─── Environment Variables ────────────────────────────────────────────────────
+[vars]
+TEAM_DOMAIN = "https://clisonix-com-pages.cloudflareaccess.com"
+POLICY_AUD  = "ce5b2e959a1c6659b8558714ec426be76ec3ba8f6b51a9a0b5fbc3f6e1ba00ae"
+
+# ─── Secrets (set via: wrangler secret put <SECRET_NAME>) ─────────────────────
+# SLACK_WEBHOOK_URL  — Slack incoming-webhook for #critical-alerts
+# HETZNER_IP         — Production server IP (default: 46.225.14.83)
+#
+# Set from CLI:
+#   wrangler secret put SLACK_WEBHOOK_URL
+#   wrangler secret put HETZNER_IP

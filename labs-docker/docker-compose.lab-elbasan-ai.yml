@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  elbasan-ai-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-elbasan-ai
+    environment:
+      LAB_ID: "Elbasan_AI"
+      LAB_TYPE: "AI"
+      LAB_NAME: "Elbasan AI Lab"
+      LAB_FUNCTION: "Artificial Intelligence & Machine Learning"
+      API_KEY: "sekret-real"
+    ports:
+      - "8101:8100"
+    volumes:
+      - ../data/elbasan-ai:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

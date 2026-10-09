@@ -1,0 +1,13 @@
+EvidenceID,ControlArea,RequiredEvidence,CurrentState,Owner,SourcePath,ReadyForAudit,Notes
+E-001,Policy,Information Security Policy approved,Pending,,docs/legal/de/iso27001-stage1/ISO27001_SCOPE_AND_BOUNDARY.md,No,
+E-002,Asset inventory,Asset register with owners,Pending,,,No,
+E-003,Access control,Access matrix and quarterly review records,Pending,,,No,
+E-004,Cryptography,Key management and rotation records,Pending,,,No,
+E-005,Operations security,Backup and restore test records,Pending,,,No,
+E-006,Logging and monitoring,Security monitoring evidence and alert handling,Partial,,sdist/clx-ai/clx/security/monitor.py,No,
+E-007,Incident management,Incident response plan and drill records,Pending,,,No,
+E-008,Secure development,Code review standard and dependency scanning reports,Pending,,,No,
+E-009,Change management,Release approval and rollback evidence,Pending,,,No,
+E-010,Supplier management,Cloud/provider assessment records,Pending,,,No,
+E-011,Business continuity,BCP/DR test report,Pending,,,No,
+E-012,Compliance,Legal and contractual requirement register,Pending,,,No,

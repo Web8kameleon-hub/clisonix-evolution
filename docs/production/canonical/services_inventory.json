@@ -1,0 +1,902 @@
+[
+  {
+    "compose_file": "apps/android-clisonix/docker-compose.android.yml",
+    "service": "android-build"
+  },
+  {
+    "compose_file": "apps/android-clisonix/docker-compose.android.yml",
+    "service": "android-test"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "adaptive-router"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "agent-telemetry"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "agiem"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "alba"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "alba-idle"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "albi"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "alda"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "alphabet-layers"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "analytics"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "api"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "asi"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "aviation"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "behavioral"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "billing-core"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "blerina"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "blog-paywall"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "blog_publisher"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "cognitive-engine"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "cycle-engine"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "datasource-africa"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "datasource-americas"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "datasource-antarctica"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "datasource-asia"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "datasource-central-asia"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "datasource-europe"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "datasource-india"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "datasource-oceania"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "dr_albana"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "eap-engine"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "economy"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "excel"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "grafana"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "health-monitor"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "jaeger"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "jona"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "knowledge"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-athens"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-beograd"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-bucharest"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-budapest"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-cairo"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-durres"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-elbasan"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-istanbul"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-jerusalem"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-korce"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-kostur"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-ljubljana"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-prague"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-prishtina"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-rome"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-saranda"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-shkoder"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-sofia"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-tirana"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-vienna"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-vlore"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-zagreb"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lab-zurich"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "lagter"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "liam"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "linkedin-poster"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "loki"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "marketplace"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "matia"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "minio"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "mongodb"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "multi-tenant"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "neo4j"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "neurosonix"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "newsroom"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "nginx"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "ocean-core"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "ocean-core-blerina"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "ocean-core-strict-chat"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "ocean-mission-service"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "ollama"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "ollama-multi-api"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "openmind"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "orchestra"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "personas"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "postgres"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "prometheus"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "quantum"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "redis"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "regulatory-service"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "reporting"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "saas"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "saas-api"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "saas-orchestrator"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "shopping-therapy"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "tempo"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "user-management"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "userdata"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "victoriametrics"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "video-generator"
+  },
+  {
+    "compose_file": "docker-compose.75-services.yml",
+    "service": "web"
+  },
+  {
+    "compose_file": "docker-compose.ads.yml",
+    "service": "ads-core"
+  },
+  {
+    "compose_file": "docker-compose.aiagi-upstream.yml",
+    "service": "kloud-upstream-runtime"
+  },
+  {
+    "compose_file": "docker-compose.bind.yml",
+    "service": "alba"
+  },
+  {
+    "compose_file": "docker-compose.bind.yml",
+    "service": "albi"
+  },
+  {
+    "compose_file": "docker-compose.bind.yml",
+    "service": "albi-user"
+  },
+  {
+    "compose_file": "docker-compose.bind.yml",
+    "service": "api"
+  },
+  {
+    "compose_file": "docker-compose.bind.yml",
+    "service": "jona"
+  },
+  {
+    "compose_file": "docker-compose.bind.yml",
+    "service": "kloud-bridge"
+  },
+  {
+    "compose_file": "docker-compose.bind.yml",
+    "service": "kloud-upstream-runtime"
+  },
+  {
+    "compose_file": "docker-compose.bind.yml",
+    "service": "ocean-core"
+  },
+  {
+    "compose_file": "docker-compose.bind.yml",
+    "service": "ocean-core-blerina"
+  },
+  {
+    "compose_file": "docker-compose.bind.yml",
+    "service": "ocean-core-multimodal"
+  },
+  {
+    "compose_file": "docker-compose.bind.yml",
+    "service": "ocean-core-strict-chat"
+  },
+  {
+    "compose_file": "docker-compose.bind.yml",
+    "service": "web"
+  },
+  {
+    "compose_file": "docker-compose.lean.yml",
+    "service": "api"
+  },
+  {
+    "compose_file": "docker-compose.lean.yml",
+    "service": "nginx"
+  },
+  {
+    "compose_file": "docker-compose.lean.yml",
+    "service": "ocean-core"
+  },
+  {
+    "compose_file": "docker-compose.lean.yml",
+    "service": "ollama"
+  },
+  {
+    "compose_file": "docker-compose.lean.yml",
+    "service": "postgres"
+  },
+  {
+    "compose_file": "docker-compose.lean.yml",
+    "service": "redis"
+  },
+  {
+    "compose_file": "docker-compose.lean.yml",
+    "service": "web"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "adaptive-router"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "agent-telemetry"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "agiem"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "alba"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "alba-idle"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "albi"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "albi-user"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "alda"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "alphabet-layers"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "analytics"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "api"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "asi"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "aviation"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "behavioral"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "biometric"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "blerina"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "blog-paywall"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "blog_publisher"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "cognitive-engine"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "content-factory"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "crawler"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "curiosity"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "cycle"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "datasource-africa"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "datasource-americas"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "datasource-antarctica"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "datasource-asia"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "datasource-central-asia"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "datasource-europe"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "datasource-india"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "datasource-oceania"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "developer-portal"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "dr_albana"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "economy"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "excel"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "grafana"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "intelligence-lab"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "jaeger"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "jona"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "kitchen-worker"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "kloud-bridge"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "kloud-rust-node"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "kloud-upstream-runtime"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "knowledge"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-athens"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-beograd"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-bucharest"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-budapest"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-cairo"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-durres"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-elbasan"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-istanbul"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-jerusalem"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-korce"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-kostur"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-ljubljana"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-prague"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-prishtina"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-rome"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-saranda"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-shkoder"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-sofia"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-tirana"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-vienna"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-vlore"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-zagreb"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lab-zurich"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "lagter"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "liam"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "linkedin-poster"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "loki"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "marketplace"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "matia"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "minio"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "mongodb"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "multi-tenant"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "neo4j"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "neurosonix"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "newsroom"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "nginx"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "ocean-core"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "ocean-core-blerina"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "ocean-core-multimodal"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "ocean-core-strict-chat"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "ocean-mission-service"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "ollama"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "ollama-multi-api"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "openmind"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "orchestra"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "personas"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "postgres"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "prometheus"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "redis"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "regulatory-service"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "reporting"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "saas"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "saas-api"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "shopping-therapy"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "tempo"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "usage-analytics"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "user-management"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "userdata"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "victoriametrics"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "video-generator"
+  },
+  {
+    "compose_file": "docker-compose.yml",
+    "service": "web"
+  }
+]

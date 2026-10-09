@@ -1,0 +1,34 @@
+# Clisonix Binary Schema - Calculate Response
+# Version: 1.0
+# Magic: CLSN
+
+name: CalculateResponse
+version: 1
+type_id: 0x01
+
+fields:
+  - name: type
+    type: uint8
+    offset: 0
+    description: "Message type identifier"
+  
+  - name: result
+    type: double
+    offset: 1
+    description: "Calculation result (IEEE754)"
+  
+  - name: expression_len
+    type: uint16
+    offset: 9
+    description: "Length of expression string"
+  
+  - name: expression
+    type: string
+    offset: 11
+    length_field: expression_len
+    description: "Original expression"
+  
+  - name: duration_us
+    type: uint32
+    offset: dynamic
+    description: "Calculation duration in microseconds"

@@ -1,0 +1,121 @@
+{
+  "seo": {
+    "enabled": true,
+    "aggressiveMode": true,
+    "title": "Clisonix | Official Neural Intelligence Platform",
+    "description": "Official Clisonix neural intelligence platform for AI workflows, EEG analysis, research tools, and real-time analytics.",
+    "keywords": [
+      "Clisonix",
+      "Clisonix Cloud",
+      "www.clisonix.com",
+      "neural intelligence platform",
+      "AI platform",
+      "industrial intelligence",
+      "machine learning",
+      "real-time analytics",
+      "EEG analysis",
+      "research workflows",
+      "behavioral science",
+      "developer platform"
+    ],
+    "canonical": "https://www.clisonix.com",
+    "ogImage": "https://www.clisonix.com/icons/icon-512x512.png",
+    "ogImageAlt": "Clisonix neural intelligence platform",
+    "ogImageWidth": 512,
+    "ogImageHeight": 512,
+    "ogType": "website",
+    "robots": {
+      "index": true,
+      "follow": true,
+      "maxImagePreview": "large",
+      "maxSnippet": -1,
+      "maxVideoPreview": -1
+    },
+    "verification": {
+      "google": "",
+      "bing": "",
+      "yandex": ""
+    },
+    "sitemaps": ["https://www.clisonix.com/sitemap.xml"],
+    "socialMediaProfiles": {
+      "github": "https://github.com/Web8kameleon-hub/clisonix.com"
+    },
+    "alternateLanguages": [
+      {
+        "lang": "en",
+        "href": "https://www.clisonix.com"
+      }
+    ],
+    "structuredData": {
+      "enableOrganization": true,
+      "enableSoftwareApplication": true,
+      "enableBreadcrumbs": true,
+      "enableFAQ": true
+    },
+    "performance": {
+      "minifyCss": true,
+      "minifyJavaScript": true,
+      "lazyLoadImages": true,
+      "generateWebP": true
+    }
+  },
+  "pages": [
+    {
+      "url": "/",
+      "priority": 1.0,
+      "changeFrequency": "daily"
+    },
+    {
+      "url": "/modules",
+      "priority": 0.9,
+      "changeFrequency": "weekly"
+    },
+    {
+      "url": "/platform",
+      "priority": 0.9,
+      "changeFrequency": "weekly"
+    },
+    {
+      "url": "/why-clisonix",
+      "priority": 0.8,
+      "changeFrequency": "weekly"
+    },
+    {
+      "url": "/pricing",
+      "priority": 0.8,
+      "changeFrequency": "weekly"
+    },
+    {
+      "url": "/security",
+      "priority": 0.7,
+      "changeFrequency": "monthly"
+    },
+    {
+      "url": "/status",
+      "priority": 0.7,
+      "changeFrequency": "daily"
+    },
+    {
+      "url": "/developers",
+      "priority": 0.8,
+      "changeFrequency": "weekly"
+    },
+    {
+      "url": "/company",
+      "priority": 0.9,
+      "changeFrequency": "monthly"
+    },
+    {
+      "url": "/faq",
+      "priority": 0.85,
+      "changeFrequency": "weekly"
+    }
+  ],
+  "monitoring": {
+    "trackRankings": true,
+    "trackBacklinks": true,
+    "trackKeywordPositions": true,
+    "generateWeeklyReport": true,
+    "alertOnRankingDrop": true
+  }
+}

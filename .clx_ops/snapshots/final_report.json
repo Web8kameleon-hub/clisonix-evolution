@@ -1,0 +1,188 @@
+{
+  "started_at": "2026-05-07T19:01:27.780755+00:00",
+  "ended_at": "2026-05-07T19:03:28.515220+00:00",
+  "mode": "high-ops-10min-phases",
+  "interval_seconds": 120,
+  "duration_seconds": 14400,
+  "max_cycles": 1,
+  "workspace_root": "C:\\Users\\Admin\\Desktop\\Clisonix-cloud",
+  "memory_dir": ".clx_ops_smoke_quick",
+  "cycles_completed": 1,
+  "totals": {
+    "local_learned": 21,
+    "code_learned": 10,
+    "git_learned": 4,
+    "api_attempted": 30,
+    "api_learned": 6,
+    "api_errors": 24
+  },
+  "knowledge_entries": 41,
+  "learning_stats": {
+    "total_learned": 41,
+    "avg_confidence": 0.9031707317073171,
+    "total_queries_this_session": 0,
+    "learning_active": false
+  },
+  "top_sources": [
+    [
+      "local:importlib.metadata",
+      1
+    ],
+    [
+      "local:requirements-autolearning.txt",
+      1
+    ],
+    [
+      "local:requirements-dev.txt",
+      1
+    ],
+    [
+      "local:requirements-ocean.txt",
+      1
+    ],
+    [
+      "local:requirements-test.txt",
+      1
+    ],
+    [
+      "local:requirements.txt",
+      1
+    ],
+    [
+      "local:9999/requirements.txt",
+      1
+    ],
+    [
+      "local:airflow/requirements.txt",
+      1
+    ],
+    [
+      "local:excel-core/requirements.txt",
+      1
+    ],
+    [
+      "local:hybrid_saas_platform/requirements.txt",
+      1
+    ],
+    [
+      "local:kloud-soc-clean/requirements-autolearning.txt",
+      1
+    ],
+    [
+      "local:kloud-soc-clean/requirements-dev.txt",
+      1
+    ],
+    [
+      "local:kloud-soc-clean/requirements-ocean.txt",
+      1
+    ],
+    [
+      "local:kloud-soc-clean/requirements-test.txt",
+      1
+    ],
+    [
+      "local:kloud-soc-clean/requirements.txt",
+      1
+    ],
+    [
+      "local:ocean-core/requirements-internal-core.txt",
+      1
+    ],
+    [
+      "local:ocean-core/requirements-internal-eeg.txt",
+      1
+    ],
+    [
+      "local:ocean-core/requirements-internal-llm.txt",
+      1
+    ],
+    [
+      "local:ocean-core/requirements-internal-multimodal.txt",
+      1
+    ],
+    [
+      "local:ocean-core/requirements-lite.txt",
+      1
+    ],
+    [
+      "local:ocean-core/requirements.txt",
+      1
+    ],
+    [
+      "code:ocean-core/xlc/xlc_alphabet.py",
+      1
+    ],
+    [
+      "code:ocean-core/xlc/xlc_codec.py",
+      1
+    ],
+    [
+      "code:ocean-core/xlc/xlc_command_router.py",
+      1
+    ],
+    [
+      "code:ocean-core/xlc/xlc_inspector.py",
+      1
+    ],
+    [
+      "code:ocean-core/xlc/xlc_key.py",
+      1
+    ],
+    [
+      "code:ocean-core/xlc/xlc_layers.py",
+      1
+    ],
+    [
+      "code:ocean-core/xlc/xlc_lock.py",
+      1
+    ],
+    [
+      "code:ocean-core/xlc/__init__.py",
+      1
+    ],
+    [
+      "code:ocean-core/xlc_security_runtime.py",
+      1
+    ],
+    [
+      "code:services/crawler/api.py",
+      1
+    ],
+    [
+      "git:status --short --branch",
+      1
+    ],
+    [
+      "git:log --oneline --decorate -n 120",
+      1
+    ],
+    [
+      "git:branch -vv",
+      1
+    ],
+    [
+      "git:remote -v",
+      1
+    ],
+    [
+      "GET https://www.clisonix.com/api/health",
+      1
+    ],
+    [
+      "GET https://www.clisonix.com/api/ocean/health",
+      1
+    ],
+    [
+      "GET https://www.clisonix.com/api/ocean/status",
+      1
+    ],
+    [
+      "GET https://www.clisonix.com/api/curiosity/health",
+      1
+    ],
+    [
+      "GET https://www.clisonix.com/api/auth/providers",
+      1
+    ]
+  ]
+}

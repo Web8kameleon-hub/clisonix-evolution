@@ -1,0 +1,48 @@
+# Clisonix Proprietary Commercial License
+
+Copyright (c) 2026 Ledjan Ahmati / Clisonix Cloud.
+All rights reserved.
+
+## 1. Scope
+This repository and its contents are proprietary software and documentation.
+No right is granted to copy, modify, redistribute, sublicense, publish,
+or create derivative works except as explicitly permitted in a written agreement.
+
+## 2. Limited Access and Use
+Access to source code, binaries, APIs, and documentation is provided solely
+for evaluation, integration, or operation of authorized Clisonix services.
+Any commercial use requires an active subscription, contract, or written approval.
+
+## 3. Restrictions
+Without prior written permission, you may not:
+- copy or redistribute source code or assets;
+- reverse engineer, decompile, disassemble, or derive internals;
+- remove legal notices or attribution;
+- bypass technical controls, metering, quotas, or billing mechanisms;
+- offer competing services based on Clisonix proprietary technology.
+
+## 4. SDK and Third-Party Exceptions
+Some subdirectories may include separate license files (for example SDK clients).
+Where a separate license is present in a subdirectory, that subdirectory license
+controls only for files within that subdirectory.
+
+## 5. API and Pay-Per-Use
+Production API usage is governed by the public Terms of Use, pricing pages,
+and/or enterprise contracts. Metered usage, rate limits, and service limits apply.
+
+## 6. Trademarks
+"Clisonix", "Kloud Bridge", "Ocean Core", and related names and logos are
+proprietary marks and may not be used without written authorization.
+
+## 7. Warranty Disclaimer
+The software and documentation are provided "as is" and "as available", without
+warranty of any kind, express or implied, to the maximum extent permitted by law.
+
+## 8. Limitation of Liability
+To the maximum extent permitted by law, the licensors are not liable for indirect,
+incidental, special, consequential, or exemplary damages.
+
+## 9. Contact
+Licensing, partnerships, and legal inquiries:
+clisonix@pm.me
+

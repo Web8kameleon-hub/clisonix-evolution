@@ -1,0 +1,118 @@
+# Clisonix Binary Schema - Binary Signal Response
+# Version: 1.0
+# Magic: BSIG
+# Created: 2026-02-23
+
+name: BinarySignalResponse
+version: 1
+type_id: 0x32
+
+header:
+  - name: magic
+    type: bytes[4]
+    value: "BSIG"
+    description: "Binary Signal magic"
+  
+  - name: version
+    type: uint8
+    description: "Protocol version"
+  
+  - name: timestamp
+    type: uint64
+    description: "Timestamp in microseconds"
+  
+  - name: flags
+    type: uint8
+    description: "Flags (bit 0=compressed, bit 1=is_result, bit 2=has_edges)"
+
+operations:
+  - AND: 0
+  - OR: 1
+  - XOR: 2
+  - NOT: 3
+  - SHIFT: 4
+  - CORRELATE: 5
+  - CONVOLVE: 6
+  - CLOCK: 7
+  - PULSE: 8
+
+fields:
+  - name: operation
+    type: uint8
+    optional: true
+    description: "Operation code (if this is a result)"
+  
+  - name: name
+    type: string[32]
+    description: "Signal name"
+  
+  - name: sample_rate
+    type: uint32
+    description: "Sample rate in Hz"
+  
+  - name: length
+    type: uint32
+    description: "Number of samples"
+  
+  - name: duration_ms
+    type: float
+    description: "Duration in milliseconds"
+  
+  - name: energy
+    type: uint32
+    description: "Number of 1-bits (sum of samples)"
+  
+  - name: duty_cycle
+    type: float
+    description: "Duty cycle (0.0 to 1.0)"
+  
+  - name: frequency_hz
+    type: float
+    description: "Estimated frequency in Hz"
+  
+  - name: edges_count
+    type: uint16
+    description: "Number of edges (rising + falling)"
+  
+  - name: rising_edges
+    type: uint16
+    description: "Number of rising edges"
+  
+  - name: falling_edges
+    type: uint16
+    description: "Number of falling edges"
+  
+  - name: data_format
+    type: uint8
+    description: "Data format (0=raw_bits, 1=packed_bytes, 2=rle)"
+  
+  - name: data_length
+    type: uint32
+    description: "Length of samples data in bytes"
+  
+  - name: samples
+    type: bytes
+    length_field: data_length
+    description: "Sample data (packed 8 bits per byte)"
+  
+  - name: edges
+    type: bytes
+    optional: true
+    description: "Edge positions (array of uint32 + type byte)"
+  
+  - name: duration_ns
+    type: uint32
+    description: "Operation duration in nanoseconds"
+  
+  - name: error_code
+    type: uint8
+    description: "Error code (0=success)"
+
+checksum:
+  type: crc32
+  fields: all
+  description: "CRC32 for integrity"
+
+# Run-Length Encoding (RLE) format for data:
+# Each entry: 1 byte value (0 or 1) + 2 bytes count
+# More efficient for signals with long runs

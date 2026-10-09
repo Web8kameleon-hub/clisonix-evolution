@@ -1,0 +1,72 @@
+#!/usr/bin/env pwsh
+# ?? Clisonix Production Server Diagnostic Script
+# Author: Ledjan Ahmati - ABA GmbH
+# Server: 46.225.14.83
+
+param(
+    [string]$Server = "root@46.225.14.83",
+    [switch]$Verbose
+)
+
+$SSH_KEY = "$env:USERPROFILE\.ssh\hetzner_deploy_key"
+
+Write-Host "????????????????????????????????????????????????" -ForegroundColor Cyan
+Write-Host "?? Clisonix Production Server Diagnostic" -ForegroundColor Green
+Write-Host "   Server: $Server" -ForegroundColor Yellow
+Write-Host "   Time: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" -ForegroundColor Gray
+Write-Host "????????????????????????????????????????????????" -ForegroundColor Cyan
+Write-Host ""
+
+# Diagnostic commands
+$DIAGNOSTIC_COMMANDS = @"
+echo '????????????????????????????????????????????????'
+echo '?? CLISONIX PRODUCTION DIAGNOSTIC'
+echo '????????????????????????????????????????????????'
+echo ''
+
+echo '?? 1. DOCKER CONTAINERS STATUS:'
+docker ps -a --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}' | grep -E 'ocean|ollama|NAMES'
+echo ''
+
+echo '?? 2. OCEAN-CORE LOGS (Last 30 lines):'
+docker logs clisonix-ocean-core --tail 30 2>&1
+echo ''
+
+echo '?? 3. OLLAMA MODELS:'
+docker exec clisonix-ollama ollama list 2>&1 || echo '? Ollama failed'
+echo ''
+
+echo '?? 4. SERVER RESOURCES:'
+free -h | grep -E 'Mem|Swap'
+echo ''
+
+echo '?? 5. CONTAINER STATS:'
+docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}' | grep -E 'ocean|ollama|NAME'
+echo ''
+
+echo '?? 6. HEALTH CHECKS:'
+curl -s http://localhost:8030/health 2>&1 || echo '? Ocean-Core failed'
+echo ''
+curl -s http://localhost:11434/api/tags 2>&1 || echo '? Ollama failed'
+echo ''
+
+echo '?? 7. RECENT ERRORS:'
+docker logs clisonix-ocean-core 2>&1 | grep -i 'error\|exception' | tail -10
+echo ''
+
+echo '? DIAGNOSTIC COMPLETE'
+"@
+
+# Execute
+try {
+    if (Test-Path $SSH_KEY) {
+        Write-Host "?? Using SSH key" -ForegroundColor Green
+        ssh -i $SSH_KEY -o StrictHostKeyChecking=no $Server $DIAGNOSTIC_COMMANDS
+    } else {
+        Write-Host "?? Default SSH auth" -ForegroundColor Yellow
+        ssh -o StrictHostKeyChecking=no $Server $DIAGNOSTIC_COMMANDS
+    }
+} catch {
+    Write-Host "? Error: $_" -ForegroundColor Red
+    exit 1
+}

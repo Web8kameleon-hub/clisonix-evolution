@@ -1,0 +1,25 @@
+FROM python:3.13
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY services/content-factory/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir uvicorn fastapi pydantic requests
+
+# Copy the LinkedIn auto poster
+COPY services/content-factory/linkedin_auto_poster.py .
+
+# Create data directory
+RUN mkdir -p /app/data
+
+# Expose API port
+EXPOSE 8007
+
+# Start API server (includes continuous posting loop via startup task)
+CMD ["python", "linkedin_auto_poster.py", "serve"]

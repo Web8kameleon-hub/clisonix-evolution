@@ -1,0 +1,5227 @@
+{
+  "entries": [
+    {
+      "id": "know_35098982",
+      "question": "AI vs human intelligence",
+      "sources_consulted": 13,
+      "avg_relevance": 0.74,
+      "total_data_points": 257,
+      "learned_at": "2026-01-24T18:42:36.675462",
+      "times_used": 9
+    },
+    {
+      "id": "know_5b4dbb90",
+      "question": "Compare art with science",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 315,
+      "learned_at": "2026-01-24T18:42:38.127395",
+      "times_used": 6
+    },
+    {
+      "id": "know_18ed02b1",
+      "question": "How to understand knowledge?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 324,
+      "learned_at": "2026-01-24T18:42:39.498196",
+      "times_used": 1
+    },
+    {
+      "id": "know_4cb63eb4",
+      "question": "How much is viruses?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 215,
+      "learned_at": "2026-01-24T18:42:40.564898",
+      "times_used": 1
+    },
+    {
+      "id": "know_9403ea34",
+      "question": "Is Polkadot real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 357,
+      "learned_at": "2026-01-24T18:42:41.866299",
+      "times_used": 3
+    },
+    {
+      "id": "know_10c3b0e7",
+      "question": "Current multiverse status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 356,
+      "learned_at": "2026-01-24T18:42:43.324899",
+      "times_used": 1
+    },
+    {
+      "id": "know_d4b9914d",
+      "question": "Explain algorithms",
+      "sources_consulted": 13,
+      "avg_relevance": 0.5,
+      "total_data_points": 339,
+      "learned_at": "2026-01-24T18:42:44.143360",
+      "times_used": 1
+    },
+    {
+      "id": "know_db65354a",
+      "question": "Current consciousness status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 375,
+      "learned_at": "2026-01-24T18:42:45.209528",
+      "times_used": 1
+    },
+    {
+      "id": "know_75b12b7a",
+      "question": "Why is reality important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 287,
+      "learned_at": "2026-01-24T18:42:46.187760",
+      "times_used": 1
+    },
+    {
+      "id": "know_3ae996ce",
+      "question": "Compare logic with intuition",
+      "sources_consulted": 13,
+      "avg_relevance": 0.56,
+      "total_data_points": 439,
+      "learned_at": "2026-01-24T18:42:47.224367",
+      "times_used": 7
+    },
+    {
+      "id": "know_3a77f9be",
+      "question": "What's the difference between AI and human intelligence?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 407,
+      "learned_at": "2026-01-24T18:42:48.562456",
+      "times_used": 8
+    },
+    {
+      "id": "know_959a7cb3",
+      "question": "Compare science with philosophy",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 300,
+      "learned_at": "2026-01-24T18:42:49.982258",
+      "times_used": 3
+    },
+    {
+      "id": "know_cbbd9a37",
+      "question": "Explain statistics",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 348,
+      "learned_at": "2026-01-24T18:42:51.020872",
+      "times_used": 4
+    },
+    {
+      "id": "know_2ee62b80",
+      "question": "Why is Mars important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 291,
+      "learned_at": "2026-01-24T18:42:52.007827",
+      "times_used": 1
+    },
+    {
+      "id": "know_90924dfc",
+      "question": "Current stars status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.54,
+      "total_data_points": 300,
+      "learned_at": "2026-01-24T18:42:52.985025",
+      "times_used": 1
+    },
+    {
+      "id": "know_ed670846",
+      "question": "Is satellites real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.56,
+      "total_data_points": 374,
+      "learned_at": "2026-01-24T18:42:54.307183",
+      "times_used": 2
+    },
+    {
+      "id": "know_a562b576",
+      "question": "What is evolution?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 282,
+      "learned_at": "2026-01-24T18:42:55.650321",
+      "times_used": 1
+    },
+    {
+      "id": "know_28f0781c",
+      "question": "What causes calculus?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 299,
+      "learned_at": "2026-01-24T18:42:56.625142",
+      "times_used": 3
+    },
+    {
+      "id": "know_573efe60",
+      "question": "What is the price of brain?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 344,
+      "learned_at": "2026-01-24T18:42:59.108939",
+      "times_used": 2
+    },
+    {
+      "id": "know_b6b30ce8",
+      "question": "How does photosynthesis work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 339,
+      "learned_at": "2026-01-24T18:43:00.531171",
+      "times_used": 1
+    },
+    {
+      "id": "know_52d3fb15",
+      "question": "Why is Litecoin important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 297,
+      "learned_at": "2026-01-24T18:43:02.825265",
+      "times_used": 1
+    },
+    {
+      "id": "know_433012c6",
+      "question": "What's the difference between nature and nurture?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 410,
+      "learned_at": "2026-01-24T18:43:03.958658",
+      "times_used": 9
+    },
+    {
+      "id": "know_3ed2bfdd",
+      "question": "What is the price of evolution?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 302,
+      "learned_at": "2026-01-24T18:43:05.344436",
+      "times_used": 1
+    },
+    {
+      "id": "know_632e6b08",
+      "question": "Is 5G real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.49,
+      "total_data_points": 319,
+      "learned_at": "2026-01-24T18:43:08.247001",
+      "times_used": 2
+    },
+    {
+      "id": "know_8503c675",
+      "question": "Can Dogecoin exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 366,
+      "learned_at": "2026-01-24T18:43:09.385838",
+      "times_used": 2
+    },
+    {
+      "id": "know_4534d12f",
+      "question": "Define Polkadot",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 328,
+      "learned_at": "2026-01-24T18:43:10.737675",
+      "times_used": 1
+    },
+    {
+      "id": "know_13148077",
+      "question": "matter vs energy",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 423,
+      "learned_at": "2026-01-24T18:43:11.610940",
+      "times_used": 9
+    },
+    {
+      "id": "know_49bf3a54",
+      "question": "Current algorithms status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 433,
+      "learned_at": "2026-01-24T18:43:13.004946",
+      "times_used": 2
+    },
+    {
+      "id": "know_244c102c",
+      "question": "Current interest rates status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 307,
+      "learned_at": "2026-01-24T18:43:13.909933",
+      "times_used": 2
+    },
+    {
+      "id": "know_5475ede9",
+      "question": "Why is existence important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 361,
+      "learned_at": "2026-01-24T18:43:15.158984",
+      "times_used": 3
+    },
+    {
+      "id": "know_735c2168",
+      "question": "What is Cosmos?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 377,
+      "learned_at": "2026-01-24T18:43:16.407060",
+      "times_used": 1
+    },
+    {
+      "id": "know_e4e6549c",
+      "question": "How does consciousness work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 338,
+      "learned_at": "2026-01-24T18:43:17.704058",
+      "times_used": 1
+    },
+    {
+      "id": "know_853a9ac3",
+      "question": "How much is asteroids?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 395,
+      "learned_at": "2026-01-24T18:43:18.747279",
+      "times_used": 2
+    },
+    {
+      "id": "know_ad396a6d",
+      "question": "What is topology?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.75,
+      "total_data_points": 260,
+      "learned_at": "2026-01-24T18:43:20.961956",
+      "times_used": 1
+    },
+    {
+      "id": "know_9a26b12f",
+      "question": "Can consciousness exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 358,
+      "learned_at": "2026-01-24T18:43:22.020112",
+      "times_used": 1
+    },
+    {
+      "id": "know_0508142a",
+      "question": "How to understand vaccines?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 351,
+      "learned_at": "2026-01-24T18:43:23.481542",
+      "times_used": 1
+    },
+    {
+      "id": "know_b372d9ea",
+      "question": "What's the difference between art and science?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 287,
+      "learned_at": "2026-01-24T18:43:24.886225",
+      "times_used": 3
+    },
+    {
+      "id": "know_735aabd4",
+      "question": "How does reality work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 215,
+      "learned_at": "2026-01-24T18:43:25.802401",
+      "times_used": 2
+    },
+    {
+      "id": "know_58ea32f5",
+      "question": "Is calculus real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 431,
+      "learned_at": "2026-01-24T18:43:26.923771",
+      "times_used": 1
+    },
+    {
+      "id": "know_c08d76fe",
+      "question": "How much is chaos theory?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 314,
+      "learned_at": "2026-01-24T18:43:28.141561",
+      "times_used": 1
+    },
+    {
+      "id": "know_a753f924",
+      "question": "How does evolution work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 335,
+      "learned_at": "2026-01-24T18:43:29.210209",
+      "times_used": 3
+    },
+    {
+      "id": "know_ccd5081f",
+      "question": "Explain truth",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 250,
+      "learned_at": "2026-01-24T18:43:30.760023",
+      "times_used": 1
+    },
+    {
+      "id": "know_91d9d669",
+      "question": "Can neurons exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 356,
+      "learned_at": "2026-01-24T18:43:31.911103",
+      "times_used": 2
+    },
+    {
+      "id": "know_49376fdc",
+      "question": "How much is DNA?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 415,
+      "learned_at": "2026-01-24T18:43:32.727969",
+      "times_used": 2
+    },
+    {
+      "id": "know_a9769fe6",
+      "question": "What is the price of trade?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 410,
+      "learned_at": "2026-01-24T18:43:35.338925",
+      "times_used": 1
+    },
+    {
+      "id": "know_150e93f1",
+      "question": "art vs science",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 344,
+      "learned_at": "2026-01-24T18:43:36.571438",
+      "times_used": 6
+    },
+    {
+      "id": "know_7b630b18",
+      "question": "What's the difference between quantum and classical computing?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 341,
+      "learned_at": "2026-01-24T18:43:37.921610",
+      "times_used": 7
+    },
+    {
+      "id": "know_0482a095",
+      "question": "Latest free will news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.56,
+      "total_data_points": 314,
+      "learned_at": "2026-01-24T18:43:39.007032",
+      "times_used": 2
+    },
+    {
+      "id": "know_c6bb6da5",
+      "question": "Bitcoin vs Ethereum",
+      "sources_consulted": 13,
+      "avg_relevance": 0.76,
+      "total_data_points": 302,
+      "learned_at": "2026-01-24T18:43:40.068911",
+      "times_used": 8
+    },
+    {
+      "id": "know_57483271",
+      "question": "Can truth exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 347,
+      "learned_at": "2026-01-24T18:43:41.397400",
+      "times_used": 1
+    },
+    {
+      "id": "know_c5badad5",
+      "question": "Why is algorithms important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.58,
+      "total_data_points": 209,
+      "learned_at": "2026-01-24T18:43:43.819815",
+      "times_used": 1
+    },
+    {
+      "id": "know_1c6ff2a6",
+      "question": "Can black holes exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 267,
+      "learned_at": "2026-01-24T18:43:45.206638",
+      "times_used": 1
+    },
+    {
+      "id": "know_8888b650",
+      "question": "Define ethics",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 352,
+      "learned_at": "2026-01-24T18:43:46.122416",
+      "times_used": 1
+    },
+    {
+      "id": "know_b631f36d",
+      "question": "How much is antimatter?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.56,
+      "total_data_points": 412,
+      "learned_at": "2026-01-24T18:43:48.837846",
+      "times_used": 3
+    },
+    {
+      "id": "know_a17b71c1",
+      "question": "How much is AI?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 320,
+      "learned_at": "2026-01-24T18:43:50.088157",
+      "times_used": 2
+    },
+    {
+      "id": "know_8c44a066",
+      "question": "What causes neurons?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 307,
+      "learned_at": "2026-01-24T18:43:51.091243",
+      "times_used": 1
+    },
+    {
+      "id": "know_c34c9515",
+      "question": "How does Chainlink work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 321,
+      "learned_at": "2026-01-24T18:43:52.352640",
+      "times_used": 1
+    },
+    {
+      "id": "know_120f0521",
+      "question": "What causes truth?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 341,
+      "learned_at": "2026-01-24T18:43:53.556913",
+      "times_used": 3
+    },
+    {
+      "id": "know_ec343f8f",
+      "question": "How to understand dark matter?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 318,
+      "learned_at": "2026-01-24T18:43:54.933288",
+      "times_used": 2
+    },
+    {
+      "id": "know_16edfae7",
+      "question": "Explain reality",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 339,
+      "learned_at": "2026-01-24T18:43:56.176804",
+      "times_used": 1
+    },
+    {
+      "id": "know_929bf356",
+      "question": "Is knowledge real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 276,
+      "learned_at": "2026-01-24T18:43:57.097370",
+      "times_used": 1
+    },
+    {
+      "id": "know_0403b245",
+      "question": "What is trade?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 352,
+      "learned_at": "2026-01-24T18:43:58.516670",
+      "times_used": 1
+    },
+    {
+      "id": "know_eafc2ba9",
+      "question": "How much is prime numbers?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 306,
+      "learned_at": "2026-01-24T18:43:59.695319",
+      "times_used": 1
+    },
+    {
+      "id": "know_faac5207",
+      "question": "What is the meaning of quantum mechanics?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 223,
+      "learned_at": "2026-01-24T18:44:01.062387",
+      "times_used": 1
+    },
+    {
+      "id": "know_5c7eb2a8",
+      "question": "Define infinity",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 407,
+      "learned_at": "2026-01-24T18:44:02.065013",
+      "times_used": 2
+    },
+    {
+      "id": "know_0e18d67a",
+      "question": "What causes gravity?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 339,
+      "learned_at": "2026-01-24T18:44:02.803815",
+      "times_used": 1
+    },
+    {
+      "id": "know_1db671b9",
+      "question": "Current cryptocurrency markets status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 309,
+      "learned_at": "2026-01-24T18:44:04.145546",
+      "times_used": 2
+    },
+    {
+      "id": "know_46770bbe",
+      "question": "What is the meaning of neural networks?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 365,
+      "learned_at": "2026-01-24T18:44:05.417321",
+      "times_used": 1
+    },
+    {
+      "id": "know_51d362a8",
+      "question": "Latest Ethereum news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 334,
+      "learned_at": "2026-01-24T18:44:06.947720",
+      "times_used": 3
+    },
+    {
+      "id": "know_33714dad",
+      "question": "How to understand XRP?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 413,
+      "learned_at": "2026-01-24T18:44:07.870975",
+      "times_used": 1
+    },
+    {
+      "id": "know_cb1cc249",
+      "question": "What causes beauty?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 311,
+      "learned_at": "2026-01-24T18:44:09.038100",
+      "times_used": 1
+    },
+    {
+      "id": "know_b36bc50b",
+      "question": "Why is neural networks important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 336,
+      "learned_at": "2026-01-24T18:44:10.192412",
+      "times_used": 2
+    },
+    {
+      "id": "know_49f4c92d",
+      "question": "quantum vs classical computing",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 350,
+      "learned_at": "2026-01-24T18:44:11.185014",
+      "times_used": 5
+    },
+    {
+      "id": "know_3789daaa",
+      "question": "Can probability exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 326,
+      "learned_at": "2026-01-24T18:44:12.570129",
+      "times_used": 1
+    },
+    {
+      "id": "know_93039f8e",
+      "question": "Is vaccines real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.78,
+      "total_data_points": 354,
+      "learned_at": "2026-01-24T18:44:13.750373",
+      "times_used": 2
+    },
+    {
+      "id": "know_ab6c3b7e",
+      "question": "Define quantum mechanics",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 287,
+      "learned_at": "2026-01-24T18:44:14.935203",
+      "times_used": 2
+    },
+    {
+      "id": "know_d0a4dcaf",
+      "question": "What is the price of space exploration?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 253,
+      "learned_at": "2026-01-24T18:44:16.103188",
+      "times_used": 2
+    },
+    {
+      "id": "know_3707c1c6",
+      "question": "What is blockchain?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.74,
+      "total_data_points": 341,
+      "learned_at": "2026-01-24T18:44:17.161156",
+      "times_used": 1
+    },
+    {
+      "id": "know_50244530",
+      "question": "What is the price of heart?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 293,
+      "learned_at": "2026-01-24T18:44:18.520402",
+      "times_used": 2
+    },
+    {
+      "id": "know_f6ffd862",
+      "question": "What's the difference between matter and energy?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 370,
+      "learned_at": "2026-01-24T18:44:19.507249",
+      "times_used": 4
+    },
+    {
+      "id": "know_a44bc7b6",
+      "question": "How to understand relativity?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 281,
+      "learned_at": "2026-01-24T18:44:21.864628",
+      "times_used": 1
+    },
+    {
+      "id": "know_6e98bf05",
+      "question": "What is the meaning of derivatives?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 265,
+      "learned_at": "2026-01-24T18:44:24.142527",
+      "times_used": 2
+    },
+    {
+      "id": "know_4fb29740",
+      "question": "How much is black holes?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 310,
+      "learned_at": "2026-01-24T18:44:25.456884",
+      "times_used": 3
+    },
+    {
+      "id": "know_926ccc08",
+      "question": "science vs philosophy",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 350,
+      "learned_at": "2026-01-24T18:44:26.544596",
+      "times_used": 5
+    },
+    {
+      "id": "know_10bf888c",
+      "question": "How to understand prime numbers?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 341,
+      "learned_at": "2026-01-24T18:44:27.585738",
+      "times_used": 2
+    },
+    {
+      "id": "know_30710f9c",
+      "question": "Current 5G status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 361,
+      "learned_at": "2026-01-24T18:44:28.605089",
+      "times_used": 1
+    },
+    {
+      "id": "know_aba15586",
+      "question": "Latest string theory news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 300,
+      "learned_at": "2026-01-24T18:44:29.895160",
+      "times_used": 3
+    },
+    {
+      "id": "know_6d9005ce",
+      "question": "What is the meaning of Avalanche?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 292,
+      "learned_at": "2026-01-24T18:44:30.968120",
+      "times_used": 3
+    },
+    {
+      "id": "know_6f12ae4a",
+      "question": "Latest morality news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 254,
+      "learned_at": "2026-01-24T18:44:32.358493",
+      "times_used": 1
+    },
+    {
+      "id": "know_915bf286",
+      "question": "What causes Mars?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 369,
+      "learned_at": "2026-01-24T18:44:33.692113",
+      "times_used": 1
+    },
+    {
+      "id": "know_ce45ef31",
+      "question": "Explain Litecoin",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 428,
+      "learned_at": "2026-01-24T18:44:34.928094",
+      "times_used": 1
+    },
+    {
+      "id": "know_37a336a2",
+      "question": "Can NASA exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 334,
+      "learned_at": "2026-01-24T18:44:36.546002",
+      "times_used": 2
+    },
+    {
+      "id": "know_6eed09b8",
+      "question": "What is the meaning of algorithms?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.75,
+      "total_data_points": 383,
+      "learned_at": "2026-01-24T18:44:37.517230",
+      "times_used": 1
+    },
+    {
+      "id": "know_7edefb2f",
+      "question": "Explain knowledge",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 414,
+      "learned_at": "2026-01-24T18:44:38.860837",
+      "times_used": 1
+    },
+    {
+      "id": "know_c8679f90",
+      "question": "Can bonds exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 246,
+      "learned_at": "2026-01-24T18:44:40.052999",
+      "times_used": 1
+    },
+    {
+      "id": "know_8838b0fe",
+      "question": "Why is heart important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 379,
+      "learned_at": "2026-01-24T18:44:40.871150",
+      "times_used": 1
+    },
+    {
+      "id": "know_50947fe9",
+      "question": "Is photosynthesis real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 285,
+      "learned_at": "2026-01-24T18:44:42.377725",
+      "times_used": 1
+    },
+    {
+      "id": "know_ac53d805",
+      "question": "What is Chainlink?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.58,
+      "total_data_points": 325,
+      "learned_at": "2026-01-24T18:44:43.584263",
+      "times_used": 2
+    },
+    {
+      "id": "know_6d22cc90",
+      "question": "What causes fractals?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 339,
+      "learned_at": "2026-01-24T18:44:45.764489",
+      "times_used": 1
+    },
+    {
+      "id": "know_f3f6086a",
+      "question": "How does GDP work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 320,
+      "learned_at": "2026-01-24T18:44:48.261290",
+      "times_used": 1
+    },
+    {
+      "id": "know_74acf257",
+      "question": "Explain time",
+      "sources_consulted": 13,
+      "avg_relevance": 0.56,
+      "total_data_points": 360,
+      "learned_at": "2026-01-24T18:44:49.553656",
+      "times_used": 2
+    },
+    {
+      "id": "know_6022db54",
+      "question": "What is black holes?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 269,
+      "learned_at": "2026-01-24T18:44:50.775004",
+      "times_used": 2
+    },
+    {
+      "id": "know_b9e28f9f",
+      "question": "What is stem cells?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.5,
+      "total_data_points": 404,
+      "learned_at": "2026-01-24T18:44:53.050684",
+      "times_used": 1
+    },
+    {
+      "id": "know_585b4065",
+      "question": "Define consciousness",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 273,
+      "learned_at": "2026-01-24T18:44:54.176227",
+      "times_used": 1
+    },
+    {
+      "id": "know_a79fb5ed",
+      "question": "What causes Polygon?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 413,
+      "learned_at": "2026-01-24T18:44:55.273916",
+      "times_used": 1
+    },
+    {
+      "id": "know_2bfb5eb5",
+      "question": "Why is multiverse important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 301,
+      "learned_at": "2026-01-24T18:44:56.577912",
+      "times_used": 2
+    },
+    {
+      "id": "know_e1570132",
+      "question": "What is chaos theory?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 341,
+      "learned_at": "2026-01-24T18:44:57.515156",
+      "times_used": 1
+    },
+    {
+      "id": "know_db2a23fe",
+      "question": "Latest genes news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.74,
+      "total_data_points": 365,
+      "learned_at": "2026-01-24T18:44:58.483671",
+      "times_used": 1
+    },
+    {
+      "id": "know_1c6ae335",
+      "question": "Define reality",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 259,
+      "learned_at": "2026-01-24T18:45:01.367949",
+      "times_used": 2
+    },
+    {
+      "id": "know_a3f8bfe7",
+      "question": "How much is machine learning?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 289,
+      "learned_at": "2026-01-24T18:45:03.433845",
+      "times_used": 1
+    },
+    {
+      "id": "know_c25f07d8",
+      "question": "Compare AI with human intelligence",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 389,
+      "learned_at": "2026-01-24T18:45:04.685346",
+      "times_used": 8
+    },
+    {
+      "id": "know_8ad58aa7",
+      "question": "Can Avalanche exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 395,
+      "learned_at": "2026-01-24T18:45:06.028798",
+      "times_used": 2
+    },
+    {
+      "id": "know_bc1ceb65",
+      "question": "Latest Solana news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 377,
+      "learned_at": "2026-01-24T18:45:07.167144",
+      "times_used": 1
+    },
+    {
+      "id": "know_78617307",
+      "question": "Is algorithms real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 222,
+      "learned_at": "2026-01-24T18:45:08.397241",
+      "times_used": 2
+    },
+    {
+      "id": "know_6d01f2c3",
+      "question": "Explain bacteria",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 339,
+      "learned_at": "2026-01-24T18:45:09.379291",
+      "times_used": 2
+    },
+    {
+      "id": "know_9a324ebb",
+      "question": "Explain IoT",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 463,
+      "learned_at": "2026-01-24T18:45:10.765878",
+      "times_used": 1
+    },
+    {
+      "id": "know_6acf2635",
+      "question": "theory vs practice",
+      "sources_consulted": 13,
+      "avg_relevance": 0.58,
+      "total_data_points": 308,
+      "learned_at": "2026-01-24T18:45:12.410840",
+      "times_used": 5
+    },
+    {
+      "id": "know_ea15b190",
+      "question": "Why is probability important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 350,
+      "learned_at": "2026-01-24T18:45:13.672079",
+      "times_used": 2
+    },
+    {
+      "id": "know_bba5b685",
+      "question": "logic vs intuition",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 324,
+      "learned_at": "2026-01-24T18:45:14.859544",
+      "times_used": 7
+    },
+    {
+      "id": "know_cf46f212",
+      "question": "What causes infinity?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 386,
+      "learned_at": "2026-01-24T18:45:20.765323",
+      "times_used": 1
+    },
+    {
+      "id": "know_0bba46b5",
+      "question": "Latest existence news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.74,
+      "total_data_points": 249,
+      "learned_at": "2026-01-24T18:45:23.366824",
+      "times_used": 1
+    },
+    {
+      "id": "know_61f31dcc",
+      "question": "What is the price of fractals?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 248,
+      "learned_at": "2026-01-24T18:45:24.882875",
+      "times_used": 1
+    },
+    {
+      "id": "know_5eb56bdf",
+      "question": "How much is forex?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 421,
+      "learned_at": "2026-01-24T18:45:26.942641",
+      "times_used": 1
+    },
+    {
+      "id": "know_9d91c07d",
+      "question": "How much is free will?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.54,
+      "total_data_points": 312,
+      "learned_at": "2026-01-24T18:45:28.195936",
+      "times_used": 2
+    },
+    {
+      "id": "know_c34670f1",
+      "question": "Explain Chainlink",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 263,
+      "learned_at": "2026-01-24T18:45:30.916377",
+      "times_used": 1
+    },
+    {
+      "id": "know_9228d04c",
+      "question": "Why is string theory important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.58,
+      "total_data_points": 342,
+      "learned_at": "2026-01-24T18:45:32.092612",
+      "times_used": 1
+    },
+    {
+      "id": "know_f1b0a9a4",
+      "question": "Why is logic important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 349,
+      "learned_at": "2026-01-24T18:45:33.566094",
+      "times_used": 1
+    },
+    {
+      "id": "know_8fee757e",
+      "question": "How does neural networks work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 316,
+      "learned_at": "2026-01-24T18:45:34.946193",
+      "times_used": 1
+    },
+    {
+      "id": "know_6f4b711a",
+      "question": "What causes SpaceX?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 301,
+      "learned_at": "2026-01-24T18:45:36.210287",
+      "times_used": 1
+    },
+    {
+      "id": "know_4d06ca0a",
+      "question": "Define vaccines",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 346,
+      "learned_at": "2026-01-24T18:45:37.823819",
+      "times_used": 2
+    },
+    {
+      "id": "know_89581d77",
+      "question": "Is truth real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 350,
+      "learned_at": "2026-01-24T18:45:38.995117",
+      "times_used": 2
+    },
+    {
+      "id": "know_12b8173c",
+      "question": "What causes cloud computing?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 266,
+      "learned_at": "2026-01-24T18:45:40.013056",
+      "times_used": 2
+    },
+    {
+      "id": "know_e1035d39",
+      "question": "Latest bonds news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.76,
+      "total_data_points": 353,
+      "learned_at": "2026-01-24T18:45:41.313430",
+      "times_used": 1
+    },
+    {
+      "id": "know_32b9ce50",
+      "question": "Can cancer exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 310,
+      "learned_at": "2026-01-24T18:45:43.771299",
+      "times_used": 1
+    },
+    {
+      "id": "know_416c44d5",
+      "question": "nature vs nurture",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 309,
+      "learned_at": "2026-01-24T18:45:44.741883",
+      "times_used": 9
+    },
+    {
+      "id": "know_02eab307",
+      "question": "What is the meaning of dark matter?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 368,
+      "learned_at": "2026-01-24T18:45:45.705252",
+      "times_used": 2
+    },
+    {
+      "id": "know_9b8629ec",
+      "question": "Current SpaceX status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 404,
+      "learned_at": "2026-01-24T18:45:46.907938",
+      "times_used": 1
+    },
+    {
+      "id": "know_47ad25ff",
+      "question": "How does statistics work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 264,
+      "learned_at": "2026-01-24T18:45:47.921885",
+      "times_used": 1
+    },
+    {
+      "id": "know_7b66617f",
+      "question": "Define probability",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 376,
+      "learned_at": "2026-01-24T18:45:49.520084",
+      "times_used": 3
+    },
+    {
+      "id": "know_b9f9ee8a",
+      "question": "What is Litecoin?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 312,
+      "learned_at": "2026-01-24T18:45:50.475016",
+      "times_used": 2
+    },
+    {
+      "id": "know_d5d5ba20",
+      "question": "What is the price of gravity?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 303,
+      "learned_at": "2026-01-24T18:45:51.435391",
+      "times_used": 1
+    },
+    {
+      "id": "know_8160ece6",
+      "question": "How much is morality?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 323,
+      "learned_at": "2026-01-24T18:45:54.406087",
+      "times_used": 2
+    },
+    {
+      "id": "know_16b5e83e",
+      "question": "Compare Bitcoin with Ethereum",
+      "sources_consulted": 13,
+      "avg_relevance": 0.55,
+      "total_data_points": 310,
+      "learned_at": "2026-01-24T18:45:56.149779",
+      "times_used": 1
+    },
+    {
+      "id": "know_500a71c7",
+      "question": "How to understand beauty?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.56,
+      "total_data_points": 310,
+      "learned_at": "2026-01-24T18:45:57.313202",
+      "times_used": 3
+    },
+    {
+      "id": "know_8650bfd9",
+      "question": "How does 5G work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 371,
+      "learned_at": "2026-01-24T18:45:58.371271",
+      "times_used": 2
+    },
+    {
+      "id": "know_bf46a9c7",
+      "question": "What causes cryptocurrency markets?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 270,
+      "learned_at": "2026-01-24T18:45:59.402990",
+      "times_used": 2
+    },
+    {
+      "id": "know_4f7e06a3",
+      "question": "What is the meaning of DNA?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 358,
+      "learned_at": "2026-01-24T18:46:02.057157",
+      "times_used": 1
+    },
+    {
+      "id": "know_7a0dfa10",
+      "question": "What causes black holes?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 349,
+      "learned_at": "2026-01-24T18:46:04.173124",
+      "times_used": 1
+    },
+    {
+      "id": "know_cb4b4ec0",
+      "question": "How much is fractals?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 339,
+      "learned_at": "2026-01-24T18:46:05.422294",
+      "times_used": 1
+    },
+    {
+      "id": "know_9097bde1",
+      "question": "How does immune system work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 323,
+      "learned_at": "2026-01-24T18:46:06.922025",
+      "times_used": 1
+    },
+    {
+      "id": "know_1cffa4d7",
+      "question": "Current brain status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 251,
+      "learned_at": "2026-01-24T18:46:08.697414",
+      "times_used": 1
+    },
+    {
+      "id": "know_d58920a5",
+      "question": "How much is Avalanche?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.54,
+      "total_data_points": 323,
+      "learned_at": "2026-01-24T18:46:09.945855",
+      "times_used": 1
+    },
+    {
+      "id": "know_d2e2089d",
+      "question": "Can robotics exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 249,
+      "learned_at": "2026-01-24T18:46:11.146058",
+      "times_used": 1
+    },
+    {
+      "id": "know_1ac2681d",
+      "question": "What's the difference between order and chaos?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 335,
+      "learned_at": "2026-01-24T18:46:12.327869",
+      "times_used": 4
+    },
+    {
+      "id": "know_ac7f26df",
+      "question": "What is the meaning of time?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 308,
+      "learned_at": "2026-01-24T18:46:13.510512",
+      "times_used": 1
+    },
+    {
+      "id": "know_573b886d",
+      "question": "How does Solana work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 319,
+      "learned_at": "2026-01-24T18:46:15.135292",
+      "times_used": 1
+    },
+    {
+      "id": "know_8ec5d1da",
+      "question": "What is cryptocurrency markets?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 366,
+      "learned_at": "2026-01-24T18:46:16.234051",
+      "times_used": 1
+    },
+    {
+      "id": "know_0f4575c0",
+      "question": "What is the price of Cosmos?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 380,
+      "learned_at": "2026-01-24T18:46:19.711942",
+      "times_used": 1
+    },
+    {
+      "id": "know_94289256",
+      "question": "Is dark matter real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 386,
+      "learned_at": "2026-01-24T18:46:20.941331",
+      "times_used": 1
+    },
+    {
+      "id": "know_c08b4840",
+      "question": "How does quantum computing work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 307,
+      "learned_at": "2026-01-24T18:46:21.849455",
+      "times_used": 1
+    },
+    {
+      "id": "know_7f133b6e",
+      "question": "Define robotics",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 311,
+      "learned_at": "2026-01-24T18:46:24.135694",
+      "times_used": 1
+    },
+    {
+      "id": "know_8ceaa9dd",
+      "question": "What is the meaning of Chainlink?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 271,
+      "learned_at": "2026-01-24T18:46:27.814246",
+      "times_used": 2
+    },
+    {
+      "id": "know_b0a335af",
+      "question": "How much is GDP?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 315,
+      "learned_at": "2026-01-24T18:46:29.199840",
+      "times_used": 1
+    },
+    {
+      "id": "know_3cd46c35",
+      "question": "Is immune system real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 422,
+      "learned_at": "2026-01-24T18:46:31.182789",
+      "times_used": 2
+    },
+    {
+      "id": "know_da4c6562",
+      "question": "Is viruses real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 235,
+      "learned_at": "2026-01-24T18:46:32.328419",
+      "times_used": 1
+    },
+    {
+      "id": "know_d6acd9b6",
+      "question": "Current quantum computing status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 244,
+      "learned_at": "2026-01-24T18:46:33.288582",
+      "times_used": 1
+    },
+    {
+      "id": "know_ce1c7947",
+      "question": "Explain machine learning",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 338,
+      "learned_at": "2026-01-24T18:46:34.793444",
+      "times_used": 2
+    },
+    {
+      "id": "know_6d119de6",
+      "question": "Is multiverse real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.54,
+      "total_data_points": 383,
+      "learned_at": "2026-01-24T18:46:35.798648",
+      "times_used": 1
+    },
+    {
+      "id": "know_0f47004a",
+      "question": "How does stock market work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 301,
+      "learned_at": "2026-01-24T18:46:38.677842",
+      "times_used": 2
+    },
+    {
+      "id": "know_112a2dee",
+      "question": "Define NASA",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 332,
+      "learned_at": "2026-01-24T18:46:40.813494",
+      "times_used": 1
+    },
+    {
+      "id": "know_4d1ceff5",
+      "question": "Is commodities real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 307,
+      "learned_at": "2026-01-24T18:46:41.922237",
+      "times_used": 2
+    },
+    {
+      "id": "know_1b13e089",
+      "question": "Why is robotics important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 372,
+      "learned_at": "2026-01-24T18:46:43.245578",
+      "times_used": 2
+    },
+    {
+      "id": "know_adb083b0",
+      "question": "Define inflation",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 375,
+      "learned_at": "2026-01-24T18:46:46.330626",
+      "times_used": 1
+    },
+    {
+      "id": "know_b6b60df3",
+      "question": "Why is derivatives important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 332,
+      "learned_at": "2026-01-24T18:46:47.424254",
+      "times_used": 2
+    },
+    {
+      "id": "know_cf7e186b",
+      "question": "What is the price of entropy?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 228,
+      "learned_at": "2026-01-24T18:46:48.731306",
+      "times_used": 1
+    },
+    {
+      "id": "know_2009ac95",
+      "question": "Current Jupiter status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 400,
+      "learned_at": "2026-01-24T18:46:49.737954",
+      "times_used": 1
+    },
+    {
+      "id": "know_2f74915a",
+      "question": "What is the meaning of statistics?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 345,
+      "learned_at": "2026-01-24T18:46:51.012823",
+      "times_used": 1
+    },
+    {
+      "id": "know_05c38100",
+      "question": "Is stock market real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 251,
+      "learned_at": "2026-01-24T18:46:53.177651",
+      "times_used": 1
+    },
+    {
+      "id": "know_f8038329",
+      "question": "How does string theory work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 298,
+      "learned_at": "2026-01-24T18:46:54.676474",
+      "times_used": 1
+    },
+    {
+      "id": "know_562e6303",
+      "question": "What causes morality?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 364,
+      "learned_at": "2026-01-24T18:46:55.924384",
+      "times_used": 2
+    },
+    {
+      "id": "know_15bad529",
+      "question": "Can AI exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 297,
+      "learned_at": "2026-01-24T18:46:57.466162",
+      "times_used": 2
+    },
+    {
+      "id": "know_dcc370a6",
+      "question": "order vs chaos",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 326,
+      "learned_at": "2026-01-24T18:46:59.623459",
+      "times_used": 2
+    },
+    {
+      "id": "know_a541a889",
+      "question": "Can interest rates exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 392,
+      "learned_at": "2026-01-24T18:47:00.994546",
+      "times_used": 1
+    },
+    {
+      "id": "know_9a88df08",
+      "question": "Why is asteroids important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 439,
+      "learned_at": "2026-01-24T18:47:02.042594",
+      "times_used": 1
+    },
+    {
+      "id": "know_ec9d558f",
+      "question": "Is cryptocurrency markets real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 259,
+      "learned_at": "2026-01-24T18:47:03.699339",
+      "times_used": 1
+    },
+    {
+      "id": "know_d31467d1",
+      "question": "Compare order with chaos",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 370,
+      "learned_at": "2026-01-24T18:47:04.996281",
+      "times_used": 4
+    },
+    {
+      "id": "know_881ed443",
+      "question": "How does cryptocurrency markets work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 338,
+      "learned_at": "2026-01-24T18:47:07.265688",
+      "times_used": 3
+    },
+    {
+      "id": "know_b9235410",
+      "question": "How to understand Avalanche?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 304,
+      "learned_at": "2026-01-24T18:47:08.502386",
+      "times_used": 2
+    },
+    {
+      "id": "know_87204593",
+      "question": "Why is commodities important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 263,
+      "learned_at": "2026-01-24T18:47:10.638621",
+      "times_used": 1
+    },
+    {
+      "id": "know_6aec84a3",
+      "question": "Explain DNA",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 261,
+      "learned_at": "2026-01-24T18:47:11.600181",
+      "times_used": 1
+    },
+    {
+      "id": "know_e3b1873c",
+      "question": "Current encryption status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.75,
+      "total_data_points": 375,
+      "learned_at": "2026-01-24T18:47:12.772385",
+      "times_used": 3
+    },
+    {
+      "id": "know_0ff01516",
+      "question": "Compare nature with nurture",
+      "sources_consulted": 13,
+      "avg_relevance": 0.78,
+      "total_data_points": 327,
+      "learned_at": "2026-01-24T18:47:13.839247",
+      "times_used": 5
+    },
+    {
+      "id": "know_3bde0406",
+      "question": "Latest logic news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.74,
+      "total_data_points": 299,
+      "learned_at": "2026-01-24T18:47:17.924266",
+      "times_used": 1
+    },
+    {
+      "id": "know_0816b71a",
+      "question": "Compare quantum with classical computing",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 402,
+      "learned_at": "2026-01-24T18:47:18.945799",
+      "times_used": 5
+    },
+    {
+      "id": "know_1e945f65",
+      "question": "What causes IoT?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 413,
+      "learned_at": "2026-01-24T18:47:19.914598",
+      "times_used": 1
+    },
+    {
+      "id": "know_21c4000b",
+      "question": "What is string theory?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 324,
+      "learned_at": "2026-01-24T18:47:23.571457",
+      "times_used": 1
+    },
+    {
+      "id": "know_90916664",
+      "question": "Can topology exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 343,
+      "learned_at": "2026-01-24T18:47:24.436697",
+      "times_used": 3
+    },
+    {
+      "id": "know_b327488a",
+      "question": "Is quantum computing real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 315,
+      "learned_at": "2026-01-24T18:47:28.686373",
+      "times_used": 2
+    },
+    {
+      "id": "know_b0ad6cfd",
+      "question": "How does time work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.56,
+      "total_data_points": 324,
+      "learned_at": "2026-01-24T18:47:32.527167",
+      "times_used": 1
+    },
+    {
+      "id": "know_8e4ce3c5",
+      "question": "Current relativity status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 382,
+      "learned_at": "2026-01-24T18:47:33.740821",
+      "times_used": 2
+    },
+    {
+      "id": "know_2cf055d0",
+      "question": "What is the meaning of stars?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 314,
+      "learned_at": "2026-01-24T18:47:34.788325",
+      "times_used": 1
+    },
+    {
+      "id": "know_019385a0",
+      "question": "Define fractals",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 313,
+      "learned_at": "2026-01-24T18:47:35.718405",
+      "times_used": 1
+    },
+    {
+      "id": "know_91550ae6",
+      "question": "What causes heart?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 325,
+      "learned_at": "2026-01-24T18:47:36.907191",
+      "times_used": 2
+    },
+    {
+      "id": "know_6dddc625",
+      "question": "How does space exploration work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 480,
+      "learned_at": "2026-01-24T18:47:38.178443",
+      "times_used": 2
+    },
+    {
+      "id": "know_c4eeb263",
+      "question": "Why is Avalanche important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.76,
+      "total_data_points": 303,
+      "learned_at": "2026-01-24T18:47:39.781873",
+      "times_used": 1
+    },
+    {
+      "id": "know_5501d891",
+      "question": "Explain logic",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 297,
+      "learned_at": "2026-01-24T18:47:40.918020",
+      "times_used": 1
+    },
+    {
+      "id": "know_d48e4b15",
+      "question": "Is DNA real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.74,
+      "total_data_points": 290,
+      "learned_at": "2026-01-24T18:47:41.940079",
+      "times_used": 1
+    },
+    {
+      "id": "know_28c4c93f",
+      "question": "How to understand string theory?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 310,
+      "learned_at": "2026-01-24T18:47:43.085447",
+      "times_used": 1
+    },
+    {
+      "id": "know_1902b96d",
+      "question": "How does robotics work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 377,
+      "learned_at": "2026-01-24T18:47:44.284688",
+      "times_used": 1
+    },
+    {
+      "id": "know_51a18072",
+      "question": "Explain quantum computing",
+      "sources_consulted": 13,
+      "avg_relevance": 0.58,
+      "total_data_points": 333,
+      "learned_at": "2026-01-24T18:47:45.967093",
+      "times_used": 1
+    },
+    {
+      "id": "know_a970f274",
+      "question": "Can forex exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 460,
+      "learned_at": "2026-01-24T18:47:46.985888",
+      "times_used": 1
+    },
+    {
+      "id": "know_5ac16d8d",
+      "question": "Latest satellites news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 324,
+      "learned_at": "2026-01-24T18:47:48.186087",
+      "times_used": 3
+    },
+    {
+      "id": "know_888d0b0a",
+      "question": "How much is Solana?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 351,
+      "learned_at": "2026-01-24T18:47:50.676865",
+      "times_used": 1
+    },
+    {
+      "id": "know_57b712bf",
+      "question": "Define black holes",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 346,
+      "learned_at": "2026-01-24T18:47:52.306597",
+      "times_used": 2
+    },
+    {
+      "id": "know_163999e4",
+      "question": "Latest heart news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 325,
+      "learned_at": "2026-01-24T18:47:53.591503",
+      "times_used": 1
+    },
+    {
+      "id": "know_c9bfdb9e",
+      "question": "What is relativity?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 284,
+      "learned_at": "2026-01-24T18:47:58.563250",
+      "times_used": 1
+    },
+    {
+      "id": "know_f5e0d506",
+      "question": "Define space exploration",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 341,
+      "learned_at": "2026-01-24T18:47:59.652157",
+      "times_used": 3
+    },
+    {
+      "id": "know_d51cc62b",
+      "question": "Can algorithms exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 332,
+      "learned_at": "2026-01-24T18:48:00.791085",
+      "times_used": 1
+    },
+    {
+      "id": "know_3d946164",
+      "question": "Can IoT exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.76,
+      "total_data_points": 369,
+      "learned_at": "2026-01-24T18:48:02.745722",
+      "times_used": 2
+    },
+    {
+      "id": "know_9df8f1cd",
+      "question": "What is photosynthesis?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 374,
+      "learned_at": "2026-01-24T18:48:04.144486",
+      "times_used": 2
+    },
+    {
+      "id": "know_b1e9eb7f",
+      "question": "Define GDP",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 334,
+      "learned_at": "2026-01-24T18:48:05.430034",
+      "times_used": 2
+    },
+    {
+      "id": "know_5e4c5b00",
+      "question": "What is the meaning of robotics?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 248,
+      "learned_at": "2026-01-24T18:48:07.157649",
+      "times_used": 1
+    },
+    {
+      "id": "know_fae14676",
+      "question": "Why is cloud computing important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 279,
+      "learned_at": "2026-01-24T18:48:08.337013",
+      "times_used": 2
+    },
+    {
+      "id": "know_f3af17b1",
+      "question": "What is the price of calculus?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 334,
+      "learned_at": "2026-01-24T18:48:11.310879",
+      "times_used": 1
+    },
+    {
+      "id": "know_a5b70f68",
+      "question": "Why is Dogecoin important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 263,
+      "learned_at": "2026-01-24T18:48:12.764687",
+      "times_used": 1
+    },
+    {
+      "id": "know_c542a7dc",
+      "question": "How much is Cardano?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 372,
+      "learned_at": "2026-01-24T18:48:13.715970",
+      "times_used": 1
+    },
+    {
+      "id": "know_14aff2bc",
+      "question": "What is stock market?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 419,
+      "learned_at": "2026-01-24T18:48:14.749500",
+      "times_used": 1
+    },
+    {
+      "id": "know_969b8685",
+      "question": "What is robotics?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 339,
+      "learned_at": "2026-01-24T18:48:17.953237",
+      "times_used": 1
+    },
+    {
+      "id": "know_9c852571",
+      "question": "Why is neurons important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 276,
+      "learned_at": "2026-01-24T18:48:19.329504",
+      "times_used": 1
+    },
+    {
+      "id": "know_c7633a51",
+      "question": "How to understand genes?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 336,
+      "learned_at": "2026-01-24T18:48:20.572750",
+      "times_used": 1
+    },
+    {
+      "id": "know_b5c2875a",
+      "question": "How does brain work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 308,
+      "learned_at": "2026-01-24T18:48:22.101145",
+      "times_used": 1
+    },
+    {
+      "id": "know_9ff493df",
+      "question": "What is beauty?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 347,
+      "learned_at": "2026-01-24T18:48:23.209386",
+      "times_used": 1
+    },
+    {
+      "id": "know_90411729",
+      "question": "What is Mars?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 524,
+      "learned_at": "2026-01-24T18:48:24.107193",
+      "times_used": 3
+    },
+    {
+      "id": "know_4d6881e0",
+      "question": "What is the meaning of quantum computing?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 330,
+      "learned_at": "2026-01-24T18:48:26.335717",
+      "times_used": 2
+    },
+    {
+      "id": "know_c8cdf86a",
+      "question": "Define happiness",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 282,
+      "learned_at": "2026-01-24T18:48:27.768479",
+      "times_used": 2
+    },
+    {
+      "id": "know_cad52d4e",
+      "question": "Is fractals real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 333,
+      "learned_at": "2026-01-24T18:48:28.913575",
+      "times_used": 2
+    },
+    {
+      "id": "know_35d94fac",
+      "question": "Is inflation real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 359,
+      "learned_at": "2026-01-24T18:48:30.812124",
+      "times_used": 1
+    },
+    {
+      "id": "know_023f23bb",
+      "question": "What is the meaning of blockchain?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 415,
+      "learned_at": "2026-01-24T18:48:32.106168",
+      "times_used": 2
+    },
+    {
+      "id": "know_dcbc24fd",
+      "question": "What is the price of encryption?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 354,
+      "learned_at": "2026-01-24T18:48:33.281998",
+      "times_used": 2
+    },
+    {
+      "id": "know_8653651c",
+      "question": "What causes forex?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 297,
+      "learned_at": "2026-01-24T18:48:34.647621",
+      "times_used": 4
+    },
+    {
+      "id": "know_6c255212",
+      "question": "How to understand truth?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.55,
+      "total_data_points": 379,
+      "learned_at": "2026-01-24T18:48:35.461211",
+      "times_used": 1
+    },
+    {
+      "id": "know_5017d15c",
+      "question": "Can cryptocurrency markets exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 377,
+      "learned_at": "2026-01-24T18:48:36.422851",
+      "times_used": 1
+    },
+    {
+      "id": "know_1bfd4e20",
+      "question": "Is string theory real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 349,
+      "learned_at": "2026-01-24T18:48:37.438639",
+      "times_used": 2
+    },
+    {
+      "id": "know_381aa27d",
+      "question": "Why is Solana important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 262,
+      "learned_at": "2026-01-24T18:48:38.574365",
+      "times_used": 1
+    },
+    {
+      "id": "know_073d11ff",
+      "question": "Define cancer",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 287,
+      "learned_at": "2026-01-24T18:48:39.889298",
+      "times_used": 4
+    },
+    {
+      "id": "know_7ce9fd7c",
+      "question": "What is genes?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 380,
+      "learned_at": "2026-01-24T18:48:41.863749",
+      "times_used": 1
+    },
+    {
+      "id": "know_f771dc13",
+      "question": "What's the difference between logic and intuition?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 385,
+      "learned_at": "2026-01-24T18:48:42.691369",
+      "times_used": 4
+    },
+    {
+      "id": "know_06c913fc",
+      "question": "Why is knowledge important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 318,
+      "learned_at": "2026-01-24T18:48:44.311937",
+      "times_used": 1
+    },
+    {
+      "id": "know_e45c7c8e",
+      "question": "What's the difference between science and philosophy?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 301,
+      "learned_at": "2026-01-24T18:48:45.633875",
+      "times_used": 3
+    },
+    {
+      "id": "know_06f755f9",
+      "question": "How does dark matter work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 340,
+      "learned_at": "2026-01-24T18:48:46.971599",
+      "times_used": 2
+    },
+    {
+      "id": "know_66fe0b47",
+      "question": "What is viruses?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.56,
+      "total_data_points": 414,
+      "learned_at": "2026-01-24T18:48:48.274115",
+      "times_used": 1
+    },
+    {
+      "id": "know_e63322ed",
+      "question": "How does black holes work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 342,
+      "learned_at": "2026-01-24T18:48:50.853279",
+      "times_used": 3
+    },
+    {
+      "id": "know_1b89864a",
+      "question": "Is IoT real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 316,
+      "learned_at": "2026-01-24T18:48:51.883468",
+      "times_used": 1
+    },
+    {
+      "id": "know_46cac03a",
+      "question": "What is bonds?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.76,
+      "total_data_points": 320,
+      "learned_at": "2026-01-24T18:48:53.926051",
+      "times_used": 2
+    },
+    {
+      "id": "know_64a8a539",
+      "question": "What is the meaning of immune system?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 463,
+      "learned_at": "2026-01-24T18:48:54.869585",
+      "times_used": 4
+    },
+    {
+      "id": "know_ee61eb1b",
+      "question": "Current morality status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 308,
+      "learned_at": "2026-01-24T18:48:56.648437",
+      "times_used": 1
+    },
+    {
+      "id": "know_6ad1b853",
+      "question": "How much is inflation?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 401,
+      "learned_at": "2026-01-24T18:48:57.733525",
+      "times_used": 2
+    },
+    {
+      "id": "know_78550355",
+      "question": "What is the price of algorithms?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 277,
+      "learned_at": "2026-01-24T18:48:59.765385",
+      "times_used": 2
+    },
+    {
+      "id": "know_02f4d739",
+      "question": "Can infinity exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 317,
+      "learned_at": "2026-01-24T18:49:03.660150",
+      "times_used": 1
+    },
+    {
+      "id": "know_91082af5",
+      "question": "What causes encryption?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 352,
+      "learned_at": "2026-01-24T18:49:04.555179",
+      "times_used": 2
+    },
+    {
+      "id": "know_6489b56b",
+      "question": "What is the meaning of cloud computing?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 298,
+      "learned_at": "2026-01-24T18:49:08.622896",
+      "times_used": 2
+    },
+    {
+      "id": "know_5092e9a3",
+      "question": "Current inflation status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 382,
+      "learned_at": "2026-01-24T18:49:11.873476",
+      "times_used": 1
+    },
+    {
+      "id": "know_47b9a769",
+      "question": "Current dark matter status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 320,
+      "learned_at": "2026-01-24T18:49:14.602348",
+      "times_used": 1
+    },
+    {
+      "id": "know_ee329650",
+      "question": "How much is vaccines?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 308,
+      "learned_at": "2026-01-24T18:49:18.018889",
+      "times_used": 1
+    },
+    {
+      "id": "know_21eb8e00",
+      "question": "What is fractals?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 272,
+      "learned_at": "2026-01-24T18:49:24.465029",
+      "times_used": 1
+    },
+    {
+      "id": "know_c7657f43",
+      "question": "How much is derivatives?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 321,
+      "learned_at": "2026-01-24T18:49:27.552512",
+      "times_used": 1
+    },
+    {
+      "id": "know_d47597f7",
+      "question": "How much is time?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 400,
+      "learned_at": "2026-01-24T18:49:29.985187",
+      "times_used": 1
+    },
+    {
+      "id": "know_c6f4d37f",
+      "question": "Is interest rates real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 259,
+      "learned_at": "2026-01-24T18:49:31.152035",
+      "times_used": 1
+    },
+    {
+      "id": "know_4a24e20e",
+      "question": "Why is Polygon important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 335,
+      "learned_at": "2026-01-24T18:49:32.313156",
+      "times_used": 1
+    },
+    {
+      "id": "know_d9dc25c8",
+      "question": "How does Bitcoin work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.79,
+      "total_data_points": 304,
+      "learned_at": "2026-01-24T18:49:35.449820",
+      "times_used": 1
+    },
+    {
+      "id": "know_55e20544",
+      "question": "Is black holes real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 298,
+      "learned_at": "2026-01-24T18:49:36.828355",
+      "times_used": 3
+    },
+    {
+      "id": "know_6ca4b8e9",
+      "question": "Latest vaccines news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 281,
+      "learned_at": "2026-01-24T18:49:38.086441",
+      "times_used": 1
+    },
+    {
+      "id": "know_1de3359d",
+      "question": "Latest evolution news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 420,
+      "learned_at": "2026-01-24T18:49:40.416772",
+      "times_used": 2
+    },
+    {
+      "id": "know_45b6b008",
+      "question": "How to understand quantum computing?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.58,
+      "total_data_points": 231,
+      "learned_at": "2026-01-24T18:49:43.784250",
+      "times_used": 2
+    },
+    {
+      "id": "know_18f5bf9a",
+      "question": "Define planets",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 271,
+      "learned_at": "2026-01-24T18:49:45.700206",
+      "times_used": 2
+    },
+    {
+      "id": "know_f6ea37f1",
+      "question": "How does antibiotics work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 321,
+      "learned_at": "2026-01-24T18:49:47.754149",
+      "times_used": 1
+    },
+    {
+      "id": "know_3149b203",
+      "question": "Can relativity exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 339,
+      "learned_at": "2026-01-24T18:49:51.200147",
+      "times_used": 1
+    },
+    {
+      "id": "know_d903db71",
+      "question": "How much is Polygon?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 331,
+      "learned_at": "2026-01-24T18:49:52.411377",
+      "times_used": 1
+    },
+    {
+      "id": "know_d0c726ed",
+      "question": "What is the price of AI?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 301,
+      "learned_at": "2026-01-24T18:49:54.722218",
+      "times_used": 2
+    },
+    {
+      "id": "know_2c424f6b",
+      "question": "Compare theory with practice",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 274,
+      "learned_at": "2026-01-24T18:49:55.959043",
+      "times_used": 3
+    },
+    {
+      "id": "know_29fac8b5",
+      "question": "What is the meaning of Ethereum?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 296,
+      "learned_at": "2026-01-24T18:49:57.672716",
+      "times_used": 2
+    },
+    {
+      "id": "know_965fddda",
+      "question": "Explain asteroids",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 327,
+      "learned_at": "2026-01-24T18:50:02.331843",
+      "times_used": 1
+    },
+    {
+      "id": "know_e77405e2",
+      "question": "What is the price of Ethereum?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.56,
+      "total_data_points": 358,
+      "learned_at": "2026-01-24T18:50:03.780535",
+      "times_used": 1
+    },
+    {
+      "id": "know_2a529093",
+      "question": "How much is logic?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.56,
+      "total_data_points": 321,
+      "learned_at": "2026-01-24T18:50:04.820003",
+      "times_used": 1
+    },
+    {
+      "id": "know_0ecad33d",
+      "question": "How does probability work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.55,
+      "total_data_points": 273,
+      "learned_at": "2026-01-24T18:50:07.119971",
+      "times_used": 2
+    },
+    {
+      "id": "know_9e66d14f",
+      "question": "How does machine learning work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 433,
+      "learned_at": "2026-01-24T18:50:08.065963",
+      "times_used": 1
+    },
+    {
+      "id": "know_4a131a6a",
+      "question": "Define brain",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 278,
+      "learned_at": "2026-01-24T18:50:09.661534",
+      "times_used": 1
+    },
+    {
+      "id": "know_eb224cc9",
+      "question": "Current stem cells status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 342,
+      "learned_at": "2026-01-24T18:50:11.677644",
+      "times_used": 1
+    },
+    {
+      "id": "know_97b10148",
+      "question": "How does multiverse work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 359,
+      "learned_at": "2026-01-24T18:50:14.039565",
+      "times_used": 1
+    },
+    {
+      "id": "know_600cfccb",
+      "question": "Current Solana status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 361,
+      "learned_at": "2026-01-24T18:50:19.096530",
+      "times_used": 2
+    },
+    {
+      "id": "know_8765cf3f",
+      "question": "Define logic",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 256,
+      "learned_at": "2026-01-24T18:50:20.279756",
+      "times_used": 1
+    },
+    {
+      "id": "know_0123fd66",
+      "question": "Current vaccines status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 259,
+      "learned_at": "2026-01-24T18:50:21.540869",
+      "times_used": 1
+    },
+    {
+      "id": "know_bb9cff57",
+      "question": "Why is AI important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 271,
+      "learned_at": "2026-01-24T18:50:22.756845",
+      "times_used": 2
+    },
+    {
+      "id": "know_bbec0029",
+      "question": "What is the meaning of NASA?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 364,
+      "learned_at": "2026-01-24T18:50:24.143516",
+      "times_used": 1
+    },
+    {
+      "id": "know_08f97310",
+      "question": "Is happiness real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 420,
+      "learned_at": "2026-01-24T18:50:26.492618",
+      "times_used": 3
+    },
+    {
+      "id": "know_85568531",
+      "question": "What is the price of logic?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 286,
+      "learned_at": "2026-01-24T18:50:27.595179",
+      "times_used": 1
+    },
+    {
+      "id": "know_fd5c0331",
+      "question": "Latest blockchain news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.53,
+      "total_data_points": 304,
+      "learned_at": "2026-01-24T18:50:29.552497",
+      "times_used": 1
+    },
+    {
+      "id": "know_2af207ba",
+      "question": "Current AI status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 346,
+      "learned_at": "2026-01-24T18:50:33.265879",
+      "times_used": 1
+    },
+    {
+      "id": "know_95fe4faa",
+      "question": "Can Solana exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 289,
+      "learned_at": "2026-01-24T18:50:34.297095",
+      "times_used": 1
+    },
+    {
+      "id": "know_6499bbe4",
+      "question": "What causes Avalanche?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 275,
+      "learned_at": "2026-01-24T18:50:35.570280",
+      "times_used": 1
+    },
+    {
+      "id": "know_fb0a1067",
+      "question": "Can evolution exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 376,
+      "learned_at": "2026-01-24T18:50:36.747784",
+      "times_used": 1
+    },
+    {
+      "id": "know_5af5da52",
+      "question": "What is neurons?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 292,
+      "learned_at": "2026-01-24T18:50:37.929088",
+      "times_used": 1
+    },
+    {
+      "id": "know_d87dd180",
+      "question": "What is the meaning of infinity?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 285,
+      "learned_at": "2026-01-24T18:50:39.432195",
+      "times_used": 1
+    },
+    {
+      "id": "know_97ea743d",
+      "question": "Current neurons status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 264,
+      "learned_at": "2026-01-24T18:50:42.596145",
+      "times_used": 2
+    },
+    {
+      "id": "know_08ac8388",
+      "question": "Current planets status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 335,
+      "learned_at": "2026-01-24T18:50:44.631994",
+      "times_used": 1
+    },
+    {
+      "id": "know_384935e5",
+      "question": "Latest statistics news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 317,
+      "learned_at": "2026-01-24T18:50:49.444352",
+      "times_used": 1
+    },
+    {
+      "id": "know_bbcfef57",
+      "question": "What is the meaning of heart?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 325,
+      "learned_at": "2026-01-24T18:50:50.695161",
+      "times_used": 1
+    },
+    {
+      "id": "know_821b7081",
+      "question": "Is antibiotics real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 328,
+      "learned_at": "2026-01-24T18:50:51.989689",
+      "times_used": 1
+    },
+    {
+      "id": "know_7e8b6e03",
+      "question": "What is the meaning of photosynthesis?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 357,
+      "learned_at": "2026-01-24T18:50:54.544491",
+      "times_used": 1
+    },
+    {
+      "id": "know_918e0748",
+      "question": "Define quantum computing",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 412,
+      "learned_at": "2026-01-24T18:50:55.640897",
+      "times_used": 1
+    },
+    {
+      "id": "know_aa71c6dc",
+      "question": "Why is fractals important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 423,
+      "learned_at": "2026-01-24T18:50:58.360356",
+      "times_used": 1
+    },
+    {
+      "id": "know_d4520f4f",
+      "question": "Is AI real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 478,
+      "learned_at": "2026-01-24T18:51:00.576429",
+      "times_used": 1
+    },
+    {
+      "id": "know_f99b22cb",
+      "question": "How much is trade?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 359,
+      "learned_at": "2026-01-24T18:51:03.493750",
+      "times_used": 2
+    },
+    {
+      "id": "know_d0de0221",
+      "question": "What is knowledge?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 322,
+      "learned_at": "2026-01-24T18:51:04.669646",
+      "times_used": 1
+    },
+    {
+      "id": "know_8791c27f",
+      "question": "What is the price of galaxies?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 388,
+      "learned_at": "2026-01-24T18:51:05.865497",
+      "times_used": 1
+    },
+    {
+      "id": "know_d9d0398e",
+      "question": "What causes Litecoin?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 380,
+      "learned_at": "2026-01-24T18:51:06.869525",
+      "times_used": 2
+    },
+    {
+      "id": "know_1e80cbba",
+      "question": "What is the meaning of Bitcoin?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 268,
+      "learned_at": "2026-01-24T18:51:09.882451",
+      "times_used": 2
+    },
+    {
+      "id": "know_6e26bb26",
+      "question": "Define cloud computing",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 351,
+      "learned_at": "2026-01-24T18:51:11.216611",
+      "times_used": 1
+    },
+    {
+      "id": "know_b249651f",
+      "question": "Why is bacteria important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 358,
+      "learned_at": "2026-01-24T18:51:14.852627",
+      "times_used": 2
+    },
+    {
+      "id": "know_36a0f92a",
+      "question": "What causes NASA?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 289,
+      "learned_at": "2026-01-24T18:51:16.516359",
+      "times_used": 2
+    },
+    {
+      "id": "know_ffae34b6",
+      "question": "What is the meaning of machine learning?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 397,
+      "learned_at": "2026-01-24T18:51:18.755273",
+      "times_used": 1
+    },
+    {
+      "id": "know_de5cce7b",
+      "question": "Define machine learning",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 408,
+      "learned_at": "2026-01-24T18:51:19.650867",
+      "times_used": 2
+    },
+    {
+      "id": "know_88567b69",
+      "question": "How does beauty work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 348,
+      "learned_at": "2026-01-24T18:51:20.564371",
+      "times_used": 2
+    },
+    {
+      "id": "know_7bb4e0f9",
+      "question": "What is Jupiter?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 275,
+      "learned_at": "2026-01-24T18:51:22.121543",
+      "times_used": 2
+    },
+    {
+      "id": "know_1a45fa10",
+      "question": "Define antibiotics",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 353,
+      "learned_at": "2026-01-24T18:51:22.980177",
+      "times_used": 1
+    },
+    {
+      "id": "know_43fee03f",
+      "question": "How much is truth?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 303,
+      "learned_at": "2026-01-24T18:51:24.347004",
+      "times_used": 1
+    },
+    {
+      "id": "know_3f10a64d",
+      "question": "Define IoT",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 274,
+      "learned_at": "2026-01-24T18:51:26.806566",
+      "times_used": 1
+    },
+    {
+      "id": "know_37c2d880",
+      "question": "Explain photosynthesis",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 481,
+      "learned_at": "2026-01-24T18:51:28.492583",
+      "times_used": 1
+    },
+    {
+      "id": "know_70d1e524",
+      "question": "How to understand free will?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 266,
+      "learned_at": "2026-01-24T18:51:29.846589",
+      "times_used": 1
+    },
+    {
+      "id": "know_04701f97",
+      "question": "Latest Cardano news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.58,
+      "total_data_points": 329,
+      "learned_at": "2026-01-24T18:51:30.949101",
+      "times_used": 1
+    },
+    {
+      "id": "know_909adbba",
+      "question": "How does satellites work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 388,
+      "learned_at": "2026-01-24T18:51:31.827098",
+      "times_used": 2
+    },
+    {
+      "id": "know_c0d194ea",
+      "question": "What causes Cardano?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 319,
+      "learned_at": "2026-01-24T18:51:33.023646",
+      "times_used": 3
+    },
+    {
+      "id": "know_70b6d7b9",
+      "question": "How does gravity work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 326,
+      "learned_at": "2026-01-24T18:51:34.464386",
+      "times_used": 1
+    },
+    {
+      "id": "know_1936ccce",
+      "question": "How much is cancer?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 363,
+      "learned_at": "2026-01-24T18:51:38.166139",
+      "times_used": 1
+    },
+    {
+      "id": "know_563e1a50",
+      "question": "What is the meaning of knowledge?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.55,
+      "total_data_points": 347,
+      "learned_at": "2026-01-24T18:51:39.100542",
+      "times_used": 1
+    },
+    {
+      "id": "know_b551761f",
+      "question": "Define chaos theory",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 357,
+      "learned_at": "2026-01-24T18:51:40.933478",
+      "times_used": 1
+    },
+    {
+      "id": "know_38360b3b",
+      "question": "What is 5G?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.76,
+      "total_data_points": 291,
+      "learned_at": "2026-01-24T18:51:43.320937",
+      "times_used": 2
+    },
+    {
+      "id": "know_b96e331e",
+      "question": "How much is quantum computing?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 376,
+      "learned_at": "2026-01-24T18:51:44.410604",
+      "times_used": 2
+    },
+    {
+      "id": "know_c05a8b07",
+      "question": "Why is truth important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 356,
+      "learned_at": "2026-01-24T18:51:48.270115",
+      "times_used": 1
+    },
+    {
+      "id": "know_539ed72c",
+      "question": "Current robotics status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 330,
+      "learned_at": "2026-01-24T18:51:49.591735",
+      "times_used": 1
+    },
+    {
+      "id": "know_f9f7c940",
+      "question": "How to understand entropy?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 315,
+      "learned_at": "2026-01-24T18:51:51.959957",
+      "times_used": 2
+    },
+    {
+      "id": "know_743acfac",
+      "question": "Why is stem cells important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 378,
+      "learned_at": "2026-01-24T18:51:54.617646",
+      "times_used": 1
+    },
+    {
+      "id": "know_9a9068a7",
+      "question": "How does prime numbers work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 391,
+      "learned_at": "2026-01-24T18:51:56.863507",
+      "times_used": 3
+    },
+    {
+      "id": "know_a76ad70e",
+      "question": "What is the meaning of AI?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 285,
+      "learned_at": "2026-01-24T18:51:59.696350",
+      "times_used": 1
+    },
+    {
+      "id": "know_39fac956",
+      "question": "How does vaccines work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.74,
+      "total_data_points": 399,
+      "learned_at": "2026-01-24T18:52:01.802441",
+      "times_used": 1
+    },
+    {
+      "id": "know_82ca1fe3",
+      "question": "Is Polygon real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 416,
+      "learned_at": "2026-01-24T18:52:04.094294",
+      "times_used": 2
+    },
+    {
+      "id": "know_f7d192d9",
+      "question": "How much is neurons?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.51,
+      "total_data_points": 273,
+      "learned_at": "2026-01-24T18:52:05.659141",
+      "times_used": 1
+    },
+    {
+      "id": "know_92c4f74c",
+      "question": "Current string theory status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 355,
+      "learned_at": "2026-01-24T18:52:06.930560",
+      "times_used": 1
+    },
+    {
+      "id": "know_609ddc4b",
+      "question": "What is the meaning of entropy?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 315,
+      "learned_at": "2026-01-24T18:52:09.000501",
+      "times_used": 1
+    },
+    {
+      "id": "know_dfebda00",
+      "question": "Is Cardano real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 388,
+      "learned_at": "2026-01-24T18:52:10.476245",
+      "times_used": 2
+    },
+    {
+      "id": "know_e57877ea",
+      "question": "Latest Dogecoin news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 401,
+      "learned_at": "2026-01-24T18:52:12.303664",
+      "times_used": 2
+    },
+    {
+      "id": "know_9efd0689",
+      "question": "Can brain exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 315,
+      "learned_at": "2026-01-24T18:52:13.239665",
+      "times_used": 1
+    },
+    {
+      "id": "know_bd82fc89",
+      "question": "How does calculus work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 342,
+      "learned_at": "2026-01-24T18:52:14.478384",
+      "times_used": 1
+    },
+    {
+      "id": "know_d0792bf9",
+      "question": "Define DNA",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 285,
+      "learned_at": "2026-01-24T18:52:16.950080",
+      "times_used": 1
+    },
+    {
+      "id": "know_3d19d04b",
+      "question": "Why is cryptocurrency markets important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 345,
+      "learned_at": "2026-01-24T18:52:18.022089",
+      "times_used": 1
+    },
+    {
+      "id": "know_aa3fed46",
+      "question": "What's the difference between Bitcoin and Ethereum?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 323,
+      "learned_at": "2026-01-24T18:52:20.403082",
+      "times_used": 4
+    },
+    {
+      "id": "know_cda318a9",
+      "question": "How does galaxies work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.55,
+      "total_data_points": 338,
+      "learned_at": "2026-01-24T18:52:21.618185",
+      "times_used": 1
+    },
+    {
+      "id": "know_7181757f",
+      "question": "How to understand cryptocurrency markets?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 303,
+      "learned_at": "2026-01-24T18:52:24.164365",
+      "times_used": 2
+    },
+    {
+      "id": "know_01340666",
+      "question": "What causes XRP?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 230,
+      "learned_at": "2026-01-24T18:52:26.018950",
+      "times_used": 1
+    },
+    {
+      "id": "know_83a5dba3",
+      "question": "Current space exploration status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.74,
+      "total_data_points": 486,
+      "learned_at": "2026-01-24T18:52:27.892065",
+      "times_used": 2
+    },
+    {
+      "id": "know_251125a6",
+      "question": "What is the price of Litecoin?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 327,
+      "learned_at": "2026-01-24T18:52:30.306508",
+      "times_used": 1
+    },
+    {
+      "id": "know_b64e45a1",
+      "question": "Explain quantum mechanics",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 385,
+      "learned_at": "2026-01-24T18:52:31.210374",
+      "times_used": 3
+    },
+    {
+      "id": "know_31b99447",
+      "question": "Latest justice news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 300,
+      "learned_at": "2026-01-24T18:52:34.617498",
+      "times_used": 1
+    },
+    {
+      "id": "know_3023221a",
+      "question": "How much is stars?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.58,
+      "total_data_points": 294,
+      "learned_at": "2026-01-24T18:52:35.534503",
+      "times_used": 1
+    },
+    {
+      "id": "know_fa8319d8",
+      "question": "Can justice exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 356,
+      "learned_at": "2026-01-24T18:52:36.499477",
+      "times_used": 2
+    },
+    {
+      "id": "know_fb7ac112",
+      "question": "How much is topology?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 395,
+      "learned_at": "2026-01-24T18:52:37.609281",
+      "times_used": 1
+    },
+    {
+      "id": "know_665b906b",
+      "question": "Explain chaos theory",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 381,
+      "learned_at": "2026-01-24T18:52:38.744074",
+      "times_used": 1
+    },
+    {
+      "id": "know_18dc3ce6",
+      "question": "Latest Bitcoin news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 419,
+      "learned_at": "2026-01-24T18:52:42.672332",
+      "times_used": 1
+    },
+    {
+      "id": "know_bd4149bb",
+      "question": "What is the price of derivatives?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 290,
+      "learned_at": "2026-01-24T18:52:43.772720",
+      "times_used": 1
+    },
+    {
+      "id": "know_fc28c438",
+      "question": "How much is Litecoin?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 332,
+      "learned_at": "2026-01-24T18:52:46.649483",
+      "times_used": 1
+    },
+    {
+      "id": "know_2212e01e",
+      "question": "Current beauty status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 330,
+      "learned_at": "2026-01-24T18:52:49.341166",
+      "times_used": 1
+    },
+    {
+      "id": "know_fa85e208",
+      "question": "What is the meaning of logic?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.51,
+      "total_data_points": 304,
+      "learned_at": "2026-01-24T18:52:50.479428",
+      "times_used": 1
+    },
+    {
+      "id": "know_b43e1592",
+      "question": "Define Polygon",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 394,
+      "learned_at": "2026-01-24T18:52:51.428259",
+      "times_used": 1
+    },
+    {
+      "id": "know_dd8f0496",
+      "question": "Is brain real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 375,
+      "learned_at": "2026-01-24T18:52:52.593921",
+      "times_used": 1
+    },
+    {
+      "id": "know_25567486",
+      "question": "Current prime numbers status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.56,
+      "total_data_points": 165,
+      "learned_at": "2026-01-24T18:52:53.498360",
+      "times_used": 1
+    },
+    {
+      "id": "know_0a99d8f5",
+      "question": "Why is black holes important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 387,
+      "learned_at": "2026-01-24T18:52:57.398303",
+      "times_used": 2
+    },
+    {
+      "id": "know_792633c4",
+      "question": "Current Bitcoin status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 290,
+      "learned_at": "2026-01-24T18:52:58.304383",
+      "times_used": 2
+    },
+    {
+      "id": "know_64bbbcc8",
+      "question": "How much is cryptocurrency markets?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 312,
+      "learned_at": "2026-01-24T18:53:00.862905",
+      "times_used": 1
+    },
+    {
+      "id": "know_6a5c9753",
+      "question": "Define forex",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 334,
+      "learned_at": "2026-01-24T18:53:02.135424",
+      "times_used": 1
+    },
+    {
+      "id": "know_797b26d3",
+      "question": "What is asteroids?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 354,
+      "learned_at": "2026-01-24T18:53:03.190443",
+      "times_used": 1
+    },
+    {
+      "id": "know_3c5a73df",
+      "question": "What is the price of satellites?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 303,
+      "learned_at": "2026-01-24T18:53:05.640925",
+      "times_used": 1
+    },
+    {
+      "id": "know_7bf0189b",
+      "question": "How much is dark matter?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 361,
+      "learned_at": "2026-01-24T18:53:07.844549",
+      "times_used": 1
+    },
+    {
+      "id": "know_a775ee28",
+      "question": "How much is consciousness?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.51,
+      "total_data_points": 333,
+      "learned_at": "2026-01-24T18:53:10.342496",
+      "times_used": 1
+    },
+    {
+      "id": "know_429ae907",
+      "question": "Define SpaceX",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 205,
+      "learned_at": "2026-01-24T18:53:11.175343",
+      "times_used": 1
+    },
+    {
+      "id": "know_68821dc2",
+      "question": "Latest time news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 389,
+      "learned_at": "2026-01-24T18:53:13.389068",
+      "times_used": 2
+    },
+    {
+      "id": "know_b05fc053",
+      "question": "Compare matter with energy",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 332,
+      "learned_at": "2026-01-24T18:53:14.737012",
+      "times_used": 3
+    },
+    {
+      "id": "know_990506af",
+      "question": "How much is bacteria?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.76,
+      "total_data_points": 342,
+      "learned_at": "2026-01-24T18:53:15.922602",
+      "times_used": 1
+    },
+    {
+      "id": "know_d3a5b6f9",
+      "question": "How much is Dogecoin?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 423,
+      "learned_at": "2026-01-24T18:53:16.948990",
+      "times_used": 2
+    },
+    {
+      "id": "know_1c652408",
+      "question": "Is probability real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 316,
+      "learned_at": "2026-01-24T18:53:20.615674",
+      "times_used": 1
+    },
+    {
+      "id": "know_8fb40eb3",
+      "question": "What is the price of free will?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 409,
+      "learned_at": "2026-01-24T18:53:23.365393",
+      "times_used": 2
+    },
+    {
+      "id": "know_221a3b22",
+      "question": "Explain black holes",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 365,
+      "learned_at": "2026-01-24T18:53:24.373344",
+      "times_used": 2
+    },
+    {
+      "id": "know_d8c3e36e",
+      "question": "Latest forex news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.55,
+      "total_data_points": 303,
+      "learned_at": "2026-01-24T18:53:28.640109",
+      "times_used": 1
+    },
+    {
+      "id": "know_0979d433",
+      "question": "Explain topology",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 412,
+      "learned_at": "2026-01-24T18:53:30.916364",
+      "times_used": 2
+    },
+    {
+      "id": "know_529903db",
+      "question": "Latest consciousness news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 305,
+      "learned_at": "2026-01-24T18:53:34.670197",
+      "times_used": 1
+    },
+    {
+      "id": "know_a8762e5f",
+      "question": "What is the meaning of ethics?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 222,
+      "learned_at": "2026-01-24T18:53:35.639361",
+      "times_used": 1
+    },
+    {
+      "id": "know_247ba5a1",
+      "question": "What is the meaning of satellites?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 376,
+      "learned_at": "2026-01-24T18:53:39.173386",
+      "times_used": 2
+    },
+    {
+      "id": "know_45b58ede",
+      "question": "Current IoT status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 311,
+      "learned_at": "2026-01-24T18:53:42.051573",
+      "times_used": 1
+    },
+    {
+      "id": "know_54c62314",
+      "question": "Why is Cosmos important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 295,
+      "learned_at": "2026-01-24T18:53:43.006598",
+      "times_used": 2
+    },
+    {
+      "id": "know_cfe7d46d",
+      "question": "What is the price of neurons?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 343,
+      "learned_at": "2026-01-24T18:53:43.877318",
+      "times_used": 1
+    },
+    {
+      "id": "know_537e2273",
+      "question": "Current viruses status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 347,
+      "learned_at": "2026-01-24T18:53:45.163547",
+      "times_used": 1
+    },
+    {
+      "id": "know_a40d100f",
+      "question": "What causes satellites?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 337,
+      "learned_at": "2026-01-24T18:53:46.618693",
+      "times_used": 2
+    },
+    {
+      "id": "know_e099a305",
+      "question": "What is AI?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 460,
+      "learned_at": "2026-01-24T18:53:50.003747",
+      "times_used": 1
+    },
+    {
+      "id": "know_c3c208fb",
+      "question": "How much is Bitcoin?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 334,
+      "learned_at": "2026-01-24T18:53:51.121885",
+      "times_used": 1
+    },
+    {
+      "id": "know_53fc97ad",
+      "question": "Define 5G",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 286,
+      "learned_at": "2026-01-24T18:53:55.852591",
+      "times_used": 1
+    },
+    {
+      "id": "know_c7613951",
+      "question": "What is the price of happiness?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 307,
+      "learned_at": "2026-01-24T18:53:56.899582",
+      "times_used": 2
+    },
+    {
+      "id": "know_f7e3463f",
+      "question": "What is the meaning of calculus?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 320,
+      "learned_at": "2026-01-24T18:53:59.553777",
+      "times_used": 3
+    },
+    {
+      "id": "know_8b4ddb88",
+      "question": "Define Ethereum",
+      "sources_consulted": 13,
+      "avg_relevance": 0.54,
+      "total_data_points": 338,
+      "learned_at": "2026-01-24T18:54:03.118503",
+      "times_used": 1
+    },
+    {
+      "id": "know_5b366276",
+      "question": "How to understand black holes?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 309,
+      "learned_at": "2026-01-24T18:54:04.507202",
+      "times_used": 2
+    },
+    {
+      "id": "know_3259f509",
+      "question": "What is the meaning of prime numbers?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 367,
+      "learned_at": "2026-01-24T18:54:05.865561",
+      "times_used": 2
+    },
+    {
+      "id": "know_145c0422",
+      "question": "How does Litecoin work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 331,
+      "learned_at": "2026-01-24T18:54:06.985840",
+      "times_used": 2
+    },
+    {
+      "id": "know_7202ef66",
+      "question": "Why is Polkadot important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 374,
+      "learned_at": "2026-01-24T18:54:12.904587",
+      "times_used": 3
+    },
+    {
+      "id": "know_5be9564a",
+      "question": "What is Polygon?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 333,
+      "learned_at": "2026-01-24T18:54:14.296521",
+      "times_used": 1
+    },
+    {
+      "id": "know_c7acf356",
+      "question": "Explain Polkadot",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 254,
+      "learned_at": "2026-01-24T18:54:16.840195",
+      "times_used": 2
+    },
+    {
+      "id": "know_a756b36b",
+      "question": "Can galaxies exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 316,
+      "learned_at": "2026-01-24T18:54:26.409391",
+      "times_used": 1
+    },
+    {
+      "id": "know_bf6ba55a",
+      "question": "What is the meaning of reality?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.56,
+      "total_data_points": 430,
+      "learned_at": "2026-01-24T18:54:27.690628",
+      "times_used": 1
+    },
+    {
+      "id": "know_65a1edd7",
+      "question": "What is happiness?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 269,
+      "learned_at": "2026-01-24T18:54:28.954356",
+      "times_used": 1
+    },
+    {
+      "id": "know_20dbbff3",
+      "question": "How does Cosmos work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 392,
+      "learned_at": "2026-01-24T18:54:31.570475",
+      "times_used": 1
+    },
+    {
+      "id": "know_58c174d6",
+      "question": "What causes entropy?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 279,
+      "learned_at": "2026-01-24T18:54:32.557671",
+      "times_used": 1
+    },
+    {
+      "id": "know_eb469de8",
+      "question": "How much is interest rates?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.53,
+      "total_data_points": 404,
+      "learned_at": "2026-01-24T18:54:33.695383",
+      "times_used": 2
+    },
+    {
+      "id": "know_e5a49024",
+      "question": "Is space exploration real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 374,
+      "learned_at": "2026-01-24T18:54:34.857414",
+      "times_used": 1
+    },
+    {
+      "id": "know_494af67e",
+      "question": "What is gravity?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 266,
+      "learned_at": "2026-01-24T18:54:37.307165",
+      "times_used": 1
+    },
+    {
+      "id": "know_3adda8c1",
+      "question": "What is machine learning?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 325,
+      "learned_at": "2026-01-24T18:54:38.216721",
+      "times_used": 1
+    },
+    {
+      "id": "know_9a1105c0",
+      "question": "Explain neurons",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 324,
+      "learned_at": "2026-01-24T18:54:39.135267",
+      "times_used": 2
+    },
+    {
+      "id": "know_5c78c793",
+      "question": "How does planets work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 329,
+      "learned_at": "2026-01-24T18:54:40.464264",
+      "times_used": 1
+    },
+    {
+      "id": "know_32b74c78",
+      "question": "How much is Ethereum?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 428,
+      "learned_at": "2026-01-24T18:54:41.403999",
+      "times_used": 1
+    },
+    {
+      "id": "know_993be410",
+      "question": "Is GDP real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 263,
+      "learned_at": "2026-01-24T18:54:42.502454",
+      "times_used": 1
+    },
+    {
+      "id": "know_e7c3d2a1",
+      "question": "How to understand stars?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.77,
+      "total_data_points": 278,
+      "learned_at": "2026-01-24T18:54:43.464635",
+      "times_used": 2
+    },
+    {
+      "id": "know_55f40b03",
+      "question": "What is the meaning of stem cells?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 367,
+      "learned_at": "2026-01-24T18:54:46.049014",
+      "times_used": 2
+    },
+    {
+      "id": "know_572618bd",
+      "question": "Current calculus status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 336,
+      "learned_at": "2026-01-24T18:54:50.014010",
+      "times_used": 1
+    },
+    {
+      "id": "know_1e9a36f8",
+      "question": "Why is genes important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 327,
+      "learned_at": "2026-01-24T18:54:50.964099",
+      "times_used": 1
+    },
+    {
+      "id": "know_5947bff3",
+      "question": "What causes bacteria?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 266,
+      "learned_at": "2026-01-24T18:54:52.554367",
+      "times_used": 1
+    },
+    {
+      "id": "know_df63c4a7",
+      "question": "What is the meaning of probability?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 311,
+      "learned_at": "2026-01-24T18:54:53.920455",
+      "times_used": 1
+    },
+    {
+      "id": "know_6ef2f47c",
+      "question": "Current Cardano status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 355,
+      "learned_at": "2026-01-24T18:54:56.099874",
+      "times_used": 1
+    },
+    {
+      "id": "know_03c7ec92",
+      "question": "Latest planets news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 241,
+      "learned_at": "2026-01-24T18:54:57.283216",
+      "times_used": 1
+    },
+    {
+      "id": "know_94df29e8",
+      "question": "Current Cosmos status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 401,
+      "learned_at": "2026-01-24T18:54:59.949764",
+      "times_used": 1
+    },
+    {
+      "id": "know_ffdd6866",
+      "question": "How does stem cells work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 346,
+      "learned_at": "2026-01-24T18:55:05.660777",
+      "times_used": 1
+    },
+    {
+      "id": "know_9df09780",
+      "question": "Current derivatives status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 302,
+      "learned_at": "2026-01-24T18:55:09.072691",
+      "times_used": 1
+    },
+    {
+      "id": "know_205fa130",
+      "question": "Why is space exploration important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 266,
+      "learned_at": "2026-01-24T18:55:10.489102",
+      "times_used": 1
+    },
+    {
+      "id": "know_cbd4f899",
+      "question": "Can antibiotics exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 287,
+      "learned_at": "2026-01-24T18:55:14.937059",
+      "times_used": 1
+    },
+    {
+      "id": "know_7b636d17",
+      "question": "Latest 5G news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 219,
+      "learned_at": "2026-01-24T18:55:16.089983",
+      "times_used": 1
+    },
+    {
+      "id": "know_c55287ae",
+      "question": "What is the meaning of commodities?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.54,
+      "total_data_points": 385,
+      "learned_at": "2026-01-24T18:55:18.152229",
+      "times_used": 1
+    },
+    {
+      "id": "know_fc42b388",
+      "question": "What is the meaning of justice?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 293,
+      "learned_at": "2026-01-24T18:55:19.307733",
+      "times_used": 1
+    },
+    {
+      "id": "know_39371d14",
+      "question": "How much is Polkadot?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 333,
+      "learned_at": "2026-01-24T18:55:20.296139",
+      "times_used": 1
+    },
+    {
+      "id": "know_69124f01",
+      "question": "What causes Solana?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.77,
+      "total_data_points": 352,
+      "learned_at": "2026-01-24T18:55:21.630903",
+      "times_used": 2
+    },
+    {
+      "id": "know_697a2d5c",
+      "question": "How to understand SpaceX?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 356,
+      "learned_at": "2026-01-24T18:55:22.876964",
+      "times_used": 2
+    },
+    {
+      "id": "know_2c1f9bb6",
+      "question": "What is the meaning of viruses?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 343,
+      "learned_at": "2026-01-24T18:55:24.177690",
+      "times_used": 1
+    },
+    {
+      "id": "know_027aca65",
+      "question": "What is the price of ethics?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 266,
+      "learned_at": "2026-01-24T18:55:25.238377",
+      "times_used": 1
+    },
+    {
+      "id": "know_d2df5d86",
+      "question": "How does Jupiter work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 433,
+      "learned_at": "2026-01-24T18:55:26.198683",
+      "times_used": 1
+    },
+    {
+      "id": "know_8283e65f",
+      "question": "How does truth work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 331,
+      "learned_at": "2026-01-24T18:55:27.602997",
+      "times_used": 1
+    },
+    {
+      "id": "know_a1b84091",
+      "question": "Current antimatter status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.74,
+      "total_data_points": 335,
+      "learned_at": "2026-01-24T18:55:32.190806",
+      "times_used": 1
+    },
+    {
+      "id": "know_ae81916c",
+      "question": "Latest asteroids news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 318,
+      "learned_at": "2026-01-24T18:55:33.752086",
+      "times_used": 1
+    },
+    {
+      "id": "know_538766b8",
+      "question": "Current asteroids status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 348,
+      "learned_at": "2026-01-24T18:55:37.055854",
+      "times_used": 1
+    },
+    {
+      "id": "know_f0a7f6d1",
+      "question": "Define stars",
+      "sources_consulted": 13,
+      "avg_relevance": 0.74,
+      "total_data_points": 369,
+      "learned_at": "2026-01-24T18:55:38.172637",
+      "times_used": 1
+    },
+    {
+      "id": "know_7a401327",
+      "question": "Latest XRP news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 375,
+      "learned_at": "2026-01-24T18:55:39.915119",
+      "times_used": 1
+    },
+    {
+      "id": "know_ef44a937",
+      "question": "What's the difference between theory and practice?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.78,
+      "total_data_points": 457,
+      "learned_at": "2026-01-24T18:55:42.475539",
+      "times_used": 3
+    },
+    {
+      "id": "know_c2e00838",
+      "question": "Define existence",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 390,
+      "learned_at": "2026-01-24T18:55:49.550558",
+      "times_used": 1
+    },
+    {
+      "id": "know_47cee8f3",
+      "question": "Is Jupiter real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 368,
+      "learned_at": "2026-01-24T18:55:51.830546",
+      "times_used": 1
+    },
+    {
+      "id": "know_a21fc560",
+      "question": "How does interest rates work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.58,
+      "total_data_points": 201,
+      "learned_at": "2026-01-24T18:55:53.168902",
+      "times_used": 1
+    },
+    {
+      "id": "know_62dbf377",
+      "question": "Is heart real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 332,
+      "learned_at": "2026-01-24T18:55:54.303045",
+      "times_used": 1
+    },
+    {
+      "id": "know_61835a9a",
+      "question": "What is prime numbers?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 293,
+      "learned_at": "2026-01-24T18:55:55.285398",
+      "times_used": 1
+    },
+    {
+      "id": "know_0197ce59",
+      "question": "What causes AI?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 335,
+      "learned_at": "2026-01-24T18:55:56.348535",
+      "times_used": 1
+    },
+    {
+      "id": "know_ee14e9d5",
+      "question": "Current cloud computing status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 333,
+      "learned_at": "2026-01-24T18:56:01.127484",
+      "times_used": 1
+    },
+    {
+      "id": "know_e22024a9",
+      "question": "Current Dogecoin status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 418,
+      "learned_at": "2026-01-24T18:56:02.036661",
+      "times_used": 1
+    },
+    {
+      "id": "know_2e5a8761",
+      "question": "How does SpaceX work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 396,
+      "learned_at": "2026-01-24T18:56:04.649099",
+      "times_used": 1
+    },
+    {
+      "id": "know_ae6db6e7",
+      "question": "Is chaos theory real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.75,
+      "total_data_points": 343,
+      "learned_at": "2026-01-24T18:56:07.209785",
+      "times_used": 1
+    },
+    {
+      "id": "know_5f7ca869",
+      "question": "Can gravity exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 349,
+      "learned_at": "2026-01-24T18:56:10.039746",
+      "times_used": 1
+    },
+    {
+      "id": "know_4be899f2",
+      "question": "How much is quantum mechanics?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 432,
+      "learned_at": "2026-01-24T18:56:14.608017",
+      "times_used": 2
+    },
+    {
+      "id": "know_5c96b41b",
+      "question": "How does commodities work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 329,
+      "learned_at": "2026-01-24T18:56:15.825434",
+      "times_used": 1
+    },
+    {
+      "id": "know_52902010",
+      "question": "Current probability status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 304,
+      "learned_at": "2026-01-24T18:56:19.365481",
+      "times_used": 1
+    },
+    {
+      "id": "know_b021d1d5",
+      "question": "What is the meaning of cryptocurrency markets?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 371,
+      "learned_at": "2026-01-24T18:56:20.550460",
+      "times_used": 1
+    },
+    {
+      "id": "know_7bf856c3",
+      "question": "Define stem cells",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 325,
+      "learned_at": "2026-01-24T18:56:21.690242",
+      "times_used": 2
+    },
+    {
+      "id": "know_f4bc6d25",
+      "question": "Define evolution",
+      "sources_consulted": 13,
+      "avg_relevance": 0.55,
+      "total_data_points": 299,
+      "learned_at": "2026-01-24T18:56:23.046357",
+      "times_used": 2
+    },
+    {
+      "id": "know_3c52ef94",
+      "question": "Current machine learning status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 323,
+      "learned_at": "2026-01-24T18:56:27.996835",
+      "times_used": 1
+    },
+    {
+      "id": "know_105a641e",
+      "question": "Can prime numbers exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 417,
+      "learned_at": "2026-01-24T18:56:32.486828",
+      "times_used": 1
+    },
+    {
+      "id": "know_59a9ef6c",
+      "question": "How to understand Jupiter?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 291,
+      "learned_at": "2026-01-24T18:56:34.009728",
+      "times_used": 2
+    },
+    {
+      "id": "know_9ec4ec0d",
+      "question": "Latest inflation news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 414,
+      "learned_at": "2026-01-24T18:56:35.421308",
+      "times_used": 1
+    },
+    {
+      "id": "know_7703cb0f",
+      "question": "Current immune system status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 314,
+      "learned_at": "2026-01-24T18:56:36.386781",
+      "times_used": 2
+    },
+    {
+      "id": "know_909b7685",
+      "question": "How does topology work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.46,
+      "total_data_points": 319,
+      "learned_at": "2026-01-24T18:56:37.441734",
+      "times_used": 1
+    },
+    {
+      "id": "know_e0a4119f",
+      "question": "What is the price of Solana?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 343,
+      "learned_at": "2026-01-24T18:56:40.381267",
+      "times_used": 1
+    },
+    {
+      "id": "know_fd737717",
+      "question": "Explain planets",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 355,
+      "learned_at": "2026-01-24T18:56:41.467478",
+      "times_used": 1
+    },
+    {
+      "id": "know_c0f006a7",
+      "question": "Can encryption exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 383,
+      "learned_at": "2026-01-24T18:56:42.503208",
+      "times_used": 1
+    },
+    {
+      "id": "know_65744aef",
+      "question": "What is the meaning of genes?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 313,
+      "learned_at": "2026-01-24T18:56:43.668839",
+      "times_used": 1
+    },
+    {
+      "id": "know_34b637ba",
+      "question": "Is relativity real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 336,
+      "learned_at": "2026-01-24T18:56:46.089321",
+      "times_used": 1
+    },
+    {
+      "id": "know_a2746b6b",
+      "question": "What causes dark matter?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 303,
+      "learned_at": "2026-01-24T18:56:53.175184",
+      "times_used": 1
+    },
+    {
+      "id": "know_30e1fcbb",
+      "question": "Why is vaccines important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.75,
+      "total_data_points": 359,
+      "learned_at": "2026-01-24T18:56:55.628162",
+      "times_used": 1
+    },
+    {
+      "id": "know_3f4e1299",
+      "question": "What is the price of GDP?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 255,
+      "learned_at": "2026-01-24T18:56:56.744809",
+      "times_used": 1
+    },
+    {
+      "id": "know_da11aa9a",
+      "question": "How does infinity work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 268,
+      "learned_at": "2026-01-24T18:57:00.514733",
+      "times_used": 1
+    },
+    {
+      "id": "know_11333269",
+      "question": "How much is heart?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 404,
+      "learned_at": "2026-01-24T18:57:04.082610",
+      "times_used": 1
+    },
+    {
+      "id": "know_a071da9f",
+      "question": "What causes bonds?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 289,
+      "learned_at": "2026-01-24T18:57:06.375587",
+      "times_used": 2
+    },
+    {
+      "id": "know_6c40375e",
+      "question": "What is the meaning of Litecoin?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 337,
+      "learned_at": "2026-01-24T18:57:11.533713",
+      "times_used": 1
+    },
+    {
+      "id": "know_68c10321",
+      "question": "What causes viruses?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 379,
+      "learned_at": "2026-01-24T18:57:12.549695",
+      "times_used": 1
+    },
+    {
+      "id": "know_ed6c3f2d",
+      "question": "How much is photosynthesis?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 314,
+      "learned_at": "2026-01-24T18:57:13.693092",
+      "times_used": 1
+    },
+    {
+      "id": "know_2bbbbf81",
+      "question": "Explain encryption",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 315,
+      "learned_at": "2026-01-24T18:57:14.894257",
+      "times_used": 1
+    },
+    {
+      "id": "know_f09172cf",
+      "question": "What is the price of Polygon?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 345,
+      "learned_at": "2026-01-24T18:57:17.828900",
+      "times_used": 1
+    },
+    {
+      "id": "know_d380d440",
+      "question": "How to understand 5G?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 303,
+      "learned_at": "2026-01-24T18:57:27.541464",
+      "times_used": 1
+    },
+    {
+      "id": "know_2e384912",
+      "question": "Latest relativity news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 342,
+      "learned_at": "2026-01-24T18:57:28.953831",
+      "times_used": 1
+    },
+    {
+      "id": "know_1fb6b433",
+      "question": "Define bonds",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 288,
+      "learned_at": "2026-01-24T18:57:32.486329",
+      "times_used": 1
+    },
+    {
+      "id": "know_f0818347",
+      "question": "Is galaxies real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 383,
+      "learned_at": "2026-01-24T18:57:33.496871",
+      "times_used": 1
+    },
+    {
+      "id": "know_5241f3b8",
+      "question": "Why is immune system important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 222,
+      "learned_at": "2026-01-24T18:57:34.998739",
+      "times_used": 1
+    },
+    {
+      "id": "know_d7e104ff",
+      "question": "Define commodities",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 368,
+      "learned_at": "2026-01-24T18:57:42.321546",
+      "times_used": 1
+    },
+    {
+      "id": "know_9a3c0465",
+      "question": "What is the price of robotics?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 324,
+      "learned_at": "2026-01-24T18:57:45.188417",
+      "times_used": 1
+    },
+    {
+      "id": "know_304ea100",
+      "question": "Why is blockchain important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 325,
+      "learned_at": "2026-01-24T18:57:46.251884",
+      "times_used": 1
+    },
+    {
+      "id": "know_3d08c184",
+      "question": "How to understand antimatter?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 325,
+      "learned_at": "2026-01-24T18:57:50.648343",
+      "times_used": 1
+    },
+    {
+      "id": "know_8bcc5886",
+      "question": "Current Chainlink status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 345,
+      "learned_at": "2026-01-24T18:57:51.793935",
+      "times_used": 1
+    },
+    {
+      "id": "know_d97d81be",
+      "question": "How much is evolution?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.58,
+      "total_data_points": 284,
+      "learned_at": "2026-01-24T18:57:52.882799",
+      "times_used": 1
+    },
+    {
+      "id": "know_08d93d6d",
+      "question": "What is algorithms?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 340,
+      "learned_at": "2026-01-24T18:57:54.611893",
+      "times_used": 1
+    },
+    {
+      "id": "know_37261958",
+      "question": "Explain cloud computing",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 396,
+      "learned_at": "2026-01-24T18:57:57.654469",
+      "times_used": 1
+    },
+    {
+      "id": "know_f0a43597",
+      "question": "How does genes work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 296,
+      "learned_at": "2026-01-24T18:57:58.877738",
+      "times_used": 2
+    },
+    {
+      "id": "know_f176363c",
+      "question": "What is dark matter?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 265,
+      "learned_at": "2026-01-24T18:58:00.277795",
+      "times_used": 1
+    },
+    {
+      "id": "know_642b3a28",
+      "question": "Current ethics status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 344,
+      "learned_at": "2026-01-24T18:58:03.505995",
+      "times_used": 1
+    },
+    {
+      "id": "know_50a951c4",
+      "question": "Why is antibiotics important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 274,
+      "learned_at": "2026-01-24T18:58:04.511233",
+      "times_used": 1
+    },
+    {
+      "id": "know_70da3df3",
+      "question": "How does Mars work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 374,
+      "learned_at": "2026-01-24T18:58:05.951338",
+      "times_used": 2
+    },
+    {
+      "id": "know_831a250f",
+      "question": "What is the meaning of Polygon?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 341,
+      "learned_at": "2026-01-24T18:58:09.605920",
+      "times_used": 1
+    },
+    {
+      "id": "know_259b1eef",
+      "question": "What is the price of relativity?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.71,
+      "total_data_points": 330,
+      "learned_at": "2026-01-24T18:58:10.786074",
+      "times_used": 1
+    },
+    {
+      "id": "know_328a545a",
+      "question": "What is truth?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.53,
+      "total_data_points": 346,
+      "learned_at": "2026-01-24T18:58:14.370194",
+      "times_used": 1
+    },
+    {
+      "id": "know_e4d9d1e9",
+      "question": "Explain AI",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 358,
+      "learned_at": "2026-01-24T18:58:15.464951",
+      "times_used": 1
+    },
+    {
+      "id": "know_b9a48fce",
+      "question": "What is free will?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 420,
+      "learned_at": "2026-01-24T18:58:16.400514",
+      "times_used": 1
+    },
+    {
+      "id": "know_3af1d4c2",
+      "question": "What is the price of Dogecoin?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 327,
+      "learned_at": "2026-01-24T18:58:19.059492",
+      "times_used": 1
+    },
+    {
+      "id": "know_964cc8ec",
+      "question": "Latest IoT news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.74,
+      "total_data_points": 312,
+      "learned_at": "2026-01-24T18:58:20.480134",
+      "times_used": 1
+    },
+    {
+      "id": "know_c8f4d594",
+      "question": "Why is morality important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 375,
+      "learned_at": "2026-01-24T18:58:21.892612",
+      "times_used": 1
+    },
+    {
+      "id": "know_cf8974d5",
+      "question": "Why is machine learning important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 319,
+      "learned_at": "2026-01-24T18:58:24.612278",
+      "times_used": 1
+    },
+    {
+      "id": "know_33f4627a",
+      "question": "Latest SpaceX news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 413,
+      "learned_at": "2026-01-24T18:58:26.883148",
+      "times_used": 1
+    },
+    {
+      "id": "know_9b99977d",
+      "question": "Explain prime numbers",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 387,
+      "learned_at": "2026-01-24T18:58:30.365152",
+      "times_used": 1
+    },
+    {
+      "id": "know_3091b8c0",
+      "question": "What is the meaning of GDP?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.75,
+      "total_data_points": 344,
+      "learned_at": "2026-01-24T18:58:31.672484",
+      "times_used": 1
+    },
+    {
+      "id": "know_3c409ff8",
+      "question": "What is the price of chaos theory?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.54,
+      "total_data_points": 307,
+      "learned_at": "2026-01-24T18:58:36.599303",
+      "times_used": 1
+    },
+    {
+      "id": "know_a6f8b0a0",
+      "question": "Can immune system exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 254,
+      "learned_at": "2026-01-24T18:58:38.687253",
+      "times_used": 1
+    },
+    {
+      "id": "know_b14833fa",
+      "question": "Explain Ethereum",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 444,
+      "learned_at": "2026-01-24T18:58:44.904834",
+      "times_used": 1
+    },
+    {
+      "id": "know_97a12daf",
+      "question": "Latest photosynthesis news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 270,
+      "learned_at": "2026-01-24T18:58:46.049272",
+      "times_used": 1
+    },
+    {
+      "id": "know_d031e42c",
+      "question": "Latest antibiotics news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 321,
+      "learned_at": "2026-01-24T18:58:47.212469",
+      "times_used": 1
+    },
+    {
+      "id": "know_63d89b13",
+      "question": "Explain stock market",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 383,
+      "learned_at": "2026-01-24T18:58:48.592493",
+      "times_used": 1
+    },
+    {
+      "id": "know_d30f2673",
+      "question": "How does bacteria work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 263,
+      "learned_at": "2026-01-24T18:58:49.636694",
+      "times_used": 2
+    },
+    {
+      "id": "know_fda28225",
+      "question": "Latest cloud computing news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 293,
+      "learned_at": "2026-01-24T18:58:53.152426",
+      "times_used": 1
+    },
+    {
+      "id": "know_eaedbdeb",
+      "question": "What causes Dogecoin?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 283,
+      "learned_at": "2026-01-24T18:58:54.674326",
+      "times_used": 1
+    },
+    {
+      "id": "know_691eca88",
+      "question": "Latest NASA news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 317,
+      "learned_at": "2026-01-24T18:58:56.674351",
+      "times_used": 1
+    },
+    {
+      "id": "know_9177daa8",
+      "question": "How to understand planets?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 348,
+      "learned_at": "2026-01-24T18:59:01.221956",
+      "times_used": 1
+    },
+    {
+      "id": "know_09f5845d",
+      "question": "What is the price of asteroids?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 338,
+      "learned_at": "2026-01-24T18:59:03.501682",
+      "times_used": 1
+    },
+    {
+      "id": "know_554752c8",
+      "question": "What causes Polkadot?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 364,
+      "learned_at": "2026-01-24T18:59:04.588742",
+      "times_used": 1
+    },
+    {
+      "id": "know_dfdeeaa6",
+      "question": "How does trade work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 313,
+      "learned_at": "2026-01-24T18:59:07.580169",
+      "times_used": 1
+    },
+    {
+      "id": "know_f1275fbe",
+      "question": "What is the meaning of stock market?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 362,
+      "learned_at": "2026-01-24T18:59:08.787792",
+      "times_used": 1
+    },
+    {
+      "id": "know_0017cb73",
+      "question": "How to understand ethics?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.58,
+      "total_data_points": 351,
+      "learned_at": "2026-01-24T18:59:13.501215",
+      "times_used": 1
+    },
+    {
+      "id": "know_068d85a6",
+      "question": "Why is Jupiter important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.69,
+      "total_data_points": 367,
+      "learned_at": "2026-01-24T18:59:14.787195",
+      "times_used": 1
+    },
+    {
+      "id": "know_a79e814b",
+      "question": "How does quantum mechanics work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 304,
+      "learned_at": "2026-01-24T18:59:15.750740",
+      "times_used": 1
+    },
+    {
+      "id": "know_d02d4694",
+      "question": "How does DNA work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 360,
+      "learned_at": "2026-01-24T18:59:19.236283",
+      "times_used": 1
+    },
+    {
+      "id": "know_b89c13c9",
+      "question": "Define morality",
+      "sources_consulted": 13,
+      "avg_relevance": 0.57,
+      "total_data_points": 403,
+      "learned_at": "2026-01-24T18:59:23.937132",
+      "times_used": 1
+    },
+    {
+      "id": "know_af80f4db",
+      "question": "Is reality real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.59,
+      "total_data_points": 342,
+      "learned_at": "2026-01-24T18:59:27.724793",
+      "times_used": 1
+    },
+    {
+      "id": "know_c7d47baf",
+      "question": "What causes probability?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 313,
+      "learned_at": "2026-01-24T18:59:29.043865",
+      "times_used": 1
+    },
+    {
+      "id": "know_73006e90",
+      "question": "How to understand encryption?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 420,
+      "learned_at": "2026-01-24T18:59:30.501783",
+      "times_used": 1
+    },
+    {
+      "id": "know_509ac8d4",
+      "question": "Why is evolution important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 407,
+      "learned_at": "2026-01-24T18:59:31.739996",
+      "times_used": 1
+    },
+    {
+      "id": "know_d6ec6886",
+      "question": "Can multiverse exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.75,
+      "total_data_points": 343,
+      "learned_at": "2026-01-24T18:59:32.625739",
+      "times_used": 1
+    },
+    {
+      "id": "know_63661e1b",
+      "question": "Can morality exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 300,
+      "learned_at": "2026-01-24T18:59:33.958616",
+      "times_used": 1
+    },
+    {
+      "id": "know_ce31e5dd",
+      "question": "How does logic work?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 235,
+      "learned_at": "2026-01-24T18:59:35.144301",
+      "times_used": 1
+    },
+    {
+      "id": "know_1da57f92",
+      "question": "How much is knowledge?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 263,
+      "learned_at": "2026-01-24T18:59:36.579401",
+      "times_used": 1
+    },
+    {
+      "id": "know_628e59ac",
+      "question": "What is the price of infinity?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 337,
+      "learned_at": "2026-01-24T18:59:37.740885",
+      "times_used": 1
+    },
+    {
+      "id": "know_1a4ca160",
+      "question": "Latest quantum computing news",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 342,
+      "learned_at": "2026-01-24T18:59:44.378719",
+      "times_used": 1
+    },
+    {
+      "id": "know_beb99ff1",
+      "question": "How much is galaxies?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 404,
+      "learned_at": "2026-01-24T18:59:45.389855",
+      "times_used": 1
+    },
+    {
+      "id": "know_c431207c",
+      "question": "Explain stars",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 517,
+      "learned_at": "2026-01-24T18:59:47.686880",
+      "times_used": 1
+    },
+    {
+      "id": "know_bbd1b6ab",
+      "question": "What is planets?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.77,
+      "total_data_points": 410,
+      "learned_at": "2026-01-24T18:59:50.092793",
+      "times_used": 1
+    },
+    {
+      "id": "know_730ebb9f",
+      "question": "What is IoT?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 290,
+      "learned_at": "2026-01-24T18:59:51.144555",
+      "times_used": 1
+    },
+    {
+      "id": "know_a4934678",
+      "question": "Can beauty exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.61,
+      "total_data_points": 284,
+      "learned_at": "2026-01-24T18:59:57.073952",
+      "times_used": 1
+    },
+    {
+      "id": "know_8c164988",
+      "question": "What is Ethereum?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 293,
+      "learned_at": "2026-01-24T18:59:58.122443",
+      "times_used": 1
+    },
+    {
+      "id": "know_0d69f7bd",
+      "question": "What is the price of prime numbers?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.62,
+      "total_data_points": 281,
+      "learned_at": "2026-01-24T18:59:59.555126",
+      "times_used": 1
+    },
+    {
+      "id": "know_e7c85160",
+      "question": "Define Mars",
+      "sources_consulted": 13,
+      "avg_relevance": 0.66,
+      "total_data_points": 326,
+      "learned_at": "2026-01-24T19:00:02.925355",
+      "times_used": 1
+    },
+    {
+      "id": "know_cf32ae4c",
+      "question": "Current topology status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 185,
+      "learned_at": "2026-01-24T19:00:05.461642",
+      "times_used": 1
+    },
+    {
+      "id": "know_ce2a8a0b",
+      "question": "Why is Cardano important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.7,
+      "total_data_points": 347,
+      "learned_at": "2026-01-24T19:00:08.096447",
+      "times_used": 1
+    },
+    {
+      "id": "know_494d3ca6",
+      "question": "What is statistics?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 351,
+      "learned_at": "2026-01-24T19:00:11.103515",
+      "times_used": 1
+    },
+    {
+      "id": "know_c9a11174",
+      "question": "What is the price of dark matter?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.54,
+      "total_data_points": 284,
+      "learned_at": "2026-01-24T19:00:12.522532",
+      "times_used": 1
+    },
+    {
+      "id": "know_e83084f0",
+      "question": "Why is quantum computing important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.6,
+      "total_data_points": 306,
+      "learned_at": "2026-01-24T19:00:13.810228",
+      "times_used": 1
+    },
+    {
+      "id": "know_7e6abcc8",
+      "question": "Define justice",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 305,
+      "learned_at": "2026-01-24T19:00:15.186390",
+      "times_used": 1
+    },
+    {
+      "id": "know_80ea040f",
+      "question": "Is derivatives real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.65,
+      "total_data_points": 420,
+      "learned_at": "2026-01-24T19:00:16.138591",
+      "times_used": 1
+    },
+    {
+      "id": "know_dbe4930c",
+      "question": "Is evolution real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.78,
+      "total_data_points": 430,
+      "learned_at": "2026-01-24T19:00:17.398992",
+      "times_used": 1
+    },
+    {
+      "id": "know_87d9bd02",
+      "question": "Define neural networks",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 392,
+      "learned_at": "2026-01-31T10:16:34.767162",
+      "times_used": 1
+    },
+    {
+      "id": "know_2a1f152f",
+      "question": "Explain probability",
+      "sources_consulted": 13,
+      "avg_relevance": 0.58,
+      "total_data_points": 357,
+      "learned_at": "2026-01-31T10:16:42.768524",
+      "times_used": 1
+    },
+    {
+      "id": "know_a6ef8b48",
+      "question": "Why is calculus important?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 340,
+      "learned_at": "2026-01-31T10:17:06.772155",
+      "times_used": 1
+    },
+    {
+      "id": "know_0ad66f69",
+      "question": "Is neural networks real?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.72,
+      "total_data_points": 295,
+      "learned_at": "2026-01-31T10:17:14.773726",
+      "times_used": 1
+    },
+    {
+      "id": "know_d7ffb17a",
+      "question": "Can space exploration exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.73,
+      "total_data_points": 355,
+      "learned_at": "2026-01-31T10:17:22.775478",
+      "times_used": 1
+    },
+    {
+      "id": "know_88da68b2",
+      "question": "Explain Bitcoin",
+      "sources_consulted": 13,
+      "avg_relevance": 0.64,
+      "total_data_points": 278,
+      "learned_at": "2026-01-31T10:17:46.780461",
+      "times_used": 1
+    },
+    {
+      "id": "know_cc9d123b",
+      "question": "Current fractals status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.67,
+      "total_data_points": 436,
+      "learned_at": "2026-01-31T10:18:18.786232",
+      "times_used": 1
+    },
+    {
+      "id": "know_e07432e6",
+      "question": "Current statistics status",
+      "sources_consulted": 13,
+      "avg_relevance": 0.63,
+      "total_data_points": 262,
+      "learned_at": "2026-01-31T10:18:42.791404",
+      "times_used": 1
+    },
+    {
+      "id": "know_d60a4e6b",
+      "question": "Explain forex",
+      "sources_consulted": 13,
+      "avg_relevance": 0.58,
+      "total_data_points": 314,
+      "learned_at": "2026-01-31T10:19:14.797208",
+      "times_used": 1
+    },
+    {
+      "id": "know_bcf9db5c",
+      "question": "Can calculus exist?",
+      "sources_consulted": 13,
+      "avg_relevance": 0.68,
+      "total_data_points": 279,
+      "learned_at": "2026-01-31T10:19:22.798404",
+      "times_used": 1
+    }
+  ],
+  "stats": {
+    "total_learned": 580
+  }
+}

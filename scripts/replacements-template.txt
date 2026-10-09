@@ -1,0 +1,17 @@
+# Replacements template for git-filter-repo / BFG
+# Edit this file to include the exact tokens or substrings you wish to replace across history.
+# Format (literal replacement):
+# ORIGINAL_SUBSTRING==>REDACTED
+
+# Common prefixes (add exact tokens where possible):
+sk_live_==>REDACTED
+sk_test_==>REDACTED
+pk_live_==>REDACTED
+pk_test_==>REDACTED
+whsec_==>REDACTED
+PMAK-==>REDACTED
+github_pat_==>REDACTED
+linkedin_==>REDACTED
+
+# Add any full-token lines below (recommended):
+# sk_live_4eXamPlEtOkEn12345==>REDACTED

@@ -1,0 +1,11 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+RUN npm install --global cbor axios
+
+COPY nanogridata_gateway.js ./
+
+EXPOSE 5678 5679
+
+CMD ["node", "nanogridata_gateway.js"]

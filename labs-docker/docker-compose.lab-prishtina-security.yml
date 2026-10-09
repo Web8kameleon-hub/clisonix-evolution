@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  prishtina-security-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-prishtina-security
+    environment:
+      LAB_ID: "Prishtina_Security"
+      LAB_TYPE: "Security"
+      LAB_NAME: "Prishtina Security Lab"
+      LAB_FUNCTION: "Cybersecurity & Network Protection"
+      API_KEY: "sekret-real"
+    ports:
+      - "8108:8100"
+    volumes:
+      - ../data/prishtina-security:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

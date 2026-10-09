@@ -1,0 +1,61 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Clisonix",
+  "url": "https://www.clisonix.com",
+  "logo": "https://www.clisonix.com/apple-touch-icon.png",
+  "description": "Official Clisonix neural intelligence platform for AI workflows, EEG analysis, research tools, and real-time analytics.",
+  "sameAs": ["https://github.com/Web8kameleon-hub/clisonix.com"],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "email": "clisonix@pm.me",
+    "availableLanguage": ["en", "sq"]
+  },
+  "knowsAbout": [
+    "Artificial Intelligence",
+    "Machine Learning",
+    "Industrial Intelligence",
+    "Behavioral Science",
+    "Real-time Analytics",
+    "Neural Networks",
+    "EEG Analysis",
+    "Data Science",
+    "Cloud Computing",
+    "Public Safety Engineering",
+    "Civil Safety Engineering",
+    "ISO Standards",
+    "EuroNorm Standards",
+    "TUV Compliance",
+    "Civil Emergency Readiness",
+    "Natural Emergency Response"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Ledjan Ahmati",
+    "jobTitle": "Founder and CEO",
+    "description": "Public and civil safety engineer, self-employed for 21 years, specialized in ISO, EuroNorm, TUV standards, and emergency readiness for civil and natural emergency scenarios.",
+    "knowsAbout": [
+      "Public Safety Engineering",
+      "Civil Safety Engineering",
+      "ISO Standards",
+      "EuroNorm Standards",
+      "TUV Compliance",
+      "Civil Emergency Response",
+      "Natural Emergency Readiness"
+    ]
+  },
+  "slogan": "Official Neural Intelligence Platform",
+  "softwareApplication": {
+    "@type": "SoftwareApplication",
+    "name": "Clisonix Cloud",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+}
+

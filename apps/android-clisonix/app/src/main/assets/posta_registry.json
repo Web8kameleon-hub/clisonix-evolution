@@ -1,0 +1,38 @@
+[
+  {
+    "module_name": "Ocean_Curiosity",
+    "posta_link": "clisonix://module/ocean",
+    "status": "available",
+    "api_endpoint": "https://api.clisonix.com/v1/ocean-curiosity"
+  },
+  {
+    "module_name": "Neural_Alignment",
+    "posta_link": "clisonix://module/neural",
+    "status": "available",
+    "api_endpoint": "https://api.clisonix.com/v1/neural-brain"
+  },
+  {
+    "module_name": "Audio_Intelligence",
+    "posta_link": "clisonix://module/jona",
+    "status": "available",
+    "api_endpoint": "https://api.clisonix.com/v1/jona-audio"
+  },
+  {
+    "module_name": "ALBA_Collection",
+    "posta_link": "clisonix://module/alba",
+    "status": "available",
+    "api_endpoint": "https://api.clisonix.com/v1/alba-data"
+  },
+  {
+    "module_name": "Protocol_Kitchen",
+    "posta_link": "clisonix://module/protocol-kitchen",
+    "status": "available",
+    "api_endpoint": "https://api.clisonix.com/v1/protocol-kitchen"
+  },
+  {
+    "module_name": "Reporting_Engine",
+    "posta_link": "clisonix://module/reporting",
+    "status": "available",
+    "api_endpoint": "https://api.clisonix.com/v1/reporting"
+  }
+]

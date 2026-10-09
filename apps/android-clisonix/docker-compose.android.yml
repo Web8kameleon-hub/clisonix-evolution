@@ -1,0 +1,24 @@
+services:
+  android-build:
+    build:
+      context: .
+      dockerfile: Dockerfile.android-build
+    container_name: clisonix-android-build
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    environment:
+      - GRADLE_USER_HOME=/workspace/.gradle
+    command: ["bash", "-lc", "gradle -v && gradle wrapper --gradle-version 8.7 && ./gradlew clean && ./gradlew assembleDebug"]
+
+  android-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.android-build
+    container_name: clisonix-android-test
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    environment:
+      - GRADLE_USER_HOME=/workspace/.gradle
+    command: ["bash", "-lc", "gradle -v && gradle wrapper --gradle-version 8.7 && ./gradlew testDebugUnitTest"]

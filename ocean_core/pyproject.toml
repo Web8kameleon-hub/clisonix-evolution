@@ -1,0 +1,31 @@
+[tool.pylint.messages_control]
+disable = [
+    "C0301",  # line-too-long (handled by formatter)
+    "C0114",  # missing-module-docstring
+    "C0115",  # missing-class-docstring
+    "C0116",  # missing-function-docstring
+    "C0415",  # import-outside-toplevel (used for lazy imports)
+    "W0212",  # protected-access (used for function-attribute caching)
+    "W0612",  # unused-variable
+    "W0613",  # unused-argument
+    "W0621",  # redefined-outer-name
+    "W0718",  # broad-exception-caught
+    "W0603",  # global-statement
+    "W0611",  # unused-import
+    "R0801",  # duplicate-code
+    "E0401",  # import-error (not resolvable locally)
+]
+
+[tool.pylint.format]
+max-line-length = 140
+
+[tool.ruff]
+line-length = 140
+target-version = "py313"
+
+[tool.ruff.lint]
+ignore = [
+    "E501",   # line too long
+    "BLE001", # blind exception
+    "W291",   # trailing whitespace
+]

@@ -1,0 +1,38 @@
+FROM python:3.13
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+
+COPY clx-ai/dist/clx_ai-0.1.0-py3-none-any.whl /tmp/
+
+# Install Python deps
+RUN pip install --no-cache-dir \
+    fastapi==0.111.0 \
+    uvicorn[standard]==0.30.1 \
+    psutil==5.9.8 \
+    /tmp/clx_ai-0.1.0-py3-none-any.whl
+
+# Copy agent and identity files
+COPY clx_agent.py ./
+COPY CLISONIX_SYSTEM_PROMPT.md ./
+
+# Memory volume mount point
+RUN mkdir -p /data/.clx /app/logs
+
+ENV PORT=7778
+ENV CLX_MEMORY_PATH=/data/.clx/training-memory.json
+ENV CLX_SYSTEM_PROMPT=/app/CLISONIX_SYSTEM_PROMPT.md
+ENV CLX_AUTO_LEARN=true
+ENV CLX_LEARN_DURATION=14400
+ENV CLX_LEARN_INTERVAL=60
+ENV CLX_MEMORY_DIR=/data/.clx
+ENV CLX_DEFAULT_LANGUAGE=en
+ENV PYTHONUNBUFFERED=1
+
+EXPOSE 7778
+
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+    CMD curl -f http://localhost:7778/health || exit 1
+
+CMD ["python", "-m", "uvicorn", "clx_agent:app", "--host", "0.0.0.0", "--port", "7778"]

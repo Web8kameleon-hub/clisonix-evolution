@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clisonix Health Monitor</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 2rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .dashboard {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      padding: 2rem;
+    }
+
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .status-item {
+      text-align: center;
+    }
+
+    .status-item label {
+      display: block;
+      font-size: 0.875rem;
+      color: #64748b;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-item value {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .badge.healthy {
+      background: #10b981;
+      color: white;
+    }
+
+    .badge.degraded {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .badge.down {
+      background: #ef4444;
+      color: white;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .service-card {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-card.ok {
+      border-color: #10b981;
+      background: linear-gradient(135deg, #ffffff 0%, #ecfdf5 100%);
+    }
+
+    .service-card.error {
+      border-color: #ef4444;
+      background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
+    }
+
+    .service-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .service-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .service-status {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .service-status.ok {
+      background: #10b981;
+    }
+
+    .service-status.error {
+      background: #ef4444;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .service-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detail-label {
+      font-size: 0.75rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .detail-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .error-message {
+      grid-column: 1 / -1;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 0.875rem;
+      color: #991b1b;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: #64748b;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e2e8f0;
+      border-top-color: #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: white;
+      opacity: 0.8;
+    }
+
+    .refresh-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .refresh-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .refresh-btn:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🏥 Clisonix Health Monitor</h1>
+      <p>Real-time service health tracking across all Clisonix infrastructure</p>
+    </div>
+
+    <div class="dashboard">
+      <button class="refresh-btn" onclick="loadHealthData()">🔄 Refresh</button>
+      
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p style="margin-top: 1rem;">Loading health data...</p>
+      </div>
+
+      <div id="content" style="display: none;">
+        <div class="status-bar">
+          <div class="status-item">
+            <label>Status</label>
+            <span id="overall-status" class="badge">Loading...</span>
+          </div>
+          <div class="status-item">
+            <label>Healthy Services</label>
+            <value id="healthy-count">-</value>
+          </div>
+          <div class="status-item">
+            <label>Total Services</label>
+            <value id="total-count">-</value>
+          </div>
+          <div class="status-item">
+            <label>Last Check</label>
+            <value id="last-check">-</value>
+          </div>
+        </div>
+
+        <div id="services" class="services"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Powered by Cloudflare Workers • Zero-Trust Gateway • RBAC Enabled</p>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'https://clisonix-health-worker.dealsjona.workers.dev';
+
+    async function loadHealthData() {
+      const loading = document.getElementById('loading');
+      const content = document.getElementById('content');
+      
+      loading.style.display = 'block';
+      content.style.display = 'none';
+
+      try {
+        const response = await fetch(API_URL, {
+          credentials: 'include' // Include cookies for CF Access
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        renderHealthData(data);
+
+        loading.style.display = 'none';
+        content.style.display = 'block';
+      } catch (error) {
+        loading.innerHTML = `
+          <div style="color: #ef4444;">
+            <h3>❌ Failed to load health data</h3>
+            <p style="margin-top: 1rem;">${error.message}</p>
+            <button class="refresh-btn" style="margin-top: 1rem;" onclick="loadHealthData()">🔄 Retry</button>
+          </div>
+        `;
+      }
+    }
+
+    function renderHealthData(data) {
+      const { summary, services, checked_at, authenticated_user, role } = data;
+
+      // Update status bar
+      document.getElementById('overall-status').textContent = summary.status.replace('_', ' ').toUpperCase();
+      document.getElementById('overall-status').className = `badge ${summary.status === 'all_healthy' ? 'healthy' : 'degraded'}`;
+      document.getElementById('healthy-count').textContent = summary.healthy;
+      document.getElementById('total-count').textContent = summary.total;
+      document.getElementById('last-check').textContent = new Date(checked_at).toLocaleTimeString();
+
+      // Render services
+      const servicesContainer = document.getElementById('services');
+      servicesContainer.innerHTML = services.map(service => `
+        <div class="service-card ${service.ok ? 'ok' : 'error'}">
+          <div class="service-header">
+            <span class="service-name">${service.name}</span>
+            <div class="service-status ${service.ok ? 'ok' : 'error'}"></div>
+          </div>
+          <div class="service-details">
+            <div class="detail-item">
+              <span class="detail-label">HTTP Code</span>
+              <span class="detail-value">${service.http_code || 'N/A'}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Latency</span>
+              <span class="detail-value">${service.latency_ms ? `${service.latency_ms}ms` : 'N/A'}</span>
+            </div>
+            ${service.error ? `
+              <div class="error-message">
+                <strong>Error:</strong> ${service.error}
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Auto-refresh every 30 seconds
+    setInterval(loadHealthData, 30000);
+
+    // Initial load
+    loadHealthData();
+  </script>
+</body>
+</html>

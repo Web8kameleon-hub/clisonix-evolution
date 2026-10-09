@@ -1,0 +1,20 @@
+[33m8521c119[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mcopilot-worktree-2026-02-10T06-50-46[m[33m)[m feat: Enhance Albanian dictionary with additional greetings and integrate into response orchestrator
+[33m4c1abb4f[m fix: Ensure .gitignore reads with utf-8 encoding and ignores errors
+[33m37e36d37[m Add Clisonix Evaluation Framework and quick evaluation runner
+[33m937f9d3a[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m fix: Get Stripe customer email from Clerk session
+[33mb49e0f57[m fix: Plan display reflects Stripe subscription status (free if no subscription)
+[33m8bb44781[m feat: Real user data sources integration - no mock
+[33md796c8e2[m Elastic Web Reader - streaming SSE, 3 retry (120s/240s/360s), cancel button
+[33m04f2bbd1[m Elastic streaming Trinity Debate - 20K words, no timeout fails, real-time SSE
+[33m8e3fcafd[m 📍 Add Zürich & Debate to modules navigation
+[33mb68083cf[m 🎨 Clean minimal design for Zürich & Debate pages
+[33mb54d434c[m 🎭 Add Zürich & Trinity Debate frontend pages + API rewrites
+[33m65583471[m 🎼 Add Harmonic features: Zürich Engine, Trinity Debate, Memory Timeline
+[33me0b0d8fb[m 🔧 Fix OLLAMA_MODEL -> MODEL in chat/browse endpoint
+[33m2f1e90aa[m 🌐 Add Web Reader endpoints: /browse, /search, /chat/browse for web scraping and search
+[33md74fd81d[m 🐛 Fix Archive page: proper interfaces for ArXiv/Wiki/PubMed paper objects
+[33me7a708e2[m 🔧 Fix research APIs: HTTPS + User-Agent headers for ArXiv, Wikipedia, PubMed
+[33m1f303785[m 📚 Add ArXiv, Wikipedia, PubMed, Sources research endpoints - Real API integrations
+[33mb1f2572b[m 📅 Fix founding year to 2025 + update all WEB8euroweb to ABA GmbH
+[33mdbea46ec[m 🏢 Update company to ABA GmbH (Amtsgericht Bochum HRB: 21069)
+[33m25abe3f1[m 🌍 Make Ocean globally neutral - remove Albania emphasis

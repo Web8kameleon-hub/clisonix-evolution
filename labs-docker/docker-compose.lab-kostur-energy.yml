@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  kostur-energy-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-kostur-energy
+    environment:
+      LAB_ID: "Kostur_Energy"
+      LAB_TYPE: "Energy"
+      LAB_NAME: "Kostur Energy Lab"
+      LAB_FUNCTION: "Renewable Energy & Power Systems"
+      API_KEY: "sekret-real"
+    ports:
+      - "8109:8100"
+    volumes:
+      - ../data/kostur-energy:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

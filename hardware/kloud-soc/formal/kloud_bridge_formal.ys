@@ -1,0 +1,6 @@
+read_verilog -formal rtl/kloud_bridge_hw.v formal/kloud_bridge_formal.v
+hierarchy -check -top kloud_bridge_formal
+prep -top kloud_bridge_formal -flatten
+async2sync
+dffunmap
+sat -prove-asserts -tempinduct -seq 25 -set-assumes

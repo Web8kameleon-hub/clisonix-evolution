@@ -1,0 +1,128 @@
+# Clisonix Binary Schema - Batch Operation Request/Response
+# Version: 1.0
+# Magic: BBAT
+# Created: 2026-02-23
+
+name: BatchOperation
+version: 1
+type_id: 0x33
+
+header:
+  - name: magic
+    type: bytes[4]
+    value: "BBAT"
+    description: "Binary Batch magic"
+  
+  - name: version
+    type: uint8
+    description: "Protocol version"
+  
+  - name: timestamp
+    type: uint64
+    description: "Timestamp in microseconds"
+  
+  - name: is_request
+    type: bool
+    description: "True if request, False if response"
+  
+  - name: operation_count
+    type: uint16
+    description: "Number of operations in batch"
+
+# Single operation entry within batch
+operation_entry:
+  - name: op_type
+    type: uint8
+    description: "Operation type (0=algebra, 1=signal, 2=matrix)"
+  
+  - name: op_code
+    type: uint8
+    description: "Operation code (from respective schema)"
+  
+  - name: operand_a
+    type: int64
+    description: "First operand"
+  
+  - name: operand_b
+    type: int64
+    description: "Second operand"
+  
+  - name: bits
+    type: uint8
+    default: 64
+    description: "Bit width for algebra operations"
+
+fields:
+  - name: operations
+    type: array[operation_entry]
+    length_field: operation_count
+    description: "Array of operations to execute"
+  
+  - name: mode
+    type: uint8
+    description: "Execution mode (0=sequential, 1=parallel, 2=chain)"
+  
+  - name: chain_intermediate
+    type: bool
+    description: "If chain mode, pass result to next operation"
+  
+  - name: stop_on_error
+    type: bool
+    default: true
+    description: "Stop batch on first error"
+
+# Response-only fields
+response_fields:
+  - name: results
+    type: array[int64]
+    length_field: operation_count
+    description: "Results of each operation"
+  
+  - name: results_binary
+    type: array[string]
+    length_field: operation_count
+    description: "Results as binary strings"
+  
+  - name: success_count
+    type: uint16
+    description: "Number of successful operations"
+  
+  - name: error_count
+    type: uint16
+    description: "Number of failed operations"
+  
+  - name: errors
+    type: array[error_entry]
+    optional: true
+    description: "Error details for failed operations"
+  
+  - name: total_duration_ns
+    type: uint64
+    description: "Total batch duration in nanoseconds"
+  
+  - name: per_op_duration_ns
+    type: array[uint32]
+    length_field: operation_count
+    description: "Duration of each operation"
+
+error_entry:
+  - name: op_index
+    type: uint16
+    description: "Index of failed operation"
+  
+  - name: error_code
+    type: uint8
+    description: "Error code"
+  
+  - name: error_message
+    type: string
+    description: "Error message"
+
+checksum:
+  type: crc32
+  fields: all
+  description: "CRC32 for integrity"
+
+# Chain mode example:
+# Operations: [XOR(a,b), SHL(result,2), AND(result,mask)]
+# Each operation uses previous result as operand_a

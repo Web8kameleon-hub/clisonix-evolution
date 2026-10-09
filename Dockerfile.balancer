@@ -1,0 +1,39 @@
+FROM python:3.13
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+RUN pip install --no-cache-dir \
+    fastapi \
+    uvicorn \
+    psutil \
+    requests
+
+# Copy balancer files
+COPY balancer_simple.py .
+COPY distributed_pulse_balancer.py .
+
+# Create logs directory
+RUN mkdir -p /app/logs
+
+# Environment
+ENV NSX_API_HOST=0.0.0.0
+ENV NSX_API_PORT=8091
+ENV NSX_HB_PORT=42999
+ENV NSX_NODE_NAME=BalancerNode
+ENV NSX_CLUSTER_KEY=clisonix-secure-cluster-key-2025
+
+EXPOSE 8091
+EXPOSE 42999/udp
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8091/status || exit 1
+
+# Run the balancer
+CMD ["python", "balancer_simple.py"]

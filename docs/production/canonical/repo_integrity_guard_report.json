@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "checked_at": "runtime",
+  "deploy_compose": "docker-compose.75-services.yml",
+  "full_compose": "docker-compose.yml",
+  "deploy_service_count": 87,
+  "full_service_count": 105,
+  "failures": []
+}

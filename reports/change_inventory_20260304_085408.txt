@@ -1,0 +1,420 @@
+CLISONIX CHANGE INVENTORY - 20260304_085408
+
+=== BRANCH STATE ===
+## main...hetzner/main [ahead 9, behind 4]
+ M apps/api/main.py
+ M apps/api/requirements.txt
+ M apps/web/app/api/debate/route.ts
+ M apps/web/app/api/ocean/voice/route.ts
+ M apps/web/app/debate/page.tsx
+ M apps/web/app/modules/curiosity-ocean/page.tsx
+ M apps/web/app/modules/page.tsx
+ M apps/web/app/page.tsx
+ M clisonix/routes/__init__.py
+ M docker-compose.75-services.yml
+ M docker-compose.yml
+ M jona_neural_api.py
+ M ocean-core/ocean_core_full.py
+ M ocean-core/requirements.txt
+?? .cspellrc.json
+?? .git_ocean_core_full.py
+?? .github/actionlint.yaml
+?? .github/workflows/canary-deploy.yml
+?? .vs/
+?? ALBI_EEG_SETTINGS_TAB_ANALYSIS.md
+?? ARCHITECTURE_VISUAL_REFERENCE.md
+?? CLISONIX_Editable_Financial_Table.xlsx
+?? CLISONIX_SYSTEM_PROMPT.md
+?? DEPLOYMENT_CHECKLIST_PROD.md
+?? DEPLOYMENT_COMPLETE_SUMMARY.md
+?? Dockerfile.adaptive-router
+?? Dockerfile.agent-telemetry
+?? Dockerfile.cognitive
+?? Dockerfile.multi-tenant
+?? Dockerfile.ocean-integrated
+?? Dockerfile.ollama-multi
+?? Dockerfile.saas-api
+?? Dockerfile.web-clean
+?? FINAL_STEP_JSON_KEY.md
+?? FIREBASE_KEY_SETUP_QUICK.md
+?? GOOGLE_FIRESTORE_SETUP.md
+?? HETZNER_DEPLOY_v2.ps1
+?? HETZNER_DEPLOY_v2.sh
+?? HETZNER_SAFE_DEPLOY.sh
+?? MANUAL_STARTUP_POWERSHELL.md
+?? OCEAN_CORE_V2_DEPLOYMENT.py
+?? OCEAN_CORE_V2_FINAL_REPORT.py
+?? OCEAN_CORE_V2_READY.py
+?? OCEAN_CORE_v2_DEPLOYMENT_PACKAGE_SUMMARY.md
+?? OCEAN_CORE_v2_DEPLOYMENT_READY.md
+?? OCEAN_CORE_v2_HETZNER_GUIDE.md
+?? PHASE2_COMPLETION_SUMMARY.md
+?? PHASE2_DELIVERABLES_INDEX.md
+?? PRODUCTION_ADVANCEMENT_PLAN.md
+?? PRODUCTION_DEPLOYMENT_GUIDE.md
+?? QUICK_START_TESTING.md
+?? READY_TO_TEST.md
+?? START_HERE_DEPLOYMENT_GUIDE.md
+?? TESTING_GUIDE.md
+?? TEST_RESULTS_TEMPLATE.md
+?? albi_user_api.py
+?? app/page.js
+?? apps/api/routes/service_discovery.py
+?? apps/web/Dockerfile.simple
+?? apps/web/OCEAN_OMNI_SETUP.md
+?? apps/web/app/albi-settings-documentation/
+?? apps/web/app/api/ocean/OCEAN_TELEMETRY_NOTES.md
+?? apps/web/app/api/ocean/omni/
+?? apps/web/app/api/ocean/realtime/
+?? apps/web/app/api/ocean/social/
+?? apps/web/app/api/service-discovery/
+?? apps/web/app/api/service-info/
+?? apps/web/app/jona-settings-documentation/
+?? apps/web/app/modules/albi-eeg-live/
+?? apps/web/app/modules/curiosity-ocean/camera-overlay.tsx
+?? apps/web/app/modules/curiosity-ocean/header-controls.tsx
+?? apps/web/app/modules/curiosity-ocean/input-composer.tsx
+?? apps/web/app/modules/curiosity-ocean/messages-panel.tsx
+?? apps/web/app/modules/curiosity-ocean/stream-utils.ts
+?? apps/web/app/modules/curiosity-ocean/suggested-questions.tsx
+?? apps/web/app/modules/curiosity-ocean/types.ts
+?? apps/web/app/modules/jona-neural/
+?? apps/web/app/modules/social-intelligence/
+?? apps/web/app/user/layout.tsx
+?? apps/web/package-lock.json
+?? apps/web/public/albi-settings-guide.md
+?? apps/web/public/jona-settings-guide.md
+?? apps/web/src/lib/language_detection_72.ts
+?? backup.sh
+?? blerina_service.py
+?? check_clisonix_health.py
+?? cleanup.sh
+?? config/__init__.py
+?? config/settings.py
+?? config_demo.py
+?? deploy-lean-fixed.sh
+?? deploy-lean.sh
+?? deploy-production.sh
+?? deploy.ps1
+?? diagnose_service_startup.py
+?? docker-compose.lean.yml
+?? docker-compose.minimal.yml
+?? dockerfiles/
+?? docs/CLISONIS_CLISONIX_PROTOCOL.md
+?? docs/MEDICAL_GEN6_9_GOVERNANCE.md
+?? docs/MEDICAL_GOVERNANCE_PACKAGES_AND_MEDIA.md
+?? docs/medical-governance-packages/
+?? generated_medical_pillars/med_011874550f07.json
+?? generated_medical_pillars/med_011874550f07.md
+?? generated_medical_pillars/med_2a3bf2070ed0.json
+?? generated_medical_pillars/med_2a3bf2070ed0.md
+?? generated_medical_pillars/med_5977060d34a6.json
+?? generated_medical_pillars/med_5977060d34a6.md
+?? generated_medical_pillars/med_d9a05afd047a.json
+?? generated_medical_pillars/med_d9a05afd047a.md
+?? generated_medical_pillars/med_f34cbfff79e8.json
+?? generated_medical_pillars/med_f34cbfff79e8.md
+?? generated_medical_pillars/med_facbdbc91dc1.json
+?? generated_medical_pillars/med_facbdbc91dc1.md
+?? investor-pack/
+?? launch-megalayer.ps1
+?? launch_5_services.ps1
+?? monitor.sh
+?? next.config.js
+?? nginx.production.conf
+?? nginx_local/
+?? nul
+?? ocean-core/Dockerfile.full
+?? ocean-core/Dockerfile.multimodal.new
+?? ocean-core/circuit_breaker.py
+?? ocean-core/curiosity_algebra/schemas/README.md
+?? ocean-core/curiosity_algebra/schemas/batch.clsn
+?? ocean-core/curiosity_algebra/schemas/binary_signal.clsn
+?? ocean-core/curiosity_algebra/schemas/matrix.clsn
+?? ocean-core/db_migration_safety.py
+?? ocean-core/document_agents.py
+?? ocean-core/document_contracts.py
+?? ocean-core/evolution_loop.py
+?? ocean-core/feature_flags.py
+?? ocean-core/genesis_engine.py
+?? ocean-core/instant_stream.py
+?? ocean-core/lazy_state_manager.py
+?? ocean-core/ollama_lazy_engine.py
+?? ocean-core/production_middleware.py
+?? ocean-core/provenance_engine.py
+?? ocean-core/rate_limiter.py
+?? ocean-core/run_ocean_core_full.py
+?? ocean-core/self_synthesis.py
+?? ocean-core/test_albanian.py
+?? ocean-core/test_ocean_v2.py
+?? ocean-core/unified_routes.py
+?? ocean_auto_deploy.sh
+?? orchestrate_discovery_tests.py
+?? output/blog/
+?? pipelines/
+?? reports/
+?? requirements/document-core-dev.txt
+?? scripts/CPU_NO_GPU_GUIDE.md
+?? scripts/audit_medical_gen_layers.py
+?? scripts/benchmark_cpu_ollama.py
+?? scripts/cpu_boost_no_gpu.ps1
+?? scripts/cpu_boost_no_gpu.sh
+?? scripts/emergency_rollback.sh
+?? services/blerina/blerina_service.py
+?? services/content-factory/demo_article.html
+?? services/content-factory/fetch_real_articles.py
+?? services/content-factory/preview_blog.html
+?? services/registry.py
+?? services/service_base.py
+?? setup-production.sh
+?? ssh_hetzner_new.txt
+?? start_production_services.ps1
+?? start_services_one_by_one.py
+?? switch-nginx.sh
+?? test_firestore_discovery_e2e.py
+?? test_mega.py
+?? test_megalayer_integration.py
+?? test_ocean.py
+?? tests/unit/test_ocean_pipeline_real_data_guardrails.py
+?? update_blerina_topics.py
+?? validate.sh
+?? verify_deployment_package.py
+?? verify_ocean_core_v2.py
+
+=== COUNTS ===
+TOTAL=178
+MODIFIED=14
+UNTRACKED=164
+
+=== LOCAL COMMITS (hetzner/main..HEAD) ===
+05b05e96 (HEAD -> main) feat(jona): generate real WAV artifacts and serve downloadable audio files
+e23b28c2 fix(jona): support pydantic v2 BaseSettings import for local startup tests
+ad613749 fix(regulatory): persist and load liability records across service processes
+fda2cb76 feat(regulatory): add standalone regulatory service and integrate mission guardrails, drift control, and liability chain
+826b62e6 (origin/backup-origin-main-20260303, hetzner/backup-origin-main-20260303) feat(ocean): add generic mission service with queue, persistence, and docker wiring on port 9500
+a06b55ad fix(ocean): restore 4-service deployment and sync web/ocean route fixes
+1598fad6 Resolve merge state, update ocean/web routing and deploy configs
+9e7e4937 fix(ocean-api): elastic no-timeout routes and stable stream proxy
+0a68b8ee chore: ignore client secrets files
+
+=== UPSTREAM COMMITS MISSING LOCALLY (HEAD..hetzner/main) ===
+9577416c (origin/master, origin/main, origin/HEAD, hetzner/master, hetzner/main) chore: sync local clisonix.com updates from this PC
+a8ed14d7 feat: Music Studio PWA module with 76+ microservices
+420a51af feat: add viral reels creator - /create page, history templates, video API integration
+6e2d9137 fix: Add missing Enum import in language_detector
+
+=== MODIFIED TRACKED FILES ===
+apps/api/main.py
+apps/api/requirements.txt
+apps/web/app/api/debate/route.ts
+apps/web/app/api/ocean/voice/route.ts
+apps/web/app/debate/page.tsx
+apps/web/app/modules/curiosity-ocean/page.tsx
+apps/web/app/modules/page.tsx
+apps/web/app/page.tsx
+clisonix/routes/__init__.py
+docker-compose.75-services.yml
+docker-compose.yml
+jona_neural_api.py
+ocean-core/ocean_core_full.py
+ocean-core/requirements.txt
+
+=== UNTRACKED FILES ===
+.cspellrc.json
+.git_ocean_core_full.py
+.github/actionlint.yaml
+.github/workflows/canary-deploy.yml
+.vs/Clisonix-cloud.slnx/v18/.wsuo
+.vs/Clisonix-cloud.slnx/v18/DocumentLayout.backup.json
+.vs/Clisonix-cloud.slnx/v18/DocumentLayout.json
+.vs/CopilotSnapshots/E827FEC5702AD14281789120C74FAD97/5E0E58EE928143449BC0D342112C89E6/7D1CACD3C49819BF74C938F20860C058
+.vs/CopilotSnapshots/E827FEC5702AD14281789120C74FAD97/5E0E58EE928143449BC0D342112C89E6/95F3BB7282F7171B39E16A99A0DA6C5F
+.vs/CopilotSnapshots/E827FEC5702AD14281789120C74FAD97/5E0E58EE928143449BC0D342112C89E6/FE12BF8CC1B5E15A821EA676653FC007
+.vs/CopilotSnapshots/E827FEC5702AD14281789120C74FAD97/state.mpack
+.vs/ProjectSettings.json
+.vs/PythonSettings.json
+.vs/VSWorkspaceState.json
+ALBI_EEG_SETTINGS_TAB_ANALYSIS.md
+ARCHITECTURE_VISUAL_REFERENCE.md
+CLISONIX_Editable_Financial_Table.xlsx
+CLISONIX_SYSTEM_PROMPT.md
+DEPLOYMENT_CHECKLIST_PROD.md
+DEPLOYMENT_COMPLETE_SUMMARY.md
+Dockerfile.adaptive-router
+Dockerfile.agent-telemetry
+Dockerfile.cognitive
+Dockerfile.multi-tenant
+Dockerfile.ocean-integrated
+Dockerfile.ollama-multi
+Dockerfile.saas-api
+Dockerfile.web-clean
+FINAL_STEP_JSON_KEY.md
+FIREBASE_KEY_SETUP_QUICK.md
+GOOGLE_FIRESTORE_SETUP.md
+HETZNER_DEPLOY_v2.ps1
+HETZNER_DEPLOY_v2.sh
+HETZNER_SAFE_DEPLOY.sh
+MANUAL_STARTUP_POWERSHELL.md
+OCEAN_CORE_V2_DEPLOYMENT.py
+OCEAN_CORE_V2_FINAL_REPORT.py
+OCEAN_CORE_V2_READY.py
+OCEAN_CORE_v2_DEPLOYMENT_PACKAGE_SUMMARY.md
+OCEAN_CORE_v2_DEPLOYMENT_READY.md
+OCEAN_CORE_v2_HETZNER_GUIDE.md
+PHASE2_COMPLETION_SUMMARY.md
+PHASE2_DELIVERABLES_INDEX.md
+PRODUCTION_ADVANCEMENT_PLAN.md
+PRODUCTION_DEPLOYMENT_GUIDE.md
+QUICK_START_TESTING.md
+READY_TO_TEST.md
+START_HERE_DEPLOYMENT_GUIDE.md
+TESTING_GUIDE.md
+TEST_RESULTS_TEMPLATE.md
+albi_user_api.py
+app/page.js
+apps/api/routes/service_discovery.py
+apps/web/Dockerfile.simple
+apps/web/OCEAN_OMNI_SETUP.md
+apps/web/app/albi-settings-documentation/page.tsx
+apps/web/app/api/ocean/OCEAN_TELEMETRY_NOTES.md
+apps/web/app/api/ocean/omni/route.ts
+apps/web/app/api/ocean/realtime/route.ts
+apps/web/app/api/ocean/social/route.ts
+apps/web/app/api/service-discovery/route.ts
+apps/web/app/api/service-info/route.ts
+apps/web/app/jona-settings-documentation/page.tsx
+apps/web/app/modules/albi-eeg-live/page.tsx
+apps/web/app/modules/curiosity-ocean/camera-overlay.tsx
+apps/web/app/modules/curiosity-ocean/header-controls.tsx
+apps/web/app/modules/curiosity-ocean/input-composer.tsx
+apps/web/app/modules/curiosity-ocean/messages-panel.tsx
+apps/web/app/modules/curiosity-ocean/stream-utils.ts
+apps/web/app/modules/curiosity-ocean/suggested-questions.tsx
+apps/web/app/modules/curiosity-ocean/types.ts
+apps/web/app/modules/jona-neural/page.tsx
+apps/web/app/modules/social-intelligence/page.tsx
+apps/web/app/user/layout.tsx
+apps/web/package-lock.json
+apps/web/public/albi-settings-guide.md
+apps/web/public/jona-settings-guide.md
+apps/web/src/lib/language_detection_72.ts
+backup.sh
+blerina_service.py
+check_clisonix_health.py
+cleanup.sh
+config/__init__.py
+config/settings.py
+config_demo.py
+deploy-lean-fixed.sh
+deploy-lean.sh
+deploy-production.sh
+deploy.ps1
+diagnose_service_startup.py
+docker-compose.lean.yml
+docker-compose.minimal.yml
+dockerfiles/Dockerfile.cognitive
+dockerfiles/Dockerfile.cycle
+dockerfiles/Dockerfile.ollama-multi
+docs/CLISONIS_CLISONIX_PROTOCOL.md
+docs/MEDICAL_GEN6_9_GOVERNANCE.md
+docs/MEDICAL_GOVERNANCE_PACKAGES_AND_MEDIA.md
+docs/medical-governance-packages/ACADEMIC_PUBLICATION_PACKAGE.md
+docs/medical-governance-packages/AUDIT_COMPLIANCE_PACKAGE.md
+docs/medical-governance-packages/BIOMARKER_VALIDATION_PACKAGE.md
+docs/medical-governance-packages/COMPARATIVE_OUTCOMES_PACKAGE.md
+docs/medical-governance-packages/CORE_GOVERNANCE_PACKAGE.md
+docs/medical-governance-packages/DATA_INTEGRITY_PACKAGE.md
+docs/medical-governance-packages/IMAGE_METADATA_TEMPLATE.json
+docs/medical-governance-packages/INDEX.md
+docs/medical-governance-packages/LABORATORY_PROTOCOL_PACKAGE.md
+docs/medical-governance-packages/PUBLICATION_GOVERNANCE_PACKAGE.md
+docs/medical-governance-packages/TRAINING_ONBOARDING_PACKAGE.md
+docs/medical-governance-packages/VISUAL_COMMUNICATION_PACKAGE.md
+generated_medical_pillars/med_011874550f07.json
+generated_medical_pillars/med_011874550f07.md
+generated_medical_pillars/med_2a3bf2070ed0.json
+generated_medical_pillars/med_2a3bf2070ed0.md
+generated_medical_pillars/med_5977060d34a6.json
+generated_medical_pillars/med_5977060d34a6.md
+generated_medical_pillars/med_d9a05afd047a.json
+generated_medical_pillars/med_d9a05afd047a.md
+generated_medical_pillars/med_f34cbfff79e8.json
+generated_medical_pillars/med_f34cbfff79e8.md
+generated_medical_pillars/med_facbdbc91dc1.json
+generated_medical_pillars/med_facbdbc91dc1.md
+investor-pack/CLISONIX_Board_Grade_Investor_Memo_EN_SQ_DE.docx
+investor-pack/CLISONIX_Financial_Model_Investor_Ready.xlsx
+investor-pack/CLISONIX_INVESTOR_BRIEF_2026.md
+investor-pack/CLISONIX_Investor_Document_EN_SQ_DE.docx
+investor-pack/build_board_grade_investor_doc.py
+investor-pack/build_investor_excel.py
+investor-pack/build_trilingual_investor_doc.py
+investor-pack/publish_investor_boardgrade.py
+investor-pack/publisher_boardgrade_report.json
+launch-megalayer.ps1
+launch_5_services.ps1
+monitor.sh
+next.config.js
+nginx.production.conf
+nginx_local/default.conf
+nul
+ocean-core/Dockerfile.full
+ocean-core/Dockerfile.multimodal.new
+ocean-core/circuit_breaker.py
+ocean-core/curiosity_algebra/schemas/README.md
+ocean-core/curiosity_algebra/schemas/batch.clsn
+ocean-core/curiosity_algebra/schemas/binary_signal.clsn
+ocean-core/curiosity_algebra/schemas/matrix.clsn
+ocean-core/db_migration_safety.py
+ocean-core/document_agents.py
+ocean-core/document_contracts.py
+ocean-core/evolution_loop.py
+ocean-core/feature_flags.py
+ocean-core/genesis_engine.py
+ocean-core/instant_stream.py
+ocean-core/lazy_state_manager.py
+ocean-core/ollama_lazy_engine.py
+ocean-core/production_middleware.py
+ocean-core/provenance_engine.py
+ocean-core/rate_limiter.py
+ocean-core/run_ocean_core_full.py
+ocean-core/self_synthesis.py
+ocean-core/test_albanian.py
+ocean-core/test_ocean_v2.py
+ocean-core/unified_routes.py
+ocean_auto_deploy.sh
+orchestrate_discovery_tests.py
+output/blog/clx.eap.investor.boardgrade.2026-03-02.json
+output/blog/clx.eap.investor.boardgrade.2026-03-02.md
+pipelines/real-data/README.md
+pipelines/real-data/go.mod
+pipelines/real-data/main.go
+pipelines/real-data/real-data.exe
+reports/change_inventory_20260304_085408.txt
+requirements/document-core-dev.txt
+scripts/CPU_NO_GPU_GUIDE.md
+scripts/audit_medical_gen_layers.py
+scripts/benchmark_cpu_ollama.py
+scripts/cpu_boost_no_gpu.ps1
+scripts/cpu_boost_no_gpu.sh
+scripts/emergency_rollback.sh
+services/blerina/blerina_service.py
+services/content-factory/demo_article.html
+services/content-factory/fetch_real_articles.py
+services/content-factory/preview_blog.html
+services/registry.py
+services/service_base.py
+setup-production.sh
+ssh_hetzner_new.txt
+start_production_services.ps1
+start_services_one_by_one.py
+switch-nginx.sh
+test_firestore_discovery_e2e.py
+test_mega.py
+test_megalayer_integration.py
+test_ocean.py
+tests/unit/test_ocean_pipeline_real_data_guardrails.py
+update_blerina_topics.py
+validate.sh
+verify_deployment_package.py
+verify_ocean_core_v2.py

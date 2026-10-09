@@ -1,0 +1,27 @@
+# Prometheus Helm Chart Values
+# Used by: deploy.yml, deploy-helm.yml
+
+prometheus:
+  prometheusSpec:
+    retention: 30d
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 50Gi
+    
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 2048Mi
+      requests:
+        cpu: 500m
+        memory: 1024Mi
+
+grafana:
+  enabled: false
+
+alertmanager:
+  enabled: true

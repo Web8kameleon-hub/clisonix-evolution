@@ -1,0 +1,46 @@
+# Ocean Core v2 - Strict Chat (Admin Mode)
+# Specialized Dockerfile for Strict Chat mode with IRON RULES enforcement
+
+FROM python:3.13-slim
+
+LABEL maintainer="Clisonix Cloud"
+LABEL description="Ocean Core v2 Strict Chat - Admin Interface with IRON RULES"
+LABEL version="2.0.0"
+
+# System dependencies for multimedia processing
+RUN apt-get update && apt-get install -y \
+    curl \
+    ffmpeg \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy Ocean Core modules and dependencies
+COPY ocean_core_full.py .
+COPY ocean_strict_chat.py .
+COPY run_ocean_strict_chat.py .
+COPY requirements.txt .
+
+# Copy all supporting engines and modules
+COPY *.py ./
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Environment configuration
+ENV PYTHONUNBUFFERED=1
+ENV OCEAN_MODE=strict
+ENV OCEAN_PORT=8035
+ENV LOG_LEVEL=INFO
+
+# Health check endpoint
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:${OCEAN_PORT}/health || exit 1
+
+# Expose port
+EXPOSE 8035
+
+# Entry point with proper signal handling
+CMD ["python", "run_ocean_strict_chat.py"]

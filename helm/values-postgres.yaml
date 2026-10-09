@@ -1,0 +1,30 @@
+# PostgreSQL Helm Chart Values
+# Used by: deploy.yml, deploy-helm.yml
+
+global:
+  postgresql:
+    auth:
+      username: clisonix
+      password: ${DB_PASSWORD:-clisonix}
+      database: clisonix
+
+auth:
+  username: clisonix
+  password: ${DB_PASSWORD:-clisonix}
+  database: clisonix
+
+primary:
+  persistence:
+    enabled: true
+    size: 10Gi
+  
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+
+metrics:
+  enabled: true

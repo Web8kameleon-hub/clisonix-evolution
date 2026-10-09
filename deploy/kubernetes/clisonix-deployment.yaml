@@ -1,0 +1,219 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: clisonix
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clisonix-backend
+  namespace: clisonix
+  labels:
+    app: clisonix
+    component: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: clisonix
+      component: backend
+  template:
+    metadata:
+      labels:
+        app: clisonix
+        component: backend
+    spec:
+      containers:
+      - name: backend
+        image: ghcr.io/Web8kameleon-hub/clisonix-cloud:latest
+        ports:
+        - containerPort: 8000
+          name: api
+        env:
+        - name: OCEAN_CORE_URL
+          value: "http://clisonix-ocean-core:8030"
+        - name: NODE_ENV
+          value: "production"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clisonix-ocean-core
+  namespace: clisonix
+  labels:
+    app: clisonix
+    component: ocean-core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clisonix
+      component: ocean-core
+  template:
+    metadata:
+      labels:
+        app: clisonix
+        component: ocean-core
+    spec:
+      containers:
+      - name: ocean-core
+        image: ghcr.io/Web8kameleon-hub/clisonix-cloud:latest
+        command: ["python", "-m", "uvicorn", "ocean_api:app", "--host", "0.0.0.0", "--port", "8030"]
+        ports:
+        - containerPort: 8030
+          name: ocean-api
+        workingDir: /app/ocean-core
+        env:
+        - name: NODE_ENV
+          value: "production"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /api/status
+            port: 8030
+          initialDelaySeconds: 30
+          periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clisonix-frontend
+  namespace: clisonix
+  labels:
+    app: clisonix
+    component: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: clisonix
+      component: frontend
+  template:
+    metadata:
+      labels:
+        app: clisonix
+        component: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: ghcr.io/Web8kameleon-hub/clisonix-cloud:latest
+        command: ["npm", "run", "start"]
+        ports:
+        - containerPort: 3000
+          name: web
+        workingDir: /app/apps/web
+        env:
+        - name: BACKEND_URL
+          value: "http://clisonix-backend:8000"
+        - name: OCEAN_CORE_URL
+          value: "http://clisonix-ocean-core:8030"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clisonix-backend
+  namespace: clisonix
+spec:
+  selector:
+    app: clisonix
+    component: backend
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clisonix-ocean-core
+  namespace: clisonix
+spec:
+  selector:
+    app: clisonix
+    component: ocean-core
+  ports:
+  - protocol: TCP
+    port: 8030
+    targetPort: 8030
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clisonix-frontend
+  namespace: clisonix
+spec:
+  selector:
+    app: clisonix
+    component: frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: clisonix-ingress
+  namespace: clisonix
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: clisonix.hetzner.cloud
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: clisonix-frontend
+            port:
+              number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: clisonix-backend
+            port:
+              number: 8000
+      - path: /ocean
+        pathType: Prefix
+        backend:
+          service:
+            name: clisonix-ocean-core
+            port:
+              number: 8030

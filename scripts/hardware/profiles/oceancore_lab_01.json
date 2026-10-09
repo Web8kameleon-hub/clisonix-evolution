@@ -1,0 +1,24 @@
+{
+  "node_id": "oceancore-lab-01",
+  "node_class": "oceancore-edge",
+  "architecture": "riscv",
+  "runtime": "rust",
+  "transport": "http",
+  "firmware_version": "0.1.0",
+  "capabilities": [
+    "heartbeat",
+    "telemetry",
+    "signal-processing"
+  ],
+  "metadata": {
+    "lab_id": "bochum-lab-01",
+    "deployment_target": "prototype-lab",
+    "concept": "OceanCore + KLOUd",
+    "role": "edge execution and telemetry node"
+  },
+  "telemetry_defaults": {
+    "temperature_c": 41.0,
+    "power_watts": 6.1,
+    "latency_ms": 8.2
+  }
+}

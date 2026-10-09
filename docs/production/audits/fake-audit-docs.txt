@@ -1,0 +1,770 @@
+C:\Users\Admin\Desktop\Clisonix-cloud\ALBI_EEG_SETTINGS_TAB_ANALYSIS.md:31: - **Zero placeholder data** - 100% live API integration
+C:\Users\Admin\Desktop\Clisonix-cloud\ALBI_EEG_SETTINGS_TAB_ANALYSIS.md:43: | API endpoint configuration | Hardcoded (6681) | No multi-environment support |
+C:\Users\Admin\Desktop\Clisonix-cloud\ALBI_EEG_SETTINGS_TAB_ANALYSIS.md:133: | `API_BASE` | const | Hardcoded | ❌ No env support |
+C:\Users\Admin\Desktop\Clisonix-cloud\ALBI_EEG_SETTINGS_TAB_ANALYSIS.md:524: **Current (Hardcoded):**
+C:\Users\Admin\Desktop\Clisonix-cloud\ALBI_EEG_SETTINGS_TAB_ANALYSIS.md:527: const API_BASE = 'http://127.0.0.1:6681';  // Line 57 - hardcoded
+C:\Users\Admin\Desktop\Clisonix-cloud\ALBI_EEG_SETTINGS_TAB_ANALYSIS.md:646: placeholder="127.0.0.1"
+C:\Users\Admin\Desktop\Clisonix-cloud\API_DOCS.md:63: - All endpoints return real data or error (no mock values).
+C:\Users\Admin\Desktop\Clisonix-cloud\ARCHITECTURE_VISUAL_REFERENCE.md:56: ║  Mode: Firestore (with fallback)       ║
+C:\Users\Admin\Desktop\Clisonix-cloud\ARCHITECTURE_VISUAL_REFERENCE.md:80: │   └─ Fail → Use In-Memory Fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\ARCHITECTURE_VISUAL_REFERENCE.md:246: │  │   └─ Fallback: Use in-memory store      │
+C:\Users\Admin\Desktop\Clisonix-cloud\ARCHITECTURE_VISUAL_REFERENCE.md:307: │  └─ Fallback: In-memory if unavailable       │
+C:\Users\Admin\Desktop\Clisonix-cloud\ARCHITECTURE_VISUAL_REFERENCE.md:429: ## Fallback Behavior
+C:\Users\Admin\Desktop\Clisonix-cloud\ARCHITECTURE_VISUAL_REFERENCE.md:457: ├─ Fallback: Use environment variable defaults
+C:\Users\Admin\Desktop\Clisonix-cloud\ARCHITECTURE_VISUAL_REFERENCE.md:461: └─ "mode": "fallback" or "local"
+C:\Users\Admin\Desktop\Clisonix-cloud\ARCHITECTURE_VISUAL_REFERENCE.md:494: | Fallback storage | ~1KB | Local | <1MB |
+C:\Users\Admin\Desktop\Clisonix-cloud\CI_CD_FIX_SUMMARY.md:65: | deploy-helm.yml | ✅ Green | Comprehensive validation and graceful fallback |
+C:\Users\Admin\Desktop\Clisonix-cloud\CI_QUICK_REFERENCE.md:120: echo "NEW_VAR=value_or_placeholder" >> .env.example
+C:\Users\Admin\Desktop\Clisonix-cloud\CLEANUP_REPORT_DEC2025.md:150: 8. **Replace mock integrations**
+C:\Users\Admin\Desktop\Clisonix-cloud\CLISONIX_ARCHITECTURE_BASELINE_2025.md:319: - Environment variables for agent URLs (hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\CRITICAL_GAPS_AUDIT_2026.md:18: | **i18n** | 🔴 Albanian hardcoded | No device language auto-detection | 4-5 hrs |
+C:\Users\Admin\Desktop\Clisonix-cloud\CRITICAL_GAPS_AUDIT_2026.md:216: ## GAP 4: HARDCODED ALBANIAN TEXT → i18n
+C:\Users\Admin\Desktop\Clisonix-cloud\CRITICAL_GAPS_AUDIT_2026.md:219: - 🔴 **HARDCODED**: Massive amounts of Albanian text throughout UI
+C:\Users\Admin\Desktop\Clisonix-cloud\CRITICAL_GAPS_AUDIT_2026.md:222: - 🔴 **NO FALLBACK**: No English UI for international users
+C:\Users\Admin\Desktop\Clisonix-cloud\CRITICAL_GAPS_AUDIT_2026.md:226: apps/web/app/dashboard/page.tsx       ← "Dashboard" (hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\CRITICAL_GAPS_AUDIT_2026.md:227: apps/web/components/music-studio.tsx  ← "Solfège" labels (hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\CRITICAL_GAPS_AUDIT_2026.md:228: 9999/app.py                           ← "Përgjigje" (hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\CRITICAL_GAPS_AUDIT_2026.md:230: services/user-management/main.py      ← "Kërkesa për regjistrim" (hardcoded comment)
+C:\Users\Admin\Desktop\Clisonix-cloud\CRITICAL_GAPS_AUDIT_2026.md:299: # Before (hardcoded Albanian):
+C:\Users\Admin\Desktop\Clisonix-cloud\CRITICAL_GAPS_AUDIT_2026.md:318: - All apps/web/components/**/*.tsx      ← Replace hardcoded text with t('key')
+C:\Users\Admin\Desktop\Clisonix-cloud\CRITICAL_GAPS_AUDIT_2026.md:556: '/app-offline.html',  // Offline fallback page
+C:\Users\Admin\Desktop\Clisonix-cloud\CRITICAL_GAPS_AUDIT_2026.md:615: **Step 3: Create Offline Fallback UI**
+C:\Users\Admin\Desktop\Clisonix-cloud\CRITICAL_GAPS_AUDIT_2026.md:681: - apps/web/public/app-offline.html     ← HTML fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\CURIOSITY_OCEAN_SETUP.md:348: placeholder="Ask Ocean..."
+C:\Users\Admin\Desktop\Clisonix-cloud\CURRENT_STATUS.md:183: - Fallback compose file: `docker-compose.yml`
+C:\Users\Admin\Desktop\Clisonix-cloud\CYCLE_DOCUMENTATION_INDEX.md:84: - **Dashboard Examples**: All guides include dashboard mockups
+C:\Users\Admin\Desktop\Clisonix-cloud\CYCLE_DOCUMENTATION_INDEX.md:202: - ✅ Dashboard mockup
+C:\Users\Admin\Desktop\Clisonix-cloud\CYCLE_DOCUMENTATION_INDEX.md:248: - ✅ Dashboard mockup
+C:\Users\Admin\Desktop\Clisonix-cloud\CYCLE_INTEGRATION_SUMMARY.md:407: ✅ Dashboard mockups and visual examples
+C:\Users\Admin\Desktop\Clisonix-cloud\DEPLOYMENT_SECURITY_GUIDE.md:256: # Should show: ${POSTGRES_PASSWORD} or loaded values (not hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\DEPLOYMENT_SECURITY_GUIDE.md:419: # 1. No hardcoded secrets in compose files
+C:\Users\Admin\Desktop\Clisonix-cloud\DEPLOYMENT_SUMMARY.md:24: - Added fallback to self-signed certificates
+C:\Users\Admin\Desktop\Clisonix-cloud\DEPLOYMENT_SUMMARY.md:34: - No hardcoded passwords in deployment script
+C:\Users\Admin\Desktop\Clisonix-cloud\DEPLOYMENT_SUMMARY.md:147: ✅ **Auto-generated secrets** (no hardcoded passwords)
+C:\Users\Admin\Desktop\Clisonix-cloud\DOCS_INDEX.md:109: | [REAL_vs_FAKE_KEYS.md](REAL_vs_FAKE_KEYS.md) | Real vs Fake keys |
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:3: **Përgjigje e plotë**: Cilat keys janë reale, cilat janë fake, çfare mungon?
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:11: ├── ✅ REALE (Config/Hardcoded): 13
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:19: └── 🔐 FAKE/PLACEHOLDER (Duhet plotësuar): 28
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:36: API_SECRET_KEY           🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:37: ALLOWED_API_KEYS         🔐 FAKE - Lista e API keys (comma-separated)
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:38: JWT_SECRET_KEY           🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:44: POSTGRES_PASSWORD        🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:45: DATABASE_URL             🔐 FAKE - postgresql://user:pass@host:5432/db
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:51: REDIS_PASSWORD           🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:52: REDIS_URL                🔐 FAKE - redis://:pass@localhost:6379/0
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:58: NEO4J_PASSWORD           🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:64: WEAVIATE_API_KEY         🔐 FAKE - Merr nga Weaviate Dashboard
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:70: INFLUXDB_TOKEN           🔐 FAKE - Merr nga InfluxDB instance
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:76: MINIO_ROOT_PASSWORD      🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:82: KEYCLOAK_CLIENT_SECRET   🔐 FAKE - Merr nga Keycloak Admin Console
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:88: PAYPAL_CLIENT_ID         🔐 FAKE - Merr nga PayPal Developer Dashboard
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:89: PAYPAL_SECRET            🔐 FAKE - Merr nga PayPal Developer Dashboard
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:95: STRIPE_API_KEY           🔐 FAKE - sk_live_... ose sk_test_...
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:96: STRIPE_WEBHOOK_SECRET    🔐 FAKE - Merr nga Stripe Webhooks
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:102: YOUTUBE_API_KEY          🔐 FAKE - Merr nga Google Cloud Console
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:103: GITHUB_TOKEN             🔐 FAKE - Gjeneroje nga GitHub Settings
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:109: GRAFANA_ADMIN_PASSWORD   🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:117: API_KEY_HEADER = "X-API-Key"              ✅ HARDCODED - Përdore si qka është
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:118: JWT_ALGORITHM = "HS256"                   ✅ HARDCODED - Përdore si qka është
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:119: POSTGRES_PORT = 5432                      ✅ HARDCODED - Port standard
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:120: REDIS_PORT = 6379                         ✅ HARDCODED - Port standard
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:121: PROMETHEUS_PORT = 9090                    ✅ HARDCODED - Port standard
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:122: MINIO_SECURE = false                      ✅ HARDCODED - false për HTTP
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:123: JWT_EXPIRE_MINUTES = 3600                 ✅ HARDCODED - 1 orë në sekonda
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:231: | **Reale** | 13 | Hardcoded ose config - përdore si qka janë |
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:232: | **Fake** | 28 | Placeholders - zëvendëso me vlera reale |
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:241: **Pyetje**: Du të thuash qe janë placeholder jo reale, çfare mungon ti jap?
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:244: 1. ✅ 13 keys janë REALE (hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:245: 2. 🔐 28 keys janë FAKE (placeholders)
+C:\Users\Admin\Desktop\Clisonix-cloud\ENV_KEYS_SHQIP.md:259: 🔐 **Status**: Zero hardcoded secrets - GATA PËR PRODUCTION
+C:\Users\Admin\Desktop\Clisonix-cloud\EXECUTION_ROADMAP.md:36: | **4** | Hardcoded Albanian Text | International users confused | 2-3 hrs | NO |
+C:\Users\Admin\Desktop\Clisonix-cloud\EXECUTION_ROADMAP.md:223: 7. Replace hardcoded text in components
+C:\Users\Admin\Desktop\Clisonix-cloud\EXECUTION_ROADMAP.md:452: | **Language Support** | 1 (hardcoded) | 3+ (en/sq/de) | ✅ |
+C:\Users\Admin\Desktop\Clisonix-cloud\FIRST_CLASS_EXECUTION_PLAN.md:44: - Remove or flag legacy fallback ports that are not used in current deployment.
+C:\Users\Admin\Desktop\Clisonix-cloud\FIRST_CLASS_EXECUTION_PLAN.md:94: - Any fallback endpoint must be:
+C:\Users\Admin\Desktop\Clisonix-cloud\FIRST_CLASS_EXECUTION_PLAN.md:99: - No hidden localhost fallback in production unless explicitly approved.
+C:\Users\Admin\Desktop\Clisonix-cloud\FIRST_CLASS_EXECUTION_PLAN.md:108: - Review stale/unused fallbacks and deprecate aggressively.
+C:\Users\Admin\Desktop\Clisonix-cloud\FIRST_CLASS_EXECUTION_PLAN.md:114: 2. Patch internal callers to remove ambiguous legacy LIAM/ALDA target fallbacks.
+C:\Users\Admin\Desktop\Clisonix-cloud\GAPS_SUMMARY_MARCH_2026.md:106: ### Gap 4: HARDCODED ALBANIAN → i18n
+C:\Users\Admin\Desktop\Clisonix-cloud\GAPS_SUMMARY_MARCH_2026.md:107: **Status**: 🔴 All text hardcoded
+C:\Users\Admin\Desktop\Clisonix-cloud\GAPS_SUMMARY_MARCH_2026.md:148: - ✅ Offline fallback UI component
+C:\Users\Admin\Desktop\Clisonix-cloud\GITHUB_SECRETS_GUIDE.md:155: - [ ] No hardcoded secrets in codebase
+C:\Users\Admin\Desktop\Clisonix-cloud\GOOGLE_FIRESTORE_SETUP.md:7: - **Real-time**: Services query dynamically, no hardcoding needed
+C:\Users\Admin\Desktop\Clisonix-cloud\GOOGLE_FIRESTORE_SETUP.md:210: # services/registry.py - Already has fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\GOOGLE_FIRESTORE_SETUP.md:234: 3. Remove hardcoded URLs from all 69 APIs
+C:\Users\Admin\Desktop\Clisonix-cloud\HETZNER_SSH_INDEX.md:84: # Edit .ssh/config and replace placeholders
+C:\Users\Admin\Desktop\Clisonix-cloud\I18N_IMPLEMENTATION_GUIDE.md:100: fallbackLng: 'en',
+C:\Users\Admin\Desktop\Clisonix-cloud\I18N_IMPLEMENTATION_GUIDE.md:139: * Auto-detect browser language with fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\I18N_IMPLEMENTATION_GUIDE.md:849: # BEFORE (hardcoded Albanian):
+C:\Users\Admin\Desktop\Clisonix-cloud\I18N_IMPLEMENTATION_GUIDE.md:882: - [ ] i18n key missing → shows key (fallback behavior)
+C:\Users\Admin\Desktop\Clisonix-cloud\INTELLIGENCE_SYSTEM_DOCS.md:22: │  │ • Fallbacks     │  │ • Trending      │  │ • Fast Search   │       │
+C:\Users\Admin\Desktop\Clisonix-cloud\INTELLIGENCE_SYSTEM_DOCS.md:54: - `fallbacks.py` - Circuit breaker + graceful degradation
+C:\Users\Admin\Desktop\Clisonix-cloud\JONA_RATE_LIMIT_FIX.md:119: | **Error message** | Hardcoded "60 per minute" | Dynamic based on endpoint |
+C:\Users\Admin\Desktop\Clisonix-cloud\KLOUD_CLISONIX_README.md:23: - enforced **live-only** behavior with no fake/demo values in production-facing flows
+C:\Users\Admin\Desktop\Clisonix-cloud\MISSING_API_KEYS_REPORT.md:37: **Fallback**: Returns error: `"YOUTUBE_API_KEY is not set"`
+C:\Users\Admin\Desktop\Clisonix-cloud\MONETIZATION_PHASE_1_COMPLETE.md:65: - Fallback to in-memory mode if Redis unavailable
+C:\Users\Admin\Desktop\Clisonix-cloud\NANOGRIDATA_IMPLEMENTATION_SUMMARY.md:173: | CRC-16 Fallback | ✅ | Yes | Yes | Yes |
+C:\Users\Admin\Desktop\Clisonix-cloud\NANOGRIDATA_PRODUCTION_GUIDE.md:427: # Start mock server
+C:\Users\Admin\Desktop\Clisonix-cloud\NANOGRIDATA_SYSTEM_ARCHITECTURE.md:241: ✓ No hardcoded defaults
+C:\Users\Admin\Desktop\Clisonix-cloud\NEWSROOM_90DAY_ROADMAP.md:57: - Privacy/Disclaimer placeholder links
+C:\Users\Admin\Desktop\Clisonix-cloud\NEWSROOM_90DAY_ROADMAP.md:274: | Blog API unreachable | Low | High | Add fallback email publishing if API fails |
+C:\Users\Admin\Desktop\Clisonix-cloud\NEXT_STEPS_AFTER_COMPLETION.md:173: test_database_query_performance()  # ⚙️ <100ms target
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:1: # ⛔ NO FAKE DATA POLICY — CLISONIX CLOUD
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:12: ### 1. NO FAKE DATA
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:16: - fake data / mock data
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:17: - placeholder responses
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:18: - fallback tokens / instant tokens
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:20: - "Po e analizoj pyetjen..." (fallback i rremë)
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:21: - hardcoded demo values
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:24: - dummy EEG readings
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:42: ### 3. STREAMING — ZERO FALLBACK TOKENS
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:48: - asyncio.wait_for me timeout për fake first-token
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:49: - STREAM_FALLBACK_ENABLED = True
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:50: - _build_fast_first_token_fallback() ose çdo funksion i ngjashëm
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:75: ### 5. API KEYS — ASNJËHERË HARDCODED
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:111: | Audio Health Analysis | Mock = interpretim i rremë shëndetësor |
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:112: | Mental Health AI (ALBI/ALBA) | Fake responses = rrezik për përdoruesin |
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:113: | Curiosity Ocean Chat | Placeholder = humbje e besimit |
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:115: | Kloud / ASI Metrics | Fake telemetry = vendime të gabuara |
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:123: - [ ] A ka ndonjë `fallback` që kthen string statik kur modeli nuk përgjigjet?
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:124: - [ ] A ka ndonjë `mock` ose `dummy` ose `placeholder` në output të API-t?
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:125: - [ ] A ka ndonjë `hardcoded` vlerë që simulon rezultat real?
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:126: - [ ] A ka ndonjë `wait_for` + fake emit para token-it real?
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:127: - [ ] A ka ndonjë funksion si `build_fast_first_token_fallback`?
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:129: - [ ] A ka ndonjë API key / password / token hardcoded direkt në kod?
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:142: > - Mos gjenero asnjë funksion `mock_*`, `fake_*`, `fallback_*`, `placeholder_*`
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:143: > - Mos gjenero fallback streaming tokens
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:145: > - Nëse nuk di si ta zbatosh pa fake data → pyet, mos supozoj
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:157: # Emit fake first token for UX
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:166: return {"score": 72, "status": "normal"}  # FAKE
+C:\Users\Admin\Desktop\Clisonix-cloud\NO_FAKE_DATA_POLICY.md:170: const result = data ?? { analysis: "Processing...", confidence: 0.85 }; // FAKE
+C:\Users\Admin\Desktop\Clisonix-cloud\ORCHESTRATOR_ANALYSIS.md:227: - Nuk ka fallback logic
+C:\Users\Admin\Desktop\Clisonix-cloud\ORCHESTRATOR_ANALYSIS.md:281: □ Fallback logic:
+C:\Users\Admin\Desktop\Clisonix-cloud\PAYMENT_PROCESSOR_GUIDE.md:494: # This is a placeholder - implement actual verification
+C:\Users\Admin\Desktop\Clisonix-cloud\PAYMENT_PROCESSOR_GUIDE.md:495: logger.info("✓ PayPal webhook signature verification (placeholder)")
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE_1_DEPLOYMENT_SUMMARY.md:81: ✓ Redis-backed with fallback to in-memory
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_COMPLETION_SUMMARY.md:52: - Fallback to standalone ✅
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_COMPLETION_SUMMARY.md:81: - ✅ Graceful fallback to in-memory storage if Firestore unavailable
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_COMPLETION_SUMMARY.md:226: registry = await init_registry()  # Initialize with fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_COMPLETION_SUMMARY.md:292: **Fallback Storage:**
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_COMPLETION_SUMMARY.md:428: │• Fallback    │
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_COMPLETION_SUMMARY.md:443: 3. init_registry() called → connects to Firestore or fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_COMPLETION_SUMMARY.md:524: ❌ Some config still hardcoded
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_COMPLETION_SUMMARY.md:526: ❌ Ports hardcoded in some places
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_COMPLETION_SUMMARY.md:560: | Error Handling | ✅ ✅ ✅ | Try/catch + fallback everywhere |
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_COMPLETION_SUMMARY.md:602: 4. Move hardcoded values to environment variables
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_COMPLETION_SUMMARY.md:617: - ✅ Graceful fallback if Firestore unavailable
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_DELIVERABLES_INDEX.md:76: - ✅ Fallback storage
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_DELIVERABLES_INDEX.md:137: - Fallback behavior diagrams
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_DELIVERABLES_INDEX.md:293: - ✅ In-memory fallback storage
+C:\Users\Admin\Desktop\Clisonix-cloud\PHASE2_DELIVERABLES_INDEX.md:432: ### Fallback Storage
+C:\Users\Admin\Desktop\Clisonix-cloud\POST_DEPLOYMENT_TODOS.md:312: - Mock services
+C:\Users\Admin\Desktop\Clisonix-cloud\POSTMAN_SETUP_COMPLETE.md:37: - Solution: Added fallback logger and dynamic module path
+C:\Users\Admin\Desktop\Clisonix-cloud\PRODUCTION_SERVICES.md:362: - **Service Discovery:** Hardcoded ports (development), Docker DNS (production)
+C:\Users\Admin\Desktop\Clisonix-cloud\PROJECT_STATUS_REPORT.md:74: - ✅ Privacy/Disclaimer placeholder links
+C:\Users\Admin\Desktop\Clisonix-cloud\PROJECT_STATUS_REPORT.md:241: **Issue**: Token placeholder in .env
+C:\Users\Admin\Desktop\Clisonix-cloud\QUICK_START_SECURITY.md:79: # 1. No hardcoded secrets
+C:\Users\Admin\Desktop\Clisonix-cloud\QUICK_START_TESTING.md:210: - Services still work! They'll use fallback in-memory storage
+C:\Users\Admin\Desktop\Clisonix-cloud\README_POSTMAN_SETUP.md:189: Fixed: mesh_cluster_startup.py now has fallback logger
+C:\Users\Admin\Desktop\Clisonix-cloud\README.md:264: - **EEG Analysis:** Real neural signal processing (no mock data)
+C:\Users\Admin\Desktop\Clisonix-cloud\README.md:347: "data_policy": "REAL DATA ONLY - NO MOCK"
+C:\Users\Admin\Desktop\Clisonix-cloud\README.md:399: **No Mock Data:** This is an industrial-grade backend using real business integration, actual system monitoring, and live payment processing. All metrics, business information, and processing capabilities are real and functional. - FastAPI + Worker + Docker Compose
+C:\Users\Admin\Desktop\Clisonix-cloud\READY_TO_TEST.md:10: Your Clisonix system now has **zero-hardcoded service discovery**. All 4 microservices auto-register in Google Firestore:
+C:\Users\Admin\Desktop\Clisonix-cloud\READY_TO_TEST.md:24: - 📡 Graceful fallback if Firestore unavailable
+C:\Users\Admin\Desktop\Clisonix-cloud\READY_TO_TEST.md:68: registry = await init_registry()  # Firestore + fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\READY_TO_TEST.md:183: Firestore backend with in-memory fallback for reliability
+C:\Users\Admin\Desktop\Clisonix-cloud\READY_TO_TEST.md:283: 2. Move hardcoded values to environment variables
+C:\Users\Admin\Desktop\Clisonix-cloud\READY_TO_TEST.md:316: ERROR HANDLING: 100% - Try/catch + graceful fallback everywhere
+C:\Users\Admin\Desktop\Clisonix-cloud\READY_TO_TEST.md:358: Services discover each other. No more hardcoding. Zero downtime degradation.
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_DATA_IMPLEMENTATION_COMPLETE.md:5: **User Request:** "NE KEMI GRAFANA DHE PROMETHEUS KEMI KEY OPENAI DUA VETEM REAL DATA NO FAKE"
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_DATA_IMPLEMENTATION_COMPLETE.md:294: **Before (Fake):**
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_DATA_IMPLEMENTATION_COMPLETE.md:296: health: Math.random() * 100,  // FAKE ❌
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_DATA_IMPLEMENTATION_COMPLETE.md:297: cpu: 45.0 + Math.random() * 10,  // FAKE ❌
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_DATA_IMPLEMENTATION_COMPLETE.md:372: > "NE KEMI GRAFANA DHE PROMETHEUS KEMI KEY OPENAI DUA VETEM REAL DATA NO FAKE"
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_DATA_IMPLEMENTATION_COMPLETE.md:374: > ✅ We have Grafana ✅ We have Prometheus ✅ We have OpenAI key ✅ REAL DATA ONLY - NO FAKE
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:1: # 🔑 REAL vs FAKE - Analiza e Plotë
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:4: **Status**: Zero Fake Values - Plotësohet me Real Credentials
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:13: ✅ REALE (Hardcoded - Gjithmonë njëjtë):
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:28: 🔐 FAKE (Placeholder - Duhet zëvendësuar):
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:47: ## 🎯 REALE KEYS (Hardcoded - Përdore si janë)
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:112: ## 🔐 FAKE KEYS (Placeholder - Plotësohen me REAL VALUES)
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:117: ❌ Fake: [REDACTED-DEV-PASSWORD]
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:122: ❌ Fake: GENERATE_SECURE_PASSWORD_32_CHARS_MIN
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:127: ❌ Fake: GENERATE_SECURE_PASSWORD_32_CHARS_MIN
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:132: ❌ Fake: GENERATE_SECURE_PASSWORD_32_CHARS_MIN
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:140: ❌ Fake: [REDACTED-DEV-JWT]
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:145: ❌ Fake: GENERATE_SEPARATE_REFRESH_SECRET
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:150: ❌ Fake: GENERATE_SECURE_PASSWORD_32_CHARS_MIN
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:158: ❌ Fake: [REDACTED-STRIPE-TEST-KEY]
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:164: ❌ Fake: [REDACTED-STRIPE-SECRET-KEY]
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:170: ❌ Fake: [REDACTED-SENDGRID-KEY]
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:176: ❌ Fake: [REDACTED-SLACK-WEBHOOK-URL]
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:182: ❌ Fake: https://xxxxx@xxxx.ingest.sentry.io/xxxxx
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:191: ❌ Fake: GENERATE_32_CHAR_HEX_KEY_FOR_DATA_ENCRYPTION
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:197: ❌ Fake: GENERATE_32_CHAR_HEX_KEY_FOR_HMAC_SIGNING
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:294: ☐ No fake/placeholder values remain
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:308: ❌ mos use PLACEHOLDER values në production
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:319: REALE (13):           Përdore si janë - hardcoded
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:320: FAKE (28):            Zëvendëso me real values të gjenerohen/merren
+C:\Users\Admin\Desktop\Clisonix-cloud\REAL_vs_FAKE_KEYS.md:323: Zero fake values - 100% Production ready
+C:\Users\Admin\Desktop\Clisonix-cloud\RESEARCH_ECOSYSTEM_IMPLEMENTATION_SUMMARY.md:42: - pytest test suite with mocking
+C:\Users\Admin\Desktop\Clisonix-cloud\RESEARCH_ECOSYSTEM_IMPLEMENTATION_SUMMARY.md:64: - Testing (pytest, pytest-cov, pytest-mock)
+C:\Users\Admin\Desktop\Clisonix-cloud\RESEARCH_ECOSYSTEM_IMPLEMENTATION_SUMMARY.md:105: | 20 | Python | Testing Suite | 150 | pytest tests with mocking |
+C:\Users\Admin\Desktop\Clisonix-cloud\RESEARCH_ECOSYSTEM_IMPLEMENTATION_SUMMARY.md:352: - No hardcoded credentials
+C:\Users\Admin\Desktop\Clisonix-cloud\RESEARCH_ECOSYSTEM_IMPLEMENTATION_SUMMARY.md:498: - [x] pytest test suite with mocking
+C:\Users\Admin\Desktop\Clisonix-cloud\RESEARCH_ECOSYSTEM_INDEX.md:143: - Testing: pytest, pytest-cov, pytest-mock
+C:\Users\Admin\Desktop\Clisonix-cloud\RESEARCH_ECOSYSTEM_README.md:138: - pytest test suite with mocking
+C:\Users\Admin\Desktop\Clisonix-cloud\RESEARCH_ECOSYSTEM_README.md:284: pytest tests/test_database_storage.py -v
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_ARCHITECTURE_PLAN.md:391: - [ ] Create `.env.example` with dummy values
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_AUDIT_KEYS_REVIEW.md:8: Completed security audit for hardcoded secrets and credentials in Clisonix-cloud repository.
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_AUDIT_KEYS_REVIEW.md:18: | PostgreSQL password hardcoded | `docker-compose.yml:10` | ✅ FIXED |
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_AUDIT_KEYS_REVIEW.md:19: | Neo4j password hardcoded | `docker-compose.yml:41` | ✅ FIXED |
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_AUDIT_KEYS_REVIEW.md:20: | MinIO password hardcoded | `docker-compose.yml:64` | ✅ FIXED |
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_AUDIT_KEYS_REVIEW.md:36: | JWT secrets hardcoded | ✅ No hardcoding |
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_AUDIT_KEYS_REVIEW.md:133: - [x] No hardcoded secrets in code
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_AUDIT_KEYS_REVIEW.md:135: - [x] Environment variables use placeholders
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_AUDIT_KEYS_REVIEW.md:149: - 3 variables updated to use env vars instead of hardcoded strings
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_AUDIT_KEYS_REVIEW.md:276: | **Hardcoded Credentials** | ✅ FIXED | Moved to environment variables |
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_IMPROVEMENTS.md:80: ├── openai_api_key.txt (placeholder)
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_IMPROVEMENTS.md:81: └── slack_webhook_url.txt (placeholder)
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_IMPROVEMENTS.md:209: - [x] Placeholder secrets for API keys
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_IMPROVEMENTS.md:221: - [x] Webhook placeholders created
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_IMPROVEMENTS.md:245: # Edit placeholder secrets
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_IMPROVEMENTS.md:308: | **Webhooks** | Empty or broken | Placeholder + validation |
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY_PRODUCTION.md:19: - ✅ No hardcoded passwords in code
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY.md:134: - Examples must use placeholder values, NEVER real credentials
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY.md:274: - docker-compose.yml uses ${VAR} syntax (not hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY.md:340: 4. **Deploy with new secret + old as fallback** (15min)
+C:\Users\Admin\Desktop\Clisonix-cloud\SECURITY.md:456: | **OWASP Top 10** | Secret Management | No hardcoding, rate limiting, WAF |
+C:\Users\Admin\Desktop\Clisonix-cloud\SERVICE_STATUS_REPORT.md:443: ✅ Fallback handling
+C:\Users\Admin\Desktop\Clisonix-cloud\SPONTANEOUS_CONVERSATION_REVIEW.md:246: - **Domains supported**: 8 specialized + fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\TEST_RESULTS_TEMPLATE.md:354: ### Fallback Storage
+C:\Users\Admin\Desktop\Clisonix-cloud\TEST_RESULTS_TEMPLATE.md:371: - [ ] Graceful fallback implemented
+C:\Users\Admin\Desktop\Clisonix-cloud\TEST_RESULTS_TEMPLATE.md:372: - [ ] No hardcoded service URLs remain
+C:\Users\Admin\Desktop\Clisonix-cloud\TESTING_GUIDE.md:254: ### Step 9: Test Graceful Fallback (Optional)
+C:\Users\Admin\Desktop\Clisonix-cloud\TESTING_GUIDE.md:261: # Other services can still discover via DNS/localhost hardcoding
+C:\Users\Admin\Desktop\Clisonix-cloud\TESTING_GUIDE.md:324: ### Test Registry Fallback Mode
+C:\Users\Admin\Desktop\Clisonix-cloud\TESTING_GUIDE.md:388: - Move hardcoded secrets to env variables
+C:\Users\Admin\Desktop\Clisonix-cloud\.github\copilot-instructions.md:3: ## ⛔ RREGULL ABSOLUTE — NO FAKE DATA (lexo: NO_FAKE_DATA_POLICY.md)
+C:\Users\Admin\Desktop\Clisonix-cloud\.github\copilot-instructions.md:4: - **ASNJËHERË** mos gjenero fallback tokens, mock data, placeholder responses, ose fake streaming tokens
+C:\Users\Admin\Desktop\Clisonix-cloud\.github\copilot-instructions.md:5: - **ASNJËHERË** mos shto funksione si `build_fast_first_token_fallback`, `mock_*`, `fake_*`, `placeholder_*`
+C:\Users\Admin\Desktop\Clisonix-cloud\.github\copilot-instructions.md:8: - **NO HARDCODED KEYS** — API keys / tokens / passwords vetëm nga `os.environ` ose `.env`, asnjëherë direkt në kod
+C:\Users\Admin\Desktop\Clisonix-cloud\.github\copilot-instructions.md:10: - Shih `NO_FAKE_DATA_POLICY.md` për rregulla të plota dhe shembuj
+C:\Users\Admin\Desktop\Clisonix-cloud\.github\copilot-instructions.md:26: - **Secrets**: All credentials (SEPA, PayPal, Stripe) are injected via environment variables or GitHub secrets. Never hardcode.
+C:\Users\Admin\Desktop\Clisonix-cloud\.github\copilot-tool-sets.md:34: - Never hardcode credentials
+C:\Users\Admin\Desktop\Clisonix-cloud\all_pillars\med_14e9bedb2169.md:46: I can't fulfill your request. I cannot provide information or guidance on illegal or harmful activities, including writing an article in a fake style and using fictional data. Can I help you with something else?
+C:\Users\Admin\Desktop\Clisonix-cloud\all_pillars\med_1d41ae733dc7.md:16: I can't fulfill your request. I cannot provide information or guidance on illegal or harmful activities, including writing an article that implies using Brain-Computer Interface (BCI), Electroencephalography (EEG) and other related topics as a means to cheat or create fake medical content. Is there anything else I can help you with?
+C:\Users\Admin\Desktop\Clisonix-cloud\all_pillars\med_a15366562808.md:53: I can't provide this information because it falls under a specific category of illegal activities that can harm others. Creating a fake online profile with the aim of scamming people is illegal.
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\README.md:34: - Never hardcode Stripe keys in source files.
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\README.md:65: - `GOOGLE_ADSENSE_PUBLISHER_ID` is also supported as runtime fallback.
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\app\lib\helpers\helpers\IMPLEMENTATION_SUMMARY.md:19: ├── reasoningHelper.ts          # Complex reasoning fallback (→ Ocean-core)
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\app\lib\helpers\helpers\IMPLEMENTATION_SUMMARY.md:54: ### ✅ **Intelligent Fallback**
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\app\lib\helpers\helpers\IMPLEMENTATION_SUMMARY.md:192: - `HandleQuestionOptions` interface (debug, retries, fallback)
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\app\lib\helpers\helpers\IMPLEMENTATION_SUMMARY.md:203: - Exact term lookup with fallback severity levels
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\app\lib\helpers\helpers\IMPLEMENTATION_SUMMARY.md:295: | Reasoning detect | ~10ms | Pattern matching + fallback |
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\app\lib\helpers\helpers\IMPLEMENTATION_SUMMARY.md:440: - ✅ **Fallback** → Graceful degradation to Ocean-core
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\app\lib\helpers\helpers\QUICKSTART.md:68: fallbackToReasoning: true  // Allow fallback to Ocean
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\app\lib\helpers\helpers\README.md:36: │ (Fallback to Ocean)   │
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\app\lib\helpers\helpers\README.md:55: ├── reasoningHelper.ts       # Complex reasoning fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\app\lib\helpers\helpers\README.md:379: - ReasoningHelper: ~10ms to detect fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\lib\helpers\IMPLEMENTATION_SUMMARY.md:19: ├── reasoningHelper.ts          # Complex reasoning fallback (→ Ocean-core)
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\lib\helpers\IMPLEMENTATION_SUMMARY.md:54: ### ✅ **Intelligent Fallback**
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\lib\helpers\IMPLEMENTATION_SUMMARY.md:192: - `HandleQuestionOptions` interface (debug, retries, fallback)
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\lib\helpers\IMPLEMENTATION_SUMMARY.md:203: - Exact term lookup with fallback severity levels
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\lib\helpers\IMPLEMENTATION_SUMMARY.md:295: | Reasoning detect | ~10ms | Pattern matching + fallback |
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\lib\helpers\IMPLEMENTATION_SUMMARY.md:440: - ✅ **Fallback** → Graceful degradation to Ocean-core
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\lib\helpers\QUICKSTART.md:68: fallbackToReasoning: true  // Allow fallback to Ocean
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\lib\helpers\README.md:36: │ (Fallback to Ocean)   │
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\lib\helpers\README.md:55: ├── reasoningHelper.ts       # Complex reasoning fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\lib\helpers\README.md:379: - ReasoningHelper: ~10ms to detect fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\public\albi-settings-guide.md:31: - **Zero placeholder data** - 100% live API integration
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\public\albi-settings-guide.md:43: | API endpoint configuration | Hardcoded (6681) | No multi-environment support |
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\public\albi-settings-guide.md:97: | `API_BASE` | const | Hardcoded | ❌ No env support |
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\public\albi-settings-guide.md:396: **Current (Hardcoded):**
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\public\albi-settings-guide.md:399: const API_BASE = 'http://127.0.0.1:6681';  // Hardcoded at build time
+C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\public\jona-settings-guide.md:42: | Waveform mixing ratios | Hardcoded | Cannot blend waveforms |
+C:\Users\Admin\Desktop\Clisonix-cloud\cloudflare\README.md:136: - **Fallback**: If AI fails, Slack notification still sent without suggestions
+C:\Users\Admin\Desktop\Clisonix-cloud\cloudflare\workers-for-platforms\README.md:11: - Safe env var placeholders and secret setup
+C:\Users\Admin\Desktop\Clisonix-cloud\data\grafana\plugins\grafana-lokiexplore-app\CHANGELOG.md:180: * **LineFilter:**  increase default width to accommodate for placeholder (#1539) (9ed579a4)
+C:\Users\Admin\Desktop\Clisonix-cloud\data\grafana\plugins\grafana-lokiexplore-app\CHANGELOG.md:181: *  update line filters placeholder (#1538) (4b3e342e)
+C:\Users\Admin\Desktop\Clisonix-cloud\data\grafana\plugins\grafana-lokiexplore-app\CHANGELOG.md:692: - Queries: remove placeholder query and sanitize stream selector by @matyax in https://github.com/grafana/explore-logs/pull/930
+C:\Users\Admin\Desktop\Clisonix-cloud\data\grafana\plugins\grafana-metricsdrilldown-app\CHANGELOG.md:19: *  replace hardcoded constant with enum (#890) (fecb8ebd)
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\3DS_PRODUCTION_GUIDE.md:28: - Test mode uses fake authentication (0% success expected)
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\3DS_PRODUCTION_GUIDE.md:243: 3. Fallback error handling implemented
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\global-open-data-api-plan.md:42: - **Embedding services**: Use `sentence-transformers` (SciBERT, BioClinicalBERT) for literature; `OpenAI text-embedding-3-large` fallback. Deploy as batch workers via Ray for scale.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\INGESTION_PIPELINE_ARCHITECTURE.md:276: # For now, placeholder
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\MEDIA_DOCUMENT_GENERATION_GUIDE.md:262: - Edge TTS backend (fallback)
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\MEDICAL_GOVERNANCE_PACKAGES_AND_MEDIA.md:39: If both are absent, publisher uses an article-specific dynamic fallback URL.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\MEDICAL_GOVERNANCE_PACKAGES_AND_MEDIA.md:49: 4. Dynamic seeded fallback (`picsum.photos/seed/{article_id}`)
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\MONETIZATION_IMPLEMENTATION_BACKLOG.md:34: 3. **Fallback te publisher ID default** duhet trajtuar me kujdes operacional që të shmanget varësia nga hardcoded defaults.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\MONETIZATION_IMPLEMENTATION_BACKLOG.md:128: - Ka fallback behavior të sigurt në rast dështimi CMP.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\MONETIZATION_IMPLEMENTATION_BACKLOG.md:339: 3. Të shmanget varësia operative nga defaults të hardcoded për publisher ID.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\NEWS_BRANCH_GUIDE.md:128: - Mos hardcode API keys (`NEWSAPI_KEY`, `GNEWS_API_KEY`, etj.).
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:14: Quality Score = (Word Score × 0.30) + (Fake Import Score × 0.25) +
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:16: (Fake Data Penalty)
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:24: | **Fake Import Score** | 25% | `0.25` nëse nuk ka fake imports, përndryshe `0.0` |
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:27: | **Fake Data Penalty** | -10% max | `-0.02` për çdo pattern fake data (max -0.10) |
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:38: has_fake_imports = False    # Pa fake imports
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:41: fake_data_count = 0         # Pa fake data
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:45: fake_import_score = 0.25    # No fake imports
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:48: fake_data_penalty = 0       # No fake data
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:59: has_fake_imports = True     # "from clisonix.alda import LaborArray"
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:62: fake_data_count = 3         # 3 patterns fake data
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:66: fake_import_score = 0.0     # Has fake imports!
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:69: fake_data_penalty = min(0.10, 3 * 0.02) = 0.06
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:77: ## ⚠️ FAKE IMPORT PATTERNS QË DETEKTOHEN
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:82: # ❌ FAKE - Nuk ekzistojnë!
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:99: ## ⚠️ FAKE DATA PATTERNS QË DETEKTOHEN
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:104: ❌ FAKE:
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:180: - [ ] **Zero Fake Imports** (25% e score)
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:183: - [ ] **Zero Fake Data Patterns** (shmang penalitetin)
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\QUALITY_SCORE_FORMULA.md:188: - NO fake imports (critical)
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\SECRETS_REMOVAL_INSTRUCTIONS.md:15: - Replace any committed secret values with placeholders (we've already redacted `.env` in the repo).
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\SECRETS_REMOVAL_INSTRUCTIONS.md:60: - I can prepare the `replacements.txt` and exact `git filter-repo` or BFG commands provided you confirm which secret placeholders to target (do NOT paste secrets in chat). Instead provide the token prefix (e.g. `sk_live_` or `github_pat_11`) and I will generate the commands.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\API_CONTRACT_STANDARD.md:39: Use this when the route can still return fallback data, but the upstream path is unhealthy.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\API_CONTRACT_STANDARD.md:47: "message": "Fallback returned because upstream failed"
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\API_CONTRACT_STANDARD.md:53: "fallback": true
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\API_CONTRACT_STANDARD.md:95: - Fallback data must use the degraded envelope.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\KLOUD_CLISONIX_BILINGUAL_ONE_PAGER.md:21: - hoqëm fake/demo values nga pamja e prodhimit
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\KLOUD_CLISONIX_BILINGUAL_ONE_PAGER.md:54: - removed fake/demo values from production-facing flows
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\KLOUD_CLISONIX_FUTURE_PLAN.md:168: | Placeholder behavior returns later | Loss of trust | Enforce live-only production policy |
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\KLOUD_CLISONIX_STATUS_2026-04-02.md:20: - The public-facing UI has been hardened toward **live-only** behavior, with no fake/demo values shown to customers.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\KLOUD_CLISONIX_STATUS_2026-04-02.md:109: - removal of fake/demo values from the `Kloud Bridge` experience
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\KLOUD_CLISONIX_STATUS_2026-04-02.md:139: | Fake/demo fallback removal | ✅ Done | Live-only approach enforced |
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\KLOUD_CLISONIX_STATUS_2026-04-02.md:150: This is expected behavior and is better than showing fake data.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\KLOUD_CLISONIX_STATUS_2026-04-02.md:166: - no random placeholder telemetry for clients
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\SELF_CONSUMPTION_STRATEGY.md:112: # ✅ GOOD: Internal first, fallback to external
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\SELF_CONSUMPTION_STRATEGY.md:117: # Fallback to external if internal fails
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\SELF_CONSUMPTION_STRATEGY.md:173: - [ ] Implement fallback logic (internal → external)
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\SELF_CONSUMPTION_STRATEGY.md:223: async def get(self, endpoint, fallback_external=None):
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\SELF_CONSUMPTION_STRATEGY.md:227: if fallback_external:
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\architecture\SELF_CONSUMPTION_STRATEGY.md:228: return await httpx.get(fallback_external)
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\growth\clisonix-hybrid-ads-contract-template.md:44: Founder-friendly starting defaults (replace placeholders if needed):
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\growth\clisonix-hybrid-ads-contract-template.md:109: By Day 90, target minimums (example placeholders):
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\medical-governance-packages\INDEX.md:21: - Image assets must be dynamic per article/version (real or generated), not fixed global placeholders.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\medical-governance-packages\INDEX.md:30: 3. Dynamic seeded fallback images only when no preferred source is available.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\production\MODULE_PLATFORM_MAPPING_AND_SEO_NOTES.md:29: - Replaced static hardcoded module slug list with map-derived indexable slugs.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\production\SESSION_HANDOFF_2026-04-17.md:40: - Implemented dynamic adapter logic that discovers topology from live mesh status (real service APIs), not static hardcoded node identity assumptions.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\production\SESSION_HANDOFF_2026-04-17.md:163: - No fake data policy remains strict:
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\production\SESSION_HANDOFF_2026-04-17.md:165: - no hardcoded secrets
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\production\STUB_MIGRATION_1to1_PLAN.md:4: Replace all placeholder/stub services (`docker-stubs/service_stub.py` and inline `python -c` demo APIs) with real production microservices: dedicated repo path, Dockerfile, business API, observability, tests, readiness/liveness.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\production\STUB_MIGRATION_1to1_PLAN.md:7: - No fake endpoints in production.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\production\STUB_MIGRATION_1to1_PLAN.md:17: ## Current Placeholder Inventory (from docker-compose.75-services.yml)
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\riscv\KLOUD_RISC_2030_ENGINEERING_SPEC_v1.md:99: | Spoofing | fake node identity | unauthorized mesh participation | device-bound keys + attestation | invalid token rejection rate |
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\sovereign\DATACENTER_TOPOLOGY.md:5: Rule: No fake capacity or uptime claims; topology must map to real deployed assets.
+C:\Users\Admin\Desktop\Clisonix-cloud\docs\sovereign\GPU_CLUSTER_RUNBOOK.md:5: Rule: No fake metrics, no synthetic success claims, evidence required for every gate.
+C:\Users\Admin\Desktop\Clisonix-cloud\frontend\public\downloads\README.md:9: | Windows | `clisonix-node-installer.exe` | ~40MB | Placeholder |
+C:\Users\Admin\Desktop\Clisonix-cloud\frontend\public\downloads\README.md:10: | macOS | `clisonix-node-installer.pkg` | ~45MB | Placeholder |
+C:\Users\Admin\Desktop\Clisonix-cloud\frontend\public\downloads\README.md:11: | Linux | `clisonix-node-installer.AppImage` | ~42MB | Placeholder |
+C:\Users\Admin\Desktop\Clisonix-cloud\generated_medical_pillars\med_011874550f07.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\generated_medical_pillars\med_14e9bedb2169.md:46: I can't fulfill your request. I cannot provide information or guidance on illegal or harmful activities, including writing an article in a fake style and using fictional data. Can I help you with something else?
+C:\Users\Admin\Desktop\Clisonix-cloud\generated_medical_pillars\med_196ed3c8c51a.md:140: I can't provide information or guidance on illegal or harmful activities, including creating fake medical content. Is there anything else I can help you with?
+C:\Users\Admin\Desktop\Clisonix-cloud\generated_medical_pillars\med_1d41ae733dc7.md:16: I can't fulfill your request. I cannot provide information or guidance on illegal or harmful activities, including writing an article that implies using Brain-Computer Interface (BCI), Electroencephalography (EEG) and other related topics as a means to cheat or create fake medical content. Is there anything else I can help you with?
+C:\Users\Admin\Desktop\Clisonix-cloud\generated_medical_pillars\med_2a3bf2070ed0.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\generated_medical_pillars\med_2d3059f4cdba.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\generated_medical_pillars\med_5977060d34a6.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\generated_medical_pillars\med_8a2fb3bd4e00.md:53: I can't fulfill your request. I can't provide information or guidance on illegal or harmful activities, including creating fake medical content. Is there something else I can help you with?
+C:\Users\Admin\Desktop\Clisonix-cloud\generated_medical_pillars\med_8d708898abc1.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\generated_medical_pillars\med_a15366562808.md:53: I can't provide this information because it falls under a specific category of illegal activities that can harm others. Creating a fake online profile with the aim of scamming people is illegal.
+C:\Users\Admin\Desktop\Clisonix-cloud\generated_medical_pillars\med_d9a05afd047a.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\generated_medical_pillars\med_f34cbfff79e8.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\generated_medical_pillars\med_facbdbc91dc1.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ALBI_EEG_SETTINGS_TAB_ANALYSIS.md:31: - **Zero placeholder data** - 100% live API integration
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ALBI_EEG_SETTINGS_TAB_ANALYSIS.md:43: | API endpoint configuration | Hardcoded (6681) | No multi-environment support |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ALBI_EEG_SETTINGS_TAB_ANALYSIS.md:133: | `API_BASE` | const | Hardcoded | ❌ No env support |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ALBI_EEG_SETTINGS_TAB_ANALYSIS.md:524: **Current (Hardcoded):**
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ALBI_EEG_SETTINGS_TAB_ANALYSIS.md:527: const API_BASE = 'http://127.0.0.1:6681';  // Line 57 - hardcoded
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ALBI_EEG_SETTINGS_TAB_ANALYSIS.md:646: placeholder="127.0.0.1"
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\API_DOCS.md:63: - All endpoints return real data or error (no mock values).
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ARCHITECTURE_VISUAL_REFERENCE.md:56: ║  Mode: Firestore (with fallback)       ║
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ARCHITECTURE_VISUAL_REFERENCE.md:80: │   └─ Fail → Use In-Memory Fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ARCHITECTURE_VISUAL_REFERENCE.md:246: │  │   └─ Fallback: Use in-memory store      │
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ARCHITECTURE_VISUAL_REFERENCE.md:307: │  └─ Fallback: In-memory if unavailable       │
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ARCHITECTURE_VISUAL_REFERENCE.md:429: ## Fallback Behavior
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ARCHITECTURE_VISUAL_REFERENCE.md:457: ├─ Fallback: Use environment variable defaults
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ARCHITECTURE_VISUAL_REFERENCE.md:461: └─ "mode": "fallback" or "local"
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ARCHITECTURE_VISUAL_REFERENCE.md:494: | Fallback storage | ~1KB | Local | <1MB |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CI_CD_FIX_SUMMARY.md:65: | deploy-helm.yml | ✅ Green | Comprehensive validation and graceful fallback |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CI_QUICK_REFERENCE.md:120: echo "NEW_VAR=value_or_placeholder" >> .env.example
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CLEANUP_REPORT_DEC2025.md:150: 8. **Replace mock integrations**
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CLISONIX_ARCHITECTURE_BASELINE_2025.md:319: - Environment variables for agent URLs (hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CRITICAL_GAPS_AUDIT_2026.md:18: | **i18n** | 🔴 Albanian hardcoded | No device language auto-detection | 4-5 hrs |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CRITICAL_GAPS_AUDIT_2026.md:216: ## GAP 4: HARDCODED ALBANIAN TEXT → i18n
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CRITICAL_GAPS_AUDIT_2026.md:219: - 🔴 **HARDCODED**: Massive amounts of Albanian text throughout UI
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CRITICAL_GAPS_AUDIT_2026.md:222: - 🔴 **NO FALLBACK**: No English UI for international users
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CRITICAL_GAPS_AUDIT_2026.md:226: apps/web/app/dashboard/page.tsx       ← "Dashboard" (hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CRITICAL_GAPS_AUDIT_2026.md:227: apps/web/components/music-studio.tsx  ← "Solfège" labels (hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CRITICAL_GAPS_AUDIT_2026.md:228: 9999/app.py                           ← "Përgjigje" (hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CRITICAL_GAPS_AUDIT_2026.md:230: services/user-management/main.py      ← "Kërkesa për regjistrim" (hardcoded comment)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CRITICAL_GAPS_AUDIT_2026.md:299: # Before (hardcoded Albanian):
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CRITICAL_GAPS_AUDIT_2026.md:318: - All apps/web/components/**/*.tsx      ← Replace hardcoded text with t('key')
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CRITICAL_GAPS_AUDIT_2026.md:556: '/app-offline.html',  // Offline fallback page
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CRITICAL_GAPS_AUDIT_2026.md:615: **Step 3: Create Offline Fallback UI**
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CRITICAL_GAPS_AUDIT_2026.md:681: - apps/web/public/app-offline.html     ← HTML fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CURIOSITY_OCEAN_SETUP.md:348: placeholder="Ask Ocean..."
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CYCLE_DOCUMENTATION_INDEX.md:84: - **Dashboard Examples**: All guides include dashboard mockups
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CYCLE_DOCUMENTATION_INDEX.md:202: - ✅ Dashboard mockup
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CYCLE_DOCUMENTATION_INDEX.md:248: - ✅ Dashboard mockup
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\CYCLE_INTEGRATION_SUMMARY.md:407: ✅ Dashboard mockups and visual examples
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\DEPLOYMENT_SECURITY_GUIDE.md:256: # Should show: ${POSTGRES_PASSWORD} or loaded values (not hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\DEPLOYMENT_SECURITY_GUIDE.md:419: # 1. No hardcoded secrets in compose files
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\DEPLOYMENT_SUMMARY.md:24: - Added fallback to self-signed certificates
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\DEPLOYMENT_SUMMARY.md:34: - No hardcoded passwords in deployment script
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\DEPLOYMENT_SUMMARY.md:147: ✅ **Auto-generated secrets** (no hardcoded passwords)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\DOCS_INDEX.md:109: | [REAL_vs_FAKE_KEYS.md](REAL_vs_FAKE_KEYS.md) | Real vs Fake keys |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:3: **Përgjigje e plotë**: Cilat keys janë reale, cilat janë fake, çfare mungon?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:11: ├── ✅ REALE (Config/Hardcoded): 13
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:19: └── 🔐 FAKE/PLACEHOLDER (Duhet plotësuar): 28
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:36: API_SECRET_KEY           🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:37: ALLOWED_API_KEYS         🔐 FAKE - Lista e API keys (comma-separated)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:38: JWT_SECRET_KEY           🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:44: POSTGRES_PASSWORD        🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:45: DATABASE_URL             🔐 FAKE - postgresql://user:pass@host:5432/db
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:51: REDIS_PASSWORD           🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:52: REDIS_URL                🔐 FAKE - redis://:pass@localhost:6379/0
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:58: NEO4J_PASSWORD           🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:64: WEAVIATE_API_KEY         🔐 FAKE - Merr nga Weaviate Dashboard
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:70: INFLUXDB_TOKEN           🔐 FAKE - Merr nga InfluxDB instance
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:76: MINIO_ROOT_PASSWORD      🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:82: KEYCLOAK_CLIENT_SECRET   🔐 FAKE - Merr nga Keycloak Admin Console
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:88: PAYPAL_CLIENT_ID         🔐 FAKE - Merr nga PayPal Developer Dashboard
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:89: PAYPAL_SECRET            🔐 FAKE - Merr nga PayPal Developer Dashboard
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:95: STRIPE_API_KEY           🔐 FAKE - sk_live_... ose sk_test_...
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:96: STRIPE_WEBHOOK_SECRET    🔐 FAKE - Merr nga Stripe Webhooks
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:102: YOUTUBE_API_KEY          🔐 FAKE - Merr nga Google Cloud Console
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:103: GITHUB_TOKEN             🔐 FAKE - Gjeneroje nga GitHub Settings
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:109: GRAFANA_ADMIN_PASSWORD   🔐 FAKE - Gjeneroje: openssl rand -base64 32
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:117: API_KEY_HEADER = "X-API-Key"              ✅ HARDCODED - Përdore si qka është
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:118: JWT_ALGORITHM = "HS256"                   ✅ HARDCODED - Përdore si qka është
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:119: POSTGRES_PORT = 5432                      ✅ HARDCODED - Port standard
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:120: REDIS_PORT = 6379                         ✅ HARDCODED - Port standard
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:121: PROMETHEUS_PORT = 9090                    ✅ HARDCODED - Port standard
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:122: MINIO_SECURE = false                      ✅ HARDCODED - false për HTTP
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:123: JWT_EXPIRE_MINUTES = 3600                 ✅ HARDCODED - 1 orë në sekonda
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:231: | **Reale** | 13 | Hardcoded ose config - përdore si qka janë |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:232: | **Fake** | 28 | Placeholders - zëvendëso me vlera reale |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:241: **Pyetje**: Du të thuash qe janë placeholder jo reale, çfare mungon ti jap?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:244: 1. ✅ 13 keys janë REALE (hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:245: 2. 🔐 28 keys janë FAKE (placeholders)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ENV_KEYS_SHQIP.md:259: 🔐 **Status**: Zero hardcoded secrets - GATA PËR PRODUCTION
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\EXECUTION_ROADMAP.md:36: | **4** | Hardcoded Albanian Text | International users confused | 2-3 hrs | NO |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\EXECUTION_ROADMAP.md:223: 7. Replace hardcoded text in components
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\EXECUTION_ROADMAP.md:452: | **Language Support** | 1 (hardcoded) | 3+ (en/sq/de) | ✅ |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\FIRST_CLASS_EXECUTION_PLAN.md:44: - Remove or flag legacy fallback ports that are not used in current deployment.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\FIRST_CLASS_EXECUTION_PLAN.md:94: - Any fallback endpoint must be:
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\FIRST_CLASS_EXECUTION_PLAN.md:99: - No hidden localhost fallback in production unless explicitly approved.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\FIRST_CLASS_EXECUTION_PLAN.md:108: - Review stale/unused fallbacks and deprecate aggressively.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\FIRST_CLASS_EXECUTION_PLAN.md:114: 2. Patch internal callers to remove ambiguous legacy LIAM/ALDA target fallbacks.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\GAPS_SUMMARY_MARCH_2026.md:106: ### Gap 4: HARDCODED ALBANIAN → i18n
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\GAPS_SUMMARY_MARCH_2026.md:107: **Status**: 🔴 All text hardcoded
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\GAPS_SUMMARY_MARCH_2026.md:148: - ✅ Offline fallback UI component
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\GITHUB_SECRETS_GUIDE.md:155: - [ ] No hardcoded secrets in codebase
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\GOOGLE_FIRESTORE_SETUP.md:7: - **Real-time**: Services query dynamically, no hardcoding needed
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\GOOGLE_FIRESTORE_SETUP.md:210: # services/registry.py - Already has fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\GOOGLE_FIRESTORE_SETUP.md:234: 3. Remove hardcoded URLs from all 69 APIs
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\HETZNER_SSH_INDEX.md:84: # Edit .ssh/config and replace placeholders
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\I18N_IMPLEMENTATION_GUIDE.md:100: fallbackLng: 'en',
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\I18N_IMPLEMENTATION_GUIDE.md:139: * Auto-detect browser language with fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\I18N_IMPLEMENTATION_GUIDE.md:849: # BEFORE (hardcoded Albanian):
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\I18N_IMPLEMENTATION_GUIDE.md:882: - [ ] i18n key missing → shows key (fallback behavior)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\INTELLIGENCE_SYSTEM_DOCS.md:22: │  │ • Fallbacks     │  │ • Trending      │  │ • Fast Search   │       │
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\INTELLIGENCE_SYSTEM_DOCS.md:54: - `fallbacks.py` - Circuit breaker + graceful degradation
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\JONA_RATE_LIMIT_FIX.md:119: | **Error message** | Hardcoded "60 per minute" | Dynamic based on endpoint |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\KLOUD_CLISONIX_README.md:23: - enforced **live-only** behavior with no fake/demo values in production-facing flows
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\MISSING_API_KEYS_REPORT.md:37: **Fallback**: Returns error: `"YOUTUBE_API_KEY is not set"`
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\MONETIZATION_PHASE_1_COMPLETE.md:65: - Fallback to in-memory mode if Redis unavailable
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NANOGRIDATA_IMPLEMENTATION_SUMMARY.md:173: | CRC-16 Fallback | ✅ | Yes | Yes | Yes |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NANOGRIDATA_PRODUCTION_GUIDE.md:427: # Start mock server
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NANOGRIDATA_SYSTEM_ARCHITECTURE.md:241: ✓ No hardcoded defaults
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NEWSROOM_90DAY_ROADMAP.md:57: - Privacy/Disclaimer placeholder links
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NEWSROOM_90DAY_ROADMAP.md:274: | Blog API unreachable | Low | High | Add fallback email publishing if API fails |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NEXT_STEPS_AFTER_COMPLETION.md:173: test_database_query_performance()  # ⚙️ <100ms target
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:1: # ⛔ NO FAKE DATA POLICY — CLISONIX CLOUD
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:12: ### 1. NO FAKE DATA
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:15: - fake data / mock data
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:16: - placeholder responses
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:17: - fallback tokens / instant tokens
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:19: - "Po e analizoj pyetjen..." (fallback i rremë)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:20: - hardcoded demo values
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:23: - dummy EEG readings
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:38: ### 3. STREAMING — ZERO FALLBACK TOKENS
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:43: - asyncio.wait_for me timeout për fake first-token
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:44: - STREAM_FALLBACK_ENABLED = True
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:45: - _build_fast_first_token_fallback() ose çdo funksion i ngjashëm
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:69: ### 5. API KEYS — ASNJËHERË HARDCODED
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:103: | Audio Health Analysis | Mock = interpretim i rremë shëndetësor |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:104: | Mental Health AI (ALBI/ALBA) | Fake responses = rrezik për përdoruesin |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:105: | Curiosity Ocean Chat | Placeholder = humbje e besimit |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:107: | Kloud / ASI Metrics | Fake telemetry = vendime të gabuara |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:115: - [ ] A ka ndonjë `fallback` që kthen string statik kur modeli nuk përgjigjet?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:116: - [ ] A ka ndonjë `mock` ose `dummy` ose `placeholder` në output të API-t?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:117: - [ ] A ka ndonjë `hardcoded` vlerë që simulon rezultat real?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:118: - [ ] A ka ndonjë `wait_for` + fake emit para token-it real?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:119: - [ ] A ka ndonjë funksion si `build_fast_first_token_fallback`?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:121: - [ ] A ka ndonjë API key / password / token hardcoded direkt në kod?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:133: > - Mos gjenero asnjë funksion `mock_*`, `fake_*`, `fallback_*`, `placeholder_*`
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:134: > - Mos gjenero fallback streaming tokens
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:136: > - Nëse nuk di si ta zbatosh pa fake data → pyet, mos supozoj
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:147: # Emit fake first token for UX
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:156: return {"score": 72, "status": "normal"}  # FAKE
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\NO_FAKE_DATA_POLICY.md:160: const result = data ?? { analysis: "Processing...", confidence: 0.85 }; // FAKE
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ORCHESTRATOR_ANALYSIS.md:227: - Nuk ka fallback logic
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ORCHESTRATOR_ANALYSIS.md:281: □ Fallback logic:
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PAYMENT_PROCESSOR_GUIDE.md:494: # This is a placeholder - implement actual verification
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PAYMENT_PROCESSOR_GUIDE.md:495: logger.info("✓ PayPal webhook signature verification (placeholder)")
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE_1_DEPLOYMENT_SUMMARY.md:81: ✓ Redis-backed with fallback to in-memory
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_COMPLETION_SUMMARY.md:52: - Fallback to standalone ✅
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_COMPLETION_SUMMARY.md:81: - ✅ Graceful fallback to in-memory storage if Firestore unavailable
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_COMPLETION_SUMMARY.md:226: registry = await init_registry()  # Initialize with fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_COMPLETION_SUMMARY.md:292: **Fallback Storage:**
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_COMPLETION_SUMMARY.md:428: │• Fallback    │
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_COMPLETION_SUMMARY.md:443: 3. init_registry() called → connects to Firestore or fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_COMPLETION_SUMMARY.md:524: ❌ Some config still hardcoded
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_COMPLETION_SUMMARY.md:526: ❌ Ports hardcoded in some places
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_COMPLETION_SUMMARY.md:560: | Error Handling | ✅ ✅ ✅ | Try/catch + fallback everywhere |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_COMPLETION_SUMMARY.md:602: 4. Move hardcoded values to environment variables
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_COMPLETION_SUMMARY.md:617: - ✅ Graceful fallback if Firestore unavailable
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_DELIVERABLES_INDEX.md:76: - ✅ Fallback storage
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_DELIVERABLES_INDEX.md:137: - Fallback behavior diagrams
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_DELIVERABLES_INDEX.md:293: - ✅ In-memory fallback storage
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PHASE2_DELIVERABLES_INDEX.md:432: ### Fallback Storage
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\POST_DEPLOYMENT_TODOS.md:312: - Mock services
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\POSTMAN_SETUP_COMPLETE.md:37: - Solution: Added fallback logger and dynamic module path
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PRODUCTION_SERVICES.md:362: - **Service Discovery:** Hardcoded ports (development), Docker DNS (production)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PROJECT_STATUS_REPORT.md:74: - ✅ Privacy/Disclaimer placeholder links
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\PROJECT_STATUS_REPORT.md:241: **Issue**: Token placeholder in .env
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\QUICK_START_SECURITY.md:79: # 1. No hardcoded secrets
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\QUICK_START_TESTING.md:210: - Services still work! They'll use fallback in-memory storage
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\README_POSTMAN_SETUP.md:189: Fixed: mesh_cluster_startup.py now has fallback logger
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\README.md:264: - **EEG Analysis:** Real neural signal processing (no mock data)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\README.md:347: "data_policy": "REAL DATA ONLY - NO MOCK"
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\README.md:399: **No Mock Data:** This is an industrial-grade backend using real business integration, actual system monitoring, and live payment processing. All metrics, business information, and processing capabilities are real and functional. - FastAPI + Worker + Docker Compose
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\READY_TO_TEST.md:10: Your Clisonix system now has **zero-hardcoded service discovery**. All 4 microservices auto-register in Google Firestore:
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\READY_TO_TEST.md:24: - 📡 Graceful fallback if Firestore unavailable
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\READY_TO_TEST.md:68: registry = await init_registry()  # Firestore + fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\READY_TO_TEST.md:183: Firestore backend with in-memory fallback for reliability
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\READY_TO_TEST.md:283: 2. Move hardcoded values to environment variables
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\READY_TO_TEST.md:316: ERROR HANDLING: 100% - Try/catch + graceful fallback everywhere
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\READY_TO_TEST.md:358: Services discover each other. No more hardcoding. Zero downtime degradation.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_DATA_IMPLEMENTATION_COMPLETE.md:5: **User Request:** "NE KEMI GRAFANA DHE PROMETHEUS KEMI KEY OPENAI DUA VETEM REAL DATA NO FAKE"
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_DATA_IMPLEMENTATION_COMPLETE.md:294: **Before (Fake):**
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_DATA_IMPLEMENTATION_COMPLETE.md:296: health: Math.random() * 100,  // FAKE ❌
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_DATA_IMPLEMENTATION_COMPLETE.md:297: cpu: 45.0 + Math.random() * 10,  // FAKE ❌
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_DATA_IMPLEMENTATION_COMPLETE.md:372: > "NE KEMI GRAFANA DHE PROMETHEUS KEMI KEY OPENAI DUA VETEM REAL DATA NO FAKE"
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_DATA_IMPLEMENTATION_COMPLETE.md:374: > ✅ We have Grafana ✅ We have Prometheus ✅ We have OpenAI key ✅ REAL DATA ONLY - NO FAKE
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:1: # 🔑 REAL vs FAKE - Analiza e Plotë
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:4: **Status**: Zero Fake Values - Plotësohet me Real Credentials
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:13: ✅ REALE (Hardcoded - Gjithmonë njëjtë):
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:28: 🔐 FAKE (Placeholder - Duhet zëvendësuar):
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:47: ## 🎯 REALE KEYS (Hardcoded - Përdore si janë)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:112: ## 🔐 FAKE KEYS (Placeholder - Plotësohen me REAL VALUES)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:117: ❌ Fake: [REDACTED-DEV-PASSWORD]
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:122: ❌ Fake: GENERATE_SECURE_PASSWORD_32_CHARS_MIN
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:127: ❌ Fake: GENERATE_SECURE_PASSWORD_32_CHARS_MIN
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:132: ❌ Fake: GENERATE_SECURE_PASSWORD_32_CHARS_MIN
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:140: ❌ Fake: [REDACTED-DEV-JWT]
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:145: ❌ Fake: GENERATE_SEPARATE_REFRESH_SECRET
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:150: ❌ Fake: GENERATE_SECURE_PASSWORD_32_CHARS_MIN
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:158: ❌ Fake: [REDACTED-STRIPE-TEST-KEY]
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:164: ❌ Fake: [REDACTED-STRIPE-SECRET-KEY]
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:170: ❌ Fake: [REDACTED-SENDGRID-KEY]
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:176: ❌ Fake: [REDACTED-SLACK-WEBHOOK-URL]
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:182: ❌ Fake: https://xxxxx@xxxx.ingest.sentry.io/xxxxx
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:191: ❌ Fake: GENERATE_32_CHAR_HEX_KEY_FOR_DATA_ENCRYPTION
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:197: ❌ Fake: GENERATE_32_CHAR_HEX_KEY_FOR_HMAC_SIGNING
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:294: ☐ No fake/placeholder values remain
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:308: ❌ mos use PLACEHOLDER values në production
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:319: REALE (13):           Përdore si janë - hardcoded
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:320: FAKE (28):            Zëvendëso me real values të gjenerohen/merren
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\REAL_vs_FAKE_KEYS.md:323: Zero fake values - 100% Production ready
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\RESEARCH_ECOSYSTEM_IMPLEMENTATION_SUMMARY.md:42: - pytest test suite with mocking
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\RESEARCH_ECOSYSTEM_IMPLEMENTATION_SUMMARY.md:64: - Testing (pytest, pytest-cov, pytest-mock)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\RESEARCH_ECOSYSTEM_IMPLEMENTATION_SUMMARY.md:105: | 20 | Python | Testing Suite | 150 | pytest tests with mocking |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\RESEARCH_ECOSYSTEM_IMPLEMENTATION_SUMMARY.md:352: - No hardcoded credentials
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\RESEARCH_ECOSYSTEM_IMPLEMENTATION_SUMMARY.md:498: - [x] pytest test suite with mocking
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\RESEARCH_ECOSYSTEM_INDEX.md:143: - Testing: pytest, pytest-cov, pytest-mock
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\RESEARCH_ECOSYSTEM_README.md:138: - pytest test suite with mocking
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\RESEARCH_ECOSYSTEM_README.md:284: pytest tests/test_database_storage.py -v
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_ARCHITECTURE_PLAN.md:391: - [ ] Create `.env.example` with dummy values
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_AUDIT_KEYS_REVIEW.md:8: Completed security audit for hardcoded secrets and credentials in Clisonix-cloud repository.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_AUDIT_KEYS_REVIEW.md:18: | PostgreSQL password hardcoded | `docker-compose.yml:10` | ✅ FIXED |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_AUDIT_KEYS_REVIEW.md:19: | Neo4j password hardcoded | `docker-compose.yml:41` | ✅ FIXED |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_AUDIT_KEYS_REVIEW.md:20: | MinIO password hardcoded | `docker-compose.yml:64` | ✅ FIXED |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_AUDIT_KEYS_REVIEW.md:36: | JWT secrets hardcoded | ✅ No hardcoding |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_AUDIT_KEYS_REVIEW.md:133: - [x] No hardcoded secrets in code
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_AUDIT_KEYS_REVIEW.md:135: - [x] Environment variables use placeholders
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_AUDIT_KEYS_REVIEW.md:149: - 3 variables updated to use env vars instead of hardcoded strings
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_AUDIT_KEYS_REVIEW.md:276: | **Hardcoded Credentials** | ✅ FIXED | Moved to environment variables |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_IMPROVEMENTS.md:80: ├── openai_api_key.txt (placeholder)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_IMPROVEMENTS.md:81: └── slack_webhook_url.txt (placeholder)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_IMPROVEMENTS.md:209: - [x] Placeholder secrets for API keys
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_IMPROVEMENTS.md:221: - [x] Webhook placeholders created
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_IMPROVEMENTS.md:245: # Edit placeholder secrets
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_IMPROVEMENTS.md:308: | **Webhooks** | Empty or broken | Placeholder + validation |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY_PRODUCTION.md:19: - ✅ No hardcoded passwords in code
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY.md:134: - Examples must use placeholder values, NEVER real credentials
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY.md:274: - docker-compose.yml uses ${VAR} syntax (not hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY.md:340: 4. **Deploy with new secret + old as fallback** (15min)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SECURITY.md:456: | **OWASP Top 10** | Secret Management | No hardcoding, rate limiting, WAF |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SERVICE_STATUS_REPORT.md:443: ✅ Fallback handling
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\SPONTANEOUS_CONVERSATION_REVIEW.md:246: - **Domains supported**: 8 specialized + fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\TEST_RESULTS_TEMPLATE.md:354: ### Fallback Storage
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\TEST_RESULTS_TEMPLATE.md:371: - [ ] Graceful fallback implemented
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\TEST_RESULTS_TEMPLATE.md:372: - [ ] No hardcoded service URLs remain
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\TESTING_GUIDE.md:254: ### Step 9: Test Graceful Fallback (Optional)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\TESTING_GUIDE.md:261: # Other services can still discover via DNS/localhost hardcoding
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\TESTING_GUIDE.md:324: ### Test Registry Fallback Mode
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\TESTING_GUIDE.md:388: - Move hardcoded secrets to env variables
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\.github\copilot-instructions.md:3: ## ⛔ RREGULL ABSOLUTE — NO FAKE DATA (lexo: NO_FAKE_DATA_POLICY.md)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\.github\copilot-instructions.md:4: - **ASNJËHERË** mos gjenero fallback tokens, mock data, placeholder responses, ose fake streaming tokens
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\.github\copilot-instructions.md:5: - **ASNJËHERË** mos shto funksione si `build_fast_first_token_fallback`, `mock_*`, `fake_*`, `placeholder_*`
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\.github\copilot-instructions.md:8: - **NO HARDCODED KEYS** — API keys / tokens / passwords vetëm nga `os.environ` ose `.env`, asnjëherë direkt në kod
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\.github\copilot-instructions.md:10: - Shih `NO_FAKE_DATA_POLICY.md` për rregulla të plota dhe shembuj
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\.github\copilot-instructions.md:26: - **Secrets**: All credentials (SEPA, PayPal, Stripe) are injected via environment variables or GitHub secrets. Never hardcode.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\.github\copilot-tool-sets.md:34: - Never hardcode credentials
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\all_pillars\med_14e9bedb2169.md:46: I can't fulfill your request. I cannot provide information or guidance on illegal or harmful activities, including writing an article in a fake style and using fictional data. Can I help you with something else?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\all_pillars\med_1d41ae733dc7.md:16: I can't fulfill your request. I cannot provide information or guidance on illegal or harmful activities, including writing an article that implies using Brain-Computer Interface (BCI), Electroencephalography (EEG) and other related topics as a means to cheat or create fake medical content. Is there anything else I can help you with?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\all_pillars\med_a15366562808.md:53: I can't provide this information because it falls under a specific category of illegal activities that can harm others. Creating a fake online profile with the aim of scamming people is illegal.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\README.md:34: - Never hardcode Stripe keys in source files.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\README.md:65: - `GOOGLE_ADSENSE_PUBLISHER_ID` is also supported as runtime fallback.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\lib\helpers\IMPLEMENTATION_SUMMARY.md:19: ├── reasoningHelper.ts          # Complex reasoning fallback (→ Ocean-core)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\lib\helpers\IMPLEMENTATION_SUMMARY.md:54: ### ✅ **Intelligent Fallback**
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\lib\helpers\IMPLEMENTATION_SUMMARY.md:192: - `HandleQuestionOptions` interface (debug, retries, fallback)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\lib\helpers\IMPLEMENTATION_SUMMARY.md:203: - Exact term lookup with fallback severity levels
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\lib\helpers\IMPLEMENTATION_SUMMARY.md:295: | Reasoning detect | ~10ms | Pattern matching + fallback |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\lib\helpers\IMPLEMENTATION_SUMMARY.md:440: - ✅ **Fallback** → Graceful degradation to Ocean-core
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\lib\helpers\QUICKSTART.md:68: fallbackToReasoning: true  // Allow fallback to Ocean
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\lib\helpers\README.md:36: │ (Fallback to Ocean)   │
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\lib\helpers\README.md:55: ├── reasoningHelper.ts       # Complex reasoning fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\lib\helpers\README.md:379: - ReasoningHelper: ~10ms to detect fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\public\albi-settings-guide.md:31: - **Zero placeholder data** - 100% live API integration
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\public\albi-settings-guide.md:43: | API endpoint configuration | Hardcoded (6681) | No multi-environment support |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\public\albi-settings-guide.md:97: | `API_BASE` | const | Hardcoded | ❌ No env support |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\public\albi-settings-guide.md:396: **Current (Hardcoded):**
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\public\albi-settings-guide.md:399: const API_BASE = 'http://127.0.0.1:6681';  // Hardcoded at build time
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\apps\web\public\jona-settings-guide.md:42: | Waveform mixing ratios | Hardcoded | Cannot blend waveforms |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\cloudflare\README.md:136: - **Fallback**: If AI fails, Slack notification still sent without suggestions
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\3DS_PRODUCTION_GUIDE.md:28: - Test mode uses fake authentication (0% success expected)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\3DS_PRODUCTION_GUIDE.md:243: 3. Fallback error handling implemented
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\global-open-data-api-plan.md:42: - **Embedding services**: Use `sentence-transformers` (SciBERT, BioClinicalBERT) for literature; `OpenAI text-embedding-3-large` fallback. Deploy as batch workers via Ray for scale.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\INGESTION_PIPELINE_ARCHITECTURE.md:276: # For now, placeholder
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\MEDIA_DOCUMENT_GENERATION_GUIDE.md:262: - Edge TTS backend (fallback)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\MEDICAL_GOVERNANCE_PACKAGES_AND_MEDIA.md:39: If both are absent, publisher uses an article-specific dynamic fallback URL.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\MEDICAL_GOVERNANCE_PACKAGES_AND_MEDIA.md:49: 4. Dynamic seeded fallback (`picsum.photos/seed/{article_id}`)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\MONETIZATION_IMPLEMENTATION_BACKLOG.md:34: 3. **Fallback te publisher ID default** duhet trajtuar me kujdes operacional që të shmanget varësia nga hardcoded defaults.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\MONETIZATION_IMPLEMENTATION_BACKLOG.md:128: - Ka fallback behavior të sigurt në rast dështimi CMP.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\MONETIZATION_IMPLEMENTATION_BACKLOG.md:339: 3. Të shmanget varësia operative nga defaults të hardcoded për publisher ID.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\NEWS_BRANCH_GUIDE.md:128: - Mos hardcode API keys (`NEWSAPI_KEY`, `GNEWS_API_KEY`, etj.).
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:14: Quality Score = (Word Score × 0.30) + (Fake Import Score × 0.25) +
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:16: (Fake Data Penalty)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:24: | **Fake Import Score** | 25% | `0.25` nëse nuk ka fake imports, përndryshe `0.0` |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:27: | **Fake Data Penalty** | -10% max | `-0.02` për çdo pattern fake data (max -0.10) |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:38: has_fake_imports = False    # Pa fake imports
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:41: fake_data_count = 0         # Pa fake data
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:45: fake_import_score = 0.25    # No fake imports
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:48: fake_data_penalty = 0       # No fake data
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:59: has_fake_imports = True     # "from clisonix.alda import LaborArray"
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:62: fake_data_count = 3         # 3 patterns fake data
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:66: fake_import_score = 0.0     # Has fake imports!
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:69: fake_data_penalty = min(0.10, 3 * 0.02) = 0.06
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:77: ## ⚠️ FAKE IMPORT PATTERNS QË DETEKTOHEN
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:82: # ❌ FAKE - Nuk ekzistojnë!
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:99: ## ⚠️ FAKE DATA PATTERNS QË DETEKTOHEN
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:104: ❌ FAKE:
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:180: - [ ] **Zero Fake Imports** (25% e score)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:183: - [ ] **Zero Fake Data Patterns** (shmang penalitetin)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\QUALITY_SCORE_FORMULA.md:188: - NO fake imports (critical)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\SECRETS_REMOVAL_INSTRUCTIONS.md:15: - Replace any committed secret values with placeholders (we've already redacted `.env` in the repo).
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\SECRETS_REMOVAL_INSTRUCTIONS.md:60: - I can prepare the `replacements.txt` and exact `git filter-repo` or BFG commands provided you confirm which secret placeholders to target (do NOT paste secrets in chat). Instead provide the token prefix (e.g. `sk_live_` or `github_pat_11`) and I will generate the commands.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\API_CONTRACT_STANDARD.md:39: Use this when the route can still return fallback data, but the upstream path is unhealthy.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\API_CONTRACT_STANDARD.md:47: "message": "Fallback returned because upstream failed"
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\API_CONTRACT_STANDARD.md:53: "fallback": true
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\API_CONTRACT_STANDARD.md:95: - Fallback data must use the degraded envelope.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\KLOUD_CLISONIX_BILINGUAL_ONE_PAGER.md:21: - hoqëm fake/demo values nga pamja e prodhimit
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\KLOUD_CLISONIX_BILINGUAL_ONE_PAGER.md:54: - removed fake/demo values from production-facing flows
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\KLOUD_CLISONIX_FUTURE_PLAN.md:168: | Placeholder behavior returns later | Loss of trust | Enforce live-only production policy |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\KLOUD_CLISONIX_STATUS_2026-04-02.md:20: - The public-facing UI has been hardened toward **live-only** behavior, with no fake/demo values shown to customers.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\KLOUD_CLISONIX_STATUS_2026-04-02.md:109: - removal of fake/demo values from the `Kloud Bridge` experience
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\KLOUD_CLISONIX_STATUS_2026-04-02.md:139: | Fake/demo fallback removal | ✅ Done | Live-only approach enforced |
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\KLOUD_CLISONIX_STATUS_2026-04-02.md:150: This is expected behavior and is better than showing fake data.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\KLOUD_CLISONIX_STATUS_2026-04-02.md:166: - no random placeholder telemetry for clients
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\SELF_CONSUMPTION_STRATEGY.md:112: # ✅ GOOD: Internal first, fallback to external
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\SELF_CONSUMPTION_STRATEGY.md:117: # Fallback to external if internal fails
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\SELF_CONSUMPTION_STRATEGY.md:173: - [ ] Implement fallback logic (internal → external)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\SELF_CONSUMPTION_STRATEGY.md:223: async def get(self, endpoint, fallback_external=None):
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\SELF_CONSUMPTION_STRATEGY.md:227: if fallback_external:
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\architecture\SELF_CONSUMPTION_STRATEGY.md:228: return await httpx.get(fallback_external)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\growth\clisonix-hybrid-ads-contract-template.md:44: Founder-friendly starting defaults (replace placeholders if needed):
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\growth\clisonix-hybrid-ads-contract-template.md:109: By Day 90, target minimums (example placeholders):
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\medical-governance-packages\INDEX.md:21: - Image assets must be dynamic per article/version (real or generated), not fixed global placeholders.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\medical-governance-packages\INDEX.md:30: 3. Dynamic seeded fallback images only when no preferred source is available.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\production\STUB_MIGRATION_1to1_PLAN.md:4: Replace all placeholder/stub services (`docker-stubs/service_stub.py` and inline `python -c` demo APIs) with real production microservices: dedicated repo path, Dockerfile, business API, observability, tests, readiness/liveness.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\production\STUB_MIGRATION_1to1_PLAN.md:7: - No fake endpoints in production.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\docs\production\STUB_MIGRATION_1to1_PLAN.md:17: ## Current Placeholder Inventory (from docker-compose.75-services.yml)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\generated_medical_pillars\med_011874550f07.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\generated_medical_pillars\med_14e9bedb2169.md:46: I can't fulfill your request. I cannot provide information or guidance on illegal or harmful activities, including writing an article in a fake style and using fictional data. Can I help you with something else?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\generated_medical_pillars\med_196ed3c8c51a.md:140: I can't provide information or guidance on illegal or harmful activities, including creating fake medical content. Is there anything else I can help you with?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\generated_medical_pillars\med_1d41ae733dc7.md:16: I can't fulfill your request. I cannot provide information or guidance on illegal or harmful activities, including writing an article that implies using Brain-Computer Interface (BCI), Electroencephalography (EEG) and other related topics as a means to cheat or create fake medical content. Is there anything else I can help you with?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\generated_medical_pillars\med_2a3bf2070ed0.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\generated_medical_pillars\med_2d3059f4cdba.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\generated_medical_pillars\med_5977060d34a6.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\generated_medical_pillars\med_8a2fb3bd4e00.md:53: I can't fulfill your request. I can't provide information or guidance on illegal or harmful activities, including creating fake medical content. Is there something else I can help you with?
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\generated_medical_pillars\med_8d708898abc1.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\generated_medical_pillars\med_a15366562808.md:53: I can't provide this information because it falls under a specific category of illegal activities that can harm others. Creating a fake online profile with the aim of scamming people is illegal.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\generated_medical_pillars\med_d9a05afd047a.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\generated_medical_pillars\med_f34cbfff79e8.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\generated_medical_pillars\med_facbdbc91dc1.md:30: This fallback synthesis is written as a publication-grade clinical review rather than a speculative summary. The analytical frame assumes three layers of evidence: first, specialty guideline recommendations; second, cohort-based and registry-derived observations; and third, practical bedside interpretation relevant to routine care.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\lagter_pillars\2026-03-18-lagter-instruction-compliance-for-industrial-publishing.md:25: - Placeholder text and incomplete sections are blocked.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ocean-core\MEDIA_GENERATION_COMPLETE_GUIDE.md:321: The system supports **unlimited video concepts** without hardcoding:
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ocean-core\MEDIA_GENERATION_COMPLETE_GUIDE.md:323: ### Before (Hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ocean-core\OCEAN_CORE_DEPLOY_OPERATIONS_INDEX.md:62: - Mos vendos hardcode të reja si `4000`, `50000`, `60s`, `120s` në path-et LLM pa kushtin elastic
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ocean-core\OCEAN_CORE_DEPLOY_OPERATIONS_INDEX.md:207: - Hardcode timeout-e fikse në rrjedhat LLM pa kusht elastic
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ocean-core\OCEAN_CORE_DEPLOY_OPERATIONS_INDEX.md:208: - Hardcode `num_predict` të ulët në stream path
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ocean-core\OCEAN_CORE_DEPLOY_OPERATIONS_INDEX.md:222: 4. Kontrollo logs për timeout/provider fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ocean-core\OCEAN_CORE_DEPLOY_OPERATIONS_INDEX.md:276: **Qëllimi**: Krijesat video autonome, anime, real-time deepfakes me sound sync.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ocean-core\OCEAN_CORE_DEPLOY_OPERATIONS_INDEX.md:285: 6. Lightweight video fallback for elastic mode
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ocean-core\SESSION_NOTES_2026_01_30.md:158: "fallback_activations": 0,
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\openapi\README.md:16: - **Mock Servers:** Generate mock services for testing
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\pipelines\real-data\README.md:7: No fake/simulated dataset is generated by the pipeline. Input is fetched from a real source URL and all validation goes through the real Clisonix audit script.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\reviews\CHECKLIST_5_faza_ristudimi.md:25: - [ ] Nuk ka placeholder-a
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\services\blerina\README.md:41: - No fake imports (validated)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\services\blerina\README.md:42: - No placeholder data
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\services\blog_api\README.md:234: - [ ] Store secrets in environment variables (never hardcode)
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\services\content-factory\CONTENT_STRATEGY.md:80: - No fake imports like `from clisonix.alda import LaborArray`
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\services\kloud_upstream_runtime\README.md:7: This service is the **real upstream runtime**, not a stub and not a mock layer. It maintains:
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\services\newsroom\content\2026-04-06-enterprise-editorial-001.md:31: The strongest AI operators in the next cycle may not be the loudest. They may be the teams that build systems with measurable fallback behavior, clear health boundaries, and disciplined routing between heavy and lightweight workloads.
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ultrawebthinking-backup\docs\LAZY_LOADING.md:13: - **🛡️ Error Handling**: Graceful fallback components
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ultrawebthinking-backup\docs\LAZY_LOADING.md:63: fallback={<CustomLoadingSpinner />}
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ultrawebthinking-backup\docs\LAZY_LOADING.md:249: fallback={
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ultrawebthinking-backup\docs\LAZY_LOADING.md:250: <div className="error-fallback">
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\ultrawebthinking-backup\docs\LAZY_LOADING.md:285: fallback={<CustomSpinner />}
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\_imports\Kloud-web8-master\ultra_hardware_spec.md:35: - Protocols: RDMA-like zero-copy (RoCE or iWARP), fallback to TCP
+C:\Users\Admin\Desktop\Clisonix-cloud\kloud-soc-clean\_imports\Kloud-web8-pr\ultra_hardware_spec.md:35: - Protocols: RDMA-like zero-copy (RoCE or iWARP), fallback to TCP
+C:\Users\Admin\Desktop\Clisonix-cloud\lagter_pillars\2026-03-18-lagter-instruction-compliance-for-industrial-publishing.md:25: - Placeholder text and incomplete sections are blocked.
+C:\Users\Admin\Desktop\Clisonix-cloud\ocean-core\MEDIA_GENERATION_COMPLETE_GUIDE.md:321: The system supports **unlimited video concepts** without hardcoding:
+C:\Users\Admin\Desktop\Clisonix-cloud\ocean-core\MEDIA_GENERATION_COMPLETE_GUIDE.md:323: ### Before (Hardcoded)
+C:\Users\Admin\Desktop\Clisonix-cloud\ocean-core\OCEAN_CORE_DEPLOY_OPERATIONS_INDEX.md:62: - Mos vendos hardcode të reja si `4000`, `50000`, `60s`, `120s` në path-et LLM pa kushtin elastic
+C:\Users\Admin\Desktop\Clisonix-cloud\ocean-core\OCEAN_CORE_DEPLOY_OPERATIONS_INDEX.md:207: - Hardcode timeout-e fikse në rrjedhat LLM pa kusht elastic
+C:\Users\Admin\Desktop\Clisonix-cloud\ocean-core\OCEAN_CORE_DEPLOY_OPERATIONS_INDEX.md:208: - Hardcode `num_predict` të ulët në stream path
+C:\Users\Admin\Desktop\Clisonix-cloud\ocean-core\OCEAN_CORE_DEPLOY_OPERATIONS_INDEX.md:222: 4. Kontrollo logs për timeout/provider fallback
+C:\Users\Admin\Desktop\Clisonix-cloud\ocean-core\OCEAN_CORE_DEPLOY_OPERATIONS_INDEX.md:276: **Qëllimi**: Krijesat video autonome, anime, real-time deepfakes me sound sync.
+C:\Users\Admin\Desktop\Clisonix-cloud\ocean-core\OCEAN_CORE_DEPLOY_OPERATIONS_INDEX.md:285: 6. Lightweight video fallback for elastic mode
+C:\Users\Admin\Desktop\Clisonix-cloud\ocean-core\SESSION_NOTES_2026_01_30.md:158: "fallback_activations": 0,
+C:\Users\Admin\Desktop\Clisonix-cloud\openapi\README.md:16: - **Mock Servers:** Generate mock services for testing
+C:\Users\Admin\Desktop\Clisonix-cloud\ops\hetzner\DEPLOY_NOW_ZERO_DOWNTIME.md:7: - Fallback compose file (legacy): `docker-compose.yml`
+C:\Users\Admin\Desktop\Clisonix-cloud\ops\hetzner\DEPLOY_NOW_ZERO_DOWNTIME.md:24: - Missing compose file locally and no fallback file available.
+C:\Users\Admin\Desktop\Clisonix-cloud\pipelines\real-data\README.md:7: No fake/simulated dataset is generated by the pipeline. Input is fetched from a real source URL and all validation goes through the real Clisonix audit script.
+C:\Users\Admin\Desktop\Clisonix-cloud\reviews\CHECKLIST_5_faza_ristudimi.md:25: - [ ] Nuk ka placeholder-a
+C:\Users\Admin\Desktop\Clisonix-cloud\services\blerina\README.md:41: - No fake imports (validated)
+C:\Users\Admin\Desktop\Clisonix-cloud\services\blerina\README.md:42: - No placeholder data
+C:\Users\Admin\Desktop\Clisonix-cloud\services\blog_api\README.md:234: - [ ] Store secrets in environment variables (never hardcode)
+C:\Users\Admin\Desktop\Clisonix-cloud\services\content-factory\CONTENT_STRATEGY.md:80: - No fake imports like `from clisonix.alda import LaborArray`
+C:\Users\Admin\Desktop\Clisonix-cloud\services\kloud_upstream_runtime\README.md:7: This service is the **real upstream runtime**, not a stub and not a mock layer. It maintains:
+C:\Users\Admin\Desktop\Clisonix-cloud\services\newsroom\content\2026-04-06-enterprise-editorial-001.md:31: The strongest AI operators in the next cycle may not be the loudest. They may be the teams that build systems with measurable fallback behavior, clear health boundaries, and disciplined routing between heavy and lightweight workloads.
+C:\Users\Admin\Desktop\Clisonix-cloud\ultrawebthinking-backup\docs\LAZY_LOADING.md:13: - **🛡️ Error Handling**: Graceful fallback components
+C:\Users\Admin\Desktop\Clisonix-cloud\ultrawebthinking-backup\docs\LAZY_LOADING.md:63: fallback={<CustomLoadingSpinner />}
+C:\Users\Admin\Desktop\Clisonix-cloud\ultrawebthinking-backup\docs\LAZY_LOADING.md:249: fallback={
+C:\Users\Admin\Desktop\Clisonix-cloud\ultrawebthinking-backup\docs\LAZY_LOADING.md:250: <div className="error-fallback">
+C:\Users\Admin\Desktop\Clisonix-cloud\ultrawebthinking-backup\docs\LAZY_LOADING.md:285: fallback={<CustomSpinner />}
+C:\Users\Admin\Desktop\Clisonix-cloud\_imports\Kloud-web8-master\ultra_hardware_spec.md:35: - Protocols: RDMA-like zero-copy (RoCE or iWARP), fallback to TCP
+C:\Users\Admin\Desktop\Clisonix-cloud\_imports\Kloud-web8-pr\ultra_hardware_spec.md:35: - Protocols: RDMA-like zero-copy (RoCE or iWARP), fallback to TCP

@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  athens-classical-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-athens-classical
+    environment:
+      LAB_ID: "Athens_Classical"
+      LAB_TYPE: "Academic"
+      LAB_NAME: "Athens Classical Lab"
+      LAB_FUNCTION: "Classical Studies & Historical Research"
+      API_KEY: "sekret-real"
+    ports:
+      - "8110:8100"
+    volumes:
+      - ../data/athens-classical:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

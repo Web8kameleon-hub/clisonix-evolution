@@ -1,0 +1,177 @@
+{
+  "id": "clx.eap.investor.boardgrade.2026-03-02",
+  "title": "Clisonix Board-Grade Investor Memorandum (DE/UK VC)",
+  "evresi": {
+    "id": "clx.obs.investor.boardgrade.2026",
+    "title": "Live Platform Validation",
+    "facts": [
+      "clisox.com is live in production and serving active users globally.",
+      "Clisonix includes 17+ modules spanning AI reasoning, neuroscience, data, and developer tools.",
+      "Financial model is maintained in investor-pack/CLISONIX_Financial_Model_Investor_Ready.xlsx.",
+      "Infrastructure baseline includes Hetzner RTX 5090 (\u20ac509/month) and storage/backups (~\u20ac258/month).",
+      "Excel Core health status: unreachable.",
+      "Ocean Core health status: unreachable."
+    ],
+    "context": "The platform demonstrates real-world traction and operational continuity, with investor-facing financial controls and modular AI architecture readiness.",
+    "source": "Clisonix production + internal investor pack",
+    "source_date": "2026-03-02",
+    "entities": [
+      "Clisonix",
+      "Excel Core",
+      "Ocean Core",
+      "ASI Trinity"
+    ],
+    "locations": [
+      "Germany",
+      "UK",
+      "Global"
+    ],
+    "keywords": [
+      "investor",
+      "board-grade",
+      "saas",
+      "neuroscience",
+      "ai"
+    ],
+    "original_question": "Prepare board-grade investor package with publisher activation",
+    "timestamp": "2026-03-02T07:20:51.145986+00:00"
+  },
+  "analysi": {
+    "id": "clx.gap.investor.boardgrade.2026",
+    "title": "Investor Readiness Gap Analysis",
+    "evresi_id": "clx.obs.investor.boardgrade.2026",
+    "structural_gaps": [
+      {
+        "type": "governance",
+        "description": "Need standardized board-grade narrative for DE/UK VC review.",
+        "severity": "major",
+        "missing": "Unified memo format with legal-financial tone"
+      },
+      {
+        "type": "distribution",
+        "description": "Investor artifacts need repeatable publish workflow.",
+        "severity": "major",
+        "missing": "Publisher-backed internal distribution path"
+      },
+      {
+        "type": "operations",
+        "description": "Service-health context should be attached to investor narratives.",
+        "severity": "moderate",
+        "missing": "Excel Core and Ocean Core runtime snapshot"
+      }
+    ],
+    "discontinuities": [],
+    "risks": [
+      {
+        "category": "fundraising",
+        "description": "Inconsistent investor materials can reduce confidence and slow cycle time.",
+        "severity": "high"
+      },
+      {
+        "category": "execution",
+        "description": "Without a publishing workflow, version control of investor documents can fragment.",
+        "severity": "medium"
+      }
+    ],
+    "missing_concepts": [
+      "Board-grade standard",
+      "Repeatable publishing governance"
+    ],
+    "implications": [
+      "Lower conversion from investor meetings to data-room progression.",
+      "Higher review friction for institutional investors.",
+      "Reduced comparability across updated financial versions."
+    ],
+    "propagation_timeline": [
+      {
+        "timeframe": "0-30 days",
+        "description": "Pitch quality inconsistency across channels."
+      },
+      {
+        "timeframe": "30-90 days",
+        "description": "Lower close-rate without standardized board packet."
+      }
+    ],
+    "severity_level": "major",
+    "timestamp": "2026-03-02T07:20:51.145986+00:00"
+  },
+  "proposi": {
+    "id": "clx.prop.investor.boardgrade.2026",
+    "title": "Board-Grade Investor Package Protocol",
+    "evresi_id": "clx.obs.investor.boardgrade.2026",
+    "analysi_id": "clx.gap.investor.boardgrade.2026",
+    "paradigm_name": "Investor Operations Protocol (IOP)",
+    "paradigm_description": "A repeatable investor-document pipeline combining financial model integrity (Excel Core), platform intelligence context (Ocean Core), and publisher-governed distribution.",
+    "architecture": {
+      "inputs": {
+        "financial_model": "investor-pack/CLISONIX_Financial_Model_Investor_Ready.xlsx",
+        "service_health": [
+          "http://localhost:8010/health (Excel Core)",
+          "http://localhost:8030/health (Ocean Core)"
+        ]
+      },
+      "processing": {
+        "memo_generation": "board-grade trilingual DOCX",
+        "quality_gate": "EAP quality + CLXPublisher assessment"
+      },
+      "distribution": {
+        "local_publish": "output/blog/*.md + metadata JSON",
+        "optional_external": "LinkedIn/Medium/Substack via configured credentials"
+      }
+    },
+    "principles": [
+      "Financial consistency across all investor-facing assets",
+      "Operational transparency with live service context",
+      "Controlled publication and version traceability",
+      "Jurisdiction-aware messaging (Germany/UK)"
+    ],
+    "implementation_steps": [
+      {
+        "name": "Generate board-grade memo",
+        "description": "Build trilingual formal memo and align with Excel investor model.",
+        "effort": "low",
+        "timeline": "same day"
+      },
+      {
+        "name": "Attach runtime status",
+        "description": "Collect Excel Core and Ocean Core health snapshots for contextual validation.",
+        "effort": "low",
+        "timeline": "same day"
+      },
+      {
+        "name": "Publish through CLXPublisher",
+        "description": "Publish internally to Clisonix blog output and log metadata for audit trail.",
+        "effort": "low",
+        "timeline": "same day"
+      }
+    ],
+    "expected_outcomes": [
+      "Board-grade packet ready for investor meetings",
+      "Consistent narrative across EN/SQ/DE",
+      "Traceable publication history for diligence"
+    ],
+    "addresses_gaps": [
+      "governance",
+      "distribution",
+      "operations"
+    ],
+    "alternatives_considered": [
+      "Manual-only investor updates",
+      "Ad-hoc publishing without quality gate"
+    ],
+    "timestamp": "2026-03-02T07:20:51.145986+00:00"
+  },
+  "executive_summary": "Clisonix operates a live, globally used platform and now standardizes investor communication through a board-grade protocol that links financial evidence (Excel Core), runtime context (Ocean Core), and publisher-governed artifact distribution.",
+  "author": "Clisonix Investor Operations",
+  "version": "1.0",
+  "tags": [
+    "investor",
+    "board-grade",
+    "excel-core",
+    "ocean-core",
+    "publisher"
+  ],
+  "category": "analysis",
+  "publish_ready": true,
+  "timestamp": "2026-03-02T07:20:51.145986+00:00"
+}

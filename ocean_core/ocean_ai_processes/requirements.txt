@@ -1,0 +1,34 @@
+# Ocean AI Processes - Dependencies
+# ===================================
+# Core NLP/ML processing modules for ocean-core
+# 
+# Installation:
+#   pip install -r requirements.txt
+#
+# For full ML capabilities (optional):
+#   pip install -r requirements.txt[ml]
+#
+# Note: Basic functionality works without any ML libraries
+# using rule-based fallbacks. Install ML libs for better accuracy.
+
+# Core dependencies (always required)
+# -----------------------------------
+# None - uses Python standard library for basic functionality
+
+# Optional ML dependencies (for enhanced accuracy)
+# ------------------------------------------------
+# Uncomment the ones you need:
+
+# transformers>=4.30.0       # For sentiment, summarization, zero-shot classification
+torch>=2.0.0                 # Backend for transformers
+# spacy>=3.5.0               # For NER (entity extraction)
+# scikit-learn>=1.2.0        # For LDA topic modeling, TF-IDF
+
+# Language models for spaCy (install separately):
+# python -m spacy download en_core_web_sm
+# python -m spacy download de_core_news_sm
+# python -m spacy download xx_ent_wiki_sm  # Multilingual including Albanian
+
+# Full ML installation command:
+# pip install transformers torch spacy scikit-learn
+# python -m spacy download en_core_web_sm

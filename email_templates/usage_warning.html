@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clisonix - Usage Warning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            line-height: 1.6;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #FF8C00 0%, #FF6B00 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        .header .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .greeting {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .message {
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+        .usage-box {
+            background: #fff8f0;
+            border: 2px solid #FF8C00;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        .usage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .usage-title {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .usage-percentage {
+            font-size: 32px;
+            font-weight: 700;
+            color: #FF6B00;
+        }
+        .progress-bar {
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF8C00, #FF6B00);
+            border-radius: 6px;
+            /* width will be set inline for dynamic value */
+            transition: width 0.3s ease;
+        }
+        .usage-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #666;
+        }
+        .alert-box {
+            background: #fef3e7;
+            border-left: 4px solid #FF8C00;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .alert-box h4 {
+            color: #FF6B00;
+            margin-bottom: 10px;
+        }
+        .alert-box p {
+            color: #856404;
+            font-size: 14px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .recommendations {
+            background: #e8f5e9;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        .recommendations h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .rec-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 12px 0;
+        }
+        .rec-icon {
+            width: 24px;
+            font-size: 16px;
+        }
+        .rec-text {
+            color: #555;
+            font-size: 14px;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        .cta-primary {
+            flex: 1;
+            background: linear-gradient(135deg, #4472C4 0%, #2E5AA8 100%);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .cta-secondary {
+            flex: 1;
+            background: #f8f9fa;
+            color: #333;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid #ddd;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        .footer-text {
+            color: #888;
+            font-size: 12px;
+        }
+        .footer-links {
+            margin-bottom: 15px;
+        }
+        .footer-links a {
+            color: #4472C4;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="icon">⚠️</div>
+            <h1>Usage Warning</h1>
+            <p style="opacity: 0.9; font-size: 14px;">You're approaching your plan limits</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <p class="greeting">Hello {{USER_NAME}},</p>
+            
+            <p class="message">
+                Your Clisonix API usage is approaching the limit for your current plan. 
+                Here's a summary of your usage this billing period:
+            </p>
+
+            <!-- Usage Box -->
+            <div class="usage-box">
+                <div class="usage-header">
+                    <span class="usage-title">Current Usage</span>
+                    <span class="usage-percentage">{{USAGE_PERCENT}}%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 70%;"></div>
+                </div>
+                <div class="usage-details">
+                    <span>{{USED_REQUESTS}} requests used</span>
+                    <span>{{TOTAL_REQUESTS}} total</span>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">{{DAYS_LEFT}}</div>
+                    <div class="stat-label">Days Left</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">{{ENDPOINTS_USED}}</div>
+                    <div class="stat-label">Endpoints Active</div>
+                </div>
+            </div>
+
+            <!-- Alert -->
+            <div class="alert-box">
+                <h4>⚡ What happens when you hit the limit?</h4>
+                <p>
+                    API requests will return a <code>429 Too Many Requests</code> error. 
+                    Upgrade your plan to continue using Clisonix without interruption.
+                </p>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="recommendations">
+                <h3>💡 Recommendations</h3>
+                <div class="rec-item">
+                    <span class="rec-icon">📈</span>
+                    <span class="rec-text">Upgrade to <strong>Pro</strong> for pay-as-you-consume pricing (€0.10/endpoint/day)</span>
+                </div>
+                <div class="rec-item">
+                    <span class="rec-icon">🔄</span>
+                    <span class="rec-text">Enable request caching to reduce API calls</span>
+                </div>
+                <div class="rec-item">
+                    <span class="rec-icon">📊</span>
+                    <span class="rec-text">Review your usage patterns in the dashboard</span>
+                </div>
+            </div>
+
+            <!-- CTAs -->
+            <div class="cta-buttons">
+                <a href="https://clisonix.com/pricing" class="cta-primary">
+                    Upgrade Plan →
+                </a>
+                <a href="https://clisonix.com/dashboard/usage" class="cta-secondary">
+                    View Usage
+                </a>
+            </div>
+
+            <p class="message" style="margin-top: 25px; font-size: 13px; color: #888;">
+                You can manage notification preferences in your 
+                <a href="https://clisonix.com/settings" style="color: #4472C4;">account settings</a>.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="https://clisonix.com/docs">Docs</a>
+                <a href="https://clisonix.com/pricing">Pricing</a>
+                <a href="https://clisonix.com/support">Support</a>
+            </div>
+            <div class="footer-text">
+                © 2025 Clisonix. All rights reserved.<br>
+                <a href="https://clisonix.com/unsubscribe?token={{UNSUB_TOKEN}}" style="color: #888;">Unsubscribe</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "lib": ["ES2020"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "declaration": true,
+    "typeRoots": ["."]
+  },
+  "include": [
+    "*.ts",
+    "office-scripts.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

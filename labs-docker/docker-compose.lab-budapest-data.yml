@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  budapest-data-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-budapest-data
+    environment:
+      LAB_ID: "Budapest_Data"
+      LAB_TYPE: "Data"
+      LAB_NAME: "Budapest Data Lab"
+      LAB_FUNCTION: "Big Data Analytics & Visualization"
+      API_KEY: "sekret-real"
+    ports:
+      - "8119:8100"
+    volumes:
+      - ../data/budapest-data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

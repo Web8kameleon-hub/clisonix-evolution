@@ -1,0 +1,39 @@
+# Clisonix Monetization Requirements
+# Use: pip install -r requirements/monetization.txt
+
+# Stripe Payment Processing
+stripe>=5.1.1
+
+# TikTok, YouTube, LinkedIn APIs
+requests>=2.28.0
+tiktok-api>=1.0.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.1.1
+google-api-python-client>=2.85.0
+
+# Content & Video Generation
+synthesia-sdk>=1.0.0
+moviepy>=1.0.3
+
+# Analytics & Tracking
+mixpanel>=4.14.1
+google-analytics-python-tracking>=2.0.0
+
+# Scheduling & Automation
+apscheduler>=3.10.0
+celery>=5.3.0
+redis>=4.5.0
+
+# Email Notifications
+sendgrid>=6.9.7
+
+# Monitoring
+sentry-sdk>=1.24.0
+
+# Database & Caching
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+
+# Utils
+python-dotenv>=1.0.0
+pydantic>=1.10.0

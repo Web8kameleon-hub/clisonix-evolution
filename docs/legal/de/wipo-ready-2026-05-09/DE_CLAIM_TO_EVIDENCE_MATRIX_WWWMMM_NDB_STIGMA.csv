@@ -1,0 +1,24 @@
+claim_id,claim_scope,technical_statement,evidence_file,evidence_line,notes
+C1,Method,Request classification from ndb_score ndb_delta ndb_threshold,docs/legal/de/DE_PATENT_TELEMETRY_ADDENDUM_NODE1_2026-05-09.md,45,Claim relevance mapping NDB deviation control
+C2,System,API runtime plus monitor learning and policy gate,sdist/clx-ai/clx/core.py,47,Security monitor integrated in core pipeline
+C2,System,API runtime plus monitor learning and policy gate,sdist/clx-ai/clx/core.py,61,Core processing path integration
+C2,System,API runtime plus monitor learning and policy gate,sdist/clx-ai/clx/core.py,108,Policy decision point in core flow
+C3,CPP,Instructions execute method flow,docs/legal/de/DE_PATENT_APPLICATION_DRAFT_WWWMMM_NDB_STIGMA.md,66,Independent computer program product basis
+C4,Method,Baseline mean median std over sliding window,sdist/clx-ai/clx/security/monitor.py,92,Baseline threshold logic implementation
+C4,Method,Baseline mean median std over sliding window,sdist/clx-ai/clx/security/monitor.py,117,Baseline and deviation evaluation
+C5,Method,Route-match indicator influences severity,sdist/clx-ai/clx/security/monitor.py,143,Route mismatch escalation logic
+C6,Method,Throttle policy uses configurable reduction,sdist/clx-ai/clx/security/monitor.py,162,Policy action and throttle branch
+C7,Method,Negative ndb_delta supports de-escalation,docs/legal/de/DE_PATENT_TELEMETRY_ADDENDUM_NODE1_2026-05-09.md,37,Delta interpreted as movement away from risk boundary
+C8,Method,Tide state used as policy control signal,docs/legal/de/DE_PATENT_TELEMETRY_ADDENDUM_NODE1_2026-05-09.md,49,Tide-conditioned operations mapping
+C9,Method,Stigma level gates operation acceptance,docs/legal/de/DE_PATENT_TELEMETRY_ADDENDUM_NODE1_2026-05-09.md,52,Stigma-governed policy regime mapping
+C10,Method,Structured event fields for audit,docs/legal/de/DE_PATENT_TELEMETRY_ADDENDUM_NODE1_2026-05-09.md,55,Event-driven auditability mapping
+C11,System,Monitor positioned before execution path,sdist/clx-ai/clx/core.py,47,Pipeline placement
+C12,System,Baseline arming requires minimum sample count,sdist/clx-ai/clx/security/monitor.py,22,Minimum sample control
+C13,System,Unmatched route severity elevation,sdist/clx-ai/clx/security/monitor.py,147,Escalation branch
+C14,System,Block hard-stops downstream runtime path,sdist/clx-ai/clx/core.py,108,Policy gate blocks execution
+C15,Method,ndB derived from anaglyphic form interference,clx_i_service.py,122,Scoring path tied to service-level resonance metric
+C16,Method,Stigma noise-trace imprint is stored and reused,clx_i_service.py,139,Stigma-linked resonance handling
+C17,Method,high_risk from score-threshold comparison,docs/legal/de/DE_PATENT_TELEMETRY_ADDENDUM_NODE1_2026-05-09.md,26,Runtime summary with threshold and high_risk
+C18,Method,Low tide and below-threshold score admit submit operation,docs/legal/de/DE_PATENT_TELEMETRY_ADDENDUM_NODE1_2026-05-09.md,19,Event trace includes accepted submit under low tide
+C19,System,Operational metrics contribute to state classification,docs/legal/de/DE_PATENT_TELEMETRY_ADDENDUM_NODE1_2026-05-09.md,13,Status metrics payload
+C20,CPP,Timestamped auditable path persisted per decision,docs/legal/de/DE_PATENT_TELEMETRY_ADDENDUM_NODE1_2026-05-09.md,19,Timestamped event records

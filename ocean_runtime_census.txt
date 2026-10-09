@@ -1,0 +1,819 @@
+=== OCEAN RUNTIME CENSUS ===
+ROOT: C:\Users\pc\Clisonix-cloud
+DATE: 2026-08-18T12:10:41.5580991+02:00
+
+=== TOP LEVEL ===
+
+Mode  Length  LastWriteTime         Name
+----  ------  -------------         ----
+d----         7/13/2026 4:12:00 PM  __pycache__
+d----         7/13/2026 4:11:52 PM  _imports
+d----         7/13/2026 4:11:51 PM  .clx_i
+d----         7/13/2026 4:11:51 PM  .clx_ops
+d----         7/13/2026 4:11:51 PM  .clx_ops_2min
+d----         7/13/2026 4:11:51 PM  .clx_ops_smoke
+d----         7/13/2026 4:11:51 PM  .clx_ops_smoke_ps1
+d----         7/13/2026 4:11:51 PM  .clx_ops_smoke_quick
+d--h-         7/17/2026 9:59:48 AM  .git
+d----         7/13/2026 4:11:51 PM  .github
+d----         8/11/2026 7:32:46 PM  .mypy_cache
+d----         7/13/2026 4:11:51 PM  .postman
+d----         7/13/2026 4:11:51 PM  .ssh
+d----         7/13/2026 4:11:51 PM  .thunder-client
+d----         7/3/2026 2:29:52 PM   .venv
+d----         7/11/2026 8:16:13 PM  .venv-1
+d----         7/13/2026 4:11:51 PM  .vs
+d----         7/13/2026 4:11:51 PM  .vscode
+d----         7/13/2026 8:43:15 PM  .worktrees
+d----         7/13/2026 4:11:51 PM  9999
+d----         7/13/2026 4:11:52 PM  agents
+d----         7/13/2026 4:11:52 PM  airflow
+d----         7/13/2026 4:11:52 PM  all_pillars
+d----         7/13/2026 4:11:52 PM  app
+d----         7/13/2026 4:11:52 PM  apps
+d----         7/13/2026 4:11:53 PM  backend
+d----         7/13/2026 4:11:53 PM  blog
+d----         7/13/2026 4:11:53 PM  Clisonix
+d----         8/18/2026 12:08:46 PM clisonix.com
+d----         7/13/2026 4:11:53 PM  cloudflare
+d----         7/13/2026 4:11:53 PM  clx-ai
+d----         12/26/2025 6:40:31 PM components
+d----         7/13/2026 4:11:53 PM  config
+d----         7/13/2026 4:11:53 PM  core
+d----         12/26/2025 6:40:32 PM cycles
+d----         12/26/2025 6:40:32 PM dashboard
+d----         7/13/2026 4:11:53 PM  data_sources
+d----         7/13/2026 4:11:53 PM  db
+d----         7/13/2026 4:11:53 PM  deploy
+d----         7/13/2026 4:11:53 PM  deployment
+d----         7/13/2026 4:11:53 PM  docker-stubs
+d----         7/13/2026 4:11:53 PM  dockerfiles
+d----         7/13/2026 4:11:54 PM  docs
+d----         7/13/2026 4:11:54 PM  email_templates
+d----         7/13/2026 4:11:54 PM  embedded
+d----         7/13/2026 4:11:54 PM  examples
+d----         7/13/2026 4:11:54 PM  excel-core
+d----         7/13/2026 4:11:54 PM  frontend
+d----         7/13/2026 4:11:54 PM  generated_medical_pillars
+d----         7/13/2026 4:11:54 PM  generated_videos
+d----         7/13/2026 4:11:54 PM  hardware
+d----         7/13/2026 4:11:54 PM  hello-ai
+d----         7/13/2026 4:11:54 PM  helm
+d----         7/13/2026 4:11:54 PM  hybrid_saas_platform
+d----         7/13/2026 4:11:54 PM  infra
+d----         7/13/2026 4:11:54 PM  investor_materials
+d----         7/13/2026 4:11:54 PM  investor-pack
+d----         7/13/2026 4:11:54 PM  java-longo
+d----         7/13/2026 4:11:54 PM  k8s
+d----         7/13/2026 4:11:54 PM  labs-docker
+d----         7/13/2026 4:11:54 PM  lagter_pillars
+d----         7/13/2026 8:35:11 PM  logs
+d----         7/13/2026 4:11:54 PM  modules
+d----         7/13/2026 4:11:54 PM  nanogrid
+d----         7/13/2026 4:11:54 PM  neo4j
+d----         7/13/2026 4:11:51 PM  neurosonix
+d----         7/13/2026 4:11:54 PM  neurosonix-supernova
+d----         7/13/2026 4:11:54 PM  nginx
+d----         7/13/2026 4:11:54 PM  nginx_local
+d----         7/13/2026 4:14:13 PM  node_modules
+d----         7/13/2026 4:11:55 PM  ocean_core
+d----         7/13/2026 4:11:54 PM  ocean-data
+d----         7/13/2026 4:11:55 PM  office_scripts
+d----         7/13/2026 4:11:55 PM  openapi
+d----         7/13/2026 4:11:55 PM  ops
+d----         7/13/2026 4:11:55 PM  orchestra
+d----         7/13/2026 4:11:55 PM  output
+d----         7/13/2026 4:11:55 PM  outputs
+d----         7/13/2026 4:11:55 PM  packages
+d----         7/13/2026 4:11:55 PM  pipelines
+d----         7/13/2026 4:11:55 PM  postman-backup
+d----         7/13/2026 4:11:55 PM  postman-collections
+d----         7/13/2026 4:11:55 PM  public
+d----         7/13/2026 4:11:56 PM  releases
+d----         7/13/2026 4:11:56 PM  reports
+d----         7/13/2026 4:11:56 PM  requirements
+d----         12/26/2025 6:40:32 PM research
+d----         7/13/2026 4:11:56 PM  reviews
+d----         7/11/2026 8:20:51 PM  routes
+d----         7/13/2026 5:46:12 PM  scripts
+d----         7/13/2026 4:11:56 PM  sdist
+d----         7/13/2026 4:11:56 PM  sdk
+d----         7/13/2026 8:15:57 PM  services
+d----         7/3/2026 2:32:53 PM   src
+d----         7/3/2026 2:33:35 PM   storage
+d----         7/13/2026 4:11:56 PM  telegraf
+d----         12/26/2025 6:40:32 PM tempo_data
+d----         7/13/2026 4:11:56 PM  tests
+d----         7/13/2026 4:11:56 PM  tools
+d----         7/13/2026 4:11:56 PM  ultrawebthinking-backup
+d----         12/26/2025 6:40:33 PM weaviate
+d----         12/26/2025 6:40:33 PM worker
+-a--- 32826   7/13/2026 4:11:51 PM  -w
+-a--- 1715    7/13/2026 4:11:51 PM  .all_unified_services.txt
+-a--- 1448    7/13/2026 4:11:51 PM  .cspellrc.json
+-a--- 199     7/13/2026 4:11:51 PM  .dockerignore
+-a--- 161     7/13/2026 4:11:51 PM  .editorconfig
+-a--- 1592    7/13/2026 4:11:51 PM  .env.sample
+-a--- 4579    7/13/2026 4:11:51 PM  .env.template
+-a--- 117423  7/13/2026 4:11:51 PM  .git_ocean_core_full.py
+-a--- 104     7/13/2026 4:11:51 PM  .gitattributes
+-a--- 4857    7/13/2026 4:11:51 PM  .gitignore
+-a--- 47      7/13/2026 4:11:51 PM  .hintrc
+-a--- 844     7/13/2026 4:11:51 PM  .mailmap
+-a--- 176     7/13/2026 4:11:51 PM  .markdownlint.json
+-a--- 42      7/13/2026 4:11:51 PM  .markdownlintignore
+-a--- 23      7/13/2026 4:11:51 PM  .npmrc
+-a--- 166     7/13/2026 4:11:51 PM  .pre-commit-config.yaml
+-a--- 907     7/13/2026 4:11:51 PM  .tmp_compose75_services.txt
+-a--- 272     7/13/2026 4:11:51 PM  .tmp_repo_service_dirs.txt
+-a--- 343     7/13/2026 4:11:51 PM  .tmp_validate_compose.py
+-a--- 3123    7/13/2026 4:11:52 PM  add_extra_functions_column.py
+-a--- 3942    7/13/2026 4:11:52 PM  add-resource-limits.py
+-a--- 11069   7/13/2026 4:11:52 PM  advanced_analytics_api.py
+-a--- 19833   7/13/2026 4:11:52 PM  advanced_cycle_alignments.py
+-a--- 16045   12/26/2025 6:40:31 PM AGENT_TELEMETRY_DOCS.md
+-a--- 13347   7/3/2026 2:04:21 PM   AGENT_TELEMETRY_GUIDE.md
+-a--- 17611   7/13/2026 4:11:52 PM  agent_telemetry.py
+-a--- 57524   7/13/2026 4:11:52 PM  agents.py
+-a--- 2044    7/13/2026 4:11:52 PM  agents.yml
+-a--- 58147   12/26/2025 6:40:31 PM agiem_core.py
+-a--- 8191    7/13/2026 4:11:52 PM  agiem_telemetry_service.py
+-a--- 25141   7/13/2026 4:11:51 PM  AI_AGENT_FRAMEWORKS.md
+-a--- 13875   7/13/2026 4:11:51 PM  AI_AGENTS_README.md
+-a--- 28008   7/13/2026 4:11:52 PM  ai_agi_pipeline.py
+-a--- 30579   7/13/2026 4:11:52 PM  ai_model_versioning.py
+-a--- 2037    7/13/2026 4:11:51 PM  ALB_CANONICAL_RECORD.md
+-a--- 4861    7/13/2026 4:11:52 PM  alba_api_server.py
+-a--- 3561    7/13/2026 4:11:52 PM  alba_control_panel.html
+-a--- 5239    12/26/2025 6:40:31 PM alba_core.py
+-a--- 2954    12/26/2025 6:40:31 PM alba_feeder_service.py
+-a--- 2020    12/26/2025 6:40:31 PM alba_frame_generator.py
+-a--- 644     7/13/2026 4:11:52 PM  alba_idle_chat.py
+-a--- 46390   7/13/2026 4:11:52 PM  alba_service_5555.py
+-a--- 4662    7/13/2026 4:11:52 PM  albi_core.py
+-a--- 32094   7/13/2026 4:11:51 PM  ALBI_EEG_SETTINGS_TAB_ANALYSIS.md
+-a--- 4968    7/13/2026 4:11:51 PM  ALBI_RATE_LIMIT_REVIEW.md
+-a--- 10638   7/13/2026 4:11:52 PM  albi_service_6680.py
+-a--- 22283   7/13/2026 4:11:52 PM  albi_user_api.py
+-a--- 13028   7/13/2026 4:11:52 PM  alda_core.py
+-a--- 17170   7/13/2026 4:11:52 PM  alda_server.py
+-a--- 1005    7/13/2026 4:11:52 PM  alembic.ini
+-a--- 3769    7/13/2026 4:11:52 PM  alphabet_layers_api.py
+-a--- 12246   7/13/2026 4:11:51 PM  API_AUDIT_COMPLETE.md
+-a--- 1571    12/26/2025 6:40:31 PM API_CONFIG.py
+-a--- 13091   7/13/2026 4:11:52 PM  api_control_panel.py
+-a--- 986     7/13/2026 4:11:52 PM  api_docs.html
+-a--- 1754    12/26/2025 6:40:31 PM API_DOCS.md
+-a--- 19426   7/13/2026 4:11:52 PM  api_key_management.py
+-a--- 965     12/26/2025 6:40:31 PM api_key_middleware.py
+-a--- 12969   7/13/2026 4:11:52 PM  api_request_generator.py
+-a--- 1247    7/13/2026 4:11:52 PM  api_root_patch.py
+-a--- 9693    12/26/2025 6:40:31 PM API-COMPLETE-REFERENCE.md
+-a--- 12994   7/13/2026 4:11:52 PM  app.js
+-a--- 29      1/10/2026 8:52:13 AM  apps_web_api.tar.gz
+-a--- 10657   12/26/2025 6:40:31 PM ARCHITECTURE_SUMMARY.md
+-a--- 19832   7/13/2026 4:11:51 PM  ARCHITECTURE_VISUAL_REFERENCE.md
+-a--- 5902    7/13/2026 4:11:53 PM  asi_api_server.py
+-a--- 15986   7/13/2026 4:11:53 PM  asi_core.py
+-a--- 447     12/26/2025 6:40:31 PM asi_logs.json
+-a--- 11212   12/26/2025 6:40:31 PM asi_realtime_engine.py
+-a--- 37793   7/13/2026 4:11:53 PM  asi_trinity_blerina.py
+-a--- 11382   12/26/2025 6:40:31 PM ASI-API-GUIDE.md
+-a--- 4396    12/26/2025 6:40:31 PM ASI-API-QUICK-REFERENCE.md
+-a--- 5743    7/13/2026 4:11:51 PM  AUDIT_COMPLETION_WRAP_UP.md
+-a--- 1716    7/13/2026 4:11:53 PM  audit.after.json
+-a--- 11518   12/26/2025 6:40:31 PM AUTHENTICATION.md
+-a--- 10341   7/13/2026 4:11:53 PM  auto_populate_excel.py
+-a--- 1430    7/13/2026 4:11:53 PM  backup.sh
+-a--- 6601    7/13/2026 4:11:53 PM  balancer_cache_3335.py
+-a--- 11125   7/13/2026 4:11:53 PM  balancer_data_3337.py
+-a--- 4010    7/13/2026 4:11:53 PM  balancer_nodes_3333.js
+-a--- 14857   7/13/2026 4:11:53 PM  balancer_nodes_3334.py
+-a--- 9022    7/13/2026 4:11:53 PM  balancer_pulse_3336.py
+-a--- 5942    12/26/2025 6:40:31 PM balancer_simple.py
+-a--- 12963   7/13/2026 4:11:53 PM  balancer_ts_3338.ts
+-a--- 1303    12/26/2025 6:40:31 PM base.json
+-a--- 21765   7/13/2026 4:11:53 PM  behavioral_science_api.py
+-a--- 862     7/13/2026 4:11:53 PM  billing_plans.py
+-a--- 38846   7/13/2026 4:11:53 PM  blerina_core.py
+-a--- 38023   7/13/2026 4:11:53 PM  blerina_reformatter.py
+-a--- 0       7/13/2026 4:11:53 PM  blerina_service.py
+-a--- 17013   7/13/2026 4:11:51 PM  BLOG_PLATFORM_COMPLETE.md
+-a--- 22905   7/13/2026 4:11:51 PM  BLOG_PUBLISHER_COMPLETE_FIX.md
+-a--- 12305   7/13/2026 4:11:51 PM  BLOG_PUBLISHER_FIXES.md
+-a--- 7088    7/13/2026 4:11:51 PM  BLOG_PUBLISHER_QUICKSTART.md
+-a--- 4564    7/13/2026 4:11:51 PM  BUILD.md
+-a--- 3000    7/13/2026 4:11:53 PM  check_clisonix_health.py
+-a--- 4036    12/26/2025 6:40:31 PM check_grafana_stack.py
+-a--- 3656    7/13/2026 4:11:51 PM  CI_CD_FIX_SUMMARY.md
+-a--- 7995    7/13/2026 4:11:51 PM  CI_QUICK_REFERENCE.md
+-a--- 8079    12/26/2025 6:40:31 PM CLEANUP_REPORT_DEC2025.md
+-a--- 2594    7/13/2026 4:11:53 PM  cleanup.sh
+-a--- 5598    7/13/2026 4:11:51 PM  Clisonix_API_Analysis.xlsx
+-a--- 18714   7/13/2026 4:11:51 PM  Clisonix_API_Dashboard_Ultra.xlsx
+-a--- 18676   7/13/2026 4:11:51 PM  Clisonix_API_Final.xlsx
+-a--- 13951   7/13/2026 4:11:51 PM  Clisonix_API_Generator.xlsx
+-a--- 20729   7/13/2026 4:11:53 PM  clisonix_api_scanner.ts
+-a--- 26145   7/13/2026 4:11:51 PM  CLISONIX_ARCHITECTURE_BASELINE_2025.md
+-a--- 32874   7/13/2026 4:11:53 PM  clisonix_blerina_core.py
+-a--- 26109   7/13/2026 4:11:51 PM  CLISONIX_Editable_Financial_Table.xlsx
+-a--- 26333   7/13/2026 4:11:53 PM  clisonix_integration_runner.py
+-a--- 13539   7/13/2026 4:11:51 PM  CLISONIX_INTELLIGENCE_README.md
+-a--- 11254   7/13/2026 4:11:51 PM  Clisonix_Master_Table.xlsx
+-a--- 3113    7/13/2026 4:11:51 PM  CLISONIX_MODULE_MAP.md
+-a--- 18337   7/13/2026 4:11:51 PM  Clisonix_Production_Ready.xlsx
+-a--- 2385    7/13/2026 4:11:53 PM  clisonix_prompt.py
+-a--- 1195    7/13/2026 4:11:53 PM  clisonix_pulse.py
+-a--- 22167   7/13/2026 4:11:51 PM  Clisonix_Python_Dashboard.xlsx
+-a--- 15778   7/13/2026 4:11:51 PM  Clisonix_Python_Excel_Dashboard.py
+-a--- 14406   12/26/2025 6:40:31 PM clisonix_sdk.py
+-a--- 13312   12/26/2025 6:40:31 PM clisonix_sdk.ts
+-a--- 3575    7/13/2026 4:11:51 PM  CLISONIX_SYSTEM_PROMPT.md
+-a--- 12291   7/13/2026 4:11:51 PM  CLISONIX_USER_GUIDE.md
+-a--- 18047   7/13/2026 4:11:53 PM  clisonix-canonical-table-enriched.xlsx
+-a--- 18509   7/13/2026 4:11:53 PM  clisonix-canonical-table-fixed.xlsx
+-a--- 18033   7/13/2026 4:11:53 PM  clisonix-canonical-table.xlsx
+-a--- 14516   7/13/2026 4:11:37 PM  Clisonix-Cloud-Complete-API.postman_collection.json
+-a--- 955     7/13/2026 4:11:37 PM  Clisonix-Cloud-Development.postman_environment.json
+-a--- 959     7/13/2026 4:11:37 PM  Clisonix-Cloud-Production.postman_environment.json
+-a--- 619     7/13/2026 4:11:53 PM  clisonix-environment-production.json
+-a--- 16814   7/13/2026 4:11:53 PM  clx_agent.py
+-a--- 10148   7/13/2026 4:11:51 PM  CLX_AI_COMPLETE_TIMELINE.md
+-a--- 7236    7/13/2026 4:11:51 PM  CLX_AI_INSTALLATION_GUIDE.md
+-a--- 10217   7/13/2026 4:11:53 PM  clx_i_service.py
+-a--- 1678    7/13/2026 4:11:51 PM  CLX_I_STIGMA_README.md
+-a--- 50959   7/13/2026 4:11:53 PM  clx_publisher.py
+-a--- 1192    7/13/2026 4:11:53 PM  codeql-config.yml
+-a--- 11992   12/26/2025 6:40:31 PM COMPLETE_DELIVERY_SUMMARY.md
+-a--- 13055   7/13/2026 4:11:51 PM  COMPLETE_SYSTEM_GUIDE.md
+-a--- 11435   7/13/2026 4:11:53 PM  compliance_checker.py
+-a--- 6584    7/13/2026 4:11:51 PM  COMPLIANCE_CHECKLIST.md
+-a--- 130     7/13/2026 4:11:53 PM  compliance_report.json
+-a--- 5493    7/13/2026 4:11:53 PM  config_demo.py
+-a--- 50466   7/13/2026 4:11:53 PM  content_factory.py
+-a--- 1210    7/13/2026 4:11:51 PM  CONTRIBUTORS.md
+-a--- 1118    12/26/2025 6:40:31 PM convert_openapi.py
+-a--- 34655   7/13/2026 4:11:51 PM  CRITICAL_GAPS_AUDIT_2026.md
+-a--- 10596   7/13/2026 4:11:53 PM  curiosity_admin_auth.py
+-a--- 8609    7/13/2026 4:11:53 PM  curiosity_admin_chat.py
+-a--- 3315    7/13/2026 4:11:53 PM  curiosity_chat.py
+-a--- 9637    7/13/2026 4:11:51 PM  CURIOSITY_OCEAN_SETUP.md
+-a--- 5006    7/13/2026 4:11:51 PM  CURRENT_STATUS.md
+-a--- 1487    7/13/2026 4:11:53 PM  cycle_api_server.py
+-a--- 27863   12/26/2025 6:40:31 PM CYCLE_ARCHITECTURE_DIAGRAM.md
+-a--- 10658   12/26/2025 6:40:31 PM CYCLE_DOCUMENTATION_INDEX.md
+-a--- 6418    12/26/2025 6:40:31 PM CYCLE_ENGINE_DEMO.py
+-a--- 10341   12/26/2025 6:40:31 PM CYCLE_ENGINE_DOCS.md
+-a--- 38765   7/13/2026 4:11:53 PM  cycle_engine.py
+-a--- 12260   12/26/2025 6:40:31 PM CYCLE_INTEGRATION_SUMMARY.md
+-a--- 7020    12/26/2025 6:40:31 PM CYCLE_QUICK_REFERENCE.md
+-a--- 12587   7/13/2026 4:11:51 PM  CYCLE_RAPORT_PERFUNDIMTAR_SQ.md
+-a--- 9097    7/13/2026 4:11:51 PM  Dashboard_Registry.xlsx
+-a--- 7045    7/13/2026 4:11:51 PM  DATA_RETENTION_POLICY.md
+-a--- 360     7/13/2026 4:11:53 PM  data_sources.json
+-a--- 3449    7/13/2026 4:11:53 PM  database_encryption_config.py
+-a--- 1396    12/26/2025 6:40:32 PM debug-test.ps1
+-a--- 14263   12/26/2025 6:40:31 PM DELIVERY_MANIFEST.md
+-a--- 13032   12/26/2025 6:40:31 PM DELIVERY-SUMMARY.md
+-a--- 7047    7/13/2026 4:11:53 PM  demo_clisonix_identity.py
+-a--- 2056    7/13/2026 4:11:51 PM  DEMO_SCRIPT.sh
+-a--- 10145   7/13/2026 4:11:51 PM  DEPENDENCY_LOCK_REPORT.md
+-a--- 4733    7/13/2026 4:11:53 PM  deploy_and_validate.ps1
+-a--- 3436    7/13/2026 4:11:53 PM  deploy_and_validate.sh
+-a--- 28639   7/13/2026 4:11:53 PM  deploy_clisonix_intelligence.py
+-a--- 4026    7/13/2026 4:11:53 PM  deploy_gateway_server.sh
+-a--- 162     7/13/2026 4:11:53 PM  deploy_logs.txt
+-a--- 6296    7/13/2026 4:11:53 PM  deploy_nanogridata_docker.sh
+-a--- 8904    7/13/2026 4:11:53 PM  deploy_nanogridata.sh
+-a--- 3269    7/13/2026 4:11:51 PM  DEPLOY_NEWSROOM.sh
+-a--- 5330    7/13/2026 4:11:53 PM  deploy-autolearning.sh
+-a--- 3232    7/13/2026 4:11:53 PM  deploy-aviation-weather.sh
+-a--- 15175   7/13/2026 4:11:53 PM  deploy-hetzner.sh
+-a--- 6512    7/13/2026 4:11:53 PM  deploy-lean-fixed.sh
+-a--- 7132    7/13/2026 4:11:53 PM  deploy-lean.sh
+-a--- 4930    7/13/2026 4:11:53 PM  deploy-production.sh
+-a--- 873     7/13/2026 4:11:53 PM  deploy.ps1
+-a--- 2946    7/13/2026 4:11:53 PM  deploy.sh
+-a--- 5584    7/13/2026 4:11:51 PM  DEPLOYMENT_CHECKLIST_PROD.md
+-a--- 7552    7/13/2026 4:11:51 PM  DEPLOYMENT_CHECKLIST.md
+-a--- 12521   7/13/2026 4:11:51 PM  DEPLOYMENT_COMPLETE_SUMMARY.md
+-a--- 10903   12/26/2025 6:40:31 PM DEPLOYMENT_COMPLETE.md
+-a--- 14262   7/13/2026 4:11:51 PM  DEPLOYMENT_EXECUTION_CHECKLIST.md
+-a--- 10087   7/13/2026 4:11:51 PM  DEPLOYMENT_GUIDE_HETZNER.md
+-a--- 109     7/13/2026 4:11:53 PM  deployment_log.txt
+-a--- 7976    7/13/2026 4:11:51 PM  DEPLOYMENT_READY.txt
+-a--- 12433   7/13/2026 4:11:51 PM  DEPLOYMENT_SECURITY_GUIDE.md
+-a--- 9726    7/13/2026 4:11:51 PM  DEPLOYMENT_SUMMARY.md
+-a--- 9703    7/13/2026 4:11:53 PM  deployment-checklist.sh
+-a--- 10584   7/13/2026 4:11:51 PM  DEVSECOPS_COMPLETE.md
+-a--- 5745    7/13/2026 4:11:53 PM  diagnose_service_startup.py
+-a--- 8102    7/13/2026 4:11:53 PM  diagnose-jona-rate-limit.sh
+-a--- 20154   7/13/2026 4:11:53 PM  distributed_pulse_balancer.py
+-a--- 10540   7/13/2026 4:11:51 PM  DOCKER_COMPOSE_GUIDE.md
+-a--- 8633    7/13/2026 4:11:51 PM  DOCKER_QUICK_START.md
+-a--- 10184   12/26/2025 6:40:31 PM DOCKER_STARTUP_REPORT.md
+-a--- 51300   7/13/2026 4:11:53 PM  docker-compose.75-services.yml
+-a--- 786     7/13/2026 4:11:53 PM  docker-compose.ads.yml
+-a--- 874     7/13/2026 4:11:53 PM  docker-compose.aiagi-upstream.yml
+-a--- 639     7/13/2026 4:11:53 PM  docker-compose.api_manager.yml
+-a--- 488     7/13/2026 4:11:53 PM  docker-compose.api.yml
+-a--- 1219    7/13/2026 4:11:53 PM  docker-compose.bind.yml
+-a--- 424     7/13/2026 4:11:53 PM  docker-compose.dashboard.yml
+-a--- 449     7/13/2026 4:11:53 PM  docker-compose.excel-core.yml
+-a--- 372     7/13/2026 4:11:53 PM  docker-compose.kitchen-api.yml
+-a--- 381     7/13/2026 4:11:53 PM  docker-compose.kitchen-worker.yml
+-a--- 7153    7/13/2026 4:11:53 PM  docker-compose.lean.yml
+-a--- 506     7/13/2026 4:11:53 PM  docker-compose.mirror.yml
+-a--- 462     7/13/2026 4:11:53 PM  docker-compose.my-data-dashboard.yml
+-a--- 2583    7/13/2026 4:11:53 PM  docker-compose.ocean-core.yml
+-a--- 378     7/13/2026 4:11:53 PM  docker-compose.thunder-postman.yml
+-a--- 13603   7/13/2026 4:11:53 PM  docker-compose.ultrawebthinking-v2.yml
+-a--- 724     7/13/2026 4:11:53 PM  docker-compose.unified.lean.yml
+-a--- 80324   7/13/2026 8:15:36 PM  docker-compose.unified.yml
+-a--- 81435   7/13/2026 8:41:35 PM  docker-compose.yml
+-a--- 1841    12/26/2025 6:40:32 PM docker-run.ps1
+-a--- 219     7/13/2026 4:11:53 PM  docker-start.bat
+-a--- 1766    7/13/2026 4:11:51 PM  Dockerfile
+-a--- 702     7/13/2026 4:11:51 PM  Dockerfile.adaptive-router
+-a--- 522     7/13/2026 4:11:51 PM  Dockerfile.agent-telemetry
+-a--- 12720   7/13/2026 4:11:51 PM  Dockerfile.agiem
+-a--- 388     7/13/2026 4:11:51 PM  Dockerfile.alba
+-a--- 11100   7/13/2026 4:11:51 PM  Dockerfile.alba-idle
+-a--- 388     7/13/2026 4:11:51 PM  Dockerfile.albi
+-a--- 354     7/13/2026 4:11:51 PM  Dockerfile.albi-user
+-a--- 596     7/13/2026 4:11:51 PM  Dockerfile.alda
+-a--- 23928   7/13/2026 4:11:51 PM  Dockerfile.alphabet
+-a--- 448     7/13/2026 4:11:51 PM  Dockerfile.analytics
+-a--- 661     7/13/2026 4:11:51 PM  Dockerfile.api
+-a--- 685     7/13/2026 4:11:51 PM  Dockerfile.asi
+-a--- 1367    7/13/2026 4:11:51 PM  Dockerfile.autolearning
+-a--- 865     7/13/2026 4:11:51 PM  Dockerfile.balancer
+-a--- 535     7/13/2026 4:11:51 PM  Dockerfile.behavioral
+-a--- 389     7/13/2026 4:11:51 PM  Dockerfile.biometric
+-a--- 1818    7/13/2026 4:11:51 PM  Dockerfile.blerina
+-a--- 1039    7/13/2026 4:11:51 PM  Dockerfile.clx-agent
+-a--- 466     7/13/2026 4:11:51 PM  Dockerfile.clx-i
+-a--- 642     7/13/2026 4:11:51 PM  Dockerfile.cognitive
+-a--- 427     7/13/2026 4:11:51 PM  Dockerfile.cycle
+-a--- 9112    7/13/2026 4:11:51 PM  Dockerfile.datasource
+-a--- 435     7/13/2026 4:11:51 PM  Dockerfile.developer-portal
+-a--- 351     7/13/2026 4:11:51 PM  Dockerfile.eap-engine
+-a--- 557     7/13/2026 4:11:51 PM  Dockerfile.economy
+-a--- 172     7/13/2026 4:11:51 PM  Dockerfile.final
+-a--- 293     7/13/2026 4:11:51 PM  Dockerfile.health-monitor
+-a--- 487     7/13/2026 4:11:51 PM  Dockerfile.intelligence
+-a--- 632     7/13/2026 4:11:51 PM  Dockerfile.jona
+-a--- 9431    7/13/2026 4:11:51 PM  Dockerfile.lab
+-a--- 596     7/13/2026 4:11:51 PM  Dockerfile.liam
+-a--- 617     7/13/2026 4:11:51 PM  Dockerfile.marketplace
+-a--- 582     7/13/2026 4:11:51 PM  Dockerfile.matia
+-a--- 390     7/13/2026 4:11:51 PM  Dockerfile.microservice
+-a--- 456     7/13/2026 4:11:51 PM  Dockerfile.multi-tenant
+-a--- 296     7/13/2026 4:11:51 PM  Dockerfile.multistage
+-a--- 638     7/13/2026 4:11:51 PM  Dockerfile.nanogridata
+-a--- 505     7/13/2026 4:11:51 PM  Dockerfile.neurosonix
+-a--- 426     7/13/2026 4:11:51 PM  Dockerfile.ng-gateway
+-a--- 673     7/13/2026 4:11:51 PM  Dockerfile.ocean
+-a--- 984     7/13/2026 4:11:51 PM  Dockerfile.ocean-integrated
+-a--- 646     7/13/2026 4:11:51 PM  Dockerfile.ollama-multi
+-a--- 1081    7/13/2026 4:11:51 PM  Dockerfile.orchestra
+-a--- 243     7/13/2026 4:11:51 PM  Dockerfile.orchestrator
+-a--- 16285   7/13/2026 4:11:51 PM  Dockerfile.personas
+-a--- 1178    7/13/2026 4:11:51 PM  Dockerfile.public
+-a--- 668     7/13/2026 4:11:51 PM  Dockerfile.reporting
+-a--- 593     7/13/2026 4:11:51 PM  Dockerfile.reporting-wrapper
+-a--- 9384    7/13/2026 4:11:51 PM  Dockerfile.saas
+-a--- 488     7/13/2026 4:11:51 PM  Dockerfile.saas-api
+-a--- 527     7/13/2026 4:11:51 PM  Dockerfile.shopping-therapy
+-a--- 133     7/13/2026 4:11:51 PM  Dockerfile.simple
+-a--- 589     7/13/2026 4:11:51 PM  Dockerfile.usage-analytics
+-a--- 415     7/13/2026 4:11:51 PM  Dockerfile.userdata
+-a--- 972     7/13/2026 4:11:51 PM  Dockerfile.web
+-a--- 434     7/13/2026 4:11:51 PM  Dockerfile.web-clean
+-a--- 339     7/13/2026 4:11:51 PM  Dockerfile.worker
+-a--- 9323    7/13/2026 4:11:51 PM  DOCS_INDEX.md
+-a--- 5447    7/13/2026 4:11:51 PM  DOCUMENTATION_INDEX.md
+-a--- 4642    7/13/2026 4:11:51 PM  DOCUMENTS_CREATED_TODAY.md
+-a--- 54382   7/13/2026 4:11:54 PM  eap_layer.py
+-a--- 2716    7/13/2026 4:11:54 PM  economy_api_server.py
+-a--- 7157    7/13/2026 4:11:54 PM  economy_dashboard.html
+-a--- 4646    12/26/2025 6:40:32 PM economy_layer.py
+-a--- 16407   7/13/2026 4:11:54 PM  eeg_metrics_fetcher.py
+-a--- 0       7/13/2026 4:11:54 PM  emri_i_filet.py
+-a--- 26926   7/13/2026 4:11:54 PM  enhanced_asi.py
+-a--- 7847    7/13/2026 4:11:51 PM  ENV_KEYS_SHQIP.md
+-a--- 1355    7/13/2026 4:11:51 PM  ENV_USAGE_STANDARD.md
+-a--- 1329    7/13/2026 4:11:51 PM  ENVIRONMENT_SETUP.md
+-a--- 79      7/13/2026 4:11:37 PM  erspcClisonix-cloud.venvScriptsActivate.ps1
+-a--- 17218   7/13/2026 4:11:54 PM  excel_infinite_generator.py
+-a--- 11953   7/13/2026 4:11:54 PM  excel_xlwings_automation.py
+-a--- 8976    7/13/2026 7:11:44 PM  EXECUTION_ROADMAP_MAY4.md
+-a--- 16556   7/13/2026 4:11:51 PM  EXECUTION_ROADMAP.md
+-a--- 10586   7/13/2026 4:11:51 PM  EXECUTIVE_SUMMARY_FOR_LEDJAN.md
+-a--- 3627    7/13/2026 4:11:54 PM  export_response.txt
+-a--- 7073    12/26/2025 6:40:31 PM EXPORTERS_ADDED.md
+-a--- 4604    12/26/2025 6:40:32 PM favicon_fixer.py
+-a--- 2646    7/13/2026 4:11:51 PM  FEEDBACK_SESSION.md
+-a--- 5738    7/13/2026 4:11:51 PM  FINAL_COMPLETION_SUMMARY.md
+-a--- 2505    7/13/2026 4:11:51 PM  FINAL_STEP_JSON_KEY.md
+-a--- 3878    7/13/2026 4:11:54 PM  final_validation.py
+-a--- 12379   12/26/2025 6:40:31 PM FINAL-CHECKLIST.md
+-a--- 4095    7/13/2026 4:11:51 PM  FIREBASE_KEY_SETUP_QUICK.md
+-a--- 4616    7/13/2026 4:11:51 PM  FIRST_CLASS_EXECUTION_PLAN.md
+-a--- 27825   7/13/2026 4:11:51 PM  FITNESS_MODULE_GUIDE.md
+-a--- 15523   12/26/2025 6:40:31 PM FITNESS_MODULE_IMPLEMENTATION_SUMMARY.md
+-a--- 15736   12/26/2025 6:40:31 PM FITNESS_MODULE_INDEX.md
+-a--- 9267    12/26/2025 6:40:31 PM FITNESS_MODULE_QUICK_REFERENCE.md
+-a--- 20113   12/26/2025 6:40:31 PM FITNESS_MODULE_TESTING_GUIDE.md
+-a--- 1204    7/13/2026 4:11:54 PM  fix_cards.sh
+-a--- 1045    7/13/2026 4:11:54 PM  fix_unified_health.py
+-a--- 6708    12/26/2025 8:33:12 PM fix-ipv6-server.sh
+-a--- 1755    7/13/2026 4:11:54 PM  fix-lab-ports.py
+-a--- 3257    12/26/2025 6:40:31 PM FIXES_APPLIED.md
+-a--- 12223   7/13/2026 4:11:51 PM  FLOATING_IP_GUIDE.md
+-a--- 12030   7/13/2026 4:11:51 PM  GAPS_SUMMARY_MARCH_2026.md
+-a--- 27492   7/13/2026 4:11:54 PM  generate_master_table.py
+-a--- 14436   12/26/2025 6:40:32 PM generate_observability_docs.py
+-a--- 5731    12/26/2025 6:40:32 PM generate_test_traces.py
+-a--- 4776    7/13/2026 4:11:51 PM  GITHUB_SECRETS_GUIDE.md
+-a--- 2244    7/13/2026 4:11:51 PM  GITHUB_SECRETS_SETUP.md
+-a--- 6328    7/13/2026 4:11:51 PM  GOOGLE_FIRESTORE_SETUP.md
+-a--- 6876    7/13/2026 4:11:51 PM  GRAFANA_AI_AGENTS_DASHBOARD.json
+-a--- 4839    12/26/2025 6:40:31 PM GRAFANA_SETUP_GUIDE.md
+-a--- 6676    12/26/2025 6:40:32 PM grafana-asi-trinity-dashboard.json
+-a--- 236     12/26/2025 6:40:32 PM grafana-dashboards.yaml
+-a--- 4532    7/13/2026 4:11:54 PM  health_monitor_service.py
+-a--- 0       7/13/2026 4:11:54 PM  heavy_query.txt
+-a--- 1047    7/13/2026 4:11:51 PM  HETZNER_DEPLOY_QUICK.txt
+-a--- 15345   7/13/2026 4:11:51 PM  HETZNER_DEPLOY_v2.ps1
+-a--- 0       7/13/2026 4:11:51 PM  HETZNER_DEPLOY_v2.sh
+-a--- 2878    7/13/2026 4:11:51 PM  HETZNER_DEPLOYMENT_GUIDE.md
+-a--- 6558    7/13/2026 4:11:51 PM  HETZNER_DEPLOYMENT.md
+-a--- 3808    7/13/2026 4:11:51 PM  HETZNER_SAFE_DEPLOY.sh
+-a--- 7932    7/13/2026 4:11:51 PM  HETZNER_SSH_INDEX.md
+-a--- 2477    7/13/2026 4:11:51 PM  HETZNER_SSH_QUICK_REF.md
+-a--- 9198    7/13/2026 7:11:34 PM  HETZNER_SSH_SETUP.md
+-a--- 7675    7/13/2026 4:11:51 PM  HETZNER_SSH_TROUBLESHOOTING.md
+-a--- 1964    7/13/2026 7:11:44 PM  HETZNER_SUPPORT_TEMPLATE.md
+-a--- 3291556 7/13/2026 4:11:51 PM  How EEG Brain-Computer Interfaces WorkTEMP_MPY_wvf_snd.mp4
+-a--- 2406    7/13/2026 4:11:51 PM  HOW_TO_USE.md
+-a--- 13674   7/13/2026 4:11:51 PM  HYBRID_BIOMETRIC_COMPLETE.md
+-a--- 14930   7/13/2026 4:11:51 PM  HYBRID_BIOMETRIC_DOCUMENTATION.md
+-a--- 13572   7/13/2026 4:11:54 PM  hybrid_protocol_pipeline.py
+-a--- 23585   7/13/2026 4:11:51 PM  I18N_IMPLEMENTATION_GUIDE.md
+-a--- 2371    7/13/2026 4:11:54 PM  identity_loader.py
+-a--- 14024   7/13/2026 4:11:51 PM  IMPLEMENTATION_SUMMARY.md
+-a--- 5559    7/13/2026 4:11:54 PM  index.html
+-a--- 11680   12/26/2025 6:40:31 PM INDEX.md
+-a--- 16036   12/26/2025 6:40:31 PM INFRASTRUCTURE_COMPLETE_REPORT.md
+-a--- 2051    12/26/2025 6:40:32 PM init_industrial.ps1
+-a--- 2933    7/13/2026 4:11:54 PM  install_packages.py
+-a--- 0       12/26/2025 6:40:31 PM INTEGRATION_COMPLETE_REPORT.md
+-a--- 10608   7/13/2026 4:11:51 PM  INTEGRATION_GUIDE_AI_AGENTS.md
+-a--- 9243    7/13/2026 4:11:51 PM  INTELLIGENCE_SYSTEM_DOCS.md
+-a--- 5666    12/26/2025 6:40:31 PM INVESTOR_DEMO_GUIDE.md
+-a--- 6129    12/26/2025 6:40:31 PM INVESTOR_PITCH.md
+-a--- 30707   7/13/2026 4:11:54 PM  jona_neural_api.py
+-a--- 11379   7/13/2026 4:11:51 PM  JONA_RATE_LIMIT_FIX.md
+-a--- 3559    7/13/2026 4:11:51 PM  JONA_RATE_LIMIT_QUICK_REF.md
+-a--- 9121    7/13/2026 4:11:51 PM  JONA_RATE_LIMIT_README.md
+-a--- 10387   7/13/2026 4:11:51 PM  JONA_RATE_LIMIT_STATUS.md
+-a--- 4280    7/13/2026 4:11:54 PM  jona_server.py
+-a--- 11236   12/26/2025 6:40:32 PM jona_service_7777.py
+-a--- 1896    7/13/2026 4:11:51 PM  KLOUD_CLISONIX_README.md
+-a--- 13229   7/13/2026 4:11:51 PM  KUBERNETES_DEPLOYMENT_GUIDE.md
+-a--- 6569    7/13/2026 4:11:51 PM  LABS_AND_ENGINES_REFERENCE.md
+-a--- 7532    7/13/2026 4:11:54 PM  launch_5_services.ps1
+-a--- 6027    7/13/2026 4:11:54 PM  launch_dual_session.py
+-a--- 3065    7/13/2026 4:11:54 PM  launch-all-services.ps1
+-a--- 13171   7/13/2026 4:11:54 PM  launch-all-with-slack.ps1
+-a--- 6087    7/13/2026 4:11:54 PM  launch-megalayer.ps1
+-a--- 11833   7/13/2026 4:11:54 PM  liam_core.py
+-a--- 13878   7/13/2026 4:11:54 PM  liam_server.py
+-a--- 2063    7/13/2026 4:11:51 PM  LICENSE
+-a--- 2039    7/13/2026 4:11:54 PM  list_stripe_prices.py
+-a--- 10396   7/13/2026 4:11:54 PM  live_excel_dashboard.py
+-a--- 1748    12/26/2025 6:40:32 PM load_balancer_launcher.py
+-a--- 13318   7/13/2026 4:11:51 PM  LOCALHOST_STARTUP_GUIDE.txt
+-a--- 6601    12/26/2025 6:40:32 PM localization.py
+-a--- 886     7/13/2026 4:11:54 PM  loki-config.yaml
+-a--- 116477  7/13/2026 4:11:54 PM  main.py.backup_root
+-a--- 424     7/13/2026 4:11:51 PM  Makefile
+-a--- 12108   12/26/2025 6:40:31 PM MANIFEST.md
+-a--- 4886    7/13/2026 4:11:51 PM  MANUAL_STARTUP_POWERSHELL.md
+-a--- 578     7/13/2026 4:11:54 PM  marketplace_api.py
+-a--- 21663   7/13/2026 4:11:51 PM  MASTER-LAUNCH-FULL.ps1
+-a--- 33649   7/13/2026 4:11:51 PM  MASTER-LAUNCH.ps1
+-a--- 9855    12/26/2025 6:40:31 PM MASTER-LAUNCHER-GUIDE.md
+-a--- 6703    12/26/2025 6:40:31 PM MASTER-LAUNCHER-STATUS.md
+-a--- 2330    12/27/2025 8:47:35 AM master.py
+-a--- 19654   7/13/2026 4:11:54 PM  matia_core.py
+-a--- 8862    7/13/2026 4:11:54 PM  matia_service.py
+-a--- 10554   7/13/2026 4:11:51 PM  MEDIA_GENERATION_DEPLOYMENT_GUIDE.md
+-a--- 4343    12/26/2025 6:40:32 PM mesh_cluster_startup.py
+-a--- 4505    12/26/2025 6:40:32 PM mesh_hq_receiver.py
+-a--- 1013    12/26/2025 6:40:32 PM metrics_monitoring.md
+-a--- 10531   7/13/2026 4:11:54 PM  metrics_realtime.py
+-a--- 15946   7/13/2026 4:11:51 PM  MICROSERVICES_ARCHITECTURE.md
+-a--- 5307    7/13/2026 4:11:51 PM  MISSING_API_KEYS_REPORT.md
+-a--- 13501   7/13/2026 4:11:54 PM  model_governance.py
+-a--- 6689    7/13/2026 4:11:51 PM  MONETIZATION_30DAY_PLAN.md
+-a--- 12777   7/13/2026 4:11:51 PM  MONETIZATION_PHASE_1_COMPLETE.md
+-a--- 10089   7/13/2026 4:11:51 PM  MONETIZATION_SETUP_GUIDE.md
+-a--- 3569    7/13/2026 4:11:54 PM  monitor.sh
+-a--- 11996   7/13/2026 4:11:51 PM  MONITORING_SETUP.md
+-a--- 8514    7/13/2026 4:11:54 PM  monitoring_system_config.py
+-a--- 6811    7/13/2026 4:11:54 PM  multi_tenant_api.py
+-a--- 596     7/13/2026 4:11:54 PM  multi_tenant_manager.py
+-a--- 8817    7/13/2026 4:11:51 PM  MUSIC_STUDIO_README.md
+-a--- 16065   12/26/2025 6:40:31 PM N8N_WORKFLOWS.json
+-a--- 4492    7/13/2026 4:11:51 PM  NANOGRID_BALANCER_MESH_123_SPEC.md
+-a--- 10135   7/13/2026 4:11:54 PM  nanogridata_config.h
+-a--- 11224   7/13/2026 4:11:51 PM  NANOGRIDATA_DEPLOYMENT_GUIDE.md
+-a--- 13616   7/13/2026 4:11:54 PM  nanogridata_gateway.js
+-a--- 10745   7/13/2026 4:11:54 PM  nanogridata_gateway.ts
+-a--- 10420   7/13/2026 4:11:51 PM  NANOGRIDATA_IMPLEMENTATION_SUMMARY.md
+-a--- 11880   7/13/2026 4:11:51 PM  NANOGRIDATA_INTEGRATION_COMPLETE.md
+-a--- 14340   7/13/2026 4:11:51 PM  NANOGRIDATA_PRODUCTION_GUIDE.md
+-a--- 15911   7/13/2026 4:11:54 PM  nanogridata_protocol_v1.c
+-a--- 26992   7/13/2026 4:11:54 PM  nanogridata_protocol_v1.py
+-a--- 23483   7/13/2026 4:11:54 PM  nanogridata_protocol_v1.ts
+-a--- 21189   7/13/2026 4:11:54 PM  nanogridata_secure_decoder.ts
+-a--- 19669   7/13/2026 4:11:51 PM  NANOGRIDATA_SYSTEM_ARCHITECTURE.md
+-a--- 32469   7/13/2026 4:11:54 PM  neurosonix_industrial_api.py
+-a--- 10659   7/13/2026 4:11:51 PM  NEWSROOM_90DAY_ROADMAP.md
+-a--- 9226    7/13/2026 4:11:51 PM  NEWSROOM_DEPLOYMENT.md
+-a--- 11038   7/13/2026 4:11:51 PM  NEXT_STEPS_AFTER_COMPLETION.md
+-a--- 257     7/13/2026 4:11:54 PM  next-env.d.ts
+-a--- 0       7/13/2026 4:11:54 PM  next.config.js
+-a--- 3488    12/26/2025 6:40:31 PM NEXTJS_WORKAROUND.md
+-a--- 5690    7/13/2026 4:11:54 PM  nginx.conf
+-a--- 35613   7/13/2026 4:11:54 PM  nginx.production.conf
+-a--- 6279    7/13/2026 4:11:51 PM  NO_FAKE_DATA_POLICY.md
+-a--- 1181    7/13/2026 4:11:54 PM  ocean_auto_deploy.sh
+-a--- 16041   7/13/2026 4:11:51 PM  OCEAN_CHAT_COMMANDS.txt
+-a--- 17293   7/13/2026 4:11:55 PM  ocean_core_adapter.ts
+-a--- 14509   7/13/2026 4:11:51 PM  OCEAN_CORE_v2_DEPLOYMENT_PACKAGE_SUMMARY.md
+-a--- 11668   7/13/2026 4:11:51 PM  OCEAN_CORE_v2_DEPLOYMENT_READY.md
+-a--- 9741    7/13/2026 4:11:51 PM  OCEAN_CORE_V2_DEPLOYMENT.py
+-a--- 25727   7/13/2026 4:11:51 PM  OCEAN_CORE_V2_FINAL_REPORT.py
+-a--- 9451    7/13/2026 4:11:51 PM  OCEAN_CORE_v2_HETZNER_GUIDE.md
+-a--- 14617   7/13/2026 4:11:51 PM  OCEAN_CORE_V2_READY.py
+-a--- 10391   7/13/2026 4:11:51 PM  OCEAN_CORE_V2_ULTRALIGHT.md
+-a--- 10767   7/13/2026 4:11:51 PM  OCEAN_MULTIMODAL_API.md
+-a--- 10112   7/13/2026 4:11:51 PM  OCEAN_MULTIMODAL_DEPLOYMENT.md
+-a--- 3730    7/13/2026 4:11:51 PM  OCEAN_MULTIMODAL_QUICKREF.md
+-a--- 13237   7/13/2026 4:11:51 PM  OCEAN_MULTIMODAL_SUMMARY.md
+-a--- 104385  7/13/2026 4:11:55 PM  ocean_nanogrid.py
+-a--- 1567    7/13/2026 4:11:55 PM  ocean_optimization_report.txt
+-a--- 8465    7/13/2026 4:11:55 PM  ocean_optimizer.py
+-a--- 123     8/18/2026 12:10:44 PM ocean_runtime_census.txt
+-a--- 2872    7/13/2026 4:11:51 PM  OCEAN_TIMEOUT_FIX.md
+-a--- 8194    7/13/2026 4:11:55 PM  ocean_training.py
+-a--- 10      7/13/2026 4:11:54 PM  ocean-core
+-a--- 6740    7/13/2026 4:11:54 PM  ocean-core-diagnostic.py
+-a--- 853     7/13/2026 4:11:54 PM  ocean-multimodal.compose.yml
+-a--- 30677   7/13/2026 4:11:55 PM  open_data_scalability_old.py
+-a--- 32102   7/13/2026 4:11:55 PM  open_data_scalability.py
+-a--- 9801    7/13/2026 4:11:51 PM  OPENAPI-COMPLETE-GUIDE.md
+-a--- 5857    12/26/2025 6:40:31 PM OPENAPI-FORMATS-GUIDE.md
+-a--- 28942   12/26/2025 6:40:32 PM openapi.cbor
+-a--- 74596   7/13/2026 4:11:55 PM  openapi.json
+-a--- 486145  7/13/2026 4:11:55 PM  openapi.unified.wwwmmm-ndb.json
+-a--- 54125   7/13/2026 4:11:55 PM  openapi.yaml
+-a--- 4148    12/26/2025 6:40:31 PM OPTIMIZATION_SUMMARY.md
+-a--- 3041    7/13/2026 4:11:55 PM  optimize_sql.sh
+-a--- 13342   7/13/2026 4:11:55 PM  orchestrate_discovery_tests.py
+-a--- 8705    7/13/2026 4:11:51 PM  ORCHESTRATOR_ANALYSIS.md
+-a--- 676776  7/13/2026 4:14:14 PM  package-lock.json
+-a--- 4078    7/13/2026 5:46:29 PM  package.json
+-a--- 7874    7/13/2026 4:11:55 PM  payment_gateway_config.py
+-a--- 3600    7/13/2026 4:11:51 PM  PAYMENT_INCIDENT_FEB10.md
+-a--- 39574   7/13/2026 4:11:51 PM  PAYMENT_PROCESSOR_GUIDE.md
+-a--- 818     7/13/2026 4:11:55 PM  personas_api.py
+-a--- 13381   7/13/2026 4:11:55 PM  pg_pool_tuner.py
+-a--- 5718    7/13/2026 4:11:55 PM  pg_pooling_tuning.sh
+-a--- 11034   7/13/2026 4:11:51 PM  PHASE_1_DEPLOYMENT_SUMMARY.md
+-a--- 19282   7/13/2026 4:11:51 PM  PHASE2_COMPLETION_SUMMARY.md
+-a--- 17650   7/13/2026 4:11:51 PM  PHASE2_DELIVERABLES_INDEX.md
+-a--- 2197    7/13/2026 4:11:55 PM  phone-monitor.html
+-a--- 8722    12/26/2025 6:40:31 PM POST_DEPLOYMENT_TODOS.md
+-a--- 9927    7/13/2026 4:11:51 PM  POSTMAN_AI_AGENTS_COLLECTION.json
+-a--- 6720    12/26/2025 6:40:32 PM postman_collection_auth.json
+-a--- 4670    12/26/2025 6:40:31 PM POSTMAN_SETUP_COMPLETE.md
+-a--- 3959    7/13/2026 4:11:37 PM  POSTMAN_SETUP_GUIDE.md
+-a--- 19069   12/26/2025 6:40:31 PM POSTMAN_TESTING_CYCLE.md
+-a--- 7642    7/13/2026 4:11:51 PM  PRODUCTION_ADVANCEMENT_PLAN.md
+-a--- 17055   7/13/2026 4:11:55 PM  production_autolearning_connector.py
+-a--- 7742    7/13/2026 7:11:44 PM  PRODUCTION_DEPLOYMENT_CHECKLIST.md
+-a--- 10405   7/13/2026 7:11:44 PM  PRODUCTION_DEPLOYMENT_GUIDE.md
+-a--- 19661   7/13/2026 4:11:55 PM  production_ready_template.py
+-a--- 13898   7/13/2026 4:11:51 PM  PRODUCTION_SERVICES.md
+-a--- 10132   7/13/2026 4:11:55 PM  production-readiness-audit.ps1
+-a--- 15285   7/13/2026 4:11:51 PM  PROJECT_STATUS_REPORT.md
+-a--- 8601815 7/13/2026 4:11:55 PM  project-tree.txt
+-a--- 2419    7/13/2026 4:11:55 PM  prometheus-ai-agents.yml
+-a--- 2087    7/13/2026 4:11:55 PM  prometheus.yml
+-a--- 5064    7/13/2026 4:11:55 PM  prompts.py
+-a--- 24135   7/13/2026 4:11:51 PM  Protocol_Kitchen_Sovereign_System.postman_collection.json
+-a--- 2065    7/13/2026 4:11:51 PM  PUBLISH_DOCS.md
+-a--- 12941   7/13/2026 4:11:55 PM  publish_to_blog.py
+-a--- 8750    7/13/2026 4:11:51 PM  PUBLISHING_SYSTEM_SUMMARY.md
+-a--- 3798    7/13/2026 4:11:55 PM  pyproject.toml
+-a--- 424     7/13/2026 4:11:55 PM  pyrightconfig.json
+-a--- 11056   7/13/2026 4:11:51 PM  QUALITY_ASSURANCE_SYSTEM.md
+-a--- 12574   7/13/2026 4:11:55 PM  quality_gate.py
+-a--- 6442    7/13/2026 4:11:51 PM  QUICK_DEPLOY.md
+-a--- 11197   7/13/2026 4:11:51 PM  QUICK_REFERENCE.md
+-a--- 5447    7/13/2026 4:11:51 PM  QUICK_START_SECURITY.md
+-a--- 7577    7/13/2026 4:11:51 PM  QUICK_START_TESTING.md
+-a--- 2698    7/13/2026 4:11:51 PM  QUICK_START.md
+-a--- 2623    12/26/2025 6:40:31 PM QUICK-START.md
+-a--- 9731    12/26/2025 6:40:31 PM QUICKSTART.md
+-a--- 5920    7/13/2026 4:11:51 PM  README_CRITICAL_GAPS.md
+-a--- 7590    7/13/2026 4:11:51 PM  README_POSTMAN_SETUP.md
+-a--- 11566   12/26/2025 6:40:31 PM README-DELIVERY.md
+-a--- 10895   7/13/2026 4:11:51 PM  README.md
+-a--- 9771    7/13/2026 4:11:51 PM  READY_TO_TEST.md
+-a--- 10306   12/26/2025 6:40:31 PM REAL_DATA_IMPLEMENTATION_COMPLETE.md
+-a--- 10815   7/13/2026 4:11:51 PM  REAL_vs_FAKE_KEYS.md
+-a--- 6082560 7/13/2026 4:11:55 PM  redis.msi
+-a--- 177716  7/13/2026 4:11:55 PM  registry_export.json
+-a--- 2591    7/13/2026 4:11:51 PM  RELEASE_GATE_CHECKLIST.md
+-a--- 2837    7/13/2026 4:11:56 PM  remove_emoji.py
+-a--- 5411    7/13/2026 4:11:51 PM  REPO_AUDIT.md
+-a--- 4265    7/13/2026 4:11:56 PM  reporting_proxy_append.py
+-a--- 1375    7/13/2026 4:11:56 PM  reporting_service.py
+-a--- 232     7/13/2026 4:11:56 PM  requirements-autolearning.txt
+-a--- 748     7/13/2026 4:11:56 PM  requirements-dev.txt
+-a--- 501     7/13/2026 4:11:56 PM  requirements-ocean.txt
+-a--- 107     7/13/2026 4:11:56 PM  requirements-test.txt
+-a--- 1548    7/13/2026 4:11:56 PM  requirements.txt
+-a--- 10666   12/26/2025 6:40:31 PM RESEARCH_CYCLE_INTEGRATION_SQ.md
+-a--- 10791   12/26/2025 6:40:31 PM RESEARCH_CYCLE_INTEGRATION.md
+-a--- 16913   12/26/2025 6:40:31 PM RESEARCH_ECOSYSTEM_IMPLEMENTATION_SUMMARY.md
+-a--- 22675   12/26/2025 6:40:31 PM RESEARCH_ECOSYSTEM_INDEX.md
+-a--- 11443   12/26/2025 6:40:31 PM RESEARCH_ECOSYSTEM_QUICK_START.md
+-a--- 15620   12/26/2025 6:40:31 PM RESEARCH_ECOSYSTEM_README.md
+-a--- 144     7/13/2026 4:11:56 PM  response.txt
+-a--- 0       12/26/2025 6:40:32 PM restore_neurosonix.ps1
+-a--- 5309    7/13/2026 4:11:56 PM  reviewer_identity_registry.py
+-a--- 11158   7/13/2026 4:11:51 PM  ROLLBACK_COMMANDS.md
+-a--- 479     7/13/2026 4:11:56 PM  route_audit.txt
+-a--- 2394    7/13/2026 4:11:56 PM  run_clx_hotguard_cli.ps1
+-a--- 2679    7/13/2026 4:11:56 PM  run_clx_hotguard.py
+-a--- 676     12/26/2025 6:40:32 PM run_pulse_balancer.py
+-a--- 4683    7/13/2026 4:11:56 PM  run_scalability_old.py
+-a--- 4395    7/13/2026 4:11:56 PM  run_scalability.py
+-a--- 5939    7/13/2026 4:11:56 PM  saas_api.py
+-a--- 27200   7/13/2026 4:11:56 PM  saas_services_orchestrator_v3.py
+-a--- 15476   12/26/2025 6:40:32 PM saas_services_orchestrator.py
+-a--- 71889   12/26/2025 6:40:32 PM scan-results.json
+-a--- 5392    7/13/2026 4:11:56 PM  script_all.ps1
+-a--- 10252   12/26/2025 6:40:31 PM SDK-README.md
+-a--- 6651    7/13/2026 4:11:51 PM  SECURITY_ACTIVATION_COMPLETE.md
+-a--- 13903   7/13/2026 4:11:51 PM  SECURITY_ARCHITECTURE_PLAN.md
+-a--- 7371    7/13/2026 4:11:51 PM  SECURITY_AUDIT_KEYS_REVIEW.md
+-a--- 2841    7/13/2026 4:11:51 PM  SECURITY_BEST_PRACTICES.md
+-a--- 6261    7/13/2026 4:11:51 PM  SECURITY_FIXES_SUMMARY.md
+-a--- 10001   12/26/2025 6:40:31 PM SECURITY_IMPROVEMENTS.md
+-a--- 8341    12/26/2025 6:40:31 PM SECURITY_PRODUCTION.md
+-a--- 19064   7/13/2026 4:11:51 PM  SECURITY.md
+-a--- 8401    7/13/2026 4:11:51 PM  SEO_IMPLEMENTATION_SUMMARY.md
+-a--- 13883   7/13/2026 4:11:51 PM  SERVICE_STATUS_REPORT.md
+-a--- 7061    7/13/2026 4:11:51 PM  SERVICES_MANIFEST_76.md
+-a--- 17638   7/13/2026 4:11:56 PM  session_10min_cycles.py
+-a--- 20093   7/13/2026 4:11:56 PM  session_10min_full.py
+-a--- 11925   7/13/2026 4:11:56 PM  session_10min_node.js
+-a--- 0       7/13/2026 4:11:51 PM  SESSION_2026-01-26.md
+-a--- 4554    7/13/2026 4:11:56 PM  session_node_node_mkh3byj2.json
+-a--- 715     12/26/2025 6:40:32 PM setup_neurosonix.ps1
+-a--- 13634   7/3/2026 2:33:35 PM   setup-floating-ip.sh
+-a--- 13842   7/13/2026 4:11:56 PM  setup-hetzner-ssh.ps1
+-a--- 11063   7/13/2026 4:11:56 PM  setup-hetzner-ssh.sh
+-a--- 3198    7/13/2026 4:11:56 PM  setup-production.sh
+-a--- 25937   7/13/2026 4:11:56 PM  shopping_therapy_core.py
+-a--- 8243    7/13/2026 4:11:56 PM  shopping_therapy_service.py
+-a--- 5531    7/13/2026 4:11:56 PM  signal_fabric.py
+-a--- 17676   7/13/2026 4:11:56 PM  signal_processing_core.py
+-a--- 13306   12/26/2025 6:40:31 PM SLACK_DEPLOYMENT_COMPLETE.md
+-a--- 13837   12/26/2025 6:40:31 PM SLACK_INDEX.md
+-a--- 11616   12/26/2025 6:40:31 PM SLACK_INTEGRATION_GUIDE.md
+-a--- 9837    12/26/2025 6:40:31 PM SLACK_INTEGRATION_READY.md
+-a--- 19638   7/13/2026 4:11:56 PM  slack_integration_service.py
+-a--- 23560   7/13/2026 4:11:56 PM  slo_sli_alerter.py
+-a--- 28343   7/13/2026 4:11:56 PM  slo_sli_budget.py
+-a--- 17389   7/13/2026 4:11:56 PM  slo_sli_collector.py
+-a--- 14891   7/13/2026 4:11:56 PM  slo_sli_cycle.py
+-a--- 19112   7/13/2026 4:11:56 PM  slo_sli_gate.py
+-a--- 26000   7/13/2026 4:11:56 PM  slo_sli_remediation.py
+-a--- 28600   7/13/2026 4:11:56 PM  slo_sli_tuning.py
+-a--- 15743   7/13/2026 4:11:56 PM  slo_tuning_history.json
+-a--- 8816    7/13/2026 4:11:51 PM  SPECIALIZED_CHAT_BEFORE_AFTER.md
+-a--- 8359    7/13/2026 4:11:51 PM  SPECIALIZED_CHAT_UI_GUIDE.md
+-a--- 12919   7/13/2026 4:11:51 PM  SPONTANEOUS_CONVERSATION_REVIEW.md
+-a--- 13048   7/13/2026 4:11:56 PM  sql_optimizer.py
+-a--- 4781    7/13/2026 4:11:51 PM  SSH_DEPLOYMENT_GUIDE.md
+-a--- 1932    7/13/2026 4:11:56 PM  ssh_hetzner_new.txt
+-a--- 10920   7/13/2026 4:11:51 PM  STABILIZATION_COMPLETE.md
+-a--- 10091   7/13/2026 4:11:51 PM  START_ALL_SERVICES.ps1
+-a--- 2417    7/13/2026 4:11:51 PM  START_ALL.ps1
+-a--- 299     7/13/2026 4:11:51 PM  START_BACKEND.ps1
+-a--- 23387   7/13/2026 4:11:56 PM  start_cycle_production.py
+-a--- 5073    7/13/2026 4:11:51 PM  START_EXTERNAL.ps1
+-a--- 226     7/13/2026 4:11:51 PM  START_FRONTEND.ps1
+-a--- 5085    12/26/2025 6:40:31 PM START_GUIDE.md
+-a--- 11966   7/13/2026 4:11:51 PM  START_HERE_DEPLOYMENT_GUIDE.md
+-a--- 7073    7/13/2026 4:11:56 PM  start_HYBRID_FULL.ps1
+-a--- 674     7/13/2026 4:11:56 PM  start_neurosonix.py
+-a--- 0       7/13/2026 4:11:51 PM  START_OCEAN.ps1
+-a--- 5821    7/13/2026 4:11:56 PM  start_production_services.ps1
+-a--- 7344    7/13/2026 4:11:56 PM  start_services_one_by_one.py
+-a--- 33389   7/13/2026 4:11:56 PM  start-all.ps1
+-a--- 1422    7/13/2026 4:11:56 PM  start-dev.ps1
+-a--- 6498    7/13/2026 4:11:56 PM  start-docker-75.ps1
+-a--- 9886    7/13/2026 4:11:51 PM  START-MICROSERVICES.ps1
+-a--- 3256    7/13/2026 4:11:56 PM  start-quick.ps1
+-a--- 14886   12/26/2025 6:40:31 PM START.ps1
+-a--- 13587   12/26/2025 6:40:31 PM STARTUP_COMPLETE.md
+-a--- 19562   7/13/2026 4:11:51 PM  STARTUP_GUIDE.md
+-a--- 15158   12/26/2025 6:40:31 PM STRATEGIC_ASSESSMENT_AL.md
+-a--- 160     7/13/2026 4:11:56 PM  stream_test.txt
+-a--- 3891    7/13/2026 4:11:56 PM  switch-nginx.sh
+-a--- 5587    12/26/2025 6:40:31 PM SYSTEM_STATUS.md
+-a--- 546     7/13/2026 4:11:56 PM  telegram_notify.py
+-a--- 264     7/13/2026 4:11:56 PM  temp_package.json
+-a--- 22320   7/13/2026 4:11:56 PM  temp_page.tsx
+-a--- 25977   7/13/2026 4:11:56 PM  temp_reporting.tsx
+-a--- 511     7/13/2026 4:11:56 PM  tempo.yaml
+-a--- 435     7/13/2026 4:11:56 PM  tempo.yml
+-a--- 9076    12/26/2025 6:40:31 PM TEST_A_INSTRUCTIONS.md
+-a--- 5747    7/13/2026 4:11:56 PM  test_agents_module.py
+-a--- 30384   7/13/2026 4:11:56 PM  test_audio.mp3
+-a--- 426     7/13/2026 4:11:56 PM  test_core_arch.py
+-a--- 4117    7/13/2026 4:11:56 PM  test_elastic_timeout.py
+-a--- 194     7/13/2026 4:11:56 PM  test_export.json
+-a--- 16763   7/13/2026 4:11:56 PM  test_firestore_discovery_e2e.py
+-a--- 15881   7/13/2026 4:11:56 PM  test_hybrid_protocol_pipeline.py
+-a--- 28472   7/13/2026 4:11:56 PM  test_hybrid_system.py
+-a--- 12506   7/13/2026 4:11:56 PM  test_image.png
+-a--- 2959    7/13/2026 4:11:56 PM  test_instant_stream.py
+-a--- 2292    7/13/2026 4:11:56 PM  test_language_fix.py
+-a--- 5950    7/13/2026 4:11:56 PM  test_live_learning.py
+-a--- 635     7/13/2026 4:11:56 PM  test_mega.py
+-a--- 5326    7/13/2026 4:11:56 PM  test_megalayer_integration.py
+-a--- 2053    7/13/2026 4:11:56 PM  test_multilang_fix.py
+-a--- 7827    7/13/2026 4:11:56 PM  test_multinode_cluster.py
+-a--- 3563    7/13/2026 4:11:56 PM  test_neurosonix_api.py
+-a--- 831     7/13/2026 4:11:56 PM  test_ocean_core.py
+-a--- 1815    7/13/2026 4:11:56 PM  test_ocean_live.sh
+-a--- 733     7/13/2026 4:11:56 PM  test_ocean.py
+-a--- 11313   12/26/2025 6:40:32 PM test_orchestrator_v3.py
+-a--- 5949    12/26/2025 6:40:32 PM test_orchestrator.py
+-a--- 1093    7/13/2026 4:11:56 PM  test_providers_full.py
+-a--- 10749   7/13/2026 4:11:51 PM  TEST_RESULTS_TEMPLATE.md
+-a--- 2011    7/13/2026 4:11:56 PM  test_runtime_full.py
+-a--- 216     7/13/2026 4:11:56 PM  test_runtime_simple.py
+-a--- 9382    7/13/2026 4:11:56 PM  test_spontaneous_api.ps1
+-a--- 1530    7/13/2026 4:11:56 PM  test_youtube_api.py
+-a--- 5325    12/26/2025 6:40:32 PM test-ai-endpoints.ps1
+-a--- 4651    7/13/2026 4:11:56 PM  test-dns-ipv4.ps1
+-a--- 1583    7/13/2026 4:11:56 PM  test-localhost.ps1
+-a--- 9369    12/26/2025 6:40:32 PM test-monitoring.ps1
+-a--- 3352    7/13/2026 4:11:56 PM  test-stripe-one-time.ps1
+-a--- 11016   7/13/2026 4:11:51 PM  TESTING_GUIDE.md
+-a--- 318     7/13/2026 4:11:56 PM  tmp_check_linkedin_counts.py
+-a--- 581     7/13/2026 4:11:56 PM  tmp_clxi_smoke.py
+-a--- 1929    7/13/2026 4:11:56 PM  tmp_real_questions_test.py
+-a--- 597     7/13/2026 4:11:56 PM  tmp_reset_linkedin_queue.py
+-a--- 1912    7/13/2026 4:11:56 PM  tmp_route_audit_clean.ps1
+-a--- 1807    7/13/2026 4:11:56 PM  tmp_route_audit.ps1
+-a--- 1585    7/13/2026 4:11:51 PM  TODO.md
+-a--- 6631    12/27/2025 8:52:09 AM tracing.py
+-a--- 20439   7/13/2026 4:11:56 PM  trinity_stack_integrator.py
+-a--- 6488    7/13/2026 4:11:56 PM  trinity_stack_report.json
+-a--- 640     7/15/2026 3:50:16 PM  tsconfig.json
+-a--- 10475   7/13/2026 4:11:51 PM  ULTRA_REPORTING_CONFIGURATION.md
+-a--- 19299   12/26/2025 6:40:31 PM ULTRA_REPORTING_GUIDE.md
+-a--- 1708    7/13/2026 4:11:56 PM  update_blerina_topics.py
+-a--- 1394    12/26/2025 6:40:33 PM usage_tracker.py
+-a--- 13641   7/13/2026 4:11:56 PM  validate_ocean_ready.py
+-a--- 3970    7/13/2026 4:11:56 PM  validate.sh
+-a--- 9316    7/13/2026 4:11:56 PM  vba_popup_module.bas
+-a--- 15699   12/26/2025 6:40:31 PM VERIFICATION_REPORT.md
+-a--- 743     7/13/2026 4:11:57 PM  verify_cbor.py
+-a--- 7947    7/13/2026 4:11:57 PM  verify_deployment_package.py
+-a--- 16638   7/13/2026 4:11:57 PM  verify_ocean_core_v2.py
+-a--- 1927    7/13/2026 4:11:56 PM  verify-localhost.ps1
+-a--- 5194    7/13/2026 4:11:57 PM  verify-platform.ps1
+-a--- 21977   7/13/2026 4:11:57 PM  video_generator_animated.py
+-a--- 52554   7/13/2026 4:11:57 PM  video_generator_blerina.py
+-a--- 14763   7/13/2026 4:11:51 PM  VISUAL_SUMMARY.md
+-a--- 1532    7/13/2026 4:11:57 PM  watchtower_guardian.py
+-a--- 9615    7/13/2026 4:11:51 PM  ZURICH_ENGINE_REFERENCE.md
+-a--- 7536    7/13/2026 4:11:51 PM  ZURICH_EXAMPLES.md
+-a--- 7169    7/13/2026 4:11:51 PM  ZURICH_UPSTREAM_FIX.md
+
+
+
+=== ALL DIRECTORIES ===

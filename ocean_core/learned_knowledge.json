@@ -1,0 +1,93 @@
+{
+  "knowledge": [
+    {
+      "knowledge_id": "know_734315584bfe",
+      "query": "What is consciousness?",
+      "query_hash": "993434e4d2d7adc80d25110a2a62ce1f",
+      "response": "Response to: What is consciousness?",
+      "sources": [
+        "test"
+      ],
+      "confidence": 0.85,
+      "times_used": 7,
+      "times_helpful": 0,
+      "times_not_helpful": 0,
+      "created_at": "2026-01-24T17:14:56.075633+00:00",
+      "updated_at": "2026-01-24T17:38:04.330174+00:00"
+    },
+    {
+      "knowledge_id": "know_e4e26f9c5dc0",
+      "query": "How many data sources do we have?",
+      "query_hash": "a5607aefca7f997892a2a2952707d0b8",
+      "response": "Response to: How many data sources do we have?",
+      "sources": [
+        "test"
+      ],
+      "confidence": 0.85,
+      "times_used": 7,
+      "times_helpful": 0,
+      "times_not_helpful": 0,
+      "created_at": "2026-01-24T17:14:56.076285+00:00",
+      "updated_at": "2026-01-24T17:38:04.330974+00:00"
+    },
+    {
+      "knowledge_id": "know_95069efac4ae",
+      "query": "What's the weather in Tirana?",
+      "query_hash": "9bab40c27d6b680e3f60daafee96f236",
+      "response": "Response to: What's the weather in Tirana?",
+      "sources": [
+        "test"
+      ],
+      "confidence": 0.85,
+      "times_used": 7,
+      "times_helpful": 0,
+      "times_not_helpful": 0,
+      "created_at": "2026-01-24T17:14:56.076921+00:00",
+      "updated_at": "2026-01-24T17:38:04.331727+00:00"
+    },
+    {
+      "knowledge_id": "know_e5b62f3c22d9",
+      "query": "Sa banore ka Shqiperia?",
+      "query_hash": "e840b76e29ad49c020027b1a93cf61ca",
+      "response": "Shqiperia ka rreth 2.8 milion banore sipas te dhenave te fundit.",
+      "sources": [
+        "census",
+        "instat"
+      ],
+      "confidence": 0.95,
+      "times_used": 5,
+      "times_helpful": 0,
+      "times_not_helpful": 0,
+      "created_at": "2026-01-26T16:40:56.272315+00:00",
+      "updated_at": "2026-01-26T16:41:03.727533+00:00"
+    },
+    {
+      "knowledge_id": "know_7b4dd6ea8a85",
+      "query": "Sa eshte 2+2?",
+      "query_hash": "a0f0dfc28d96933d13fb6a8119af0a78",
+      "response": "2+2 eshte 4",
+      "sources": [],
+      "confidence": 0.8,
+      "times_used": 1,
+      "times_helpful": 0,
+      "times_not_helpful": 0,
+      "created_at": "2026-01-26T17:03:42.984849+00:00",
+      "updated_at": "2026-01-26T17:03:42.984854+00:00"
+    },
+    {
+      "knowledge_id": "know_8d8e30fbc907",
+      "query": "Kush e krijoi Clisonix?",
+      "query_hash": "ec46d0f8cccd858fa4b45e6cd139cea3",
+      "response": "Clisonix u krijua nga Ledjan Koci, nje inxhinier software shqiptar.",
+      "sources": [],
+      "confidence": 0.8,
+      "times_used": 2,
+      "times_helpful": 0,
+      "times_not_helpful": 0,
+      "created_at": "2026-01-26T17:04:45.105357+00:00",
+      "updated_at": "2026-01-26T17:05:25.969089+00:00"
+    }
+  ],
+  "total_entries": 6,
+  "updated_at": "2026-01-26T17:05:25.969125+00:00"
+}

@@ -1,0 +1,42 @@
+services:
+  # CLX BRAIN Service Configuration
+  # Add this to docker-compose.yml
+
+  clx-brain:
+    image: clisonix/clx-brain:latest
+    build:
+      context: .
+      dockerfile: services/clx_brain/Dockerfile
+    container_name: clisonix-clx-brain
+    ports:
+      - "1001:1001"
+    environment:
+      - SERVICE_NAME=clx-brain
+      - SERVICE_PORT=1001
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - LOG_LEVEL=INFO
+      - BRAIN_MODE=cognitive_engine
+      - ENABLE_LEARNING=true
+      - ENABLE_ETHICS=true
+      - PLASTICITY_RATE=0.1
+      - ELASTICITY_TARGET=0.85
+    depends_on:
+      - redis
+    volumes:
+      - ./services/clx_brain:/app/clx_brain
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - clisonix-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:1001/brain/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    labels:
+      - "service.type=cognitive"
+      - "service.tier=brain"
+      - "monitoring=enabled"

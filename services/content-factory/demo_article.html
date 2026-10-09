@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="articleTitle">Article - Clisonix Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #0a0a1a;
+            --bg-secondary: #1a1a2e;
+            --bg-card: #16213e;
+            --accent: #00d4ff;
+            --accent-purple: #7c3aed;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --border: #2d3748;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+        header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+        }
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .back-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        .article-header {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--accent), var(--accent-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .meta {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .category-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .article-content h2 {
+            margin: 2rem 0 1rem;
+            color: var(--accent);
+        }
+        .article-content h3 {
+            margin: 1.5rem 0 0.5rem;
+            color: var(--text-primary);
+        }
+        .article-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        .article-content ul, .article-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        .article-content code {
+            background: var(--bg-card);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: var(--accent);
+        }
+        .article-content pre {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+        .demo-notice {
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid var(--accent-purple);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            color: var(--accent-purple);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="preview_blog.html" class="back-link">← Back to Blog</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="demo-notice">
+            📋 Demo Preview - This is a sample article generated for localhost testing
+        </div>
+
+        <article>
+            <div class="article-header">
+                <span class="category-tag" id="categoryTag">🧠 EEG</span>
+                <h1 id="mainTitle">Loading...</h1>
+                <div class="meta">
+                    <span id="dateSpan">📅 2025-01-15</span>
+                    <span id="authorSpan">✍️ Clisonix</span>
+                    <span>⏱️ 8 min read</span>
+                </div>
+            </div>
+
+            <div class="article-content" id="content">
+                <h2>Introduction</h2>
+                <p>This is a demo article generated for preview purposes. In the production version, this would contain the full article content fetched from the GitHub repository.</p>
+
+                <h2>Key Concepts</h2>
+                <p>The article explores advanced techniques and methodologies in the field, providing insights backed by scientific research and practical applications.</p>
+
+                <h3>Main Points</h3>
+                <ul>
+                    <li>Comprehensive analysis of current methodologies</li>
+                    <li>Integration with modern industrial systems</li>
+                    <li>Real-world applications and case studies</li>
+                    <li>Future trends and emerging technologies</li>
+                </ul>
+
+                <h2>Technical Implementation</h2>
+                <p>Implementation details would include code samples, architectural diagrams, and step-by-step guides for practitioners in the field.</p>
+
+                <pre><code>// Sample code snippet
+function analyzeSignal(data) {
+    const processed = preprocess(data);
+    const features = extractFeatures(processed);
+    return classify(features);
+}</code></pre>
+
+                <h2>Conclusion</h2>
+                <p>This demo showcases the article layout and styling. The actual articles on the live blog contain 4000-6000 words of detailed scientific and technical content.</p>
+
+                <p><strong>For full content, visit:</strong> <a href="https://ledjanahmati.github.io/clisonix-blog/" style="color: var(--accent);">https://ledjanahmati.github.io/clisonix-blog/</a></p>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // Get URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const title = params.get('title') || 'Demo Article';
+        const category = params.get('category') || 'ai';
+        const date = params.get('date') || '2025-01-15';
+        const author = params.get('author') || 'Clisonix';
+
+        // Update page content
+        document.getElementById('articleTitle').textContent = title + ' - Clisonix Blog';
+        document.getElementById('mainTitle').textContent = title;
+        document.getElementById('dateSpan').textContent = '📅 ' + date;
+        document.getElementById('authorSpan').textContent = '✍️ ' + author;
+
+        // Set category
+        const categoryIcons = {
+            'eeg': '🧠 EEG',
+            'audio': '🔊 Audio',
+            'ai': '🤖 AI',
+            'medical': '🏥 Medical',
+            'compliance': '📋 Compliance',
+            'industrial': '🏭 Industrial'
+        };
+        document.getElementById('categoryTag').textContent = categoryIcons[category] || '📄 General';
+    </script>
+</body>
+</html>

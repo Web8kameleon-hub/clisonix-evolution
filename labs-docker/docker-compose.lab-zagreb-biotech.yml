@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  zagreb-biotech-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-zagreb-biotech
+    environment:
+      LAB_ID: "Zagreb_Biotech"
+      LAB_TYPE: "Biotech"
+      LAB_NAME: "Zagreb Biotech Lab"
+      LAB_FUNCTION: "Biotechnology & Genetic Engineering"
+      API_KEY: "sekret-real"
+    ports:
+      - "8115:8100"
+    volumes:
+      - ../data/zagreb-biotech:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

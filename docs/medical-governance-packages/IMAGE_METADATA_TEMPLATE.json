@@ -1,0 +1,11 @@
+{
+  "image_id": "gen6-architecture-v1",
+  "package": "core-governance",
+  "source_type": "generated",
+  "source_url": "https://example.org/path/to/image.png",
+  "license_or_usage": "internal-use",
+  "generated_prompt": "GEN6-GEN9 architecture diagram in medical governance style",
+  "article_id": "optional-article-id",
+  "version": "1.0.0",
+  "updated_at": "2026-02-15T00:00:00Z"
+}

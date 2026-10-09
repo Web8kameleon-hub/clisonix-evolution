@@ -1,0 +1,397 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# DOCKERFILE.AGIEM - Artificial General Enhanced Intelligence Manager
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# AGIEM manages the AGI ecosystem and connects to:
+# - Scalable Managers
+# - Open Free Data Sources (5000+ sources from 200+ countries)
+# - Alba, Albi, Jona coordination
+# ═══════════════════════════════════════════════════════════════════════════════
+
+FROM python:3.13
+
+LABEL maintainer="Clisonix Cloud Team"
+LABEL description="AGIEM - AGI Ecosystem Manager"
+LABEL version="1.0.0"
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy AGIEM core
+COPY agiem_core.py ./
+COPY data_sources/ ./data_sources/
+
+# Create AGIEM service
+COPY <<EOF /app/agiem_service.py
+"""
+AGIEM SERVICE - Artificial General Enhanced Intelligence Manager
+Connects to scalable managers and open free data sources.
+"""
+
+import os
+import time
+import logging
+import asyncio
+from datetime import datetime, timezone
+from typing import Dict, Any, List, Optional
+from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("AGIEM")
+
+# Configuration
+AGIEM_PORT = int(os.getenv("AGIEM_PORT", "9300"))
+AGIEM_MODE = os.getenv("AGIEM_MODE", "production")
+
+# URLs of connected services
+ALBA_URL = os.getenv("ALBA_URL", "http://alba:5555")
+ALBI_URL = os.getenv("ALBI_URL", "http://albi:6666")
+JONA_URL = os.getenv("JONA_URL", "http://jona:7777")
+
+# Data source regions enabled
+DATA_SOURCES_ENABLED = os.getenv("DATA_SOURCES_ENABLED", "europe,americas,asia_china,india_south_asia,africa_middle_east,oceania").split(",")
+
+app = FastAPI(
+    title="AGIEM - AGI Ecosystem Manager",
+    description="Artificial General Enhanced Intelligence Manager",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json"
+)
+
+# API Version prefix
+API_V1 = "/api/v1"
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+# Data Sources Registry
+DATA_SOURCES = {
+    "europe": {
+        "sources": ["europe_sources", "eastern_europe_balkans_sources"],
+        "countries": 39,
+        "source_count": 1600,
+        "endpoint": "http://datasource-europe:9301"
+    },
+    "americas": {
+        "sources": ["americas_sources", "caribbean_central_america_sources"],
+        "countries": 44,
+        "source_count": 800,
+        "endpoint": "http://datasource-americas:9302"
+    },
+    "asia_china": {
+        "sources": ["asia_china_sources", "asia_oceania_global_sources"],
+        "countries": 15,
+        "source_count": 1400,
+        "endpoint": "http://datasource-asia-china:9303"
+    },
+    "india_south_asia": {
+        "sources": ["india_south_asia_sources"],
+        "countries": 8,
+        "source_count": 800,
+        "endpoint": "http://datasource-india:9304"
+    },
+    "africa_middle_east": {
+        "sources": ["africa_middle_east_sources"],
+        "countries": 60,
+        "source_count": 500,
+        "endpoint": "http://datasource-africa:9305"
+    },
+    "oceania_pacific": {
+        "sources": ["pacific_islands_sources", "asia_oceania_global_sources"],
+        "countries": 25,
+        "source_count": 300,
+        "endpoint": "http://datasource-oceania:9306"
+    },
+    "central_asia": {
+        "sources": ["central_asia_caucasus_sources"],
+        "countries": 8,
+        "source_count": 200,
+        "endpoint": "http://datasource-central-asia:9307"
+    }
+}
+
+# Scalable Managers
+SCALABLE_MANAGERS = {
+    "data_manager": {
+        "id": "mgr_data",
+        "function": "Data ingestion and preprocessing",
+        "status": "active",
+        "scaling_factor": 1.0
+    },
+    "learning_manager": {
+        "id": "mgr_learn",
+        "function": "Machine learning pipelines",
+        "status": "active",
+        "scaling_factor": 1.0
+    },
+    "coordination_manager": {
+        "id": "mgr_coord",
+        "function": "Service coordination",
+        "status": "active",
+        "scaling_factor": 1.0
+    },
+    "analytics_manager": {
+        "id": "mgr_analytics",
+        "function": "Real-time analytics",
+        "status": "active",
+        "scaling_factor": 1.0
+    },
+    "storage_manager": {
+        "id": "mgr_storage",
+        "function": "Distributed storage",
+        "status": "active",
+        "scaling_factor": 1.0
+    }
+}
+
+START_TIME = time.time()
+ecosystem_state = {
+    "alba_status": "unknown",
+    "albi_status": "unknown",
+    "jona_status": "unknown",
+    "data_pipeline_active": True,
+    "learning_active": True
+}
+task_queue: List[Dict[str, Any]] = []
+completed_tasks: List[Dict[str, Any]] = []
+
+
+class TaskRequest(BaseModel):
+    task_type: str
+    parameters: Dict[str, Any]
+    priority: str = "normal"
+    region: Optional[str] = None
+
+
+class ScalingRequest(BaseModel):
+    manager_id: str
+    scaling_factor: float
+    reason: str
+
+
+@app.get(f"{API_V1}/health")
+@app.get("/health")  # Docker healthcheck
+async def health_check():
+    return {
+        "status": "healthy",
+        "mode": AGIEM_MODE,
+        "data_sources_enabled": DATA_SOURCES_ENABLED,
+        "managers_active": sum(1 for m in SCALABLE_MANAGERS.values() if m["status"] == "active"),
+        "uptime_seconds": time.time() - START_TIME,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.get("/api/status")
+async def api_status_short():
+    return {
+        "service": "AGIEM",
+        "version": "1.0.0",
+        "status": "operational",
+        "mode": AGIEM_MODE,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.get(f"{API_V1}/spec")
+async def api_spec():
+    return app.openapi()
+
+
+@app.get(f"{API_V1}/status")
+async def get_status():
+    """Get comprehensive AGIEM status"""
+    total_sources = sum(ds["source_count"] for ds in DATA_SOURCES.values())
+    total_countries = sum(ds["countries"] for ds in DATA_SOURCES.values())
+    
+    return {
+        "status": "operational",
+        "mode": AGIEM_MODE,
+        "ecosystem": ecosystem_state,
+        "data_sources": {
+            "total_sources": total_sources,
+            "total_countries": total_countries,
+            "regions": list(DATA_SOURCES.keys()),
+            "enabled_regions": DATA_SOURCES_ENABLED
+        },
+        "managers": {
+            "total": len(SCALABLE_MANAGERS),
+            "active": sum(1 for m in SCALABLE_MANAGERS.values() if m["status"] == "active")
+        },
+        "tasks": {
+            "queued": len(task_queue),
+            "completed": len(completed_tasks)
+        },
+        "uptime_seconds": time.time() - START_TIME
+    }
+
+
+@app.get(f"{API_V1}/data-sources")
+async def list_data_sources():
+    """List all available data source regions"""
+    return {
+        "total_regions": len(DATA_SOURCES),
+        "enabled_regions": DATA_SOURCES_ENABLED,
+        "regions": DATA_SOURCES
+    }
+
+
+@app.get(f"{API_V1}/data-sources/{{region}}")
+async def get_data_source(region: str):
+    """Get specific data source region details"""
+    if region not in DATA_SOURCES:
+        raise HTTPException(status_code=404, detail=f"Region {region} not found")
+    return DATA_SOURCES[region]
+
+
+@app.get(f"{API_V1}/managers")
+async def list_managers():
+    """List all scalable managers"""
+    return {
+        "total": len(SCALABLE_MANAGERS),
+        "managers": SCALABLE_MANAGERS
+    }
+
+
+@app.post(f"{API_V1}/managers/scale")
+async def scale_manager(request: ScalingRequest):
+    """Scale a manager up or down"""
+    if request.manager_id not in SCALABLE_MANAGERS:
+        # Try by ID
+        found = None
+        for key, m in SCALABLE_MANAGERS.items():
+            if m["id"] == request.manager_id:
+                found = key
+                break
+        if not found:
+            raise HTTPException(status_code=404, detail=f"Manager {request.manager_id} not found")
+        request.manager_id = found
+    
+    old_factor = SCALABLE_MANAGERS[request.manager_id]["scaling_factor"]
+    SCALABLE_MANAGERS[request.manager_id]["scaling_factor"] = request.scaling_factor
+    
+    logger.info(f"Scaled {request.manager_id}: {old_factor} → {request.scaling_factor} ({request.reason})")
+    
+    return {
+        "manager_id": request.manager_id,
+        "old_scaling_factor": old_factor,
+        "new_scaling_factor": request.scaling_factor,
+        "reason": request.reason
+    }
+
+
+@app.post(f"{API_V1}/tasks")
+async def create_task(request: TaskRequest, background_tasks: BackgroundTasks):
+    """Create a new AGIEM task"""
+    task = {
+        "id": f"task_{len(task_queue) + len(completed_tasks) + 1:04d}",
+        "type": request.task_type,
+        "parameters": request.parameters,
+        "priority": request.priority,
+        "region": request.region,
+        "status": "queued",
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    task_queue.append(task)
+    
+    logger.info(f"Created task {task['id']}: {request.task_type}")
+    
+    return task
+
+
+@app.get(f"{API_V1}/tasks")
+async def list_tasks():
+    """List all tasks"""
+    return {
+        "queued": task_queue,
+        "completed": completed_tasks[-10:]  # Last 10
+    }
+
+
+@app.get(f"{API_V1}/ecosystem")
+async def get_ecosystem_state():
+    """Get current ecosystem state"""
+    return {
+        "agiem_status": "active",
+        "connected_services": {
+            "alba": {"url": ALBA_URL, "status": ecosystem_state["alba_status"]},
+            "albi": {"url": ALBI_URL, "status": ecosystem_state["albi_status"]},
+            "jona": {"url": JONA_URL, "status": ecosystem_state["jona_status"]}
+        },
+        "pipelines": {
+            "data_pipeline": ecosystem_state["data_pipeline_active"],
+            "learning_pipeline": ecosystem_state["learning_active"]
+        },
+        "data_sources": {
+            "regions_enabled": len(DATA_SOURCES_ENABLED),
+            "total_sources": sum(DATA_SOURCES[r]["source_count"] for r in DATA_SOURCES_ENABLED if r in DATA_SOURCES)
+        }
+    }
+
+
+@app.post(f"{API_V1}/coordinate")
+async def coordinate_services(config: Dict[str, Any]):
+    """Coordinate between Alba, Albi, Jona services"""
+    action = config.get("action", "sync")
+    
+    result = {
+        "action": action,
+        "services_coordinated": ["alba", "albi", "jona"],
+        "data_sources_queried": config.get("regions", DATA_SOURCES_ENABLED),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "status": "success"
+    }
+    
+    logger.info(f"Coordination action: {action}")
+    
+    return result
+
+
+@app.get(f"{API_V1}/analytics")
+async def get_analytics():
+    """Get AGIEM analytics"""
+    return {
+        "uptime_hours": (time.time() - START_TIME) / 3600,
+        "tasks_processed": len(completed_tasks),
+        "tasks_pending": len(task_queue),
+        "data_sources_active": len(DATA_SOURCES_ENABLED),
+        "managers_scaling": {
+            m_id: m["scaling_factor"] for m_id, m in SCALABLE_MANAGERS.items()
+        },
+        "ecosystem_health": 0.95,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    logger.info(f"🧠 Starting AGIEM - AGI Ecosystem Manager on port {AGIEM_PORT}")
+    logger.info(f"📊 Mode: {AGIEM_MODE}")
+    logger.info(f"🌍 Data Sources Enabled: {DATA_SOURCES_ENABLED}")
+    uvicorn.run(app, host="0.0.0.0", port=AGIEM_PORT)
+EOF
+
+EXPOSE 9300
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:9300/health || exit 1
+
+CMD ["python", "agiem_service.py"]

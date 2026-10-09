@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  shkoder-marine-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-shkoder-marine
+    environment:
+      LAB_ID: "Shkoder_Marine"
+      LAB_TYPE: "Marine"
+      LAB_NAME: "Shkodër Marine Lab"
+      LAB_FUNCTION: "Marine Biology & Oceanography"
+      API_KEY: "sekret-real"
+    ports:
+      - "8104:8100"
+    volumes:
+      - ../data/shkoder-marine:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

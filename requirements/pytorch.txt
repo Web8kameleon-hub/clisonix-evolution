@@ -1,0 +1,18 @@
+# ═══════════════════════════════════════════════════════════════
+# Clisonix PyTorch Requirements - Deep Learning (CPU optimized)
+# ═══════════════════════════════════════════════════════════════
+# For GPU support, use: pip install torch --index-url https://download.pytorch.org/whl/cu121
+
+# Core PyTorch (CPU version for non-GPU servers)
+--index-url https://download.pytorch.org/whl/cpu
+torch>=2.5.0
+
+# Transformers
+transformers>=4.47.0
+accelerate>=1.2.0
+
+# Sentence Embeddings
+sentence-transformers>=3.3.0
+
+# Tokenizers
+tokenizers>=0.21.0

@@ -1,0 +1,142 @@
+{
+  "started_at": "2026-05-09T07:59:48.149176+00:00",
+  "last_updated_at": "2026-05-09T09:33:32.793183+00:00",
+  "mode": "high-ops-10min-phases",
+  "interval_seconds": 120,
+  "duration_seconds": 14400,
+  "max_cycles": 0,
+  "workspace_root": "C:\\Users\\Admin\\Desktop\\Clisonix-cloud",
+  "memory_dir": "C:\\Users\\Admin\\Desktop\\Clisonix-cloud/.clx_ops_2min",
+  "cycles_completed": 5,
+  "totals": {
+    "local_learned": 3505,
+    "code_learned": 720,
+    "git_learned": 20,
+    "api_attempted": 150,
+    "api_learned": 30,
+    "api_errors": 120
+  },
+  "checkpoint": {
+    "cycle": 5,
+    "cycle_started_at": "2026-05-09T09:09:33.347158+00:00",
+    "cycle_ended_at": "2026-05-09T09:33:32.793043+00:00",
+    "cycle_seconds": 1439.446,
+    "metrics": {
+      "local_learned": 701,
+      "code_learned": 144,
+      "git_learned": 4,
+      "api_attempted": 30,
+      "api_learned": 6,
+      "api_errors": 24
+    },
+    "knowledge_entries": 11106,
+    "learning_stats": {
+      "total_learned": 11106,
+      "avg_confidence": 0.898419773095624,
+      "total_queries_this_session": 0,
+      "learning_active": false
+    },
+    "top_sources": [
+      [
+        "local:importlib.metadata",
+        5
+      ],
+      [
+        "local:requirements-autolearning.txt",
+        5
+      ],
+      [
+        "local:requirements-dev.txt",
+        5
+      ],
+      [
+        "local:requirements-ocean.txt",
+        5
+      ],
+      [
+        "local:requirements-test.txt",
+        5
+      ],
+      [
+        "local:requirements.txt",
+        5
+      ],
+      [
+        "local:9999/requirements.txt",
+        5
+      ],
+      [
+        "local:airflow/requirements.txt",
+        5
+      ],
+      [
+        "local:excel-core/requirements.txt",
+        5
+      ],
+      [
+        "local:hybrid_saas_platform/requirements.txt",
+        5
+      ],
+      [
+        "local:kloud-soc-clean/requirements-autolearning.txt",
+        5
+      ],
+      [
+        "local:kloud-soc-clean/requirements-dev.txt",
+        5
+      ],
+      [
+        "local:kloud-soc-clean/requirements-ocean.txt",
+        5
+      ],
+      [
+        "local:kloud-soc-clean/requirements-test.txt",
+        5
+      ],
+      [
+        "local:kloud-soc-clean/requirements.txt",
+        5
+      ],
+      [
+        "local:ocean-core/requirements-internal-core.txt",
+        5
+      ],
+      [
+        "local:ocean-core/requirements-internal-eeg.txt",
+        5
+      ],
+      [
+        "local:ocean-core/requirements-internal-llm.txt",
+        5
+      ],
+      [
+        "local:ocean-core/requirements-internal-multimodal.txt",
+        5
+      ],
+      [
+        "local:ocean-core/requirements-lite.txt",
+        5
+      ],
+      [
+        "local:ocean-core/requirements.txt",
+        5
+      ],
+      [
+        "local:orchestra/requirements.txt",
+        5
+      ],
+      [
+        "local:_profile_repos/Clisonix/requirements-dev.txt",
+        5
+      ],
+      [
+        "local:_profile_repos/Clisonix/requirements-test.txt",
+        5
+      ],
+      [
+        "local:_profile_repos/Clisonix/requirements.txt",
+        5
+      ]
+    ]
+  }
+}

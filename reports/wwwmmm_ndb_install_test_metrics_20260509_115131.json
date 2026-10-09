@@ -1,0 +1,89 @@
+{
+  "timestamp": "2026-05-09T11:51:31.4552565+02:00",
+  "repo_root": "C:\\Users\\Admin\\Desktop\\Clisonix-cloud",
+  "install": {
+    "ok": true,
+    "duration_sec": 6.82
+  },
+  "tests": {
+    "ok": true,
+    "duration_sec": 0.96
+  },
+  "disk": [
+    {
+      "path": ".venv",
+      "size_mb": 1060.84,
+      "size_gb": 1.036
+    },
+    {
+      "path": "sdist/clx-ai",
+      "size_mb": 101.24,
+      "size_gb": 0.099
+    },
+    {
+      "path": ".clx_i",
+      "size_mb": 0.0,
+      "size_gb": 0.0
+    },
+    {
+      "path": ".clx_ops_2min",
+      "size_mb": 29.1,
+      "size_gb": 0.028
+    },
+    {
+      "path": "apps/web/node_modules",
+      "size_mb": 192.68,
+      "size_gb": 0.188
+    }
+  ],
+  "profile_clxi_only": {
+    "latency": {
+      "avg_ms": 203.4,
+      "min_ms": 140.83,
+      "max_ms": 1272.72,
+      "p95_ms": 153.55,
+      "count": 20
+    },
+    "process": {
+      "pid": 31908,
+      "ws_mb": 3.87,
+      "cpu_sec": 0.0
+    }
+  },
+  "profile_clxi_hotguard": {
+    "latency": {
+      "avg_ms": 201.07,
+      "min_ms": 145.56,
+      "max_ms": 1177.41,
+      "p95_ms": 155.71,
+      "count": 20
+    },
+    "uvicorn": {
+      "pid": 27984,
+      "ws_mb": 3.87,
+      "cpu_sec": 0.0
+    },
+    "hotguard": {
+      "pid": 33240,
+      "ws_mb": 3.87,
+      "cpu_sec": 0.0
+    }
+  },
+  "full_stack_baseline": [
+    {
+      "port": 8000,
+      "available": false,
+      "status": "n/a"
+    },
+    {
+      "port": 8030,
+      "available": false,
+      "status": "n/a"
+    },
+    {
+      "port": 9999,
+      "available": false,
+      "status": "n/a"
+    }
+  ]
+}

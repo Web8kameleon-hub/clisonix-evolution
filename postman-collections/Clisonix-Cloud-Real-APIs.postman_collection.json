@@ -1,0 +1,484 @@
+{
+  "info": {
+    "name": "Clisonix Cloud - Real Data APIs",
+    "description": "Complete API collection for Clisonix Cloud with REAL Prometheus metrics, CoinGecko, Weather, and OpenAI integration",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://46.225.14.83:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "ASI Trinity - Real Prometheus Metrics",
+      "item": [
+        {
+          "name": "ASI Status (Real)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/asi/status",
+              "host": ["{{base_url}}"],
+              "path": ["asi", "status"]
+            },
+            "description": "Get ASI Trinity status with REAL Prometheus metrics"
+          },
+          "response": []
+        },
+        {
+          "name": "ASI Health (Real)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/asi/health",
+              "host": ["{{base_url}}"],
+              "path": ["asi", "health"]
+            },
+            "description": "Check overall ASI Trinity health from real Prometheus data"
+          },
+          "response": []
+        },
+        {
+          "name": "ALBA Network Metrics (Real)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/asi/alba/metrics",
+              "host": ["{{base_url}}"],
+              "path": ["asi", "alba", "metrics"]
+            },
+            "description": "ALBA Network real-time metrics: CPU, Memory, Network Latency from Prometheus"
+          },
+          "response": []
+        },
+        {
+          "name": "ALBI Neural Metrics (Real)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/asi/albi/metrics",
+              "host": ["{{base_url}}"],
+              "path": ["asi", "albi", "metrics"]
+            },
+            "description": "ALBI Neural real-time metrics: Goroutines, Neural Patterns, GC Operations from Prometheus"
+          },
+          "response": []
+        },
+        {
+          "name": "JONA Coordination Metrics (Real)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/asi/jona/metrics",
+              "host": ["{{base_url}}"],
+              "path": ["asi", "jona", "metrics"]
+            },
+            "description": "JONA Coordination real-time metrics: HTTP Requests, Coordination Score from Prometheus"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Monitoring & Dashboards",
+      "item": [
+        {
+          "name": "Monitoring Dashboards Links",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/monitoring/dashboards",
+              "host": ["{{base_url}}"],
+              "path": ["api", "monitoring", "dashboards"]
+            },
+            "description": "Get links to Prometheus, Grafana, and Tempo dashboards"
+          },
+          "response": []
+        },
+        {
+          "name": "Real Metrics Info",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/monitoring/real-metrics-info",
+              "host": ["{{base_url}}"],
+              "path": ["api", "monitoring", "real-metrics-info"]
+            },
+            "description": "Get documentation about REAL vs SYNTHETIC data sources"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "OpenAI Real Neural Analysis",
+      "item": [
+        {
+          "name": "AI Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ai/health",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ai", "health"]
+            },
+            "description": "Check OpenAI API connectivity and configuration status"
+          },
+          "response": []
+        },
+        {
+          "name": "Analyze Neural Pattern",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/ai/analyze-neural?query=Analyze%20the%20neural%20pattern:%20increased%20alpha%20waves%20(8-12Hz)%20with%20stable%20amplitude",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ai", "analyze-neural"],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "Analyze the neural pattern: increased alpha waves (8-12Hz) with stable amplitude"
+                }
+              ]
+            },
+            "description": "Get real OpenAI GPT-4 analysis of neural patterns"
+          },
+          "response": []
+        },
+        {
+          "name": "EEG Interpretation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"frequencies\": {\n    \"delta\": 2.5,\n    \"theta\": 6.5,\n    \"alpha\": 10.5,\n    \"beta\": 20.0,\n    \"gamma\": 40.0\n  },\n  \"dominant_freq\": 10.5,\n  \"amplitude_range\": {\n    \"min\": 5.2,\n    \"max\": 45.8\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ai/eeg-interpretation",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ai", "eeg-interpretation"]
+            },
+            "description": "Get real OpenAI GPT-4 interpretation of EEG frequency data"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Real External APIs",
+      "item": [
+        {
+          "name": "Crypto Market (CoinGecko Real)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/crypto/market",
+              "host": ["{{base_url}}"],
+              "path": ["api", "crypto", "market"]
+            },
+            "description": "Get real cryptocurrency prices from CoinGecko API"
+          },
+          "response": []
+        },
+        {
+          "name": "Crypto Detailed (Bitcoin)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/crypto/market/detailed/bitcoin",
+              "host": ["{{base_url}}"],
+              "path": ["api", "crypto", "market", "detailed", "bitcoin"]
+            },
+            "description": "Get detailed real cryptocurrency data from CoinGecko"
+          },
+          "response": []
+        },
+        {
+          "name": "Weather Data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/weather?latitude=41.3275&longitude=19.8187",
+              "host": ["{{base_url}}"],
+              "path": ["api", "weather"],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "41.3275"
+                },
+                {
+                  "key": "longitude",
+                  "value": "19.8187"
+                }
+              ]
+            },
+            "description": "Get real weather data from Open-Meteo API"
+          },
+          "response": []
+        },
+        {
+          "name": "Multi-City Weather",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/weather/multiple-cities",
+              "host": ["{{base_url}}"],
+              "path": ["api", "weather", "multiple-cities"]
+            },
+            "description": "Get real weather for multiple Albanian cities from Open-Meteo API"
+          },
+          "response": []
+        },
+        {
+          "name": "Real Data Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/realdata/dashboard",
+              "host": ["{{base_url}}"],
+              "path": ["api", "realdata", "dashboard"]
+            },
+            "description": "Get combined crypto + weather real data in one request"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "System Health & Status",
+      "item": [
+        {
+          "name": "System Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "Check FastAPI backend health"
+          },
+          "response": []
+        },
+        {
+          "name": "System Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/status",
+              "host": ["{{base_url}}"],
+              "path": ["status"]
+            },
+            "description": "Get full system status report"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Kitchen API",
+      "item": [
+        {
+          "name": "Kitchen Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/kitchen/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "kitchen", "status"]
+            },
+            "description": "Get Kitchen layers status"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": { "method": "GET", "header": [] },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"status\": \"ok\",\n  \"layers\": [\"ingest\", \"transform\", \"synthesis\"],\n  \"uptime\": \"12d 4h\"\n}"
+            },
+            {
+              "name": "500 Server Error",
+              "originalRequest": { "method": "GET", "header": [] },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"error\": \"KITCHEN_UNAVAILABLE\",\n  \"message\": \"Kitchen worker is temporarily unavailable\",\n  \"trace_id\": \"<trace-id>\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Kitchen Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/kitchen/health",
+              "host": ["{{base_url}}"],
+              "path": ["api", "kitchen", "health"]
+            },
+            "description": "Check Kitchen health"
+          },
+          "response": []
+        },
+        {
+          "name": "Kitchen Excel Integration",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/kitchen/excel-integration",
+              "host": ["{{base_url}}"],
+              "path": ["api", "kitchen", "excel-integration"]
+            },
+            "description": "Kitchen-Excel integration status and data flow"
+          },
+          "response": []
+        },
+        {
+          "name": "Kitchen Layers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/kitchen/layers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "kitchen", "layers"]
+            },
+            "description": "Get all 7 Protocol Kitchen layers"
+          },
+          "response": []
+        },
+        {
+          "name": "Kitchen Metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/kitchen/metrics",
+              "host": ["{{base_url}}"],
+              "path": ["api", "kitchen", "metrics"]
+            },
+            "description": "Kitchen processing metrics"
+          },
+          "response": []
+        },
+        {
+          "name": "Kitchen to Excel",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/kitchen/kitchen-to-excel",
+              "host": ["{{base_url}}"],
+              "path": ["api", "kitchen", "kitchen-to-excel"]
+            },
+            "description": "Export Kitchen data to Excel format"
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": { "method": "GET", "header": [] },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"export_id\": \"exp_12345\",\n  \"status\": \"completed\",\n  \"download_url\": \"https://storage.clisonix.com/exports/exp_12345.xlsx\"\n}"
+            },
+            {
+              "name": "400 Bad Request",
+              "originalRequest": { "method": "GET", "header": [] },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"error\": \"INVALID_PARAMETERS\",\n  \"message\": \"Missing required query parameter: layer_id\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Excel Dashboard API",
+      "item": [
+        {
+          "name": "Excel Dashboards List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/excel/dashboards",
+              "host": ["{{base_url}}"],
+              "path": ["api", "excel", "dashboards"]
+            },
+            "description": "List all Excel dashboards"
+          },
+          "response": []
+        },
+        {
+          "name": "Excel Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/excel/summary",
+              "host": ["{{base_url}}"],
+              "path": ["api", "excel", "summary"]
+            },
+            "description": "Summary of all Excel dashboards"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Docs Index",
+      "item": [
+        {
+          "name": "Get Docs Index",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/docs-index",
+              "host": ["{{base_url}}"],
+              "path": ["api", "docs-index"]
+            },
+            "description": "Get documentation index with 173 docs in 18 categories"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

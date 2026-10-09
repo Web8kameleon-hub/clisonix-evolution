@@ -1,0 +1,23 @@
+{
+  "name": "kitchen-worker",
+  "version": "1.0.0",
+  "description": "Production Job Orchestrator for Clisonix Kitchen - Newman + Redis + Real Workloads",
+  "main": "worker.js",
+  "scripts": {
+    "start": "node worker.js",
+    "dev": "node --watch worker.js",
+    "postinstall": "echo 'Kitchen Worker v2.0 - Production Ready with Redis Queue'"
+  },
+  "dependencies": {
+    "newman": "^6.1.0",
+    "newman-reporter-htmlextra": "^1.23.1",
+    "redis": "^4.7.0",
+    "bullmq": "^5.76.5",
+    "ioredis": "^5.4.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "Clisonix Team",
+  "license": "MIT"
+}

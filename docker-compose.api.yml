@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  clisonix-api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: clisonix-api
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.api
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    # Add volumes if you want to mount local code for dev
+    # volumes:
+    #   - ./apps/api:/app

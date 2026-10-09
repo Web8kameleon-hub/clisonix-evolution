@@ -1,0 +1,112 @@
+# Clisonix Binary Schema - Binary Matrix Response
+# Version: 1.0
+# Magic: BMAT
+# Created: 2026-02-23
+
+name: MatrixResponse
+version: 1
+type_id: 0x31
+
+header:
+  - name: magic
+    type: bytes[4]
+    value: "BMAT"
+    description: "Binary Matrix magic"
+  
+  - name: version
+    type: uint8
+    description: "Protocol version"
+  
+  - name: timestamp
+    type: uint64
+    description: "Timestamp in microseconds"
+  
+  - name: flags
+    type: uint8
+    description: "Response flags (bit 0=sparse, bit 1=symmetric, bit 2=has_error)"
+
+operations:
+  - AND: 0
+  - OR: 1
+  - XOR: 2
+  - NOT: 3
+  - MULTIPLY_GF2: 4
+  - TRANSPOSE: 5
+  - IDENTITY: 6
+  - INVERSE_GF2: 7
+
+fields:
+  - name: operation
+    type: uint8
+    description: "Operation code"
+  
+  - name: rows
+    type: uint16
+    description: "Number of rows"
+  
+  - name: cols
+    type: uint16
+    description: "Number of columns"
+  
+  - name: data_format
+    type: uint8
+    description: "Data format (0=dense, 1=sparse, 2=packed_bits)"
+  
+  - name: data_length
+    type: uint32
+    description: "Length of matrix data in bytes"
+  
+  - name: data
+    type: bytes
+    length_field: data_length
+    description: "Matrix data (row-major, packed bits for dense)"
+  
+  - name: sparse_count
+    type: uint32
+    optional: true
+    description: "Number of non-zero elements (only for sparse format)"
+  
+  - name: rank
+    type: uint16
+    description: "Matrix rank"
+  
+  - name: determinant_gf2
+    type: uint8
+    description: "Determinant in GF(2) (0 or 1)"
+  
+  - name: trace
+    type: uint32
+    description: "Sum of diagonal elements (mod 2^32)"
+  
+  - name: ones_count
+    type: uint32
+    description: "Total number of 1-bits in matrix"
+  
+  - name: sparsity
+    type: float
+    description: "Sparsity ratio (0.0 to 1.0)"
+  
+  - name: duration_ns
+    type: uint32
+    description: "Operation duration in nanoseconds"
+  
+  - name: error_code
+    type: uint8
+    description: "Error code (0=success, 1=dimension_mismatch, 2=singular)"
+
+checksum:
+  type: crc32
+  fields: all
+  description: "CRC32 of all fields for integrity"
+
+# Encoding rules for data field:
+# Dense format: Each row is packed into bytes (8 bits per byte)
+#   - Rows are padded to nearest byte boundary
+#   - data_length = rows * ceil(cols / 8)
+# 
+# Sparse format: List of (row, col) pairs for non-zero elements
+#   - Each element: 2 bytes row + 2 bytes col = 4 bytes
+#   - data_length = sparse_count * 4
+#
+# Packed_bits: Similar to dense but no row padding
+#   - More compact for large matrices

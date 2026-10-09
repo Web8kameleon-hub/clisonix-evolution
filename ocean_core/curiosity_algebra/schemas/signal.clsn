@@ -1,0 +1,55 @@
+# Clisonix Binary Schema - Signal Frame
+# Version: 1.0
+# Magic: CLSN
+
+name: SignalFrame
+version: 1
+type_id: 0x10
+
+fields:
+  - name: type
+    type: uint8
+    offset: 0
+    description: "Message type (0x10 = signal)"
+  
+  - name: signal_type
+    type: uint8
+    offset: 1
+    description: "Signal type (0=metric, 1=event, 2=alarm, 3=stream)"
+  
+  - name: source_len
+    type: uint8
+    offset: 2
+    description: "Source ID length"
+  
+  - name: source
+    type: string
+    offset: 3
+    length_field: source_len
+    description: "Source identifier"
+  
+  - name: timestamp
+    type: uint64
+    offset: dynamic
+    description: "Signal timestamp (microseconds)"
+  
+  - name: value
+    type: double
+    offset: dynamic
+    description: "Signal value"
+  
+  - name: confidence
+    type: float
+    offset: dynamic
+    description: "Signal confidence (0.0-1.0)"
+  
+  - name: metadata_len
+    type: uint16
+    offset: dynamic
+    description: "Metadata length"
+  
+  - name: metadata
+    type: bytes
+    offset: dynamic
+    length_field: metadata_len
+    description: "Additional metadata (CBOR encoded)"

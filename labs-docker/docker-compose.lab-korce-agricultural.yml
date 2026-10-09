@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  korce-agricultural-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-korce-agricultural
+    environment:
+      LAB_ID: "Korce_Agricultural"
+      LAB_TYPE: "Agricultural"
+      LAB_NAME: "Korça Agricultural Lab"
+      LAB_FUNCTION: "Agricultural Sciences & Crop Analysis"
+      API_KEY: "sekret-real"
+    ports:
+      - "8106:8100"
+    volumes:
+      - ../data/korce-agricultural:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

@@ -1,0 +1,7 @@
+# Internal EEG / biosignal profile
+mne>=1.8.0
+neurokit2>=0.2.10
+pyedflib>=0.1.39
+biosppy>=2.2.2
+pyriemann>=0.7
+braindecode>=0.8.1

@@ -1,0 +1,27 @@
+# Redis Helm Chart Values
+# Used by: deploy.yml, deploy-helm.yml
+
+auth:
+  enabled: false
+
+master:
+  persistence:
+    enabled: true
+    size: 5Gi
+  
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+replica:
+  replicaCount: 1
+  persistence:
+    enabled: true
+    size: 5Gi
+
+metrics:
+  enabled: true

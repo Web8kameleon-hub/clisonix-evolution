@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-03-02T07:20:51.147684+00:00",
+  "document_id": "clx.eap.investor.boardgrade.2026-03-02",
+  "title": "Clisonix Board-Grade Investor Memorandum (DE/UK VC)",
+  "quality": {
+    "score": 1.0,
+    "passed": true,
+    "threshold": 0.7,
+    "issues": [],
+    "recommendations": [],
+    "publish_ready": true
+  },
+  "excel_core_health": {
+    "status": "unreachable",
+    "url": "http://localhost:8010/health"
+  },
+  "ocean_core_health": {
+    "status": "unreachable",
+    "url": "http://localhost:8030/health"
+  },
+  "publish_results": [
+    {
+      "id": "pub_clx_6d86c899",
+      "document_id": "clx.eap.investor.boardgrade.2026-03-02",
+      "platform": "clisonix",
+      "status": "published",
+      "url": "https://clisonix.cloud/analysis/clx.eap.investor.boardgrade.2026-03-02",
+      "error": null,
+      "published_at": "2026-03-02T07:20:51.147644+00:00",
+      "metadata": {
+        "filename": "output/blog/clx.eap.investor.boardgrade.2026-03-02.md"
+      }
+    }
+  ],
+  "output_markdown": "output\\blog\\clx.eap.investor.boardgrade.2026-03-02.md"
+}

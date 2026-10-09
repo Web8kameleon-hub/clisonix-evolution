@@ -1,0 +1,15 @@
+apiVersion: v2
+name: clisonix
+description: Clisonix Cloud Platform - Industrial AI & Multi-Service Backend
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - clisonix
+  - ai
+  - microservices
+  - industrial
+home: https://clisonix.com
+maintainers:
+  - name: Clisonix Team
+    email: clisonix@pm.me

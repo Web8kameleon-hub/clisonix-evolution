@@ -1,0 +1,35 @@
+FROM python:3.13-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    ffmpeg \
+    libsndfile1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt 2>/dev/null || \
+    pip install --no-cache-dir uvicorn fastapi pydantic httpx python-multipart 2>/dev/null || true
+
+# Copy application code
+COPY ocean_multimodal.py .
+COPY ocean_nanogrid.py .
+COPY run_ocean_multimodal.py .
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8031/health || exit 1
+
+# Environment
+ENV PYTHONUNBUFFERED=1
+ENV PORT=8033
+ENV OCEAN_PORT=8033
+ENV OLLAMA_HOST=http://clisonix-ollama:11434
+
+# Run multimodal service
+CMD ["python", "run_ocean_multimodal.py"]

@@ -1,0 +1,28 @@
+services:
+  ads-core:
+    build: ./services/ads_core
+    container_name: clisonix-ads-core
+    ports:
+      - "8096:8096"
+    environment:
+      - PORT=8096
+      - ADS_DATA_DIR=/data
+      - ADS_ENABLED=${ADS_ENABLED:-false}
+      - ADS_PROVIDER=${ADS_PROVIDER:-none}
+      - ADS_REQUIRE_CONSENT=${ADS_REQUIRE_CONSENT:-true}
+      - ADS_ALLOWED_COUNTRIES=${ADS_ALLOWED_COUNTRIES:-AL,XK,MK,ME,RS,GR,IT,ES,DE,CH}
+      - PROPELLER_ZONE_NATIVE=${PROPELLER_ZONE_NATIVE:-}
+      - PROPELLER_ZONE_BANNER=${PROPELLER_ZONE_BANNER:-}
+      - ADSTERRA_ZONE_SOCIAL=${ADSTERRA_ZONE_SOCIAL:-}
+    volumes:
+      - ads-core-data:/data
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+volumes:
+  ads-core-data:
+
+networks:
+  clisonix-net:
+    external: true

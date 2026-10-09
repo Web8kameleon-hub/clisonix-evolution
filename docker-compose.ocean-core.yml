@@ -1,0 +1,83 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: clisonix-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: clisonix-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      OLLAMA_HOST: "0.0.0.0"
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list || exit 0"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped
+
+  ocean-core:
+    build:
+      context: ./ocean-core
+      dockerfile: Dockerfile
+    container_name: clisonix-ocean-core
+    environment:
+      PYTHONUNBUFFERED: "1"
+      OCEAN_PORT: "8030"
+      OLLAMA_HOST: "http://clisonix-ollama:11434"
+      MODEL: "llama3.1:8b"
+      OCEAN_AUTOLEARNING_ENABLED: "true"
+      OCEAN_LLM_PROVIDER_ORDER: "openai_compat,ollama,selflearning"
+      OPENAI_COMPAT_BASE: "http://clisonix-kloud-bridge:8889"
+      OPENAI_COMPAT_MODEL: "llama3.1:8b"
+      OCEAN_SOVEREIGN_SELFREGEN_ENABLED: "true"
+      OCEAN_SELFREGEN_REBUILD_MAX_LINES: "2000"
+      CHAT_ELASTIC_NO_LIMITS: "true"
+      CHAT_MAX_TOKENS_HARD: "0"
+      CHAT_RATE_LIMIT_REQUESTS: "999999"
+      CHAT_MAX_PROMPT_CHARS: "0"
+      OCEAN_FAST_ANSWER_TIMEOUT_S: "15"
+      OCEAN_FAST_SHORTCUT_MAX_CHARS: "0"
+      OCEAN_FAST_TARGET_CHARS_SHORT: "420"
+      OCEAN_FAST_TARGET_CHARS_MEDIUM: "900"
+      DEBATE_MAX_TOKENS_HARD: "-1"
+      DEBATE_STREAM_MAX_CONCURRENCY: "12"
+      DEBATE_STREAM_QUEUE_LIMIT: "64"
+      DEBATE_RATE_LIMIT_REQUESTS: "999999"
+      REDIS_URL: "redis://redis:6379/0"
+      API_KEYS_FILE: "/app/config/api_keys.json"
+      CLISONIX_SYSTEM_PROMPT_PATH: "/app/CLISONIX_SYSTEM_PROMPT.md"
+      CLISONIX_MODULE_MAP_PATH: "/app/CLISONIX_MODULE_MAP.md"
+      KLOUD_BRIDGE_URL: "http://clisonix-kloud-bridge:8889"
+    volumes:
+      - ./config/api_keys.json:/app/config/api_keys.json:ro
+      - ./CLISONIX_SYSTEM_PROMPT.md:/app/CLISONIX_SYSTEM_PROMPT.md:ro
+      - ./CLISONIX_MODULE_MAP.md:/app/CLISONIX_MODULE_MAP.md:ro
+      - ./ocean-data:/app/data
+    ports:
+      - "8030:8030"
+    depends_on:
+      ollama:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8030/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+volumes:
+  ollama_data:

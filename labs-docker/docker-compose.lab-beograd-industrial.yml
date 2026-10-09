@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  beograd-industrial-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-beograd-industrial
+    environment:
+      LAB_ID: "Beograd_Industrial"
+      LAB_TYPE: "Industrial"
+      LAB_NAME: "Beograd Industrial Lab"
+      LAB_FUNCTION: "Industrial Process Optimization"
+      API_KEY: "sekret-real"
+    ports:
+      - "8113:8100"
+    volumes:
+      - ../data/beograd-industrial:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

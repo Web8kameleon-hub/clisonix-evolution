@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  istanbul-trade-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-istanbul-trade
+    environment:
+      LAB_ID: "Istanbul_Trade"
+      LAB_TYPE: "Trade"
+      LAB_NAME: "Istanbul Trade Lab"
+      LAB_FUNCTION: "International Trade & Logistics"
+      API_KEY: "sekret-real"
+    ports:
+      - "8121:8100"
+    volumes:
+      - ../data/istanbul-trade:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

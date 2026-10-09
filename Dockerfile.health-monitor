@@ -1,0 +1,15 @@
+FROM python:3.13
+
+WORKDIR /app
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONIOENCODING=UTF-8 \
+    LANG=C.UTF-8
+
+RUN pip install --no-cache-dir fastapi uvicorn httpx
+
+COPY health_monitor_service.py /app/health_monitor_service.py
+
+EXPOSE 8099
+
+CMD ["python", "health_monitor_service.py"]

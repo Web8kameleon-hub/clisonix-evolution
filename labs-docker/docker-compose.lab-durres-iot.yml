@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  durres-iot-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-durres-iot
+    environment:
+      LAB_ID: "Durres_IoT"
+      LAB_TYPE: "IoT"
+      LAB_NAME: "Durrës IoT Lab"
+      LAB_FUNCTION: "Internet of Things & Sensor Networks"
+      API_KEY: "sekret-real"
+    ports:
+      - "8103:8100"
+    volumes:
+      - ../data/durres-iot:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

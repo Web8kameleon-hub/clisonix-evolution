@@ -1,0 +1,118 @@
+# Clisonix Binary Schema - Binary Algebra Response
+# Version: 2.0
+# Magic: BALG
+# Updated: 2026-02-23
+
+name: AlgebraResponse
+version: 2
+type_id: 0x30
+
+header:
+  - name: magic
+    type: bytes[4]
+    value: "BALG"
+    description: "Binary Algebra magic"
+  
+  - name: version
+    type: uint8
+    description: "Protocol version"
+  
+  - name: timestamp
+    type: uint64
+    description: "Timestamp in microseconds"
+  
+  - name: field_count
+    type: uint16
+    description: "Number of fields"
+  
+  - name: flags
+    type: uint8
+    description: "Response flags (bit 0=has_error, bit 1=has_carry, bit 2=has_overflow)"
+
+operations:
+  # Bitwise (0-6)
+  - AND: 0
+  - OR: 1  
+  - XOR: 2
+  - NOT: 3
+  - NAND: 4
+  - NOR: 5
+  - XNOR: 6
+  # Shifts (7-10)
+  - SHL: 7
+  - SHR: 8
+  - ROL: 9
+  - ROR: 10
+  # Arithmetic (11-15)
+  - ADD: 11
+  - SUB: 12
+  - MUL: 13
+  - DIV: 14
+  - MOD: 15
+
+fields:
+  - name: operation
+    type: uint8
+    description: "Operation code (see operations enum)"
+  
+  - name: operation_name
+    type: string[8]
+    description: "Operation name (and, or, xor, etc.)"
+  
+  - name: operand_a
+    type: int64
+    description: "First operand"
+  
+  - name: operand_b
+    type: int64
+    description: "Second operand (0 for unary ops)"
+  
+  - name: result
+    type: int64
+    description: "Result value (decimal)"
+  
+  - name: result_binary
+    type: string
+    description: "Result as binary string"
+  
+  - name: result_hex
+    type: string[16]
+    description: "Result as hex string"
+  
+  - name: bits
+    type: uint8
+    description: "Bit width (8, 16, 32, 64)"
+  
+  - name: ones_count
+    type: uint8
+    description: "Number of 1-bits in result (popcount)"
+  
+  - name: zeros_count
+    type: uint8
+    description: "Number of 0-bits in result"
+  
+  - name: carry_flag
+    type: bool
+    description: "Carry flag for arithmetic operations"
+  
+  - name: overflow_flag
+    type: bool
+    description: "Overflow flag for arithmetic operations"
+  
+  - name: duration_ns
+    type: uint32
+    description: "Operation duration in nanoseconds"
+  
+  - name: error_code
+    type: uint8
+    description: "Error code (0=success, 1=division_by_zero, 2=overflow)"
+  
+  - name: error_message
+    type: string
+    optional: true
+    description: "Human-readable error message"
+
+checksum:
+  type: crc32
+  fields: all
+  description: "CRC32 of all fields for integrity"

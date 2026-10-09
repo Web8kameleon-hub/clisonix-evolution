@@ -1,0 +1,629 @@
+name: ultrawebthinking-v2-microservices
+
+x-ultra-common: &ultra-common
+  build:
+    context: ./external/Ultrawebthinkig-v2
+    dockerfile: Dockerfile.microservices
+  working_dir: /app
+  restart: unless-stopped
+  networks:
+    - ultra-ms-net
+
+services:
+  ultra-ms-7111:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'backend'
+      ULTRA_SERVICE_PORT: '7111'
+    command:
+      - node
+      - backend-server.js
+    ports:
+      - '7111:8000'
+  ultra-ms-7112:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'simple-backend'
+      ULTRA_SERVICE_PORT: '7112'
+    command:
+      - node
+      - simple-backend.js
+    ports:
+      - '7112:3008'
+  ultra-ms-7113:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'gateway'
+      ULTRA_SERVICE_PORT: '7113'
+    command:
+      - node
+      - gateway-api-server.js
+    ports:
+      - '7113:3003'
+  ultra-ms-7114:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'simple-gateway'
+      ULTRA_SERVICE_PORT: '7114'
+    command:
+      - node
+      - simple-gateway-server.js
+    ports:
+      - '7114:3003'
+  ultra-ms-7115:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'internal-api'
+      ULTRA_SERVICE_PORT: '7115'
+    command:
+      - node
+      - internal-api-server.js
+    ports:
+      - '7115:3002'
+  ultra-ms-7116:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'api-gateway'
+      ULTRA_SERVICE_PORT: '7116'
+      PORT: '7116'
+    command:
+      - node
+      - api-gateway/server.js
+    ports:
+      - '7116:7116'
+  ultra-ms-7117:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'asi-agent'
+      ULTRA_SERVICE_PORT: '7117'
+    command:
+      - node
+      - asi-agent.js
+    ports:
+      - '7117:3004'
+  ultra-ms-7118:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'asi-ultra'
+      ULTRA_SERVICE_PORT: '7118'
+      ASI_PORT: '7118'
+    command:
+      - node
+      - asi-agent-ultra.js
+    ports:
+      - '7118:7118'
+  ultra-ms-7119:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'asi-ultra-native'
+      ULTRA_SERVICE_PORT: '7119'
+      ASI_PORT: '7119'
+    command:
+      - node
+      - asi-agent-ultra-native.js
+    ports:
+      - '7119:7119'
+  ultra-ms-7120:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'asi-producer'
+      ULTRA_SERVICE_PORT: '7120'
+    command:
+      - node
+      - asi-api-producer.js
+    ports:
+      - '7120:3005'
+  ultra-ms-7121:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'chat-native'
+      ULTRA_SERVICE_PORT: '7121'
+      CHAT_PORT: '7121'
+    command:
+      - node
+      - chat-server-native.js
+    ports:
+      - '7121:7121'
+  ultra-ms-7122:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'chat-ws'
+      ULTRA_SERVICE_PORT: '7122'
+      CHAT_WS_PORT: '7122'
+    command:
+      - node
+      - ultraweb-chat-server.js
+    ports:
+      - '7122:7122'
+  ultra-ms-7123:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'secure-comms'
+      ULTRA_SERVICE_PORT: '7123'
+      PORT: '7123'
+    command:
+      - node
+      - ultraweb-secure-comms.js
+    ports:
+      - '7123:7123'
+  ultra-ms-7124:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'ultracom'
+      ULTRA_SERVICE_PORT: '7124'
+      PORT: '7124'
+    command:
+      - node
+      - ultracom-server.js
+    ports:
+      - '7124:7124'
+  ultra-ms-7125:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'joan-asi'
+      ULTRA_SERVICE_PORT: '7125'
+      PORT: '7125'
+    command:
+      - node
+      - euroweb-asi/server.js
+    ports:
+      - '7125:7125'
+  ultra-ms-7126:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'neurosonix'
+      ULTRA_SERVICE_PORT: '7126'
+      PORT: '7126'
+    command:
+      - node
+      - ultracom/neurosonix-server.js
+    ports:
+      - '7126:7126'
+  ultra-ms-7127:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'backend'
+      ULTRA_SERVICE_PORT: '7127'
+    command:
+      - node
+      - backend-server.js
+    ports:
+      - '7127:8000'
+  ultra-ms-7128:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'simple-backend'
+      ULTRA_SERVICE_PORT: '7128'
+    command:
+      - node
+      - simple-backend.js
+    ports:
+      - '7128:3008'
+  ultra-ms-7129:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'gateway'
+      ULTRA_SERVICE_PORT: '7129'
+    command:
+      - node
+      - gateway-api-server.js
+    ports:
+      - '7129:3003'
+  ultra-ms-7130:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'simple-gateway'
+      ULTRA_SERVICE_PORT: '7130'
+    command:
+      - node
+      - simple-gateway-server.js
+    ports:
+      - '7130:3003'
+  ultra-ms-7131:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'internal-api'
+      ULTRA_SERVICE_PORT: '7131'
+    command:
+      - node
+      - internal-api-server.js
+    ports:
+      - '7131:3002'
+  ultra-ms-7132:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'api-gateway'
+      ULTRA_SERVICE_PORT: '7132'
+      PORT: '7132'
+    command:
+      - node
+      - api-gateway/server.js
+    ports:
+      - '7132:7132'
+  ultra-ms-7133:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'asi-agent'
+      ULTRA_SERVICE_PORT: '7133'
+    command:
+      - node
+      - asi-agent.js
+    ports:
+      - '7133:3004'
+  ultra-ms-7134:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'asi-ultra'
+      ULTRA_SERVICE_PORT: '7134'
+      ASI_PORT: '7134'
+    command:
+      - node
+      - asi-agent-ultra.js
+    ports:
+      - '7134:7134'
+  ultra-ms-7135:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'asi-ultra-native'
+      ULTRA_SERVICE_PORT: '7135'
+      ASI_PORT: '7135'
+    command:
+      - node
+      - asi-agent-ultra-native.js
+    ports:
+      - '7135:7135'
+  ultra-ms-7136:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'asi-producer'
+      ULTRA_SERVICE_PORT: '7136'
+    command:
+      - node
+      - asi-api-producer.js
+    ports:
+      - '7136:3005'
+  ultra-ms-7137:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'chat-native'
+      ULTRA_SERVICE_PORT: '7137'
+      CHAT_PORT: '7137'
+    command:
+      - node
+      - chat-server-native.js
+    ports:
+      - '7137:7137'
+  ultra-ms-7138:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'chat-ws'
+      ULTRA_SERVICE_PORT: '7138'
+      CHAT_WS_PORT: '7138'
+    command:
+      - node
+      - ultraweb-chat-server.js
+    ports:
+      - '7138:7138'
+  ultra-ms-7139:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'secure-comms'
+      ULTRA_SERVICE_PORT: '7139'
+      PORT: '7139'
+    command:
+      - node
+      - ultraweb-secure-comms.js
+    ports:
+      - '7139:7139'
+  ultra-ms-7140:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'ultracom'
+      ULTRA_SERVICE_PORT: '7140'
+      PORT: '7140'
+    command:
+      - node
+      - ultracom-server.js
+    ports:
+      - '7140:7140'
+  ultra-ms-7141:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'joan-asi'
+      ULTRA_SERVICE_PORT: '7141'
+      PORT: '7141'
+    command:
+      - node
+      - euroweb-asi/server.js
+    ports:
+      - '7141:7141'
+  ultra-ms-7142:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'neurosonix'
+      ULTRA_SERVICE_PORT: '7142'
+      PORT: '7142'
+    command:
+      - node
+      - ultracom/neurosonix-server.js
+    ports:
+      - '7142:7142'
+  ultra-ms-7143:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'backend'
+      ULTRA_SERVICE_PORT: '7143'
+    command:
+      - node
+      - backend-server.js
+    ports:
+      - '7143:8000'
+  ultra-ms-7144:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'simple-backend'
+      ULTRA_SERVICE_PORT: '7144'
+    command:
+      - node
+      - simple-backend.js
+    ports:
+      - '7144:3008'
+  ultra-ms-7145:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'gateway'
+      ULTRA_SERVICE_PORT: '7145'
+    command:
+      - node
+      - gateway-api-server.js
+    ports:
+      - '7145:3003'
+  ultra-ms-7146:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'simple-gateway'
+      ULTRA_SERVICE_PORT: '7146'
+    command:
+      - node
+      - simple-gateway-server.js
+    ports:
+      - '7146:3003'
+  ultra-ms-7147:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'internal-api'
+      ULTRA_SERVICE_PORT: '7147'
+    command:
+      - node
+      - internal-api-server.js
+    ports:
+      - '7147:3002'
+  ultra-ms-7148:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'api-gateway'
+      ULTRA_SERVICE_PORT: '7148'
+      PORT: '7148'
+    command:
+      - node
+      - api-gateway/server.js
+    ports:
+      - '7148:7148'
+  ultra-ms-7149:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'asi-agent'
+      ULTRA_SERVICE_PORT: '7149'
+    command:
+      - node
+      - asi-agent.js
+    ports:
+      - '7149:3004'
+  ultra-ms-7150:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'asi-ultra'
+      ULTRA_SERVICE_PORT: '7150'
+      ASI_PORT: '7150'
+    command:
+      - node
+      - asi-agent-ultra.js
+    ports:
+      - '7150:7150'
+  ultra-ms-7151:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'asi-ultra-native'
+      ULTRA_SERVICE_PORT: '7151'
+      ASI_PORT: '7151'
+    command:
+      - node
+      - asi-agent-ultra-native.js
+    ports:
+      - '7151:7151'
+  ultra-ms-7152:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'asi-producer'
+      ULTRA_SERVICE_PORT: '7152'
+    command:
+      - node
+      - asi-api-producer.js
+    ports:
+      - '7152:3005'
+  ultra-ms-7153:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'chat-native'
+      ULTRA_SERVICE_PORT: '7153'
+      CHAT_PORT: '7153'
+    command:
+      - node
+      - chat-server-native.js
+    ports:
+      - '7153:7153'
+  ultra-ms-7154:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'chat-ws'
+      ULTRA_SERVICE_PORT: '7154'
+      CHAT_WS_PORT: '7154'
+    command:
+      - node
+      - ultraweb-chat-server.js
+    ports:
+      - '7154:7154'
+  ultra-ms-7155:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'secure-comms'
+      ULTRA_SERVICE_PORT: '7155'
+      PORT: '7155'
+    command:
+      - node
+      - ultraweb-secure-comms.js
+    ports:
+      - '7155:7155'
+  ultra-ms-7156:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'ultracom'
+      ULTRA_SERVICE_PORT: '7156'
+      PORT: '7156'
+    command:
+      - node
+      - ultracom-server.js
+    ports:
+      - '7156:7156'
+  ultra-ms-7157:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'joan-asi'
+      ULTRA_SERVICE_PORT: '7157'
+      PORT: '7157'
+    command:
+      - node
+      - euroweb-asi/server.js
+    ports:
+      - '7157:7157'
+  ultra-ms-7158:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'neurosonix'
+      ULTRA_SERVICE_PORT: '7158'
+      PORT: '7158'
+    command:
+      - node
+      - ultracom/neurosonix-server.js
+    ports:
+      - '7158:7158'
+  ultra-ms-7159:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'backend'
+      ULTRA_SERVICE_PORT: '7159'
+    command:
+      - node
+      - backend-server.js
+    ports:
+      - '7159:8000'
+  ultra-ms-7160:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'simple-backend'
+      ULTRA_SERVICE_PORT: '7160'
+    command:
+      - node
+      - simple-backend.js
+    ports:
+      - '7160:3008'
+  ultra-ms-7161:
+    <<: *ultra-common
+    environment:
+      NODE_ENV: production
+      ULTRA_SERVICE_ID: 'gateway'
+      ULTRA_SERVICE_PORT: '7161'
+    command:
+      - node
+      - gateway-api-server.js
+    ports:
+      - '7161:3003'
+
+  ultra-ms-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - '7162:6379'
+    networks:
+      - ultra-ms-net
+
+  ultra-ms-postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ultraweb
+      POSTGRES_USER: ultraweb
+      POSTGRES_PASSWORD: ultraweb_secure_2026
+    ports:
+      - '7163:5432'
+    volumes:
+      - ultra_ms_pg:/var/lib/postgresql/data
+    networks:
+      - ultra-ms-net
+
+volumes:
+  ultra_ms_pg:
+
+networks:
+  ultra-ms-net:
+    driver: bridge

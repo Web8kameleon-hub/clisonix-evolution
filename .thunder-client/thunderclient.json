@@ -1,0 +1,507 @@
+[
+  {
+    "_id": "req_health_main",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_health",
+    "name": "GET /health",
+    "url": "{{base_url}}/health",
+    "method": "GET",
+    "sortNum": 10000,
+    "headers": [{ "name": "Authorization", "value": "Bearer {{auth_token}}" }]
+  },
+  {
+    "_id": "req_status_main",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_health",
+    "name": "GET /status",
+    "url": "{{base_url}}/status",
+    "method": "GET",
+    "sortNum": 20000,
+    "headers": []
+  },
+  {
+    "_id": "req_system_status",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_health",
+    "name": "GET /api/system-status",
+    "url": "{{base_url}}/api/system-status",
+    "method": "GET",
+    "sortNum": 30000,
+    "headers": []
+  },
+  {
+    "_id": "req_asi_status",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_asi",
+    "name": "ASI Status (Real)",
+    "url": "{{base_url}}/asi/status",
+    "method": "GET",
+    "sortNum": 10000,
+    "headers": []
+  },
+  {
+    "_id": "req_asi_health",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_asi",
+    "name": "ASI Health (Real)",
+    "url": "{{base_url}}/asi/health",
+    "method": "GET",
+    "sortNum": 20000,
+    "headers": []
+  },
+  {
+    "_id": "req_alba_metrics",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_asi",
+    "name": "ALBA Network Metrics",
+    "url": "{{base_url}}/asi/alba/metrics",
+    "method": "GET",
+    "sortNum": 30000,
+    "headers": []
+  },
+  {
+    "_id": "req_albi_metrics",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_asi",
+    "name": "ALBI Neural Metrics",
+    "url": "{{base_url}}/asi/albi/metrics",
+    "method": "GET",
+    "sortNum": 40000,
+    "headers": []
+  },
+  {
+    "_id": "req_jona_metrics",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_asi",
+    "name": "JONA Coordination Metrics",
+    "url": "{{base_url}}/asi/jona/metrics",
+    "method": "GET",
+    "sortNum": 50000,
+    "headers": []
+  },
+  {
+    "_id": "req_ocean_chat",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_ocean",
+    "name": "Ocean Chat",
+    "url": "{{base_url}}/ocean/chat",
+    "method": "POST",
+    "sortNum": 10000,
+    "headers": [{ "name": "Content-Type", "value": "application/json" }],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"message\": \"Hello Ocean AI\",\n  \"session_id\": \"test-session\"\n}"
+    }
+  },
+  {
+    "_id": "req_ocean_stream",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_ocean",
+    "name": "Ocean Stream Chat",
+    "url": "{{base_url}}/ocean/stream",
+    "method": "POST",
+    "sortNum": 20000,
+    "headers": [{ "name": "Content-Type", "value": "application/json" }],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"message\": \"Explain quantum computing\",\n  \"stream\": true\n}"
+    }
+  },
+  {
+    "_id": "req_billing_health",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_monetization",
+    "name": "Billing Core Health",
+    "url": "{{billing_url}}/health",
+    "method": "GET",
+    "sortNum": 10000,
+    "headers": []
+  },
+  {
+    "_id": "req_billing_plans",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_monetization",
+    "name": "List Plans",
+    "url": "{{billing_url}}/api/v1/plans",
+    "method": "GET",
+    "sortNum": 20000,
+    "headers": []
+  },
+  {
+    "_id": "req_billing_register",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_monetization",
+    "name": "Register + Issue API Key",
+    "url": "{{billing_url}}/api/v1/register",
+    "method": "POST",
+    "sortNum": 30000,
+    "headers": [{ "name": "Content-Type", "value": "application/json" }],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"dev+{{user_id}}@clisonix.com\",\n  \"plan\": \"free\"\n}"
+    }
+  },
+  {
+    "_id": "req_billing_checkout",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_monetization",
+    "name": "Create Stripe Checkout",
+    "url": "{{billing_url}}/api/v1/checkout",
+    "method": "POST",
+    "sortNum": 40000,
+    "headers": [{ "name": "Content-Type", "value": "application/json" }],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"dev+{{user_id}}@clisonix.com\",\n  \"plan\": \"starter\",\n  \"success_url\": \"{{base_url}}/billing/success\",\n  \"cancel_url\": \"{{base_url}}/billing/cancel\"\n}"
+    }
+  },
+  {
+    "_id": "req_billing_entitlements_header",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_monetization",
+    "name": "Resolve Entitlements (Header)",
+    "url": "{{billing_url}}/api/v1/entitlements/resolve",
+    "method": "GET",
+    "sortNum": 50000,
+    "headers": [{ "name": "X-API-Key", "value": "{{api_key}}" }]
+  },
+  {
+    "_id": "req_billing_entitlements_path",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_monetization",
+    "name": "Resolve Entitlements (Path)",
+    "url": "{{billing_url}}/api/v1/entitlements/{{api_key}}",
+    "method": "GET",
+    "sortNum": 60000,
+    "headers": []
+  },
+  {
+    "_id": "req_ocean_chat_v1_apikey",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_monetization",
+    "name": "Ocean v1 Chat (with API Key)",
+    "url": "{{ocean_url}}/api/v1/chat",
+    "method": "POST",
+    "sortNum": 70000,
+    "headers": [
+      { "name": "Content-Type", "value": "application/json" },
+      { "name": "X-API-Key", "value": "{{api_key}}" }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"message\": \"Pershendetje Ocean, jep nje status te shkurter te sistemit.\"\n}"
+    }
+  },
+  {
+    "_id": "req_ocean_query_v1_apikey",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_monetization",
+    "name": "Ocean v1 Query (with API Key)",
+    "url": "{{ocean_url}}/api/v1/query",
+    "method": "POST",
+    "sortNum": 80000,
+    "headers": [
+      { "name": "Content-Type", "value": "application/json" },
+      { "name": "X-API-Key", "value": "{{api_key}}" }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"query\": \"Cilat jane capability kryesore te Ocean Core?\"\n}"
+    }
+  },
+  {
+    "_id": "req_excel_health",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_excel",
+    "name": "Excel Service Health",
+    "url": "{{excel_url}}/health",
+    "method": "GET",
+    "sortNum": 10000,
+    "headers": []
+  },
+  {
+    "_id": "req_excel_status",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_excel",
+    "name": "Excel Status",
+    "url": "{{excel_url}}/status",
+    "method": "GET",
+    "sortNum": 15000,
+    "headers": []
+  },
+  {
+    "_id": "req_excel_generate",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_excel",
+    "name": "Generate Excel Report",
+    "url": "{{excel_url}}/api/excel/generate",
+    "method": "GET",
+    "sortNum": 20000,
+    "headers": []
+  },
+  {
+    "_id": "req_excel_validate",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_excel",
+    "name": "Validate Excel File",
+    "url": "{{excel_url}}/api/excel/validate",
+    "method": "POST",
+    "sortNum": 30000,
+    "headers": [{ "name": "Content-Type", "value": "application/json" }],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"filename\": \"test.xlsx\",\n  \"data\": {}\n}"
+    }
+  },
+  {
+    "_id": "req_excel_parse",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_excel",
+    "name": "Parse Excel File",
+    "url": "{{excel_url}}/api/excel/parse",
+    "method": "POST",
+    "sortNum": 40000,
+    "headers": [{ "name": "Content-Type", "value": "application/json" }],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"filename\": \"sample.xlsx\"\n}"
+    }
+  },
+  {
+    "_id": "req_excel_formulas",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_excel",
+    "name": "Get Excel Formulas",
+    "url": "{{excel_url}}/api/excel/formulas",
+    "method": "GET",
+    "sortNum": 50000,
+    "headers": []
+  },
+  {
+    "_id": "req_excel_scripts",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_excel",
+    "name": "Office Scripts",
+    "url": "{{excel_url}}/api/excel/office-scripts",
+    "method": "GET",
+    "sortNum": 60000,
+    "headers": []
+  },
+  {
+    "_id": "req_excel_run_script",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_excel",
+    "name": "Run Excel Script",
+    "url": "{{excel_url}}/api/excel/run-script",
+    "method": "POST",
+    "sortNum": 70000,
+    "headers": [{ "name": "Content-Type", "value": "application/json" }],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"script\": \"calculateTotal\",\n  \"params\": {}\n}"
+    }
+  },
+  {
+    "_id": "req_excel_templates",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_excel",
+    "name": "List Templates",
+    "url": "{{excel_url}}/api/excel/templates",
+    "method": "GET",
+    "sortNum": 80000,
+    "headers": []
+  },
+  {
+    "_id": "req_weather_current",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_weather",
+    "name": "Current Weather",
+    "url": "{{base_url}}/api/weather/current?city=Tirana",
+    "method": "GET",
+    "sortNum": 10000,
+    "headers": []
+  },
+  {
+    "_id": "req_weather_forecast",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_weather",
+    "name": "Weather Forecast",
+    "url": "{{base_url}}/api/weather/forecast?city=Berlin&days=5",
+    "method": "GET",
+    "sortNum": 20000,
+    "headers": []
+  },
+  {
+    "_id": "req_crypto_prices",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_crypto",
+    "name": "Crypto Prices (CoinGecko)",
+    "url": "{{base_url}}/api/crypto/prices?coins=bitcoin,ethereum",
+    "method": "GET",
+    "sortNum": 10000,
+    "headers": []
+  },
+  {
+    "_id": "req_crypto_market",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_crypto",
+    "name": "Crypto Market Data",
+    "url": "{{base_url}}/api/crypto/market",
+    "method": "GET",
+    "sortNum": 20000,
+    "headers": []
+  },
+  {
+    "_id": "req_intelligence_health",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_intelligence",
+    "name": "Intelligence Lab Health",
+    "url": "{{intelligence_url}}/health",
+    "method": "GET",
+    "sortNum": 10000,
+    "headers": []
+  },
+  {
+    "_id": "req_klajdi_status",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_intelligence",
+    "name": "KLAJDI Status",
+    "url": "{{intelligence_url}}/klajdi/status",
+    "method": "GET",
+    "sortNum": 20000,
+    "headers": []
+  },
+  {
+    "_id": "req_klajdi_signals",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_intelligence",
+    "name": "KLAJDI Recent Signals",
+    "url": "{{intelligence_url}}/klajdi/signals?limit=10",
+    "method": "GET",
+    "sortNum": 30000,
+    "headers": []
+  },
+  {
+    "_id": "req_klajdi_analyze",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_intelligence",
+    "name": "KLAJDI Analyze Signal",
+    "url": "{{intelligence_url}}/klajdi/analyze",
+    "method": "POST",
+    "sortNum": 40000,
+    "headers": [{ "name": "Content-Type", "value": "application/json" }],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"signal_type\": \"market\",\n  \"data\": {\"symbol\": \"BTC\", \"price\": 45000}\n}"
+    }
+  },
+  {
+    "_id": "req_mali_status",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_intelligence",
+    "name": "MALI Status",
+    "url": "{{intelligence_url}}/mali/status",
+    "method": "GET",
+    "sortNum": 50000,
+    "headers": []
+  },
+  {
+    "_id": "req_mali_announcements",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_intelligence",
+    "name": "MALI Recent Announcements",
+    "url": "{{intelligence_url}}/mali/announcements?limit=10",
+    "method": "GET",
+    "sortNum": 60000,
+    "headers": []
+  },
+  {
+    "_id": "req_mali_announce",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_intelligence",
+    "name": "MALI Create Announcement",
+    "url": "{{intelligence_url}}/mali/announce",
+    "method": "POST",
+    "sortNum": 70000,
+    "headers": [{ "name": "Content-Type", "value": "application/json" }],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"title\": \"Test Announcement\",\n  \"message\": \"This is a test\",\n  \"priority\": \"normal\"\n}"
+    }
+  },
+  {
+    "_id": "req_users_health",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_users",
+    "name": "User Management Health",
+    "url": "{{users_url}}/health",
+    "method": "GET",
+    "sortNum": 10000,
+    "headers": []
+  },
+  {
+    "_id": "req_users_list",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_users",
+    "name": "List Users",
+    "url": "{{users_url}}/users?limit=10",
+    "method": "GET",
+    "sortNum": 20000,
+    "headers": []
+  },
+  {
+    "_id": "req_users_register",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_users",
+    "name": "Register User",
+    "url": "{{users_url}}/users/register",
+    "method": "POST",
+    "sortNum": 30000,
+    "headers": [{ "name": "Content-Type", "value": "application/json" }],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"clisonix@pm.me\",\n  \"username\": \"testuser\",\n  \"full_name\": \"Test User\"\n}"
+    }
+  },
+  {
+    "_id": "req_users_get",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_users",
+    "name": "Get User by ID",
+    "url": "{{users_url}}/users/{{user_id}}",
+    "method": "GET",
+    "sortNum": 40000,
+    "headers": []
+  },
+  {
+    "_id": "req_users_stats",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_users",
+    "name": "User Statistics",
+    "url": "{{users_url}}/users/stats",
+    "method": "GET",
+    "sortNum": 50000,
+    "headers": []
+  },
+  {
+    "_id": "req_kitchen_health",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_kitchen",
+    "name": "Kitchen Worker Health",
+    "url": "{{kitchen_url}}/health",
+    "method": "GET",
+    "sortNum": 10000,
+    "headers": []
+  },
+  {
+    "_id": "req_kitchen_stats",
+    "colId": "col_clisonix_main",
+    "containerId": "fldr_kitchen",
+    "name": "Kitchen Worker Stats",
+    "url": "{{kitchen_url}}/stats",
+    "method": "GET",
+    "sortNum": 20000,
+    "headers": []
+  }
+]
+

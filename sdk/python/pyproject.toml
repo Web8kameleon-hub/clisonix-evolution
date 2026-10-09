@@ -1,0 +1,73 @@
+[project]
+name = "clisonix"
+version = "1.0.0"
+description = "Official Python SDK for Clisonix Cloud API - Neural harmonic processing, EEG analysis, and ASI Trinity integration"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Clisonix Cloud", email = "support@clisonix.cloud"}
+]
+keywords = [
+    "clisonix",
+    "api",
+    "sdk",
+    "neural",
+    "eeg",
+    "brain",
+    "harmonic",
+    "asi"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+requires-python = ">=3.8"
+
+[project.urls]
+Homepage = "https://clisonix.cloud"
+Documentation = "https://clisonix.cloud/docs/sdk/python"
+Repository = "https://github.com/clisonix/sdk-python"
+Issues = "https://github.com/clisonix/sdk-python/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.20.0",
+    "black>=23.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0"
+]
+
+[project.scripts]
+clisonix = "clisonix:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["clisonix"]
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+[tool.mypy]
+python_version = "3.8"
+strict = true
+warn_return_any = true
+warn_unused_configs = true

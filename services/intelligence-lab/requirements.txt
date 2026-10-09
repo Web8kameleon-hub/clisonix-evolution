@@ -1,0 +1,13 @@
+# Clisonix Intelligence Lab Requirements
+# KLAJDI + MALI
+
+fastapi>=0.115.6
+uvicorn>=0.32.1
+pydantic>=2.10.0
+httpx>=0.28.1
+numpy>=2.0.0
+psutil>=6.1.0
+
+# Optional Excel support
+openpyxl>=3.1.0
+pandas>=2.0.0

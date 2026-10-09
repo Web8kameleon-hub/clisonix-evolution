@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://www.clisonix.com/icon.png</loc><lastmod>2026-07-13T15:44:38.778Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.clisonix.com/robots.txt</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.clisonix.com/sitemap.xml</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.clisonix.com</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://www.clisonix.com/modules</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://www.clisonix.com/platform</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://www.clisonix.com/pricing</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://www.clisonix.com/company</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://www.clisonix.com/brand</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://www.clisonix.com/why-clisonix</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://www.clisonix.com/developers</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://www.clisonix.com/faq</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>daily</changefreq><priority>1</priority></url>
+<url><loc>https://www.clisonix.com/modules/mood-journal</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/daily-habits</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/focus-timer</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/phone-sensors</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/curiosity-ocean</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/openmind</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/eeg-analysis</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/neural-biofeedback</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/spectrum-analyzer</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/weather-dashboard</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/fitness-dashboard</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/nanogrid-zeiss</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/kloud-bridge</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/data-collection</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://www.clisonix.com/modules/reporting-dashboard</loc><lastmod>2026-07-13T15:44:38.779Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+</urlset>

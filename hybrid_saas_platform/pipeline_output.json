@@ -1,0 +1,21 @@
+{
+    "Row_ID": "ROW-002",
+    "Timestamp": "2026-01-11 12:30:00",
+    "Protocol": "REST",
+    "Source": "api.test.com",
+    "Endpoint": "/orders",
+    "Status": "READY",
+    "Security_Status": "PASS",
+    "Validation_Status": "PASS",
+    "Agent_ID": "agent_data_002",
+    "Lab_Results": "All tests passed",
+    "Artifact_IDs": "ART-003",
+    "Maturity_State": "MATURE",
+    "ML_Score": 0.88,
+    "ML_Confidence": "HIGH",
+    "ML_Suggested_Agent": "agent_analytics_001",
+    "ML_Anomaly_Prob": 0.12,
+    "Enforcement_Mode": "ADVISORY",
+    "Compliance_Status": "COMPLIANT",
+    "API_Spec_ID": "SPEC-002"
+}

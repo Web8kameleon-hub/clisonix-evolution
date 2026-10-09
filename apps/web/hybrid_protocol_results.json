@@ -1,0 +1,440 @@
+{
+  "stats": {
+    "total_processed": 20,
+    "passed": 16,
+    "failed": 4,
+    "anomalies_detected": 0
+  },
+  "completed": [
+    {
+      "id": "503950d0",
+      "endpoint": "/api/health",
+      "method": "GET",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "core",
+      "depth": 1,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_503950d0.json",
+        "validation_log_503950d0.txt",
+        "canonical_api_503950d0.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "ValidationAgent",
+        "strategy_confidence": 0.91,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.295,
+      "timestamp": "2026-01-11T08:59:50.881332"
+    },
+    {
+      "id": "ce6f38e7",
+      "endpoint": "/api/asi/status",
+      "method": "GET",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "monitoring",
+      "depth": 2,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_ce6f38e7.json",
+        "validation_log_ce6f38e7.txt",
+        "canonical_api_ce6f38e7.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "SecurityAgent",
+        "strategy_confidence": 0.97,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.18,
+      "timestamp": "2026-01-11T08:59:50.881432"
+    },
+    {
+      "id": "e9dea2aa",
+      "endpoint": "/api/cycle/start",
+      "method": "POST",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "engine",
+      "depth": 3,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_e9dea2aa.json",
+        "validation_log_e9dea2aa.txt",
+        "canonical_api_e9dea2aa.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "SecurityAgent",
+        "strategy_confidence": 0.91,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.163,
+      "timestamp": "2026-01-11T08:59:50.881487"
+    },
+    {
+      "id": "beb19816",
+      "endpoint": "/api/alba/frame",
+      "method": "POST",
+      "protocol": "GRPC",
+      "status": "complete",
+      "layer": "processing",
+      "depth": 2,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_beb19816.json",
+        "validation_log_beb19816.txt",
+        "canonical_api_beb19816.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "DataAgent",
+        "strategy_confidence": 0.97,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.031,
+      "timestamp": "2026-01-11T08:59:50.881530"
+    },
+    {
+      "id": "a2dd1124",
+      "endpoint": "/api/albi/neural",
+      "method": "POST",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "ai",
+      "depth": 4,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_a2dd1124.json",
+        "validation_log_a2dd1124.txt",
+        "canonical_api_a2dd1124.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "ValidationAgent",
+        "strategy_confidence": 0.92,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.028,
+      "timestamp": "2026-01-11T08:59:50.881590"
+    },
+    {
+      "id": "1785e407",
+      "endpoint": "/api/jona/coordinate",
+      "method": "PUT",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "coordination",
+      "depth": 3,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_1785e407.json",
+        "validation_log_1785e407.txt",
+        "canonical_api_1785e407.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "ValidationAgent",
+        "strategy_confidence": 0.96,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.001,
+      "timestamp": "2026-01-11T08:59:50.881655"
+    },
+    {
+      "id": "169d43e6",
+      "endpoint": "/api/metrics/prometheus",
+      "method": "GET",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "metrics",
+      "depth": 2,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_169d43e6.json",
+        "validation_log_169d43e6.txt",
+        "canonical_api_169d43e6.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "PerformanceAgent",
+        "strategy_confidence": 0.88,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.275,
+      "timestamp": "2026-01-11T08:59:50.881801"
+    },
+    {
+      "id": "a5d5a04e",
+      "endpoint": "/api/billing/plans",
+      "method": "GET",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "billing",
+      "depth": 1,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_a5d5a04e.json",
+        "validation_log_a5d5a04e.txt",
+        "canonical_api_a5d5a04e.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "SecurityAgent",
+        "strategy_confidence": 0.86,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.023,
+      "timestamp": "2026-01-11T08:59:50.881840"
+    },
+    {
+      "id": "503950d0",
+      "endpoint": "/api/health",
+      "method": "GET",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "core",
+      "depth": 1,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_503950d0.json",
+        "validation_log_503950d0.txt",
+        "canonical_api_503950d0.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "ValidationAgent",
+        "strategy_confidence": 0.91,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.295,
+      "timestamp": "2026-01-11T08:59:50.881332"
+    },
+    {
+      "id": "ce6f38e7",
+      "endpoint": "/api/asi/status",
+      "method": "GET",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "monitoring",
+      "depth": 2,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_ce6f38e7.json",
+        "validation_log_ce6f38e7.txt",
+        "canonical_api_ce6f38e7.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "SecurityAgent",
+        "strategy_confidence": 0.97,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.18,
+      "timestamp": "2026-01-11T08:59:50.881432"
+    },
+    {
+      "id": "e9dea2aa",
+      "endpoint": "/api/cycle/start",
+      "method": "POST",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "engine",
+      "depth": 3,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_e9dea2aa.json",
+        "validation_log_e9dea2aa.txt",
+        "canonical_api_e9dea2aa.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "SecurityAgent",
+        "strategy_confidence": 0.91,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.163,
+      "timestamp": "2026-01-11T08:59:50.881487"
+    },
+    {
+      "id": "beb19816",
+      "endpoint": "/api/alba/frame",
+      "method": "POST",
+      "protocol": "GRPC",
+      "status": "complete",
+      "layer": "processing",
+      "depth": 2,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_beb19816.json",
+        "validation_log_beb19816.txt",
+        "canonical_api_beb19816.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "DataAgent",
+        "strategy_confidence": 0.97,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.031,
+      "timestamp": "2026-01-11T08:59:50.881530"
+    },
+    {
+      "id": "a2dd1124",
+      "endpoint": "/api/albi/neural",
+      "method": "POST",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "ai",
+      "depth": 4,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_a2dd1124.json",
+        "validation_log_a2dd1124.txt",
+        "canonical_api_a2dd1124.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "ValidationAgent",
+        "strategy_confidence": 0.92,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.028,
+      "timestamp": "2026-01-11T08:59:50.881590"
+    },
+    {
+      "id": "1785e407",
+      "endpoint": "/api/jona/coordinate",
+      "method": "PUT",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "coordination",
+      "depth": 3,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_1785e407.json",
+        "validation_log_1785e407.txt",
+        "canonical_api_1785e407.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "ValidationAgent",
+        "strategy_confidence": 0.96,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.001,
+      "timestamp": "2026-01-11T08:59:50.881655"
+    },
+    {
+      "id": "169d43e6",
+      "endpoint": "/api/metrics/prometheus",
+      "method": "GET",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "metrics",
+      "depth": 2,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_169d43e6.json",
+        "validation_log_169d43e6.txt",
+        "canonical_api_169d43e6.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "PerformanceAgent",
+        "strategy_confidence": 0.88,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.275,
+      "timestamp": "2026-01-11T08:59:50.881801"
+    },
+    {
+      "id": "a5d5a04e",
+      "endpoint": "/api/billing/plans",
+      "method": "GET",
+      "protocol": "REST",
+      "status": "complete",
+      "layer": "billing",
+      "depth": 1,
+      "security_passed": true,
+      "validation_passed": true,
+      "artifacts": [
+        "security_report_a5d5a04e.json",
+        "validation_log_a5d5a04e.txt",
+        "canonical_api_a5d5a04e.json"
+      ],
+      "ml_suggestions": {
+        "suggested_agent": "SecurityAgent",
+        "strategy_confidence": 0.86,
+        "anomaly_detected": false
+      },
+      "anomaly_score": 0.023,
+      "timestamp": "2026-01-11T08:59:50.881840"
+    }
+  ],
+  "failed": [
+    {
+      "id": "31dff31e",
+      "endpoint": "/api/../../../etc/passwd",
+      "method": "GET",
+      "protocol": "REST",
+      "status": "failed",
+      "layer": "hack",
+      "depth": 1,
+      "security_passed": false,
+      "validation_passed": true,
+      "artifacts": [],
+      "ml_suggestions": {},
+      "anomaly_score": 0.0,
+      "timestamp": "2026-01-11T08:59:50.881703"
+    },
+    {
+      "id": "ea19411d",
+      "endpoint": "/api/users",
+      "method": "INVALID",
+      "protocol": "REST",
+      "status": "failed",
+      "layer": "users",
+      "depth": 1,
+      "security_passed": true,
+      "validation_passed": false,
+      "artifacts": [],
+      "ml_suggestions": {},
+      "anomaly_score": 0.0,
+      "timestamp": "2026-01-11T08:59:50.881754"
+    },
+    {
+      "id": "31dff31e",
+      "endpoint": "/api/../../../etc/passwd",
+      "method": "GET",
+      "protocol": "REST",
+      "status": "failed",
+      "layer": "hack",
+      "depth": 1,
+      "security_passed": false,
+      "validation_passed": true,
+      "artifacts": [],
+      "ml_suggestions": {},
+      "anomaly_score": 0.0,
+      "timestamp": "2026-01-11T08:59:50.881703"
+    },
+    {
+      "id": "ea19411d",
+      "endpoint": "/api/users",
+      "method": "INVALID",
+      "protocol": "REST",
+      "status": "failed",
+      "layer": "users",
+      "depth": 1,
+      "security_passed": true,
+      "validation_passed": false,
+      "artifacts": [],
+      "ml_suggestions": {},
+      "anomaly_score": 0.0,
+      "timestamp": "2026-01-11T08:59:50.881754"
+    }
+  ]
+}

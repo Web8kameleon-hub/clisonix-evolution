@@ -1,0 +1,494 @@
+{
+  "info": {
+    "name": "UltraWebThinking Web8 API",
+    "description": "Complete API collection for Web8 AGI System - Search, Analysis, Data, AGI Status, World Surfing, GISheet, Live Activity, Mesh Network, LoRA Adaptation",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "System Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/health",
+              "host": ["{{base_url}}"],
+              "path": ["api", "health"]
+            },
+            "description": "Check system health and status"
+          }
+        },
+        {
+          "name": "API Version",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/version",
+              "host": ["{{base_url}}"],
+              "path": ["api", "version"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search Machine",
+      "item": [
+        {
+          "name": "Perform Search",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"artificial intelligence trends 2025\",\n  \"filters\": {\n    \"type\": \"web\",\n    \"language\": \"en\",\n    \"dateRange\": \"last_week\"\n  },\n  \"maxResults\": 10\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/search",
+              "host": ["{{base_url}}"],
+              "path": ["api", "search"]
+            }
+          }
+        },
+        {
+          "name": "Search History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/search/history?limit=20",
+              "host": ["{{base_url}}"],
+              "path": ["api", "search", "history"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Data/Dita/Ora",
+      "item": [
+        {
+          "name": "Current DateTime",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/datetime?locale=sq-AL&timezone=Europe/Tirane",
+              "host": ["{{base_url}}"],
+              "path": ["api", "datetime"],
+              "query": [
+                {
+                  "key": "locale",
+                  "value": "sq-AL"
+                },
+                {
+                  "key": "timezone",
+                  "value": "Europe/Tirane"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Time Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/datetime/analytics",
+              "host": ["{{base_url}}"],
+              "path": ["api", "datetime", "analytics"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "AGI Status",
+      "item": [
+        {
+          "name": "AGI Metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/agi/metrics",
+              "host": ["{{base_url}}"],
+              "path": ["api", "agi", "metrics"]
+            }
+          }
+        },
+        {
+          "name": "System Performance",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/agi/performance",
+              "host": ["{{base_url}}"],
+              "path": ["api", "agi", "performance"]
+            }
+          }
+        },
+        {
+          "name": "Update AGI Config",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"learningRate\": 0.01,\n  \"maxTokens\": 4096,\n  \"temperature\": 0.7,\n  \"enableAdvancedReasoning\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/agi/config",
+              "host": ["{{base_url}}"],
+              "path": ["api", "agi", "config"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI Analysis Engine",
+      "item": [
+        {
+          "name": "Analyze Text",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Artificial intelligence is revolutionizing industries across the globe...\",\n  \"analysisType\": \"sentiment\",\n  \"includeEntities\": true,\n  \"language\": \"en\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/analysis/text",
+              "host": ["{{base_url}}"],
+              "path": ["api", "analysis", "text"]
+            }
+          }
+        },
+        {
+          "name": "Analyze Image",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                },
+                {
+                  "key": "analysisType",
+                  "value": "object_detection",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/analysis/image",
+              "host": ["{{base_url}}"],
+              "path": ["api", "analysis", "image"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "World Surfing Engine",
+      "item": [
+        {
+          "name": "Browse Website",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://example.com\",\n  \"extractContent\": true,\n  \"followRedirects\": true,\n  \"timeout\": 30000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/surfing/browse",
+              "host": ["{{base_url}}"],
+              "path": ["api", "surfing", "browse"]
+            }
+          }
+        },
+        {
+          "name": "Crawl Domain",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"domain\": \"example.com\",\n  \"maxPages\": 100,\n  \"respectRobots\": true,\n  \"depth\": 3\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/surfing/crawl",
+              "host": ["{{base_url}}"],
+              "path": ["api", "surfing", "crawl"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "GISheet Enterprise",
+      "item": [
+        {
+          "name": "Create Workspace",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Q1 2025 Analytics\",\n  \"description\": \"Quarterly business analytics workspace\",\n  \"template\": \"analytics\",\n  \"permissions\": {\n    \"public\": false,\n    \"collaborators\": [\"user@example.com\"]\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/gisheet/workspace",
+              "host": ["{{base_url}}"],
+              "path": ["api", "gisheet", "workspace"]
+            }
+          }
+        },
+        {
+          "name": "Get Workspaces",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/gisheet/workspaces",
+              "host": ["{{base_url}}"],
+              "path": ["api", "gisheet", "workspaces"]
+            }
+          }
+        },
+        {
+          "name": "Import Data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": ""
+                },
+                {
+                  "key": "workspaceId",
+                  "value": "workspace_123",
+                  "type": "text"
+                },
+                {
+                  "key": "format",
+                  "value": "csv",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/gisheet/import",
+              "host": ["{{base_url}}"],
+              "path": ["api", "gisheet", "import"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Live Activity Feed",
+      "item": [
+        {
+          "name": "Get Recent Activities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/activity/recent?limit=50&type=all",
+              "host": ["{{base_url}}"],
+              "path": ["api", "activity", "recent"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "key": "type",
+                  "value": "all"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "WebSocket Connection",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Upgrade",
+                "value": "websocket"
+              },
+              {
+                "key": "Connection",
+                "value": "Upgrade"
+              }
+            ],
+            "url": {
+              "raw": "ws://{{base_url}}/api/activity/ws",
+              "host": ["{{base_url}}"],
+              "path": ["api", "activity", "ws"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mesh Network",
+      "item": [
+        {
+          "name": "Network Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/mesh/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "mesh", "status"]
+            }
+          }
+        },
+        {
+          "name": "Connect Node",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nodeId\": \"node_789\",\n  \"endpoint\": \"https://node789.web8.network\",\n  \"capabilities\": [\"compute\", \"storage\", \"analysis\"],\n  \"region\": \"eu-west-1\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/mesh/connect",
+              "host": ["{{base_url}}"],
+              "path": ["api", "mesh", "connect"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "LoRA Adaptation",
+      "item": [
+        {
+          "name": "List Adaptations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/lora/adaptations",
+              "host": ["{{base_url}}"],
+              "path": ["api", "lora", "adaptations"]
+            }
+          }
+        },
+        {
+          "name": "Create Adaptation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Customer Support Fine-tune\",\n  \"baseModel\": \"gpt-4\",\n  \"datasetPath\": \"/datasets/customer_support.jsonl\",\n  \"config\": {\n    \"rank\": 16,\n    \"alpha\": 32,\n    \"dropout\": 0.1,\n    \"targetModules\": [\"q_proj\", \"v_proj\"]\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/lora/create",
+              "host": ["{{base_url}}"],
+              "path": ["api", "lora", "create"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "description": "Base URL for local development"
+    },
+    {
+      "key": "base_url_prod",
+      "value": "https://ultrawebthinking.vercel.app",
+      "description": "Production URL on Vercel"
+    },
+    {
+      "key": "base_url_docker",
+      "value": "http://localhost:3000",
+      "description": "Docker container URL"
+    }
+  ]
+}

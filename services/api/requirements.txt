@@ -1,0 +1,10 @@
+fastapi>=0.115
+uvicorn[standard]
+pydantic>=2.8
+httpx
+psycopg2-binary
+sqlalchemy>=2.0
+influxdb-client
+neo4j
+weaviate-client>=4.6.4
+PyJWT[crypto]>=2.10.1

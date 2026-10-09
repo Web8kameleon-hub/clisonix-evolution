@@ -1,0 +1,535 @@
+[
+  {
+    "id": "149f417a9108af6888eea223fce9a657",
+    "query": "ops:local_python_installed_packages",
+    "response": "{\"installed_packages\": [{\"name\": \"aiofiles\", \"version\": \"25.1.0\"}, {\"name\": \"aiohappyeyeballs\", \"version\": \"2.6.1\"}, {\"name\": \"aiohttp\", \"version\": \"3.9.3\"}, {\"name\": \"aiosignal\", \"version\": \"1.4.0\"}, {\"name\": \"annotated-doc\", \"version\": \"0.0.4\"}, {\"name\": \"annotated-types\", \"version\": \"0.7.0\"}, {\"name\": \"anyio\", \"version\": \"4.13.0\"}, {\"name\": \"asyncpg\", \"version\": \"0.31.0\"}, {\"name\": \"attrs\", \"version\": \"26.1.0\"}, {\"name\": \"audioop-lts\", \"version\": \"0.2.2\"}, {\"name\": \"audioread\", \"version\": \"3.1.0\"}, {\"name\": \"Authlib\", \"version\": \"1.7.0\"}, {\"name\": \"bcrypt\", \"version\": \"5.0.0\"}, {\"name\": \"build\", \"version\": \"1.5.0\"}, {\"name\": \"cbor2\", \"version\": \"5.9.0\"}, {\"name\": \"certifi\", \"version\": \"2026.2.25\"}, {\"name\": \"cffi\", \"version\": \"2.0.0\"}, {\"name\": \"charset-normalizer\", \"version\": \"3.4.7\"}, {\"name\": \"click\", \"version\": \"8.3.2\"}, {\"name\": \"clx-ai\", \"version\": \"0.1.0\"}, {\"name\": \"clx-ai\", \"version\": \"0.1.0\"}, {\"name\": \"colorama\", \"version\": \"0.4.6\"}, {\"name\": \"contourpy\", \"version\": \"1.3.3\"}, {\"name\": \"cryptography\", \"version\": \"47.0.0\"}, {\"name\": \"cycler\", \"version\": \"0.12.1\"}, {\"name\": \"decorator\", \"version\": \"5.2.1\"}, {\"name\": \"dnspython\", \"version\": \"2.8.0\"}, {\"name\": \"docutils\", \"version\": \"0.22.4\"}, {\"name\": \"et_xmlfile\", \"version\": \"2.0.0\"}, {\"name\": \"fastapi\", \"version\": \"0.109.2\"}, {\"name\": \"filelock\", \"version\": \"3.28.0\"}, {\"name\": \"fonttools\", \"version\": \"4.62.1\"}, {\"name\": \"frozenlist\", \"version\": \"1.8.0\"}, {\"name\": \"fsspec\", \"version\": \"2026.3.0\"}, {\"name\": \"greenlet\", \"version\": \"3.4.0\"}, {\"name\": \"grpcio\", \"version\": \"1.78.0\"}, {\"name\": \"h11\", \"version\": \"0.16.0\"}, {\"name\": \"httpcore\", \"version\": \"1.0.9\"}, {\"name\": \"httptools\", \"version\": \"0.7.1\"}, {\"name\": \"httpx\", \"version\": \"0.26.0\"}, {\"name\": \"huggingface_hub\", \"version\": \"0.36.2\"}, {\"name\": \"id\", \"version\": \"1.6.1\"}, {\"name\": \"idna\", \"version\": \"3.11\"}, {\"name\": \"iniconfig\", \"version\": \"2.3.0\"}, {\"name\": \"jaraco.classes\", \"version\": \"3.4.0\"}, {\"name\": \"jaraco.context\", \"version\": \"6.1.2\"}, {\"name\": \"jaraco.functools\", \"version\": \"4.4.0\"}, {\"name\": \"Jinja2\", \"version\": \"3.1.6\"}, {\"name\": \"joblib\", \"version\": \"1.5.3\"}, {\"name\": \"joserfc\", \"version\": \"1.6.4\"}, {\"name\": \"jsonpatch\", \"version\": \"1.33\"}, {\"name\": \"jsonpointer\", \"version\": \"3.1.1\"}, {\"name\": \"keyring\", \"version\": \"25.7.0\"}, {\"name\": \"kiwisolver\", \"version\": \"1.5.0\"}, {\"name\": \"langchain\", \"version\": \"1.2.15\"}, {\"name\": \"langchain-classic\", \"version\": \"1.0.3\"}, {\"name\": \"langchain-core\", \"version\": \"1.2.30\"}, {\"name\": \"langchain-text-splitters\", \"version\": \"1.1.1\"}, {\"name\": \"langgraph\", \"version\": \"1.1.6\"}, {\"name\": \"langgraph-checkpoint\", \"version\": \"4.0.2\"}, {\"name\": \"langgraph-prebuilt\", \"version\": \"1.0.9\"}, {\"name\": \"langgraph-sdk\", \"version\": \"0.3.13\"}, {\"name\": \"langsmith\", \"version\": \"0.7.32\"}, {\"name\": \"lazy-loader\", \"version\": \"0.5\"}, {\"name\": \"librosa\", \"version\": \"0.11.0\"}, {\"name\": \"livekit\", \"version\": \"1.1.6\"}, {\"name\": \"livekit-api\", \"version\": \"1.1.0\"}, {\"name\": \"livekit-protocol\", \"version\": \"1.1.5\"}, {\"name\": \"llvmlite\", \"version\": \"0.47.0\"}, {\"name\": \"loguru\", \"version\": \"0.7.2\"}, {\"name\": \"markdown-it-py\", \"version\": \"4.1.0\"}, {\"name\": \"MarkupSafe\", \"version\": \"3.0.3\"}, {\"name\": \"matplotlib\", \"version\": \"3.10.8\"}, {\"name\": \"mdurl\", \"version\": \"0.1.2\"}, {\"name\": \"mne\", \"version\": \"1.12.0\"}, {\"name\": \"more-itertools\", \"version\": \"11.0.2\"}, {\"name\": \"motor\", \"version\": \"3.7.1\"}, {\"name\": \"mpmath\", \"version\": \"1.3.0\"}, {\"name\": \"msgpack\", \"version\": \"1.1.2\"}, {\"name\": \"multidict\", \"version\": \"6.7.1\"}, {\"name\": \"neo4j\", \"version\": \"5.17.0\"}, {\"name\": \"networkx\", \"version\": \"3.6.1\"}, {\"name\": \"nh3\", \"version\": \"0.3.5\"}, {\"name\": \"numba\", \"version\": \"0.65.0\"}, {\"name\": \"numpy\", \"version\": \"2.4.4\"}, {\"name\": \"openpyxl\", \"version\": \"3.1.5\"}, {\"name\": \"orjson\", \"version\": \"3.11.8\"}, {\"name\": \"ormsgpack\", \"version\": \"1.12.2\"}, {\"name\": \"packaging\", \"version\": \"26.1\"}, {\"name\": \"passlib\", \"version\": \"1.7.4\"}, {\"name\": \"pillow\", \"version\": \"12.2.0\"}, {\"name\": \"pip\", \"version\": \"26.1.1\"}, {\"name\": \"platformdirs\", \"version\": \"4.9.6\"}, {\"name\": \"pluggy\", \"version\": \"1.6.0\"}, {\"name\": \"pooch\", \"version\": \"1.9.0\"}, {\"name\": \"propcache\", \"version\": \"0.4.1\"}, {\"name\": \"protobuf\", \"version\": \"6.33.6\"}, {\"name\": \"psutil\", \"version\": \"7.2.2\"}, {\"name\": \"pycparser\", \"version\": \"3.0\"}, {\"name\": \"pydantic\", \"version\": \"2.13.3\"}, {\"name\": \"pydantic-settings\", \"version\": \"2.13.1\"}, {\"name\": \"pydantic_core\", \"version\": \"2.46.3\"}, {\"name\": \"Pygments\", \"version\": \"2.20.0\"}, {\"name\": \"PyJWT\", \"version\": \"2.12.1\"}, {\"name\": \"pymongo\", \"version\": \"4.17.0\"}, {\"name\": \"pyparsing\", \"version\": \"3.3.2\"}, {\"name\": \"pyproject_hooks\", \"version\": \"1.2.0\"}, {\"name\": \"pytest\", \"version\": \"9.0.3\"}, {\"name\": \"pytest-asyncio\", \"version\": \"1.3.0\"}, {\"name\": \"python-dateutil\", \"version\": \"2.8.2\"}, {\"name\": \"python-dotenv\", \"version\": \"1.2.2\"}, {\"name\": \"python-multipart\", \"version\": \"0.0.26\"}, {\"name\": \"pytz\", \"version\": \"2026.1.post1\"}, {\"name\": \"pywin32-ctypes\", \"version\": \"0.2.3\"}, {\"name\": \"PyYAML\", \"version\": \"6.0.3\"}, {\"name\": \"readme_renderer\", \"version\": \"44.0\"}, {\"name\": \"redis\", \"version\": \"7.4.0\"}, {\"name\": \"regex\", \"version\": \"2026.4.4\"}, {\"name\": \"requests\", \"version\": \"2.33.1\"}, {\"name\": \"requests-toolbelt\", \"version\": \"1.0.0\"}, {\"name\": \"rfc3986\", \"version\": \"2.0.0\"}, {\"name\": \"rich\", \"version\": \"15.0.0\"}, {\"name\": \"safetensors\", \"version\": \"0.7.0\"}, {\"name\": \"scikit-learn\", \"version\": \"1.8.0\"}, {\"name\": \"scipy\", \"version\": \"1.17.1\"}, {\"name\": \"setuptools\", \"version\": \"81.0.0\"}, {\"name\": \"six\", \"version\": \"1.17.0\"}, {\"name\": \"sniffio\", \"version\": \"1.3.1\"}, {\"name\": \"soundfile\", \"version\": \"0.13.1\"}, {\"name\": \"soxr\", \"version\": \"1.0.0\"}, {\"name\": \"SQLAlchemy\", \"version\": \"2.0.49\"}, {\"name\": \"standard-aifc\", \"version\": \"3.13.0\"}, {\"name\": \"standard-chunk\", \"version\": \"3.13.0\"}, {\"name\": \"standard-sunau\", \"version\": \"3.13.0\"}, {\"name\": \"starlette\", \"version\": \"0.36.3\"}, {\"name\": \"stripe\", \"version\": \"15.0.1\"}, {\"name\": \"sympy\", \"version\": \"1.14.0\"}, {\"name\": \"tenacity\", \"version\": \"9.1.4\"}, {\"name\": \"threadpoolctl\", \"version\": \"3.6.0\"}, {\"name\": \"tokenizers\", \"version\": \"0.21.4\"}, {\"name\": \"torch\", \"version\": \"2.11.0\"}, {\"name\": \"tqdm\", \"version\": \"4.67.3\"}, {\"name\": \"transformers\", \"version\": \"4.53.3\"}, {\"name\": \"twine\", \"version\": \"6.2.0\"}, {\"name\": \"types-protobuf\", \"version\": \"7.34.1.20260408\"}, {\"name\": \"types-psutil\", \"version\": \"7.2.2.20260408\"}, {\"name\": \"types-requests\", \"version\": \"2.33.0.20260408\"}, {\"name\": \"typing-inspection\", \"version\": \"0.4.2\"}, {\"name\": \"typing_extensions\", \"version\": \"4.15.0\"}, {\"name\": \"urllib3\", \"version\": \"2.6.3\"}, {\"name\": \"uuid_utils\", \"version\": \"0.14.1\"}, {\"name\": \"uvicorn\", \"version\": \"0.27.1\"}, {\"name\": \"validators\", \"version\": \"0.35.0\"}, {\"name\": \"watchfiles\", \"version\": \"1.1.1\"}, {\"name\": \"weaviate-client\", \"version\": \"4.21.0\"}, {\"name\": \"websockets\", \"version\": \"16.0\"}, {\"name\": \"win32_setctime\", \"version\": \"1.2.0\"}, {\"name\": \"xxhash\", \"version\": \"3.6.0\"}, {\"name\": \"yarl\", \"version\": \"1.23.0\"}, {\"name\": \"zstandard\", \"version\": \"0.25.0\"}]}",
+    "confidence": 0.97,
+    "sources": [
+      "local:importlib.metadata"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.881525+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "19b674abae9ee64317999d006df0bde2",
+    "query": "ops:local_material:requirements-autolearning.txt",
+    "response": "# Requirements for Auto-Learning Service\n# Production-grade dependencies\n\n# Core\nnumpy>=2.0.0\ncbor2>=5.6.5\n\n# Optional but recommended\naiohttp>=3.11.0\nrequests>=2.32.3\n\n# Monitoring (optional)\nprometheus-client>=0.21.1",
+    "confidence": 0.89,
+    "sources": [
+      "local:requirements-autolearning.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.894269+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "f0d2d27204b6922f8c3c9a7167a0724d",
+    "query": "ops:local_material:requirements-dev.txt",
+    "response": "pytest>=8.3.0\nuvicorn[standard]>=0.32.1\nrequests>=2.32.3\nruff>=0.8.0\nhttpx>=0.28.1",
+    "confidence": 0.87,
+    "sources": [
+      "local:requirements-dev.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.897029+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "19a856821dacc097d3567c585c066b19",
+    "query": "ops:local_material:requirements-ocean.txt",
+    "response": "# Ultra-Light Ocean Core Requirements\n# Minimal CPU footprint, maximum performance\n\n# Core\nfastapi>=0.115.0\nuvicorn>=0.30.0\nuvloop>=0.20.0\nhttpx[http2]>=0.27.0\nh2>=4.1.0\npydantic>=2.10.0\n\n# Data\nduckdb>=1.1.0\nduckdb-engine>=0.14.0\nredis>=5.2.0\n# aioredis deprecated, use redis.asyncio instead\n\n# Encoding/Decoding - Binary Only (NO JSON)\nmsgpack>=1.1.0\ncbor2>=5.6.5\norjson>=3.10.0\n\n# Monitoring\nprometheus-client>=0.21.0\n\n# Utilities\npython-dotenv>=1.0.1\nstructlog>=24.4.0",
+    "confidence": 0.89,
+    "sources": [
+      "local:requirements-ocean.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.899914+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "51bacc236db21942736ce60047e082eb",
+    "query": "ops:local_material:requirements-test.txt",
+    "response": "fastapi>=0.115.6\nuvicorn>=0.32.1\nrequests>=2.32.3\npytest>=8.3.0\npytest-asyncio>=0.24.0\nhttpx>=0.28.1",
+    "confidence": 0.87,
+    "sources": [
+      "local:requirements-test.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.902234+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "3822c4d90c22f5dd9ee1db9ff54f153c",
+    "query": "ops:local_material:requirements.txt",
+    "response": "# ═══════════════════════════════════════════════════════════════\n# Clisonix Main Requirements - Updated Feb 2026\n# ═══════════════════════════════════════════════════════════════\n\nfastapi>=0.115.6\nuvicorn>=0.34.0\npydantic>=2.10.4\npydantic-settings>=2.7.0\npsutil>=6.1.0\n\n# Data\nnumpy>=2.2.0\npandas>=2.2.3\n\n# Audio Processing\nlibrosa>=0.10.2\nsoundfile>=0.13.0\nmne>=1.8.0\n\n# Database\nasyncpg>=0.30.0\nredis>=5.2.1\nsqlalchemy>=2.0.36\n\n# Security & Encryption (Compliance)\ncryptography>=42.0.0\npyOpenSSL>=26.0.0\nstripe>=10.0.0\n\n# Cloud\nboto3>=1.36.0\n\n# Docker\ndocker>=7.1.0\n\n# HTTP\nrequests>=2.32.3\nhttpx>=0.28.1\n\n# Speech\nSpeechRecognition>=3.14.0\nfaster-whisper>=1.1.0\npydub>=0.25.1\nedge-tts>=7.0.0\n\n# PDF\nreportlab>=4.2.5\n\n# Binary encoding\ncbor2>=5.6.5\nmsgpack>=1.1.2\norjson>=3.10.14\n\n# Observability\nopentelemetry-api>=1.30.0\nopentelemetry-sdk>=1.30.0\nopentelemetry-instrumentation-fastapi>=0.51b0\nopentelemetry-instrumentation-httpx>=0.51b0\nopentelemetry-instrumentation-requests>=0.51b0\nopentelemetry-instrumentation-aiohttp-client>=0.51b0\nopentelemetry-instrumentation-logging>=0.51b0\nopentelemetry-exporter-otlp>=1.30.0\nopentelemetry-exporter-otlp-proto-http>=1.30.0\n\n# Payments\nstripe>=12.1.0\npydantic-extra-types>=2.10.1",
+    "confidence": 0.9,
+    "sources": [
+      "local:requirements.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.904464+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "b9fed22277110204b31d3582dda3c446",
+    "query": "ops:local_material:9999/requirements.txt",
+    "response": "fastapi>=0.104.0\nuvicorn>=0.24.0\nhttpx>=0.25.0\npydantic>=2.5.0\npython-dotenv>=1.0.0\nnumpy>=1.26.0\npillow>=10.0.0\nimageio>=2.34.0\nimageio-ffmpeg>=0.4.9",
+    "confidence": 0.89,
+    "sources": [
+      "local:9999/requirements.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.906753+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "34f69ff1b2cfa710abf73b8265d5d5de",
+    "query": "ops:local_material:airflow/requirements.txt",
+    "response": "requests>=2.32.0\nweaviate-client>=4.6.4\npsycopg2-binary>=2.9.9\nneo4j>=5.22.0\nboto3>=1.34.0",
+    "confidence": 0.87,
+    "sources": [
+      "local:airflow/requirements.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.909263+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "ac4c1d04806c66f2ab40c6635bd8f1f8",
+    "query": "ops:local_material:excel-core/requirements.txt",
+    "response": "fastapi>=0.104.0\nuvicorn>=0.24.0\npsutil>=5.9.0\nopenpyxl>=3.1.5",
+    "confidence": 0.87,
+    "sources": [
+      "local:excel-core/requirements.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.911539+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "4c8da36d2cafca7121424d15180d292c",
+    "query": "ops:local_material:hybrid_saas_platform/requirements.txt",
+    "response": "# Hybrid Protocol Sovereign System\n# Dependencies\n\nopenpyxl>=3.1.0\npydantic>=2.0.0\npython-dateutil>=2.8.0\n\n# Excel Dashboard with Windows pop-ups (requires Microsoft Excel)\nxlwings>=0.30.0",
+    "confidence": 0.89,
+    "sources": [
+      "local:hybrid_saas_platform/requirements.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.914031+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "6746f3b38fac5b281e95677f67a27604",
+    "query": "ops:local_material:kloud-soc-clean/requirements-autolearning.txt",
+    "response": "# Requirements for Auto-Learning Service\n# Production-grade dependencies\n\n# Core\nnumpy>=2.0.0\ncbor2>=5.6.5\n\n# Optional but recommended\naiohttp>=3.11.0\nrequests>=2.32.3\n\n# Monitoring (optional)\nprometheus-client>=0.21.1",
+    "confidence": 0.89,
+    "sources": [
+      "local:kloud-soc-clean/requirements-autolearning.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.916482+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "262f745b2e5e2009adb004be8a54b116",
+    "query": "ops:local_material:kloud-soc-clean/requirements-dev.txt",
+    "response": "pytest>=8.3.0\nuvicorn[standard]>=0.32.1\nrequests>=2.32.3\nruff>=0.8.0\nhttpx>=0.28.1",
+    "confidence": 0.87,
+    "sources": [
+      "local:kloud-soc-clean/requirements-dev.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.919418+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "49bcdc5711fd00ac4f65e34cd7d90887",
+    "query": "ops:local_material:kloud-soc-clean/requirements-ocean.txt",
+    "response": "# Ultra-Light Ocean Core Requirements\n# Minimal CPU footprint, maximum performance\n\n# Core\nfastapi>=0.115.0\nuvicorn>=0.30.0\nuvloop>=0.20.0\nhttpx[http2]>=0.27.0\nh2>=4.1.0\npydantic>=2.10.0\n\n# Data\nduckdb>=1.1.0\nduckdb-engine>=0.14.0\nredis>=5.2.0\n# aioredis deprecated, use redis.asyncio instead\n\n# Encoding/Decoding - Binary Only (NO JSON)\nmsgpack>=1.1.0\ncbor2>=5.6.5\norjson>=3.10.0\n\n# Monitoring\nprometheus-client>=0.21.0\n\n# Utilities\npython-dotenv>=1.0.1\nstructlog>=24.4.0",
+    "confidence": 0.89,
+    "sources": [
+      "local:kloud-soc-clean/requirements-ocean.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.921906+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "8d1e60a29707c3843db90edf2f585010",
+    "query": "ops:local_material:kloud-soc-clean/requirements-test.txt",
+    "response": "fastapi>=0.115.6\nuvicorn>=0.32.1\nrequests>=2.32.3\npytest>=8.3.0\npytest-asyncio>=0.24.0\nhttpx>=0.28.1",
+    "confidence": 0.87,
+    "sources": [
+      "local:kloud-soc-clean/requirements-test.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.924522+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "904435d829d5fee48d8df017c24b0c4b",
+    "query": "ops:local_material:kloud-soc-clean/requirements.txt",
+    "response": "# ═══════════════════════════════════════════════════════════════\n# Clisonix Main Requirements - Updated Feb 2026\n# ═══════════════════════════════════════════════════════════════\n\nfastapi>=0.115.6\nuvicorn>=0.34.0\npydantic>=2.10.4\npydantic-settings>=2.7.0\npsutil>=6.1.0\n\n# Data\nnumpy>=2.2.0\npandas>=2.2.3\n\n# Audio Processing\nlibrosa>=0.10.2\nsoundfile>=0.13.0\nmne>=1.8.0\n\n# Database\nasyncpg>=0.30.0\nredis>=5.2.1\nsqlalchemy>=2.0.36\n\n# Security & Encryption (Compliance)\ncryptography>=42.0.0\npyOpenSSL>=26.0.0\nstripe>=10.0.0\n\n# Cloud\nboto3>=1.36.0\n\n# Docker\ndocker>=7.1.0\n\n# HTTP\nrequests>=2.32.3\nhttpx>=0.28.1\n\n# Speech\nSpeechRecognition>=3.14.0\nfaster-whisper>=1.1.0\npydub>=0.25.1\nedge-tts>=7.0.0\n\n# PDF\nreportlab>=4.2.5\n\n# Binary encoding\ncbor2>=5.6.5\nmsgpack>=1.1.2\norjson>=3.10.14\n\n# Observability\nopentelemetry-api>=1.30.0\nopentelemetry-sdk>=1.30.0\nopentelemetry-instrumentation-fastapi>=0.51b0\nopentelemetry-instrumentation-httpx>=0.51b0\nopentelemetry-instrumentation-requests>=0.51b0\nopentelemetry-instrumentation-aiohttp-client>=0.51b0\nopentelemetry-instrumentation-logging>=0.51b0\nopentelemetry-exporter-otlp>=1.30.0\nopentelemetry-exporter-otlp-proto-http>=1.30.0\n\n# Payments\nstripe>=12.1.0\npydantic-extra-types>=2.10.1",
+    "confidence": 0.9,
+    "sources": [
+      "local:kloud-soc-clean/requirements.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.927002+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "3b5f87c41ec9492faca42c29bc9bd7e1",
+    "query": "ops:local_material:ocean-core/requirements-internal-core.txt",
+    "response": "# Internal core runtime profile (default-safe)\nfastapi>=0.115.0\nuvicorn>=0.30.0\nhttpx[http2]>=0.27.0\npydantic>=2.10.0\naiohttp>=3.11.0\npython-multipart>=0.0.9\n\n# Serialization / transport\ncbor2>=5.6.5\nmsgpack>=1.1.0\norjson>=3.10.0\n\n# Runtime infra\nredis>=5.2.0\nprometheus-client>=0.21.0\npython-dotenv>=1.0.1\nstructlog>=24.4.0\npyyaml>=6.0.0\nrequests>=2.31.0\n\n# Voice/document utilities currently used by Ocean\nedge-tts>=7.0.0\npypdf>=4.2.0\nfaster-whisper>=1.1.0",
+    "confidence": 0.89,
+    "sources": [
+      "local:ocean-core/requirements-internal-core.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.929551+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "ccf98e7f83276c298cd129ebc57b27c7",
+    "query": "ops:local_material:ocean-core/requirements-internal-eeg.txt",
+    "response": "# Internal EEG / biosignal profile\nmne>=1.8.0\nneurokit2>=0.2.10\npyedflib>=0.1.39\nbiosppy>=2.2.2\npyriemann>=0.7\nbraindecode>=0.8.1",
+    "confidence": 0.89,
+    "sources": [
+      "local:ocean-core/requirements-internal-eeg.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.932410+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "4a0ec708318434ad6b0f99667129805e",
+    "query": "ops:local_material:ocean-core/requirements-internal-llm.txt",
+    "response": "# Internal LLM profile (no external API SDKs)\n# Install this on nodes that host model inference/training workloads.\n\n# Core DL stack\ntorch>=2.4.0\ntransformers>=4.45.0\naccelerate>=1.0.0\n\n# Fine-tuning / optimization\nbitsandbytes>=0.44.0\npeft>=0.13.0\ntrl>=0.11.0\nxformers>=0.0.28\n\n# Serving / runtime\nvllm>=0.6.0\nonnxruntime-gpu>=1.20.0\nray[serve]>=2.37.0\nbentoml>=1.3.0\n\n# Vector/reasoning runtime\nfaiss-cpu>=1.8.0\nchromadb>=0.5.0\npymilvus>=2.4.0\nlanggraph>=0.2.0",
+    "confidence": 0.89,
+    "sources": [
+      "local:ocean-core/requirements-internal-llm.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.935043+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "7a47d0dafbb85d3cd5e5abea84d2e3e8",
+    "query": "ops:local_material:ocean-core/requirements-internal-multimodal.txt",
+    "response": "# Internal multimodal profile\nopencv-python>=4.10.0\nfaster-whisper>=1.1.0\npydub>=0.25.1\nmoviepy>=1.0.3\ndiffusers>=0.31.0\ncontrolnet_aux>=0.0.9",
+    "confidence": 0.89,
+    "sources": [
+      "local:ocean-core/requirements-internal-multimodal.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.937905+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "0ce9cefb2c05338f896a991b7ba821a9",
+    "query": "ops:local_material:ocean-core/requirements-lite.txt",
+    "response": "# Ocean Core Lite - Minimal Requirements\nfastapi>=0.115.0\nuvicorn>=0.32.0\nhttpx[http2]>=0.27.0\nh2>=4.1.0\npydantic>=2.9.0\nfaster-whisper>=1.1.0\nelasticsearch>=8.0.0,<9.0.0",
+    "confidence": 0.89,
+    "sources": [
+      "local:ocean-core/requirements-lite.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.941015+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "9b8f34980a2729c94455eeb9e43d3524",
+    "query": "ops:local_material:ocean-core/requirements.txt",
+    "response": "# Ocean-Core Requirements - BINARY FIRST (NO JSON for messages)\n# Clisonix Cloud v2.4.0 - CBP Protocol Edition\n\n# Core Framework\nfastapi>=0.104.0\nuvicorn>=0.24.0\nhttpx>=0.25.0\npydantic>=2.5.0\naiohttp>=3.11.0\npython-multipart>=0.0.9\n\n# Language Detection & Translation\nlangdetect>=1.0.9\ngoogletrans==4.0.2\n\n# Binary Serialization (CBOR2 + MessagePack - NO JSON)\ncbor2>=5.6.0\nmsgpack>=1.0.7\n\n# Fast JSON (for config files only, NOT messages)\norjson>=3.9.0\n\n# Async\nanyio>=4.0.0\naiofiles>=23.0.0\n\n# Data & Monitoring\nnumpy>=1.26.0\nredis>=5.0.0\nprometheus-client>=0.18.0\n\n# Utils\npython-dotenv>=1.0.0\nstructlog>=23.2.0\npyyaml>=6.0.0\nrequests>=2.31.0\nedge-tts>=6.1.10\npypdf>=4.2.0\npython-docx>=1.1.2\nopenpyxl>=3.1.5\nxlrd>=2.0.1\nfaster-whisper>=1.0.3",
+    "confidence": 0.89,
+    "sources": [
+      "local:ocean-core/requirements.txt"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.943611+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "6f29ffd59f9c51a65fc600aa8bb1191d",
+    "query": "ops:high_value_code:ocean-core/xlc/xlc_alphabet.py",
+    "response": "\"\"\"\nXLC WWWMMM Alphabet — 26 fizike profile unike per çdo shkronjë angleze.\n\nÇdo simbol ka 6 dimensione:\n  W1 = amplitude envelope    (4 samples)\n  W2 = phase progression     (4 samples)\n  W3 = wavefront coherence   (4 samples)\n  M1 = base frequency        (4 samples)\n  M2 = harmonic spread       (4 samples)\n  M3 = jitter_ns             (4 samples)\n\nProfile janë gjeneruar me formulë deterministike bazuar në pozicionin e shkronjës,\nduke siguruar distancë minumale cosine >= 0.04 ndërmjet çdo çifti simbolesh.\n\"\"\"\nfrom __future__ import annotations\n\nimport math\nimport unicodedata\nfrom dataclasses import dataclass\nfrom typing import Dict, List\n\n\n@dataclass(frozen=True)\nclass WWWMMM:\n    \"\"\"6-dimensional physical resonance profile — the XLC symbol fingerprint.\"\"\"\n\n    w1_amplitude: List[float]     # envelope shape\n    w2_phase: List[float]         # phase progression\n    w3_coherence: List[float]     # wavefront coherence (inter-sample correlance)\n    m1_frequency: List[float]     # base frequency band\n    m2_harmonic: List[float]      # harmonic spread\n    m3_jitter_ns: List[float]     # nanosecond timing jitter\n\n    def to_vector(self) -> List[float]:\n        \"\"\"Flatten all 6×4 = 24 floats into a single feature vector.\n\n        Jitter is scaled by 1/1000 to keep magnitudes comparable.\n        \"\"\"\n        jitter_scaled = [v / 1000.0 for v in self.m3_jitter_ns]\n        return [\n            *self.w1_amplitude,\n            *self.w2_phase,\n            *self.w3_coherence,\n            *self.m1_frequency,\n            *self.m2_harmonic,\n            *jitter_scaled,\n        ]\n\n\nLATIN_BASE_ALPHABET = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\"\n\n\ndef _profile_for(index: int) -> WWWMMM:\n    \"\"\"Deterministike: çdo shkronjë merr profile bazuar në indeksin (0–25).\n\n    Formulë: dimensione të derivuara nga harmonikat e π dhe e bazuar\n    në frekuencën karakteristike të pozicionit.\n    \"\"\"\n    i = index\n    n = 26  # total symbols\n\n    base = (i + 1) / n  # në (0, 1]\n    angle_step = math.pi * 2 * (i + 1) / n\n\n    def w1(k: int) -> float:\n        return round(0.55 + 0.40 * math.sin(angle_step * (k + 1) + 0.0), 6)\n\n    def w2(k: int) -> float:\n        return round(0.10 + 0.85 * abs(math.cos(angle_step * (k + 1) / 2 + base)), 6)\n\n    def w3(k: int) -> float:\n        return round(0.50 + 0.45 * math.sin(angle_step / 3 * (k + 1) + math.pi / 4), 6)\n\n    def m1(k: int) -> float:\n        return round(0.15 + 0.80 * abs(math.sin(angle_step * (k + 1) * 1.5 + base * math.pi)), 6)\n\n    def m2(k: int) -> float:\n        return round(0.20 + 0.70 * abs(math.cos(angle_step * (k + 1) * 2.3 + 0.5)), 6)\n\n    def m3(k: int) -> float:\n        # jitter qëndron në [8, 42] nanosekonda\n        return round(8.0 + 34.0 * abs(math.sin(angle_step * (k + 1) * 0.7 + base)), 6)\n\n    return WWWMMM(\n        w1_amplitude=[w1(k) for k in range(4)],\n        w2_phase=[w2(k) for k in range(4)],\n        w3_coherence=[w3(k) for k in range(4)],\n        m1_frequency=[m1(k) for k in range(4)],\n        m2_harmonic=[m2(k) for k in range(4)],\n        m3_jitter_ns=[m3(k) for k in range(4)],\n    )\n\n\ndef normalize_symbol(symbol: str) -> str:\n    \"\"\"Normalizon simbolin në formën kanonike 1-karakterëshe për XLC.\"\"\"\n    normalized = unicodedata.normalize(\"NFKC\", symbol or \"\").strip().upper()\n    if not normalized:\n        return \"\"\n    return normalized[0]\n\n\ndef _profile_for_unicode_symbol(symbol: str) -> WWWMMM:\n    \"\"\"Gjeneron profil deterministik për çdo shkronjë Unicode.\"\"\"\n    normalized = normalize_symbol(symbol)\n    if normalized in LATIN_BASE_ALPHABET:\n        return _profile_for(LATIN_BASE_ALPHABET.index(normalized))\n\n    codepoint = ord(normalized)\n    seed = codepoint + 1\n    base = ((seed % 4096) + 1) / 4096.0\n    angle_step = math.pi * 2 * ((seed % 1024) + 1) / 1024.0\n    drift = ((seed // 7) % 257) / 257.0\n\n    def w1(k: int) -> float:\n        return round(0.50 + 0.43 * math.sin(angle_step * (k + 1) + drift), 6)\n\n    def w2(k: int) -> float:\n        return round(0.12 + 0.82 * abs(math.cos(angle_step * (k",
+    "confidence": 0.94,
+    "sources": [
+      "code:ocean-core/xlc/xlc_alphabet.py"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.948375+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "a8505b80b680582f0a5ebf6989c21a18",
+    "query": "ops:high_value_code:ocean-core/xlc/xlc_codec.py",
+    "response": "\"\"\"\nXLC Codec — eXtreme Latency Codec për WWWMMM.\n\nInovacioni kryesor ndaj ResonanceChannel:\n  - Alfabeti parakompjutohet si matric (lista e listave) në __init__\n  - Decode = 1 kalim: dot-product i vektorit incoming me ÇDDO rresht të matricës\n  - Nuk ka loop for-symbol brenda decode_sample (ose ka por overhead i jashtëzakonshëm\n    minimizohet pasi matrix është e ndërtuar me cache locality)\n  - Latency e kthimit matet me time.perf_counter_ns()\n  - Kthimi i plotë: simboli, confidence, deformation, latency_ns (integer)\n\nRregull NO_FAKE_DATA: nëse asnjë simbol nuk kalon min_confidence, kthehet\n  symbol=None — asnjëherë mos invento rezultat.\n\"\"\"\nfrom __future__ import annotations\n\nimport time\nfrom dataclasses import dataclass\nfrom typing import Dict, List, Optional, Tuple\n\nimport numpy as np\nfrom xlc_alphabet import ALPHABET, WWWMMM, normalize_symbol, resolve_profile  # type: ignore\n\n# ---------------------------------------------------------------------------\n# Data classes\n# ---------------------------------------------------------------------------\n\n@dataclass(frozen=True)\nclass XLCPacket:\n    \"\"\"Paketa e enkoduar gati për transmetim ose ruajtje.\"\"\"\n\n    symbol: str\n    profile: WWWMMM\n    encode_latency_ns: int\n\n\n@dataclass(frozen=True)\nclass XLCResult:\n    \"\"\"Rezultati i dekodimit — gjithmonë real, asnjëherë i shpikur.\"\"\"\n\n    symbol: Optional[str]          # None nëse confidence < threshold\n    confidence: float              # [0.0, 1.0]\n    deformation: float             # distanca euklidiane nga profili ideal\n    decode_latency_ns: int         # nanosekonda\n\n\n# ---------------------------------------------------------------------------\n# Precomputed matrix for batch cosine similarity\n# ---------------------------------------------------------------------------\n\nclass _AlphabetMatrix:\n    \"\"\"Matric numpy e parakompjutuar: shape (N, D) — vektorë të normalizuar.\n\n    cosine_all = 1 matrix-vector multiply (dot) + norm scalar → O(N*D) SIMD.\n    \"\"\"\n\n    def __init__(self, alphabet: Dict[str, WWWMMM]) -> None:\n        self.symbols: List[str] = sorted(alphabet.keys())\n        raw = np.array(\n            [alphabet[s].to_vector() for s in self.symbols], dtype=np.float64\n        )  # shape (N, 24)\n        self._norms: np.ndarray = np.linalg.norm(raw, axis=1)  # (N,)\n        self._matrix: np.ndarray = raw  # (N, 24)\n\n    def cosine_all(self, incoming: List[float]) -> List[Tuple[str, float, float]]:\n        \"\"\"Kthen listën (symbol, cosine_similarity, euclidean_distance).\n\n        1 matrix-vector dot + broadcasting — zero Python loop.\n        \"\"\"\n        vec = np.asarray(incoming, dtype=np.float64)  # (24,)\n        in_norm = float(np.linalg.norm(vec))\n        dots = self._matrix @ vec  # (N,) — single BLAS call\n        denoms = self._norms * in_norm\n        sims = np.divide(dots, denoms, out=np.zeros_like(dots), where=denoms != 0.0)\n        diffs = self._matrix - vec  # (N, 24) broadcast\n        dists = np.linalg.norm(diffs, axis=1)  # (N,)\n        return [\n            (self.symbols[i], float(sims[i]), float(dists[i]))\n            for i in range(len(self.symbols))\n        ]\n\n\n# ---------------------------------------------------------------------------\n# XLC Codec — API kryesore\n# ---------------------------------------------------------------------------\n\nclass XLCCodec:\n    \"\"\"WWWMMM encoder/decoder me shpejtësi absolute.\n\n    Parametra:\n        alphabet: Dict[str, WWWMMM] — zakonisht ALPHABET nga xlc_alphabet.py\n        min_confidence: float — threshold poshtë të cilit decode kthen symbol=None\n    \"\"\"\n\n    def __init__(\n        self,\n        alphabet: Dict[str, WWWMMM] | None = None,\n        min_confidence: float = 0.82,\n    ) -> None:\n        if alphabet is None:\n            alphabet = ALPHABET\n        if not alphabet:\n            raise ValueError(\"alphabet nuk mund të jetë bosh\")\n        if not (0.0 < min_confidence <= 1.0):\n            raise ValueError(\"min_confidence duhet të jetë në (0.0, 1.0]\")\n        self._alphabet = alphabe",
+    "confidence": 0.9,
+    "sources": [
+      "code:ocean-core/xlc/xlc_codec.py"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.951185+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "84dca69175427a7c3a8e84cc3b374ead",
+    "query": "ops:high_value_code:ocean-core/xlc/xlc_command_router.py",
+    "response": "\"\"\"\nXLCCommandRouter — ruter komandash mbi XLC Resonance Engine.\n\nRegjistron komanda si fjalë kyçe (p.sh. \"START\", \"RESET\", \"MODE_WWW_MMM\"),\nskanon tekstin input me inspect_scan dhe kthen komandën me rezonancën më të lartë.\n\nRregulla:\n- NO_FAKE_DATA: çdo similarity nga dot-product real; nëse asnjë komandë nuk kalon\n  threshold kthen route_name=None, raporti ka opened=False.\n- Nanoide (perf_counter_ns) maten për çdo operacion.\n- Nuk ka fallback/mock data.\n\"\"\"\nfrom __future__ import annotations\n\nimport time\nfrom dataclasses import dataclass, field\nfrom typing import Dict, List, Optional, Tuple\n\nfrom xlc_inspector import XLCInspectionReport, XLCInspector  # type: ignore\nfrom xlc_layers import LayerBuilder  # type: ignore\n\n\n@dataclass(frozen=True)\nclass RouteResult:\n    \"\"\"Rezultat i plotë i routing-ut për observability.\"\"\"\n\n    input_text: str\n    route_name: Optional[str]          # None nëse asnjë komandë nuk hapet\n    report: Optional[XLCInspectionReport]  # raporti i komandës fituesë\n    all_scores: Dict[str, float]        # {command: combined} për çdo komandë\n    router_ns: int                      # kohëzgjatja totale e routing-ut\n\n    @property\n    def matched(self) -> bool:\n        return self.route_name is not None\n\n    def as_dict(self) -> dict:\n        return {\n            \"input_text\": self.input_text,\n            \"route_name\": self.route_name,\n            \"matched\": self.matched,\n            \"report\": self.report.as_dict() if self.report else None,\n            \"all_scores\": self.all_scores,\n            \"router_ns\": self.router_ns,\n        }\n\n\nclass XLCCommandRouter:\n    \"\"\"\n    Router i komandave bazuar në XLC resonance scan.\n\n    Shembull:\n        router = XLCCommandRouter()\n        router.register(\"START\")\n        router.register(\"RESET\")\n        router.register(\"MODE_WWW\")\n\n        result = router.route(\"A je START tani\")\n        # result.route_name == \"START\", result.matched == True\n        # result.report.opened == True, result.report.scan_mode == True\n    \"\"\"\n\n    def __init__(\n        self,\n        builder: LayerBuilder | None = None,\n        threshold: float = 0.9999,\n        max_extra_window: int = 2,\n    ) -> None:\n        if not (0.0 < threshold <= 1.0):\n            raise ValueError(\"threshold duhet të jetë në (0.0, 1.0]\")\n        if max_extra_window < 0:\n            raise ValueError(\"max_extra_window duhet të jetë >= 0\")\n\n        self._builder = builder if builder is not None else LayerBuilder()\n        self._inspector = XLCInspector(builder=self._builder)\n        self._threshold = threshold\n        self._max_extra_window = max_extra_window\n        # ruajmë listë të renditur sipas regjistrimit për determinizëm\n        self._commands: List[str] = []\n\n    # ------------------------------------------------------------------\n    # Regjistrim\n    # ------------------------------------------------------------------\n\n    def register(self, command: str) -> \"XLCCommandRouter\":\n        \"\"\"Regjistron një komandë si fjalë kyçe rezonante.\n\n        Kthen self për method-chaining.\n        Heq karaktere jo-shkronja nga komanda dhe ruan skriptet Unicode.\n        \"\"\"\n        if not command:\n            raise ValueError(\"command nuk mund të jetë bosh\")\n        normalized = self._builder.normalize_text(command)\n        if not normalized:\n            raise ValueError(\n                f\"command '{command}' nuk ka asnjë shkronjë të vlefshme\"\n            )\n        if normalized not in self._commands:\n            self._commands.append(normalized)\n        return self\n\n    def register_many(self, commands: List[str]) -> \"XLCCommandRouter\":\n        \"\"\"Regjistron shumë komanda njëkohësisht.\"\"\"\n        for c in commands:\n            self.register(c)\n        return self\n\n    @property\n    def commands(self) -> Tuple[str, ...]:\n        \"\"\"Lista e komandave të regjistruara (read-only).\"\"\"\n        return tuple(self._commands)\n\n    # ------------------------------------------------------------------\n    # Routing\n    # -------------------",
+    "confidence": 0.9,
+    "sources": [
+      "code:ocean-core/xlc/xlc_command_router.py"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.953944+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "4d56820352eb42f30d870d76e24c9483",
+    "query": "ops:high_value_code:ocean-core/xlc/xlc_inspector.py",
+    "response": "\"\"\"\nXLC Inspector — krahasim i thellë i dy sekuencave me raport observability.\n\nKy modul ndërton LayerStack për candidate/reference, llogarit similarity 3-shtresore\n(WW, MM, CC), merr vendim me threshold dhe kthen raport të serializueshëm JSON.\n\"\"\"\nfrom __future__ import annotations\n\nimport json\nimport time\nfrom dataclasses import dataclass\nfrom typing import Any, Dict\n\nfrom xlc_layers import LayerBuilder  # type: ignore\n\n\n@dataclass(frozen=True)\nclass XLCInspectionReport:\n    \"\"\"Raport i plotë i inspektimit për observability/panel.\"\"\"\n\n    candidate_input: str\n    reference_input: str\n    candidate_sequence: str\n    reference_sequence: str\n    sim_ww: float\n    sim_mm: float\n    sim_cc: float\n    combined: float\n    threshold: float\n    opened: bool\n    build_candidate_ns: int\n    build_reference_ns: int\n    compare_ns: int\n    inspect_ns: int\n    source_sequence: str | None = None\n    scan_mode: bool = False\n    windows_evaluated: int = 1\n\n    @property\n    def resonance_score(self) -> float:\n        \"\"\"Alias semantik për combined similarity.\"\"\"\n        return self.combined\n\n    def as_dict(self) -> Dict[str, Any]:\n        return {\n            \"candidate_input\": self.candidate_input,\n            \"reference_input\": self.reference_input,\n            \"candidate_sequence\": self.candidate_sequence,\n            \"reference_sequence\": self.reference_sequence,\n            \"sim_ww\": self.sim_ww,\n            \"sim_mm\": self.sim_mm,\n            \"sim_cc\": self.sim_cc,\n            \"combined\": self.combined,\n            \"threshold\": self.threshold,\n            \"opened\": self.opened,\n            \"build_candidate_ns\": self.build_candidate_ns,\n            \"build_reference_ns\": self.build_reference_ns,\n            \"compare_ns\": self.compare_ns,\n            \"inspect_ns\": self.inspect_ns,\n            \"source_sequence\": self.source_sequence,\n            \"scan_mode\": self.scan_mode,\n            \"windows_evaluated\": self.windows_evaluated,\n        }\n\n    def to_json(self) -> str:\n        return json.dumps(self.as_dict(), ensure_ascii=True, separators=(\",\", \":\"))\n\n\nclass XLCInspector:\n    \"\"\"Inspector për pyetje direkte dhe krahasim me sekuencë reference.\"\"\"\n\n    def __init__(self, builder: LayerBuilder | None = None) -> None:\n        self._builder = builder if builder is not None else LayerBuilder()\n\n    def inspect(\n        self,\n        candidate_text: str,\n        reference_text: str,\n        threshold: float = 0.9999,\n    ) -> XLCInspectionReport:\n        \"\"\"Krahason candidate kundrejt reference dhe kthen raport të plotë.\"\"\"\n        if not (0.0 < threshold <= 1.0):\n            raise ValueError(\"threshold duhet të jetë në (0.0, 1.0]\")\n\n        t0 = time.perf_counter_ns()\n\n        t_build_candidate_start = time.perf_counter_ns()\n        candidate_stack = self._builder.build(candidate_text)\n        t_build_candidate_end = time.perf_counter_ns()\n\n        t_build_reference_start = time.perf_counter_ns()\n        reference_stack = self._builder.build(reference_text)\n        t_build_reference_end = time.perf_counter_ns()\n\n        sim = candidate_stack.similarity_with(reference_stack)\n        opened = sim.opens_at(threshold)\n\n        t1 = time.perf_counter_ns()\n\n        return XLCInspectionReport(\n            candidate_input=candidate_text,\n            reference_input=reference_text,\n            candidate_sequence=candidate_stack.sequence,\n            reference_sequence=reference_stack.sequence,\n            sim_ww=sim.sim_ww,\n            sim_mm=sim.sim_mm,\n            sim_cc=sim.sim_cc,\n            combined=sim.combined,\n            threshold=threshold,\n            opened=opened,\n            build_candidate_ns=t_build_candidate_end - t_build_candidate_start,\n            build_reference_ns=t_build_reference_end - t_build_reference_start,\n            compare_ns=sim.compare_ns,\n            inspect_ns=t1 - t0,\n            source_sequence=candidate_stack.sequence,\n            scan_mode=False,\n            windows_evaluated=1,\n        )\n\n    def inspect_scan(",
+    "confidence": 0.9,
+    "sources": [
+      "code:ocean-core/xlc/xlc_inspector.py"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.956974+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "47779c5475e432ae381e2f8f87811706",
+    "query": "ops:high_value_code:ocean-core/xlc/xlc_key.py",
+    "response": "\"\"\"\nXLC Key — çelësi i bazuar në valë WWWMMM.\n\nKoncepti:\n  Çdo sekuencë simbolesh (p.sh. \"HELLO\") transformohet në një \"keyprint\" —\n  një vektor i vetëm 24-dimensional që përfaqëson superpozicionin e valëve\n  të të gjithë simboleve. Dy sekuenca identike prodhojnë keyprint identik.\n  Sekuencë e ndryshme → keyprint i ndryshëm → dera nuk hapet.\n\nAlgebra e kombinimit:\n  keyprint[i] = mean(v[i] for v in symbol_vectors)\n\n  Kjo është analogia fizike me superpozicionin e valëve:\n  kur N vale mbivendosen, rezultante është mesatarja e tyre amplitudinale.\n\"\"\"\nfrom __future__ import annotations\n\nfrom dataclasses import dataclass\nfrom typing import Dict, List, Optional\n\nimport numpy as np\nfrom xlc_alphabet import ALPHABET, WWWMMM, normalize_symbol, resolve_profile  # type: ignore\n\n\ndef _vector_mean(vectors: List[List[float]]) -> List[float]:\n    \"\"\"Mean element-wise me numpy.\"\"\"\n    if not vectors:\n        raise ValueError(\"nuk mund të ndërtosh keyprint nga sekuencë bosh\")\n    arr = np.array(vectors, dtype=np.float64)  # (N, D)\n    return arr.mean(axis=0).tolist()\n\n\ndef _normalize(v: List[float]) -> List[float]:\n    \"\"\"Normalizon vektorin në njësi (unit vector) me numpy.\"\"\"\n    arr = np.asarray(v, dtype=np.float64)\n    n = float(np.linalg.norm(arr))\n    return (arr / n).tolist() if n > 0.0 else arr.tolist()\n\n\n@dataclass(frozen=True)\nclass XLCKey:\n    \"\"\"Çelësi i valëve — keyprint i normalizuar 24-dimensional.\n\n    Atribute:\n        sequence:  sekuenca origjinale e simboleve (uppercase)\n        keyprint:  vektor unit 24-d (superpozicion i normalizuar)\n        length:    numri i simboleve të njohur që ndërtuan keyprint-in\n    \"\"\"\n\n    sequence: str\n    keyprint: List[float]\n    length: int\n\n    @staticmethod\n    def from_string(\n        text: str,\n        alphabet: Dict[str, WWWMMM] | None = None,\n    ) -> \"XLCKey\":\n        \"\"\"Ndërton XLCKey nga teksti.\n\n        Parametra:\n            text:     sekuenca e simboleve (rasti i madh ose i vogël)\n            alphabet: alfabeti WWWMMM (parazgjedhja = ALPHABET global)\n\n        Raises:\n            ValueError: nëse asnjë karakter i tekstit nuk ekziston në alfabet\n        \"\"\"\n        if alphabet is None:\n            alphabet = ALPHABET\n\n        vectors: List[List[float]] = []\n        known_chars: List[str] = []\n\n        for ch in text:\n            symbol = normalize_symbol(ch)\n            if not symbol or not symbol.isalpha():\n                continue\n            vectors.append(resolve_profile(symbol, alphabet).to_vector())\n            known_chars.append(symbol)\n\n        if not vectors:\n            raise ValueError(\n                f\"sekuenca '{text}' nuk përmban asnjë simbol të njohur në alfabet\"\n            )\n\n        raw_keyprint = _vector_mean(vectors)\n        unit_keyprint = _normalize(raw_keyprint)\n\n        return XLCKey(\n            sequence=\"\".join(known_chars),\n            keyprint=unit_keyprint,\n            length=len(known_chars),\n        )\n\n    def cosine_similarity_with(self, other: \"XLCKey\") -> float:\n        \"\"\"Cosine similarity = dot product (unit vectors) me numpy.\"\"\"\n        a = np.asarray(self.keyprint, dtype=np.float64)\n        b = np.asarray(other.keyprint, dtype=np.float64)\n        return float(a @ b)",
+    "confidence": 0.89,
+    "sources": [
+      "code:ocean-core/xlc/xlc_key.py"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.959947+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "8c5eba63ffad7e993a37de7b0938bbb8",
+    "query": "ops:high_value_code:ocean-core/xlc/xlc_layers.py",
+    "response": "\"\"\"\nXLC Layers — 3-shtresa WW / MM / CC me matje nanoide.\n\nKoncepti:\n  Çdo sekuencë (p.sh. \"ALPHA\") ndahet në TRE shtresa fizike:\n\n    Layer WW (Wave):            w1_amplitude + w2_phase + w3_coherence  → 12 dims\n    Layer MM (Momentum):        m1_frequency + m2_harmonic + m3_jitter  → 12 dims\n    Layer CC (Cross-Corr WW⊗MM): produkti element-wise WW×MM, normalizuar → 12 dims\n\n  Çdo shtresë prodhohet nga superpozicioni i vektorëve të simboleve,\n  pastaj normalizohet (unit vector).\n\n  CC = \"lidhja\" ndërmjet valës dhe momentumit — shpreh sa dy shtresat\n  janë në rezonancë me njëra-tjetrën. Dy sekuenca identike → CC identik.\n  Sekuenca e ndryshme → CC i ndryshëm, edhe kur WW ose MM rastësisht ngjajnë.\n\n  Koha e ndërtimit të çdo shtrese matet në **nanoide** (ns) me perf_counter_ns.\n  \"Nanoide\" = njësia e brendshme XLC për timing inter-shtresë.\n\n  LayerStack = [WW, MM, CC] + metadata nanoide per shtresë.\n  combined = mean(sim_ww, sim_mm, sim_cc) — 3-shtresë, rezolucion maksimal.\n\n  Rregull NO_FAKE_DATA: asnjë similarity e hardcoded — çdo vlerë vjen\n  nga llogaritje reale dot-product.\n\"\"\"\nfrom __future__ import annotations\n\nimport time\nfrom dataclasses import dataclass\nfrom typing import Dict, List\n\nimport numpy as np\nfrom xlc_alphabet import ALPHABET, WWWMMM, resolve_profile  # type: ignore\n\n# ---------------------------------------------------------------------------\n# Low-level math (numpy)\n# ---------------------------------------------------------------------------\n\ndef _dot(a: List[float], b: List[float]) -> float:\n    return float(np.dot(a, b))\n\n\ndef _normalize(v: List[float]) -> List[float]:\n    arr = np.asarray(v, dtype=np.float64)\n    n = float(np.linalg.norm(arr))\n    return (arr / n).tolist() if n > 0.0 else arr.tolist()\n\n\ndef _mean_vectors(vectors: List[List[float]]) -> List[float]:\n    return np.array(vectors, dtype=np.float64).mean(axis=0).tolist()\n\n\n# ---------------------------------------------------------------------------\n# Nanoide — njësia e brendshme e timing\n# ---------------------------------------------------------------------------\n\n@dataclass(frozen=True)\nclass Nanoide:\n    \"\"\"Matja e kohës për ndërtimin e një shtrese (në nanosekonda).\"\"\"\n    layer_name: str\n    start_ns: int\n    end_ns: int\n\n    @property\n    def duration_ns(self) -> int:\n        return self.end_ns - self.start_ns\n\n    def __repr__(self) -> str:\n        return f\"Nanoide({self.layer_name}: {self.duration_ns} ns)\"\n\n\n# ---------------------------------------------------------------------------\n# LayerPrint — fingerprint i një shtrese\n# ---------------------------------------------------------------------------\n\n@dataclass(frozen=True)\nclass LayerPrint:\n    \"\"\"Fingerprint i normalizuar i një shtrese (WW, MM, ose CC).\"\"\"\n    name: str           # \"WW\", \"MM\", ose \"CC\"\n    vector: List[float] # 12-dimensional unit vector\n    nanoide: Nanoide    # koha e ndërtimit\n\n    def similarity_with(self, other: \"LayerPrint\") -> float:\n        \"\"\"Cosine similarity — meqë të dyja janë unit vectors, ky është dot product.\"\"\"\n        if self.name != other.name:\n            raise ValueError(\n                f\"nuk mund të krahasosh shtresë '{self.name}' me '{other.name}'\"\n            )\n        return _dot(self.vector, other.vector)\n\n\n# ---------------------------------------------------------------------------\n# LayerStack — stack i plotë WW + MM për një sekuencë\n# ---------------------------------------------------------------------------\n\n@dataclass(frozen=True)\nclass LayerStack:\n    \"\"\"Stack 3-shtresë WW+MM+CC për një sekuencë simbolesh.\n\n    Atribute:\n        sequence:   sekuenca origjinale (uppercase, vetëm shkronja të njohura)\n        ww:         LayerPrint Wave (12-dim)\n        mm:         LayerPrint Momentum (12-dim)\n        cc:         LayerPrint Cross-Correlation WW⊗MM (12-dim)\n        total_ns:   koha totale e ndërtimit (ns)\n    \"\"\"\n    sequence: str\n    ww: LayerPrint\n    mm: LayerPrint\n    cc: LayerPrint\n    total_ns: int\n\n    def similarity_with(sel",
+    "confidence": 0.9,
+    "sources": [
+      "code:ocean-core/xlc/xlc_layers.py"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.962819+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "c5d123f66368ca36feb7636c9a887913",
+    "query": "ops:high_value_code:ocean-core/xlc/xlc_lock.py",
+    "response": "\"\"\"\nXLC Lock — celesberi (key-bearer / door guard).\n\nKoncepti:\n  XLCLock ruan keyprint-in e regjistruar.\n  Kur vjen një çelës i ri (XLCKey), Lock llogarit ngjashmërinë cosine\n  ndërmjet dy keyprint-eve. Nëse similarity >= min_similarity,\n  dera hapet (LockResult.opened = True).\n\nAlgebra e verifikimit:\n  similarity = dot(keyprint_registered, keyprint_incoming)\n             (të dy janë unit vectors → cosine = dot)\n\n  Dera: hapet  ←→  similarity >= min_similarity\n        mbyllet ←→  similarity < min_similarity\n\nRregull NO_FAKE_DATA:\n  - LockResult.opened = False nëse similarity nuk plotëson pragun — asnjëherë True i rremë\n  - similarity është vlera reale llogaritje, jo hardcoded\n\"\"\"\nfrom __future__ import annotations\n\nimport time\nfrom dataclasses import dataclass\nfrom typing import Optional\n\nfrom xlc_key import XLCKey  # type: ignore\n\n\n@dataclass(frozen=True)\nclass LockResult:\n    \"\"\"Rezultati i provës së çelësit.\"\"\"\n\n    opened: bool           # True vetëm nëse similarity >= min_similarity\n    similarity: float      # cosine similarity reale [−1.0, 1.0]\n    check_latency_ns: int  # koha e verifikimit në nanosekonda\n    registered_sequence: str   # sekuenca e regjistruar (read-only info)\n    candidate_sequence: str    # sekuenca kandidate\n\n\nclass XLCLock:\n    \"\"\"Celesberi — ruan çelësin e regjistruar dhe kontrollon kandidatët.\n\n    Parametra:\n        registered_key: XLCKey — çelësi që \"hap\" derën\n        min_similarity:  float — pragu cosine, default 0.9999 (identik praktikisht)\n\n    Shembull:\n        lock = XLCLock.from_passphrase(\"OPEN\")\n        result = lock.try_open(XLCKey.from_string(\"OPEN\"))\n        # result.opened == True\n\n        result2 = lock.try_open(XLCKey.from_string(\"FAIL\"))\n        # result2.opened == False\n    \"\"\"\n\n    # Pragu i parazgjedhur: shumë i lartë — vetëm sekuenca identike hap\n    DEFAULT_MIN_SIMILARITY = 0.9999\n\n    def __init__(\n        self,\n        registered_key: XLCKey,\n        min_similarity: float = DEFAULT_MIN_SIMILARITY,\n    ) -> None:\n        if not (0.0 < min_similarity <= 1.0):\n            raise ValueError(\"min_similarity duhet të jetë në (0.0, 1.0]\")\n        self._registered = registered_key\n        self._min_similarity = min_similarity\n\n    @staticmethod\n    def from_passphrase(\n        passphrase: str,\n        min_similarity: float = DEFAULT_MIN_SIMILARITY,\n    ) -> \"XLCLock\":\n        \"\"\"Shkurtore: krijon Lock direkt nga një string passphrase.\"\"\"\n        key = XLCKey.from_string(passphrase)\n        return XLCLock(key, min_similarity=min_similarity)\n\n    @property\n    def registered_sequence(self) -> str:\n        return self._registered.sequence\n\n    def try_open(self, candidate: XLCKey) -> LockResult:\n        \"\"\"Provo çelësin kandidat kundrejt çelësit të regjistruar.\n\n        Kthon LockResult me opened=True vetëm nëse valët përputhen.\n        Asnjëherë nuk kthehet opened=True kur similarity < min_similarity.\n        \"\"\"\n        t0 = time.perf_counter_ns()\n        similarity = self._registered.cosine_similarity_with(candidate)\n        t1 = time.perf_counter_ns()\n\n        opened = similarity >= self._min_similarity\n\n        return LockResult(\n            opened=opened,\n            similarity=similarity,\n            check_latency_ns=t1 - t0,\n            registered_sequence=self._registered.sequence,\n            candidate_sequence=candidate.sequence,\n        )\n\n    def try_open_string(self, text: str) -> LockResult:\n        \"\"\"Shkurtore: provo direkt nga string, pa krijuar XLCKey manualisht.\"\"\"\n        candidate = XLCKey.from_string(text)\n        return self.try_open(candidate)",
+    "confidence": 0.9,
+    "sources": [
+      "code:ocean-core/xlc/xlc_lock.py"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.965804+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "76fbd36b712c831cf0af2ff3d7af4f0f",
+    "query": "ops:high_value_code:ocean-core/xlc/__init__.py",
+    "response": "\"\"\"\nXLC — eXtreme Latency Codec (WWWMMM)\n\nPaketa kryesore eksporton:\n  - XLCCodec   : encoder/decoder me matrix projection\n  - XLCPacket  : paketa e enkoduar\n  - XLCResult  : rezultati i dekodimit\n  - WWWMMM     : 6-dimensional resonance profile\n  - ALPHABET   : 26-shkronja alfabet i parakompjutuar\n\nShembull i shpejtë:\n    from xlc import XLCCodec\n\n    codec = XLCCodec()\n    packet = codec.encode(\"A\")\n    result = codec.decode_packet(packet)\n    # result.symbol == \"A\", result.decode_latency_ns < 10_000\n\"\"\"\n\nfrom xlc_alphabet import ALPHABET, WWWMMM  # type: ignore\nfrom xlc_codec import XLCCodec, XLCPacket, XLCResult  # type: ignore\nfrom xlc_command_router import RouteResult, XLCCommandRouter  # type: ignore\nfrom xlc_inspector import XLCInspectionReport, XLCInspector  # type: ignore\nfrom xlc_key import XLCKey  # type: ignore\nfrom xlc_layers import LayerBuilder, LayerPrint, LayerStack, Nanoide, StackSimilarity  # type: ignore\nfrom xlc_lock import LockResult, XLCLock  # type: ignore\n\n__all__ = [\n    \"XLCCodec\",\n    \"XLCPacket\",\n    \"XLCResult\",\n    \"WWWMMM\",\n    \"ALPHABET\",\n    \"XLCKey\",\n    \"XLCLock\",\n    \"LockResult\",\n    \"LayerBuilder\",\n    \"LayerStack\",\n    \"LayerPrint\",\n    \"StackSimilarity\",\n    \"Nanoide\",\n    \"XLCInspectionReport\",\n    \"XLCInspector\",\n    \"XLCCommandRouter\",\n    \"RouteResult\",\n]",
+    "confidence": 0.93,
+    "sources": [
+      "code:ocean-core/xlc/__init__.py"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.969050+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "41237b4f4945a1fde2d7fe684323811e",
+    "query": "ops:high_value_code:ocean-core/xlc_security_runtime.py",
+    "response": "from __future__ import annotations\n\nimport statistics\nimport time\nfrom collections import Counter, deque\nfrom typing import Any, Deque, Dict, List, Optional\n\n\nclass XLCSecurityMonitor:\n    \"\"\"Tracks endpoint resonance profiles and derives simple ndB-based security decisions.\"\"\"\n\n    def __init__(\n        self,\n        *,\n        min_baseline_samples: int = 5,\n        max_baseline_samples: int = 120,\n        alert_deviation_ndb: float = 500_000_000.0,\n        block_deviation_ndb: float = 2_000_000_000.0,\n    ) -> None:\n        self.min_baseline_samples = max(3, int(min_baseline_samples))\n        self.max_baseline_samples = max(self.min_baseline_samples, int(max_baseline_samples))\n        self.alert_deviation_ndb = float(alert_deviation_ndb)\n        self.block_deviation_ndb = float(block_deviation_ndb)\n        self._profiles: Dict[str, Dict[str, Any]] = {}\n\n    def evaluate(\n        self,\n        *,\n        endpoint: str,\n        resonance_ndb: float,\n        matched: bool,\n        route_name: Optional[str],\n        input_text: str,\n    ) -> Dict[str, Any]:\n        profile = self._profiles.setdefault(\n            endpoint,\n            {\n                \"history\": deque(maxlen=self.max_baseline_samples),\n                \"matched_history\": deque(maxlen=self.max_baseline_samples),\n                \"route_counts\": Counter(),\n                \"total_requests\": 0,\n                \"last_seen\": None,\n            },\n        )\n\n        baseline = self._build_baseline(endpoint, profile)\n        signature = self._detect_signature(\n            endpoint=endpoint,\n            profile=profile,\n            baseline=baseline,\n            resonance_ndb=float(resonance_ndb),\n            matched=matched,\n            route_name=route_name,\n            input_text=input_text,\n        )\n        firewall_action = self._decide_firewall_action(signature)\n\n        profile[\"history\"].append(float(resonance_ndb))\n        profile[\"matched_history\"].append(bool(matched))\n        profile[\"route_counts\"].update([route_name or \"__unmatched__\"])\n        profile[\"total_requests\"] += 1\n        profile[\"last_seen\"] = time.time()\n\n        return {\n            \"resonance_profile\": self._profile_snapshot(endpoint, profile),\n            \"normal_behavior_baseline\": self._build_baseline(endpoint, profile),\n            \"attack_signature\": signature,\n            \"firewall_action\": firewall_action,\n        }\n\n    def get_profiles(self) -> List[Dict[str, Any]]:\n        return [self._profile_snapshot(endpoint, profile) for endpoint, profile in sorted(self._profiles.items())]\n\n    def get_profile(self, endpoint: str) -> Optional[Dict[str, Any]]:\n        profile = self._profiles.get(endpoint)\n        if profile is None:\n            return None\n        return self._profile_snapshot(endpoint, profile)\n\n    def _build_baseline(self, endpoint: str, profile: Dict[str, Any]) -> Dict[str, Any]:\n        history = list(profile[\"history\"])\n        sample_count = len(history)\n        if not history:\n            return {\n                \"endpoint\": endpoint,\n                \"armed\": False,\n                \"sample_count\": 0,\n                \"avg_ndb\": None,\n                \"min_ndb\": None,\n                \"max_ndb\": None,\n                \"stddev_ndb\": None,\n            }\n\n        stddev = statistics.pstdev(history) if sample_count > 1 else 0.0\n        return {\n            \"endpoint\": endpoint,\n            \"armed\": sample_count >= self.min_baseline_samples,\n            \"sample_count\": sample_count,\n            \"avg_ndb\": round(statistics.fmean(history), 3),\n            \"min_ndb\": round(min(history), 3),\n            \"max_ndb\": round(max(history), 3),\n            \"stddev_ndb\": round(stddev, 3),\n        }\n\n    def _profile_snapshot(self, endpoint: str, profile: Dict[str, Any]) -> Dict[str, Any]:\n        history = list(profile[\"history\"])\n        matched_history = list(profile[\"matched_history\"])\n        matched_rate = (\n            round(sum(1 for item in matched_history if item) / len(matched_histo",
+    "confidence": 0.94,
+    "sources": [
+      "code:ocean-core/xlc_security_runtime.py"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.972110+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "497728ab478ea7ad5f8b0da47d937667",
+    "query": "ops:high_value_code:services/crawler/api.py",
+    "response": "from __future__ import annotations\n\nimport asyncio\nimport json\nimport os\nimport sqlite3\nimport uuid\nfrom contextlib import asynccontextmanager\nfrom dataclasses import dataclass\nfrom datetime import datetime, timezone\nfrom typing import Any\nfrom urllib.parse import urljoin, urlparse, urlunparse\n\nimport httpx\nfrom bs4 import BeautifulSoup\nfrom fastapi import FastAPI, HTTPException\nfrom pydantic import BaseModel, Field, HttpUrl\n\nSERVICE_NAME = \"clisonix-crawler\"\nSERVICE_VERSION = \"1.0.0\"\nPORT = int(os.getenv(\"PORT\", \"9211\"))\nDB_PATH = os.getenv(\"CRAWLER_DB_PATH\", \"/data/crawler.db\")\nWORKERS = max(int(os.getenv(\"CRAWLER_WORKERS\", \"1\")), 1)\nREQUEST_DELAY_MS = max(int(os.getenv(\"CRAWLER_REQUEST_DELAY_MS\", \"250\")), 0)\nMAX_PAGES_DEFAULT = max(int(os.getenv(\"CRAWLER_MAX_PAGES_DEFAULT\", \"50\")), 1)\n\n\njob_queue: asyncio.Queue[str] = asyncio.Queue()\nworkers: list[asyncio.Task] = []\njobs_memory: dict[str, dict[str, Any]] = {}\n\n\nclass CrawlRequest(BaseModel):\n    seed_url: HttpUrl\n    max_pages: int = Field(default=MAX_PAGES_DEFAULT, ge=1, le=1000)\n    same_domain_only: bool = True\n\n\nclass CrawlResponse(BaseModel):\n    job_id: str\n    status: str\n\n\n@dataclass\nclass PageResult:\n    url: str\n    status_code: int | None\n    title: str | None\n    depth: int\n    links_count: int\n    error: str | None\n\n\ndef now_iso() -> str:\n    return datetime.now(timezone.utc).isoformat()\n\n\ndef normalize_url(url: str) -> str:\n    parsed = urlparse(url)\n    clean = parsed._replace(fragment=\"\", query=\"\")\n    return urlunparse(clean)\n\n\ndef same_domain(url: str, domain: str) -> bool:\n    return urlparse(url).netloc == domain\n\n\ndef ensure_db() -> None:\n    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)\n    with sqlite3.connect(DB_PATH) as conn:\n        conn.execute(\n            \"\"\"\n            CREATE TABLE IF NOT EXISTS crawl_jobs (\n                job_id TEXT PRIMARY KEY,\n                seed_url TEXT NOT NULL,\n                status TEXT NOT NULL,\n                same_domain_only INTEGER NOT NULL,\n                max_pages INTEGER NOT NULL,\n                pages_discovered INTEGER NOT NULL DEFAULT 0,\n                pages_crawled INTEGER NOT NULL DEFAULT 0,\n                pages_failed INTEGER NOT NULL DEFAULT 0,\n                created_at TEXT NOT NULL,\n                started_at TEXT,\n                finished_at TEXT,\n                error_message TEXT\n            )\n            \"\"\"\n        )\n        conn.execute(\n            \"\"\"\n            CREATE TABLE IF NOT EXISTS crawled_pages (\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\n                job_id TEXT NOT NULL,\n                url TEXT NOT NULL,\n                status_code INTEGER,\n                title TEXT,\n                depth INTEGER NOT NULL,\n                links_count INTEGER NOT NULL,\n                error TEXT,\n                crawled_at TEXT NOT NULL,\n                UNIQUE(job_id, url)\n            )\n            \"\"\"\n        )\n        conn.commit()\n\n\ndef create_job(seed_url: str, max_pages: int, same_domain_only_flag: bool) -> str:\n    job_id = str(uuid.uuid4())\n    created_at = now_iso()\n    with sqlite3.connect(DB_PATH) as conn:\n        conn.execute(\n            \"\"\"\n            INSERT INTO crawl_jobs (\n                job_id, seed_url, status, same_domain_only, max_pages, created_at\n            ) VALUES (?, ?, 'queued', ?, ?, ?)\n            \"\"\",\n            (job_id, seed_url, int(same_domain_only_flag), max_pages, created_at),\n        )\n        conn.commit()\n\n    jobs_memory[job_id] = {\n        \"job_id\": job_id,\n        \"seed_url\": seed_url,\n        \"status\": \"queued\",\n        \"max_pages\": max_pages,\n        \"same_domain_only\": same_domain_only_flag,\n        \"created_at\": created_at,\n        \"started_at\": None,\n        \"finished_at\": None,\n        \"pages_discovered\": 0,\n        \"pages_crawled\": 0,\n        \"pages_failed\": 0,\n        \"error_message\": None,\n    }\n    return job_id\n\n\ndef update_job(job_id: str, **fields: Any) -> None:\n    if not fields:\n        return\n\n    if job_id in j",
+    "confidence": 0.9,
+    "sources": [
+      "code:services/crawler/api.py"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:27.975497+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "2058d9fd3313fda934153dee0449a1dc",
+    "query": "ops:git:status --short --branch",
+    "response": "## feature/clx-2min-hotguard...origin/feature/clx-2min-hotguard\n M -w\n M .env.template\n M .git_ocean_core_full.py\n M .mailmap\n M .thunder-client/thunderclient.json\n M .vs/CopilotSnapshots/E827FEC5702AD14281789120C74FAD97/5E0E58EE928143449BC0D342112C89E6/7D1CACD3C49819BF74C938F20860C058\n M .vs/CopilotSnapshots/E827FEC5702AD14281789120C74FAD97/5E0E58EE928143449BC0D342112C89E6/95F3BB7282F7171B39E16A99A0DA6C5F\n M .vs/CopilotSnapshots/E827FEC5702AD14281789120C74FAD97/5E0E58EE928143449BC0D342112C89E6/FE12BF8CC1B5E15A821EA676653FC007\n M API_AUDIT_COMPLETE.md\n M BLOG_PLATFORM_COMPLETE.md\n M CI_QUICK_REFERENCE.md\n M CLISONIX_INTELLIGENCE_README.md\n M CLX_AI_COMPLETE_TIMELINE.md\n M CLX_AI_INSTALLATION_GUIDE.md\n M COMPLIANCE_CHECKLIST.md\n M CONTRIBUTORS.md\n M DEPLOYMENT_CHECKLIST.md\n M DEPLOYMENT_GUIDE_HETZNER.md\n M DEPLOYMENT_SECURITY_GUIDE.md\n M DOCKER_QUICK_START.md\n M Dockerfile.clx-agent\n M FITNESS_MODULE_GUIDE.md\n M FLOATING_IP_GUIDE.md\n M HYBRID_BIOMETRIC_DOCUMENTATION.md\n M KUBERNETES_DEPLOYMENT_GUIDE.md\n M LICENSE\n M MONETIZATION_30DAY_PLAN.md\n M MONITORING_SETUP.md\n M NANOGRIDATA_PRODUCTION_GUIDE.md\n M OPENAPI-COMPLETE-GUIDE.md\n M PAYMENT_INCIDENT_FEB10.md\n M QUICK_DEPLOY.md\n M QUICK_REFERENCE.md\n M QUICK_START_SECURITY.md\n M README.md\n M SECURITY_ACTIVATION_COMPLETE.md\n M SECURITY_ARCHITECTURE_PLAN.md\n M STARTUP_GUIDE.md\n M api_root_patch.py\n M apps/api/main.py\n M apps/api/src/auth/auth-routes.ts\n M apps/web/SEO_SYSTEM.md\n M apps/web/app/HomePageClient.tsx\n M apps/web/app/brand/page.tsx\n M apps/web/app/company/page.tsx\n M apps/web/app/developers/page.tsx\n M apps/web/app/faq/page.tsx\n M apps/web/app/landing/page.tsx\n M apps/web/app/lib/business-identity.ts\n M apps/web/app/modules/about-us/page.tsx\n M apps/web/app/modules/clisonix-invest/workspace.tsx\n M apps/web/app/pricing/page.tsx\n M apps/web/app/privacy/page.tsx\n M apps/web/app/schema.org.json\n M apps/web/app/security/page.tsx\n M apps/web/app/status/page.tsx\n M apps/web/app/terms/page.tsx\n M apps/web/app/why-clisonix/page.tsx\n M apps/web/scripts/seo-optimizer.ts\n M apps/web/src/components/dashboard/DashboardLayout.tsx\n M cloudflare/README.md\n M clx_agent.py\n M config/business_profile.json\n M deploy-hetzner.sh\n M deploy_clisonix_intelligence.py\n M docker-compose.75-services.yml\n M docker-compose.unified.yml\n M docker-compose.yml\n M docs/API_MONETIZATION_GUIDE.md\n M docs/BUSINESS_STRATEGY.md\n M docs/CATALOG_GOVERNANCE_SETUP.md\n M docs/DEVELOPMENT_GUIDELINES.md\n M docs/DNS_CONFIGURATION_STRATO.md\n M docs/FACEBOOK_PAGE_CLISONIX.md\n M docs/GITHUB_SECRETS_SETUP.md\n M docs/INGESTION_PIPELINE_ARCHITECTURE.md\n M docs/LINKEDIN_INTEGRATION.md\n M docs/SECURITY.md\n M docs/SECURITY_GUIDE.md\n M docs/clisonix.bind.zone\n M docs/clisonix.cloudflare.zone\n M docs/clisonix.zone\n M docs/growth/NRW_OUTREACH_PLAYBOOK_DE.md\n M docs/legal/WWWMMM_IP_MEMO.md\n M docs/observability/alerts.md\n M docs/observability/exports/observability-docs.html\n M docs/production/GOOGLE_AUTH_SETUP.md\n M email_templates/invoice.html\n M helm/clisonix/Chart.yaml\n M k8s/04-ingress-tls.yaml\n M nginx.production.conf\n M ocean-core/albanian_dictionary.py\n M ocean-core/knowledge_seeds/core_knowledge.py\n M ocean-core/ocean_core_full.py\n M openapi.json\n M openapi.yaml\n M public/terms.html\n M run_clx_hotguard_cli.ps1\n M sdist/clx-ai/examples/ecosystem_ops_10min.py\n M sdk/typescript/package.json\n M services/blog-paywall/README.md\n M services/blog_api/README.md\n M services/blog_publisher/main.py\n M services/content-factory/auto_publisher.py\n M services/content-factory/blog_sync.py\n M services/internal_agi/fallbacks.py\n M services/user-management/README.md\n M tests/unit/test_model_governance_routes.py\n M video_generator_animated.py\n?? .clx_ops/\n?? .clx_ops_2min/\n?? .clx_ops_smoke/\n?? .clx_ops_smoke_ps1/\n?? .clx_ops_smoke_quick/\n?? releases/\n?? scripts/hetzner/install_clx_ai_hetzner_neu.sh",
+    "confidence": 0.94,
+    "sources": [
+      "git:status --short --branch"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:28.014415+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "2fcee7f6103cf036d3ac0960c7fffad2",
+    "query": "ops:git:log --oneline --decorate -n 120",
+    "response": "265cad10 (HEAD -> feature/clx-2min-hotguard, tag: clx-ai/v2026.05.07-final, origin/feature/clx-2min-hotguard) docs: add QUICK_START.md showing broken vs working commands for CLX hotguard\n2f51c937 fix: simplify CLX hotguard runner to exec ecosystem_ops_10min.py directly\n64320a0b release: include runner scripts and installation guide in packaged releases\n3819ca7a docs+scripts: add CLX AI runners and installation guide for accessible hotguard execution\n24dd18e4 docs: add complete CLX AI WWWMMM timeline (May 6-7, 2026) with all 17 commits and metrics\n1d1c406b (tag: clx-ai/v2026.05.07-complete) release: expand CLX AI package to include all documentation, examples, tests, and configuration\nc0d3b07a (tag: clx-ai/v2026.05.07-wwwmmm-apache2) release: add Apache-2.0 licensing to CLX WWWMMM package\nd4fdc9da clx: add 2-minute hotguard runner and atomic persistence writes\n7f5584bb (origin/main, origin/HEAD, main) chore: sync workspace updates and Apache-2.0 licensing docs\nb5c86950 (hetzner/main, hetzner/HEAD) fix: auth sign-in CSP issue, remove fake chat fallbacks, add excel dependencies\n430b690f fix: handle callback-accepted stream events in ocean chat UI\n836461c9 feat: add real async webhook callback flow for curiosity ask\n7a1a27ed fix: make conversational fallback explicit no-data\nbe1727bd fix: remove canned identity/fallback responses and prefer real async processing\n3d060cf5 fix: remove hardcoded fast replies and enforce callback/real processing\ncedcc3e2 (origin/feature/clx-only-rollout, feature/clx-only-rollout) fix: include xlc_security_runtime in ocean-core image\n73748505 feat: improve curiosity reasoning and add examples\ncf96cbc2 fix: restore missing export async function POST in curiosity/route.ts\n21cdcdca Add XLC security runtime and smoke checks\n43790975 fix: HumanThinking fast-path in stream + curiosity routes, <300ms for all deepthink/plan triggers\n0bddbf99 fix: deepthink -> HumanThinking fast-path, caps upstream at 20s, <300ms response\n2bb1a7cc Normalize CLX gate script formatting\nc8aeadcd Fix markdown lint formatting in CLX rollout checklist\n11e38a24 Prepare CLX-only rollout guardrails, gateway hard mode, and smoke gates\nad9ea5b3 Extend smoke checks to public ocean endpoint\n9c6d4074 Add Curiosity ask smoke check cron script\n90ee16e3 Improve multilingual AGI reasoning and Unicode routing\nb865e86c feat(xlc): switch resonance metrics to nanodecibel\ndbb40de2 feat(xlc): enforce unlimited nanovolt scanner-printer stream\n9f7b3bb8 fix(xlc-stream): synchronize resonance with token printer cadence\n8271011b fix(web-ocean): retry vision upstream with JSON on CBOR 500\n5c38517b fix(ocean): restore audio proxy fallback and add docx/xlsx parsers\na15918cd feat(xlc): add resonant inspector and command router with tests\n482578ef chore: decouple external submodules (Cwy, Ultrawebthinkig-v2) from pipeline\nb9db0741 chore: commit all pending changes before rebase with origin/main\na27236a6 deploy: rolling one-by-one service restart with per-service health gate\nd930adbd Merge pull request #62 from Web8kameleon-hub/blackboxai/kloud-bridge-real-fix-1000\nb8570485 kloud-bridge: tolerate partial upstream availability without full outage\n2f898148 (origin/blackboxai/kloud-bridge-real-fix-1000) feat: Add Swagger module, lean compose, Docker start script. Kloud Bridge ready for real data [skip ci]\nc104de80 kloud-bridge: avoid false stale when timestamp is absent\nd5434846 kloud-bridge: accept meta.fetched_at for freshness checks\nd3d6347d nginx: increase proxy header buffers to prevent 502 on large upstream headers\nec4067e9 reporting: add real /api/reporting/system-metrics endpoint\nd69c7b83 kloud-bridge: enforce fresh internal telemetry and remove static smoothness claim\nc28f7ae8 chore: spec-based service discovery (replace port probing)\n6a4ff664 refactor(reporting): use docker inspection callback path\n6925bb06 fix(reporting): add docker-sdk fallback for container inspection\ned661293 fix(reporting,web): harden docker inspection and isolate module head metadata\n28f1ce7b refactor(reporting): remove fallback candidate loop to avoid timeout\n2f0fcb8e fix(reporting): add docker cli for live container metrics\n30bd338e fix(reporting): pin service to clisonix-net network\n4e9fc8b0 fix(reporting): build dedicated stable wrapper image\n04a88763 fix(reporting): restore repo volume mount for startup paths\n12def925 fix(reporting): use verified apps/api startup paths\n9a035c9d fix(compose-75): restore real reporting startup and resolve cycle port\n1ccd10e0 feat(compose): replace stub monitoring and reporting services\nef9aae1e feat(clx): add CLX independent agent with Ollama self-learning (4h sessions)\nccd7e2b1 fix(web): remove synthetic kloud-bridge fallbacks and keep live UI stable\nbccfebd9 fix(mymirror): use real platform health probes for active sources\n3f449664 fix(mymirror): derive live sources from kitchen/observability when catalog missing\na336f252 feat(api): replace postman runtime routes with native publisher API\nbb3f7fc6 fix: sanitize reporting alerts and stabilize loki ruler config\n3ed7dcba fix(deploy): restart only targeted services without deps\n9a1ad785 Fix live dashboards and stale cache behavior\nf70fc9ba fix(unified): use LAB_PORT for city labs and keep loki optional\n05902617 fix(unified): stabilize healthchecks for all lab services and isolate loki\nc0cd7f1d fix(kloud-bridge): detect lab services in worker count\n9025c292 fix(infrastructure): capacity governance & lab service recovery (May 5 2026)\n784acd53 fix(unified): add missing volumes/networks and correct lab build contexts\n6315f9b5 fix(app): redirect /app to Ocean Curiosity chat instead of old report workspace\nd3adc4e5 fix(deploy): replace all required :? vars with safe defaults in unified compose\n95e31736 fix(deploy): KITCHEN_RUN_API_KEY internal default - no external env required\na660fb05 chore(deploy): add unified compose for main + 23 labs (128 services)\n82e95ed8 feat(home): optimize landing CTAs and remove module-first friction\n5303a129 fix(home): remove fake preview data and keep real-output-only copy\n90ce6389 fix(deploy): force-recreate to avoid stale container conflict\nf4e71d48 chore: commit all pending changes (alba layer4 index)\n40d8efcc feat(home): add 'Powered by Clisonix' to bottom CTA\n5c670761 feat(home): high-converting landing â€” report-first, remove service overload and IoT API section\nda370a11 seo: focus sitemap on sellable pages, disallow /modules/ crawling in robots.txt\ne81b98d7 chore(deploy): satisfy integrity guard service and healthcheck requirements\n998bb58d fix(web): restore billing checkout contract and harden Google login flow\na35e390f fix(guardrails): remove mymirror identity fallbacks and opt guard workflow into Node 24\n4e4d3539 fix(auth): remove hardcoded auth fallbacks and use real user service\n79abd431 feat(auth): strengthen Google OAuth registration for 365-day user retention and add robust login security\n946ec502 ci(deps): add explicit dependabot configs for /frontend and /hello-ai directories to prevent update conflicts\nb0852abc fix: upgrade Next.js and postcss for security - resolve remaining dependencies\n784f2717 fix: update dependencies for security vulnerabilities\nbcc296ee fix(api): expose /api/health alias on backend and keep web health proxy route\n63002ebd ci: update workflow action runtimes\n4b666369 fix(web): expose public /api/health route via existing proxy health handler\nd0e0cc6b fix(ci): restore external/Cwy submodule mapping to stop checkout git 128 warning\n329781e8 ci(deploy): sync server repo before running hetzner autodeploy script\nc71e07fe ci: upgrade all upload-artifact@v4 â†’ v4.4 (Node 24-compatible)\ncceebb87 docs: final execution roadmap â€” 3-track parallel deployment plan\n7ceff188 docs: comprehensive CI 4-point analysis + deployment + hetzner guidance\n494e28b5 infra: harden autodeploy workflow + add security posture monitoring\n0cc6ee33 ci: fix kloud edge failures â€” update actions, install ecppack, add git auth\n63f88f3f web: reduce empty offline polling noise\n268fb2b9 ocean + reporting: adaptive elastic context and consistent error tracker states\n0269180f fix(web): route ocean chat directly to ocean curiosity\n97e7b24e fix: improve app workspace ingest UX and ocean chat toggle\n03b65caa feat(web): remove homepage bottom demo CTA\nd0dfafc9 chore: commit all current local changes\nc1ce3bc4 chore(web): clean legacy assets, utf/favicon hardening, and ocean stream polish\n1c8b4598 fix(web): enforce utf edge rendering and restore branded favicon\n65b37a4d feat: deliver V1 web flow, auth fixes, and report UX updates\nd5f3b114 chore: harden compose runtime and standardize production env flow\n4010be09 fix: make docker network managed by compose instead of external\n3849a7b9 fix: use /api/asi/marketplace/health instead of /api/proxy/marketplace-health\ne88cb563 fix: add /api/proxy/marketplace-health endpoint for service discovery\n1ba1d376 fix: reporting dashboard registry warning and marketplace health probe\n73b177f3 fix: map reporting dashboard to nested real metrics payload\naed0d2d8 fix: harden reporting proxy error handling\nf9eed259 fix: stream errors as JSON, reporting catalog fallback, health proxy\n791a3224 ci: provision origin tls during ssh deploy\n582fd597 fix: stabilize fresh-server deploy bootstrapping\n5b084ffd ci: allow deploy to continue when ssh bootstrap fallback fails\n898d3944 fix: correct kitchen-worker bullmq version\n79491599 ci: switch deploy target to new server 91.98.47.131 (debian-32gb-fsn1-1)",
+    "confidence": 0.89,
+    "sources": [
+      "git:log --oneline --decorate -n 120"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:28.047346+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "e7250591bb949f7bf5a0c5deafa381c6",
+    "query": "ops:git:branch -vv",
+    "response": "backup/main-before-oversize-fix                     0ddddb1d chore(git): exclude oversized local bundle from repository\n  backup/main-before-rollback-20260421-1351           2d186ba3 fix(kloud-bridge): smooth cpu/memory telemetry updates\n  backup/post-rollback-20260418-074332                1c496d38 perf(ocean-core): relax fast-path caps and timeouts for elastic compute\n  backup/pre-109-rollback-20260421-220747             433ad8dc fix(web): track app/lib business identity module for production build\n  backup/pre-blackbox-cleanup-20260320                4fc555b6 chore: remove unrelated ocean-core changes from linkedin link fix\n  backup/pre-first-today-rollback-20260421-220858     1b6f5894 feat: add 14 missing services to 75-services compose (knowledge, mongodb, newsroom, matia, saas, orchestra, regulatory, video-generator, shopping-therapy, userdata, ocean-core-blerina, ocean-core-strict-chat, ocean-mission, linkedin-poster)\n  backup/pre-integrate-ultra-exclude-20260426-130842  53afda89 ops: Hetzner deployment automation script\n  backup/pre-rollback-20260418-074034                 940f24b0 fix(web): add kloud-bridge route error and not-found boundaries\n  backup/pre-rollback-20260421-215120                 21d37cb8 fix(web): pass persistent user identity to data dashboards\n  backup/pre-rollback-20260421-215129                 433ad8dc fix(web): track app/lib business identity module for production build\n  backup/server-hetzner-new-20260412                  66c8dab1 fix: restore live docker containers dashboard\n  backup/server-main-20260412                         9d11195f fix(web): restore kloud bridge public proxy\n  backup/server-worktree-20260412                     ed03760a backup: capture live server worktree snapshot\n  blackboxai-risc-v-pr                                06172cea [origin/main: ahead 1, behind 370] docs: track RISC-V reliability PR status\n  blackboxai/fix-kitchen-real-services                90d83f13 [origin/blackboxai/fix-kitchen-real-services: gone] feat(kitchen): productionize with Redis BullMQ queue, real services, curl tests in README\n  blackboxai/fix-slo-sli-gate-errors                  b2481314 [origin/blackboxai/fix-slo-sli-gate-errors] fix: orchestra-gate â€” mark hetzner as allow_failure (unreachable from GitHub Actions runners)\n  blackboxai/kloud-bridge-real-fix-1000               3c5890bc [origin/blackboxai/kloud-bridge-real-fix-1000: ahead 1] kloud-bridge: serve partial live data when non-core upstreams are unavailable\n  blackboxai/kloud-bridge-ui                          8e24cefe [origin/blackboxai/kloud-bridge-ui: ahead 1] fix(prod): restore media/vision integrations and add bind-mount override\n  blackboxai/kloud-edge-soc-v0.1                      cc9ff99a [origin/blackboxai/kloud-edge-soc-v0.1: gone] docs: add RISC-V reliability gap analysis for KLOUd SoC v0.1 with accelerated timeline plan\n  blackboxai/risc-v-reliability-analysis              f822aad9 [origin/blackboxai/risc-v-reliability-analysis] docs: add RISC-V hardware reliability gap analysis for KLOUd SoC (gap to production + accelerated 2-12 month plan)\n  blackboxai/risc-v-reliability-gap                   06172cea [origin/blackboxai/risc-v-reliability-gap] docs: track RISC-V reliability PR status\n  blackboxai/risc-v-reliability-pr                    083f9eb2 fix: clean UTF-8 mojibake in ALBA layer; complete med_23c860271a2b clinical content\n  blackboxai/trinity-elastic-human-logic              5f26500e feat: Trinity Debate - elastic human logic with ASI synthesis, no limits, natural prompts\n  chore/recover-stashed-work                          9d56ac75 [origin/chore/recover-stashed-work: gone] Revert \"fix(web): preserve whitespace in ocean streaming\"\n  cleanup/remove-lifestyle-modules                    4e55bc04 ðŸ§¹ cleanup: Remove Lifestyle/Sensors modules (mood-journal, daily-habits, focus-timer, phone-sensors, face-detection)\n+ copilot-worktree-2026-02-10T06-50-46                2f1b6a89 (C:/Users/Admin/Desktop/Clisonix-cloud.worktrees/copilot-worktree-2026-02-10T06-50-46) Copilot CLI session 30932e90-2f42-4034-897d-4d79b4651419 changes\n  copilot/fix-slo-sli-gate-errors                     244fc35a [origin/copilot/fix-slo-sli-gate-errors] Commit all current changes: ocean-core_full.py, slo_sli_alerter.py, slo_sli_budget.py, and TODO.md\n  copilot/vscode-mlg9l1dl-3t7s                        1b4f0ce9 [origin/copilot/vscode-mlg9l1dl-3t7s] Checkpoint from VS Code for cloud agent session\n  copilot/vscode-mli7d4if-efz8                        5f7efc7b fix: restore clean blerina main.py from stable tag\n  dependabot/npm_and_yarn/apps/web/tailwindcss-4.1.18 5a4b5dab deps(npm): bump tailwindcss from 3.4.19 to 4.1.18 in /apps/web\n  deploy-invest                                       37e517dc [origin/main: behind 233] feat(web): add official Clisonix Invest module tab and page\n  feat/python-runtime-routing-matrix                  8a77a2ce [origin/feat/python-runtime-routing-matrix] feat(user-management): enforce Google-only authentication\n  feat/ultrawebthinking-v2-microservices              36a3182d chore(web): reduce lint warnings in api routes and hooks safely\n* feature/clx-2min-hotguard                           265cad10 [origin/feature/clx-2min-hotguard] docs: add QUICK_START.md showing broken vs working commands for CLX hotguard\n  feature/clx-only-rollout                            cedcc3e2 fix: include xlc_security_runtime in ocean-core image\n  fix/linkedin-autopost-blog-route                    b40b7392 feat(sync): include all remaining workspace updates for tonight deployment\n  fix/stabilize-java-kotlin-c19-policy                f8410ce7 [origin/fix/stabilize-java-kotlin-c19-policy] fix(deploy): make smoke status check numeric and redirect-safe\n  fix/telemetry-pipeline-phone-monitor                1ac3f0a0 ðŸ“š Add comprehensive ENV keys & tokens configuration guide\n  hetzner-new                                         5f24a918 [hetzner/hetzner-new: behind 2] Improve debate elasticity, content quality, and public publishing reach\n+ hotfix/kloud-bridge-telemetry                       7b8e72cd (C:/Users/Admin/Desktop/clisonix-main-hotfix) [origin/main: ahead 21, behind 211] Merge remote-tracking branch 'origin/main' into hotfix/kloud-bridge-telemetry\n  integrate/server-fix-dashboard                      be329125 [origin/integrate/server-fix-dashboard] fix: zero demo/mock/fallback â€” real errors only across all routes and dashboards\n+ isolate/ultrawebthinking-v2                         5c690947 (C:/Users/Admin/Desktop/Clisonix-cloud-ultrawebthinking-v2) chore: preserve isolated ultrawebthinking v2 snapshot\n  main                                                7f5584bb [origin/main] chore: sync workspace updates and Apache-2.0 licensing docs\n  master                                              fd7a9b54 Initial commit: Trinity System with optimized architecture and memory distribution\n  monorepo-integration                                8f4990e0 wip: preserve local changes before subtree integration\n  ocean-apr30-fast-ultra-baseline                     8937fbd2 [origin/ocean-apr30-fast-ultra-baseline] feat(ocean): stabilize streaming, binary transport, kloud chim engine, deterministic algebra\n  recover/wip                                         9748033d chore: full commit 2025-10-31\n  sdk-public                                          c69f51f4 fix: resolve docker requirement path and stabilize auto sync deploy\n  stable/2026-04-20-1400                              a76e1ddc feat(seo): boost AI/chat discoverability across modules\n  wip/local-snapshot                                  8f4990e0 wip: preserve local changes before subtree integration",
+    "confidence": 0.89,
+    "sources": [
+      "git:branch -vv"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:28.090186+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "e8f6775f47ec9d5390fb0d2292d819d5",
+    "query": "ops:git:remote -v",
+    "response": "hetzner\tgit@github.com:Web8kameleon-hub/clisonix.com.git (fetch)\nhetzner\tgit@github.com:Web8kameleon-hub/clisonix.com.git (push)\norigin\tgit@github.com:Web8kameleon-hub/clisonix.com.git (fetch)\norigin\tgit@github.com:Web8kameleon-hub/clisonix.com.git (push)\nsdkpub\thttps://github.com/Web8kameleon-hub/Web8kameleon-hub-clisonix-sdk.git (fetch)\nsdkpub\thttps://github.com/Web8kameleon-hub/Web8kameleon-hub-clisonix-sdk.git (push)",
+    "confidence": 0.91,
+    "sources": [
+      "git:remote -v"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:01:28.110904+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "678abb61b262824809e89c2db206ff29",
+    "query": "ops_probe:/api/health",
+    "response": "{\"service\": \"Clisonix-industrial-backend-real\", \"status\": \"operational\", \"version\": \"1.0.0\", \"timestamp\": \"2026-05-07T19:02:04.522717+00:00\", \"instance_id\": \"7d12f102\", \"uptime_app_seconds\": 2241.821, \"system\": {\"cpu_percent\": 61.4, \"memory_percent\": 70.0, \"memory_total\": 32864829440, \"disk_percent\": 54.03, \"disk_total\": 241640574976, \"net_bytes_sent\": 1700812, \"net_bytes_recv\": 2199491, \"processes\": 1, \"hostname\": \"c890c8871a26\", \"boot_time\": 1777748532.0, \"uptime_seconds\": 431992.52108359337}, \"redis\": {\"status\": \"connected\", \"message\": null, \"connected_clients\": 3, \"used_memory\": \"1.19M\", \"uptime_seconds\": 2259, \"response_time_ms\": null}, \"database\": {\"status\": \"healthy\", \"message\": null, \"connected_clients\": null, \"used_memory\": null, \"uptime_seconds\": null, \"response_time_ms\": 0.5}, \"environment\": \"production\"}",
+    "confidence": 0.95,
+    "sources": [
+      "GET https://www.clisonix.com/api/health"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:02:04.917992+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "405c7fe4a551a31be815ffbb8066f62f",
+    "query": "ops_probe:/api/ocean/health",
+    "response": "{\"status\": \"healthy\", \"version\": \"5.0.0\", \"uptime_s\": 0.003, \"ollama\": \"http://clisonix-ollama:11434\", \"translation_node\": \"http://clisonix-translation-node:8036\", \"dependencies\": {\"healthy\": 1, \"total\": 2, \"detail\": {\"ollama\": \"up\", \"translation\": \"down\"}}, \"dependency_health\": 0.5}",
+    "confidence": 0.94,
+    "sources": [
+      "GET https://www.clisonix.com/api/ocean/health"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:02:05.021965+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "d5f1303d09a1785b32f21e774612671d",
+    "query": "ops_probe:/api/ocean/status",
+    "response": "{\"status\": \"operational\", \"service\": \"Ocean Core Full\", \"version\": \"5.0.0\", \"model\": \"llama3.1:8b\", \"system_prompt_path\": \"/app/CLISONIX_SYSTEM_PROMPT.md\", \"module_map_path\": \"/app/CLISONIX_MODULE_MAP.md\", \"system_prompt_loaded\": true, \"module_map_loaded\": true, \"engines_active\": 6, \"total_layer_combinations\": 4291445422817280, \"enterprise_guard\": null}",
+    "confidence": 0.94,
+    "sources": [
+      "GET https://www.clisonix.com/api/ocean/status"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:02:05.087923+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "270616e31287b03cb571f36ada7ba98b",
+    "query": "ops_probe:/api/curiosity/health",
+    "response": "{\"status\": \"healthy\", \"service\": \"curiosity_ocean\", \"timestamp\": \"2026-05-07T19:02:04.765167\"}",
+    "confidence": 0.92,
+    "sources": [
+      "GET https://www.clisonix.com/api/curiosity/health"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:02:05.153588+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "e27d446872b2614d298f213209f0bd3a",
+    "query": "ops_probe:/api/auth/providers",
+    "response": "{\"google\": {\"id\": \"google\", \"name\": \"Google\", \"type\": \"oidc\", \"signinUrl\": \"https://www.clisonix.com/api/auth/signin/google\", \"callbackUrl\": \"https://www.clisonix.com/api/auth/callback/google\"}}",
+    "confidence": 0.94,
+    "sources": [
+      "GET https://www.clisonix.com/api/auth/providers"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:02:05.226334+00:00",
+    "times_used": 0,
+    "helpful": true
+  },
+  {
+    "id": "31bdb23c64801c02d15bf2127a583569",
+    "query": "ops_curiosity:DeepThink and provide an operations plan.",
+    "response": "{\"status\": \"accepted\", \"mode\": \"callback\", \"request_id\": \"cb_1778180531025_kdu8ahka\", \"callback_url\": null, \"callback_required\": true, \"reason\": \"async_processing_required\", \"fast_path\": true}",
+    "confidence": 0.94,
+    "sources": [
+      "POST https://www.clisonix.com/api/ocean/curiosity"
+    ],
+    "language": "en",
+    "created_at": "2026-05-07T19:02:11.416924+00:00",
+    "times_used": 0,
+    "helpful": true
+  }
+]

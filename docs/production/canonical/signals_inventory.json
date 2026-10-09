@@ -1,0 +1,2390 @@
+[
+  {
+    "method": "GET",
+    "route": "/",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/",
+    "source_file": "docker-stubs/agent_telemetry_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/",
+    "source_file": "services/kloud_upstream_runtime/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/Clisonix/metrics",
+    "source_file": "apps/api/api/routes/neurosonix_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/Clisonix/status",
+    "source_file": "apps/api/api/routes/neurosonix_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/academic/status",
+    "source_file": "services/content-factory/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/admin/summary",
+    "source_file": "services/kloud_upstream_runtime/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/agent/{agent_id}",
+    "source_file": "docker-stubs/agent_telemetry_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/agents",
+    "source_file": "docker-stubs/agent_telemetry_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/agents/{agent_id}/heartbeat",
+    "source_file": "saas_services_orchestrator.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/agents/{agent_id}/heartbeat",
+    "source_file": "saas_services_orchestrator_v3.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/agi/metrics",
+    "source_file": "apps/api/api/routes/agi_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/agi/status",
+    "source_file": "apps/api/api/routes/agi_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/alba",
+    "source_file": "apps/api/signal_gen/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/albi",
+    "source_file": "apps/api/signal_gen/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/algebra/signal",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/algebra/signal/clock",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/algebra/signal/correlate",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/algebra/signal/op",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/algebra/signal/pulse",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/agents/status",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/ai/agents-status",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/alba/metrics",
+    "source_file": "apps/web/app/api/alba/metrics/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/api/alba/metrics",
+    "source_file": "neurosonix_industrial_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/alba/status",
+    "source_file": "neurosonix_industrial_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/alba/streams",
+    "source_file": "neurosonix_industrial_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/alba/streams/start",
+    "source_file": "neurosonix_industrial_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/alba/streams/{stream_id}/data",
+    "source_file": "neurosonix_industrial_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/alba/streams/{stream_id}/stop",
+    "source_file": "neurosonix_industrial_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/albi/metrics",
+    "source_file": "apps/web/app/api/albi/metrics/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/api/asi-status",
+    "source_file": "apps/api/main_minimal.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/asi-status",
+    "source_file": "apps/web/app/api/asi-status/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/api/asi/alba/metrics",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/asi/albi/metrics",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/asi/joint-status",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/asi/jona/metrics",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/asi/status",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/asi/status",
+    "source_file": "apps/web/app/api/asi/status/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/api/billing/metering-status",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/billing/webhook",
+    "source_file": "apps/web/app/api/billing/webhook/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/api/connections/status",
+    "source_file": "apps/web/app/api/connections/status/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "POST",
+    "route": "/api/coordination/event",
+    "source_file": "jona_service_7777.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/debate/stream",
+    "source_file": "apps/web/app/api/debate/stream/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "POST",
+    "route": "/api/debate/stream",
+    "source_file": "apps/web/app/api/debate/stream/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/api/documents/metrics",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/events",
+    "source_file": "backend/system/smart_orchestrator.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/excel/status",
+    "source_file": "ocean-core/ocean_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/jona/metrics",
+    "source_file": "apps/web/app/api/jona/metrics/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/api/jona/status",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/kitchen/status/:runId",
+    "source_file": "apps/web/app/api/kitchen/status/[runId]/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "POST",
+    "route": "/api/linkedin/webhook",
+    "source_file": "services/content-factory/linkedin_auto_poster.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/mesh-status",
+    "source_file": "balancer_nodes_3334.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/metrics",
+    "source_file": "apps/api/caching_middleware.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/metrics",
+    "source_file": "services/core/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/monitoring/metrics",
+    "source_file": "monitoring_system_config.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/monitoring/real-metrics-info",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/mymirror/live-metrics",
+    "source_file": "apps/web/app/api/mymirror/live-metrics/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "POST",
+    "route": "/api/nodes/heartbeat",
+    "source_file": "balancer_nodes_3334.py",
+    "source_type": "python"
+  },
+  {
+    "method": "PUT",
+    "route": "/api/nodes/{nodeId}/status",
+    "source_file": "balancer_nodes_3334.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/ocean/self-learning-status",
+    "source_file": "apps/web/app/api/ocean/self-learning-status/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "POST",
+    "route": "/api/ocean/self-learning-status",
+    "source_file": "apps/web/app/api/ocean/self-learning-status/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/api/ocean/status",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/ocean/status",
+    "source_file": "apps/api/ocean_api_v2.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/ocean/stream",
+    "source_file": "apps/web/app/api/ocean/stream/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "POST",
+    "route": "/api/ocean/stream/warm",
+    "source_file": "apps/web/app/api/ocean/stream/warm/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "POST",
+    "route": "/api/ocean/telemetry/batch",
+    "source_file": "apps/api/ocean_api_v2.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/ocean/telemetry/ingest",
+    "source_file": "apps/api/ocean_api_v2.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/ocean/telemetry/mark-processed",
+    "source_file": "apps/api/ocean_api_v2.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/ocean/telemetry/unprocessed",
+    "source_file": "apps/api/ocean_api_v2.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/ocean/web-reader/stream",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/ocean/web-reader/stream",
+    "source_file": "apps/web/app/api/ocean/web-reader/stream/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/api/performance-metrics",
+    "source_file": "apps/api/industrial_dashboard_demo.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/performance-metrics",
+    "source_file": "neurosonix_industrial_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/proxy/system-metrics",
+    "source_file": "apps/web/app/api/proxy/system-metrics/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/api/proxy/user-metrics",
+    "source_file": "apps/web/app/api/proxy/user-metrics/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "POST",
+    "route": "/api/proxy/user-metrics",
+    "source_file": "apps/web/app/api/proxy/user-metrics/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/api/regulatory/status",
+    "source_file": "services/regulatory/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/reporting/metrics-history",
+    "source_file": "services/reporting/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/reporting/system-metrics",
+    "source_file": "excel-core/excel_reporting_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/reporting/system-metrics",
+    "source_file": "services/reporting/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/signals/all",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/signals/recent",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "alba_service_5555.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "albi_service_6680.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "asi_api_server.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "behavioral_science_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "economy_api_server.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "ocean-core/ocean_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "ocean-core/ocean_api_giant_restored.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "ocean-core/ocean_api_hybrid.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "services/aviation-weather/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "services/core/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "services/excel/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/status",
+    "source_file": "services/reporting/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/system-status",
+    "source_file": "apps/api/industrial_dashboard_demo.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/system-status",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/system-status",
+    "source_file": "apps/web/app/api/system-status/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/api/system-status",
+    "source_file": "neurosonix_industrial_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/telemetry/ingest",
+    "source_file": "alba_service_5555.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/telemetry/web-vitals",
+    "source_file": "apps/web/app/api/telemetry/web-vitals/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/api/telemetry/web-vitals/report",
+    "source_file": "apps/web/app/api/telemetry/web-vitals/report/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/agents/heartbeat",
+    "source_file": "services/agiem/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/chat/browse/stream",
+    "source_file": ".git_ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/chat/browse/stream",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/chat/stream",
+    "source_file": ".git_ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/chat/stream",
+    "source_file": "ocean-core/nanogrid_v3.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/chat/stream",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/chat/stream",
+    "source_file": "ocean-core/ocean_core_lite.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/chat/stream",
+    "source_file": "ocean-core/ocean_nanogrid.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/chat/stream",
+    "source_file": "ocean-core/ocean_nanogrid_old.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/chat/stream",
+    "source_file": "ocean-core/ocean_orchestrator.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/chat/stream",
+    "source_file": "ocean-core/ocean_simple.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/chat/stream",
+    "source_file": "ocean-core/ocean_simple_new.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/chat/stream",
+    "source_file": "ocean_nanogrid.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/chat/stream/warm",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/debate/stream",
+    "source_file": ".git_ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/debate/stream",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/documents/metrics",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/enterprise/status",
+    "source_file": ".git_ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/enterprise/status",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/integrations/kloud/status",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/integrations/status",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/kloud/status",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/multimodal/status",
+    "source_file": "ocean-core/ocean_nanogrid.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/multimodal/status",
+    "source_file": "ocean_nanogrid.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/nanogrid/status",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/payments/webhook",
+    "source_file": "services/blog_api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/publish/status",
+    "source_file": "9999/app.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/selflearning/status",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/signals/external",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/signals/internal",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/signals/metrics/histogram",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/signals/recent",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/signals/status",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/signals/system",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/signals/validate",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/status",
+    "source_file": ".git_ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/status",
+    "source_file": "alba_service_5555.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/status",
+    "source_file": "albi_service_6680.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/status",
+    "source_file": "ocean-core/asi_lite_server.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/status",
+    "source_file": "ocean-core/nanogrid_v3.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/status",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/status",
+    "source_file": "ocean-core/ocean_core_lite.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/status",
+    "source_file": "ocean-core/ocean_nanogrid.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/status",
+    "source_file": "ocean-core/ocean_nanogrid_old.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/status",
+    "source_file": "ocean-core/ocean_super_lite.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/status",
+    "source_file": "ocean_nanogrid.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/status",
+    "source_file": "services/blog_publisher/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/stream",
+    "source_file": "matia_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/stream",
+    "source_file": "shopping_therapy_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "DELETE",
+    "route": "/api/v1/telemetry/events",
+    "source_file": "services/agent-telemetry/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/telemetry/events",
+    "source_file": "services/agent-telemetry/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/telemetry/events",
+    "source_file": "services/agent-telemetry/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/telemetry/metrics",
+    "source_file": "services/agent-telemetry/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/tools/status",
+    "source_file": "9999/app.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/tools/status",
+    "source_file": "services/ai-global-9999/app.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/v6/evolution/status",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v1/video/status",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/v1/webhooks/stripe",
+    "source_file": "services/billing_core/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/v2/status",
+    "source_file": "ocean-core/ocean_super_lite.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/api/vendor-nodes/heartbeat",
+    "source_file": "balancer_nodes_3334.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/api/video/status/:id",
+    "source_file": "apps/web/app/api/video/status/[id]/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "POST",
+    "route": "/api/webhooks/stripe",
+    "source_file": "apps/web/app/api/webhooks/stripe/route.ts",
+    "source_type": "next-route"
+  },
+  {
+    "method": "GET",
+    "route": "/asi/alba/metrics",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/asi/albi/metrics",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/asi/joint-status",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/asi/joint-status",
+    "source_file": "asi_api_server.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/asi/jona/metrics",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/asi/status",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/asi/status",
+    "source_file": "backend/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/asi/status",
+    "source_file": "neurosonix_industrial_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/asi/status",
+    "source_file": "services/core/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/audio/status",
+    "source_file": "apps/api/neurosonix/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/audit/log",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/balancer/feedback",
+    "source_file": "distributed_pulse_balancer.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/balancer/request",
+    "source_file": "distributed_pulse_balancer.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/balancer/status",
+    "source_file": "distributed_pulse_balancer.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/billing/event",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/billing/{username}",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/bin/signals",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/bin/status",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/bin/stream",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/bin/stream",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/binary-algebra/signal/create",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/binary-algebra/signal/operate",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/binary-algebra/signal/{name}",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/binary-algebra/signals",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/binary/status",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/cache/invalidate",
+    "source_file": "apps/api/unified_status_layer.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/cache/stats",
+    "source_file": "apps/api/unified_status_layer.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/cbp/stream/sample",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/cbp/stream/start",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/cbp/stream/write",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/chat/stream",
+    "source_file": "apps/api/ocean_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/curiosity-ocean/external-status",
+    "source_file": "apps/api/curiosity_ocean_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/cycles",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/dashboard/metrics",
+    "source_file": "apps/api/api/routes/dashboard_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/dashboard/status",
+    "source_file": "apps/api/api/routes/dashboard_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/data",
+    "source_file": "apps/api/signal_gen/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/data-sources/{source_id}/metrics",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/data/metrics",
+    "source_file": "balancer_data_3337.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/data/metrics/{nodeId}",
+    "source_file": "balancer_data_3337.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/errors",
+    "source_file": "apps/api/unified_status_layer.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/event",
+    "source_file": "docker-stubs/agent_telemetry_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/events",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/events",
+    "source_file": "ocean-core/unified_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/events",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/events/stats",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/hardware/mesh/status",
+    "source_file": "services/kloud_bridge/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/hardware/nodes/heartbeat",
+    "source_file": "services/kloud_bridge/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/hardware/nodes/pulse",
+    "source_file": "services/kloud_bridge/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/health",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/health",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/health",
+    "source_file": "apps/api/signal_gen/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/health",
+    "source_file": "apps/api/unified_status_layer.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/health",
+    "source_file": "balancer_pulse_3336.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/health",
+    "source_file": "docker-stubs/agent_telemetry_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/health",
+    "source_file": "services/agent-telemetry/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/health",
+    "source_file": "services/kloud_upstream_runtime/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/i18n/status",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/info",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/info",
+    "source_file": "balancer_pulse_3336.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/jona",
+    "source_file": "apps/api/signal_gen/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/klajdi/signal",
+    "source_file": "services/intelligence-lab/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/klajdi/signals",
+    "source_file": "services/intelligence-lab/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/learn/status",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/license/{username}",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/live-metrics",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/logs",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/logs/event",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/loop/status",
+    "source_file": "ocean-core/unified_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/mega/signals",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/mega/status",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/mesh/status",
+    "source_file": "apps/api/mesh/server.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/mesh/status",
+    "source_file": "backend/mesh/server.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "alba_service_5555.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "albi_service_6680.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "app/neurosonix/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "apps/api/user_data_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "asi_api_server.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "cycle_api_server.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "distributed_pulse_balancer.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "docker-stubs/agent_telemetry_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "docker-stubs/analytics_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "docker-stubs/saas_orchestrator_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "jona_service_7777.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "ocean-core/api/router.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics",
+    "source_file": "routes/alba_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/metrics",
+    "source_file": "apps/api/user_data_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics-history",
+    "source_file": "apps/api/reporting_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics/full",
+    "source_file": "apps/api_manager/app.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/metrics/latest",
+    "source_file": "mesh_hq_receiver.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/metrics/upload",
+    "source_file": "mesh_hq_receiver.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/modules",
+    "source_file": "apps/api/signal_gen/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/monitoring/nodes",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/multi-tenant",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/neural-alignment/status",
+    "source_file": "research/generated_apis/generated_service/neural_alignment_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/neuroacoustic/status",
+    "source_file": "apps/api/neurosonix/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/neuroacoustic/stream",
+    "source_file": "apps/api/neurosonix/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/node/{node}/signals",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/nodes",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/nodes",
+    "source_file": "services/kloud_upstream_runtime/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/nodes/heartbeat",
+    "source_file": "services/kloud_upstream_runtime/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/nodes/register",
+    "source_file": "services/kloud_upstream_runtime/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/nodes/{node_id}",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "PUT",
+    "route": "/nodes/{node_id}/status",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/ocean/signals/publish",
+    "source_file": "services/kloud_bridge/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/ocean/status",
+    "source_file": "services/kloud_bridge/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/peers",
+    "source_file": "scripts/hardware/kloud_upstream_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/peers",
+    "source_file": "services/kloud_upstream_runtime/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/ping",
+    "source_file": "clisonix/routes/status.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/pulse/config",
+    "source_file": "balancer_pulse_3336.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/pulse/config",
+    "source_file": "balancer_pulse_3336.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/pulse/dead-nodes",
+    "source_file": "balancer_pulse_3336.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/pulse/heartbeat",
+    "source_file": "balancer_pulse_3336.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/pulse/metrics",
+    "source_file": "balancer_pulse_3336.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/pulse/nodes",
+    "source_file": "balancer_pulse_3336.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/pulse/reset/{nodeId}",
+    "source_file": "balancer_pulse_3336.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/pulse/resuscitate/{nodeId}",
+    "source_file": "balancer_pulse_3336.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/pulse/status/{nodeId}",
+    "source_file": "balancer_pulse_3336.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/quota/{username}",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/register",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/regulatory/status",
+    "source_file": "ocean-core/ocean_mission_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/report",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/routes/{signal_type}",
+    "source_file": "ocean-core/bridge_engine.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/series",
+    "source_file": "services/api/routers/telemetry.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/session/{session_id}/event",
+    "source_file": "albi_user_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/session/{session_id}/metrics",
+    "source_file": "albi_user_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/session/{session_id}/metrics",
+    "source_file": "jona_neural_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/session/{session_id}/stream",
+    "source_file": "albi_user_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/signal/create",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/signal/{signal_id}",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/signals/all",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/signals/emit",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/signals/poll",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/signals/process",
+    "source_file": "ocean-core/bridge_engine.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/signals/publish",
+    "source_file": "ocean-core/bridge_engine.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/signals/publish",
+    "source_file": "services/kloud_bridge/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/signals/recent",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/signals/sources",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/signals/status",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/stages",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/stages/{stage_name}",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/stages/{stage_name}/metrics",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/state",
+    "source_file": "scripts/hardware/kloud_upstream_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/state",
+    "source_file": "services/kloud_upstream_runtime/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "agiem_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "app/neurosonix/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api/billing/stripe_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api/excel_module.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api/main_minimal.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api/master.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api/neurosonix/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api/ocean_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api/routes/jona_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api/routes/service_discovery.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api/services/spectrum_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api/signal_gen/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api_manager/app.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "apps/api_producer/app.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "asi_api_server.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "balancer_simple.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "behavioral_science_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "clisonix/routes/status.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "docker-stubs/asi_component_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "docker-stubs/core_engine_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "docker-stubs/cycle_engine_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "docker-stubs/health_monitor.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "economy_api_server.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "jona_neural_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "master.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "matia_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "neurosonix_industrial_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "ocean-core/api_mega_layer.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "ocean-core/curiosity_algebra/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "ocean-core/ocean_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "ocean-core/ocean_core_full.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "ocean-core/production_middleware.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "orchestra/server.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "routes/alba_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "saas_services_orchestrator.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "saas_services_orchestrator_v3.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "scripts/hardware/kloud_upstream_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/agent-telemetry/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/agiem/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/aviation-weather/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/blerina/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/blog_api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/content-factory/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/core/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/crawler/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/cycle-engine/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/excel/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/intelligence-lab/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/kloud_bridge/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/kloud_upstream_runtime/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/lagter/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/openmind/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/reporting/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/usage_analytics.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "services/video-generator/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status",
+    "source_file": "shopping_therapy_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status-report",
+    "source_file": "slack_integration_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status/{job_id}",
+    "source_file": "services/crawler/api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/status/{service_name}",
+    "source_file": "docker-stubs/health_monitor.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/stream/start",
+    "source_file": "apps/api/routers/eeg_router.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/streams",
+    "source_file": "routes/alba_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/streams/start",
+    "source_file": "routes/alba_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/streams/{stream_id}/data",
+    "source_file": "routes/alba_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/streams/{stream_id}/stop",
+    "source_file": "routes/alba_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/submit",
+    "source_file": "scripts/hardware/kloud_upstream_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/submit",
+    "source_file": "services/kloud_upstream_runtime/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/summary",
+    "source_file": "docker-stubs/agent_telemetry_stub.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/system",
+    "source_file": "apps/api/signal_gen/routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/system-metrics",
+    "source_file": "apps/api/main.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/system-metrics",
+    "source_file": "reporting_proxy_append.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/system-telemetry/status",
+    "source_file": "research/generated_apis/generated_service/system_telemetry_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/unified/status",
+    "source_file": "ocean-core/unified_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/user/login",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/users/{user_id}/biometrics",
+    "source_file": "apps/api/routes/fitness_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/users/{user_id}/biometrics",
+    "source_file": "apps/api/routes/fitness_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/webhook",
+    "source_file": "apps/api/billing/checkout_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/webhook",
+    "source_file": "apps/api/billing/stripe_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/webhook",
+    "source_file": "backend/api/billing_controller.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/webhook/register",
+    "source_file": "apps/api/saas_signal_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/webhook/stripe",
+    "source_file": "services/blog-paywall/blog_paywall_service.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/webhook/stripe",
+    "source_file": "services/revenue_analytics.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/webhook/subscribe",
+    "source_file": "blerina_reformatter.py",
+    "source_type": "python"
+  },
+  {
+    "method": "POST",
+    "route": "/webhook/{source_id}",
+    "source_file": "apps/api/user_data_api.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/world-brain/metrics",
+    "source_file": "apps/api/api/routes/world_brain_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/world-brain/status",
+    "source_file": "apps/api/api/routes/world_brain_routes.py",
+    "source_type": "python"
+  },
+  {
+    "method": "GET",
+    "route": "/{model_id}/{version}/gate-status",
+    "source_file": "apps/api/routes/model_governance_routes.py",
+    "source_type": "python"
+  }
+]

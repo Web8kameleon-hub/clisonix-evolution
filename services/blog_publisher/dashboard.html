@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Publisher Dashboard - Clisonix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-title h1 {
+            font-size: 32px;
+            color: #667eea;
+        }
+
+        .badge {
+            background: #48bb78;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .badge.warning {
+            background: #ed8936;
+        }
+
+        .badge.error {
+            background: #f56565;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            font-size: 18px;
+            color: #667eea;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .metric {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 15px 0;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .btn-success {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #38a169;
+        }
+
+        .btn-warning {
+            background: #ed8936;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #dd6b20;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            color: #667eea;
+            border-bottom: 2px solid #eee;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #fafafa;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status.published {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status.pending {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+
+        .status.failed {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .status.low-quality {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .quality-score {
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .quality-score.excellent {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .quality-score.good {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+
+        .quality-score.fair {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+
+        .quality-score.poor {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .tab {
+            padding: 10px 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: bold;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab:hover {
+            color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .alert {
+            background: #fef5e7;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .alert.error {
+            background: #fadbd8;
+            border-left-color: #e74c3c;
+        }
+
+        .alert.success {
+            background: #d5f4e6;
+            border-left-color: #27ae60;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        footer {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-title">
+                <h1>📰 Blog Publisher Dashboard</h1>
+            </div>
+            <div>
+                <span class="badge" id="status-badge">✅ Online</span>
+            </div>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <h2>📊 Today's Performance</h2>
+                <div class="metric" id="today-published">0</div>
+                <div class="metric-label">articles published</div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" id="today-progress" style="width: 0%"></div>
+                </div>
+                <div class="metric-label" id="daily-limit">0/10 daily limit</div>
+            </div>
+
+            <div class="card">
+                <h2>⭐ Quality Average</h2>
+                <div class="metric" id="avg-quality">0.00</div>
+                <div class="metric-label">average quality score</div>
+                <div class="metric-label">Minimum required: 0.85</div>
+            </div>
+
+            <div class="card">
+                <h2>📝 Pending Articles</h2>
+                <div class="metric" id="pending-count">0</div>
+                <div class="metric-label">waiting to publish</div>
+                <button class="btn btn-primary" onclick="publishBatch()">Publish Now</button>
+            </div>
+
+            <div class="card">
+                <h2>💾 Total Published</h2>
+                <div class="metric" id="total-published">0</div>
+                <div class="metric-label">articles all time</div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-primary" onclick="openPublishModal()">📤 Publish Article</button>
+            <button class="btn btn-success" onclick="publishBatch()">🚀 Publish Batch (Quality Filtered)</button>
+            <button class="btn btn-warning" onclick="refreshStats()">🔄 Refresh Stats</button>
+            <button class="btn btn-secondary" onclick="openQualityCheckModal()">🔍 Quality Check</button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('overview')">Overview</button>
+            <button class="tab" onclick="switchTab('pending')">Pending Articles</button>
+            <button class="tab" onclick="switchTab('published')">Published History</button>
+            <button class="tab" onclick="switchTab('quality')">Quality Reports</button>
+            <button class="tab" onclick="switchTab('validation')">FDA/Sandbox</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div class="tab-content active" id="overview">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="stat-articles-pending">0</div>
+                    <div class="stat-label">Pending Quality Check</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="stat-articles-today">0</div>
+                    <div class="stat-label">Published Today</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="stat-quality-min">0.85</div>
+                    <div class="stat-label">Min Quality Score</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="stat-duplicates-blocked">0</div>
+                    <div class="stat-label">Duplicates Blocked</div>
+                </div>
+            </div>
+            <div id="alerts-container"></div>
+        </div>
+
+        <!-- Pending Tab -->
+        <div class="tab-content" id="pending">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Article ID</th>
+                            <th>Source</th>
+                            <th>Title</th>
+                            <th>Quality Score</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pending-table">
+                        <tr>
+                            <td colspan="5" style="text-align: center; color: #999;">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Published Tab -->
+        <div class="tab-content" id="published">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Article ID</th>
+                            <th>Date Published</th>
+                            <th>Status</th>
+                            <th>Link</th>
+                        </tr>
+                    </thead>
+                    <tbody id="published-table">
+                        <tr>
+                            <td colspan="4" style="text-align: center; color: #999;">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Quality Tab -->
+        <div class="tab-content" id="quality">
+            <div id="quality-stats"></div>
+        </div>
+
+        <!-- Validation Tab -->
+        <div class="tab-content" id="validation">
+            <div class="grid">
+                <div class="card">
+                    <h2>FDA Compliance Check</h2>
+                    <p>Validate medical articles for FDA requirements</p>
+                    <button class="btn btn-primary" onclick="openFdaValidationModal()" style="margin-top: 10px;">🔍 Run FDA Validation</button>
+                </div>
+                <div class="card">
+                    <h2>Sandbox Algorithm Test</h2>
+                    <p>Test articles in sandbox before publication</p>
+                    <button class="btn btn-primary" onclick="openSandboxTestModal()" style="margin-top: 10px;">🧪 Run Sandbox Test</button>
+                </div>
+            </div>
+            <div id="validation-results"></div>
+        </div>
+
+        <!-- Modals -->
+        <div id="publishModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">📤 Publish Article</div>
+                <div class="form-group">
+                    <label>Article ID</label>
+                    <input type="text" id="publishArticleId" placeholder="e.g., pillar_001">
+                </div>
+                <div class="form-group">
+                    <label>Source</label>
+                    <select id="publishSource">
+                        <option value="blerina">Blerina (Technology)</option>
+                        <option value="dr_albana">Dr. Albana (Medical)</option>
+                        <option value="lagter">Lagter (Research Notes)</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeModal('publishModal')">Cancel</button>
+                    <button class="btn btn-primary" onclick="publishSingle()">Publish</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="qualityCheckModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">🔍 Quality Check</div>
+                <div class="form-group">
+                    <label>Article ID</label>
+                    <input type="text" id="qualityArticleId" placeholder="e.g., pillar_001">
+                </div>
+                <div class="form-group">
+                    <label>Source</label>
+                    <select id="qualitySource">
+                        <option value="blerina">Blerina</option>
+                        <option value="dr_albana">Dr. Albana</option>
+                        <option value="lagter">Lagter</option>
+                    </select>
+                </div>
+                <div id="qualityCheckResult"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeModal('qualityCheckModal')">Close</button>
+                    <button class="btn btn-primary" onclick="runQualityCheck()">Check Quality</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="fdaValidationModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">FDA Validation</div>
+                <div class="form-group">
+                    <label>Article ID</label>
+                    <input type="text" id="fdaArticleId" placeholder="Medical article ID">
+                </div>
+                <div id="fdaValidationResult"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeModal('fdaValidationModal')">Close</button>
+                    <button class="btn btn-primary" onclick="runFdaValidation()">Validate</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="sandboxTestModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">Sandbox Test</div>
+                <div class="form-group">
+                    <label>Article ID</label>
+                    <input type="text" id="sandboxArticleId" placeholder="Article ID">
+                </div>
+                <div id="sandboxTestResult"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeModal('sandboxTestModal')">Close</button>
+                    <button class="btn btn-primary" onclick="runSandboxTest()">Test</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Clisonix Blog Auto-Publisher | High-Quality Content Management System</p>
+            <p>Target: <a href="https://ledjanahmati.github.io/clisonix-blog/" target="_blank">ledjanahmati.github.io/clisonix-blog</a></p>
+        </footer>
+    </div>
+
+    <script>
+        const API_BASE = '/api/v1';
+
+        async function fetchStats() {
+            try {
+                const [quality, pending, published] = await Promise.all([
+                    fetch(`${API_BASE}/quality/stats`).then(r => r.json()),
+                    fetch(`${API_BASE}/pending`).then(r => r.json()),
+                    fetch(`${API_BASE}/published`).then(r => r.json())
+                ]);
+
+                // Update main cards
+                document.getElementById('avg-quality').textContent = quality.stats.avg_score.toFixed(2);
+                document.getElementById('pending-count').textContent = pending.total_pending;
+                document.getElementById('total-published').textContent = published.total_published;
+                document.getElementById('today-published').textContent = '0';  // Would need date tracking
+                document.getElementById('daily-limit').textContent = '0/10 daily limit';
+                document.getElementById('today-progress').style.width = '0%';
+
+                // Update tabs
+                updatePendingTable(pending.articles);
+                updatePublishedTable(published.articles);
+                updateQualityStats(quality);
+
+                // Update status badge
+                document.getElementById('status-badge').textContent = '✅ Online';
+                document.getElementById('status-badge').style.background = '#48bb78';
+            } catch (error) {
+                console.error('Error fetching stats:', error);
+                document.getElementById('status-badge').textContent = '❌ Error';
+                document.getElementById('status-badge').className = 'badge error';
+            }
+        }
+
+        function updatePendingTable(articles) {
+            const tbody = document.getElementById('pending-table');
+            if (!articles || articles.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#999;">No pending articles</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = articles.slice(0, 10).map(a => `
+                <tr>
+                    <td>${a.id}</td>
+                    <td>${a.source}</td>
+                    <td>${a.title}</td>
+                    <td><span class="quality-score" id="qs-${a.id}">-</span></td>
+                    <td><button class="btn btn-primary" onclick="publishSingleArticle('${a.id}', '${a.source}')">Publish</button></td>
+                </tr>
+            `).join('');
+
+            // Check quality for each
+            articles.forEach(a => checkArticleQuality(a.id, a.source));
+        }
+
+        function updatePublishedTable(articles) {
+            const tbody = document.getElementById('published-table');
+            if (!articles || articles.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#999;">No published articles</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = articles.slice(0, 20).map(a => `
+                <tr>
+                    <td>${a}</td>
+                    <td>-</td>
+                    <td><span class="status published">Published</span></td>
+                    <td><a href="#" target="_blank">View</a></td>
+                </tr>
+            `).join('');
+        }
+
+        function updateQualityStats(quality) {
+            const html = `
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">${quality.stats.avg_score.toFixed(2)}</div>
+                        <div class="stat-label">Average Score</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${quality.stats.total}</div>
+                        <div class="stat-label">Total Assessed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${quality.stats.max_score.toFixed(2)}</div>
+                        <div class="stat-label">Max Score</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${quality.stats.min_score.toFixed(2)}</div>
+                        <div class="stat-label">Min Score</div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('quality-stats').innerHTML = html;
+        }
+
+        async function checkArticleQuality(articleId, source) {
+            try {
+                const result = await fetch(`${API_BASE}/quality/check/${articleId}?source=${source}`).then(r => r.json());
+                const el = document.getElementById(`qs-${articleId}`);
+                if (el) {
+                    el.textContent = result.quality_score.toFixed(2);
+                    el.className = 'quality-score ';
+                    if (result.quality_score >= 0.85) el.className += 'excellent';
+                    else if (result.quality_score >= 0.70) el.className += 'good';
+                    else if (result.quality_score >= 0.55) el.className += 'fair';
+                    else el.className += 'poor';
+                }
+            } catch (e) {
+                console.error('Error checking quality:', e);
+            }
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function openPublishModal() {
+            document.getElementById('publishModal').classList.add('active');
+        }
+
+        function openQualityCheckModal() {
+            document.getElementById('qualityCheckModal').classList.add('active');
+        }
+
+        function openFdaValidationModal() {
+            document.getElementById('fdaValidationModal').classList.add('active');
+        }
+
+        function openSandboxTestModal() {
+            document.getElementById('sandboxTestModal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        async function publishSingle() {
+            const articleId = document.getElementById('publishArticleId').value;
+            const source = document.getElementById('publishSource').value;
+
+            if (!articleId) {
+                alert('Please enter article ID');
+                return;
+            }
+
+            try {
+                const result = await fetch(`${API_BASE}/publish`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({article_id: articleId, source: source})
+                }).then(r => r.json());
+
+                alert(result.message);
+                closeModal('publishModal');
+                refreshStats();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        async function publishSingleArticle(articleId, source) {
+            try {
+                const result = await fetch(`${API_BASE}/publish`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({article_id: articleId, source: source})
+                }).then(r => r.json());
+
+                alert(result.message);
+                refreshStats();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        async function publishBatch() {
+            try {
+                const result = await fetch(`${API_BASE}/publish/batch`, {method: 'POST'}).then(r => r.json());
+                alert(`Published ${result.published_count} articles (quality filtered)`);
+                refreshStats();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        async function runQualityCheck() {
+            const articleId = document.getElementById('qualityArticleId').value;
+            const source = document.getElementById('qualitySource').value;
+
+            try {
+                const result = await fetch(`${API_BASE}/quality/check/${articleId}?source=${source}`).then(r => r.json());
+                const html = `
+                    <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                        <p><strong>Quality Score:</strong> <span style="font-size: 20px; color: #667eea;">${result.quality_score.toFixed(2)}</span></p>
+                        <p><strong>Status:</strong> ${result.passed ? '✅ Passed' : '❌ Failed'}</p>
+                        <p><strong>Word Count:</strong> ${result.word_count}</p>
+                        <p><strong>Duplicate:</strong> ${result.is_duplicate ? '⚠️ Yes' : '✅ No'}</p>
+                        <p><strong>Already Published:</strong> ${result.already_published ? '⚠️ Yes' : '✅ No'}</p>
+                    </div>
+                `;
+                document.getElementById('qualityCheckResult').innerHTML = html;
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        async function runFdaValidation() {
+            const articleId = document.getElementById('fdaArticleId').value;
+            try {
+                const result = await fetch(`${API_BASE}/fda/validate?article_id=${articleId}&source=dr_albana`).then(r => r.json());
+                const html = `
+                    <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                        <p><strong>FDA Compliant:</strong> ${result.fda_compliant ? '✅ Yes' : '❌ No'}</p>
+                        ${result.issues.map(i => `<p style="color: red;"><strong>⚠️ Issue:</strong> ${i}</p>`).join('')}
+                        ${result.warnings.map(w => `<p style="color: orange;"><strong>ℹ️ Warning:</strong> ${w}</p>`).join('')}
+                    </div>
+                `;
+                document.getElementById('fdaValidationResult').innerHTML = html;
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        async function runSandboxTest() {
+            const articleId = document.getElementById('sandboxArticleId').value;
+            try {
+                const result = await fetch(`${API_BASE}/sandbox/test?article_id=${articleId}`).then(r => r.json());
+                const html = `
+                    <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                        <p><strong>Sandbox Passed:</strong> ${result.sandbox_passed ? '✅ Yes' : '❌ No'}</p>
+                        <p><strong>Parsing:</strong> ${result.test_results.parsing}</p>
+                        <p><strong>Quality:</strong> ${result.test_results.quality_score}</p>
+                        <p><strong>Duplication:</strong> ${result.test_results.duplication_check}</p>
+                    </div>
+                `;
+                document.getElementById('sandboxTestResult').innerHTML = html;
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        function refreshStats() {
+            fetchStats();
+        }
+
+        // Load stats on page load
+        window.addEventListener('load', fetchStats);
+
+        // Refresh every 30 seconds
+        setInterval(refreshStats, 30000);
+
+        // Close modals on escape
+        window.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(m => m.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>

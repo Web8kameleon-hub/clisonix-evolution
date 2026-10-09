@@ -1,0 +1,28 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  - job_name: "clisonix-api"
+    static_configs:
+      - targets: ["api:8000"]
+    metrics_path: /metrics
+
+  - job_name: "trinity-alba"
+    static_configs:
+      - targets: ["alba:5555"]
+    metrics_path: /metrics
+
+  - job_name: "trinity-albi"
+    static_configs:
+      - targets: ["albi:6680"]
+    metrics_path: /metrics
+
+  - job_name: "trinity-jona"
+    static_configs:
+      - targets: ["jona:7777"]
+    metrics_path: /metrics

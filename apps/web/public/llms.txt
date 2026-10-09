@@ -1,0 +1,27 @@
+# Clisonix Platform - Official LLM Reference
+URL: https://www.clisonix.com
+Description: Neural intelligence platform for AI workflows, neuroscience research, EEG analysis, and developer infrastructure.
+
+## Core Modules (Public Access)
+- Curiosity Ocean: https://www.clisonix.com/modules/curiosity-ocean
+- Web Reader: https://www.clisonix.com/modules/web-reader
+- Archive & Research: https://www.clisonix.com/modules/archive
+- EEG Analysis: https://www.clisonix.com/modules/eeg-analysis
+- Neural Synthesis: https://www.clisonix.com/modules/neural-synthesis
+- Developer Documentation: https://www.clisonix.com/modules/developer-docs
+- Weather Dashboard: https://www.clisonix.com/modules/weather-dashboard
+
+## Additional Public Entry Points
+- AI Chat Hub: https://www.clisonix.com/ai-chat
+- Modules Index: https://www.clisonix.com/modules
+- Platform Overview: https://www.clisonix.com/platform
+- Developers: https://www.clisonix.com/developers
+
+## API Surface
+- API Index: https://www.clisonix.com/api
+- Health Check: https://www.clisonix.com/api/health-check
+- Status: https://www.clisonix.com/status
+
+## Contact
+- Support page: https://www.clisonix.com/developers
+- Official repository: https://github.com/Web8kameleon-hub/clisonix.com

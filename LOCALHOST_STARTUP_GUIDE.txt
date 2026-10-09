@@ -1,0 +1,298 @@
+🚀 LOCALHOST STARTUP GUIDE - CLISONIX CLOUD
+============================================
+
+SERVICES & PORTS:
+✅ Backend API:        http://localhost:8000
+✅ Ocean-Core (Chat):  http://localhost:8030 + /chat UI
+✅ Frontend Next.js:   http://localhost:3001
+✅ Chat Optimizer:     Integrated in Ocean-Core
+
+═══════════════════════════════════════════════════════════════════════════
+
+QUICK START - OPTION 1 (RECOMMENDED - All in One)
+═══════════════════════════════════════════════════════════════════════════
+
+Run this command in PowerShell:
+    .\START_ALL.ps1
+
+This will start:
+  • Backend API (8000)
+  • Ocean-Core (8030)
+  • Frontend (3001)
+  • Chat Interface
+
+Then open:
+  • http://localhost:3001 (Frontend)
+  • http://localhost:8030 (Chat UI)
+
+═══════════════════════════════════════════════════════════════════════════
+
+QUICK START - OPTION 2 (Individual Services)
+═══════════════════════════════════════════════════════════════════════════
+
+In separate PowerShell windows:
+
+WINDOW 1 - Backend:
+    .\START_BACKEND.ps1
+    (Starts on port 8000)
+
+WINDOW 2 - Ocean-Core (Chat):
+    .\START_OCEAN.ps1
+    (Starts on port 8030 with chat interface)
+
+WINDOW 3 - Frontend:
+    .\START_FRONTEND.ps1
+    (Starts on port 3001)
+
+═══════════════════════════════════════════════════════════════════════════
+
+WHAT EACH SERVICE DOES
+═══════════════════════════════════════════════════════════════════════════
+
+🔵 BACKEND (8000)
+  • Main API server
+  • Handles: auth, user management, data processing
+  • Tech: Python + FastAPI + Uvicorn
+  • File: apps/api/main.py
+  • Start: .\START_BACKEND.ps1
+
+🟢 OCEAN-CORE (8030)
+  • Specialized Chat Engine
+  • 8 Expert Domains (Neuroscience, AI/ML, Quantum, Security, IoT, Marine, Biotech, Data Science)
+  • Bilingual Support (English + Albanian)
+  • Web UI at /chat
+  • Tech: Python + FastAPI + Specialized Engine
+  • File: ocean-core/ocean_api.py
+  • Start: .\START_OCEAN.ps1
+
+🟡 FRONTEND (3001)
+  • Next.js React Application
+  • User Dashboard
+  • Integration with Backend & Ocean-Core
+  • Tech: Node.js + Next.js + React
+  • File: apps/web/
+  • Start: .\START_FRONTEND.ps1
+
+═══════════════════════════════════════════════════════════════════════════
+
+TESTING THE SERVICES
+═══════════════════════════════════════════════════════════════════════════
+
+1️⃣ TEST BACKEND (8000):
+   Open: http://localhost:8000/docs
+   (Swagger UI - interactive API testing)
+
+2️⃣ TEST OCEAN-CORE CHAT (8030):
+   Option A - Web UI:
+      Open: http://localhost:8030/
+      Ask: "How does quantum computing work?"
+      Response: Expert answer from Zurich_Quantum lab
+
+   Option B - Direct API:
+      curl -X POST http://localhost:8030/api/chat \
+        -H "Content-Type: application/json" \
+        -d '{"query":"Tell me about neuroscience"}'
+
+3️⃣ TEST FRONTEND (3001):
+   Open: http://localhost:3001
+   (Main user dashboard)
+
+═══════════════════════════════════════════════════════════════════════════
+
+AVAILABLE SCRIPTS IN REPO
+═══════════════════════════════════════════════════════════════════════════
+
+Quick Launch Scripts:
+  • .\START_ALL.ps1              → All 3 services at once ⭐
+  • .\START_BACKEND.ps1          → Backend only
+  • .\START_OCEAN.ps1            → Ocean-Core (Chat) only
+  • .\START_FRONTEND.ps1         → Frontend only
+
+Advanced Launch Scripts:
+  • .\START.ps1                  → Parameterized launcher (many options)
+  • .\launch-all-services.ps1    → Alternative all-in-one
+  • .\launch-all-with-slack.ps1  → With Slack integration
+  • .\scripts\launch.ps1         → Scripts folder version
+  • .\scripts\launch-all.ps1     → Scripts folder all-in-one
+
+═══════════════════════════════════════════════════════════════════════════
+
+TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════════
+
+❌ Port Already in Use?
+   The scripts will check for available ports. If you get "port in use":
+   
+   Kill Python: Get-Process python | Stop-Process -Force
+   Kill Node:   Get-Process node,npm | Stop-Process -Force
+
+❌ Python Not Found?
+   Make sure Python is in PATH:
+   python --version
+   
+   If not:
+   • Install Python 3.9+
+   • Or use full path to python.exe
+
+❌ npm Not Found?
+   Make sure Node.js is installed:
+   node --version
+   npm --version
+
+❌ Dependencies Missing?
+   • For Backend/Ocean: pip install -r requirements.txt
+   • For Frontend: cd apps/web && npm install
+
+═══════════════════════════════════════════════════════════════════════════
+
+TESTING OCEAN-CORE CHAT (8030)
+═══════════════════════════════════════════════════════════════════════════
+
+🧠 NEUROSCIENCE Query:
+   curl -X POST http://localhost:8030/api/chat \
+     -H "Content-Type: application/json" \
+     -d '{"query":"How does the brain process memory?"}'
+   
+   Expected Response:
+   {
+     "domain": "neuroscience",
+     "domain_expertise": "Advanced neuroscience research",
+     "answer": "[Expert explanation]",
+     "sources": ["Vienna_Neuroscience", "Tirana_Medical"],
+     "confidence": 0.94
+   }
+
+🤖 AI/ML Query:
+   curl -X POST http://localhost:8030/api/chat \
+     -H "Content-Type: application/json" \
+     -d '{"query":"Explain deep learning"}'
+
+⚛️ QUANTUM Query:
+   curl -X POST http://localhost:8030/api/chat \
+     -H "Content-Type: application/json" \
+     -d '{"query":"How do quantum gates work?"}'
+
+🔐 SECURITY Query:
+   curl -X POST http://localhost:8030/api/chat \
+     -H "Content-Type: application/json" \
+     -d '{"query":"What is end-to-end encryption?"}'
+
+📡 IoT Query:
+   curl -X POST http://localhost:8030/api/chat \
+     -H "Content-Type: application/json" \
+     -d '{"query":"What are IoT sensors?"}'
+
+🌊 MARINE Query:
+   curl -X POST http://localhost:8030/api/chat \
+     -H "Content-Type: application/json" \
+     -d '{"query":"Tell me about marine ecosystems"}'
+
+🧬 BIOTECH Query:
+   curl -X POST http://localhost:8030/api/chat \
+     -H "Content-Type: application/json" \
+     -d '{"query":"What is CRISPR gene editing?"}'
+
+📊 DATA SCIENCE Query:
+   curl -X POST http://localhost:8030/api/chat \
+     -H "Content-Type: application/json" \
+     -d '{"query":"Explain machine learning pipelines"}'
+
+═══════════════════════════════════════════════════════════════════════════
+
+LANGUAGE SUPPORT (8030)
+═══════════════════════════════════════════════════════════════════════════
+
+English Queries:
+   "How does quantum computing work?"
+   "What is artificial intelligence?"
+
+Albanian Queries:
+   "Si punon truri?" (How does the brain work?)
+   "Çfare eshte enkriptimi?" (What is encryption?)
+   "Cilat janë sensort IoT?" (What are IoT sensors?)
+
+The system auto-detects language and routes to correct domain!
+
+═══════════════════════════════════════════════════════════════════════════
+
+ACCESSING OCEAN-CORE CHAT UI (8030)
+═══════════════════════════════════════════════════════════════════════════
+
+After starting Ocean-Core with .\START_OCEAN.ps1:
+
+1. Open: http://localhost:8030/
+2. You'll see:
+   🎯 Specialized Expert Chat
+   [Domain badges for all 8 domains]
+   [Chat interface]
+
+3. Type a question:
+   "How does quantum computing work?"
+
+4. Click "Send" or press Enter
+
+5. Get:
+   - Domain: quantum
+   - Expert Answer
+   - Confidence: 0.92
+   - Lab: Zurich_Quantum
+   - Follow-up suggestions
+
+═══════════════════════════════════════════════════════════════════════════
+
+NEXT STEPS
+═══════════════════════════════════════════════════════════════════════════
+
+✅ STEP 1: Start all services
+   .\START_ALL.ps1
+
+✅ STEP 2: Wait 15 seconds for everything to initialize
+
+✅ STEP 3: Open in browser:
+   http://localhost:8030/      (Chat UI)
+   http://localhost:3001       (Frontend Dashboard)
+   http://localhost:8000/docs  (Backend API docs)
+
+✅ STEP 4: Test the chat
+   Ask: "How does quantum computing work?"
+
+✅ STEP 5: Test in Albanian
+   Ask: "Çfare eshte inteligjenca artificiale?"
+
+═══════════════════════════════════════════════════════════════════════════
+
+USEFUL KEYBOARD SHORTCUTS
+═══════════════════════════════════════════════════════════════════════════
+
+Stop a service:     Ctrl+C (in the PowerShell window)
+Stop all services:  Get-Process python,node,npm | Stop-Process -Force
+View logs:          Receive-Job -Name "Backend-8000" (or other service names)
+
+═══════════════════════════════════════════════════════════════════════════
+
+FILE LOCATIONS IN REPO
+═══════════════════════════════════════════════════════════════════════════
+
+Backend:
+  C:\Users\Admin\Desktop\Clisonix-cloud\apps\api\main.py
+
+Frontend:
+  C:\Users\Admin\Desktop\Clisonix-cloud\apps\web\
+
+Ocean-Core (Chat):
+  C:\Users\Admin\Desktop\Clisonix-cloud\ocean-core\ocean_api.py
+  C:\Users\Admin\Desktop\Clisonix-cloud\ocean-core\specialized_chat_engine.py
+  C:\Users\Admin\Desktop\Clisonix-cloud\ocean-core\specialized_chat.html
+
+═══════════════════════════════════════════════════════════════════════════
+
+READY? RUN THIS NOW:
+═══════════════════════════════════════════════════════════════════════════
+
+PowerShell Command:
+  .\START_ALL.ps1
+
+Then wait 10 seconds and open:
+  http://localhost:8030/
+
+ENJOY! 🎉

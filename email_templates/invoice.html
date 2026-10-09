@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clisonix - Invoice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            line-height: 1.6;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #4472C4 0%, #2E5AA8 100%);
+            color: white;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-left h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .header-left .subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        .invoice-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .invoice-badge .label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        .invoice-badge .number {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .content {
+            padding: 30px;
+        }
+        .invoice-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        .meta-section h4 {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .meta-section p {
+            font-size: 14px;
+            color: #333;
+            margin: 3px 0;
+        }
+        .status-paid {
+            display: inline-block;
+            background: #d4edda;
+            color: #155724;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .status-pending {
+            display: inline-block;
+            background: #fff3cd;
+            color: #856404;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .invoice-table {
+            width: 100%;
+            margin: 25px 0;
+            border-collapse: collapse;
+        }
+        .invoice-table th {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+            border-bottom: 2px solid #dee2e6;
+        }
+        .invoice-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+            color: #333;
+        }
+        .invoice-table .description {
+            color: #666;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+        .invoice-table .amount {
+            text-align: right;
+            font-weight: 500;
+        }
+        .invoice-table .qty {
+            text-align: center;
+            color: #666;
+        }
+        .totals {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        .total-row.subtotal {
+            color: #666;
+        }
+        .total-row.tax {
+            color: #666;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 15px;
+        }
+        .total-row.grand-total {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            padding-top: 15px;
+        }
+        .payment-info {
+            background: #e8f4fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        .payment-info h4 {
+            color: #1565c0;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .payment-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .payment-item {
+            font-size: 13px;
+        }
+        .payment-item .label {
+            color: #666;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        .payment-item .value {
+            color: #333;
+            font-weight: 500;
+        }
+        .cta-button {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #4472C4 0%, #2E5AA8 100%);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 25px 0;
+        }
+        .notes {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            color: #666;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        .company-info {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .footer-links a {
+            color: #4472C4;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 12px;
+        }
+        .footer-text {
+            color: #888;
+            font-size: 11px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <h1>🔷 Clisonix</h1>
+                <div class="subtitle">Invoice</div>
+            </div>
+            <div class="invoice-badge">
+                <div class="label">Invoice No.</div>
+                <div class="number">{{INVOICE_NUMBER}}</div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Invoice Meta -->
+            <div class="invoice-meta">
+                <div class="meta-section">
+                    <h4>Bill To</h4>
+                    <p><strong>{{CUSTOMER_NAME}}</strong></p>
+                    <p>{{CUSTOMER_EMAIL}}</p>
+                    <p>{{CUSTOMER_ADDRESS}}</p>
+                    <p>{{CUSTOMER_COUNTRY}}</p>
+                </div>
+                <div class="meta-section" style="text-align: right;">
+                    <h4>Invoice Details</h4>
+                    <p><strong>Date:</strong> {{INVOICE_DATE}}</p>
+                    <p><strong>Due:</strong> {{DUE_DATE}}</p>
+                    <p><strong>Period:</strong> {{BILLING_PERIOD}}</p>
+                    <p style="margin-top: 10px;">
+                        <span class="status-{{PAYMENT_STATUS}}">{{PAYMENT_STATUS_TEXT}}</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Invoice Table -->
+            <table class="invoice-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">Description</th>
+                        <th style="width: 15%;">Qty</th>
+                        <th style="width: 15%;">Unit Price</th>
+                        <th style="width: 20%;">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>{{PLAN_NAME}} Plan</strong>
+                            <div class="description">Monthly subscription</div>
+                        </td>
+                        <td class="qty">1</td>
+                        <td class="amount">€{{PLAN_PRICE}}</td>
+                        <td class="amount">€{{PLAN_PRICE}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Additional API Calls</strong>
+                            <div class="description">Pay-as-you-consume usage</div>
+                        </td>
+                        <td class="qty">{{EXTRA_CALLS}}</td>
+                        <td class="amount">€0.10</td>
+                        <td class="amount">€{{EXTRA_AMOUNT}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Excel ∞ Dashboard</strong>
+                            <div class="description">Advanced analytics add-on</div>
+                        </td>
+                        <td class="qty">1</td>
+                        <td class="amount">€{{EXCEL_PRICE}}</td>
+                        <td class="amount">€{{EXCEL_PRICE}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Totals -->
+            <div class="totals">
+                <div class="total-row subtotal">
+                    <span>Subtotal</span>
+                    <span>€{{SUBTOTAL}}</span>
+                </div>
+                <div class="total-row tax">
+                    <span>VAT ({{VAT_PERCENT}}%)</span>
+                    <span>€{{VAT_AMOUNT}}</span>
+                </div>
+                <div class="total-row grand-total">
+                    <span>Total Due</span>
+                    <span>€{{TOTAL}}</span>
+                </div>
+            </div>
+
+            <!-- Payment Info -->
+            <div class="payment-info">
+                <h4>💳 Payment Information</h4>
+                <div class="payment-details">
+                    <div class="payment-item">
+                        <div class="label">Payment Method</div>
+                        <div class="value">{{PAYMENT_METHOD}}</div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="label">Transaction ID</div>
+                        <div class="value">{{TRANSACTION_ID}}</div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="label">Payment Date</div>
+                        <div class="value">{{PAYMENT_DATE}}</div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="label">Next Billing</div>
+                        <div class="value">{{NEXT_BILLING}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <a href="https://clisonix.com/billing/invoices/{{INVOICE_NUMBER}}" class="cta-button">
+                Download PDF Invoice →
+            </a>
+
+            <!-- Notes -->
+            <div class="notes">
+                <strong>Note:</strong> This invoice was automatically generated. 
+                For questions about billing, contact <a href="mailto:clisonix@pm.me">clisonix@pm.me</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="company-info">
+                <strong>Clisonix GmbH</strong><br>
+                Hauptstraße 123, 90402 Nuremberg, Germany<br>
+                VAT ID: DE123456789
+            </div>
+            <div class="footer-links">
+                <a href="https://clisonix.com/billing">Billing Portal</a>
+                <a href="https://clisonix.com/support">Support</a>
+                <a href="https://clisonix.com/terms">Terms</a>
+            </div>
+            <div class="footer-text">
+                © 2025 Clisonix. All rights reserved.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

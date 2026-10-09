@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Clisonix - API Key Issued</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            line-height: 1.6;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #4472C4 0%, #2E5AA8 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .header .logo {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .header .tagline {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .greeting {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .message {
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+        .api-key-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        .api-key-label {
+            color: #8892b0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .api-key-value {
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            color: #64ffda;
+            word-break: break-all;
+            padding: 15px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 6px;
+            border: 1px dashed #64ffda;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 14px;
+            color: #856404;
+        }
+        .quick-start {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        .quick-start h3 {
+            color: #4472C4;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .code-block .keyword { color: #c678dd; }
+        .code-block .string { color: #98c379; }
+        .code-block .comment { color: #5c6370; }
+        .plan-badge {
+            display: inline-block;
+            background: #4472C4;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .features {
+            margin: 25px 0;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+        .feature-icon {
+            width: 30px;
+            font-size: 18px;
+        }
+        .feature-text {
+            color: #555;
+            font-size: 14px;
+        }
+        .cta-button {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #4472C4 0%, #2E5AA8 100%);
+            color: white;
+            text-align: center;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 25px 0;
+            transition: transform 0.2s;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        .footer-links {
+            margin-bottom: 15px;
+        }
+        .footer-links a {
+            color: #4472C4;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 13px;
+        }
+        .footer-text {
+            color: #888;
+            font-size: 12px;
+        }
+        .social-icons {
+            margin: 15px 0;
+        }
+        .social-icons a {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            background: #4472C4;
+            color: white;
+            border-radius: 50%;
+            margin: 0 5px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🔷</div>
+            <h1>Welcome to Clisonix!</h1>
+            <div class="tagline">Excel ∞ → API. Zero Chaos. Zero Guesswork.</div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <p class="greeting">Hello {{USER_NAME}},</p>
+            
+            <p class="message">
+                Your Clisonix account has been successfully created. Below you'll find your API key 
+                to start building with our deterministic SaaS protocol.
+            </p>
+
+            <span class="plan-badge">{{PLAN_NAME}} Plan</span>
+
+            <!-- API Key Box -->
+            <div class="api-key-box">
+                <div class="api-key-label">Your API Key</div>
+                <div class="api-key-value">{{API_KEY}}</div>
+            </div>
+
+            <div class="warning">
+                ⚠️ <strong>Keep this key secure!</strong> Do not share it publicly or commit it to version control.
+            </div>
+
+            <!-- Quick Start -->
+            <div class="quick-start">
+                <h3>🚀 Quick Start</h3>
+                <p style="color: #666; font-size: 14px; margin-bottom: 15px;">
+                    Test your API key with this simple request:
+                </p>
+                <div class="code-block">
+<span class="keyword">curl</span> -X GET <span class="string">"https://clisonix.com/health"</span> \
+  -H <span class="string">"Authorization: Bearer {{API_KEY}}"</span>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="features">
+                <h3 style="color: #333; margin-bottom: 15px;">Your Plan Includes:</h3>
+                <div class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span class="feature-text">{{ENDPOINT_LIMIT}} API endpoints</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span class="feature-text">{{REQUEST_LIMIT}} requests/day</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span class="feature-text">Excel ∞ Dashboard Access</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span class="feature-text">Protocol Kitchen Pipeline</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span class="feature-text">ASI Trinity Metrics</span>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <a href="https://clisonix.com/dashboard" class="cta-button">
+                Go to Dashboard →
+            </a>
+
+            <p class="message" style="margin-top: 30px;">
+                Need help? Check out our <a href="https://clisonix.com/docs" style="color: #4472C4;">documentation</a> 
+                or reply to this email.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="https://clisonix.com/docs">Documentation</a>
+                <a href="https://clisonix.com/pricing">Pricing</a>
+                <a href="https://clisonix.com/support">Support</a>
+                <a href="https://clisonix.com/terms">Terms</a>
+            </div>
+            <div class="social-icons">
+                <a href="#">𝕏</a>
+                <a href="#">in</a>
+                <a href="#">🐙</a>
+            </div>
+            <div class="footer-text">
+                © 2025 Clisonix. All rights reserved.<br>
+                Nuremberg, Germany
+            </div>
+        </div>
+    </div>
+</body>
+</html>

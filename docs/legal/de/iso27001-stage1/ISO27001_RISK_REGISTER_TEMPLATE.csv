@@ -1,0 +1,6 @@
+RiskID,Asset,Threat,Vulnerability,Impact,Likelihood,RiskLevel,ControlPlan,Owner,Status,DueDate,Evidence
+R-001,Production API,Unauthorized access,Weak or inconsistent access review,High,Medium,High,Implement quarterly access recertification + MFA enforcement,,,Open,,
+R-002,CI/CD pipeline,Supply chain tampering,Insufficient dependency governance,High,Medium,High,SBOM + dependency scanning + signed releases,,,Open,,
+R-003,Runtime secrets,Credential leakage,Hardcoded/overexposed secrets in workflows,High,Low,Medium,Centralized secret vault + rotation policy,,,Open,,
+R-004,Observability logs,Sensitive data exposure,Insufficient log redaction policy,Medium,Medium,Medium,Data classification + log filtering and retention controls,,,Open,,
+R-005,Service availability,DoS or anomaly burst,Insufficient adaptive throttling policy,High,Medium,High,Policy guardrails + rate controls + incident runbook,,,Open,,

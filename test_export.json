@@ -1,0 +1,8 @@
+{
+  "messages": [
+    {"role": "user", "content": "What is Clisonix?"},
+    {"role": "assistant", "content": "Clisonix is an AI platform."}
+  ],
+  "format": "docx",
+  "language": "en"
+}

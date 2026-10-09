@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  rome-architecture-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-rome-architecture
+    environment:
+      LAB_ID: "Rome_Architecture"
+      LAB_TYPE: "Architecture"
+      LAB_NAME: "Rome Architecture Lab"
+      LAB_FUNCTION: "Architectural Engineering & Design"
+      API_KEY: "sekret-real"
+    ports:
+      - "8111:8100"
+    volumes:
+      - ../data/rome-architecture:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

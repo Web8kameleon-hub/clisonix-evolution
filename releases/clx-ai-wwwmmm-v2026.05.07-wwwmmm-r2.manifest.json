@@ -1,0 +1,23 @@
+{
+  "package": "clx-ai-wwwmmm-v2026.05.07-wwwmmm-r2",
+  "version": "v2026.05.07-wwwmmm-r2",
+  "generated_at_utc": "2026-05-07T17:49:09.2101553Z",
+  "repository": "Web8kameleon-hub/clisonix.com",
+  "branch": "feature/clx-2min-hotguard",
+  "commit": "d4fdc9da41d9779fc5a8dd616703ec0c4db6e8cb",
+  "included_paths": [
+    "sdist\\clx-ai\\clx",
+    "sdist\\clx-ai\\examples\\ecosystem_ops_10min.py",
+    "sdist\\clx-ai\\examples\\start_ops_2min_hotguard.ps1",
+    "scripts\\clx_only_gate.ps1",
+    "RELEASE_GATE_CHECKLIST.md",
+    "NO_FAKE_DATA_POLICY.md",
+    "sdist\\clx-ai\\README.md",
+    "run_2min_hotguard.ps1"
+  ],
+  "publish_recommendation": {
+    "git_tag": "clx-ai/v2026.05.07-wwwmmm-r2",
+    "github_release_title": "CLX AI WWWMMM v2026.05.07-wwwmmm-r2",
+    "github_release_notes": "2-minute hotguard release with atomic persistence and phased ops learning."
+  }
+}

@@ -1,0 +1,23 @@
+FROM python:3.13
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies directly
+RUN pip install --no-cache-dir fastapi uvicorn pydantic
+
+# Copy Economy service files
+COPY economy_api_server.py .
+COPY economy_layer.py .
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+    CMD curl -f http://localhost:9093/health || exit 1
+
+EXPOSE 9093
+
+CMD ["python", "economy_api_server.py"]

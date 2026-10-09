@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  my-data-dashboard:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - ./apps/web/app/modules/my-data-dashboard:/app
+    command: ["npm", "run", "start"]
+    ports:
+      - "3051:3000"
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  vienna-neuroscience-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-vienna-neuroscience
+    environment:
+      LAB_ID: "Vienna_Neuroscience"
+      LAB_TYPE: "Neuroscience"
+      LAB_NAME: "Vienna Neuroscience Lab"
+      LAB_FUNCTION: "Neuroscience & Brain Research"
+      API_KEY: "sekret-real"
+    ports:
+      - "8117:8100"
+    volumes:
+      - ../data/vienna-neuroscience:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

@@ -1,0 +1,37 @@
+<svg width="144" height="144" viewBox="0 0 144 144" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c4b5fd" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="144" height="144" rx="28" fill="url(#bg)"/>
+  
+  <!-- Glow effect -->
+  <circle cx="72" cy="72" r="50" fill="url(#glow)"/>
+  
+  <!-- Brain icon -->
+  <g transform="translate(72, 72)" fill="#ffffff">
+    <!-- Left hemisphere -->
+    <path d="M-35 0 C-40 -25 -30 -42 -15 -42 C-8 -47 0 -42 0 -32 C0 -42 8 -47 15 -42 C30 -42 40 -25 35 0 C40 20 30 35 15 38 C8 42 -8 42 -15 38 C-30 35 -40 20 -35 0Z" fill="#ffffff"/>
+    
+    <!-- Brain folds -->
+    <path d="M-28 -8 Q-15 -14 -5 -8" stroke="#8b5cf6" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M-24 8 Q-12 2 -4 8" stroke="#8b5cf6" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M28 -8 Q15 -14 5 -8" stroke="#8b5cf6" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M24 8 Q12 2 4 8" stroke="#8b5cf6" stroke-width="3" fill="none" stroke-linecap="round"/>
+    
+    <!-- Center line -->
+    <line x1="0" y1="-30" x2="0" y2="35" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="4,3"/>
+    
+    <!-- Neural pulse -->
+    <path d="M-20 25 L-10 25 L-5 15 L0 35 L5 10 L10 30 L15 25 L25 25" 
+          stroke="#a78bfa" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

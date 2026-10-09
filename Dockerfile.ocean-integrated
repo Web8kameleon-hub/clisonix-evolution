@@ -1,0 +1,36 @@
+# Dockerfile for Ocean Core WITH integrated Ollama
+FROM python:3.13
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    git \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Ollama
+RUN curl -fsSL https://ollama.ai/install.sh | sh || wget -qO- https://ollama.ai/install.sh | sh
+
+# Copy Ocean Core source
+COPY ocean-core/ /app/
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt || pip install --no-cache-dir fastapi uvicorn redis pydantic
+
+# Expose ports
+EXPOSE 8030 11434
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:8030/health || exit 1
+
+# Start both services
+CMD /bin/sh -c '\
+    echo "Starting Ollama..."; \
+    ollama serve &\
+    sleep 10; \
+    echo "Starting Ocean Core..."; \
+    python -m uvicorn main:app --host 0.0.0.0 --port 8030 --workers 4'

@@ -1,0 +1,3222 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: clisonix-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-clisonix}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-clisonix_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-clisonixdb}
+    ports:
+      - 127.0.0.1:5432:5432
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U ${POSTGRES_USER:-clisonix} -d ${POSTGRES_DB:-clisonixdb}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  mongodb:
+    image: mongo:7
+    container_name: clisonix-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:-clisonix}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-clisonix_mongo_password}
+      MONGO_INITDB_DATABASE: ${MONGO_DB:-starbooking}
+    ports:
+      - 127.0.0.1:27017:27017
+    volumes:
+      - ./data/mongodb:/data/db
+    healthcheck:
+      test:
+        - CMD
+        - mongosh
+        - --quiet
+        - --eval
+        - db.adminCommand('ping').ok
+      interval: 15s
+      timeout: 10s
+      retries: 8
+    restart: unless-stopped
+  redis:
+    image: redis:7-alpine
+    container_name: clisonix-redis
+    ports:
+      - 127.0.0.1:6379:6379
+    command: redis-server --maxmemory 0 --maxmemory-policy noeviction --appendonly yes --save ""
+    environment:
+      REDIS_REPLICATION_BACKLOG_SIZE: 1gb
+      REDIS_MAX_CLIENTS: 0
+    volumes:
+      - ./data/redis:/data
+      - ./data/redis-aof:/data/appendonly
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  neo4j:
+    image: neo4j:5-community
+    container_name: clisonix-neo4j
+    environment:
+      NEO4J_AUTH: neo4j/${NEO4J_PASSWORD:-neo4j_dev_password}
+      NEO4J_PLUGINS: '["apoc"]'
+    ports:
+      - 127.0.0.1:7474:7474
+      - 127.0.0.1:7687:7687
+    volumes:
+      - ./data/neo4j:/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q --spider http://localhost:7474 || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+  minio:
+    image: minio/minio:latest
+    container_name: clisonix-minio
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-clisonix}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    command: server /data --console-address ":9001"
+    ports:
+      - 127.0.0.1:9000:9000
+      - 127.0.0.1:9001:9001
+    volumes:
+      - ./data/minio:/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:9000/minio/health/live
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  alba:
+    build:
+      context: .
+      dockerfile: Dockerfile.alba
+    container_name: clisonix-alba
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - 5555:5555
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:5555/health >/dev/null && python -c "import socket; s=socket.create_connection(('redis',6379),2); s.close()"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  albi:
+    build:
+      context: .
+      dockerfile: Dockerfile.albi
+    container_name: clisonix-albi
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+      PORT: '6680'
+    ports:
+      - 6680:6680
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:6680/health >/dev/null && python -c "import socket; s=socket.create_connection(('redis',6379),2); s.close()"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  albi-user:
+    build:
+      context: .
+      dockerfile: Dockerfile.albi-user
+    container_name: clisonix-albi-user
+    environment:
+      PYTHONUNBUFFERED: '1'
+    ports:
+      - 6681:6681
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:6681/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  jona:
+    build:
+      context: .
+      dockerfile: Dockerfile.jona
+    container_name: clisonix-jona
+    command: 'sh -c "python -m uvicorn jona_neural_api:app --host 0.0.0.0 --port 7777"
+
+      '
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+      PORT: '7777'
+    ports:
+      - 7777:7777
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:7777/health >/dev/null && python -c "import socket; s=socket.create_connection(('redis',6379),2); s.close()"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  ollama:
+    image: ollama/ollama:latest
+    container_name: clisonix-ollama
+    ports:
+      - 11434:11434
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      OLLAMA_HOST: 0.0.0.0
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - ollama list || exit 0
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped
+  ollama-multi-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.ollama-multi
+    container_name: clisonix-ollama-multi-api
+    environment:
+      PYTHONUNBUFFERED: '1'
+      OLLAMA_HOST: http://clisonix-ollama:11434
+      PORT: '4444'
+    ports:
+      - 4444:4444
+    depends_on:
+      ollama:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:4444/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  ocean-core:
+    build:
+      context: ./ocean-core
+      dockerfile: Dockerfile
+    container_name: clisonix-ocean-core
+    networks:
+      default:
+        aliases:
+          - ocean-core
+    environment:
+      PYTHONUNBUFFERED: '1'
+      OCEAN_PORT: '8030'
+      OLLAMA_HOST: http://clisonix-ollama:11434
+      MODEL: llama3.1:8b
+      OCEAN_AUTOLEARNING_ENABLED: 'true'
+      OCEAN_LLM_PROVIDER_ORDER: ollama,selflearning
+      OCEAN_SOVEREIGN_SELFREGEN_ENABLED: 'true'
+      OCEAN_SELFREGEN_REBUILD_MAX_LINES: '2000'
+      CHAT_ELASTIC_NO_LIMITS: 'true'
+      CHAT_MAX_TOKENS_HARD: '0'
+      CHAT_RATE_LIMIT_REQUESTS: '999999'
+      CHAT_MAX_PROMPT_CHARS: '0'
+      OCEAN_FAST_ANSWER_TIMEOUT_S: '15'
+      OCEAN_FAST_SHORTCUT_MAX_CHARS: '0'
+      OCEAN_FAST_TARGET_CHARS_SHORT: '420'
+      OCEAN_FAST_TARGET_CHARS_MEDIUM: '900'
+      OCEAN_ELASTIC_NUM_CTX: '8192'
+      OCEAN_ELASTIC_NUM_CTX_MIN: '2048'
+      OCEAN_ELASTIC_CTX_SHORT_RATIO: '0.18'
+      OCEAN_ELASTIC_CTX_MEDIUM_RATIO: '0.35'
+      OCEAN_STREAM_FIRST_TOKEN_TIMEOUT_S: '10'
+      DEBATE_MAX_TOKENS_HARD: '8192'
+      DEBATE_STREAM_MAX_CONCURRENCY: '6'
+      DEBATE_STREAM_QUEUE_LIMIT: '24'
+      DEBATE_RATE_LIMIT_REQUESTS: '999999'
+      REDIS_URL: redis://redis:6379/0
+      API_KEYS_FILE: /app/config/api_keys.json
+      CLISONIX_SYSTEM_PROMPT_PATH: /app/CLISONIX_SYSTEM_PROMPT.md
+      CLISONIX_MODULE_MAP_PATH: /app/CLISONIX_MODULE_MAP.md
+      KLOUD_BRIDGE_URL: http://clisonix-kloud-bridge:8889
+    volumes:
+      - ./config/api_keys.json:/app/config/api_keys.json:ro
+      - ./CLISONIX_SYSTEM_PROMPT.md:/app/CLISONIX_SYSTEM_PROMPT.md:ro
+      - ./CLISONIX_MODULE_MAP.md:/app/CLISONIX_MODULE_MAP.md:ro
+      - ./ocean-data:/app/data
+    ports:
+      - 8030:8030
+    depends_on:
+      ollama:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8030/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  ocean-mission-service:
+    build:
+      context: .
+      dockerfile: ocean-core/Dockerfile.mission
+    container_name: clisonix-ocean-mission
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '9500'
+      MISSION_DB_PATH: /app/data/ocean_missions.db
+      PYTHON_BIN: python
+    volumes:
+      - ./data:/app/data
+    ports:
+      - 9500:9500
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:9500/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  kloud-upstream-runtime:
+    build:
+      context: .
+      dockerfile: services/kloud_upstream_runtime/Dockerfile
+    container_name: clisonix-kloud-upstream-runtime
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '9080'
+      KLOUD_RUNTIME_NODE_ID: ${KLOUD_RUNTIME_NODE_ID:-aiagi-node-01}
+      KLOUD_RUNTIME_ROLE: ${KLOUD_RUNTIME_ROLE:-coordinator}
+      KLOUD_RUNTIME_REGION: ${KLOUD_RUNTIME_REGION:-eu-central}
+      KLOUD_RUNTIME_PUBLIC_BASE_URL: ${KLOUD_RUNTIME_PUBLIC_BASE_URL:-https://aiagi.io}
+      KLOUD_RUNTIME_STATE_PATH: /app/data/runtime-state.json
+    volumes:
+      - ./data/kloud-upstream-runtime:/app/data
+    ports:
+      - 9080:9080
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:9080/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  kloud-bridge:
+    build:
+      context: .
+      dockerfile: services/kloud_bridge/Dockerfile
+    container_name: clisonix-kloud-bridge
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '8889'
+      KLOUD_ISOLATED_MODE: 'true'
+      KLOUD_UPSTREAM_URL: ${KLOUD_UPSTREAM_URL:-http://kloud-upstream-runtime:9080}
+      KLOUD_UPSTREAM_CANDIDATES: ${KLOUD_UPSTREAM_CANDIDATES:-http://kloud-upstream-runtime:9080,https://aiagi.io,http://host.docker.internal:9080,http://host.containers.internal:9080,http://gateway.docker.internal:9080,http://172.17.0.1:9080,http://172.18.0.1:9080,http://127.0.0.1:9080}
+      KLOUD_SIGNAL_PATH: ${KLOUD_SIGNAL_PATH:-/submit}
+      KLOUD_STATUS_PATH: ${KLOUD_STATUS_PATH:-/status}
+      KLOUD_PEERS_PATH: ${KLOUD_PEERS_PATH:-/peers}
+      KLOUD_STATE_PATH: ${KLOUD_STATE_PATH:-/state}
+      KLOUD_TIMEOUT_SECONDS: ${KLOUD_TIMEOUT_SECONDS:-8}
+      KLOUD_LLM_UPSTREAM_URL: ${KLOUD_LLM_UPSTREAM_URL:-http://clisonix-openmind:9999}
+      KLOUD_LLM_CHAT_PATH: ${KLOUD_LLM_CHAT_PATH:-/api/v1/chat}
+      KLOUD_LLM_TIMEOUT_SECONDS: ${KLOUD_LLM_TIMEOUT_SECONDS:-30}
+      KLOUD_LLM_STREAM_CHUNK_CHARS: ${KLOUD_LLM_STREAM_CHUNK_CHARS:-48}
+      KLOUD_BRIDGE_ADMIN_TOKEN: ${KLOUD_BRIDGE_ADMIN_TOKEN:-}
+      OCEAN_ADMIN_API_TOKEN: ${OCEAN_ADMIN_API_TOKEN:-}
+      OCEAN_CORE_URL: http://clisonix-ocean-core:8030
+      OCEAN_STATUS_PATH: /api/v1/status
+      OCEAN_SIGNAL_PATH: /api/v1/signals/internal
+    depends_on:
+      kloud-upstream-runtime:
+        condition: service_started
+    extra_hosts:
+      - host.docker.internal:host-gateway
+      - host.containers.internal:host-gateway
+      - gateway.docker.internal:host-gateway
+    ports:
+      - 8889:8889
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8889/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  kloud-rust-node:
+    build:
+      context: ./scripts/hardware/rust_node_agent
+      dockerfile: Dockerfile
+    container_name: clisonix-kloud-rust-node
+    depends_on:
+      kloud-bridge:
+        condition: service_started
+    command:
+      - --bridge
+      - http://clisonix-kloud-bridge:8889
+      - --profile
+      - /app/profiles/oceancore_live_01.json
+      - --forever
+      - --interval
+      - '300'
+      - --wake-offline
+      - --emit-signal
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://clisonix-kloud-bridge:8889/api/v1/hardware/nodes/oceancore-live-01 | grep -Eq '"runtime_state"[[:space:]]*:[[:space:]]*"offline"' && exit 1 || exit 0
+      interval: 5m
+      timeout: 15s
+      retries: 2
+      start_period: 90s
+    restart: unless-stopped
+  regulatory-service:
+    build:
+      context: ./services/regulatory
+      dockerfile: Dockerfile
+    container_name: clisonix-regulatory
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '9501'
+      REGULATORY_JURISDICTION: EU
+      REGULATORY_DATA_REGION: EU
+      REGULATORY_PROFILE: wellness-v1
+      CERTIFIED_MODEL_VERSION: clisonix-default:certified
+      BASELINE_SUCCESS_RATE: '0.95'
+      BASELINE_RETRY_RATE: '0.05'
+      DRIFT_WARNING_THRESHOLD: '0.05'
+      DRIFT_CRITICAL_THRESHOLD: '0.10'
+      FEDERATED_TARGETS: EU
+    volumes:
+      - ./data:/app/data
+    ports:
+      - 9501:9501
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://localhost:9501/health', timeout=5)
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  ocean-core-multimodal:
+    build:
+      context: ./ocean-core
+      dockerfile: Dockerfile.multimodal
+    container_name: clisonix-ocean-core-multimodal
+    environment:
+      PYTHONUNBUFFERED: '1'
+      OCEAN_PORT: '8033'
+      PORT: '8033'
+      OLLAMA_HOST: http://clisonix-ollama:11434
+    ports:
+      - 8033:8033
+    depends_on:
+      ollama:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8033/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  ocean-core-strict-chat:
+    build:
+      context: ./ocean-core
+      dockerfile: Dockerfile.strict-chat
+    container_name: clisonix-ocean-core-strict-chat
+    environment:
+      PYTHONUNBUFFERED: '1'
+      OCEAN_PORT: '8035'
+      OLLAMA_HOST: http://clisonix-ollama:11434
+    ports:
+      - 8035:8035
+    depends_on:
+      ollama:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8035/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  ocean-core-blerina:
+    build:
+      context: ./ocean-core
+      dockerfile: Dockerfile.blerina
+    container_name: clisonix-ocean-core-blerina
+    environment:
+      PYTHONUNBUFFERED: '1'
+      OCEAN_PORT: '8032'
+      OLLAMA_HOST: http://clisonix-ollama:11434
+    ports:
+      - 8032:8032
+    depends_on:
+      ollama:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8032/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  aviation:
+    build:
+      context: ./services/aviation-weather
+      dockerfile: Dockerfile
+    container_name: clisonix-aviation
+    environment:
+      PYTHONUNBUFFERED: '1'
+      AVIATION_PORT: '8080'
+      AVWX_API_KEY: ${AVWX_API_KEY:-}
+      CHECKWX_API_KEY: ${CHECKWX_API_KEY:-}
+    ports:
+      - 8080:8080
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8080/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: clisonix-api
+    networks:
+      default:
+        aliases:
+          - api
+    env_file:
+      - ${CLISONIX_ENV_FILE:-.env.production}
+    environment:
+      PYTHONUNBUFFERED: '1'
+      API_PORT: '8000'
+      JONA_API_URL: http://jona:7777
+      DATABASE_URL: postgresql://${POSTGRES_USER:-clisonix}:${POSTGRES_PASSWORD:-clisonix_dev_password}@postgres:5432/${POSTGRES_DB:-clisonixdb}
+      REDIS_URL: redis://redis:6379/0
+      MARKETPLACE_URL: http://clisonix-marketplace:8004
+    ports:
+      - 8000:8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      jona:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:8000/health >/dev/null && python -c "import socket; socket.create_connection(('postgres',5432),2).close(); socket.create_connection(('redis',6379),2).close(); socket.create_connection(('jona',7777),2).close()"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  matia:
+    build:
+      context: .
+      dockerfile: Dockerfile.matia
+    container_name: clisonix-matia
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '7200'
+    ports:
+      - 7200:7200
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:7200/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  shopping-therapy:
+    build:
+      context: .
+      dockerfile: Dockerfile.shopping-therapy
+    container_name: clisonix-shopping-therapy
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '7300'
+      OCEAN_CORE_URL: http://ocean-core:8030
+    ports:
+      - 7300:7300
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:7300/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  openmind:
+    build:
+      context: ./9999
+      dockerfile: Dockerfile
+    container_name: clisonix-openmind
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '9999'
+      OLLAMA_HOST: http://clisonix-ollama:11434
+      OCEAN_CORE_URL: http://clisonix-ocean-core:8030
+    ports:
+      - 9999:9999
+    depends_on:
+      ocean-core:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:9999/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:-${STRIPE_PUBLISHABLE_KEY:-}}
+        NEXT_PUBLIC_STRIPE_PRICING_TABLE_ID: ${NEXT_PUBLIC_STRIPE_PRICING_TABLE_ID:-}
+        NEXT_PUBLIC_API_BASE: /api
+        NEXT_PUBLIC_GOOGLE_ADSENSE_ID: ${NEXT_PUBLIC_GOOGLE_ADSENSE_ID:-}
+    container_name: clisonix-web
+    networks:
+      default:
+        aliases:
+          - web
+    env_file:
+      - ${CLISONIX_ENV_FILE:-.env.production}
+    environment:
+      NODE_ENV: production
+      PORT: '3000'
+      API_INTERNAL_URL: http://clisonix-api:8000
+      OCEAN_INTERNAL_URL: http://ocean-core:8030
+      OCEAN_CORE_URL: http://ocean-core:8030
+      NEWSROOM_PUBLIC_URL: ${NEWSROOM_PUBLIC_URL:-http://newsroom:9800}
+      NEXT_PUBLIC_API_BASE: /api
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-https://www.clisonix.com}
+      AUTH_URL: ${AUTH_URL:-https://www.clisonix.com}
+      AUTH_TRUST_HOST: 'true'
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      AUTH_GOOGLE_ID: ${AUTH_GOOGLE_ID}
+      AUTH_GOOGLE_SECRET: ${AUTH_GOOGLE_SECRET}
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:-${STRIPE_PUBLISHABLE_KEY:-}}
+      NEXT_PUBLIC_STRIPE_PRICING_TABLE_ID: ${NEXT_PUBLIC_STRIPE_PRICING_TABLE_ID:-}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      NEXT_PUBLIC_GOOGLE_ADSENSE_ID: ${NEXT_PUBLIC_GOOGLE_ADSENSE_ID:-}
+      GOOGLE_ADSENSE_PUBLISHER_ID: ${GOOGLE_ADSENSE_PUBLISHER_ID:-}
+      ADSENSE_SLOT_FOOTER: ${ADSENSE_SLOT_FOOTER:-}
+      ADSENSE_SLOT_SIDEBAR: ${ADSENSE_SLOT_SIDEBAR:-}
+      ADSENSE_SLOT_ARTICLE_TOP: ${ADSENSE_SLOT_ARTICLE_TOP:-}
+      ADSENSE_SLOT_ARTICLE_BOTTOM: ${ADSENSE_SLOT_ARTICLE_BOTTOM:-}
+      AFFILIATE_TRACKING_URL: http://clisonix-blog-api:8050
+      KITCHEN_JOBS_DIR: /app/kitchen-jobs
+      KITCHEN_REPORTS_DIR: /app/kitchen-reports
+      KITCHEN_RUN_API_KEY: ${KITCHEN_RUN_API_KEY:-clisonix-kitchen-key}
+      MATIA_BASE_URL: http://clisonix-matia:7200
+      SHOPPING_THERAPY_BASE_URL: http://clisonix-shopping-therapy:7300
+      OPENMIND_INTERNAL_URL: http://clisonix-openmind:9999
+    ports:
+      - 3000:3000
+    volumes:
+      - kitchen_jobs:/app/kitchen-jobs
+      - kitchen_reports:/app/kitchen-reports
+    depends_on:
+      api:
+        condition: service_healthy
+      ocean-core:
+        condition: service_healthy
+      matia:
+        condition: service_healthy
+      shopping-therapy:
+        condition: service_healthy
+      openmind:
+        condition: service_healthy
+    restart: unless-stopped
+  victoriametrics:
+    image: victoriametrics/victoria-metrics:v1.96.0
+    container_name: clisonix-victoriametrics
+    ports:
+      - 127.0.0.1:8428:8428
+    volumes:
+      - victoriametrics_data:/victoria-metrics-data
+    command:
+      - -storageDataPath=/victoria-metrics-data
+      - -retentionPeriod=12
+      - -httpListenAddr=0.0.0.0:8428
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --no-verbose
+        - --tries=1
+        - --spider
+        - http://127.0.0.1:8428/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  prometheus:
+    image: prom/prometheus:v2.48.0
+    container_name: clisonix-prometheus
+    ports:
+      - 127.0.0.1:9090:9090
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --web.enable-lifecycle
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - -q
+        - --spider
+        - http://localhost:9090/-/healthy
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  grafana:
+    image: grafana/grafana:10.2.0
+    container_name: clisonix-grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-clisonix_grafana_admin}
+      GF_USERS_ALLOW_SIGN_UP: 'false'
+    ports:
+      - 127.0.0.1:3001:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+      - victoriametrics
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q --spider http://localhost:3000/api/health || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  loki:
+    image: grafana/loki:2.9.2
+    container_name: clisonix-loki
+    ports:
+      - 127.0.0.1:3102:3100
+    volumes:
+      - ./loki-config.yaml:/etc/loki/local-config.yaml:ro
+      - loki_data:/tmp/loki
+    command: -config.file=/etc/loki/local-config.yaml
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q --spider http://localhost:3100/ready || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    profiles:
+      - monitoring
+  jaeger:
+    image: jaegertracing/all-in-one:1.52
+    container_name: clisonix-jaeger
+    environment:
+      COLLECTOR_OTLP_ENABLED: 'true'
+    ports:
+      - 127.0.0.1:16686:16686
+      - 127.0.0.1:14268:14268
+      - 127.0.0.1:4317:4317
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q --spider http://localhost:16686/ || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  tempo:
+    image: grafana/tempo:2.3.1
+    container_name: clisonix-tempo
+    ports:
+      - 127.0.0.1:3200:3200
+      - 127.0.0.1:9095:9095
+    volumes:
+      - ./tempo.yaml:/etc/tempo.yaml:ro
+      - tempo_data:/var/tempo
+    command:
+      - -config.file=/etc/tempo.yaml
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q --spider http://localhost:3200/ready || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  nginx:
+    image: nginx:alpine
+    container_name: clisonix-nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx.production.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/certs:ro
+    depends_on:
+      api:
+        condition: service_healthy
+      web:
+        condition: service_started
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q --spider http://localhost/health || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  asi:
+    build:
+      context: .
+      dockerfile: Dockerfile.asi
+    container_name: clisonix-asi
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+      ASI_HQ_EVENT_URL: ${ASI_HQ_EVENT_URL:-http://clisonix-api:8000/mesh/status}
+      ASI_HQ_REGISTER_URL: ${ASI_HQ_REGISTER_URL:-http://clisonix-api:8000/mesh/register}
+      ASI_HQ_STATUS_URL: ${ASI_HQ_STATUS_URL:-http://clisonix-api:8000/mesh/status}
+      ASI_AUDIO_UPLOAD_URL: ${ASI_AUDIO_UPLOAD_URL:-https://clisonix.com/api/uploads/audio/process}
+      ASI_EEG_UPLOAD_URL: ${ASI_EEG_UPLOAD_URL:-https://clisonix.com/api/uploads/eeg/process}
+      ASI_REQUEST_TIMEOUT_SECONDS: ${ASI_REQUEST_TIMEOUT_SECONDS:-5}
+      ASI_REQUEST_MAX_RETRIES: ${ASI_REQUEST_MAX_RETRIES:-3}
+      ASI_REQUEST_RETRY_BACKOFF_SECONDS: ${ASI_REQUEST_RETRY_BACKOFF_SECONDS:-0.5}
+    ports:
+      - 9094:9094
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:9094/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  marketplace:
+    build:
+      context: .
+      dockerfile: Dockerfile.marketplace
+    container_name: clisonix-marketplace
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_PUBLISHABLE_KEY: ${STRIPE_PUBLISHABLE_KEY:-${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:-}}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+    ports:
+      - 8004:8004
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8004/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  developer-portal:
+    build:
+      context: .
+      dockerfile: Dockerfile.developer-portal
+    container_name: clisonix-developer-portal
+    environment:
+      PYTHONUNBUFFERED: '1'
+      DEV_PORTAL_PORT: '8005'
+      MARKETPLACE_URL: http://clisonix-marketplace:8004
+      ANALYTICS_URL: http://clisonix-analytics:8006
+    ports:
+      - 8005:8005
+    depends_on:
+      marketplace:
+        condition: service_healthy
+      clx-i:
+        condition: service_started
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://localhost:8005/health', timeout=5)
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  clx-i:
+    build:
+      context: .
+      dockerfile: Dockerfile.clx-i
+    container_name: clisonix-clx-i
+    environment:
+      PYTHONUNBUFFERED: '1'
+      CLXI_OLLAMA_HOST: ${CLXI_OLLAMA_HOST:-http://ollama:11434}
+      CLXI_VISION_MODEL: ${CLXI_VISION_MODEL:-llava:latest}
+      CLXI_TIMEOUT_SECONDS: ${CLXI_TIMEOUT_SECONDS:-60}
+      CLXI_SELFLEARNING_ENABLED: ${CLXI_SELFLEARNING_ENABLED:-1}
+      CLXI_MIRROR_FILE: /data/.clx_i/mirror_events.jsonl
+      CLXI_SELFLEARNING_FILE: /data/.clx_i/selflearning_events.jsonl
+    ports:
+      - 8048:8048
+    volumes:
+      - clx_i_data:/data/.clx_i
+    depends_on:
+      ollama:
+        condition: service_started
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8048/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  usage-analytics:
+    build:
+      context: .
+      dockerfile: Dockerfile.usage-analytics
+    container_name: clisonix-analytics
+    environment:
+      PYTHONUNBUFFERED: '1'
+      ANALYTICS_PORT: '8006'
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - 8066:8006
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8006/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  content-factory:
+    build:
+      context: .
+      dockerfile: services/content-factory/Dockerfile
+    container_name: clisonix-content-factory
+    env_file:
+      - ${CLISONIX_ENV_FILE:-.env.production}
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '4003'
+      OLLAMA_HOST: http://clisonix-ollama:11434
+      BLOG_REPO_URL: ${BLOG_REPO_URL:-https://github.com/Web8kameleon-hub/clisonix-blog.git}
+      LINKEDIN_ORGANIZATION_URN: ${LINKEDIN_ORGANIZATION_URN:-urn:li:organization:111866162}
+      LINKEDIN_PERSON_URN: ${LINKEDIN_PERSON_URN:-urn:li:person:5KOBp94BOT}
+      SITE_URL: ${SITE_URL:-https://clisonix.com}
+    ports:
+      - 4003:4003
+    volumes:
+      - ./data/linkedin:/app/data
+    depends_on:
+      ollama:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:4003/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  linkedin-poster:
+    build:
+      context: .
+      dockerfile: services/content-factory/Dockerfile.linkedin
+    container_name: clisonix-linkedin-poster
+    env_file:
+      - ${CLISONIX_ENV_FILE:-.env.production}
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '8007'
+      LINKEDIN_PERSON_URN: ${LINKEDIN_PERSON_URN:-urn:li:person:5KOBp94BOT}
+      SITE_URL: ${SITE_URL:-https://clisonix.com}
+      BLOG_URL: ${BLOG_URL:-https://ledjanahmati.github.io/clisonix-blog/}
+      LINKEDIN_POLL_SECONDS: '15'
+      LINKEDIN_POST_ALL_PENDING: 'true'
+      LINKEDIN_SCAN_DOCUMENTS: 'true'
+      LINKEDIN_DOCUMENT_DIRS: /app/blerina_pillars,/app/medical_pillars,/app/lagter_pillars
+      LINKEDIN_DOCUMENT_GLOB: '*.md'
+      LINKEDIN_TRIGGER_LAGTER: 'true'
+      LAGTER_TRIGGER_URL: ${LAGTER_TRIGGER_URL:-http://clisonix-lagter:9500/api/v1/publish/batch}
+    ports:
+      - 8021:8007
+    volumes:
+      - ./data/linkedin:/app/data
+      - ./all_pillars:/app/blerina_pillars:ro
+      - ./generated_medical_pillars:/app/medical_pillars:ro
+      - ./lagter_pillars:/app/lagter_pillars:ro
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8007/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lagter:
+    build:
+      context: ./services/lagter
+      dockerfile: Dockerfile
+    container_name: clisonix-lagter
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAGTER_PORT: '9500'
+      BLOG_PUBLISHER_URL: http://clisonix-blog-publisher:8041
+      AUTO_TRIGGER_ENABLED: 'false'
+      AUTO_TRIGGER_INTERVAL_SECONDS: '300'
+    ports:
+      - 9510:9500
+    depends_on:
+      blog_publisher:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:9500/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  video-generator:
+    build:
+      context: .
+      dockerfile: services/video-generator/Dockerfile
+    container_name: clisonix-video-generator
+    env_file:
+      - ${CLISONIX_ENV_FILE:-.env.production}
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '8029'
+      VIDEO_OUTPUT_DIR: /app/generated_videos
+      YOUTUBE_CATEGORY_ID: ${YOUTUBE_CATEGORY_ID:-22}
+      YOUTUBE_PRIVACY_STATUS: ${YOUTUBE_PRIVACY_STATUS:-public}
+    ports:
+      - 8029:8029
+    volumes:
+      - ./data/videos:/app/generated_videos
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8029/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  alphabet-layers:
+    build:
+      context: .
+      dockerfile: Dockerfile.alphabet
+    container_name: clisonix-alphabet-layers
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+      PORT: '8061'
+    ports:
+      - 8061:8061
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8061/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  liam:
+    build:
+      context: .
+      dockerfile: Dockerfile.liam
+    container_name: clisonix-liam
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+      PORT: '8062'
+    ports:
+      - 8062:8062
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8062/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  alda:
+    build:
+      context: .
+      dockerfile: Dockerfile.alda
+    container_name: clisonix-alda
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+      PORT: '8063'
+    ports:
+      - 8063:8063
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8063/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  alba-idle:
+    build:
+      context: .
+      dockerfile: Dockerfile.alba-idle
+    container_name: clisonix-alba-idle
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+      PORT: '8031'
+    ports:
+      - 8031:8031
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8031/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  blerina:
+    build:
+      context: .
+      dockerfile: Dockerfile.blerina
+    container_name: clisonix-blerina
+    environment:
+      PYTHONUNBUFFERED: '1'
+      OLLAMA_HOST: http://clisonix-ollama:11434
+      PORT: '8037'
+      PILLARS_DIR: /app/all_pillars
+      YOUTUBE_CHANNEL_ID: UC4e4fVUHwNGTQ_UKDGd62nQ
+      YOUTUBE_API_KEY: ${YOUTUBE_API_KEY:-}
+      VIDEO_GENERATOR_URL: http://clisonix-video-generator:8029
+    ports:
+      - 8037:8037
+    volumes:
+      - ./all_pillars:/app/all_pillars
+    depends_on:
+      ollama:
+        condition: service_healthy
+      video-generator:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8037/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  dr_albana:
+    build:
+      context: ./services/dr_albana
+      dockerfile: Dockerfile
+    container_name: clisonix-dr-albana
+    environment:
+      PYTHONUNBUFFERED: '1'
+      OLLAMA_URL: http://clisonix-ollama:11434
+      MEDICAL_MODEL: llava:latest
+      DR_ALBANA_PORT: '8040'
+      DR_ALBANA_DYNAMIC_MODE: 'false'
+      DR_ALBANA_DYNAMIC_INTERVAL_MINUTES: '20'
+      DR_ALBANA_MAX_PENDING_ARTICLES: '1'
+      MIN_ARTICLES_PER_DAY: '1'
+      MAX_ARTICLES_PER_DAY: '1'
+      ARTICLES_PER_DAY: '1'
+      MEDICAL_TARGET_WORDS: '5000'
+    ports:
+      - 8040:8040
+    volumes:
+      - ./generated_medical_pillars:/app/generated_medical_pillars
+    depends_on:
+      ollama:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8040/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  blog_publisher:
+    build:
+      context: ./services/blog_publisher
+      dockerfile: Dockerfile
+    container_name: clisonix-blog-publisher
+    networks:
+      default:
+        aliases:
+          - blog_publisher
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PUBLISHER_PORT: '8041'
+      BLERINA_URL: http://clisonix-blerina:8037
+      DR_ALBANA_URL: http://clisonix-dr-albana:8040
+      LAGTER_PILLARS_DIR: /app/lagter_pillars
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      GITHUB_REPO: LedjanAhmati/clisonix-blog
+      GITHUB_BRANCH: main
+      AUTO_PUBLISH_INTERVAL_SECONDS: '30'
+      AUTO_PUBLISH_MAX_PER_CYCLE: '20'
+      GITHUB_AUTH_FAILURE_COOLDOWN_SECONDS: '600'
+      GOOGLE_ADSENSE_PUBLISHER_ID: ${GOOGLE_ADSENSE_PUBLISHER_ID:-}
+      NEXT_PUBLIC_GOOGLE_ADSENSE_ID: ${NEXT_PUBLIC_GOOGLE_ADSENSE_ID:-}
+      GOOGLE_ADSENSE_SLOT_FOOTER: ${ADSENSE_SLOT_FOOTER:-}
+      GOOGLE_ADSENSE_SLOT_SIDEBAR: ${ADSENSE_SLOT_SIDEBAR:-}
+      GOOGLE_ADSENSE_SLOT_INLINE: ${ADSENSE_SLOT_ARTICLE_TOP:-}
+    ports:
+      - 8041:8041
+    volumes:
+      - ./all_pillars:/app/blerina_pillars
+      - ./generated_medical_pillars:/app/medical_pillars
+      - ./lagter_pillars:/app/lagter_pillars
+    depends_on:
+      - blerina
+      - dr_albana
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8041/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  blog-paywall:
+    build:
+      context: .
+      dockerfile: services/blog-paywall/Dockerfile
+    container_name: clisonix-blog-paywall
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '8020'
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
+      STRIPE_PRICE_BLOG_BASIC_MONTHLY: ${STRIPE_PRICE_BLOG_BASIC_MONTHLY:-}
+      STRIPE_PRICE_BLOG_PRO_MONTHLY: ${STRIPE_PRICE_BLOG_PRO_MONTHLY:-}
+      STRIPE_PRICE_BLOG_PRO_YEARLY: ${STRIPE_PRICE_BLOG_PRO_YEARLY:-}
+    ports:
+      - 8020:8020
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8020/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  saas-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.saas-api
+    container_name: clisonix-saas-api
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+      PORT: '8040'
+    ports:
+      - 8042:8040
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8040/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  personas:
+    build:
+      context: .
+      dockerfile: Dockerfile.personas
+    container_name: clisonix-personas
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+      PORT: '9200'
+    ports:
+      - 9200:9200
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:9200/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  multi-tenant:
+    build:
+      context: .
+      dockerfile: Dockerfile.multi-tenant
+    container_name: clisonix-multi-tenant
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+      PORT: '8007'
+    ports:
+      - 8007:8007
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8007/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  user-management:
+    build:
+      context: ./services/user-management
+      dockerfile: Dockerfile
+    container_name: clisonix-user-management
+    environment:
+      PYTHONUNBUFFERED: '1'
+      USER_MANAGEMENT_PORT: '8070'
+    ports:
+      - 8070:8070
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8070/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  intelligence-lab:
+    build:
+      context: ./services/intelligence-lab
+      dockerfile: Dockerfile
+    container_name: clisonix-intelligence-lab
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      INTELLIGENCE_LAB_PORT: '8098'
+      LAB_PORT: '8100'
+    ports:
+      - 8098:8098
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8098/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  agiem:
+    build:
+      context: .
+      dockerfile: Dockerfile.agiem
+    container_name: clisonix-agiem
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+      PORT: '9300'
+    ports:
+      - 9300:9300
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:9300/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  datasource-europe:
+    build:
+      context: .
+      dockerfile: Dockerfile.datasource
+    container_name: clisonix-datasource-europe
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REGION: europe
+      PORT: '9301'
+    ports:
+      - 9301:9301
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  datasource-americas:
+    build:
+      context: .
+      dockerfile: Dockerfile.datasource
+    container_name: clisonix-datasource-americas
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REGION: americas
+      PORT: '9302'
+    ports:
+      - 9302:9302
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  datasource-asia:
+    build:
+      context: .
+      dockerfile: Dockerfile.datasource
+    container_name: clisonix-datasource-asia
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REGION: asia
+      PORT: '9303'
+    ports:
+      - 9303:9303
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  datasource-india:
+    build:
+      context: .
+      dockerfile: Dockerfile.datasource
+    container_name: clisonix-datasource-india
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REGION: india
+      PORT: '9304'
+    ports:
+      - 9304:9304
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  datasource-africa:
+    build:
+      context: .
+      dockerfile: Dockerfile.datasource
+    container_name: clisonix-datasource-africa
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REGION: africa
+      PORT: '9305'
+    ports:
+      - 9305:9305
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  datasource-oceania:
+    build:
+      context: .
+      dockerfile: Dockerfile.datasource
+    container_name: clisonix-datasource-oceania
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REGION: oceania
+      PORT: '9306'
+    ports:
+      - 9306:9306
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  datasource-central-asia:
+    build:
+      context: .
+      dockerfile: Dockerfile.datasource
+    container_name: clisonix-datasource-central-asia
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REGION: central-asia
+      PORT: '9307'
+    ports:
+      - 9307:9307
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  datasource-antarctica:
+    build:
+      context: .
+      dockerfile: Dockerfile.datasource
+    container_name: clisonix-datasource-antarctica
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REGION: antarctica
+      PORT: '9308'
+    ports:
+      - 9308:9308
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  agent-telemetry:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent-telemetry
+    container_name: clisonix-agent-telemetry
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '6680'
+    ports:
+      - 8009:6680
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:6680/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  cognitive-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile.cognitive
+    container_name: clisonix-cognitive-engine
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '8010'
+    ports:
+      - 8010:8010
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8010/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  adaptive-router:
+    build:
+      context: .
+      dockerfile: Dockerfile.adaptive-router
+    container_name: clisonix-adaptive-router
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '8011'
+    ports:
+      - 8011:8011
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8011/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  excel:
+    build:
+      context: ./services/excel
+      dockerfile: Dockerfile
+    container_name: clisonix-excel
+    environment:
+      PYTHONUNBUFFERED: '1'
+      CORE_API_URL: http://clisonix-api:8000
+    ports:
+      - 8002:8002
+    volumes:
+      - ./excel_files:/app/excel_files
+      - ./uploads:/app/uploads
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8002/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  reporting:
+    build:
+      context: .
+      dockerfile: Dockerfile.reporting
+    container_name: clisonix-reporting
+    environment:
+      PYTHONUNBUFFERED: '1'
+      DOCKER_HOST: unix:///var/run/docker.sock
+      REPORTING_QUEUE_WARNING_THRESHOLD: '50'
+    ports:
+      - 8001:8001
+    volumes:
+      - ./reports:/app/reports
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8001/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  economy:
+    build:
+      context: .
+      dockerfile: Dockerfile.economy
+    container_name: clisonix-economy
+    environment:
+      PYTHONUNBUFFERED: '1'
+      ECONOMY_API_PORT: '9093'
+    ports:
+      - 9093:9093
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:9093/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  behavioral:
+    build:
+      context: .
+      dockerfile: Dockerfile.behavioral
+    container_name: clisonix-behavioral
+    environment:
+      PYTHONUNBUFFERED: '1'
+    ports:
+      - 8003:8003
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8003/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  cycle:
+    build:
+      context: .
+      dockerfile: Dockerfile.cycle
+    container_name: clisonix-cycle
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - 8013:8005
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8005/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  neurosonix:
+    build:
+      context: .
+      dockerfile: Dockerfile.neurosonix
+    container_name: clisonix-neurosonix
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '8015'
+    ports:
+      - 8015:8006
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8006/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  analytics:
+    build:
+      context: .
+      dockerfile: Dockerfile.analytics
+    container_name: clisonix-advanced-analytics
+    environment:
+      PYTHONUNBUFFERED: '1'
+      DATABASE_URL: postgresql://${POSTGRES_USER:-clisonix}:${POSTGRES_PASSWORD:-clisonix_dev_password}@postgres:5432/${POSTGRES_DB:-clisonixdb}
+      PORT: '8016'
+    ports:
+      - 8016:8016
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8016/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  saas:
+    build:
+      context: .
+      dockerfile: Dockerfile.saas
+    container_name: clisonix-saas
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+      SAAS_PORT: '8008'
+    ports:
+      - 8008:8008
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8008/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  biometric:
+    build:
+      context: .
+      dockerfile: Dockerfile.biometric
+    container_name: clisonix-biometric
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '8017'
+    ports:
+      - 8017:8009
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8009/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  userdata:
+    build:
+      context: .
+      dockerfile: Dockerfile.userdata
+    container_name: clisonix-userdata
+    environment:
+      PYTHONUNBUFFERED: '1'
+      DATABASE_URL: postgresql://${POSTGRES_USER:-clisonix}:${POSTGRES_PASSWORD:-clisonix_dev_password}@postgres:5432/${POSTGRES_DB:-clisonixdb}
+      REDIS_URL: redis://redis:6379/0
+      PORT: '8018'
+    ports:
+      - 8018:8010
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8010/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  curiosity:
+    build:
+      context: ./services/curiosity_ocean
+      dockerfile: Dockerfile
+    container_name: clisonix-curiosity
+    environment:
+      PYTHONUNBUFFERED: '1'
+      OCEAN_CORE_URL: http://clisonix-ocean-core:8030
+      PORT: '8011'
+    ports:
+      - 8019:8011
+    depends_on:
+      - ocean-core
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8011/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  knowledge:
+    build:
+      context: ./services/knowledge_index
+      dockerfile: Dockerfile
+    container_name: clisonix-knowledge
+    environment:
+      PYTHONUNBUFFERED: '1'
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - 8012:8012
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8012/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  crawler:
+    build:
+      context: ./services/crawler
+      dockerfile: Dockerfile
+    container_name: clisonix-crawler
+    environment:
+      PYTHONUNBUFFERED: '1'
+      PORT: '9211'
+      CRAWLER_DB_PATH: /data/crawler.db
+      CRAWLER_WORKERS: '1'
+      CRAWLER_REQUEST_DELAY_MS: '250'
+      CRAWLER_MAX_PAGES_DEFAULT: '50'
+    ports:
+      - 9211:9211
+    volumes:
+      - ./data/crawler:/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:9211/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-elbasan:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-elbasan
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Elbasan
+      PORT: '9101'
+    ports:
+      - 9101:9101
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-tirana:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-tirana
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Tirana
+      PORT: '9102'
+    ports:
+      - 9102:9102
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-durres:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-durres
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Durres
+      PORT: '9103'
+    ports:
+      - 9103:9103
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-vlore:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-vlore
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Vlore
+      PORT: '9104'
+    ports:
+      - 9104:9104
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-shkoder:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-shkoder
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Shkoder
+      PORT: '9105'
+    ports:
+      - 9105:9105
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-korce:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-korce
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Korce
+      PORT: '9106'
+    ports:
+      - 9106:9106
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-saranda:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-saranda
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Saranda
+      PORT: '9107'
+    ports:
+      - 9107:9107
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-prishtina:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-prishtina
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Prishtina
+      PORT: '9108'
+    ports:
+      - 9108:9108
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-kostur:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-kostur
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Kostur
+      PORT: '9109'
+    ports:
+      - 9109:9109
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-athens:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-athens
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Athens
+      PORT: '9110'
+    ports:
+      - 9110:9110
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-rome:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-rome
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Rome
+      PORT: '9111'
+    ports:
+      - 9111:9111
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-zurich:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-zurich
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Zurich
+      PORT: '9112'
+    ports:
+      - 9112:9112
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-beograd:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-beograd
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Beograd
+      PORT: '9113'
+    ports:
+      - 9113:9113
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-sofia:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-sofia
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Sofia
+      PORT: '9114'
+    ports:
+      - 9114:9114
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-zagreb:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-zagreb
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Zagreb
+      PORT: '9115'
+    ports:
+      - 9115:9115
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-ljubljana:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-ljubljana
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Ljubljana
+      PORT: '9116'
+    ports:
+      - 9116:9116
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-vienna:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-vienna
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Vienna
+      PORT: '9117'
+    ports:
+      - 9117:9117
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-prague:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-prague
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Prague
+      PORT: '9118'
+    ports:
+      - 9118:9118
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-budapest:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-budapest
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Budapest
+      PORT: '9119'
+    ports:
+      - 9119:9119
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-bucharest:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-bucharest
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Bucharest
+      PORT: '9120'
+    ports:
+      - 9120:9120
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-istanbul:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-istanbul
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Istanbul
+      PORT: '9121'
+    ports:
+      - 9121:9121
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-cairo:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-cairo
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Cairo
+      PORT: '9122'
+    ports:
+      - 9122:9122
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  lab-jerusalem:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-jerusalem
+    profiles:
+      - research
+    environment:
+      PYTHONUNBUFFERED: '1'
+      LAB_NAME: Jerusalem
+      PORT: '9123'
+    ports:
+      - 9123:9123
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS http://localhost:$${PORT}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  kitchen-worker:
+    build:
+      context: ./services/kitchen-worker
+      dockerfile: Dockerfile
+    container_name: clisonix-kitchen-worker
+    environment:
+      NODE_ENV: production
+      KITCHEN_JOBS_DIR: /app/kitchen-jobs
+      KITCHEN_REPORTS_DIR: /app/kitchen-reports
+      COLLECTIONS_DIR: /app/postman-collections
+      POLL_INTERVAL_MS: '3000'
+      MAX_CONCURRENT_JOBS: '2'
+      HEALTH_PORT: '3100'
+    ports:
+      - 3100:3100
+    volumes:
+      - kitchen_jobs:/app/kitchen-jobs
+      - kitchen_reports:/app/kitchen-reports
+      - ./postman-collections:/app/postman-collections:ro
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - -q
+        - --spider
+        - http://localhost:3100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  newsroom:
+    build:
+      context: ./services/newsroom
+      dockerfile: Dockerfile
+    container_name: clisonix-newsroom
+    env_file:
+      - ./services/newsroom/.env
+    environment:
+      PYTHONUNBUFFERED: '1'
+      BLOG_API_URL: http://blog-api:8041
+      NEWSROOM_PORT: '9800'
+      PUBLISH_INTERVAL: '3600'
+      MAX_LABS: '200'
+      POSTS_PER_DAY: '10'
+      REDIS_URL: redis://redis:6379/1
+      ENGINE_TIMEOUT: '3.0'
+      ALBA_URL: http://alba:5555
+      ALBI_URL: http://albi:6680
+      JONA_URL: http://jona:7777
+      OCEAN_URL: http://ocean-core:8030
+      BLERINA_URL: http://ocean-core-blerina:8032
+      ASI_URL: http://asi:9094
+      AVIATION_URL: http://aviation:8080
+      API_INTERNAL_URL: http://api:8000
+      GNEWS_API_KEY: ${GNEWS_API_KEY:-}
+      NEWSAPI_KEY: ${NEWSAPI_KEY:-}
+    ports:
+      - 9800:9800
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://localhost:9800/health', timeout=5).read()
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    volumes:
+      - ./services/newsroom/.env:/app/.env:ro
+  orchestra:
+    build:
+      context: .
+      dockerfile: Dockerfile.orchestra
+    container_name: clisonix-orchestra
+    ports:
+      - 9700:9700
+    environment:
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      GITHUB_REPO: ${GITHUB_REPO:-Web8kameleon-hub/clisonix.com}
+      CF_API_TOKEN: ${CF_API_TOKEN:-}
+      CF_ZONE_ID: ${CF_ZONE_ID:-}
+      CF_ACCOUNT_ID: ${CF_ACCOUNT_ID:-}
+      ORCHESTRA_HETZNER_IP: ${ORCHESTRA_HETZNER_IP:-46.225.14.83}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      CLISONIX_API_URL: ${CLISONIX_API_URL:-http://api:8000}
+      CLISONIX_INTERNAL_KEY: ${CLISONIX_INTERNAL_KEY:-}
+      GIT_EXPECTED_ORG: Web8kameleon-hub
+      GIT_REPO_PATH: /app
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      ORCHESTRA_TIMEOUT_S: '15'
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:9700/health
+      interval: 30s
+      timeout: 8s
+      retries: 3
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+  athens-classical-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-athens-classical
+    environment:
+      LAB_ID: Athens_Classical
+      LAB_TYPE: Academic
+      LAB_NAME: Athens Classical Lab
+      LAB_FUNCTION: Classical Studies & Historical Research
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8110:8100
+    volumes:
+      - ./data/athens-classical:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  beograd-industrial-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-beograd-industrial
+    environment:
+      LAB_ID: Beograd_Industrial
+      LAB_TYPE: Industrial
+      LAB_NAME: Beograd Industrial Lab
+      LAB_FUNCTION: Industrial Process Optimization
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8113:8100
+    volumes:
+      - ./data/beograd-industrial:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  bucharest-nanotechnology-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-bucharest-nanotechnology
+    environment:
+      LAB_ID: Bucharest_Nanotechnology
+      LAB_TYPE: Nanotechnology
+      LAB_NAME: Bucharest Nanotechnology Lab
+      LAB_FUNCTION: Nanotechnology & Nanomaterials
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8120:8100
+    volumes:
+      - ./data/bucharest-nanotechnology:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  budapest-data-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-budapest-data
+    environment:
+      LAB_ID: Budapest_Data
+      LAB_TYPE: Data
+      LAB_NAME: Budapest Data Lab
+      LAB_FUNCTION: Big Data Analytics & Visualization
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8119:8100
+    volumes:
+      - ./data/budapest-data:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  cairo-archeology-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-cairo-archeology
+    environment:
+      LAB_ID: Cairo_Archeology
+      LAB_TYPE: Archeology
+      LAB_NAME: Cairo Archeology Lab
+      LAB_FUNCTION: Archeological Research & Preservation
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8122:8100
+    volumes:
+      - ./data/cairo-archeology:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  durres-iot-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-durres-iot
+    environment:
+      LAB_ID: Durres_IoT
+      LAB_TYPE: IoT
+      LAB_NAME: Durrës IoT Lab
+      LAB_FUNCTION: Internet of Things & Sensor Networks
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8103:8100
+    volumes:
+      - ./data/durres-iot:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  elbasan-ai-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-elbasan-ai
+    environment:
+      LAB_ID: Elbasan_AI
+      LAB_TYPE: AI
+      LAB_NAME: Elbasan AI Lab
+      LAB_FUNCTION: Artificial Intelligence & Machine Learning
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8101:8100
+    volumes:
+      - ./data/elbasan-ai:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  istanbul-trade-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-istanbul-trade
+    environment:
+      LAB_ID: Istanbul_Trade
+      LAB_TYPE: Trade
+      LAB_NAME: Istanbul Trade Lab
+      LAB_FUNCTION: International Trade & Logistics
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8121:8100
+    volumes:
+      - ./data/istanbul-trade:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  jerusalem-heritage-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-jerusalem-heritage
+    environment:
+      LAB_ID: Jerusalem_Heritage
+      LAB_TYPE: Heritage
+      LAB_NAME: Jerusalem Heritage Lab
+      LAB_FUNCTION: Cultural Heritage & Restoration
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8123:8100
+    volumes:
+      - ./data/jerusalem-heritage:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  korce-agricultural-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-korce-agricultural
+    environment:
+      LAB_ID: Korce_Agricultural
+      LAB_TYPE: Agricultural
+      LAB_NAME: Korça Agricultural Lab
+      LAB_FUNCTION: Agricultural Sciences & Crop Analysis
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8106:8100
+    volumes:
+      - ./data/korce-agricultural:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  kostur-energy-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-kostur-energy
+    environment:
+      LAB_ID: Kostur_Energy
+      LAB_TYPE: Energy
+      LAB_NAME: Kostur Energy Lab
+      LAB_FUNCTION: Renewable Energy & Power Systems
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8109:8100
+    volumes:
+      - ./data/kostur-energy:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  ljubljana-quantum-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-ljubljana-quantum
+    environment:
+      LAB_ID: Ljubljana_Quantum
+      LAB_TYPE: Quantum
+      LAB_NAME: Ljubljana Quantum Lab
+      LAB_FUNCTION: Quantum Computing & Physics
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8116:8100
+    volumes:
+      - ./data/ljubljana-quantum:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  prague-robotics-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-prague-robotics
+    environment:
+      LAB_ID: Prague_Robotics
+      LAB_TYPE: Robotics
+      LAB_NAME: Prague Robotics Lab
+      LAB_FUNCTION: Robotics & Automation Systems
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8118:8100
+    volumes:
+      - ./data/prague-robotics:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  prishtina-security-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-prishtina-security
+    environment:
+      LAB_ID: Prishtina_Security
+      LAB_TYPE: Security
+      LAB_NAME: Prishtina Security Lab
+      LAB_FUNCTION: Cybersecurity & Network Protection
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8108:8100
+    volumes:
+      - ./data/prishtina-security:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  rome-architecture-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-rome-architecture
+    environment:
+      LAB_ID: Rome_Architecture
+      LAB_TYPE: Architecture
+      LAB_NAME: Rome Architecture Lab
+      LAB_FUNCTION: Architectural Engineering & Design
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8111:8100
+    volumes:
+      - ./data/rome-architecture:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  sarrande-underwater-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-sarrande-underwater
+    environment:
+      LAB_ID: Sarrande_Underwater
+      LAB_TYPE: Underwater
+      LAB_NAME: Sarandë Underwater Lab
+      LAB_FUNCTION: Underwater Exploration & Deep Sea Research
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8107:8100
+    volumes:
+      - ./data/sarrande-underwater:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  shkoder-marine-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-shkoder-marine
+    environment:
+      LAB_ID: Shkoder_Marine
+      LAB_TYPE: Marine
+      LAB_NAME: Shkodër Marine Lab
+      LAB_FUNCTION: Marine Biology & Oceanography
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8104:8100
+    volumes:
+      - ./data/shkoder-marine:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  sofia-chemistry-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-sofia-chemistry
+    environment:
+      LAB_ID: Sofia_Chemistry
+      LAB_TYPE: Chemistry
+      LAB_NAME: Sofia Chemistry Lab
+      LAB_FUNCTION: Chemical Research & Material Science
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8114:8100
+    volumes:
+      - ./data/sofia-chemistry:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  tirana-medical-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-tirana-medical
+    environment:
+      LAB_ID: Tirana_Medical
+      LAB_TYPE: Medical
+      LAB_NAME: Tirana Medical Lab
+      LAB_FUNCTION: Medical Research & Bioscience
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8102:8100
+    volumes:
+      - ./data/tirana-medical:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  vienna-neuroscience-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-vienna-neuroscience
+    environment:
+      LAB_ID: Vienna_Neuroscience
+      LAB_TYPE: Neuroscience
+      LAB_NAME: Vienna Neuroscience Lab
+      LAB_FUNCTION: Neuroscience & Brain Research
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8117:8100
+    volumes:
+      - ./data/vienna-neuroscience:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  vlore-environmental-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-vlore-environmental
+    environment:
+      LAB_ID: Vlore_Environmental
+      LAB_TYPE: Environmental
+      LAB_NAME: Vlorë Environmental Lab
+      LAB_FUNCTION: Environmental Monitoring & Ecology
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8105:8100
+    volumes:
+      - ./data/vlore-environmental:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  zagreb-biotech-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-zagreb-biotech
+    environment:
+      LAB_ID: Zagreb_Biotech
+      LAB_TYPE: Biotech
+      LAB_NAME: Zagreb Biotech Lab
+      LAB_FUNCTION: Biotechnology & Genetic Engineering
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8115:8100
+    volumes:
+      - ./data/zagreb-biotech:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  zurich-finance-lab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-zurich-finance
+    environment:
+      LAB_ID: Zurich_Finance
+      LAB_TYPE: Finance
+      LAB_NAME: Zurich Finance Lab
+      LAB_FUNCTION: Financial Analysis & Blockchain
+      API_KEY: sekret-real
+      LAB_PORT: '8100'
+    ports:
+      - 8112:8100
+    volumes:
+      - ./data/zurich-finance:/app/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8100/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+volumes:
+  ollama_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  loki_data:
+    driver: local
+  victoriametrics_data:
+    driver: local
+  tempo_data:
+    driver: local
+  kitchen_jobs:
+    driver: local
+  kitchen_reports:
+    driver: local
+  clx_i_data:
+    driver: local
+networks:
+  default:
+    name: clisonix-net
+    driver: bridge

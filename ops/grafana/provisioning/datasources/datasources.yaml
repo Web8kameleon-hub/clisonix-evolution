@@ -1,0 +1,29 @@
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://clisonix-cloud-prometheus-1:9090
+    isDefault: true
+    editable: true
+    
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://clisonix-loki:3100
+    editable: true
+    jsonData:
+      maxLines: 1000
+      
+  - name: Tempo
+    type: tempo
+    access: proxy
+    url: http://clisonix-tempo:3200
+    editable: true
+    jsonData:
+      tracesToLogs:
+        datasourceUid: loki
+        filterByTraceID: true
+      serviceMap:
+        datasourceUid: prometheus

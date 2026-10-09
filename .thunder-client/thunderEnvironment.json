@@ -1,0 +1,96 @@
+[
+  {
+    "_id": "env_clisonix_prod",
+    "name": "Clisonix Production",
+    "default": true,
+    "data": [
+      {
+        "name": "base_url",
+        "value": "http://46.225.14.83:8000"
+      },
+      {
+        "name": "billing_url",
+        "value": "http://46.225.14.83:8095"
+      },
+      {
+        "name": "ocean_url",
+        "value": "http://46.225.14.83:8030"
+      },
+      {
+        "name": "intelligence_url",
+        "value": "http://46.225.14.83:8098"
+      },
+      {
+        "name": "users_url",
+        "value": "http://46.225.14.83:8070"
+      },
+      {
+        "name": "excel_url",
+        "value": "http://46.225.14.83:8002"
+      },
+      {
+        "name": "kitchen_url",
+        "value": "http://46.225.14.83:3100"
+      },
+      {
+        "name": "auth_token",
+        "value": ""
+      },
+      {
+        "name": "api_key",
+        "value": ""
+      },
+      {
+        "name": "user_id",
+        "value": "test-user-id"
+      }
+    ]
+  },
+  {
+    "_id": "env_clisonix_local",
+    "name": "Clisonix Local",
+    "default": false,
+    "data": [
+      {
+        "name": "base_url",
+        "value": "http://localhost:8000"
+      },
+      {
+        "name": "billing_url",
+        "value": "http://localhost:8095"
+      },
+      {
+        "name": "ocean_url",
+        "value": "http://localhost:8030"
+      },
+      {
+        "name": "intelligence_url",
+        "value": "http://localhost:8099"
+      },
+      {
+        "name": "users_url",
+        "value": "http://localhost:8070"
+      },
+      {
+        "name": "excel_url",
+        "value": "http://localhost:8002"
+      },
+      {
+        "name": "kitchen_url",
+        "value": "http://localhost:3100"
+      },
+      {
+        "name": "auth_token",
+        "value": ""
+      },
+      {
+        "name": "api_key",
+        "value": ""
+      },
+      {
+        "name": "user_id",
+        "value": "test-user-id"
+      }
+    ]
+  }
+]

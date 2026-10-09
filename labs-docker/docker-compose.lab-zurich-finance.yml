@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  zurich-finance-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-zurich-finance
+    environment:
+      LAB_ID: "Zurich_Finance"
+      LAB_TYPE: "Finance"
+      LAB_NAME: "Zurich Finance Lab"
+      LAB_FUNCTION: "Financial Analysis & Blockchain"
+      API_KEY: "sekret-real"
+    ports:
+      - "8112:8100"
+    volumes:
+      - ../data/zurich-finance:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

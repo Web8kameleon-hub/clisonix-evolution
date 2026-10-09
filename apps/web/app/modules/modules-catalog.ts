@@ -1,0 +1,256 @@
+import {
+  Brain,
+  Waves,
+  GraduationCap,
+  Plane,
+  Activity,
+  Zap,
+  Cloud,
+  User,
+  BarChart3,
+  Layout,
+  Code2,
+  MessageSquare,
+  Globe,
+  Archive,
+  Target,
+  Users,
+  Shield,
+  Building2,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+export interface ModuleEntry {
+  id: string;
+  name: string;
+  description: string;
+  icon: LucideIcon;
+  category: string;
+  href: string;
+  accent: string;
+  external?: boolean;
+}
+
+export const moduleCatalog: ModuleEntry[] = [
+  {
+    id: "zurich",
+    name: "Zürich Engine",
+    description: "Deterministic 9-stage reasoning without AI randomness",
+    icon: Target,
+    category: "AI Reasoning",
+    href: "/zurich",
+    accent: "slate",
+  },
+  {
+    id: "debate",
+    name: "Trinity Debate",
+    description: "5 AI personas debate any topic from different perspectives",
+    icon: Users,
+    category: "AI Reasoning",
+    href: "/debate",
+    accent: "slate",
+  },
+  {
+    id: "curiosity-ocean",
+    name: "Curiosity Ocean",
+    description: "AI-powered chat interface for exploring knowledge",
+    icon: Waves,
+    category: "AI Chat",
+    href: "/modules/curiosity-ocean",
+    accent: "slate",
+  },
+  {
+    id: "web-reader",
+    name: "Web Reader",
+    description:
+      "Browse any webpage, search the web, and chat with page content",
+    icon: Globe,
+    category: "AI Chat",
+    href: "/modules/web-reader",
+    accent: "slate",
+  },
+  {
+    id: "archive",
+    name: "Archive & Research",
+    description:
+      "Search ArXiv, Wikipedia, PubMed and 5000+ global data sources",
+    icon: Archive,
+    category: "Research",
+    href: "/modules/archive",
+    accent: "slate",
+  },
+  {
+    id: "social-intelligence",
+    name: "Social Intelligence",
+    description: "Direct social search for video, photos, figures and statuses",
+    icon: Globe,
+    category: "Research",
+    href: "/modules/social-intelligence",
+    accent: "slate",
+  },
+  {
+    id: "specialized-chat",
+    name: "Specialized Expert Chat",
+    description: "Expert-level AI conversations in advanced domains",
+    icon: GraduationCap,
+    category: "AI Chat",
+    href: "/modules/specialized-chat",
+    accent: "slate",
+  },
+  {
+    id: "specialized-chat-backend",
+    name: "Specialized Chat (Backend)",
+    description: "Direct access to Ocean Core Specialized Chat HTML",
+    icon: MessageSquare,
+    category: "AI Chat",
+    href: "http://localhost:8030/chat",
+    accent: "slate",
+    external: true,
+  },
+  {
+    id: "aviation-weather",
+    name: "Aviation Weather",
+    description: "METAR, TAF and real-time flight conditions",
+    icon: Plane,
+    category: "Environment",
+    href: "/modules/aviation-weather",
+    accent: "slate",
+  },
+  {
+    id: "eeg-analysis",
+    name: "EEG Analysis",
+    description: "Real-time brainwave pattern analysis",
+    icon: Activity,
+    category: "Neuroscience",
+    href: "/modules/eeg-analysis",
+    accent: "slate",
+  },
+  {
+    id: "neural-synthesis",
+    name: "Neural Synthesis",
+    description: "Synthesize neural patterns and waveforms",
+    icon: Zap,
+    category: "Neuroscience",
+    href: "/modules/neural-synthesis",
+    accent: "slate",
+  },
+  {
+    id: "nanogrid-zeiss",
+    name: "NanoGrid + ZEISS",
+    description: "Unified limit-mode control for ZEISS Vision Ultra workflows",
+    icon: Brain,
+    category: "Neuroscience",
+    href: "/modules/nanogrid-zeiss",
+    accent: "slate",
+  },
+  {
+    id: "kloud-bridge",
+    name: "Kloud Bridge",
+    description:
+      "Isolated sovereign fabric gateway for secure routing, sync and telemetry handoff",
+    icon: Shield,
+    category: "Infrastructure",
+    href: "/modules/kloud-bridge",
+    accent: "slate",
+  },
+  {
+    id: "clisonix-invest",
+    name: "Clisonix Invest",
+    description:
+      "Bank-ready investor portal with live links, container fallback, and document access",
+    icon: Building2,
+    category: "Business",
+    href: "/modules/clisonix-invest",
+    accent: "slate",
+  },
+  {
+    id: "weather-dashboard",
+    name: "Weather & Cognitive",
+    description: "How weather impacts cognitive performance",
+    icon: Cloud,
+    category: "Environment",
+    href: "/modules/weather-dashboard",
+    accent: "slate",
+  },
+  {
+    id: "account",
+    name: "Account & Billing",
+    description:
+      "Manage your profile, subscriptions, payment methods and settings",
+    icon: User,
+    category: "Account",
+    href: "/modules/account",
+    accent: "slate",
+  },
+  {
+    id: "my-data-dashboard",
+    name: "My Data Dashboard",
+    description: "IoT devices, API integrations, LoRa/GSM networks",
+    icon: BarChart3,
+    category: "Data",
+    href: "/modules/my-data-dashboard",
+    accent: "slate",
+  },
+  {
+    id: "mymirror-now",
+    name: "MyMirror Now",
+    description:
+      "Real-time client admin portal with live metrics & data sources",
+    icon: Layout,
+    category: "Admin",
+    href: "/modules/mymirror-now",
+    accent: "slate",
+  },
+  {
+    id: "developer-docs",
+    name: "Developer Documentation",
+    description: "API Reference, SDKs, Quick Start Guide",
+    icon: Code2,
+    category: "Developer",
+    href: "/developers",
+    accent: "slate",
+  },
+];
+
+export const accentColors = {
+  slate: {
+    bg: "bg-gray-100",
+    border: "border-black",
+    borderHover: "hover:border-gray-600",
+    text: "text-black",
+    icon: "text-black",
+    badge: "bg-gray-100 text-black",
+  },
+  violet: {
+    bg: "bg-gray-100",
+    border: "border-black",
+    borderHover: "hover:border-gray-600",
+    text: "text-black",
+    icon: "text-black",
+    badge: "bg-gray-100 text-black",
+  },
+  orange: {
+    bg: "bg-gray-100",
+    border: "border-black",
+    borderHover: "hover:border-gray-600",
+    text: "text-black",
+    icon: "text-black",
+    badge: "bg-gray-100 text-black",
+  },
+  green: {
+    bg: "bg-gray-100",
+    border: "border-black",
+    borderHover: "hover:border-gray-600",
+    text: "text-black",
+    icon: "text-black",
+    badge: "bg-gray-100 text-black",
+  },
+  neutral: {
+    bg: "bg-gray-100",
+    border: "border-black",
+    borderHover: "hover:border-gray-600",
+    text: "text-black",
+    icon: "text-black",
+    badge: "bg-gray-100 text-black",
+  },
+};

@@ -1,0 +1,29 @@
+[package]
+name = "clisonix-cbp"
+version = "1.0.0"
+edition = "2021"
+authors = ["Clisonix Team"]
+description = "Clisonix Binary Protocol (CBP) SDK for Rust"
+license = "MIT"
+repository = "https://github.com/clisonix/clisonix-cloud"
+keywords = ["binary", "protocol", "clisonix", "networking"]
+categories = ["network-programming", "encoding"]
+
+[dependencies]
+# No external dependencies - pure Rust implementation
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "cbp_bench"
+harness = false
+
+[features]
+default = []
+compression = []  # Enable zlib compression
+encryption = []   # Enable AES-GCM encryption
+
+[lib]
+name = "clisonix_cbp"
+path = "src/lib.rs"

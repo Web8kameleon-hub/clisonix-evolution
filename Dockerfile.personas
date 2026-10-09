@@ -1,0 +1,429 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# DOCKERFILE.PERSONAS - 14 Specialist Personas Module
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Contains all 14 specialist personas:
+# 1. medical_science - Health, Brain, Biology
+# 2. lora_iot - Sensors, Devices, Networks
+# 3. security - Security, Crypto, Vulnerability
+# 4. systems_architecture - API, Infrastructure
+# 5. natural_science - Physics, Energy, Quantum
+# 6. industrial_process - Production, Cycles
+# 7. agi_analyst - AGI, Cognitive, Consciousness
+# 8. business_analyst - Revenue, Strategy, Growth
+# 9. smart_human - Understanding, Help, Explain
+# 10. academic - Research, Theory, Study
+# 11. media - News, Story, Report
+# 12. culture - Tradition, Art, Society
+# 13. hobby - Hobby, Learn, Practice
+# 14. entertainment - Movie, Game, Music
+# ═══════════════════════════════════════════════════════════════════════════════
+
+FROM python:3.13
+
+LABEL maintainer="Clisonix Cloud Team"
+LABEL description="14 Specialist Personas Module"
+LABEL version="1.0.0"
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy ocean-core persona router if exists
+COPY ocean-core/response_orchestrator.py ./
+
+# Create personas service
+COPY <<EOF /app/personas_service.py
+"""
+14 SPECIALIST PERSONAS SERVICE
+All personas in one container, each with domain expertise.
+"""
+
+import os
+import time
+import logging
+from datetime import datetime, timezone
+from typing import Dict, Any, List, Optional
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("PersonasService")
+
+# Configuration
+PERSONA_PORT = int(os.getenv("PERSONA_PORT", "9200"))
+
+# FastAPI app with v1 versioning
+app = FastAPI(
+    title="Clisonix Personas API",
+    description="14 Specialist Personas for Expert Knowledge",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json"
+)
+
+# API Version prefix
+API_V1 = "/api/v1"
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+# 14 Personas Definition
+PERSONAS = {
+    "medical_science": {
+        "id": "ps_001",
+        "name": "Medical Science Expert",
+        "domain": "medical",
+        "keywords": ["health", "brain", "biology", "medicine", "disease", "treatment"],
+        "expertise": "Medical research, bioscience, healthcare, neuroscience",
+        "languages": ["en", "sq", "de"]
+    },
+    "lora_iot": {
+        "id": "ps_002",
+        "name": "LoRa & IoT Specialist",
+        "domain": "iot",
+        "keywords": ["sensor", "device", "network", "iot", "lora", "mqtt"],
+        "expertise": "Internet of Things, sensor networks, LoRaWAN, embedded systems",
+        "languages": ["en", "sq"]
+    },
+    "security": {
+        "id": "ps_003",
+        "name": "Cybersecurity Expert",
+        "domain": "security",
+        "keywords": ["security", "crypto", "vulnerability", "hacking", "encryption"],
+        "expertise": "Cybersecurity, cryptography, penetration testing, secure systems",
+        "languages": ["en", "sq", "de"]
+    },
+    "systems_architecture": {
+        "id": "ps_004",
+        "name": "Systems Architect",
+        "domain": "technical",
+        "keywords": ["api", "infrastructure", "architecture", "microservices", "cloud"],
+        "expertise": "System design, API architecture, cloud infrastructure, DevOps",
+        "languages": ["en", "sq"]
+    },
+    "natural_science": {
+        "id": "ps_005",
+        "name": "Natural Science Expert",
+        "domain": "science",
+        "keywords": ["physics", "energy", "quantum", "chemistry", "nature"],
+        "expertise": "Physics, quantum mechanics, chemistry, environmental science",
+        "languages": ["en", "sq", "de"]
+    },
+    "industrial_process": {
+        "id": "ps_006",
+        "name": "Industrial Process Engineer",
+        "domain": "operational",
+        "keywords": ["production", "cycle", "manufacturing", "process", "automation"],
+        "expertise": "Industrial automation, manufacturing, process optimization",
+        "languages": ["en", "sq", "de"]
+    },
+    "agi_analyst": {
+        "id": "ps_007",
+        "name": "AGI Analyst",
+        "domain": "philosophical",
+        "keywords": ["agi", "cognitive", "consciousness", "ai", "intelligence"],
+        "expertise": "Artificial General Intelligence, cognitive science, AI ethics",
+        "languages": ["en", "sq"]
+    },
+    "business_analyst": {
+        "id": "ps_008",
+        "name": "Business Analyst",
+        "domain": "financial",
+        "keywords": ["revenue", "strategy", "growth", "market", "business"],
+        "expertise": "Business strategy, market analysis, financial planning",
+        "languages": ["en", "sq", "de"]
+    },
+    "smart_human": {
+        "id": "ps_009",
+        "name": "Smart Human Interface",
+        "domain": "personal",
+        "keywords": ["understand", "help", "explain", "guide", "assist"],
+        "expertise": "Human-AI interaction, explanation, guidance, support",
+        "languages": ["en", "sq", "de", "it"]
+    },
+    "academic": {
+        "id": "ps_010",
+        "name": "Academic Researcher",
+        "domain": "scientific",
+        "keywords": ["research", "theory", "study", "paper", "academic"],
+        "expertise": "Academic research, scientific methodology, peer review",
+        "languages": ["en", "sq", "de"]
+    },
+    "media": {
+        "id": "ps_011",
+        "name": "Media Specialist",
+        "domain": "narrative",
+        "keywords": ["news", "story", "report", "journalism", "media"],
+        "expertise": "News analysis, storytelling, media production, journalism",
+        "languages": ["en", "sq"]
+    },
+    "culture": {
+        "id": "ps_012",
+        "name": "Cultural Expert",
+        "domain": "exploratory",
+        "keywords": ["tradition", "art", "society", "culture", "heritage"],
+        "expertise": "Cultural studies, art history, social anthropology",
+        "languages": ["en", "sq", "it", "el"]
+    },
+    "hobby": {
+        "id": "ps_013",
+        "name": "Hobby Advisor",
+        "domain": "personal",
+        "keywords": ["hobby", "learn", "practice", "skill", "leisure"],
+        "expertise": "Skill development, hobby guidance, learning strategies",
+        "languages": ["en", "sq"]
+    },
+    "entertainment": {
+        "id": "ps_014",
+        "name": "Entertainment Expert",
+        "domain": "narrative",
+        "keywords": ["movie", "game", "music", "entertainment", "fun"],
+        "expertise": "Entertainment industry, gaming, music, film analysis",
+        "languages": ["en", "sq"]
+    }
+}
+
+START_TIME = time.time()
+consultation_history: List[Dict[str, Any]] = []
+
+
+class ConsultationRequest(BaseModel):
+    query: str
+    persona_id: Optional[str] = None
+    language: str = "en"
+    context: Optional[Dict[str, Any]] = None
+
+
+class ConsultationResponse(BaseModel):
+    persona_id: str
+    persona_name: str
+    domain: str
+    response: str
+    confidence: float
+    processing_time: float
+
+
+def find_best_persona(query: str) -> str:
+    """Find the best persona for a query based on keywords"""
+    query_lower = query.lower()
+    scores = {}
+    
+    for persona_id, persona in PERSONAS.items():
+        score = sum(1 for kw in persona["keywords"] if kw in query_lower)
+        if score > 0:
+            scores[persona_id] = score
+    
+    if scores:
+        return max(scores, key=scores.get)
+    return "smart_human"  # Default persona
+
+
+def generate_response(persona: Dict[str, Any], query: str) -> str:
+    """Generate a response from a persona"""
+    domain = persona["domain"]
+    name = persona["name"]
+    expertise = persona["expertise"]
+    
+    # Domain-specific response templates
+    responses = {
+        "medical": f"From a medical science perspective, regarding your question about '{query[:50]}...': Based on current research in {expertise}, this involves understanding biological mechanisms and evidence-based approaches.",
+        "iot": f"As an IoT specialist, your query about '{query[:50]}...' relates to {expertise}. Consider the sensor data patterns and network topology.",
+        "security": f"Security analysis of '{query[:50]}...': From a cybersecurity standpoint with expertise in {expertise}, we need to consider threat vectors and mitigation strategies.",
+        "technical": f"Architecturally speaking, '{query[:50]}...' requires consideration of {expertise}. Let's examine the system design implications.",
+        "science": f"Scientific analysis of '{query[:50]}...': Using principles from {expertise}, we can explore the fundamental mechanisms.",
+        "operational": f"From an operational perspective on '{query[:50]}...': Industrial process optimization through {expertise} suggests efficiency improvements.",
+        "philosophical": f"Philosophically examining '{query[:50]}...': AGI and cognitive science perspectives from {expertise} reveal interesting considerations about intelligence.",
+        "financial": f"Business analysis of '{query[:50]}...': Strategic insights from {expertise} indicate market opportunities.",
+        "personal": f"I understand your question about '{query[:50]}...'. Let me help explain this clearly using my expertise in {expertise}.",
+        "scientific": f"Academic research perspective on '{query[:50]}...': Scholarly analysis through {expertise} provides theoretical foundations.",
+        "narrative": f"Media perspective on '{query[:50]}...': Storytelling and communication through {expertise} frames this effectively.",
+        "exploratory": f"Cultural exploration of '{query[:50]}...': Understanding through {expertise} reveals rich heritage and traditions."
+    }
+    
+    return responses.get(domain, f"{name} analyzing: {query[:50]}...")
+
+
+@app.get(f"{API_V1}/health")
+@app.get("/health")  # Also for Docker healthcheck
+async def health_check():
+    return {
+        "status": "healthy",
+        "personas_count": len(PERSONAS),
+        "uptime_seconds": time.time() - START_TIME,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.get(f"{API_V1}/status")
+@app.get("/api/status")
+async def api_status():
+    return {
+        "service": "Clisonix Personas API",
+        "version": "1.0.0",
+        "status": "operational",
+        "personas_count": len(PERSONAS),
+        "uptime_seconds": time.time() - START_TIME,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.get(f"{API_V1}/spec")
+async def api_spec():
+    return app.openapi()
+
+
+@app.get(f"{API_V1}/personas")
+async def list_personas():
+    """List all 14 personas"""
+    return {
+        "total": len(PERSONAS),
+        "personas": [
+            {
+                "id": p["id"],
+                "key": key,
+                "name": p["name"],
+                "domain": p["domain"],
+                "expertise": p["expertise"],
+                "keywords": p["keywords"]
+            }
+            for key, p in PERSONAS.items()
+        ]
+    }
+
+
+@app.get(f"{API_V1}/personas/{{persona_id}}")
+async def get_persona(persona_id: str):
+    """Get specific persona details"""
+    if persona_id in PERSONAS:
+        return PERSONAS[persona_id]
+    
+    # Try by ID (ps_001, etc.)
+    for key, p in PERSONAS.items():
+        if p["id"] == persona_id:
+            return {**p, "key": key}
+    
+    raise HTTPException(status_code=404, detail=f"Persona {persona_id} not found")
+
+
+@app.post(f"{API_V1}/consult")
+async def consult_persona(request: ConsultationRequest):
+    """Consult with a persona"""
+    start = time.time()
+    
+    # Find best persona if not specified
+    if request.persona_id:
+        persona_key = request.persona_id
+        if persona_key not in PERSONAS:
+            # Try by ID
+            persona_key = None
+            for key, p in PERSONAS.items():
+                if p["id"] == request.persona_id:
+                    persona_key = key
+                    break
+            if not persona_key:
+                raise HTTPException(status_code=404, detail=f"Persona {request.persona_id} not found")
+    else:
+        persona_key = find_best_persona(request.query)
+    
+    persona = PERSONAS[persona_key]
+    response_text = generate_response(persona, request.query)
+    processing_time = time.time() - start
+    
+    consultation = {
+        "id": f"cons_{len(consultation_history) + 1:04d}",
+        "query": request.query,
+        "persona_id": persona["id"],
+        "persona_key": persona_key,
+        "response": response_text,
+        "confidence": 0.87,
+        "processing_time": processing_time,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+    consultation_history.append(consultation)
+    
+    logger.info(f"[{persona['name']}] Consultation completed in {processing_time:.3f}s")
+    
+    return {
+        "persona_id": persona["id"],
+        "persona_name": persona["name"],
+        "domain": persona["domain"],
+        "response": response_text,
+        "confidence": 0.87,
+        "processing_time": processing_time
+    }
+
+
+@app.post(f"{API_V1}/consult/multi")
+async def consult_multiple(request: ConsultationRequest):
+    """Get responses from multiple relevant personas"""
+    start = time.time()
+    query_lower = request.query.lower()
+    
+    responses = []
+    for persona_key, persona in PERSONAS.items():
+        # Check if persona is relevant
+        if any(kw in query_lower for kw in persona["keywords"]):
+            response_text = generate_response(persona, request.query)
+            responses.append({
+                "persona_id": persona["id"],
+                "persona_name": persona["name"],
+                "domain": persona["domain"],
+                "response": response_text,
+                "relevance_score": sum(1 for kw in persona["keywords"] if kw in query_lower)
+            })
+    
+    # Sort by relevance
+    responses.sort(key=lambda x: x["relevance_score"], reverse=True)
+    
+    return {
+        "query": request.query,
+        "personas_consulted": len(responses),
+        "processing_time": time.time() - start,
+        "responses": responses[:5]  # Top 5 relevant personas
+    }
+
+
+@app.get(f"{API_V1}/stats")
+async def get_stats():
+    """Get persona service statistics"""
+    return {
+        "total_personas": len(PERSONAS),
+        "total_consultations": len(consultation_history),
+        "domains": list(set(p["domain"] for p in PERSONAS.values())),
+        "uptime_seconds": time.time() - START_TIME,
+        "consultations_by_persona": {
+            p["id"]: sum(1 for c in consultation_history if c.get("persona_id") == p["id"])
+            for p in PERSONAS.values()
+        }
+    }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    logger.info(f"🎭 Starting 14 Personas Service on port {PERSONA_PORT}")
+    logger.info(f"📋 Loaded {len(PERSONAS)} specialist personas")
+    uvicorn.run(app, host="0.0.0.0", port=PERSONA_PORT)
+EOF
+
+EXPOSE 9200
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:9200/health || exit 1
+
+CMD ["python", "personas_service.py"]

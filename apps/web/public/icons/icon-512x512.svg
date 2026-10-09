@@ -1,0 +1,49 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c4b5fd" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#bg)"/>
+  
+  <!-- Glow effect -->
+  <circle cx="256" cy="256" r="180" fill="url(#glow)"/>
+  
+  <!-- Brain icon -->
+  <g transform="translate(256, 256)" fill="#ffffff" filter="url(#shadow)">
+    <!-- Brain shape -->
+    <path d="M-120 0 C-140 -85 -105 -145 -50 -145 C-25 -162 0 -145 0 -110 C0 -145 25 -162 50 -145 C105 -145 140 -85 120 0 C140 70 105 120 50 130 C25 145 -25 145 -50 130 C-105 120 -140 70 -120 0Z" fill="#ffffff"/>
+    
+    <!-- Brain folds - left -->
+    <path d="M-95 -25 Q-50 -45 -15 -25" stroke="#8b5cf6" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M-80 25 Q-40 5 -12 25" stroke="#8b5cf6" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M-70 -55 Q-45 -70 -20 -55" stroke="#8b5cf6" stroke-width="8" fill="none" stroke-linecap="round"/>
+    
+    <!-- Brain folds - right -->
+    <path d="M95 -25 Q50 -45 15 -25" stroke="#8b5cf6" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M80 25 Q40 5 12 25" stroke="#8b5cf6" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M70 -55 Q45 -70 20 -55" stroke="#8b5cf6" stroke-width="8" fill="none" stroke-linecap="round"/>
+    
+    <!-- Center line -->
+    <line x1="0" y1="-105" x2="0" y2="120" stroke="#8b5cf6" stroke-width="6" stroke-dasharray="12,10"/>
+    
+    <!-- Neural pulse / EEG -->
+    <path d="M-70 85 L-35 85 L-18 50 L0 120 L18 35 L35 100 L50 85 L85 85" 
+          stroke="#a78bfa" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Sparkles -->
+  <circle cx="420" cy="100" r="8" fill="#fff" opacity="0.8"/>
+  <circle cx="100" cy="420" r="6" fill="#fff" opacity="0.6"/>
+  <circle cx="380" cy="400" r="5" fill="#fff" opacity="0.5"/>
+</svg>

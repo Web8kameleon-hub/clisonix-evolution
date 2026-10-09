@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  kitchen-api:
+    build:
+      context: ./services/kitchen-api
+      dockerfile: Dockerfile
+    container_name: clisonix-kitchen-api
+    ports:
+      - "8065:8065"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8065/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

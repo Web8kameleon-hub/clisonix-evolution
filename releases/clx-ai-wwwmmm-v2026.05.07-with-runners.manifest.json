@@ -1,0 +1,38 @@
+{
+  "package": "clx-ai-wwwmmm-v2026.05.07-with-runners",
+  "version": "v2026.05.07-with-runners",
+  "generated_at_utc": "2026-05-07T18:09:18.0547428Z",
+  "repository": "Web8kameleon-hub/clisonix.com",
+  "branch": "feature/clx-2min-hotguard",
+  "commit": "3819ca7aaffa375a52abe8063bf5606446119b98",
+  "license": "Apache-2.0",
+  "license_url": "https://www.apache.org/licenses/LICENSE-2.0",
+  "included_paths": [
+    "sdist\\clx-ai\\clx",
+    "sdist\\clx-ai\\README.md",
+    "sdist\\clx-ai\\LICENSE",
+    "sdist\\clx-ai\\BUILD_AND_PUBLISH.md",
+    "sdist\\clx-ai\\DISTRIBUTION.md",
+    "sdist\\clx-ai\\PACKAGE_STRUCTURE.md",
+    "sdist\\clx-ai\\pyproject.toml",
+    "sdist\\clx-ai\\setup.py",
+    "sdist\\clx-ai\\requirements.txt",
+    "sdist\\clx-ai\\MANIFEST.in",
+    "sdist\\clx-ai\\examples",
+    "sdist\\clx-ai\\tests",
+    "sdist\\clx-ai\\validate_package.py",
+    "scripts\\clx_only_gate.ps1",
+    "RELEASE_GATE_CHECKLIST.md",
+    "NO_FAKE_DATA_POLICY.md",
+    "run_clx_hotguard.py",
+    "run_clx_hotguard_cli.ps1",
+    "CLX_AI_INSTALLATION_GUIDE.md",
+    "CLX_AI_COMPLETE_TIMELINE.md",
+    "run_2min_hotguard.ps1"
+  ],
+  "publish_recommendation": {
+    "git_tag": "clx-ai/v2026.05.07-with-runners",
+    "github_release_title": "CLX AI WWWMMM v2026.05.07-with-runners",
+    "github_release_notes": "2-minute hotguard release with atomic persistence and phased ops learning."
+  }
+}

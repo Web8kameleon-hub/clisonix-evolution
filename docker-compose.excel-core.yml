@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  excel-core:
+    build:
+      context: ./excel-core
+      dockerfile: Dockerfile
+    container_name: clisonix-excel-core
+    ports:
+      - "8010:8010"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8010/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    # env_file:
+    #   - .env.excel-core
+    # volumes:
+    #   - ./excel-core:/app

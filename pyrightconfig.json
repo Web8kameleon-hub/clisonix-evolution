@@ -1,0 +1,23 @@
+{
+  "include": [
+    "**/*.py"
+  ],
+  "exclude": [
+    "**/.*",
+    "**/.venv/**",
+    "**/venv/**",
+    "**/env/**",
+    "**/env1/**",
+    "**/env2/**",
+    "**/env3/**",
+    "**/site-packages/**",
+    "**/node_modules/**",
+    "**/__pycache__/**",
+    "**/.mypy_cache/**",
+    "**/.pytest_cache/**",
+    "**/.next/**",
+    "_imports/**",
+    "_profile_repos/**",
+    ".git_ocean_core_full.py"
+  ]
+}

@@ -1,0 +1,35 @@
+# ═══════════════════════════════════════════════════════════════
+# Clisonix API Requirements - FastAPI Services
+# ═══════════════════════════════════════════════════════════════
+# For: backend, alba, albi, jona, alda, liam, blerina, agiem
+
+-r base.txt
+
+# Web Framework
+fastapi>=0.115.6
+uvicorn[standard]>=0.32.1
+python-multipart>=0.0.22
+
+# Database
+sqlalchemy>=2.0.36
+psycopg>=3.2.0
+alembic>=1.14.0
+redis>=5.2.0
+
+# Data Processing
+pandas>=2.2.0
+numpy>=1.26.4
+
+# System
+psutil>=6.0.0
+aiofiles>=24.1.0
+
+# Monitoring
+prometheus-client>=0.21.1
+
+# Payments (optional - comment out if not needed)
+stripe>=12.0.0
+paypalrestsdk>=1.7.1
+
+# Extended Types
+pydantic-extra-types>=2.10.0

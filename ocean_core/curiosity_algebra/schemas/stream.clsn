@@ -1,0 +1,46 @@
+# Clisonix Binary Schema - Stream Frame
+# Version: 1.0
+# Magic: CLSN
+
+name: StreamFrame
+version: 1
+type_id: 0x20
+
+header:
+  - name: magic
+    type: bytes[4]
+    value: "CLSN"
+    description: "Magic header"
+  
+  - name: version
+    type: uint8
+    description: "Protocol version"
+  
+  - name: flags
+    type: uint8
+    description: "Frame flags"
+    bits:
+      0: compressed
+      1: encrypted
+      2: chunked
+      3: error
+      4: last_chunk
+      5-7: reserved
+  
+  - name: stream_id
+    type: uint16
+    description: "Stream identifier"
+  
+  - name: sequence
+    type: uint32
+    description: "Sequence number"
+  
+  - name: payload_len
+    type: uint16
+    description: "Payload length"
+
+fields:
+  - name: payload
+    type: bytes
+    length_field: payload_len
+    description: "Stream payload data"

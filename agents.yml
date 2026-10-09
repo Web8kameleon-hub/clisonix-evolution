@@ -1,0 +1,67 @@
+version: 1
+updated_at: "2026-05-05"
+owner: clisonix-platform
+
+stepstone:
+  - id: preflight
+    description: Validate manifests, openapi syntax, and deploy scripts.
+    required: true
+  - id: quality_gate
+    description: Agent import checks and fake-data policy guard.
+    required: true
+  - id: deploy_hetzner
+    description: Deploy critical or full stack to Hetzner GEX44.
+    required: true
+  - id: cloudflare_sync
+    description: Purge edge cache after successful deploy.
+    required: true
+  - id: ai_agent_gate
+    description: Validate AI agent map and critical health endpoints.
+    required: true
+
+pipelines:
+  production_clean_chain:
+    branch: main
+    target:
+      provider: hetzner
+      host: 178.63.89.121
+      deploy_path: /root/Clisonix-cloud
+    edge:
+      provider: cloudflare
+      domain: clisonix.com
+      purge_mode: api-and-root
+    flow:
+      - preflight
+      - quality_gate
+      - deploy_hetzner
+      - cloudflare_sync
+      - ai_agent_gate
+
+ai_agents:
+  - id: ocean_guardian
+    service: ocean-core
+    role: Guard Curiosity Ocean runtime and response integrity.
+    health_endpoint: http://127.0.0.1:8030/api/v1/status
+    verify_endpoint: http://127.0.0.1:3000/api/ocean
+    critical: true
+
+  - id: billing_guardian
+    service: billing
+    role: Guard subscription, checkout, and billing plan integrity.
+    health_endpoint: http://127.0.0.1:3000/api/billing/plans
+    verify_endpoint: http://127.0.0.1:3000/api/billing/subscription
+    critical: true
+
+  - id: paywall_guardian
+    service: blog-paywall
+    role: Guard premium access control and tier matrix.
+    health_endpoint: http://127.0.0.1:8020/health
+    verify_endpoint: http://127.0.0.1:8020/api/access/check
+    critical: true
+
+  - id: auth_guardian
+    service: user-management-proxy
+    role: Guard auth path stability on register/login/me routes.
+    health_endpoint: http://127.0.0.1:8000/auth/me
+    verify_endpoint: http://127.0.0.1:8000/auth/login
+    critical: true

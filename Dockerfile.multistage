@@ -1,0 +1,19 @@
+FROM node:18-alpine AS builder
+
+WORKDIR /build
+
+COPY package.json .
+
+RUN npm install cbor axios
+
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY nanogridata_gateway.js ./
+
+COPY --from=builder /build/node_modules ./node_modules
+
+EXPOSE 5678 5679
+
+CMD ["node", "nanogridata_gateway.js"]

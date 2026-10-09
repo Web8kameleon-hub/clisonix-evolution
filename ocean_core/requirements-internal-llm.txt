@@ -1,0 +1,25 @@
+# Internal LLM profile (no external API SDKs)
+# Install this on nodes that host model inference/training workloads.
+
+# Core DL stack
+torch>=2.4.0
+transformers>=4.45.0
+accelerate>=1.0.0
+
+# Fine-tuning / optimization
+bitsandbytes>=0.44.0
+peft>=0.13.0
+trl>=0.11.0
+xformers>=0.0.28
+
+# Serving / runtime
+vllm>=0.6.0
+onnxruntime-gpu>=1.20.0
+ray[serve]>=2.37.0
+bentoml>=1.3.0
+
+# Vector/reasoning runtime
+faiss-cpu>=1.8.0
+chromadb>=0.5.0
+pymilvus>=2.4.0
+langgraph>=0.2.0

@@ -1,0 +1,8 @@
+FROM mingc/android-build-box:latest
+
+WORKDIR /workspace
+
+# Gradle user home inside mounted workspace for reproducible cache location.
+ENV GRADLE_USER_HOME=/workspace/.gradle
+
+CMD ["bash"]

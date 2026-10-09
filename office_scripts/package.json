@@ -1,0 +1,13 @@
+{
+  "name": "office_scripts",
+  "version": "1.0.0",
+  "description": "| Kolona | Index | Emri | Përshkrimi |\r |--------|-------|------|------------|\r | A | 0 | Row_ID | Numri i rreshtit |\r | B | 1 | Folder | Folder në Postman |\r | C | 2 | Method | GET, POST, PUT, DELETE |\r | **D** | **3** | **Endpoint** | URL e API (lexohet) |\r | E | 4 | Përshkrimi | Emri i request-it |\r | **F** | **5** | **Status_Testimi** | ✅/❌ (shkruhet) |\r | G | 6 | Autentikimi | OAuth2, JWT, API Key |\r | H | 7 | Dokumentacioni | ✅ Full Docs |\r | I | 8 | Monitorimi | Prometheus, Grafana |\r | J | 9 | Siguria | SSL/TLS, Pen Test |\r | K | 10 | Versioni_API | v1.0, v2.0 |\r | L | 11 | Data_Publikimit | DD/MM/YYYY |\r | M | 12 | Owner | Ekipi përgjegjës |\r | N | 13 | Status_Publikimi | Ready, Pending |\r | O | 14 | Komente | Shënime |\r | P | 15 | cURL | Command cURL |\r | Q | 16 | Python_Snippet | Kod Python |\r | **R** | **17** | **Response_Sample** | (shkruhet) |\r | **S** | **18** | **Last_Check** | Timestamp (shkruhet) |",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

@@ -1,0 +1,22 @@
+FROM python:3.13
+
+WORKDIR /app
+
+# Copy ocean-core module
+COPY ocean-core/ /app/ocean-core/
+
+# Install dependencies
+RUN pip install --no-cache-dir fastapi uvicorn
+
+# Set working directory to ocean-core
+WORKDIR /app/ocean-core
+
+# Expose port 8030
+EXPOSE 8030
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8030/health')" || exit 1
+
+# Run FastAPI app with minimal personas
+CMD ["python", "-m", "uvicorn", "ocean_api_minimal:app", "--host", "0.0.0.0", "--port", "8030"]

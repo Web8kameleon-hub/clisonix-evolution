@@ -1,0 +1,29 @@
+FROM python:3.13-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy all Ocean Core modules
+COPY ocean_core_full.py prompts.py identity_loader.py ./
+COPY mega_layer_engine.py real_answer_engine.py service_registry.py ./
+COPY knowledge_layer.py albanian_dictionary.py laboratories.py ./
+COPY translation_node.py cell_registry.py external_apis.py ./
+COPY response_orchestrator_v5.py alphabet_layers.py ./
+COPY requirements.txt ./
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+ENV PORT=8030 \
+    PYTHONUNBUFFERED=1 \
+    ENVIRONMENT=production
+
+EXPOSE 8030
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+    CMD curl -f http://localhost:8030/health || exit 1
+
+CMD ["python", "-c", "from ocean_core_full import app; import uvicorn; uvicorn.run(app, host='0.0.0.0', port=8030)"]

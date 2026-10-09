@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "seo:optimize": "ts-node scripts/seo-optimizer.ts",
+    "seo:analyze": "node scripts/seo-analyzer.js",
+    "seo:check": "npm run seo:analyze && npm run seo:optimize",
+    "seo:monitor": "watch 'npm run seo:check' src app",
+    "seo:report": "node scripts/generate-seo-report.js"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "node-fetch": "^3.3.0",
+    "watch": "^1.0.2"
+  }
+}

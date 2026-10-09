@@ -1,0 +1,19 @@
+[
+  {
+    "_id": "env_clisonix_prod_public",
+    "name": "Clisonix Production (Public)",
+    "default": true,
+    "data": [
+      { "name": "base_url", "value": "https://api.clisonix.com" },
+      { "name": "billing_url", "value": "https://billing.clisonix.com" },
+      { "name": "ocean_url", "value": "https://ocean.clisonix.com" },
+      { "name": "intelligence_url", "value": "https://intelligence.clisonix.com" },
+      { "name": "users_url", "value": "https://users.clisonix.com" },
+      { "name": "excel_url", "value": "https://excel.clisonix.com" },
+      { "name": "kitchen_url", "value": "https://kitchen.clisonix.com" },
+      { "name": "auth_token", "value": "" },
+      { "name": "api_key", "value": "" },
+      { "name": "user_id", "value": "" }
+    ]
+  }
+]

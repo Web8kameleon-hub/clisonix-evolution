@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  cairo-archeology-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-cairo-archeology
+    environment:
+      LAB_ID: "Cairo_Archeology"
+      LAB_TYPE: "Archeology"
+      LAB_NAME: "Cairo Archeology Lab"
+      LAB_FUNCTION: "Archeological Research & Preservation"
+      API_KEY: "sekret-real"
+    ports:
+      - "8122:8100"
+    volumes:
+      - ../data/cairo-archeology:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

@@ -1,0 +1,22 @@
+# Dockerfile.cognitive - Cognitive Processing Service
+FROM python:3.13
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements/base.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir uvicorn fastapi pydantic
+
+COPY ocean-core/cognitive_api.py ./
+COPY ocean-core/cognitive_signature_engine.py ./
+
+EXPOSE 8010
+
+CMD ["python", "-m", "uvicorn", "cognitive_api:app", "--host", "0.0.0.0", "--port", "8010"]

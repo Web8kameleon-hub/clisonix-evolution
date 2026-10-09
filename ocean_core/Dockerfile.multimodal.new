@@ -1,0 +1,61 @@
+# Ocean Core v2 - Multimodal Engine
+# Specialized Dockerfile for Vision/Audio/Document/Reasoning processing
+
+FROM python:3.13-slim
+
+LABEL maintainer="Clisonix Cloud"
+LABEL description="Ocean Core v2 Multimodal - Vision/Audio/Document Processing"
+LABEL version="2.0.0"
+
+# System dependencies for multimedia processing
+RUN apt-get update && apt-get install -y \
+    curl \
+    ffmpeg \
+    libsndfile1 \
+    sox \
+    imagemagick \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy Ocean Core modules and dependencies
+COPY ocean_core_full.py .
+COPY ocean_multimodal.py .
+COPY run_ocean_multimodal.py .
+COPY requirements.txt .
+
+# Copy all supporting engines and modules
+COPY *.py ./
+
+# Install Python dependencies with production optimizations
+RUN pip install --no-cache-dir \
+    uvicorn[standard]==0.27.0 \
+    fastapi==0.108.0 \
+    pydantic==2.5.3 \
+    httpx==0.25.2 \
+    aiofiles==23.2.1 \
+    python-multipart==0.0.6 \
+    python-dotenv==1.0.0 \
+    requests==2.31.0 \
+    redis==5.0.1 \
+    pillow==10.1.0 \
+    numpy==1.26.3 \
+    && pip install --no-cache-dir -r requirements.txt
+
+# Environment configuration
+ENV PYTHONUNBUFFERED=1
+ENV OCEAN_MODE=multimodal
+ENV OCEAN_PORT=8033
+ENV LOG_LEVEL=INFO
+
+# Health check endpoint
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:${OCEAN_PORT}/health || exit 1
+
+# Expose port
+EXPOSE 8033
+
+# Entry point with proper signal handling
+CMD ["python", "run_ocean_multimodal.py"]

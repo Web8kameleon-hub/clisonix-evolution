@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clisonix Blog - AI, EEG Analytics & Industrial Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #0a0a1a;
+            --bg-secondary: #1a1a2e;
+            --bg-card: #16213e;
+            --accent: #00d4ff;
+            --accent-purple: #7c3aed;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --border: #2d3748;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent), var(--accent-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .search-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 16px;
+            width: 300px;
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+        .stats-badge {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .stats-badge span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, #1a0a2e 50%, var(--bg-primary) 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--accent), var(--accent-purple), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Categories Navigation */
+        .categories-nav {
+            background: var(--bg-secondary);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 70px;
+            z-index: 99;
+        }
+        .categories-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .category-btn {
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-secondary);
+        }
+        .category-btn:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+        .category-btn.active {
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+        .category-btn .count {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 6px;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        .article-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .article-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.15);
+        }
+        .article-category {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        .cat-eeg { background: rgba(0, 212, 255, 0.15); color: var(--accent); }
+        .cat-audio { background: rgba(124, 58, 237, 0.15); color: var(--accent-purple); }
+        .cat-ai { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+        .cat-compliance { background: rgba(245, 158, 11, 0.15); color: var(--accent-orange); }
+        .cat-medical { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
+        .cat-industrial { background: rgba(139, 92, 246, 0.15); color: #8b5cf6; }
+        .cat-default { background: rgba(107, 114, 128, 0.15); color: #6b7280; }
+        
+        .article-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .article-title:hover {
+            color: var(--accent);
+        }
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .article-date {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .article-author {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+        .no-results-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 2rem 0;
+        }
+        .page-btn {
+            padding: 10px 16px;
+            border-radius: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .page-btn:hover, .page-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            .search-box {
+                width: 100%;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            padding: 3rem;
+        }
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🧠</div>
+                <span class="logo-text">Clisonix Blog</span>
+            </div>
+            <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search articles...">
+            <div class="stats-badge">
+                <span id="totalCount">0</span> Articles
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>AI, EEG Analytics & Industrial Intelligence</h1>
+        <p>Deep scientific research, cutting-edge technology insights, and regulatory compliance guides</p>
+    </section>
+
+    <!-- Categories Navigation -->
+    <nav class="categories-nav">
+        <div class="categories-container" id="categoriesNav">
+            <button class="category-btn active" data-category="all">
+                📚 All <span class="count" id="countAll">0</span>
+            </button>
+            <button class="category-btn" data-category="eeg">
+                🧠 EEG & Neuroscience <span class="count" id="countEeg">0</span>
+            </button>
+            <button class="category-btn" data-category="audio">
+                🔊 Audio Analytics <span class="count" id="countAudio">0</span>
+            </button>
+            <button class="category-btn" data-category="ai">
+                🤖 AI & ML <span class="count" id="countAi">0</span>
+            </button>
+            <button class="category-btn" data-category="medical">
+                🏥 Medical Research <span class="count" id="countMedical">0</span>
+            </button>
+            <button class="category-btn" data-category="compliance">
+                📋 Compliance <span class="count" id="countCompliance">0</span>
+            </button>
+            <button class="category-btn" data-category="industrial">
+                🏭 Industrial <span class="count" id="countIndustrial">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+        </div>
+        <div class="articles-grid" id="articlesGrid"></div>
+        <div class="no-results" id="noResults" style="display: none;">
+            <div class="no-results-icon">🔍</div>
+            <h3>No articles found</h3>
+            <p>Try different keywords or browse categories</p>
+        </div>
+        <div class="pagination" id="pagination"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 <a href="https://clisonix.com">Clisonix GmbH</a> - AI-Powered Research Platform</p>
+        <p style="margin-top: 8px; font-size: 12px;">
+            Generated by DR. ALBANA & Blerina • <a href="https://clisonix.com/modules">Platform</a> • <a href="https://clisonix.com/developers">API</a>
+        </p>
+    </footer>
+
+    <script>
+        // Article data will be injected here
+        const ARTICLES = __ARTICLES_DATA__;
+
+        // Category classification
+        function getCategory(article) {
+            const title = article.title.toLowerCase();
+            const filename = article.filename.toLowerCase();
+            
+            if (title.includes('eeg') || title.includes('brain') || title.includes('neural') || title.includes('bci')) return 'eeg';
+            if (title.includes('audio') || title.includes('speech') || title.includes('sound') || title.includes('voice')) return 'audio';
+            if (title.includes('cardiac') || title.includes('hepat') || title.includes('hormon') || title.includes('obesity') || title.includes('medical') || title.includes('clinical')) return 'medical';
+            if (title.includes('fda') || title.includes('gdpr') || title.includes('hipaa') || title.includes('compliance') || title.includes('regulatory') || title.includes('mdr') || title.includes('iso')) return 'compliance';
+            if (title.includes('industrial') || title.includes('manufacturing') || title.includes('factory') || title.includes('edge')) return 'industrial';
+            if (title.includes('ai') || title.includes('machine learning') || title.includes('deep learning') || title.includes('ml') || title.includes('model')) return 'ai';
+            return 'ai'; // default
+        }
+
+        // Get category CSS class
+        function getCatClass(cat) {
+            const classes = {
+                'eeg': 'cat-eeg',
+                'audio': 'cat-audio',
+                'ai': 'cat-ai',
+                'medical': 'cat-medical',
+                'compliance': 'cat-compliance',
+                'industrial': 'cat-industrial'
+            };
+            return classes[cat] || 'cat-default';
+        }
+
+        // Get category label
+        function getCatLabel(cat) {
+            const labels = {
+                'eeg': '🧠 EEG',
+                'audio': '🔊 Audio',
+                'ai': '🤖 AI',
+                'medical': '🏥 Medical',
+                'compliance': '📋 Compliance',
+                'industrial': '🏭 Industrial'
+            };
+            return labels[cat] || '📄 General';
+        }
+
+        // State
+        let currentCategory = 'all';
+        let currentSearch = '';
+        let currentPage = 1;
+        const ITEMS_PER_PAGE = 24;
+
+        // Process articles
+        const processedArticles = ARTICLES.map(a => ({
+            ...a,
+            category: getCategory(a)
+        }));
+
+        // Count by category
+        function updateCounts() {
+            const counts = { all: processedArticles.length };
+            processedArticles.forEach(a => {
+                counts[a.category] = (counts[a.category] || 0) + 1;
+            });
+            document.getElementById('totalCount').textContent = counts.all;
+            document.getElementById('countAll').textContent = counts.all;
+            document.getElementById('countEeg').textContent = counts.eeg || 0;
+            document.getElementById('countAudio').textContent = counts.audio || 0;
+            document.getElementById('countAi').textContent = counts.ai || 0;
+            document.getElementById('countMedical').textContent = counts.medical || 0;
+            document.getElementById('countCompliance').textContent = counts.compliance || 0;
+            document.getElementById('countIndustrial').textContent = counts.industrial || 0;
+        }
+
+        // Filter articles
+        function getFilteredArticles() {
+            return processedArticles.filter(a => {
+                const matchesCategory = currentCategory === 'all' || a.category === currentCategory;
+                const matchesSearch = !currentSearch || 
+                    a.title.toLowerCase().includes(currentSearch.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+        }
+
+        // Render articles
+        function renderArticles() {
+            const grid = document.getElementById('articlesGrid');
+            const noResults = document.getElementById('noResults');
+            const loading = document.getElementById('loading');
+            
+            loading.style.display = 'none';
+            
+            const filtered = getFilteredArticles();
+            const start = (currentPage - 1) * ITEMS_PER_PAGE;
+            const end = start + ITEMS_PER_PAGE;
+            const pageArticles = filtered.slice(start, end);
+            
+            if (pageArticles.length === 0) {
+                grid.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            
+            grid.innerHTML = pageArticles.map(article => `
+                <div class="article-card">
+                    <span class="article-category ${getCatClass(article.category)}">
+                        ${getCatLabel(article.category)}
+                    </span>
+                    <a href="static/${article.filename}" class="article-title">
+                        ${article.title}
+                    </a>
+                    <div class="article-meta">
+                        <span class="article-date">📅 ${article.date}</span>
+                        <span class="article-author">✍️ ${article.author || 'Clisonix'}</span>
+                    </div>
+                </div>
+            `).join('');
+            
+            renderPagination(filtered.length);
+        }
+
+        // Render pagination
+        function renderPagination(totalItems) {
+            const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+            const pagination = document.getElementById('pagination');
+            
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+            
+            let html = '';
+            if (currentPage > 1) {
+                html += `<button class="page-btn" onclick="goToPage(${currentPage - 1})">← Prev</button>`;
+            }
+            
+            for (let i = 1; i <= Math.min(totalPages, 7); i++) {
+                html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+            }
+            
+            if (totalPages > 7) {
+                html += `<span style="padding: 10px;">...</span>`;
+                html += `<button class="page-btn ${totalPages === currentPage ? 'active' : ''}" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+            }
+            
+            if (currentPage < totalPages) {
+                html += `<button class="page-btn" onclick="goToPage(${currentPage + 1})">Next →</button>`;
+            }
+            
+            pagination.innerHTML = html;
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            renderArticles();
+            window.scrollTo({ top: 400, behavior: 'smooth' });
+        }
+
+        // Event listeners
+        document.getElementById('searchBox').addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            currentPage = 1;
+            renderArticles();
+        });
+
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.dataset.category;
+                currentPage = 1;
+                renderArticles();
+            });
+        });
+
+        // Initialize
+        updateCounts();
+        renderArticles();
+    </script>
+</body>
+</html>

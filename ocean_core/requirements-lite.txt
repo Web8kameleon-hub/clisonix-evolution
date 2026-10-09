@@ -1,0 +1,8 @@
+# Ocean Core Lite - Minimal Requirements
+fastapi>=0.115.0
+uvicorn>=0.32.0
+httpx[http2]>=0.27.0
+h2>=4.1.0
+pydantic>=2.9.0
+faster-whisper>=1.1.0
+elasticsearch>=8.0.0,<9.0.0

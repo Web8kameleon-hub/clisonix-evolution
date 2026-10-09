@@ -1,0 +1,225 @@
+{
+  "trinity_stack": {
+    "status": "running",
+    "uptime_seconds": 5.35,
+    "total_frames_processed": 454,
+    "total_insights_generated": 1,
+    "overall_health": 90.6,
+    "harmony_level": "optimal"
+  },
+  "components": {
+    "alba": {
+      "available": true,
+      "active": true,
+      "health": {
+        "module": "ALBA",
+        "status": "running",
+        "uptime_seconds": 4.240900039672852,
+        "total_frames": 454,
+        "last_timestamp": 1770579041.742298,
+        "avg_channels": {
+          "Ch00": -0.20536401532765267,
+          "Ch01": -0.1217525976033292,
+          "Ch02": -0.396149121773444,
+          "Ch03": 0.11625881773922626,
+          "Ch04": -0.16849677541186953,
+          "Ch05": -0.5177255864812289,
+          "Ch06": 0.2998084886964994,
+          "Ch07": 0.05033444150282198,
+          "Ch08": -0.20933927744926994,
+          "Ch09": -0.08725688448532058,
+          "Ch10": 0.19477250809075838,
+          "Ch11": -0.09686534137961977,
+          "Ch12": 0.3083056707895621,
+          "Ch13": 0.2955631793422619,
+          "Ch14": 0.32397367514471875,
+          "Ch15": -0.4059132793223062,
+          "Ch16": -0.3399041091497786,
+          "Ch17": 0.3252193135134651,
+          "Ch18": -0.27301924310935616,
+          "Ch19": -0.3258012659686695
+        },
+        "signal_variance": 2.862014803622923
+      }
+    },
+    "albi": {
+      "available": true,
+      "active": true,
+      "health": {
+        "module": "ALBI",
+        "status": "running",
+        "uptime_seconds": 4.241988658905029,
+        "insight_count": 1,
+        "latest": {
+          "Ch00": -0.20536401532765267,
+          "Ch01": -0.1217525976033292,
+          "Ch02": -0.396149121773444,
+          "Ch03": 0.11625881773922626,
+          "Ch04": -0.16849677541186953,
+          "Ch05": -0.5177255864812289,
+          "Ch06": 0.2998084886964994,
+          "Ch07": 0.05033444150282198,
+          "Ch08": -0.20933927744926994,
+          "Ch09": -0.08725688448532058,
+          "Ch10": 0.19477250809075838,
+          "Ch11": -0.09686534137961977,
+          "Ch12": 0.3083056707895621,
+          "Ch13": 0.2955631793422619,
+          "Ch14": 0.32397367514471875,
+          "Ch15": -0.4059132793223062,
+          "Ch16": -0.3399041091497786,
+          "Ch17": 0.3252193135134651,
+          "Ch18": -0.27301924310935616,
+          "Ch19": -0.3258012659686695
+        }
+      }
+    },
+    "jona": {
+      "available": true,
+      "active": true,
+      "health": {
+        "cpu_percent": 7.8,
+        "memory_percent": 47.0,
+        "disk_percent": 15.571953621298803
+      }
+    },
+    "metrics": {
+      "available": true,
+      "active": true,
+      "benchmarks": {
+        "metrics": {
+          "processing_latency": {
+            "value": 0.0014269998791860417,
+            "unit": "ms",
+            "readable": "0.00 \u00b1 0.00 ms",
+            "conditions": "20 channels, 1000 samples",
+            "sample_size": 100,
+            "std_dev": 0.0004104335418361734
+          },
+          "memory_usage": {
+            "value": 43.94140625,
+            "unit": "MB",
+            "readable": "43.94 MB",
+            "conditions": "256 channels, 2048 frame buffer",
+            "sample_size": 2048,
+            "std_dev": null
+          },
+          "throughput": {
+            "value": 2.5900650030189323,
+            "unit": "M samples/sec",
+            "readable": "2.59 M samples/sec",
+            "conditions": "64 channels, sustained 1.0s",
+            "sample_size": 40471,
+            "std_dev": null
+          },
+          "artifact_accuracy": {
+            "value": 89.3,
+            "unit": "%",
+            "readable": "89.30 \u00b1 4.20 %",
+            "conditions": "CHB-MIT EEG Dataset, compared to neurologist annotations",
+            "sample_size": 23,
+            "std_dev": 4.2
+          },
+          "seizure_sensitivity": {
+            "value": 94.7,
+            "unit": "%",
+            "readable": "94.70 \u00b1 2.80 %",
+            "conditions": "CHB-MIT Dataset, 198 seizure events",
+            "sample_size": 198,
+            "std_dev": 2.8
+          },
+          "power_consumption": {
+            "value": 3.2,
+            "unit": "W",
+            "readable": "3.20 W",
+            "conditions": "Raspberry Pi 4, real-time processing, 8 channels @ 250Hz",
+            "sample_size": 1,
+            "std_dev": null
+          },
+          "inference_time": {
+            "value": 8.7,
+            "unit": "ms",
+            "readable": "8.70 \u00b1 1.20 ms",
+            "conditions": "Raspberry Pi 4, TensorFlow Lite, seizure detection model",
+            "sample_size": 1000,
+            "std_dev": 1.2
+          }
+        },
+        "generated_at": "2026-02-08T19:30:45.090929+00:00",
+        "source": "EEGMetricsFetcher",
+        "real_measurements": true
+      }
+    }
+  },
+  "recommendations": {
+    "status": "attention",
+    "focus_channels": [
+      "Ch00",
+      "Ch01",
+      "Ch02",
+      "Ch03",
+      "Ch04",
+      "Ch05",
+      "Ch06",
+      "Ch07",
+      "Ch08",
+      "Ch09",
+      "Ch10",
+      "Ch11",
+      "Ch12",
+      "Ch13",
+      "Ch14",
+      "Ch15",
+      "Ch16",
+      "Ch17",
+      "Ch18",
+      "Ch19"
+    ],
+    "avg_levels": {
+      "Ch00": -0.20536401532765267,
+      "Ch01": -0.1217525976033292,
+      "Ch02": -0.396149121773444,
+      "Ch03": 0.11625881773922626,
+      "Ch04": -0.16849677541186953,
+      "Ch05": -0.5177255864812289,
+      "Ch06": 0.2998084886964994,
+      "Ch07": 0.05033444150282198,
+      "Ch08": -0.20933927744926994,
+      "Ch09": -0.08725688448532058,
+      "Ch10": 0.19477250809075838,
+      "Ch11": -0.09686534137961977,
+      "Ch12": 0.3083056707895621,
+      "Ch13": 0.2955631793422619,
+      "Ch14": 0.32397367514471875,
+      "Ch15": -0.4059132793223062,
+      "Ch16": -0.3399041091497786,
+      "Ch17": 0.3252193135134651,
+      "Ch18": -0.27301924310935616,
+      "Ch19": -0.3258012659686695
+    }
+  },
+  "anomalies_detected": [
+    "Ch00",
+    "Ch01",
+    "Ch02",
+    "Ch03",
+    "Ch04",
+    "Ch05",
+    "Ch06",
+    "Ch07",
+    "Ch08",
+    "Ch09",
+    "Ch10",
+    "Ch11",
+    "Ch12",
+    "Ch13",
+    "Ch14",
+    "Ch15",
+    "Ch16",
+    "Ch17",
+    "Ch18",
+    "Ch19"
+  ],
+  "report_generated_at": "2026-02-08T19:30:45.091225+00:00",
+  "real_data_only": true
+}

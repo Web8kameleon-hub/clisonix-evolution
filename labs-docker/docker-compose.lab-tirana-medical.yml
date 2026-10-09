@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  tirana-medical-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-tirana-medical
+    environment:
+      LAB_ID: "Tirana_Medical"
+      LAB_TYPE: "Medical"
+      LAB_NAME: "Tirana Medical Lab"
+      LAB_FUNCTION: "Medical Research & Bioscience"
+      API_KEY: "sekret-real"
+    ports:
+      - "8102:8100"
+    volumes:
+      - ../data/tirana-medical:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

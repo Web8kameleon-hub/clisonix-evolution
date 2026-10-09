@@ -1,0 +1,11 @@
+Curiosity Ocean Conversation Export
+Timestamp: 2026-05-01T14:36:45.849Z
+Language: en
+
+Transcript:
+
+1. USER
+test
+
+2. ASSISTANT
+response

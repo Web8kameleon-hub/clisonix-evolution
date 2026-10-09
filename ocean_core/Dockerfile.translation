@@ -1,0 +1,26 @@
+# Clisonix Translation Node - Nanogrid Pulse Architecture
+# Ultra-lightweight translation microservice
+
+FROM python:3.13-slim
+
+WORKDIR /app
+
+# Install minimal dependencies
+RUN pip install --no-cache-dir \
+    fastapi \
+    uvicorn \
+    pydantic \
+    deep-translator
+
+# Copy only translation node
+COPY translation_node.py /app/
+
+# Expose port
+EXPOSE 8036
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8036/health', timeout=5).read()" || exit 1
+
+# Run
+CMD ["python", "translation_node.py"]

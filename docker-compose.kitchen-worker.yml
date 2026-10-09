@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  kitchen-worker:
+    build:
+      context: ./services/kitchen-worker
+      dockerfile: Dockerfile
+    container_name: clisonix-kitchen-worker
+    ports:
+      - "3100:3100"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

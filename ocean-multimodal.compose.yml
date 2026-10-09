@@ -1,0 +1,34 @@
+# Ocean Multimodal Service Configuration
+# ==========================================
+# Unified Vision, Audio, Document, and Reasoning pipelines
+
+ocean-multimodal:
+  build:
+    context: ./ocean-core
+    dockerfile: Dockerfile.multimodal
+  container_name: clisonix-ocean-multimodal
+  ports:
+    - "8031:8031"
+  environment:
+    PORT: 8031
+    OLLAMA_HOST: http://clisonix-06-ollama:11434
+    VISION_MODEL: llava:latest
+    AUDIO_MODEL: whisper:latest
+    REASONING_MODEL: llama3.1:8b
+    PYTHONUNBUFFERED: 1
+  depends_on:
+    - ollama
+  networks:
+    - clisonix
+  healthcheck:
+    test: ["CMD", "curl", "-f", "http://localhost:8031/health"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+    start_period: 5s
+  restart: always
+  logging:
+    driver: "json-file"
+    options:
+      max-size: "10m"
+      max-file: "3"

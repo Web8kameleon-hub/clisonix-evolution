@@ -1,0 +1,45 @@
+# Clisonix Binary Schema - Chat Response
+# Version: 1.0
+# Magic: CLSN
+
+name: ChatResponse
+version: 1
+type_id: 0x02
+
+fields:
+  - name: type
+    type: uint8
+    offset: 0
+    description: "Message type (0x02 = chat)"
+  
+  - name: intent
+    type: uint8
+    offset: 1
+    description: "Intent type (0=unknown, 1=math, 2=greeting, 3=time, 4=date, 5=status)"
+  
+  - name: confidence
+    type: float
+    offset: 2
+    description: "Intent confidence (0.0-1.0)"
+  
+  - name: response_len
+    type: uint16
+    offset: 6
+    description: "Length of response text"
+  
+  - name: response
+    type: string
+    offset: 8
+    length_field: response_len
+    description: "Chat response text"
+  
+  - name: data_len
+    type: uint16
+    offset: dynamic
+    description: "Length of additional data"
+  
+  - name: data
+    type: bytes
+    offset: dynamic
+    length_field: data_len
+    description: "Additional binary data"

@@ -1,0 +1,22 @@
+# Dockerfile.saas-api - SaaS API Gateway Service
+FROM python:3.13
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements ./requirements
+RUN pip install --no-cache-dir -r requirements/api.txt
+
+COPY saas_api*.py ./
+COPY api_*.py ./
+COPY billing_plans.py ./
+
+EXPOSE 8056
+
+CMD ["python", "saas_api.py"]

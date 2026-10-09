@@ -1,0 +1,3312 @@
+{
+  "generated_at": "2026-07-13T07:07:44Z",
+  "summary": {
+    "npm": {
+      "records": 243,
+      "unique": 129
+    },
+    "pypi": {
+      "records": 413,
+      "unique": 121
+    },
+    "cargo": {
+      "records": 40,
+      "unique": 24
+    },
+    "api_routes_discovered": 500,
+    "protocols_discovered": 2,
+    "recursive_scan": {
+      "files_scanned": 3479,
+      "directories_scanned": 733,
+      "max_depth": 12
+    }
+  },
+  "top_download_links": {
+    "npm": [
+      {
+        "name": "@aws-sdk/client-s3",
+        "version": "^3.893.0",
+        "url": "https://www.npmjs.com/package/@aws-sdk/client-s3",
+        "install": "npm i @aws-sdk/client-s3"
+      },
+      {
+        "name": "@aws-sdk/s3-request-presigner",
+        "version": "^3.893.0",
+        "url": "https://www.npmjs.com/package/@aws-sdk/s3-request-presigner",
+        "install": "npm i @aws-sdk/s3-request-presigner"
+      },
+      {
+        "name": "@clisonix/shared",
+        "version": "1.0.0",
+        "url": "https://www.npmjs.com/package/@clisonix/shared",
+        "install": "npm i @clisonix/shared"
+      },
+      {
+        "name": "@eslint/eslintrc",
+        "version": "^3.3.3",
+        "url": "https://www.npmjs.com/package/@eslint/eslintrc",
+        "install": "npm i @eslint/eslintrc"
+      },
+      {
+        "name": "@eslint/js",
+        "version": "^9.0.0",
+        "url": "https://www.npmjs.com/package/@eslint/js",
+        "install": "npm i @eslint/js"
+      },
+      {
+        "name": "@fastify/cors",
+        "version": "^11.2.0",
+        "url": "https://www.npmjs.com/package/@fastify/cors",
+        "install": "npm i @fastify/cors"
+      },
+      {
+        "name": "@fastify/rate-limit",
+        "version": "^10.0.0",
+        "url": "https://www.npmjs.com/package/@fastify/rate-limit",
+        "install": "npm i @fastify/rate-limit"
+      },
+      {
+        "name": "@fontsource/noto-color-emoji",
+        "version": "^5.2.12",
+        "url": "https://www.npmjs.com/package/@fontsource/noto-color-emoji",
+        "install": "npm i @fontsource/noto-color-emoji"
+      },
+      {
+        "name": "@jest/globals",
+        "version": "^30.3.0",
+        "url": "https://www.npmjs.com/package/@jest/globals",
+        "install": "npm i @jest/globals"
+      },
+      {
+        "name": "@opennextjs/cloudflare",
+        "version": "^1.19.8",
+        "url": "https://www.npmjs.com/package/@opennextjs/cloudflare",
+        "install": "npm i @opennextjs/cloudflare"
+      },
+      {
+        "name": "@radix-ui/react-avatar",
+        "version": "^1.1.11",
+        "url": "https://www.npmjs.com/package/@radix-ui/react-avatar",
+        "install": "npm i @radix-ui/react-avatar"
+      },
+      {
+        "name": "@radix-ui/react-dialog",
+        "version": "^1.1.15",
+        "url": "https://www.npmjs.com/package/@radix-ui/react-dialog",
+        "install": "npm i @radix-ui/react-dialog"
+      },
+      {
+        "name": "@radix-ui/react-dropdown-menu",
+        "version": "^2.1.16",
+        "url": "https://www.npmjs.com/package/@radix-ui/react-dropdown-menu",
+        "install": "npm i @radix-ui/react-dropdown-menu"
+      },
+      {
+        "name": "@radix-ui/react-scroll-area",
+        "version": "^1.2.10",
+        "url": "https://www.npmjs.com/package/@radix-ui/react-scroll-area",
+        "install": "npm i @radix-ui/react-scroll-area"
+      },
+      {
+        "name": "@radix-ui/react-select",
+        "version": "^2.2.6",
+        "url": "https://www.npmjs.com/package/@radix-ui/react-select",
+        "install": "npm i @radix-ui/react-select"
+      },
+      {
+        "name": "@radix-ui/react-separator",
+        "version": "^1.1.8",
+        "url": "https://www.npmjs.com/package/@radix-ui/react-separator",
+        "install": "npm i @radix-ui/react-separator"
+      },
+      {
+        "name": "@radix-ui/react-slot",
+        "version": "^1.2.3",
+        "url": "https://www.npmjs.com/package/@radix-ui/react-slot",
+        "install": "npm i @radix-ui/react-slot"
+      },
+      {
+        "name": "@radix-ui/react-tabs",
+        "version": "^1.1.13",
+        "url": "https://www.npmjs.com/package/@radix-ui/react-tabs",
+        "install": "npm i @radix-ui/react-tabs"
+      },
+      {
+        "name": "@radix-ui/react-tooltip",
+        "version": "^1.2.8",
+        "url": "https://www.npmjs.com/package/@radix-ui/react-tooltip",
+        "install": "npm i @radix-ui/react-tooltip"
+      },
+      {
+        "name": "@tailwindcss/aspect-ratio",
+        "version": "^0.4.2",
+        "url": "https://www.npmjs.com/package/@tailwindcss/aspect-ratio",
+        "install": "npm i @tailwindcss/aspect-ratio"
+      }
+    ],
+    "pypi": [
+      {
+        "name": "Clisonix-cloud",
+        "version": "[api,data,ocean,payments,observability]",
+        "url": "https://pypi.org/project/Clisonix-cloud/",
+        "install": "pip install Clisonix-cloud"
+      },
+      {
+        "name": "Pillow",
+        "version": ">=11.1.0",
+        "url": "https://pypi.org/project/Pillow/",
+        "install": "pip install Pillow"
+      },
+      {
+        "name": "PyJWT",
+        "version": "[crypto]>=2.10.1",
+        "url": "https://pypi.org/project/PyJWT/",
+        "install": "pip install PyJWT"
+      },
+      {
+        "name": "SpeechRecognition",
+        "version": ">=3.14.0",
+        "url": "https://pypi.org/project/SpeechRecognition/",
+        "install": "pip install SpeechRecognition"
+      },
+      {
+        "name": "XlsxWriter",
+        "version": ">=3.2.9",
+        "url": "https://pypi.org/project/XlsxWriter/",
+        "install": "pip install XlsxWriter"
+      },
+      {
+        "name": "accelerate",
+        "version": ">=1.0.0",
+        "url": "https://pypi.org/project/accelerate/",
+        "install": "pip install accelerate"
+      },
+      {
+        "name": "aiofiles",
+        "version": ">=24.1.0",
+        "url": "https://pypi.org/project/aiofiles/",
+        "install": "pip install aiofiles"
+      },
+      {
+        "name": "aiohttp",
+        "version": ">=3.11.0",
+        "url": "https://pypi.org/project/aiohttp/",
+        "install": "pip install aiohttp"
+      },
+      {
+        "name": "alembic",
+        "version": ">=1.14.0",
+        "url": "https://pypi.org/project/alembic/",
+        "install": "pip install alembic"
+      },
+      {
+        "name": "anyio",
+        "version": ">=4.0.0",
+        "url": "https://pypi.org/project/anyio/",
+        "install": "pip install anyio"
+      },
+      {
+        "name": "apscheduler",
+        "version": ">=3.10.4",
+        "url": "https://pypi.org/project/apscheduler/",
+        "install": "pip install apscheduler"
+      },
+      {
+        "name": "asyncpg",
+        "version": ">=0.29.0",
+        "url": "https://pypi.org/project/asyncpg/",
+        "install": "pip install asyncpg"
+      },
+      {
+        "name": "beautifulsoup4",
+        "version": "==4.13.5",
+        "url": "https://pypi.org/project/beautifulsoup4/",
+        "install": "pip install beautifulsoup4"
+      },
+      {
+        "name": "bentoml",
+        "version": ">=1.3.0",
+        "url": "https://pypi.org/project/bentoml/",
+        "install": "pip install bentoml"
+      },
+      {
+        "name": "biosppy",
+        "version": ">=2.2.2",
+        "url": "https://pypi.org/project/biosppy/",
+        "install": "pip install biosppy"
+      },
+      {
+        "name": "bitsandbytes",
+        "version": ">=0.44.0",
+        "url": "https://pypi.org/project/bitsandbytes/",
+        "install": "pip install bitsandbytes"
+      },
+      {
+        "name": "black",
+        "version": ">=24.10.0",
+        "url": "https://pypi.org/project/black/",
+        "install": "pip install black"
+      },
+      {
+        "name": "boto3",
+        "version": ">=1.34.0",
+        "url": "https://pypi.org/project/boto3/",
+        "install": "pip install boto3"
+      },
+      {
+        "name": "braindecode",
+        "version": ">=0.8.1",
+        "url": "https://pypi.org/project/braindecode/",
+        "install": "pip install braindecode"
+      },
+      {
+        "name": "cbor2",
+        "version": ">=5.6.5",
+        "url": "https://pypi.org/project/cbor2/",
+        "install": "pip install cbor2"
+      }
+    ],
+    "cargo": [
+      {
+        "name": "aes-gcm",
+        "version": "0.9",
+        "url": "https://crates.io/crates/aes-gcm",
+        "install": "cargo add aes-gcm"
+      },
+      {
+        "name": "algebra",
+        "version": "unspecified",
+        "url": "https://crates.io/crates/algebra",
+        "install": "cargo add algebra"
+      },
+      {
+        "name": "axum",
+        "version": "0.7",
+        "url": "https://crates.io/crates/axum",
+        "install": "cargo add axum"
+      },
+      {
+        "name": "base64",
+        "version": "0.21",
+        "url": "https://crates.io/crates/base64",
+        "install": "cargo add base64"
+      },
+      {
+        "name": "clap",
+        "version": "4.5",
+        "url": "https://crates.io/crates/clap",
+        "install": "cargo add clap"
+      },
+      {
+        "name": "criterion",
+        "version": "0.5",
+        "url": "https://crates.io/crates/criterion",
+        "install": "cargo add criterion"
+      },
+      {
+        "name": "ed25519-dalek",
+        "version": "2",
+        "url": "https://crates.io/crates/ed25519-dalek",
+        "install": "cargo add ed25519-dalek"
+      },
+      {
+        "name": "futures-util",
+        "version": "0.3",
+        "url": "https://crates.io/crates/futures-util",
+        "install": "cargo add futures-util"
+      },
+      {
+        "name": "lru",
+        "version": "0.12",
+        "url": "https://crates.io/crates/lru",
+        "install": "cargo add lru"
+      },
+      {
+        "name": "protocol",
+        "version": "unspecified",
+        "url": "https://crates.io/crates/protocol",
+        "install": "cargo add protocol"
+      },
+      {
+        "name": "quinn",
+        "version": "0.10",
+        "url": "https://crates.io/crates/quinn",
+        "install": "cargo add quinn"
+      },
+      {
+        "name": "rand",
+        "version": "0.8",
+        "url": "https://crates.io/crates/rand",
+        "install": "cargo add rand"
+      },
+      {
+        "name": "rcgen",
+        "version": "0.11",
+        "url": "https://crates.io/crates/rcgen",
+        "install": "cargo add rcgen"
+      },
+      {
+        "name": "reqwest",
+        "version": "0.12",
+        "url": "https://crates.io/crates/reqwest",
+        "install": "cargo add reqwest"
+      },
+      {
+        "name": "rmp-serde",
+        "version": "1.1",
+        "url": "https://crates.io/crates/rmp-serde",
+        "install": "cargo add rmp-serde"
+      },
+      {
+        "name": "rustls",
+        "version": "0.21",
+        "url": "https://crates.io/crates/rustls",
+        "install": "cargo add rustls"
+      },
+      {
+        "name": "security",
+        "version": "unspecified",
+        "url": "https://crates.io/crates/security",
+        "install": "cargo add security"
+      },
+      {
+        "name": "serde",
+        "version": "1.0",
+        "url": "https://crates.io/crates/serde",
+        "install": "cargo add serde"
+      },
+      {
+        "name": "serde_cbor",
+        "version": "0.11",
+        "url": "https://crates.io/crates/serde_cbor",
+        "install": "cargo add serde_cbor"
+      },
+      {
+        "name": "serde_json",
+        "version": "1.0",
+        "url": "https://crates.io/crates/serde_json",
+        "install": "cargo add serde_json"
+      }
+    ]
+  },
+  "api_inventory": [
+    {
+      "method": "GET",
+      "route": "/",
+      "file": "ocean_nanogrid.py",
+      "line": "1417"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "ocean_nanogrid.py",
+      "line": "1422"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/personality/contract",
+      "file": "ocean_nanogrid.py",
+      "line": "1427"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/chat",
+      "file": "ocean_nanogrid.py",
+      "line": "1452"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/chat/stream",
+      "file": "ocean_nanogrid.py",
+      "line": "1578"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/query",
+      "file": "ocean_nanogrid.py",
+      "line": "1606"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/chat/history",
+      "file": "ocean_nanogrid.py",
+      "line": "1615"
+    },
+    {
+      "method": "DELETE",
+      "route": "/api/v1/chat/history",
+      "file": "ocean_nanogrid.py",
+      "line": "1627"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/algebra/op",
+      "file": "ocean_nanogrid.py",
+      "line": "1643"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/algebra/convert",
+      "file": "ocean_nanogrid.py",
+      "line": "1658"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/labs",
+      "file": "ocean_nanogrid.py",
+      "line": "1684"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/labs/{lab_id}",
+      "file": "ocean_nanogrid.py",
+      "line": "1695"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/labs/{lab_id}/query",
+      "file": "ocean_nanogrid.py",
+      "line": "1709"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/browse",
+      "file": "ocean_nanogrid.py",
+      "line": "1726"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/search",
+      "file": "ocean_nanogrid.py",
+      "line": "1746"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/chat/browse",
+      "file": "ocean_nanogrid.py",
+      "line": "1766"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/rate-limit",
+      "file": "ocean_nanogrid.py",
+      "line": "1822"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/status",
+      "file": "ocean_nanogrid.py",
+      "line": "1844"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/now",
+      "file": "ocean_nanogrid.py",
+      "line": "1853"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/weather/{city}",
+      "file": "ocean_nanogrid.py",
+      "line": "1866"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/wiki/{query}",
+      "file": "ocean_nanogrid.py",
+      "line": "1873"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/crypto/{symbol}",
+      "file": "ocean_nanogrid.py",
+      "line": "1884"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/github/{owner}/{repo}",
+      "file": "ocean_nanogrid.py",
+      "line": "1897"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/arxiv/{query}",
+      "file": "ocean_nanogrid.py",
+      "line": "1918"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/earthquake",
+      "file": "ocean_nanogrid.py",
+      "line": "1938"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/sources",
+      "file": "ocean_nanogrid.py",
+      "line": "1960"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/vision/analyze",
+      "file": "ocean_nanogrid.py",
+      "line": "2011"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/audio/transcribe",
+      "file": "ocean_nanogrid.py",
+      "line": "2100"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/document/analyze",
+      "file": "ocean_nanogrid.py",
+      "line": "2203"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/document/write",
+      "file": "ocean_nanogrid.py",
+      "line": "2295"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/multimodal/status",
+      "file": "ocean_nanogrid.py",
+      "line": "2382"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "alphabet_layers_api.py",
+      "line": "49"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/alphabet/stats",
+      "file": "alphabet_layers_api.py",
+      "line": "67"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/alphabet/consciousness",
+      "file": "alphabet_layers_api.py",
+      "line": "73"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/alphabet/process",
+      "file": "alphabet_layers_api.py",
+      "line": "79"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/curiosity/algebra/op",
+      "file": "alphabet_layers_api.py",
+      "line": "85"
+    },
+    {
+      "method": "GET",
+      "route": "/",
+      "file": "shopping_therapy_service.py",
+      "line": "78"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "shopping_therapy_service.py",
+      "line": "98"
+    },
+    {
+      "method": "GET",
+      "route": "/status",
+      "file": "shopping_therapy_service.py",
+      "line": "103"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/catalogue",
+      "file": "shopping_therapy_service.py",
+      "line": "112"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/search",
+      "file": "shopping_therapy_service.py",
+      "line": "121"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/stream",
+      "file": "shopping_therapy_service.py",
+      "line": "131"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/register",
+      "file": "shopping_therapy_service.py",
+      "line": "153"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/read",
+      "file": "shopping_therapy_service.py",
+      "line": "168"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/ocean-chat",
+      "file": "shopping_therapy_service.py",
+      "line": "181"
+    },
+    {
+      "method": "GET",
+      "route": "/",
+      "file": "asi_api_server.py",
+      "line": "76"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "asi_api_server.py",
+      "line": "96"
+    },
+    {
+      "method": "GET",
+      "route": "/status",
+      "file": "asi_api_server.py",
+      "line": "106"
+    },
+    {
+      "method": "GET",
+      "route": "/api/status",
+      "file": "asi_api_server.py",
+      "line": "107"
+    },
+    {
+      "method": "GET",
+      "route": "/metrics",
+      "file": "asi_api_server.py",
+      "line": "126"
+    },
+    {
+      "method": "GET",
+      "route": "/nodes",
+      "file": "asi_api_server.py",
+      "line": "130"
+    },
+    {
+      "method": "GET",
+      "route": "/logs",
+      "file": "asi_api_server.py",
+      "line": "134"
+    },
+    {
+      "method": "GET",
+      "route": "/system",
+      "file": "asi_api_server.py",
+      "line": "143"
+    },
+    {
+      "method": "POST",
+      "route": "/mesh/register",
+      "file": "asi_api_server.py",
+      "line": "151"
+    },
+    {
+      "method": "POST",
+      "route": "/mesh/send",
+      "file": "asi_api_server.py",
+      "line": "162"
+    },
+    {
+      "method": "GET",
+      "route": "/asi/joint-status",
+      "file": "asi_api_server.py",
+      "line": "173"
+    },
+    {
+      "method": "POST",
+      "route": "/api/nodes/register",
+      "file": "balancer_nodes_3334.py",
+      "line": "44"
+    },
+    {
+      "method": "GET",
+      "route": "/api/nodes",
+      "file": "balancer_nodes_3334.py",
+      "line": "77"
+    },
+    {
+      "method": "GET",
+      "route": "/api/nodes/{nodeId}",
+      "file": "balancer_nodes_3334.py",
+      "line": "90"
+    },
+    {
+      "method": "PUT",
+      "route": "/api/nodes/{nodeId}/status",
+      "file": "balancer_nodes_3334.py",
+      "line": "105"
+    },
+    {
+      "method": "GET",
+      "route": "/api/load-balance",
+      "file": "balancer_nodes_3334.py",
+      "line": "128"
+    },
+    {
+      "method": "POST",
+      "route": "/api/external-nodes/register",
+      "file": "balancer_nodes_3334.py",
+      "line": "149"
+    },
+    {
+      "method": "GET",
+      "route": "/api/external-nodes",
+      "file": "balancer_nodes_3334.py",
+      "line": "181"
+    },
+    {
+      "method": "POST",
+      "route": "/api/route-to-external",
+      "file": "balancer_nodes_3334.py",
+      "line": "194"
+    },
+    {
+      "method": "POST",
+      "route": "/api/offline-nodes/register",
+      "file": "balancer_nodes_3334.py",
+      "line": "227"
+    },
+    {
+      "method": "GET",
+      "route": "/api/offline-nodes",
+      "file": "balancer_nodes_3334.py",
+      "line": "244"
+    },
+    {
+      "method": "POST",
+      "route": "/api/route-to-offline",
+      "file": "balancer_nodes_3334.py",
+      "line": "257"
+    },
+    {
+      "method": "GET",
+      "route": "/api/mesh-status",
+      "file": "balancer_nodes_3334.py",
+      "line": "278"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "balancer_nodes_3334.py",
+      "line": "295"
+    },
+    {
+      "method": "GET",
+      "route": "/info",
+      "file": "balancer_nodes_3334.py",
+      "line": "313"
+    },
+    {
+      "method": "POST",
+      "route": "/api/vendor-nodes/register",
+      "file": "balancer_nodes_3334.py",
+      "line": "348"
+    },
+    {
+      "method": "GET",
+      "route": "/api/vendor-nodes",
+      "file": "balancer_nodes_3334.py",
+      "line": "380"
+    },
+    {
+      "method": "POST",
+      "route": "/api/vendor-nodes/heartbeat",
+      "file": "balancer_nodes_3334.py",
+      "line": "395"
+    },
+    {
+      "method": "POST",
+      "route": "/api/vendor-nodes/complete",
+      "file": "balancer_nodes_3334.py",
+      "line": "413"
+    },
+    {
+      "method": "GET",
+      "route": "/api/vendor-nodes/best",
+      "file": "balancer_nodes_3334.py",
+      "line": "426"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "jona_neural_api.py",
+      "line": "477"
+    },
+    {
+      "method": "GET",
+      "route": "/status",
+      "file": "jona_neural_api.py",
+      "line": "487"
+    },
+    {
+      "method": "POST",
+      "route": "/session/start",
+      "file": "jona_neural_api.py",
+      "line": "504"
+    },
+    {
+      "method": "POST",
+      "route": "/session/{session_id}/stop",
+      "file": "jona_neural_api.py",
+      "line": "531"
+    },
+    {
+      "method": "GET",
+      "route": "/session/{session_id}/metrics",
+      "file": "jona_neural_api.py",
+      "line": "564"
+    },
+    {
+      "method": "GET",
+      "route": "/presets",
+      "file": "jona_neural_api.py",
+      "line": "577"
+    },
+    {
+      "method": "GET",
+      "route": "/presets/{preset_id}",
+      "file": "jona_neural_api.py",
+      "line": "582"
+    },
+    {
+      "method": "GET",
+      "route": "/settings/default",
+      "file": "jona_neural_api.py",
+      "line": "590"
+    },
+    {
+      "method": "GET",
+      "route": "/channels",
+      "file": "jona_neural_api.py",
+      "line": "613"
+    },
+    {
+      "method": "POST",
+      "route": "/session/{session_id}/export",
+      "file": "jona_neural_api.py",
+      "line": "621"
+    },
+    {
+      "method": "GET",
+      "route": "/synthesis/preview",
+      "file": "jona_neural_api.py",
+      "line": "668"
+    },
+    {
+      "method": "GET",
+      "route": "/audio/list",
+      "file": "jona_neural_api.py",
+      "line": "712"
+    },
+    {
+      "method": "DELETE",
+      "route": "/audio/{file_id}",
+      "file": "jona_neural_api.py",
+      "line": "723"
+    },
+    {
+      "method": "GET",
+      "route": "/files/{filename}",
+      "file": "jona_neural_api.py",
+      "line": "763"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "clx_agent.py",
+      "line": "332"
+    },
+    {
+      "method": "GET",
+      "route": "/status",
+      "file": "clx_agent.py",
+      "line": "343"
+    },
+    {
+      "method": "POST",
+      "route": "/chat",
+      "file": "clx_agent.py",
+      "line": "370"
+    },
+    {
+      "method": "GET",
+      "route": "/memory",
+      "file": "clx_agent.py",
+      "line": "395"
+    },
+    {
+      "method": "POST",
+      "route": "/observe",
+      "file": "clx_agent.py",
+      "line": "412"
+    },
+    {
+      "method": "POST",
+      "route": "/learn/start",
+      "file": "clx_agent.py",
+      "line": "422"
+    },
+    {
+      "method": "POST",
+      "route": "/learn/stop",
+      "file": "clx_agent.py",
+      "line": "435"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "albi_user_api.py",
+      "line": "199"
+    },
+    {
+      "method": "POST",
+      "route": "/session/start",
+      "file": "albi_user_api.py",
+      "line": "212"
+    },
+    {
+      "method": "POST",
+      "route": "/session/{session_id}/stop",
+      "file": "albi_user_api.py",
+      "line": "246"
+    },
+    {
+      "method": "GET",
+      "route": "/session/{session_id}/metrics",
+      "file": "albi_user_api.py",
+      "line": "266"
+    },
+    {
+      "method": "POST",
+      "route": "/session/{session_id}/event",
+      "file": "albi_user_api.py",
+      "line": "314"
+    },
+    {
+      "method": "POST",
+      "route": "/session/{session_id}/stream",
+      "file": "albi_user_api.py",
+      "line": "344"
+    },
+    {
+      "method": "GET",
+      "route": "/session/{session_id}/export",
+      "file": "albi_user_api.py",
+      "line": "419"
+    },
+    {
+      "method": "GET",
+      "route": "/sessions",
+      "file": "albi_user_api.py",
+      "line": "527"
+    },
+    {
+      "method": "GET",
+      "route": "/channels",
+      "file": "albi_user_api.py",
+      "line": "556"
+    },
+    {
+      "method": "GET",
+      "route": "/brainwave-bands",
+      "file": "albi_user_api.py",
+      "line": "570"
+    },
+    {
+      "method": "POST",
+      "route": "/auth/users",
+      "file": "neurosonix_industrial_api.py",
+      "line": "211"
+    },
+    {
+      "method": "POST",
+      "route": "/auth/api-keys",
+      "file": "neurosonix_industrial_api.py",
+      "line": "227"
+    },
+    {
+      "method": "GET",
+      "route": "/auth/api-keys",
+      "file": "neurosonix_industrial_api.py",
+      "line": "250"
+    },
+    {
+      "method": "DELETE",
+      "route": "/auth/api-keys/{key_id}",
+      "file": "neurosonix_industrial_api.py",
+      "line": "259"
+    },
+    {
+      "method": "POST",
+      "route": "/api/ask",
+      "file": "neurosonix_industrial_api.py",
+      "line": "306"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "neurosonix_industrial_api.py",
+      "line": "328"
+    },
+    {
+      "method": "GET",
+      "route": "/status",
+      "file": "neurosonix_industrial_api.py",
+      "line": "337"
+    },
+    {
+      "method": "POST",
+      "route": "/api/uploads/eeg/process",
+      "file": "neurosonix_industrial_api.py",
+      "line": "352"
+    },
+    {
+      "method": "POST",
+      "route": "/api/uploads/audio/process",
+      "file": "neurosonix_industrial_api.py",
+      "line": "383"
+    },
+    {
+      "method": "POST",
+      "route": "/billing/paypal/order",
+      "file": "neurosonix_industrial_api.py",
+      "line": "424"
+    },
+    {
+      "method": "POST",
+      "route": "/billing/paypal/capture/{order_id}",
+      "file": "neurosonix_industrial_api.py",
+      "line": "455"
+    },
+    {
+      "method": "POST",
+      "route": "/billing/stripe/payment-intent",
+      "file": "neurosonix_industrial_api.py",
+      "line": "476"
+    },
+    {
+      "method": "POST",
+      "route": "/billing/sepa/initiate",
+      "file": "neurosonix_industrial_api.py",
+      "line": "498"
+    },
+    {
+      "method": "GET",
+      "route": "/db/ping",
+      "file": "neurosonix_industrial_api.py",
+      "line": "509"
+    },
+    {
+      "method": "GET",
+      "route": "/redis/ping",
+      "file": "neurosonix_industrial_api.py",
+      "line": "519"
+    },
+    {
+      "method": "GET",
+      "route": "/api/alba/status",
+      "file": "neurosonix_industrial_api.py",
+      "line": "532"
+    },
+    {
+      "method": "GET",
+      "route": "/api/alba/alba/cbor",
+      "file": "neurosonix_industrial_api.py",
+      "line": "544"
+    },
+    {
+      "method": "POST",
+      "route": "/api/alba/alba/cbor",
+      "file": "neurosonix_industrial_api.py",
+      "line": "555"
+    },
+    {
+      "method": "POST",
+      "route": "/api/alba/streams/start",
+      "file": "neurosonix_industrial_api.py",
+      "line": "565"
+    },
+    {
+      "method": "POST",
+      "route": "/api/alba/streams/{stream_id}/stop",
+      "file": "neurosonix_industrial_api.py",
+      "line": "588"
+    },
+    {
+      "method": "GET",
+      "route": "/api/alba/streams",
+      "file": "neurosonix_industrial_api.py",
+      "line": "608"
+    },
+    {
+      "method": "GET",
+      "route": "/api/alba/streams/{stream_id}/data",
+      "file": "neurosonix_industrial_api.py",
+      "line": "617"
+    },
+    {
+      "method": "POST",
+      "route": "/api/alba/config",
+      "file": "neurosonix_industrial_api.py",
+      "line": "633"
+    },
+    {
+      "method": "GET",
+      "route": "/api/alba/metrics",
+      "file": "neurosonix_industrial_api.py",
+      "line": "643"
+    },
+    {
+      "method": "GET",
+      "route": "/api/alba/health",
+      "file": "neurosonix_industrial_api.py",
+      "line": "655"
+    },
+    {
+      "method": "GET",
+      "route": "/api/data-sources",
+      "file": "neurosonix_industrial_api.py",
+      "line": "669"
+    },
+    {
+      "method": "GET",
+      "route": "/api/activity-log",
+      "file": "neurosonix_industrial_api.py",
+      "line": "702"
+    },
+    {
+      "method": "POST",
+      "route": "/api/start-bulk-collection",
+      "file": "neurosonix_industrial_api.py",
+      "line": "722"
+    },
+    {
+      "method": "GET",
+      "route": "/api/performance-metrics",
+      "file": "neurosonix_industrial_api.py",
+      "line": "733"
+    },
+    {
+      "method": "GET",
+      "route": "/api/system-status",
+      "file": "neurosonix_industrial_api.py",
+      "line": "748"
+    },
+    {
+      "method": "GET",
+      "route": "/api/storage-alert",
+      "file": "neurosonix_industrial_api.py",
+      "line": "764"
+    },
+    {
+      "method": "GET",
+      "route": "/api/audio-spectrometer-error",
+      "file": "neurosonix_industrial_api.py",
+      "line": "778"
+    },
+    {
+      "method": "GET",
+      "route": "/asi/status",
+      "file": "neurosonix_industrial_api.py",
+      "line": "791"
+    },
+    {
+      "method": "GET",
+      "route": "/asi/health",
+      "file": "neurosonix_industrial_api.py",
+      "line": "808"
+    },
+    {
+      "method": "POST",
+      "route": "/asi/execute",
+      "file": "neurosonix_industrial_api.py",
+      "line": "820"
+    },
+    {
+      "method": "POST",
+      "route": "/alignments/evaluate",
+      "file": "neurosonix_industrial_api.py",
+      "line": "848"
+    },
+    {
+      "method": "POST",
+      "route": "/alignments/create-adaptive",
+      "file": "neurosonix_industrial_api.py",
+      "line": "861"
+    },
+    {
+      "method": "GET",
+      "route": "/alignments/dashboard",
+      "file": "neurosonix_industrial_api.py",
+      "line": "880"
+    },
+    {
+      "method": "GET",
+      "route": "/favicon.ico",
+      "file": "neurosonix_industrial_api.py",
+      "line": "894"
+    },
+    {
+      "method": "GET",
+      "route": "/",
+      "file": "neurosonix_industrial_api.py",
+      "line": "906"
+    },
+    {
+      "method": "POST",
+      "route": "/data/documents",
+      "file": "balancer_data_3337.py",
+      "line": "38"
+    },
+    {
+      "method": "GET",
+      "route": "/data/documents/{docId}",
+      "file": "balancer_data_3337.py",
+      "line": "67"
+    },
+    {
+      "method": "GET",
+      "route": "/data/collections/{collection}",
+      "file": "balancer_data_3337.py",
+      "line": "80"
+    },
+    {
+      "method": "PUT",
+      "route": "/data/documents/{docId}",
+      "file": "balancer_data_3337.py",
+      "line": "100"
+    },
+    {
+      "method": "DELETE",
+      "route": "/data/documents/{docId}",
+      "file": "balancer_data_3337.py",
+      "line": "119"
+    },
+    {
+      "method": "POST",
+      "route": "/data/metrics",
+      "file": "balancer_data_3337.py",
+      "line": "137"
+    },
+    {
+      "method": "GET",
+      "route": "/data/metrics/{nodeId}",
+      "file": "balancer_data_3337.py",
+      "line": "159"
+    },
+    {
+      "method": "POST",
+      "route": "/data/config",
+      "file": "balancer_data_3337.py",
+      "line": "176"
+    },
+    {
+      "method": "GET",
+      "route": "/data/config/{configId}",
+      "file": "balancer_data_3337.py",
+      "line": "195"
+    },
+    {
+      "method": "GET",
+      "route": "/data/collections",
+      "file": "balancer_data_3337.py",
+      "line": "209"
+    },
+    {
+      "method": "GET",
+      "route": "/data/stats",
+      "file": "balancer_data_3337.py",
+      "line": "221"
+    },
+    {
+      "method": "POST",
+      "route": "/data/export",
+      "file": "balancer_data_3337.py",
+      "line": "236"
+    },
+    {
+      "method": "POST",
+      "route": "/data/import",
+      "file": "balancer_data_3337.py",
+      "line": "258"
+    },
+    {
+      "method": "DELETE",
+      "route": "/data/collections/{collection}",
+      "file": "balancer_data_3337.py",
+      "line": "286"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "balancer_data_3337.py",
+      "line": "304"
+    },
+    {
+      "method": "GET",
+      "route": "/info",
+      "file": "balancer_data_3337.py",
+      "line": "317"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "saas_services_orchestrator.py",
+      "line": "66"
+    },
+    {
+      "method": "GET",
+      "route": "/status",
+      "file": "saas_services_orchestrator.py",
+      "line": "78"
+    },
+    {
+      "method": "POST",
+      "route": "/agents/register",
+      "file": "saas_services_orchestrator.py",
+      "line": "130"
+    },
+    {
+      "method": "POST",
+      "route": "/agents/{agent_id}/heartbeat",
+      "file": "saas_services_orchestrator.py",
+      "line": "169"
+    },
+    {
+      "method": "POST",
+      "route": "/agents/{agent_id}/scale",
+      "file": "saas_services_orchestrator.py",
+      "line": "183"
+    },
+    {
+      "method": "GET",
+      "route": "/agents",
+      "file": "saas_services_orchestrator.py",
+      "line": "216"
+    },
+    {
+      "method": "GET",
+      "route": "/agents/{agent_id}",
+      "file": "saas_services_orchestrator.py",
+      "line": "224"
+    },
+    {
+      "method": "POST",
+      "route": "/api-docs/generate",
+      "file": "saas_services_orchestrator.py",
+      "line": "236"
+    },
+    {
+      "method": "GET",
+      "route": "/api-docs",
+      "file": "saas_services_orchestrator.py",
+      "line": "318"
+    },
+    {
+      "method": "GET",
+      "route": "/api-docs/{agent_id}",
+      "file": "saas_services_orchestrator.py",
+      "line": "326"
+    },
+    {
+      "method": "GET",
+      "route": "/api-docs/{agent_id}/openapi.json",
+      "file": "saas_services_orchestrator.py",
+      "line": "334"
+    },
+    {
+      "method": "POST",
+      "route": "/api/models/register",
+      "file": "ai_model_versioning.py",
+      "line": "719"
+    },
+    {
+      "method": "GET",
+      "route": "/api/models/{model_id}/versions",
+      "file": "ai_model_versioning.py",
+      "line": "724"
+    },
+    {
+      "method": "GET",
+      "route": "/api/models/{model_id}/production",
+      "file": "ai_model_versioning.py",
+      "line": "729"
+    },
+    {
+      "method": "POST",
+      "route": "/api/models/{model_id}/{version}/promote",
+      "file": "ai_model_versioning.py",
+      "line": "736"
+    },
+    {
+      "method": "POST",
+      "route": "/metrics/upload",
+      "file": "mesh_hq_receiver.py",
+      "line": "53"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "mesh_hq_receiver.py",
+      "line": "79"
+    },
+    {
+      "method": "GET",
+      "route": "/metrics/latest",
+      "file": "mesh_hq_receiver.py",
+      "line": "96"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "agiem_telemetry_service.py",
+      "line": "66"
+    },
+    {
+      "method": "GET",
+      "route": "/status",
+      "file": "agiem_telemetry_service.py",
+      "line": "81"
+    },
+    {
+      "method": "GET",
+      "route": "/nodes",
+      "file": "agiem_telemetry_service.py",
+      "line": "100"
+    },
+    {
+      "method": "GET",
+      "route": "/nodes/{node_id}",
+      "file": "agiem_telemetry_service.py",
+      "line": "110"
+    },
+    {
+      "method": "PUT",
+      "route": "/nodes/{node_id}/status",
+      "file": "agiem_telemetry_service.py",
+      "line": "123"
+    },
+    {
+      "method": "GET",
+      "route": "/stages",
+      "file": "agiem_telemetry_service.py",
+      "line": "134"
+    },
+    {
+      "method": "GET",
+      "route": "/stages/{stage_name}",
+      "file": "agiem_telemetry_service.py",
+      "line": "143"
+    },
+    {
+      "method": "POST",
+      "route": "/stages/{stage_name}/metrics",
+      "file": "agiem_telemetry_service.py",
+      "line": "161"
+    },
+    {
+      "method": "GET",
+      "route": "/metrics",
+      "file": "agiem_telemetry_service.py",
+      "line": "173"
+    },
+    {
+      "method": "GET",
+      "route": "/logs",
+      "file": "agiem_telemetry_service.py",
+      "line": "186"
+    },
+    {
+      "method": "POST",
+      "route": "/logs/event",
+      "file": "agiem_telemetry_service.py",
+      "line": "197"
+    },
+    {
+      "method": "GET",
+      "route": "/cycles",
+      "file": "agiem_telemetry_service.py",
+      "line": "209"
+    },
+    {
+      "method": "GET",
+      "route": "/multi-tenant",
+      "file": "agiem_telemetry_service.py",
+      "line": "220"
+    },
+    {
+      "method": "POST",
+      "route": "/register",
+      "file": "agiem_telemetry_service.py",
+      "line": "229"
+    },
+    {
+      "method": "POST",
+      "route": "/report",
+      "file": "agiem_telemetry_service.py",
+      "line": "239"
+    },
+    {
+      "method": "GET",
+      "route": "/info",
+      "file": "agiem_telemetry_service.py",
+      "line": "250"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "clx_i_service.py",
+      "line": "215"
+    },
+    {
+      "method": "GET",
+      "route": "/metrics",
+      "file": "clx_i_service.py",
+      "line": "239"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/icons/analyze",
+      "file": "clx_i_service.py",
+      "line": "244"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "185"
+    },
+    {
+      "method": "GET",
+      "route": "/status",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "198"
+    },
+    {
+      "method": "GET",
+      "route": "/registry",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "232"
+    },
+    {
+      "method": "POST",
+      "route": "/agents/register",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "249"
+    },
+    {
+      "method": "POST",
+      "route": "/agents/{agent_id}/heartbeat",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "288"
+    },
+    {
+      "method": "POST",
+      "route": "/agents/{agent_id}/scale",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "302"
+    },
+    {
+      "method": "GET",
+      "route": "/agents",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "334"
+    },
+    {
+      "method": "GET",
+      "route": "/agents/{agent_id}",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "342"
+    },
+    {
+      "method": "POST",
+      "route": "/api-docs/generate",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "354"
+    },
+    {
+      "method": "GET",
+      "route": "/api-docs",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "426"
+    },
+    {
+      "method": "GET",
+      "route": "/api-docs/{agent_id}",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "434"
+    },
+    {
+      "method": "GET",
+      "route": "/api-docs/{agent_id}/openapi.json",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "442"
+    },
+    {
+      "method": "POST",
+      "route": "/communicate",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "454"
+    },
+    {
+      "method": "GET",
+      "route": "/communication/log",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "486"
+    },
+    {
+      "method": "POST",
+      "route": "/services/{service}/execute",
+      "file": "saas_services_orchestrator_v3.py",
+      "line": "524"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "nanogridata_gateway.ts",
+      "line": "353"
+    },
+    {
+      "method": "GET",
+      "route": "/stats",
+      "file": "nanogridata_gateway.ts",
+      "line": "357"
+    },
+    {
+      "method": "GET",
+      "route": "/metrics",
+      "file": "nanogridata_gateway.ts",
+      "line": "361"
+    },
+    {
+      "method": "POST",
+      "route": "/analyze",
+      "file": "albi_service_6680.py",
+      "line": "65"
+    },
+    {
+      "method": "GET",
+      "route": "/insights",
+      "file": "albi_service_6680.py",
+      "line": "129"
+    },
+    {
+      "method": "GET",
+      "route": "/anomalies",
+      "file": "albi_service_6680.py",
+      "line": "143"
+    },
+    {
+      "method": "POST",
+      "route": "/api/analytics/agent",
+      "file": "albi_service_6680.py",
+      "line": "157"
+    },
+    {
+      "method": "GET",
+      "route": "/metrics",
+      "file": "albi_service_6680.py",
+      "line": "197"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "albi_service_6680.py",
+      "line": "211"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/status",
+      "file": "albi_service_6680.py",
+      "line": "231"
+    },
+    {
+      "method": "GET",
+      "route": "/api/status",
+      "file": "albi_service_6680.py",
+      "line": "232"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/spec",
+      "file": "albi_service_6680.py",
+      "line": "244"
+    },
+    {
+      "method": "POST",
+      "route": "/execute",
+      "file": "albi_service_6680.py",
+      "line": "250"
+    },
+    {
+      "method": "POST",
+      "route": "/receive",
+      "file": "albi_service_6680.py",
+      "line": "270"
+    },
+    {
+      "method": "GET",
+      "route": "/",
+      "file": "health_monitor_service.py",
+      "line": "111"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "health_monitor_service.py",
+      "line": "121"
+    },
+    {
+      "method": "GET",
+      "route": "/status",
+      "file": "health_monitor_service.py",
+      "line": "131"
+    },
+    {
+      "method": "GET",
+      "route": "/status/{service_name}",
+      "file": "health_monitor_service.py",
+      "line": "148"
+    },
+    {
+      "method": "GET",
+      "route": "/",
+      "file": "saas_api.py",
+      "line": "102"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "saas_api.py",
+      "line": "119"
+    },
+    {
+      "method": "GET",
+      "route": "/plans",
+      "file": "saas_api.py",
+      "line": "129"
+    },
+    {
+      "method": "POST",
+      "route": "/subscriptions",
+      "file": "saas_api.py",
+      "line": "134"
+    },
+    {
+      "method": "GET",
+      "route": "/subscriptions",
+      "file": "saas_api.py",
+      "line": "145"
+    },
+    {
+      "method": "GET",
+      "route": "/subscriptions/{tenant_id}",
+      "file": "saas_api.py",
+      "line": "151"
+    },
+    {
+      "method": "POST",
+      "route": "/usage/check",
+      "file": "saas_api.py",
+      "line": "161"
+    },
+    {
+      "method": "POST",
+      "route": "/features/check",
+      "file": "saas_api.py",
+      "line": "174"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "personas_api.py",
+      "line": "16"
+    },
+    {
+      "method": "GET",
+      "route": "/",
+      "file": "personas_api.py",
+      "line": "21"
+    },
+    {
+      "method": "GET",
+      "route": "/personas",
+      "file": "personas_api.py",
+      "line": "26"
+    },
+    {
+      "method": "GET",
+      "route": "/status",
+      "file": "master.py",
+      "line": "25"
+    },
+    {
+      "method": "POST",
+      "route": "/log",
+      "file": "master.py",
+      "line": "38"
+    },
+    {
+      "method": "POST",
+      "route": "/control",
+      "file": "master.py",
+      "line": "46"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "master.py",
+      "line": "61"
+    },
+    {
+      "method": "GET",
+      "route": "/industrial/data",
+      "file": "master.py",
+      "line": "67"
+    },
+    {
+      "method": "GET",
+      "route": "/dashboard",
+      "file": "master.py",
+      "line": "79"
+    },
+    {
+      "method": "POST",
+      "route": "/synthesize",
+      "file": "jona_service_7777.py",
+      "line": "66"
+    },
+    {
+      "method": "GET",
+      "route": "/synthesize/{synthesis_id}",
+      "file": "jona_service_7777.py",
+      "line": "102"
+    },
+    {
+      "method": "GET",
+      "route": "/synthesize/{synthesis_id}/audio",
+      "file": "jona_service_7777.py",
+      "line": "110"
+    },
+    {
+      "method": "POST",
+      "route": "/coordinate",
+      "file": "jona_service_7777.py",
+      "line": "167"
+    },
+    {
+      "method": "GET",
+      "route": "/queue",
+      "file": "jona_service_7777.py",
+      "line": "190"
+    },
+    {
+      "method": "POST",
+      "route": "/api/coordination/event",
+      "file": "jona_service_7777.py",
+      "line": "200"
+    },
+    {
+      "method": "GET",
+      "route": "/metrics",
+      "file": "jona_service_7777.py",
+      "line": "232"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "jona_service_7777.py",
+      "line": "245"
+    },
+    {
+      "method": "POST",
+      "route": "/execute",
+      "file": "jona_service_7777.py",
+      "line": "264"
+    },
+    {
+      "method": "POST",
+      "route": "/receive",
+      "file": "jona_service_7777.py",
+      "line": "286"
+    },
+    {
+      "method": "POST",
+      "route": "/api/nodes/register",
+      "file": "balancer_nodes_3333.js",
+      "line": "29"
+    },
+    {
+      "method": "GET",
+      "route": "/api/nodes",
+      "file": "balancer_nodes_3333.js",
+      "line": "63"
+    },
+    {
+      "method": "GET",
+      "route": "/api/nodes/:nodeId",
+      "file": "balancer_nodes_3333.js",
+      "line": "77"
+    },
+    {
+      "method": "PUT",
+      "route": "/api/nodes/:nodeId/status",
+      "file": "balancer_nodes_3333.js",
+      "line": "95"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "balancer_nodes_3333.js",
+      "line": "119"
+    },
+    {
+      "method": "GET",
+      "route": "/info",
+      "file": "balancer_nodes_3333.js",
+      "line": "134"
+    },
+    {
+      "method": "GET",
+      "route": "/",
+      "file": "reporting_service.py",
+      "line": "33"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "reporting_service.py",
+      "line": "43"
+    },
+    {
+      "method": "GET",
+      "route": "/status",
+      "file": "reporting_service.py",
+      "line": "51"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "alda_server.py",
+      "line": "317"
+    },
+    {
+      "method": "GET",
+      "route": "/",
+      "file": "balancer_simple.py",
+      "line": "65"
+    },
+    {
+      "method": "GET",
+      "route": "/status",
+      "file": "balancer_simple.py",
+      "line": "69"
+    },
+    {
+      "method": "POST",
+      "route": "/balance",
+      "file": "balancer_simple.py",
+      "line": "84"
+    },
+    {
+      "method": "POST",
+      "route": "/cache/set",
+      "file": "balancer_cache_3335.py",
+      "line": "42"
+    },
+    {
+      "method": "GET",
+      "route": "/cache/get/{key}",
+      "file": "balancer_cache_3335.py",
+      "line": "64"
+    },
+    {
+      "method": "DELETE",
+      "route": "/cache/delete/{key}",
+      "file": "balancer_cache_3335.py",
+      "line": "85"
+    },
+    {
+      "method": "GET",
+      "route": "/cache/keys",
+      "file": "balancer_cache_3335.py",
+      "line": "102"
+    },
+    {
+      "method": "POST",
+      "route": "/cache/clear",
+      "file": "balancer_cache_3335.py",
+      "line": "118"
+    },
+    {
+      "method": "GET",
+      "route": "/cache/stats",
+      "file": "balancer_cache_3335.py",
+      "line": "132"
+    },
+    {
+      "method": "POST",
+      "route": "/cache/batch/set",
+      "file": "balancer_cache_3335.py",
+      "line": "150"
+    },
+    {
+      "method": "POST",
+      "route": "/cache/batch/get",
+      "file": "balancer_cache_3335.py",
+      "line": "172"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "balancer_cache_3335.py",
+      "line": "191"
+    },
+    {
+      "method": "GET",
+      "route": "/info",
+      "file": "balancer_cache_3335.py",
+      "line": "204"
+    },
+    {
+      "method": "GET",
+      "route": "/api",
+      "file": "api_root_patch.py",
+      "line": "2"
+    },
+    {
+      "method": "POST",
+      "route": "/alba/frame",
+      "file": "alba_api_server.py",
+      "line": "67"
+    },
+    {
+      "method": "GET",
+      "route": "/alba/latest",
+      "file": "alba_api_server.py",
+      "line": "95"
+    },
+    {
+      "method": "GET",
+      "route": "/",
+      "file": "alba_api_server.py",
+      "line": "122"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "alba_api_server.py",
+      "line": "131"
+    },
+    {
+      "method": "POST",
+      "route": "/pulse/heartbeat",
+      "file": "balancer_pulse_3336.py",
+      "line": "39"
+    },
+    {
+      "method": "GET",
+      "route": "/pulse/status/{nodeId}",
+      "file": "balancer_pulse_3336.py",
+      "line": "74"
+    },
+    {
+      "method": "GET",
+      "route": "/pulse/nodes",
+      "file": "balancer_pulse_3336.py",
+      "line": "103"
+    },
+    {
+      "method": "GET",
+      "route": "/pulse/dead-nodes",
+      "file": "balancer_pulse_3336.py",
+      "line": "134"
+    },
+    {
+      "method": "POST",
+      "route": "/pulse/resuscitate/{nodeId}",
+      "file": "balancer_pulse_3336.py",
+      "line": "158"
+    },
+    {
+      "method": "GET",
+      "route": "/pulse/config",
+      "file": "balancer_pulse_3336.py",
+      "line": "178"
+    },
+    {
+      "method": "POST",
+      "route": "/pulse/config",
+      "file": "balancer_pulse_3336.py",
+      "line": "188"
+    },
+    {
+      "method": "GET",
+      "route": "/pulse/metrics",
+      "file": "balancer_pulse_3336.py",
+      "line": "204"
+    },
+    {
+      "method": "POST",
+      "route": "/pulse/reset/{nodeId}",
+      "file": "balancer_pulse_3336.py",
+      "line": "221"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": "balancer_pulse_3336.py",
+      "line": "236"
+    },
+    {
+      "method": "GET",
+      "route": "/info",
+      "file": "balancer_pulse_3336.py",
+      "line": "253"
+    },
+    {
+      "method": "GET",
+      "route": "/",
+      "file": ".git_ocean_core_full.py",
+      "line": "620"
+    },
+    {
+      "method": "GET",
+      "route": "/health",
+      "file": ".git_ocean_core_full.py",
+      "line": "637"
+    }
+  ],
+  "protocol_matrix": [
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000",
+      "file": "compliance_checker.py"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8030",
+      "file": "ocean_optimizer.py"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:11434",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://clisonix-ocean-core:8030",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://en.wikipedia.org/w/api.php",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://wttr.in/{city}?format=j1",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://api.coingecko.com/api/v3/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://export.arxiv.org/api/query",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://eutils.ncbi.nlm.nih.gov",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://eutils.ncbi.nlm.nih.gov",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://ec.europa.eu/eurostat/api/dissemination/catalogue/datasets?lang=en&limit=5",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://ec.europa.eu/eurostat/databrowser/view/demo_pjan",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://ec.europa.eu/eurostat/databrowser/view/nama_10_gdp",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://ec.europa.eu/eurostat/databrowser/view/une_rt_m",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_manr",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://api.exchangerate.host/latest?base=EUR&symbols=USD,GBP,CHF,ALL,JPY",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://api.frankfurter.app/latest?from=EUR&to=USD,GBP,CHF,JPY",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://api.github.com/search/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://github.com/{name})",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.instat.gov.al/en/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.bankofalbania.org/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:{config[",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:5555/analyze",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8006/generate",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://{domain}",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8002",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://html.duckduckgo.com/html/?q={query}",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.europa.eu/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.govdata.de/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.data.gouv.fr/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.uk/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://dati.gov.it/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://datos.gob.es/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.overheid.nl/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://opendata.swiss/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gv.at/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.be/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://oppnadata.se/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.norge.no/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://datahub.virk.dk/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.avoindata.fi/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://dane.gov.pl/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.cz/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://dados.gov.pt/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.gr/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.ie/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.instat.gov.al/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://opendata.rks-gov.net/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://opendata.gov.mk/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.rs/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.hr/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.opsi.si/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://bhas.gov.ba/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.monstat.org/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.ro/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://opendata.government.bg/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://open.canada.ca/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://datos.gob.mx/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://dados.gov.br/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://datos.gob.ar/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://datos.gob.cl/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://datos.gov.co/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.datosabiertos.gob.pe/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.e-stat.go.jp/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.data.go.kr/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.stats.gov.cn/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.in/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.sg/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.data.gov.my/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.go.th/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.go.id/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.ph/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.tw/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.au/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.data.govt.nz/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.data.gov.za/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://opendata.go.ke/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://nigeriastat.gov.ng/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://bayanat.ae/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.sa/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.gov.il/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.un.org/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.worldbank.org/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.imf.org/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.oecd.org/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://apps.who.int/iris/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.fao.org/faostat/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.wto.org/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.unicef.org/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://arxiv.org/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://pubmed.ncbi.nlm.nih.gov/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://zenodo.org/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://opendata.cern.ch/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://data.nasa.gov/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://earth.esa.int/",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://clisonix.com/pricing",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://example.com",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://example.com&max_chars=4000",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://example.com",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://api.coingecko.com/api/v3/simple/price?ids={symbol}&vs_currencies=usd,eur",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://api.github.com/repos/{owner}/{repo}",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://export.arxiv.org/api/query?search_query=all:{query}&max_results=5",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson",
+      "file": "ocean_nanogrid.py"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000/docs",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000/health",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:3000",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:9000/minio/health/live",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:9200",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:5601",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000/docs",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000/redoc",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000/health",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:3000",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:9001",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:9000",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:5601",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:9200/_cluster/health",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:9200/_cat/indices",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:9200/logs-clisonix",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:9200/logs-clisonix/_doc",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:9200/logs-clisonix/_search",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000/health",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://your-domain.com/health",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000/health",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:3000",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000/health",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:5601",
+      "file": "DOCKER_COMPOSE_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://clisonix-06-ollama:11434",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8031/health",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8031/health",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8031/api/v1/vision",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8031/api/v1/audio",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8031/api/v1/document",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8031/api/v1/reason",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8031/api/v1/analyze",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:11434",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8031/health",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8031/health",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:11434/api/tags",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:11434/api/ps",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://clisonix-ocean-multimodal:8031/api/v1/analyze",
+      "file": "OCEAN_MULTIMODAL_DEPLOYMENT.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000/health",
+      "file": "QUICK_REFERENCE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000/docs",
+      "file": "QUICK_REFERENCE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:3000",
+      "file": "QUICK_REFERENCE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000/health",
+      "file": "QUICK_REFERENCE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000/health",
+      "file": "QUICK_REFERENCE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:9090",
+      "file": "QUICK_REFERENCE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:3000",
+      "file": "QUICK_REFERENCE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:5601",
+      "file": "QUICK_REFERENCE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:16686",
+      "file": "QUICK_REFERENCE.md"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://api.clisonix.com/health",
+      "file": "QUICK_REFERENCE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://dr_albana:8040",
+      "file": "BLOG_PLATFORM_COMPLETE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://blerina:8039",
+      "file": "BLOG_PLATFORM_COMPLETE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://dr_albana:8040",
+      "file": "BLOG_PLATFORM_COMPLETE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://blerina:8039",
+      "file": "BLOG_PLATFORM_COMPLETE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8050/health",
+      "file": "BLOG_PLATFORM_COMPLETE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8050/api/v1/auth/profile",
+      "file": "BLOG_PLATFORM_COMPLETE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8050/health",
+      "file": "BLOG_PLATFORM_COMPLETE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8050/status",
+      "file": "BLOG_PLATFORM_COMPLETE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8050/api/v1/articles",
+      "file": "BLOG_PLATFORM_COMPLETE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8050/api/v1/payments/article",
+      "file": "BLOG_PLATFORM_COMPLETE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8050/api/v1/payments/subscribe",
+      "file": "BLOG_PLATFORM_COMPLETE.md"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://docs.clisonix.com/blog",
+      "file": "BLOG_PLATFORM_COMPLETE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000`",
+      "file": "HOW_TO_USE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8030/`",
+      "file": "SPECIALIZED_CHAT_UI_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://46.224.203.89:8030/`",
+      "file": "SPECIALIZED_CHAT_UI_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://46.224.203.89:8030/api/chat",
+      "file": "SPECIALIZED_CHAT_UI_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://46.224.203.89:8030/**",
+      "file": "SPECIALIZED_CHAT_UI_GUIDE.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://46.224.203.89:8030/",
+      "file": "SPECIALIZED_CHAT_UI_GUIDE.md"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://www.ncbi.nlm.nih.gov/account/settings/",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://openweathermap.org/api",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://newsapi.org/register",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://open-platform.theguardian.com/access/",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8888`",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:9200/research_papers/_count",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:9090/api/v1/query?query=research_papers_collected_total",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:3000",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:5050/health",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:6060/health",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:7070/health",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:8000/health",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://host.docker.internal:9200",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:3000",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://prometheus:9090",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:9090)",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:3000)",
+      "file": "RESEARCH_ECOSYSTEM_QUICK_START.md"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://api.clisonix.com",
+      "file": "clisonix_sdk.ts"
+    },
+    {
+      "protocol": "https",
+      "endpoint": "https://api.clisonix.com",
+      "file": "clisonix_sdk.ts"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://46.225.14.83:8030/health",
+      "file": "OCEAN_CORE_v2_DEPLOYMENT_PACKAGE_SUMMARY.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://46.225.14.83:8033/health",
+      "file": "OCEAN_CORE_v2_DEPLOYMENT_PACKAGE_SUMMARY.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://46.225.14.83:8035/health",
+      "file": "OCEAN_CORE_v2_DEPLOYMENT_PACKAGE_SUMMARY.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://46.225.14.83:8032/health",
+      "file": "OCEAN_CORE_v2_DEPLOYMENT_PACKAGE_SUMMARY.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://46.225.14.83:8030/health",
+      "file": "OCEAN_CORE_v2_DEPLOYMENT_PACKAGE_SUMMARY.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://46.225.14.83:8033/health",
+      "file": "OCEAN_CORE_v2_DEPLOYMENT_PACKAGE_SUMMARY.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://46.225.14.83:8035/health",
+      "file": "OCEAN_CORE_v2_DEPLOYMENT_PACKAGE_SUMMARY.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://46.225.14.83:8032/health",
+      "file": "OCEAN_CORE_v2_DEPLOYMENT_PACKAGE_SUMMARY.md"
+    },
+    {
+      "protocol": "http",
+      "endpoint": "http://localhost:11434/api/tags",
+      "file": "OCEAN_CORE_v2_DEPLOYMENT_PACKAGE_SUMMARY.md"
+    }
+  ],
+  "growth_tracks": {
+    "install_docs": [
+      "README.md",
+      "apps/web/README.md",
+      "CLX_AI_INSTALLATION_GUIDE.md",
+      "sdk/python/README.md",
+      "sdk/typescript/README.md",
+      "hardware/kloud-soc/README.md",
+      "scripts/hardware/rust_node_agent/README.md"
+    ],
+    "api_tracks": {
+      "agimed": [],
+      "iot_mesh": [
+        {
+          "method": "POST",
+          "route": "/mesh/register",
+          "file": "asi_api_server.py",
+          "line": "151"
+        },
+        {
+          "method": "POST",
+          "route": "/mesh/send",
+          "file": "asi_api_server.py",
+          "line": "162"
+        },
+        {
+          "method": "GET",
+          "route": "/api/mesh-status",
+          "file": "balancer_nodes_3334.py",
+          "line": "278"
+        },
+        {
+          "method": "POST",
+          "route": "/metrics/upload",
+          "file": "mesh_hq_receiver.py",
+          "line": "53"
+        },
+        {
+          "method": "GET",
+          "route": "/health",
+          "file": "mesh_hq_receiver.py",
+          "line": "79"
+        },
+        {
+          "method": "GET",
+          "route": "/metrics/latest",
+          "file": "mesh_hq_receiver.py",
+          "line": "96"
+        }
+      ],
+      "mirror_defence": []
+    },
+    "hardware_tracks": {
+      "hardware_paths": [
+        "hardware/kloud-soc/RISCV_RELIABILITY_GAP.md",
+        "hardware/kloud-soc/README.md",
+        "hardware/kloud-soc/firmware/Makefile",
+        "hardware/kloud-soc/firmware/supervisor.c",
+        "hardware/kloud-soc/firmware/linker.ld",
+        "hardware/kloud-soc/firmware/boot_rom.S",
+        "hardware/kloud-soc/scripts/verify.sh",
+        "hardware/kloud-soc/formal/kloud_bridge_formal.v",
+        "hardware/kloud-soc/formal/kloud_bridge_formal.ys",
+        "hardware/kloud-soc/tests/coverage_report.py",
+        "hardware/kloud-soc/tests/Makefile",
+        "hardware/kloud-soc/tests/tb_soc_top_mmio.v",
+        "hardware/kloud-soc/tests/tb_kloud_soc_engines.v",
+        "hardware/kloud-soc/fpga/ulx3s.lpf",
+        "hardware/kloud-soc/fpga/ulx3s_top.v",
+        "hardware/kloud-soc/rtl/uart_tx_core.v",
+        "hardware/kloud-soc/rtl/kloud_bridge_hw.v",
+        "hardware/kloud-soc/rtl/picorv32.v",
+        "hardware/kloud-soc/rtl/pulse_engine.v",
+        "hardware/kloud-soc/rtl/rom.v",
+        "hardware/kloud-soc/rtl/soc_top.v",
+        "hardware/kloud-soc/rtl/sram.v",
+        "hardware/kloud-soc/rtl/sync_engine.v",
+        "docs/architecture/OCEANCORE_KLOUD_HARDWARE_IMPLEMENTATION_PLAN.md",
+        "scripts/hardware/oceancore_edge_node.py",
+        "scripts/hardware/kloud_upstream_stub.py",
+        "scripts/hardware/rust_node_agent/README.md",
+        "scripts/hardware/rust_node_agent/Dockerfile",
+        "scripts/hardware/rust_node_agent/Cargo.lock",
+        "scripts/hardware/rust_node_agent/Cargo.toml",
+        "scripts/hardware/rust_node_agent/.dockerignore",
+        "scripts/hardware/profiles/oceancore_lab_01.json",
+        "scripts/hardware/profiles/oceancore_lab_02.json",
+        "scripts/hardware/rust_node_agent/src/main.rs",
+        "scripts/hardware/rust_node_agent/profiles/oceancore_live_01.json"
+      ],
+      "mirror_paths": [
+        "apps/web/app/modules/mymirror-now/page.tsx",
+        "apps/web/app/api/mymirror/docker-containers/route.ts",
+        "apps/web/app/api/mymirror/data-sources/route.ts",
+        "apps/web/app/api/mymirror/alert-policy/route.ts",
+        "apps/web/app/api/mymirror/export/route.ts",
+        "apps/web/app/api/mymirror/live-metrics/route.ts",
+        "apps/web/app/api/mymirror/data-sources/[id]/route.ts",
+        "apps/web/src/lib/mymirror-data-catalog.ts"
+      ]
+    },
+    "creator_protection": {
+      "license_docs": [
+        "LICENSE",
+        "clx-ai/LICENSE",
+        "sdk/python/LICENSE",
+        "sdk/typescript/LICENSE",
+        "docs/legal/WWWMMM_IP_MEMO.md"
+      ],
+      "monetization_docs": [
+        "docs/API_MONETIZATION_GUIDE.md",
+        "MONETIZATION_30DAY_PLAN.md",
+        "docs/BUSINESS_STRATEGY.md"
+      ]
+    }
+  }
+}

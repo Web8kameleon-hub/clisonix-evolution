@@ -1,0 +1,12 @@
+unknown command "logs" for "gh run"
+
+Usage:  gh run <command> [flags]
+
+Available commands:
+  cancel
+  delete
+  download
+  list
+  rerun
+  view
+  watch

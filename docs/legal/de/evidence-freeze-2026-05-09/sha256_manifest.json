@@ -1,0 +1,38 @@
+[
+  {
+    "file": "sdist/clx-ai/clx/core.py",
+    "sha256": "7639fa7909b0b1a8bfa3cba2c03b0f9be1c642d67f67ae1a0b1570dbad71ed87"
+  },
+  {
+    "file": "sdist/clx-ai/clx/security/monitor.py",
+    "sha256": "e971ba5fc4a4218a35f5191ea00d7a2666872761399329df1377824b3d9a8f11"
+  },
+  {
+    "file": "clx_i_service.py",
+    "sha256": "28ed01ec115256bb768d6bdf877fb1a81c9e9d0a62a5c048b895559d0aeec27e"
+  },
+  {
+    "file": "sdist/clx-ai/examples/ecosystem_ops_10min.py",
+    "sha256": "a4fe79ea0735275094bdd0a1775c529ee56177255ba18e443fd5bb04ec4d294a"
+  },
+  {
+    "file": "docs/legal/WWWMMM_IP_MEMO.md",
+    "sha256": "2c9322c67855ab227e1b4843a85d0b9568f5ce6bf71a71c5d16c9ce32e647ba4"
+  },
+  {
+    "file": "docs/legal/de/DE_PATENT_APPLICATION_DRAFT_WWWMMM_NDB_STIGMA.md",
+    "sha256": "cf5256ab705698d08958606421f39c87e6a6f1c9172b24c16936933d5a7663d9"
+  },
+  {
+    "file": "docs/legal/de/DE_NOVELTY_MATRIX_WWWMMM_NDB_STIGMA.md",
+    "sha256": "890d5d304f69bea5225952a751128246791e6644dbb2eb9130a94be3bef3d773"
+  },
+  {
+    "file": "docs/legal/de/DE_EVIDENCE_INDEX_WWWMMM_NDB_STIGMA.md",
+    "sha256": "17c2734e113702ebce507f969e244f488f9b99fa22c0ef71c5523df2b8618217"
+  },
+  {
+    "file": "docs/legal/de/DE_CERTIFICATION_ROADMAP_CLISONIX.md",
+    "sha256": "844aeb37f6d985273550b08364afbc05caa9348a787610262616bb01fb35e8c0"
+  }
+]

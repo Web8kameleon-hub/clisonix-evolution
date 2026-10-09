@@ -1,0 +1,14 @@
+﻿TOTAL_MODULES=36 TOTAL_API=95 BAD=13
+api 502 /api/albi-user/[...path]
+api 500 /api/chat
+api 404 /api/jona/[...path]
+api 502 /api/linkedin/posted-articles
+api 404 /api/openmind
+api 404 /api/proxy/reporting-dashboard
+api 404 /api/proxy/reporting-errors
+api 404 /api/proxy/reporting-error-summary
+api 404 /api/proxy/reporting-export-excel
+api 404 /api/proxy/reporting-export-pptx
+api 404 /api/route.ts
+api 503 /api/service-discovery
+module 404 /modules/jona-neural

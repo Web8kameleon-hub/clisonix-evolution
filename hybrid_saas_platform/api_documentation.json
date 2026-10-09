@@ -1,0 +1,422 @@
+{
+  "/health": {
+    "method": "GET",
+    "description": "Kontrollon gjendjen e shëndetit të sistemit. Kthen statusin e përgjithshëm të platformës Clisonix Cloud duke përfshirë versionin, uptime dhe statusin e shërbimeve të brendshme.",
+    "sample_response": {
+      "service": "clisonix-cloud",
+      "status": "healthy",
+      "version": "2.1.0",
+      "uptime_seconds": 86400,
+      "timestamp": "2026-01-11T10:00:00Z",
+      "components": {
+        "database": "healthy",
+        "redis": "healthy",
+        "prometheus": "healthy"
+      }
+    },
+    "curl": "curl -X GET \"https://api.clisonix.com/health\" -H \"Authorization: Bearer $TOKEN\"",
+    "python": "import requests\n\nresponse = requests.get(\n    \"https://api.clisonix.com/health\",\n    headers={\"Authorization\": f\"Bearer {TOKEN}\"}\n)\nprint(response.json())"
+  },
+  "/status": {
+    "method": "GET",
+    "description": "Merr statusin e detajuar të sistemit duke përfshirë metrikat e CPU, RAM, disk dhe numrin e kërkesave aktive.",
+    "sample_response": {
+      "status": "operational",
+      "cpu_percent": 23.5,
+      "memory_percent": 45.2,
+      "disk_percent": 67.8,
+      "active_requests": 42,
+      "total_requests_24h": 15420,
+      "average_response_time_ms": 125,
+      "timestamp": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X GET \"https://api.clisonix.com/status\" -H \"Authorization: Bearer $TOKEN\"",
+    "python": "import requests\n\nresponse = requests.get(\n    \"https://api.clisonix.com/status\",\n    headers={\"Authorization\": f\"Bearer {TOKEN}\"}\n)\nprint(response.json())"
+  },
+  "/api/system-status": {
+    "method": "GET",
+    "description": "Kthen statusin e plotë të sistemit industrial duke përfshirë të gjitha shërbimet, metrikat dhe alarmet aktive.",
+    "sample_response": {
+      "system": "clisonix-industrial",
+      "status": "running",
+      "services": {
+        "alba_network": {
+          "status": "active",
+          "latency_ms": 12
+        },
+        "albi_neural": {
+          "status": "active",
+          "goroutines": 156
+        },
+        "jona_coordinator": {
+          "status": "active",
+          "score": 0.95
+        }
+      },
+      "alerts": [],
+      "last_check": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X GET \"https://api.clisonix.com/api/system-status\" -H \"Authorization: Bearer $TOKEN\"",
+    "python": "import requests\n\nresponse = requests.get(\n    \"https://api.clisonix.com/api/system-status\",\n    headers={\"Authorization\": f\"Bearer {TOKEN}\"}\n)\nprint(response.json())"
+  },
+  "/db/ping": {
+    "method": "GET",
+    "description": "Teston lidhjen me bazën e të dhënave PostgreSQL. Kthen kohën e përgjigjes dhe statusin e koneksionit.",
+    "sample_response": {
+      "database": "postgresql",
+      "status": "connected",
+      "ping_ms": 2.3,
+      "version": "PostgreSQL 15.2",
+      "connections": {
+        "active": 12,
+        "max": 100
+      },
+      "timestamp": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X GET \"https://api.clisonix.com/db/ping\" -H \"Authorization: Bearer $TOKEN\"",
+    "python": "import requests\n\nresponse = requests.get(\n    \"https://api.clisonix.com/db/ping\",\n    headers={\"Authorization\": f\"Bearer {TOKEN}\"}\n)\nprint(response.json())"
+  },
+  "/redis/ping": {
+    "method": "GET",
+    "description": "Teston lidhjen me Redis cache. Kthen statusin, memorien e përdorur dhe numrin e çelësave.",
+    "sample_response": {
+      "redis": "connected",
+      "ping": "PONG",
+      "latency_ms": 0.8,
+      "memory_used_mb": 256,
+      "keys_count": 15420,
+      "version": "7.2.0",
+      "timestamp": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X GET \"https://api.clisonix.com/redis/ping\" -H \"Authorization: Bearer $TOKEN\"",
+    "python": "import requests\n\nresponse = requests.get(\n    \"https://api.clisonix.com/redis/ping\",\n    headers={\"Authorization\": f\"Bearer {TOKEN}\"}\n)\nprint(response.json())"
+  },
+  "/api/ask": {
+    "method": "POST",
+    "description": "Endpoint i inteligjencës artificiale për pyetje-përgjigje. Pranon pyetje në gjuhë natyrore dhe kthen përgjigje të gjeneruara nga AI me kontekst të plotë.",
+    "sample_response": {
+      "answer": "Clisonix është një platformë e avancuar neuro-audio që kombinon përpunimin EEG me gjenerimin e muzikës brain-sync.",
+      "confidence": 0.95,
+      "sources": [
+        "internal_docs",
+        "knowledge_base"
+      ],
+      "processing_time_ms": 450,
+      "tokens_used": 125,
+      "timestamp": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X POST \"https://api.clisonix.com/api/ask\" \\\n  -H \"Authorization: Bearer $TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"question\": \"Çfarë është Clisonix?\", \"context\": \"Platformë neuro-audio\", \"include_details\": true}' ",
+    "python": "import requests\n\nresponse = requests.post(\n    \"https://api.clisonix.com/api/ask\",\n    headers={\n        \"Authorization\": f\"Bearer {TOKEN}\",\n        \"Content-Type\": \"application/json\"\n    },\n    json={\n        \"question\": \"Çfarë është Clisonix?\",\n        \"context\": \"Platformë neuro-audio dhe EEG\",\n        \"include_details\": True\n    }\n)\nprint(response.json())"
+  },
+  "/neural-symphony": {
+    "method": "GET",
+    "description": "Gjeneron muzikë brain-sync në kohë reale bazuar në parametrat e specifikuar. Kthen stream audio WAV.",
+    "sample_response": {
+      "type": "audio/wav",
+      "duration_seconds": 300,
+      "frequency_hz": 40,
+      "wave_type": "binaural",
+      "status": "streaming",
+      "stream_url": "/neural-symphony/stream/abc123"
+    },
+    "curl": "curl -X GET \"https://api.clisonix.com/neural-symphony\" -H \"Authorization: Bearer $TOKEN\" -H \"Accept: audio/wav\" --output symphony.wav",
+    "python": "import requests\n\nresponse = requests.get(\n    \"https://api.clisonix.com/neural-symphony\",\n    headers={\n        \"Authorization\": f\"Bearer {TOKEN}\",\n        \"Accept\": \"audio/wav\"\n    },\n    stream=True\n)\n\nwith open(\"symphony.wav\", \"wb\") as f:\n    for chunk in response.iter_content(chunk_size=8192):\n        f.write(chunk)"
+  },
+  "/api/uploads/eeg/process": {
+    "method": "POST",
+    "description": "Ngarkon dhe përpunon skedarë EEG (formatet .edf, .bdf, .fif). Ekstrakon kanalet, frekuencat dhe gjeneron raport analitik.",
+    "sample_response": {
+      "file_id": "eeg-upload-001",
+      "filename": "brain_scan_001.edf",
+      "status": "processed",
+      "channels": 64,
+      "duration_seconds": 3600,
+      "sampling_rate_hz": 256,
+      "bands": {
+        "delta": {
+          "power": 0.25,
+          "range": "0.5-4 Hz"
+        },
+        "theta": {
+          "power": 0.3,
+          "range": "4-8 Hz"
+        },
+        "alpha": {
+          "power": 0.2,
+          "range": "8-13 Hz"
+        },
+        "beta": {
+          "power": 0.15,
+          "range": "13-30 Hz"
+        },
+        "gamma": {
+          "power": 0.1,
+          "range": "30-100 Hz"
+        }
+      },
+      "report_url": "/reports/eeg-upload-001.pdf",
+      "timestamp": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X POST \"https://api.clisonix.com/api/uploads/eeg/process\" \\\n  -H \"Authorization: Bearer $TOKEN\" \\\n  -F \"file=@brain_scan.edf\"",
+    "python": "import requests\n\nwith open(\"brain_scan.edf\", \"rb\") as f:\n    response = requests.post(\n        \"https://api.clisonix.com/api/uploads/eeg/process\",\n        headers={\"Authorization\": f\"Bearer {TOKEN}\"},\n        files={\"file\": f}\n    )\nprint(response.json())"
+  },
+  "/api/uploads/audio/process": {
+    "method": "POST",
+    "description": "Ngarkon dhe përpunon skedarë audio për analizë. Ekstrakon karakteristika audio, detekton emocione dhe gjeneron metadata.",
+    "sample_response": {
+      "file_id": "audio-upload-001",
+      "filename": "recording.wav",
+      "status": "processed",
+      "duration_seconds": 180,
+      "sample_rate_hz": 44100,
+      "channels": 2,
+      "analysis": {
+        "tempo_bpm": 120,
+        "key": "C major",
+        "mood": "calm",
+        "energy": 0.6,
+        "valence": 0.7
+      },
+      "timestamp": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X POST \"https://api.clisonix.com/api/uploads/audio/process\" \\\n  -H \"Authorization: Bearer $TOKEN\" \\\n  -F \"file=@recording.wav\"",
+    "python": "import requests\n\nwith open(\"recording.wav\", \"rb\") as f:\n    response = requests.post(\n        \"https://api.clisonix.com/api/uploads/audio/process\",\n        headers={\"Authorization\": f\"Bearer {TOKEN}\"},\n        files={\"file\": f}\n    )\nprint(response.json())"
+  },
+  "/billing/paypal/order": {
+    "method": "POST",
+    "description": "Krijon një porosi PayPal për pagesë. Kthen ID-në e porosisë dhe URL-në për aprovim.",
+    "sample_response": {
+      "order_id": "PAYPAL-ORDER-5AB12345XY",
+      "status": "CREATED",
+      "intent": "CAPTURE",
+      "amount": {
+        "currency_code": "EUR",
+        "value": "10.00"
+      },
+      "approval_url": "https://www.paypal.com/checkoutnow?token=5AB12345XY",
+      "created_at": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X POST \"https://api.clisonix.com/billing/paypal/order\" \\\n  -H \"Authorization: Bearer $TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"intent\": \"CAPTURE\", \"purchase_units\": [{\"amount\": {\"currency_code\": \"EUR\", \"value\": \"10.00\"}}]}'  ",
+    "python": "import requests\n\nresponse = requests.post(\n    \"https://api.clisonix.com/billing/paypal/order\",\n    headers={\n        \"Authorization\": f\"Bearer {TOKEN}\",\n        \"Content-Type\": \"application/json\"\n    },\n    json={\n        \"intent\": \"CAPTURE\",\n        \"purchase_units\": [{\n            \"amount\": {\"currency_code\": \"EUR\", \"value\": \"10.00\"}\n        }]\n    }\n)\nprint(response.json())"
+  },
+  "/billing/stripe/payment-intent": {
+    "method": "POST",
+    "description": "Krijon një Stripe Payment Intent për pagesë me kartë ose SEPA. Kthen client_secret për frontend.",
+    "sample_response": {
+      "id": "pi_1234567890",
+      "client_secret": "pi_1234567890_secret_abc123",
+      "status": "requires_payment_method",
+      "amount": 1000,
+      "currency": "eur",
+      "payment_method_types": [
+        "card",
+        "sepa_debit"
+      ],
+      "created": 1704963600
+    },
+    "curl": "curl -X POST \"https://api.clisonix.com/billing/stripe/payment-intent\" \\\n  -H \"Authorization: Bearer $TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"amount\": 1000, \"currency\": \"eur\", \"payment_method_types\": [\"sepa_debit\"]}'  ",
+    "python": "import requests\n\nresponse = requests.post(\n    \"https://api.clisonix.com/billing/stripe/payment-intent\",\n    headers={\n        \"Authorization\": f\"Bearer {TOKEN}\",\n        \"Content-Type\": \"application/json\"\n    },\n    json={\n        \"amount\": 1000,\n        \"currency\": \"eur\",\n        \"payment_method_types\": [\"sepa_debit\"],\n        \"description\": \"Clisonix subscription\"\n    }\n)\nprint(response.json())"
+  },
+  "/asi/status": {
+    "method": "GET",
+    "description": "Merr statusin e ASI Trinity (ALBA, ALBI, JONA). Kthen gjendjen e secilit agjent dhe koordinimin ndërmjet tyre.",
+    "sample_response": {
+      "trinity_status": "active",
+      "agents": {
+        "alba": {
+          "status": "online",
+          "role": "Network Manager",
+          "latency_ms": 12,
+          "requests_per_second": 150
+        },
+        "albi": {
+          "status": "online",
+          "role": "Neural Processor",
+          "goroutines": 256,
+          "neural_patterns": 1024
+        },
+        "jona": {
+          "status": "online",
+          "role": "Coordinator",
+          "coordination_score": 0.97,
+          "http_requests_total": 50000
+        }
+      },
+      "coordination_level": "synchronized",
+      "timestamp": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X GET \"https://api.clisonix.com/asi/status\" -H \"Authorization: Bearer $TOKEN\"",
+    "python": "import requests\n\nresponse = requests.get(\n    \"https://api.clisonix.com/asi/status\",\n    headers={\"Authorization\": f\"Bearer {TOKEN}\"}\n)\nprint(response.json())"
+  },
+  "/asi/health": {
+    "method": "GET",
+    "description": "Kontrollon shëndetin e ASI Trinity. Kthen health check të detajuar për secilin komponent dhe alarme aktive.",
+    "sample_response": {
+      "overall_health": "healthy",
+      "components": {
+        "alba_network": {
+          "status": "healthy",
+          "cpu_usage": 23.5,
+          "memory_mb": 512,
+          "network_latency_ms": 5
+        },
+        "albi_neural": {
+          "status": "healthy",
+          "cpu_usage": 45.2,
+          "memory_mb": 1024,
+          "gc_pause_ms": 2.3
+        },
+        "jona_coordinator": {
+          "status": "healthy",
+          "cpu_usage": 15.8,
+          "memory_mb": 256,
+          "active_connections": 42
+        }
+      },
+      "alerts": [],
+      "last_check": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X GET \"https://api.clisonix.com/asi/health\" -H \"Authorization: Bearer $TOKEN\"",
+    "python": "import requests\n\nresponse = requests.get(\n    \"https://api.clisonix.com/asi/health\",\n    headers={\"Authorization\": f\"Bearer {TOKEN}\"}\n)\nprint(response.json())"
+  },
+  "/asi/execute": {
+    "method": "POST",
+    "description": "Ekzekuton një komandë në ASI Trinity. Mund të dërgojë komanda tek ALBA, ALBI ose JONA.",
+    "sample_response": {
+      "command": "status",
+      "agent": "trinity",
+      "result": {
+        "executed": true,
+        "output": "All agents operational",
+        "execution_time_ms": 125
+      },
+      "timestamp": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X POST \"https://api.clisonix.com/asi/execute\" \\\n  -H \"Authorization: Bearer $TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"command\": \"status\", \"agent\": \"trinity\", \"parameters\": {}}'  ",
+    "python": "import requests\n\nresponse = requests.post(\n    \"https://api.clisonix.com/asi/execute\",\n    headers={\n        \"Authorization\": f\"Bearer {TOKEN}\",\n        \"Content-Type\": \"application/json\"\n    },\n    json={\n        \"command\": \"status\",\n        \"agent\": \"trinity\",\n        \"parameters\": {}\n    }\n)\nprint(response.json())"
+  },
+  "/api/alba/health": {
+    "method": "GET",
+    "description": "Kontrollon shëndetin e ALBA Network Manager. Kthen metrikat e rrjetit, latency dhe statusin e lidhjeve.",
+    "sample_response": {
+      "service": "alba-network",
+      "status": "healthy",
+      "version": "3.2.1",
+      "metrics": {
+        "cpu_percent": 18.5,
+        "memory_mb": 384,
+        "network_in_mbps": 125.4,
+        "network_out_mbps": 89.2,
+        "active_connections": 156,
+        "latency_p50_ms": 5,
+        "latency_p95_ms": 12,
+        "latency_p99_ms": 25
+      },
+      "uptime_seconds": 864000,
+      "last_restart": "2026-01-01T00:00:00Z",
+      "timestamp": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X GET \"https://api.clisonix.com/api/alba/health\" -H \"Authorization: Bearer $TOKEN\"",
+    "python": "import requests\n\nresponse = requests.get(\n    \"https://api.clisonix.com/api/alba/health\",\n    headers={\"Authorization\": f\"Bearer {TOKEN}\"}\n)\nprint(response.json())"
+  },
+  "/asi/alba/metrics": {
+    "method": "GET",
+    "description": "Merr metrikat real-time të ALBA nga Prometheus. Përfshin CPU, Memory, Network Latency.",
+    "sample_response": {
+      "service": "alba",
+      "source": "prometheus",
+      "metrics": {
+        "cpu_usage_percent": 18.5,
+        "memory_used_bytes": 402653184,
+        "memory_percent": 12.3,
+        "network_receive_bytes_total": 1073741824,
+        "network_transmit_bytes_total": 536870912,
+        "http_requests_total": 125000,
+        "http_request_duration_seconds_p50": 0.005,
+        "http_request_duration_seconds_p99": 0.025
+      },
+      "scraped_at": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X GET \"https://api.clisonix.com/asi/alba/metrics\" -H \"Authorization: Bearer $TOKEN\"",
+    "python": "import requests\n\nresponse = requests.get(\n    \"https://api.clisonix.com/asi/alba/metrics\",\n    headers={\"Authorization\": f\"Bearer {TOKEN}\"}\n)\nprint(response.json())"
+  },
+  "/asi/albi/metrics": {
+    "method": "GET",
+    "description": "Merr metrikat real-time të ALBI Neural nga Prometheus. Përfshin Goroutines, Neural Patterns, GC Operations.",
+    "sample_response": {
+      "service": "albi",
+      "source": "prometheus",
+      "metrics": {
+        "goroutines": 256,
+        "gc_pause_total_seconds": 0.125,
+        "go_memstats_alloc_bytes": 536870912,
+        "neural_patterns_processed": 10240,
+        "neural_inference_duration_ms": 45,
+        "model_accuracy": 0.97
+      },
+      "scraped_at": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X GET \"https://api.clisonix.com/asi/albi/metrics\" -H \"Authorization: Bearer $TOKEN\"",
+    "python": "import requests\n\nresponse = requests.get(\n    \"https://api.clisonix.com/asi/albi/metrics\",\n    headers={\"Authorization\": f\"Bearer {TOKEN}\"}\n)\nprint(response.json())"
+  },
+  "/asi/jona/metrics": {
+    "method": "GET",
+    "description": "Merr metrikat real-time të JONA Coordinator nga Prometheus. Përfshin HTTP Requests, Coordination Score.",
+    "sample_response": {
+      "service": "jona",
+      "source": "prometheus",
+      "metrics": {
+        "http_requests_total": 50000,
+        "http_request_duration_seconds_avg": 0.125,
+        "coordination_score": 0.97,
+        "active_workflows": 12,
+        "completed_workflows_24h": 1250,
+        "error_rate_percent": 0.02
+      },
+      "scraped_at": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X GET \"https://api.clisonix.com/asi/jona/metrics\" -H \"Authorization: Bearer $TOKEN\"",
+    "python": "import requests\n\nresponse = requests.get(\n    \"https://api.clisonix.com/asi/jona/metrics\",\n    headers={\"Authorization\": f\"Bearer {TOKEN}\"}\n)\nprint(response.json())"
+  },
+  "/brain/youtube/insight": {
+    "method": "GET",
+    "description": "Analizon një video YouTube dhe kthen insights, transkript dhe analiza sentimentesh.",
+    "sample_response": {
+      "video_id": "dQw4w9WgXcQ",
+      "title": "Video Title",
+      "duration_seconds": 212,
+      "insights": {
+        "summary": "Përmbledhje e videos...",
+        "key_topics": [
+          "topic1",
+          "topic2"
+        ],
+        "sentiment": "positive",
+        "engagement_score": 0.85
+      },
+      "transcript_available": true,
+      "timestamp": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X GET \"https://api.clisonix.com/brain/youtube/insight?video_id=dQw4w9WgXcQ\" -H \"Authorization: Bearer $TOKEN\"",
+    "python": "import requests\n\nresponse = requests.get(\n    \"https://api.clisonix.com/brain/youtube/insight\",\n    headers={\"Authorization\": f\"Bearer {TOKEN}\"},\n    params={\"video_id\": \"dQw4w9WgXcQ\"}\n)\nprint(response.json())"
+  },
+  "/brain/music/brainsync": {
+    "method": "POST",
+    "description": "Gjeneron muzikë brain-sync bazuar në skedarin EEG dhe modalitetin e kërkuar (relax, focus, sleep).",
+    "sample_response": {
+      "job_id": "brainsync-job-001",
+      "mode": "relax",
+      "status": "processing",
+      "estimated_duration_seconds": 300,
+      "frequencies": {
+        "carrier_hz": 200,
+        "binaural_beat_hz": 10,
+        "target_brainwave": "alpha"
+      },
+      "download_url": "/brain/music/download/brainsync-job-001",
+      "timestamp": "2026-01-11T10:00:00Z"
+    },
+    "curl": "curl -X POST \"https://api.clisonix.com/brain/music/brainsync?mode=relax\" \\\n  -H \"Authorization: Bearer $TOKEN\" \\\n  -F \"file=@eeg_data.edf\"",
+    "python": "import requests\n\nwith open(\"eeg_data.edf\", \"rb\") as f:\n    response = requests.post(\n        \"https://api.clisonix.com/brain/music/brainsync\",\n        headers={\"Authorization\": f\"Bearer {TOKEN}\"},\n        params={\"mode\": \"relax\"},\n        files={\"file\": f}\n    )\nprint(response.json())"
+  }
+}

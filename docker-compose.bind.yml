@@ -1,0 +1,61 @@
+services:
+  alba:
+    volumes:
+      - ./:/app
+
+  albi:
+    volumes:
+      - ./:/app
+
+  albi-user:
+    volumes:
+      - ./:/app
+
+  jona:
+    volumes:
+      - ./:/app
+
+  api:
+    volumes:
+      - ./apps/api:/app
+      - ./agents.py:/app/agents.py:ro
+      - ./ocean-core/laboratories.py:/app/laboratories.py:ro
+
+  ocean-core:
+    volumes:
+      - ./ocean-core:/app
+      - ./config/api_keys.json:/app/config/api_keys.json:ro
+      - ./CLISONIX_SYSTEM_PROMPT.md:/app/CLISONIX_SYSTEM_PROMPT.md:ro
+      - ./CLISONIX_MODULE_MAP.md:/app/CLISONIX_MODULE_MAP.md:ro
+      - ./ocean-data:/app/data
+
+  ocean-core-multimodal:
+    volumes:
+      - ./ocean-core:/app
+
+  ocean-core-strict-chat:
+    volumes:
+      - ./ocean-core:/app
+
+  ocean-core-blerina:
+    volumes:
+      - ./ocean-core:/app
+
+  kloud-upstream-runtime:
+    volumes:
+      - ./services/kloud_upstream_runtime:/app
+      - ./data/kloud-upstream-runtime:/app/data
+
+  kloud-bridge:
+    volumes:
+      - ./services/kloud_bridge:/app
+
+  web:
+    volumes:
+      - ./apps/web:/app
+      - kitchen_jobs:/app/kitchen-jobs
+      - kitchen_reports:/app/kitchen-reports
+
+volumes:
+  kitchen_jobs:
+  kitchen_reports:

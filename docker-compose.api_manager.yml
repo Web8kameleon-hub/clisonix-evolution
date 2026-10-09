@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  clisonix-api-manager:
+    build:
+      context: ./apps/api_manager
+      dockerfile: ../api/Dockerfile  # Reuse the main API Dockerfile if no custom Dockerfile exists
+    container_name: clisonix-api-manager
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env.api_manager
+    command: ["python", "app.py"]
+    restart: unless-stopped
+    # Add healthcheck if you have a /health endpoint
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+    # volumes:
+    #   - ./apps/api_manager:/app

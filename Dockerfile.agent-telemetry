@@ -1,0 +1,21 @@
+# Dockerfile.agent-telemetry - Agent Telemetry Service
+FROM python:3.13
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements ./requirements
+RUN pip install --no-cache-dir -r requirements/api.txt
+
+COPY agent_telemetry*.py agiem_telemetry_service.py ./
+COPY agiem_core.py ./
+
+EXPOSE 8070
+
+CMD ["python", "agiem_telemetry_service.py"]

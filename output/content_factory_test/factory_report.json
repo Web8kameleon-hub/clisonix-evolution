@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-02-06T08:53:47.910614+00:00",
+  "stats": {
+    "mode": "manual",
+    "documents_produced": 1,
+    "results_count": 1,
+    "completed": 1,
+    "failed": 0,
+    "published": 0,
+    "avg_quality": 1.0,
+    "total_gaps_found": 9,
+    "watcher": {
+      "sources_count": 0,
+      "items_ingested": 0,
+      "last_check": null,
+      "sources": []
+    },
+    "selector": {
+      "threshold": 0.6,
+      "max_per_day": 10,
+      "today_count": 0,
+      "selected_ids": [],
+      "rejected_count": 0
+    },
+    "ocean": {
+      "documents_written": 1,
+      "model": "llama3.1:8b"
+    },
+    "publisher": {
+      "total_published": 0,
+      "total_failed": 0,
+      "queue_size": 0,
+      "platforms": {},
+      "quality_threshold": 0.7
+    }
+  },
+  "recent_results": [
+    {
+      "id": "factory_7cb2a5f0434e",
+      "source_id": "source_1152d127",
+      "blerina_signal_id": "bln_sig_1_20260206095342",
+      "eap_document_id": "clx.eap.34a5b50024",
+      "gaps_found": 9,
+      "discontinuity_level": "critical",
+      "quality_score": 1.0,
+      "published": false,
+      "publish_platforms": [],
+      "publish_urls": [],
+      "processing_time_ms": 44915.09938240051,
+      "status": "completed",
+      "error": null,
+      "timestamp": "2026-02-06T08:53:02.994840+00:00"
+    }
+  ]
+}

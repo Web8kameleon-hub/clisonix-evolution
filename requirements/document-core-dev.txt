@@ -1,0 +1,5 @@
+# Document Core Development Requirements
+# Type stubs for better MyPy compliance
+
+types-requests>=2.28.0
+types-psutil>=5.9.0

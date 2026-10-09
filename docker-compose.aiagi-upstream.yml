@@ -1,0 +1,24 @@
+services:
+  kloud-upstream-runtime:
+    build:
+      context: .
+      dockerfile: services/kloud_upstream_runtime/Dockerfile
+    container_name: aiagi-kloud-upstream-runtime
+    environment:
+      PYTHONUNBUFFERED: "1"
+      PORT: "9080"
+      KLOUD_RUNTIME_NODE_ID: "${KLOUD_RUNTIME_NODE_ID:-aiagi-node-01}"
+      KLOUD_RUNTIME_ROLE: "${KLOUD_RUNTIME_ROLE:-coordinator}"
+      KLOUD_RUNTIME_REGION: "${KLOUD_RUNTIME_REGION:-eu-central}"
+      KLOUD_RUNTIME_PUBLIC_BASE_URL: "${KLOUD_RUNTIME_PUBLIC_BASE_URL:-https://aiagi.io}"
+      KLOUD_RUNTIME_STATE_PATH: "/app/data/runtime-state.json"
+    volumes:
+      - ./data/kloud-upstream-runtime:/app/data
+    ports:
+      - "9080:9080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

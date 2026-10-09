@@ -1,0 +1,13 @@
+# Requirements for Auto-Learning Service
+# Production-grade dependencies
+
+# Core
+numpy>=2.0.0
+cbor2>=5.6.5
+
+# Optional but recommended
+aiohttp>=3.11.0
+requests>=2.32.3
+
+# Monitoring (optional)
+prometheus-client>=0.21.1

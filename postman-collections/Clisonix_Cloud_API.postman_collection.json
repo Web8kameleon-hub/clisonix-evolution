@@ -1,0 +1,167 @@
+{
+  "item": [
+    {
+      "description": "System health and status endpoints",
+      "name": "Health & Diagnostics",
+      "item": [
+        {
+          "description": "Get system health status",
+          "name": "Health Check",
+          "request": {
+            "header": [],
+            "method": "GET",
+            "url": {
+              "host": ["localhost"],
+              "port": "8000",
+              "raw": "{{baseUrl}}/health",
+              "path": ["health"],
+              "protocol": "http"
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": []
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"timestamp\": \"2026-03-14T12:00:00Z\",\n  \"instance_id\": \"instance-1\",\n  \"status\": \"active\",\n  \"uptime\": \"2h 15m\",\n  \"memory\": { \"used\": 20379, \"total\": 65317 },\n  \"system\": { \"cpu_percent\": 6.6, \"memory_percent\": 31.2 }\n}"
+            }
+          ]
+        },
+        {
+          "description": "Get complete system status",
+          "name": "System Status",
+          "request": {
+            "header": [
+              {
+                "value": "application/json",
+                "key": "Accept"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": ["localhost"],
+              "port": "8000",
+              "raw": "{{baseUrl}}/api/system-status",
+              "path": ["api", "system-status"],
+              "protocol": "http"
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [{ "key": "Accept", "value": "application/json" }]
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"instance_id\": \"instance-1\",\n  \"status\": \"active\",\n  \"uptime\": \"2h 15m\",\n  \"services\": { \"api\": \"ok\", \"db\": \"ok\", \"redis\": \"ok\" },\n  \"metrics\": { \"cpu\": 6.6, \"memory_percent\": 31.2 }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Advanced AI and cognitive processing endpoints",
+      "name": "Brain Intelligence APIs",
+      "item": [
+        {
+          "description": "Analyze YouTube content and extract insights",
+          "name": "YouTube Insight",
+          "request": {
+            "header": [],
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/brain/youtube/insight",
+              "path": ["brain", "youtube", "insight"]
+            }
+          }
+        },
+        {
+          "description": "Check energy levels and system performance",
+          "name": "Energy Check",
+          "request": {
+            "header": [
+              {
+                "value": "application/json",
+                "key": "Content-Type"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"energy_level\": 50, \"threshold\": 30}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/brain/energy/check",
+              "path": ["brain", "energy", "check"]
+            }
+          }
+        },
+        {
+          "description": "Get neural network topology and connections",
+          "name": "Cortex Map",
+          "request": {
+            "header": [],
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/brain/cortex-map",
+              "path": ["brain", "cortex-map"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "description": "API documentation and schema",
+      "name": "Documentation",
+      "item": [
+        {
+          "description": "Interactive Swagger UI documentation",
+          "name": "OpenAPI Docs",
+          "request": {
+            "url": {
+              "raw": "{{baseUrl}}/docs",
+              "path": ["docs"]
+            },
+            "method": "GET"
+          }
+        },
+        {
+          "description": "ReDoc API documentation",
+          "name": "ReDoc Docs",
+          "request": {
+            "url": {
+              "raw": "{{baseUrl}}/redoc",
+              "path": ["redoc"]
+            },
+            "method": "GET"
+          }
+        },
+        {
+          "description": "OpenAPI specification JSON",
+          "name": "OpenAPI Schema",
+          "request": {
+            "url": {
+              "raw": "{{baseUrl}}/openapi.json",
+              "path": ["openapi.json"]
+            },
+            "method": "GET"
+          }
+        }
+      ]
+    }
+  ],
+  "info": {
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Auto-generated API collection for Clisonix Cloud - Complete microservices API",
+    "name": "Clisonix Cloud API"
+  }
+}
+

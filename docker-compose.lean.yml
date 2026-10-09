@@ -1,0 +1,196 @@
+version: '3.9'
+
+services:
+  # ═══════════════════════════════════════════════════════
+  # DATABASE LAYER (CRITICAL)
+  # ═══════════════════════════════════════════════════════
+  postgres:
+    image: postgres:16-alpine
+    container_name: clisonix-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-clisonix}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME:-clisonixdb}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-clisonix} -d ${DB_NAME:-clisonixdb}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - clisonix-prod
+
+  # ═══════════════════════════════════════════════════════
+  # CACHE LAYER (CRITICAL)
+  # ═══════════════════════════════════════════════════════
+  redis:
+    image: redis:7-alpine
+    container_name: clisonix-redis
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD} --maxmemory 512mb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - clisonix-prod
+
+  # ═══════════════════════════════════════════════════════
+  # OLLAMA - LOCAL LLM ENGINE (llama3.1:8b integrated)
+  # ═══════════════════════════════════════════════════════
+  ollama:
+    image: ollama/ollama:latest
+    container_name: clisonix-ollama
+    restart: unless-stopped
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+      - ollama-models:/root/.ollama/models
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - clisonix-prod
+
+  # ═══════════════════════════════════════════════════════
+  # OCEAN CORE (AI ENGINE WITH OLLAMA 3.1.8B INTEGRATED)
+  # ═══════════════════════════════════════════════════════
+  ocean-core:
+    image: clisonix-ocean-core:latest
+    container_name: clisonix-ocean-core
+    restart: unless-stopped
+    environment:
+      PYTHONUNBUFFERED: "1"
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/0
+      OLLAMA_HOST: http://clisonix-ollama:11434
+      OLLAMA_MODEL: llama3.1:8b
+      OCEAN_PORT: "8030"
+      LOG_LEVEL: info
+    ports:
+      - "8030:8030"
+    depends_on:
+      redis:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8030/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - clisonix-prod
+
+  # ═══════════════════════════════════════════════════════
+  # BACKEND API (CRITICAL)
+  # ═══════════════════════════════════════════════════════
+  api:
+    image: clisonix-api:latest
+    container_name: clisonix-api
+    restart: unless-stopped
+    environment:
+      PYTHONUNBUFFERED: "1"
+      APP_ENV: ${ENVIRONMENT}
+      DEBUG: ${DEBUG}
+      LOG_LEVEL: ${LOG_LEVEL}
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@postgres:5432/${DB_NAME}
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/0
+      JWT_SECRET: ${JWT_SECRET}
+      API_PORT: ${API_PORT}
+      API_WORKERS: ${API_WORKERS}
+      OCEAN_CORE_URL: http://ocean-core:8030
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      ocean-core:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${API_PORT}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - clisonix-prod
+
+  # ═══════════════════════════════════════════════════════
+  # FRONTEND WEB (CRITICAL)
+  # ═══════════════════════════════════════════════════════
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web-clean
+    image: clisonix-web:latest
+    container_name: clisonix-web
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+      NEXT_PUBLIC_OCEAN_URL: ${NEXT_PUBLIC_OCEAN_URL}
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - clisonix-prod
+
+  # ═══════════════════════════════════════════════════════
+  # NGINX REVERSE PROXY (CRITICAL)
+  # ═══════════════════════════════════════════════════════
+  nginx:
+    image: nginx:alpine
+    container_name: clisonix-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.production.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    depends_on:
+      - api
+      - web
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - clisonix-prod
+
+volumes:
+  postgres-data:
+    driver: local
+  ollama-data:
+    driver: local
+  ollama-models:
+    driver: local
+
+networks:
+  clisonix-prod:
+    driver: bridge

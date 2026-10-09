@@ -1,0 +1,693 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# DOCKERFILE.ALPHABET - Binary Alphabet Layers Microservice
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# 61 Mathematical Layers (Greek 24 + Albanian 36 + Meta 1)
+# BINARY ONLY - CBOR2, MessagePack, Custom Binary Protocol
+# NO JSON - Pure binary communication for performance
+#
+# Port: 8061 (symbolizing 61 layers)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+FROM python:3.13
+
+LABEL maintainer="Clisonix Cloud Team"
+LABEL description="Alphabet Layers - Binary Mathematical Engine"
+LABEL version="1.0.0"
+LABEL protocol="binary-only"
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    ALPHABET_PORT=8061 \
+    BINARY_ONLY=true
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install binary protocol dependencies
+RUN pip install --no-cache-dir \
+    fastapi \
+    uvicorn \
+    cbor2 \
+    msgpack \
+    numpy \
+    httpx
+
+# Copy alphabet layers and binary modules
+COPY ocean-core/alphabet_layers.py ./
+COPY ocean-core/curiosity_algebra/binary_algebra.py ./
+COPY ocean-core/curiosity_algebra/binary_protocols.py ./
+COPY ocean-core/curiosity_algebra/cbp_protocol.py ./
+
+# Create Binary Alphabet Service
+COPY <<EOF /app/alphabet_service.py
+"""
+🔤 ALPHABET LAYERS BINARY MICROSERVICE
+═══════════════════════════════════════
+61 Mathematical Layers - BINARY ONLY (CBOR2, MessagePack)
+NO JSON ENDPOINTS - Pure binary for performance
+
+Layers:
+- 1-24: Greek (α-ω) - Pure mathematics
+- 25-60: Albanian (a-zh) - Phonetic mathematics  
+- 61: Meta-layer (Ω+) - Unified consciousness
+"""
+
+import os
+import time
+import struct
+import logging
+from datetime import datetime, timezone
+from typing import Dict, Any, List, Optional, Union
+from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi.middleware.cors import CORSMiddleware
+import numpy as np
+
+# REQUIRED: Binary protocols - NO FALLBACK
+import cbor2
+import msgpack
+
+from alphabet_layers import AlbanianGreekLayerSystem, LayerResult
+from binary_algebra import BinaryNumber, BinaryOp, get_binary_algebra
+from binary_protocols import BinaryFormat, BinaryMessage, SignalPacket, DataType
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("AlphabetService")
+
+ALPHABET_PORT = int(os.getenv("ALPHABET_PORT", "8061"))
+
+# API Version prefix
+API_V1 = "/api/v1"
+
+app = FastAPI(
+    title="Alphabet Layers - Binary Engine",
+    description="61 Mathematical Layers - BINARY ONLY (CBOR2/MessagePack)",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+# Initialize Alphabet System
+alphabet_system = AlbanianGreekLayerSystem()
+binary_algebra = get_binary_algebra()
+START_TIME = time.time()
+
+# Statistics
+stats = {
+    "cbor_requests": 0,
+    "msgpack_requests": 0,
+    "layers_computed": 0,
+    "binary_ops": 0
+}
+
+
+def detect_format(content_type: str) -> BinaryFormat:
+    """Detect binary format from content-type"""
+    if "cbor" in content_type.lower():
+        return BinaryFormat.CBOR2
+    elif "msgpack" in content_type.lower():
+        return BinaryFormat.MSGPACK
+    elif "octet-stream" in content_type.lower():
+        return BinaryFormat.CUSTOM_BINARY
+    return BinaryFormat.CBOR2  # Default
+
+
+def decode_binary(data: bytes, fmt: BinaryFormat) -> Dict[str, Any]:
+    """Decode binary data"""
+    if fmt == BinaryFormat.CBOR2:
+        return cbor2.loads(data)
+    elif fmt == BinaryFormat.MSGPACK:
+        return msgpack.loads(data, raw=False)
+    elif fmt == BinaryFormat.CUSTOM_BINARY:
+        # Custom format: 4 bytes length + CBOR payload
+        length = struct.unpack(">I", data[:4])[0]
+        return cbor2.loads(data[4:4+length])
+    return cbor2.loads(data)
+
+
+def encode_binary(data: Dict[str, Any], fmt: BinaryFormat) -> bytes:
+    """Encode data to binary format"""
+    if fmt == BinaryFormat.CBOR2:
+        return cbor2.dumps(data)
+    elif fmt == BinaryFormat.MSGPACK:
+        return msgpack.dumps(data, use_bin_type=True)
+    elif fmt == BinaryFormat.CUSTOM_BINARY:
+        cbor_data = cbor2.dumps(data)
+        return struct.pack(">I", len(cbor_data)) + cbor_data
+    return cbor2.dumps(data)
+
+
+def binary_response(data: Dict[str, Any], fmt: BinaryFormat) -> Response:
+    """Create binary response"""
+    content = encode_binary(data, fmt)
+    media_type = {
+        BinaryFormat.CBOR2: "application/cbor",
+        BinaryFormat.MSGPACK: "application/msgpack",
+        BinaryFormat.CUSTOM_BINARY: "application/octet-stream"
+    }.get(fmt, "application/cbor")
+    
+    return Response(content=content, media_type=media_type)
+
+
+# ══════════════════════════════════════════════════════════════════════
+# HEALTH & STATUS (JSON allowed for monitoring)
+# ══════════════════════════════════════════════════════════════════════
+
+@app.get(f"{API_V1}/health")
+@app.get("/health")
+async def health_check():
+    """Health check - JSON for monitoring compatibility"""
+    return {
+        "status": "healthy",
+        "service": "alphabet-layers",
+        "layers": alphabet_system.alphabet["size"],
+        "binary_only": True,
+        "formats": ["cbor2", "msgpack", "custom-binary"],
+        "uptime_seconds": time.time() - START_TIME,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.get(f"{API_V1}/status")
+@app.get("/api/status")
+async def api_status():
+    """API status endpoint"""
+    return {
+        "service": "Alphabet Layers Binary Engine",
+        "version": "1.0.0",
+        "status": "operational",
+        "layers": 61,
+        "binary_only": True,
+        "uptime_seconds": time.time() - START_TIME,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+
+@app.get(f"{API_V1}/spec")
+async def api_spec():
+    """OpenAPI specification"""
+    return app.openapi()
+
+
+@app.get(f"{API_V1}/info")
+async def get_info():
+    """System info - JSON for compatibility"""
+    return {
+        "service": "Alphabet Layers Binary Engine",
+        "version": "1.0.0",
+        "layers": {
+            "total": 61,
+            "greek": 24,
+            "albanian": 36,
+            "meta": 1
+        },
+        "protocols": {
+            "cbor2": True,
+            "msgpack": True,
+            "custom_binary": True
+        },
+        "endpoints": {
+            "binary": [
+                f"{API_V1}/bin/compute",
+                f"{API_V1}/bin/layer",
+                f"{API_V1}/bin/compose",
+                f"{API_V1}/bin/algebra",
+                f"{API_V1}/bin/stream"
+            ],
+            "monitoring": [
+                f"{API_V1}/health",
+                f"{API_V1}/info",
+                f"{API_V1}/stats"
+            ]
+        },
+        "stats": stats
+    }
+
+
+@app.get(f"{API_V1}/stats")
+async def get_stats():
+    """Statistics"""
+    return {
+        **stats,
+        "uptime_hours": (time.time() - START_TIME) / 3600,
+        "layers_available": alphabet_system.alphabet["size"],
+        "layer_history_size": len(alphabet_system.layer_history)
+    }
+
+
+# ══════════════════════════════════════════════════════════════════════
+# BINARY ENDPOINTS - CBOR2 / MessagePack / Custom Binary
+# ══════════════════════════════════════════════════════════════════════
+
+@app.post(f"{API_V1}/bin/compute")
+async def binary_compute(request: Request):
+    """
+    🔢 BINARY COMPUTE - Process through alphabet layers
+    
+    Input (CBOR/MessagePack):
+    {
+        "input": <any value>,
+        "layers": ["α", "β", "a", "ë"] or null for all,
+        "mode": "sequential" | "parallel" | "meta"
+    }
+    
+    Output: Binary response with layer results
+    """
+    content_type = request.headers.get("content-type", "application/cbor")
+    fmt = detect_format(content_type)
+    
+    # Track stats
+    if fmt == BinaryFormat.CBOR2:
+        stats["cbor_requests"] += 1
+    else:
+        stats["msgpack_requests"] += 1
+    
+    try:
+        raw_body = await request.body()
+        body = decode_binary(raw_body, fmt)
+        
+        input_value = body.get("input", 0)
+        layers = body.get("layers", None)
+        mode = body.get("mode", "sequential")
+        
+        results = []
+        
+        if mode == "meta":
+            # Use meta-layer (Layer 61)
+            result = alphabet_system.compute_meta_layer(input_value)
+            results.append({
+                "layer": "Ω+",
+                "layer_number": 61,
+                "input": input_value,
+                "output": float(result) if isinstance(result, (int, float, np.number)) else result,
+                "type": "meta"
+            })
+        elif layers:
+            # Specific layers
+            for layer_name in layers:
+                if layer_name in alphabet_system.layers:
+                    output = alphabet_system.layers[layer_name](input_value)
+                    results.append({
+                        "layer": layer_name,
+                        "input": input_value,
+                        "output": float(output) if isinstance(output, (int, float, np.number)) else output
+                    })
+                    input_value = output  # Chain for sequential
+        else:
+            # All layers
+            for layer_name, layer_fn in list(alphabet_system.layers.items())[:10]:  # Limit for performance
+                output = layer_fn(input_value)
+                results.append({
+                    "layer": layer_name,
+                    "input": input_value,
+                    "output": float(output) if isinstance(output, (int, float, np.number)) else output
+                })
+        
+        stats["layers_computed"] += len(results)
+        
+        response_data = {
+            "status": "computed",
+            "mode": mode,
+            "layers_processed": len(results),
+            "results": results,
+            "timestamp": time.time()
+        }
+        
+        return binary_response(response_data, fmt)
+        
+    except Exception as e:
+        logger.error(f"Binary compute error: {e}")
+        return binary_response({"error": str(e), "status": "error"}, fmt)
+
+
+@app.post(f"{API_V1}/bin/layer")
+async def binary_single_layer(request: Request):
+    """
+    🔤 BINARY SINGLE LAYER - Execute one layer
+    
+    Input: {"layer": "α", "value": 42}
+    Output: Binary result
+    """
+    content_type = request.headers.get("content-type", "application/cbor")
+    fmt = detect_format(content_type)
+    
+    if fmt == BinaryFormat.CBOR2:
+        stats["cbor_requests"] += 1
+    else:
+        stats["msgpack_requests"] += 1
+    
+    try:
+        raw_body = await request.body()
+        body = decode_binary(raw_body, fmt)
+        
+        layer_name = body.get("layer", "α")
+        value = body.get("value", 0)
+        
+        if layer_name not in alphabet_system.layers:
+            return binary_response({
+                "error": f"Layer '{layer_name}' not found",
+                "available_layers": list(alphabet_system.layers.keys())[:20]
+            }, fmt)
+        
+        output = alphabet_system.layers[layer_name](value)
+        stats["layers_computed"] += 1
+        
+        # Get phonetic properties if available
+        phonetic = alphabet_system.phonetic_map.get(layer_name, {})
+        
+        return binary_response({
+            "layer": layer_name,
+            "input": value,
+            "output": float(output) if isinstance(output, (int, float, np.number)) else output,
+            "phonetic": phonetic,
+            "timestamp": time.time()
+        }, fmt)
+        
+    except Exception as e:
+        return binary_response({"error": str(e)}, fmt)
+
+
+@app.post(f"{API_V1}/bin/compose")
+async def binary_compose_word(request: Request):
+    """
+    🔤 BINARY WORD COMPOSITION - Compose word through layers
+    
+    Input: {"word": "shqip", "include_phonetics": true}
+    Output: Binary composition result
+    """
+    content_type = request.headers.get("content-type", "application/cbor")
+    fmt = detect_format(content_type)
+    
+    if fmt == BinaryFormat.CBOR2:
+        stats["cbor_requests"] += 1
+    else:
+        stats["msgpack_requests"] += 1
+    
+    try:
+        raw_body = await request.body()
+        body = decode_binary(raw_body, fmt)
+        
+        word = body.get("word", "")
+        include_phonetics = body.get("include_phonetics", False)
+        
+        if not word:
+            return binary_response({"error": "Word required"}, fmt)
+        
+        # Compose word through layers
+        result = alphabet_system.compose_word(word)
+        
+        response_data = {
+            "word": word,
+            "composition": {
+                "final_value": float(result.get("total_value", 0)),
+                "layers_used": result.get("layers", []),
+                "complexity": float(result.get("complexity", 0))
+            },
+            "timestamp": time.time()
+        }
+        
+        if include_phonetics:
+            response_data["phonetics"] = result.get("phonetics", {})
+        
+        return binary_response(response_data, fmt)
+        
+    except Exception as e:
+        return binary_response({"error": str(e)}, fmt)
+
+
+@app.post(f"{API_V1}/bin/algebra")
+async def binary_algebra_op(request: Request):
+    """
+    🔢 BINARY ALGEBRA - Perform binary algebra operations
+    
+    Input: {
+        "op": "XOR",  // AND, OR, XOR, NOT, NAND, SHL, SHR, ADD, etc.
+        "a": 255,
+        "b": 128,
+        "bits": 8
+    }
+    Output: Binary result with bit representation
+    """
+    content_type = request.headers.get("content-type", "application/cbor")
+    fmt = detect_format(content_type)
+    
+    if fmt == BinaryFormat.CBOR2:
+        stats["cbor_requests"] += 1
+    else:
+        stats["msgpack_requests"] += 1
+    
+    try:
+        raw_body = await request.body()
+        body = decode_binary(raw_body, fmt)
+        
+        op_name = body.get("op", "XOR").upper()
+        a = body.get("a", 0)
+        b = body.get("b", 0)
+        bits = body.get("bits", 64)
+        
+        # Create binary numbers
+        num_a = BinaryNumber(a, bits)
+        num_b = BinaryNumber(b, bits)
+        
+        # Perform operation
+        op_map = {
+            "AND": lambda: num_a & num_b,
+            "OR": lambda: num_a | num_b,
+            "XOR": lambda: num_a ^ num_b,
+            "NOT": lambda: ~num_a,
+            "NAND": lambda: ~(num_a & num_b),
+            "NOR": lambda: ~(num_a | num_b),
+            "SHL": lambda: BinaryNumber(num_a.value << b, bits),
+            "SHR": lambda: BinaryNumber(num_a.value >> b, bits),
+            "ADD": lambda: BinaryNumber(num_a.value + num_b.value, bits),
+            "SUB": lambda: BinaryNumber(num_a.value - num_b.value, bits),
+            "MUL": lambda: BinaryNumber(num_a.value * num_b.value, bits)
+        }
+        
+        if op_name not in op_map:
+            return binary_response({
+                "error": f"Unknown operation: {op_name}",
+                "available_ops": list(op_map.keys())
+            }, fmt)
+        
+        result = op_map[op_name]()
+        stats["binary_ops"] += 1
+        
+        return binary_response({
+            "operation": op_name,
+            "inputs": {
+                "a": {"value": a, "binary": num_a.binary, "hex": num_a.hex},
+                "b": {"value": b, "binary": num_b.binary, "hex": num_b.hex}
+            },
+            "result": {
+                "value": result.value,
+                "binary": result.binary,
+                "hex": result.hex,
+                "ones": result.count_ones(),
+                "zeros": result.count_zeros()
+            },
+            "bits": bits,
+            "timestamp": time.time()
+        }, fmt)
+        
+    except Exception as e:
+        return binary_response({"error": str(e)}, fmt)
+
+
+@app.post(f"{API_V1}/bin/stream")
+async def binary_stream_signals(request: Request):
+    """
+    📡 BINARY SIGNAL STREAM - Process signal stream
+    
+    Input: {
+        "signals": [{"type": "metric", "value": 0.5}, ...],
+        "aggregate": true
+    }
+    Output: Binary processed signals
+    """
+    content_type = request.headers.get("content-type", "application/cbor")
+    fmt = detect_format(content_type)
+    
+    if fmt == BinaryFormat.CBOR2:
+        stats["cbor_requests"] += 1
+    else:
+        stats["msgpack_requests"] += 1
+    
+    try:
+        raw_body = await request.body()
+        body = decode_binary(raw_body, fmt)
+        
+        signals = body.get("signals", [])
+        aggregate = body.get("aggregate", False)
+        
+        processed = []
+        for i, sig in enumerate(signals):
+            # Apply layer transformation
+            value = sig.get("value", 0)
+            sig_type = sig.get("type", "metric")
+            
+            # Use different layers based on signal type
+            if sig_type == "metric":
+                transformed = alphabet_system.layers.get("α", lambda x: x)(value)
+            elif sig_type == "event":
+                transformed = alphabet_system.layers.get("β", lambda x: x)(value)
+            else:
+                transformed = alphabet_system.layers.get("γ", lambda x: x)(value)
+            
+            processed.append({
+                "index": i,
+                "original": value,
+                "transformed": float(transformed) if isinstance(transformed, (int, float, np.number)) else transformed,
+                "type": sig_type
+            })
+        
+        result = {
+            "signals_processed": len(processed),
+            "signals": processed,
+            "timestamp": time.time()
+        }
+        
+        if aggregate and processed:
+            values = [p["transformed"] for p in processed if isinstance(p["transformed"], (int, float))]
+            if values:
+                result["aggregate"] = {
+                    "sum": sum(values),
+                    "mean": sum(values) / len(values),
+                    "min": min(values),
+                    "max": max(values)
+                }
+        
+        return binary_response(result, fmt)
+        
+    except Exception as e:
+        return binary_response({"error": str(e)}, fmt)
+
+
+@app.post(f"{API_V1}/bin/matrix")
+async def binary_matrix_op(request: Request):
+    """
+    🔢 BINARY MATRIX - Matrix operations in binary
+    
+    Input: {
+        "matrix_a": [[1,2],[3,4]],
+        "matrix_b": [[5,6],[7,8]],
+        "op": "multiply" | "add" | "xor"
+    }
+    """
+    content_type = request.headers.get("content-type", "application/cbor")
+    fmt = detect_format(content_type)
+    
+    if fmt == BinaryFormat.CBOR2:
+        stats["cbor_requests"] += 1
+    else:
+        stats["msgpack_requests"] += 1
+    
+    try:
+        raw_body = await request.body()
+        body = decode_binary(raw_body, fmt)
+        
+        matrix_a = np.array(body.get("matrix_a", [[1]]))
+        matrix_b = np.array(body.get("matrix_b", [[1]]))
+        op = body.get("op", "multiply")
+        
+        if op == "multiply":
+            result = np.matmul(matrix_a, matrix_b)
+        elif op == "add":
+            result = matrix_a + matrix_b
+        elif op == "xor":
+            result = np.bitwise_xor(matrix_a.astype(int), matrix_b.astype(int))
+        else:
+            result = matrix_a
+        
+        stats["binary_ops"] += 1
+        
+        return binary_response({
+            "operation": op,
+            "result": result.tolist(),
+            "shape": list(result.shape),
+            "timestamp": time.time()
+        }, fmt)
+        
+    except Exception as e:
+        return binary_response({"error": str(e)}, fmt)
+
+
+# ══════════════════════════════════════════════════════════════════════
+# LAYER INTROSPECTION (JSON for debugging)
+# ══════════════════════════════════════════════════════════════════════
+
+@app.get(f"{API_V1}/layers")
+async def list_layers():
+    """List all 61 layers"""
+    return {
+        "total": 61,
+        "greek": {
+            "count": 24,
+            "letters": alphabet_system.alphabet["greek"]
+        },
+        "albanian": {
+            "count": 36,
+            "letters": alphabet_system.alphabet["albanian"]
+        },
+        "meta": {
+            "name": "Ω+",
+            "number": 61,
+            "description": "Unified consciousness layer"
+        }
+    }
+
+
+@app.get(f"{API_V1}/layers/{{layer_name}}")
+async def get_layer_info(layer_name: str):
+    """Get layer details"""
+    if layer_name not in alphabet_system.layers and layer_name != "Ω+":
+        raise HTTPException(status_code=404, detail=f"Layer '{layer_name}' not found")
+    
+    phonetic = alphabet_system.phonetic_map.get(layer_name, {})
+    
+    # Determine layer number
+    if layer_name in alphabet_system.alphabet["greek"]:
+        layer_num = alphabet_system.alphabet["greek"].index(layer_name) + 1
+        layer_type = "greek"
+    elif layer_name in alphabet_system.alphabet["albanian"]:
+        layer_num = alphabet_system.alphabet["albanian"].index(layer_name) + 25
+        layer_type = "albanian"
+    else:
+        layer_num = 61
+        layer_type = "meta"
+    
+    return {
+        "layer": layer_name,
+        "number": layer_num,
+        "type": layer_type,
+        "phonetic_properties": phonetic
+    }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    logger.info(f"🔤 Starting Alphabet Layers Binary Engine on port {ALPHABET_PORT}")
+    logger.info(f"📊 Layers: {alphabet_system.alphabet['size']} + Meta = 61")
+    logger.info(f"🔧 Protocols: CBOR2, MessagePack, Custom Binary")
+    logger.info(f"❌ NO JSON for computation endpoints - BINARY ONLY")
+    uvicorn.run(app, host="0.0.0.0", port=ALPHABET_PORT)
+EOF
+
+EXPOSE 8061
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:8061/health || exit 1
+
+CMD ["python", "alphabet_service.py"]

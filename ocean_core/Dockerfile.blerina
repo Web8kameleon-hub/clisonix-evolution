@@ -1,0 +1,47 @@
+# Ocean Core v2 - Blerina (Advanced Architecture Processing)
+# Specialized Dockerfile for Blerina with EAP pipeline and gap detection
+
+FROM python:3.13-slim
+
+LABEL maintainer="Clisonix Cloud"
+LABEL description="Ocean Core v2 Blerina - Advanced Architecture Processing"
+LABEL version="2.0.0"
+
+# System dependencies for multimedia and architecture analysis
+RUN apt-get update && apt-get install -y \
+    curl \
+    ffmpeg \
+    graphviz \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy Ocean Core modules and dependencies
+COPY ocean_core_full.py .
+COPY ocean_blerina_core.py .
+COPY run_ocean_blerina.py .
+COPY requirements.txt .
+
+# Copy all supporting engines and modules
+COPY *.py ./
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Environment configuration
+ENV PYTHONUNBUFFERED=1
+ENV OCEAN_MODE=blerina
+ENV OCEAN_PORT=8032
+ENV LOG_LEVEL=INFO
+
+# Health check endpoint
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:${OCEAN_PORT}/health || exit 1
+
+# Expose port
+EXPOSE 8032
+
+# Entry point with proper signal handling
+CMD ["python", "run_ocean_blerina.py"]

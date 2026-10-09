@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  bucharest-nanotechnology-lab:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lab
+    container_name: clisonix-lab-bucharest-nanotechnology
+    environment:
+      LAB_ID: "Bucharest_Nanotechnology"
+      LAB_TYPE: "Nanotechnology"
+      LAB_NAME: "Bucharest Nanotechnology Lab"
+      LAB_FUNCTION: "Nanotechnology & Nanomaterials"
+      API_KEY: "sekret-real"
+    ports:
+      - "8120:8100"
+    volumes:
+      - ../data/bucharest-nanotechnology:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
