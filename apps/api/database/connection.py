@@ -3,10 +3,11 @@
 # Industrial Redis Caching, Session Management
 
 import os
-from sqlalchemy import create_engine, MetaData
+from sqlalchemy import create_engine, MetaData, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.pool import QueuePool
+from .configuration import database_url, engine_options
 from contextlib import contextmanager
 import redis
 import json
@@ -28,8 +29,8 @@ class DatabaseConfig:
         self.DB_NAME = os.getenv('DB_NAME', 'Clisonix')
         
         # Connection pooling
-        self.POOL_SIZE = int(os.getenv('DB_POOL_SIZE', '20'))
-        self.MAX_OVERFLOW = int(os.getenv('DB_MAX_OVERFLOW', '30'))
+        self.POOL_SIZE = int(os.getenv('DB_POOL_SIZE', '2'))
+        self.MAX_OVERFLOW = int(os.getenv('DB_MAX_OVERFLOW', '0'))
         self.POOL_TIMEOUT = int(os.getenv('DB_POOL_TIMEOUT', '30'))
         self.POOL_RECYCLE = int(os.getenv('DB_POOL_RECYCLE', '3600'))
         
@@ -46,19 +47,14 @@ class DatabaseConfig:
     @property
     def database_url(self) -> str:
         """Get database URL"""
-        return f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+        return database_url()
 
 config = DatabaseConfig()
 
 # Create SQLAlchemy engine with connection pooling
 engine = create_engine(
     config.database_url,
-    poolclass=QueuePool,
-    pool_size=config.POOL_SIZE,
-    max_overflow=config.MAX_OVERFLOW,
-    pool_timeout=config.POOL_TIMEOUT,
-    pool_recycle=config.POOL_RECYCLE,
-    pool_pre_ping=True,  # Verify connections before use
+    **engine_options(config.database_url),
     echo=config.ENVIRONMENT == 'development',  # Log SQL in development
     future=True  # Use SQLAlchemy 2.0 style
 )
@@ -71,26 +67,15 @@ SessionLocal = sessionmaker(
     expire_on_commit=False
 )
 
-# Redis client for caching
+# Construct cache clients only when configured; health probes own connectivity checks.
 redis_client = None
-try:
-    redis_client = redis.Redis(
-        host=config.REDIS_HOST,
-        port=config.REDIS_PORT,
-        db=config.REDIS_DB,
-        password=config.REDIS_PASSWORD,
-        decode_responses=True,
-        socket_connect_timeout=5,
-        socket_timeout=5,
-        retry_on_timeout=True,
-        health_check_interval=30
-    )
-    # Test connection
-    redis_client.ping()
-    logger.info("âœ… Redis connection established")
-except Exception as e:
-    logger.warning(f"âš ï¸ Redis connection failed: {e}")
-    redis_client = None
+if os.getenv("REDIS_URL"):
+    redis_client = redis.Redis.from_url(os.environ["REDIS_URL"], decode_responses=True,
+                                       socket_connect_timeout=2, socket_timeout=2)
+elif os.getenv("REDIS_HOST"):
+    redis_client = redis.Redis(host=config.REDIS_HOST, port=config.REDIS_PORT,
+                               db=config.REDIS_DB, password=config.REDIS_PASSWORD,
+                               decode_responses=True, socket_connect_timeout=2, socket_timeout=2)
 
 # Database session dependency
 @contextmanager
@@ -199,7 +184,7 @@ def check_database_health() -> Dict[str, Any]:
     try:
         with get_db_session() as session:
             # Simple query to test connection
-            result = session.execute("SELECT 1 as health_check")
+            result = session.execute(text("SELECT 1 as health_check"))
             row = result.fetchone()
             
             if row and row[0] == 1:

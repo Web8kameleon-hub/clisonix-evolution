@@ -1,23 +1,8 @@
 import { currentUser } from "@/lib/auth/server";
+import { checkoutRedirect } from "@/lib/billing/checkout";
 import { apiError, apiSuccess } from "@/lib/api/response";
 import { trackEconomyServer } from "@/lib/economy/track";
 import Stripe from "stripe";
-
-function resolveBaseUrl(request: Request): string {
-  const forwardedProto = request.headers.get("x-forwarded-proto");
-  const forwardedHost = request.headers.get("x-forwarded-host");
-  const host = forwardedHost || request.headers.get("host");
-
-  if (host) {
-    return `${forwardedProto || "https"}://${host}`;
-  }
-
-  if (process.env.NEXT_PUBLIC_APP_URL) {
-    return process.env.NEXT_PUBLIC_APP_URL;
-  }
-
-  throw new Error("APP_URL_NOT_CONFIGURED");
-}
 
 export async function POST(request: Request) {
   try {
@@ -50,10 +35,12 @@ export async function POST(request: Request) {
 
     const customers = await stripe.customers.list({
       email: customerEmail,
-      limit: 1,
+      limit: 100,
     });
 
-    if (customers.data.length === 0) {
+    const customer = customers.data.find(candidate => candidate.metadata.user_id === user.id) ||
+      customers.data.find(candidate => !candidate.metadata.user_id);
+    if (!customer) {
       return apiError(
         "CUSTOMER_NOT_FOUND",
         "No Stripe customer was found for this account",
@@ -65,9 +52,9 @@ export async function POST(request: Request) {
     }
 
     const session = await stripe.billingPortal.sessions.create({
-      customer: customers.data[0].id,
+      customer: customer.id,
       return_url:
-        body.returnUrl || `${resolveBaseUrl(request)}/modules/account`,
+        checkoutRedirect(request, body.returnUrl, "/modules/account"),
     });
 
     await trackEconomyServer({
@@ -75,13 +62,13 @@ export async function POST(request: Request) {
       slot: "billing",
       placement_id: "billing-portal-opened",
       metadata: {
-        customerId: customers.data[0].id,
+        customerId: customer.id,
       },
     });
 
     return apiSuccess({
       url: session.url,
-      customerId: customers.data[0].id,
+      customerId: customer.id,
     });
   } catch (error: unknown) {
     await trackEconomyServer({

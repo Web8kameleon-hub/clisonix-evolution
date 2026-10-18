@@ -118,7 +118,11 @@ fitness_router = APIRouter(prefix="/fitness", tags=["fitness"])
 
 def get_db() -> Session:
     """Get database session - adjust based on your setup"""
-    from apps.api.database.models import SessionLocal
+    from apps.api.database.connection import SessionLocal
+    from apps.api.database.connection import engine
+    if engine.dialect.name == "sqlite":
+        from apps.api.database.fitness_models import Base
+        Base.metadata.create_all(engine)
     db = SessionLocal()
     try:
         yield db

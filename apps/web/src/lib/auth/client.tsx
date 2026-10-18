@@ -25,6 +25,8 @@ function mapUser(data: ReturnType<typeof useSession>["data"]): ClientUser | null
         name?: string | null;
         email?: string | null;
         image?: string | null;
+        role?: "admin" | "user";
+        plan?: string;
       }
     | undefined;
 
@@ -44,7 +46,10 @@ function mapUser(data: ReturnType<typeof useSession>["data"]): ClientUser | null
     imageUrl: sessionUser.image || null,
     emailAddresses: [{ emailAddress: sessionUser.email }],
     unsafeMetadata: {},
-    publicMetadata: {},
+    publicMetadata: {
+      role: sessionUser.role || "user",
+      plan: sessionUser.plan || "mesh_daily",
+    },
   };
 }
 
@@ -70,8 +75,8 @@ export function useUser() {
   );
 }
 
-export async function signIn(provider: string = "google") {
-  return nextAuthSignIn(provider);
+export async function signIn(provider: string = "credentials", options?: Parameters<typeof nextAuthSignIn>[1]) {
+  return nextAuthSignIn(provider, options);
 }
 
 export async function signOut(options?: { callbackUrl?: string }) {

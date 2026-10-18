@@ -38,23 +38,25 @@ export async function GET() {
     // Search for customer by email
     const customers = await stripe.customers.list({
       email: customerEmail,
-      limit: 1,
+      limit: 100,
     });
 
-    if (customers.data.length === 0) {
+    const customer = customers.data.find(candidate => candidate.metadata.user_id === user.id) ||
+      customers.data.find(candidate => !candidate.metadata.user_id);
+    if (!customer) {
       return apiSuccess({
         subscription: null,
         message: "No customer found",
       });
     }
 
-    const customerId = customers.data[0].id;
+    const customerId = customer.id;
 
     // Fetch active subscriptions
     const subscriptions = await stripe.subscriptions.list({
       customer: customerId,
       status: "all",
-      limit: 1,
+      limit: 100,
     });
 
     if (subscriptions.data.length === 0) {
@@ -64,7 +66,7 @@ export async function GET() {
       });
     }
 
-    const sub = subscriptions.data[0];
+    const sub = subscriptions.data.find(candidate => ["active", "trialing"].includes(candidate.status)) || subscriptions.data[0];
     const priceItem = sub.items?.data?.[0];
 
     // Determine plan name from price metadata or product name
@@ -96,12 +98,10 @@ export async function GET() {
       plan: planName,
       status: statusMap[sub.status] || sub.status,
       currentPeriodStart: new Date(
-        ((sub as unknown as Record<string, number>).current_period_start || 0) *
-          1000,
+        ((sub as unknown as Record<string, number>).current_period_start || priceItem?.current_period_start || 0) * 1000,
       ).toISOString(),
       currentPeriodEnd: new Date(
-        ((sub as unknown as Record<string, number>).current_period_end || 0) *
-          1000,
+        ((sub as unknown as Record<string, number>).current_period_end || priceItem?.current_period_end || 0) * 1000,
       ).toISOString(),
       cancelAtPeriodEnd: sub.cancel_at_period_end || false,
       amount: (priceItem?.price?.unit_amount || 0) / 100,

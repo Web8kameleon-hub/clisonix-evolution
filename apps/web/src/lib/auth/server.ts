@@ -14,6 +14,8 @@ type SessionUser = {
   email: string;
   name?: string | null;
   image?: string | null;
+  role?: "admin" | "user";
+  plan?: string;
 };
 
 type AppUser = {
@@ -40,6 +42,8 @@ function toSessionUser(session: AuthSession): SessionUser | null {
     email: user.email,
     name: user.name,
     image: user.image,
+    role: (user as { role?: "admin" | "user" }).role,
+    plan: (user as { plan?: string }).plan,
   };
 }
 
@@ -61,7 +65,10 @@ function toAppUser(user: SessionUser | null): AppUser | null {
     createdAt: Date.now(),
     emailAddresses: [{ emailAddress: user.email }],
     unsafeMetadata: {},
-    publicMetadata: {},
+    publicMetadata: {
+      role: user.role || "user",
+      plan: user.plan || "free",
+    },
   };
 }
 

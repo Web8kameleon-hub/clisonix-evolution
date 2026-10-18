@@ -12,6 +12,7 @@ declare module "next-auth" {
   }
 
   interface User {
+    internalAccessToken?: string;
     role?: "admin" | "user";
     plan?: string;
     email_verified?: boolean;
@@ -20,6 +21,7 @@ declare module "next-auth" {
 
 declare module "next-auth/jwt" {
   interface JWT {
+    internalAccessToken?: string;
     role?: "admin" | "user";
     plan?: string;
     provider?: string;

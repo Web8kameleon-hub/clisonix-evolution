@@ -28,7 +28,8 @@ import requests  # type: ignore[import-untyped]
 
 # FastAPI / ASGI
 from fastapi import (
-    FastAPI, UploadFile, File, Request, HTTPException, APIRouter, Form, Depends, Header, Query
+    FastAPI, UploadFile, File, Request, HTTPException, APIRouter, Form, Depends, Header, Query,
+    WebSocket, WebSocketDisconnect
 )
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -106,7 +107,7 @@ from metrics import MetricsMiddleware, get_metrics
 
 # Curiosity Ocean - Groq + Hybrid Biometric Integration
 try:
-    from .ocean_routes import router as ocean_router
+    from apps.api.ocean_routes import router as ocean_router
     _OCEAN_AVAILABLE = True
 except ImportError:
     _OCEAN_AVAILABLE = False
@@ -319,6 +320,15 @@ app = FastAPI(
     version=settings.api_version,
     debug=settings.debug,
 )
+
+from longo_client import LongoClient
+longo_client = LongoClient(os.environ["LONGO_URL"]) if os.getenv("LONGO_URL") else None
+
+
+@app.on_event("shutdown")
+async def close_longo_connection():
+    if longo_client is not None:
+        await longo_client.close()
 
 # --- Middleware ---
 app.add_middleware(MetricsMiddleware)
@@ -2768,12 +2778,13 @@ async def on_startup():
             redis_client = None
 
     # Postgres
-    if _PG and settings.database_url and asyncpg is not None:
+    if (_PG and settings.database_url and asyncpg is not None
+            and settings.database_url.startswith(("postgresql://", "postgres://"))):
         try:
             pg_pool = await asyncpg.create_pool(
                 settings.database_url,
                 min_size=1,
-                max_size=10,
+                max_size=int(os.getenv("DB_POOL_SIZE", "2")),
                 command_timeout=10,
             )
             async with pg_pool.acquire() as conn:

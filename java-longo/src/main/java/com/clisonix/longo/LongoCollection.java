@@ -30,7 +30,28 @@ public class LongoCollection implements Serializable {
 
     public Document insert(Document doc) {
         Document stored = doc.copy();
+        if (documents.containsKey(stored.getId())) {
+            throw new DuplicateDocumentException(stored.getId());
+        }
         documents.put(stored.getId(), stored);
+        indexDocument(stored);
+        return stored.copy();
+    }
+
+    public Document getById(String documentId) {
+        Document document = documents.get(documentId);
+        return document == null ? null : document.copy();
+    }
+
+    public Document replace(String documentId, Document replacement) {
+        Document existing = documents.get(documentId);
+        if (existing == null) {
+            return null;
+        }
+        deIndexDocument(existing);
+        Document stored = replacement.copy();
+        stored.setId(documentId);
+        documents.put(documentId, stored);
         indexDocument(stored);
         return stored.copy();
     }
@@ -76,6 +97,15 @@ public class LongoCollection implements Serializable {
         return toDelete.size();
     }
 
+    public boolean deleteById(String documentId) {
+        Document removed = documents.remove(documentId);
+        if (removed == null) {
+            return false;
+        }
+        deIndexDocument(removed);
+        return true;
+    }
+
     public void createIndex(String field) {
         if (indexedFields.contains(field)) {
             return;
@@ -89,6 +119,17 @@ public class LongoCollection implements Serializable {
 
     public int size() {
         return documents.size();
+    }
+
+    LongoCollection copy() {
+        LongoCollection copy = new LongoCollection(name);
+        for (String field : indexedFields) {
+            copy.createIndex(field);
+        }
+        for (Document document : documents.values()) {
+            copy.insert(document);
+        }
+        return copy;
     }
 
     private void indexDocument(Document doc) {

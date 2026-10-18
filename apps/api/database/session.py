@@ -7,6 +7,8 @@ from typing import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import text
+from .configuration import database_url, engine_options
 
 try:
     from ..settings import settings
@@ -16,18 +18,11 @@ except ImportError:
 logger = logging.getLogger(__name__)
 
 # Create async engine with connection pooling
+_database_url = database_url(settings.database_url, asynchronous=True)
 engine = create_async_engine(
-    settings.database_url,
+    _database_url,
     echo=settings.database_echo,
-    pool_size=20,
-    max_overflow=30,
-    pool_pre_ping=True,
-    pool_recycle=3600,  # Recycle connections after 1 hour
-    connect_args={
-        "server_settings": {
-            "application_name": "Clisonix-api",
-        }
-    }
+    **engine_options(_database_url, asynchronous=True),
 )
 
 # Create async session maker
@@ -79,7 +74,7 @@ async def check_db_health() -> bool:
     """Check database connectivity"""
     try:
         async with AsyncSessionLocal() as session:
-            await session.execute("SELECT 1")
+            await session.execute(text("SELECT 1"))
             return True
     except Exception as e:
         logger.error(f"Database health check failed: {e}")

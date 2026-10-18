@@ -5,7 +5,15 @@ on:
     branches: [main]
     paths:
       - tests/unit/test_runtime_route_compatibility.py
+      - tests/unit/test_stripe_webhook.py
+      - tests/unit/test_database_configuration.py
+      - services/user-management/**
+      - java-longo/**
       - apps/api/**
+      - ai_model_versioning.py
+      - model_governance.py
+      - reviewer_identity_registry.py
+      - routes/alba_routes.py
       - apps/web/**
       - ocean_core/**
       - .github/workflows/ghcr-build-push.yml
@@ -33,7 +41,7 @@ jobs:
         service:
           - name: api
             image: clisonix-evolution-api
-            context: ./apps/api
+            context: .
             dockerfile: ./apps/api/Dockerfile
             host_port: 18000
             container_port: 8000
@@ -45,6 +53,13 @@ jobs:
             host_port: 13000
             container_port: 3000
             health_path: /api/health-check
+          - name: user-management
+            image: clisonix-evolution-user-management
+            context: ./services/user-management
+            dockerfile: ./services/user-management/Dockerfile
+            host_port: 18070
+            container_port: 8070
+            health_path: /health
           - name: ocean-core
             image: clisonix-evolution-ocean-core
             context: ./ocean_core
@@ -114,11 +129,18 @@ jobs:
         if: matrix.service.name == 'api'
         run: |
           docker run --rm --entrypoint sh \
-            -e PYTHONPATH=/app \
-            -v "${{ github.workspace }}/tests/unit/test_runtime_route_compatibility.py:/tests/test_runtime_route_compatibility.py:ro" \
+            -e PYTHONPATH=/app:/app/apps/api \
+            -v "${{ github.workspace }}/tests/unit:/tests:ro" \
             local/${{ matrix.service.image }}:${{ github.sha }} \
-            -c 'python -m pip install "pytest>=8.3,<10" && python -m pytest -q /tests/test_runtime_route_compatibility.py'
+            -c 'python -m pip install "pytest>=8.3,<10" && python -m pytest -q /tests/test_runtime_route_compatibility.py /tests/test_stripe_webhook.py /tests/test_database_configuration.py'
 
+
+      - name: Verify persistent auth and billing
+        if: matrix.service.name == 'user-management'
+        run: |
+          docker run --rm --entrypoint sh \
+            local/${{ matrix.service.image }}:${{ github.sha }} \
+            -c 'python -m pip install "pytest>=8.3,<10" && python -m pytest -q tests'
 
       - name: Capture complete API route contract
         if: matrix.service.name == 'api'
@@ -151,12 +173,16 @@ jobs:
         service:
           - name: api
             image: clisonix-evolution-api
-            context: ./apps/api
+            context: .
             dockerfile: ./apps/api/Dockerfile
           - name: web
             image: clisonix-evolution-web
             context: ./apps/web
             dockerfile: ./apps/web/Dockerfile
+          - name: user-management
+            image: clisonix-evolution-user-management
+            context: ./services/user-management
+            dockerfile: ./services/user-management/Dockerfile
           - name: ocean-core
             image: clisonix-evolution-ocean-core
             context: ./ocean_core

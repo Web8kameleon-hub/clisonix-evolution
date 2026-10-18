@@ -15,13 +15,13 @@ public class Main {
 
     private LongoDatabase currentDb;
 
-    public Main(Path storagePath) {
+    public Main(Path storagePath) throws IOException {
         this.storage = new StorageEngine(storagePath);
         this.cluster = storage.loadOrCreate();
         this.currentDb = cluster.getOrCreateDatabase("default");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Main app = new Main(Path.of("data", "longo.bin"));
         app.run();
     }

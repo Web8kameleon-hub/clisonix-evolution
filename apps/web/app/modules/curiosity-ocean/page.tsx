@@ -1,6 +1,6 @@
 ﻿'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { type JSX, useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Sparkles, RefreshCw, Loader2, Mic, Camera, FileText, X, Plus, Settings2, ArrowLeft, Volume2, VolumeX, UserCircle2, Bot } from 'lucide-react';

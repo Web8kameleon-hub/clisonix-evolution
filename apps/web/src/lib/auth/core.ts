@@ -1,59 +1,107 @@
 import NextAuth from "next-auth";
-import Google from "next-auth/providers/google";
+import Credentials from "next-auth/providers/credentials";
 
-const googleClientId =
-  process.env.AUTH_GOOGLE_ID || process.env.GOOGLE_CLIENT_ID || "";
-const googleClientSecret =
-  process.env.AUTH_GOOGLE_SECRET || process.env.GOOGLE_CLIENT_SECRET || "";
-const googleHostedDomain = process.env.AUTH_GOOGLE_HD?.trim() || undefined;
+type InternalLoginResponse = {
+  success?: boolean;
+  valid?: boolean;
+  access_token?: string;
+  session?: { access_token?: string };
+  user?: {
+    id?: string;
+    user_id?: string;
+    email?: string;
+    username?: string | null;
+    display_name?: string | null;
+    role?: string;
+    plan?: string;
+  };
+};
 
-const hasGoogleProvider = Boolean(googleClientId && googleClientSecret);
+async function verifyInternalCredentials(emailOrUsername: string, password: string) {
+  const authBaseUrl = process.env.AUTH_INTERNAL_URL?.trim().replace(/\/+$/, "");
+  if (!authBaseUrl) {
+    throw new Error("Missing AUTH_INTERNAL_URL.");
+  }
 
-const providers = [];
-
-if (hasGoogleProvider) {
-  providers.push(
-    Google({
-      clientId: googleClientId,
-      clientSecret: googleClientSecret,
-      allowDangerousEmailAccountLinking: false,
-      authorization: {
-        params: {
-          prompt: "select_account",
-          access_type: "offline",
-          response_type: "code",
-          include_granted_scopes: true,
-          ...(googleHostedDomain ? { hd: googleHostedDomain } : {}),
-        },
-      },
-      profile(profile) {
-        return {
-          id: profile.sub,
-          name: profile.name,
-          email: profile.email,
-          image: profile.picture,
-          email_verified: profile.email_verified,
-          aud: profile.aud,
-        };
-      },
+  const response = await fetch(`${authBaseUrl}/api/users/login`, {
+    method: "POST",
+    cache: "no-store",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email_or_username: emailOrUsername,
+      password,
     }),
-  );
+    signal: AbortSignal.timeout(6000),
+  });
+
+  if (response.status === 401) {
+    return null;
+  }
+  if (!response.ok) {
+    throw new Error(`Internal authentication failed with HTTP ${response.status}.`);
+  }
+
+  const result = (await response.json()) as InternalLoginResponse;
+  const user = result.user;
+  const userId = user?.user_id || user?.id;
+  const succeeded = result.success ?? result.valid;
+  if (!succeeded || !userId || !user?.email || !result.access_token) {
+    throw new Error("Internal authentication returned an invalid response.");
+  }
+
+  return {
+    id: userId,
+    email: user.email,
+    name: user.display_name || user.username || user.email,
+    role: ["admin", "superadmin"].includes(user.role || "") ? ("admin" as const) : ("user" as const),
+    plan: user.plan || "",
+    internalAccessToken: result.access_token,
+  };
 }
+
+const providers = [
+  Credentials({
+    name: "Clisonix Internal",
+    credentials: {
+      email: { label: "Email", type: "email" },
+      password: { label: "Password", type: "password" },
+    },
+    async authorize(credentials) {
+      const email = String(credentials?.email || "").trim();
+      const password = String(credentials?.password || "");
+      if (!email || !password) {
+        return null;
+      }
+
+      const user = await verifyInternalCredentials(email, password);
+      if (!user) {
+        return null;
+      }
+
+      return {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        plan: user.plan,
+        email_verified: true,
+        internalAccessToken: user.internalAccessToken,
+      };
+    },
+  }),
+];
 
 const envAuthSecret =
   process.env.AUTH_SECRET?.trim() || process.env.NEXTAUTH_SECRET?.trim() || "";
 
-const authSecret =
-  envAuthSecret ||
-  (process.env.NODE_ENV !== "production"
-    ? "clisonix-dev-auth-secret-change-this"
-    : undefined);
+const authSecret = envAuthSecret || undefined;
 
-if (!authSecret && process.env.NODE_ENV === "production") {
-  throw new Error(
-    "Missing Auth secret: set AUTH_SECRET or NEXTAUTH_SECRET in production.",
-  );
-}
+// Auth.js validates the secret when authentication requests are handled.
+// Do not throw during module import: Next.js imports this route at build time.
+
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
@@ -73,17 +121,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async signIn({ user, account, profile }) {
-      if (account?.provider && !user.email) {
+      if (!user.email) {
         return false;
-      }
-
-      if (account?.provider === "google") {
-        const googleProfile = profile as
-          | { email_verified?: unknown }
-          | undefined;
-        if (googleProfile?.email_verified !== true) {
-          return false;
-        }
       }
 
       return true;
@@ -94,6 +133,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           id?: string;
           email_verified?: boolean;
           provider?: string;
+          role?: "admin" | "user";
+          plan?: string;
         };
         userWithId.id =
           (token.sub as string | undefined) ||
@@ -101,34 +142,43 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           "";
         userWithId.email_verified = (token.email_verified as boolean) ?? true;
         userWithId.provider = token.provider as string | undefined;
+        userWithId.role = token.role as "admin" | "user" | undefined;
+        userWithId.plan = token.plan as string | undefined;
       }
       return session;
     },
     async jwt({ token, user, account, profile }) {
-      // Store initial user data from provider
       if (user) {
         token.sub = user.id;
         token.email = user.email;
+        token.role = (user as { role?: "admin" | "user" }).role;
+        token.plan = (user as { plan?: string }).plan;
+        token.internalAccessToken = (user as { internalAccessToken?: string }).internalAccessToken;
+        token.email_verified =
+          (user as { email_verified?: boolean }).email_verified ?? true;
       }
 
-      // Store provider info for retention tracking
+      // Resolve revocation and billing state from the same durable user registry.
+      // The backend token stays inside the encrypted Auth.js cookie, never in Session.
+      if (!token.internalAccessToken || !process.env.AUTH_INTERNAL_URL) return null;
+      const response = await fetch(
+        `${process.env.AUTH_INTERNAL_URL.replace(/\/+$/, "")}/api/users/validate-token`, {
+          method: "POST", cache: "no-store",
+          headers: { Authorization: `Bearer ${token.internalAccessToken}` },
+          signal: AbortSignal.timeout(6000),
+        },
+      );
+      if (response.status === 401) return null;
+      if (!response.ok) throw new Error("Central authentication is unavailable");
+      const state = (await response.json()) as InternalLoginResponse;
+      if (!state.valid || state.user?.user_id !== token.sub) return null;
+      token.plan = state.user.plan;
+      token.role = ["admin", "superadmin"].includes(state.user.role || "") ? "admin" : "user";
+
       if (account) {
         token.provider = account.provider;
-        token.provider_account_id = account.providerAccountId;
         token.expires_at = account.expires_at;
       }
-
-      // Track email verification status from Google profile
-      if (
-        profile &&
-        typeof profile === "object" &&
-        "email_verified" in profile
-      ) {
-        token.email_verified =
-          (profile as { email_verified?: unknown }).email_verified === true;
-      }
-
-      // Set issued_at for session tracking (365-day retention)
       if (!token.iat) {
         token.iat = Math.floor(Date.now() / 1000);
       }

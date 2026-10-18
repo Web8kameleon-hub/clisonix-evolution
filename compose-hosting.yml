@@ -8,6 +8,7 @@ x-ultra-common: &ultra-common
 services:
   postgres:
     image: postgres:16-alpine
+    command: ["postgres", "-c", "shared_buffers=64MB", "-c", "work_mem=2MB", "-c", "maintenance_work_mem=32MB"]
     container_name: clisonix-postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-clisonix}
@@ -28,11 +29,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "1.0"
-          memory: 2G
-        reservations:
           cpus: "0.5"
-          memory: 1G
+          memory: 512M
+        reservations:
+          cpus: "0.1"
+          memory: 128M
   mongodb:
     image: mongo:7
     container_name: clisonix-mongodb
@@ -816,8 +817,8 @@ services:
           memory: 256M
   api:
     build:
-      context: ./apps/api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: apps/api/Dockerfile
     container_name: clisonix-api
     networks:
       default:
@@ -830,14 +831,19 @@ services:
       API_PORT: "8000"
       REPORTING_SERVICE_URL: http://reporting:8001
       JONA_API_URL: http://jona:7777
-      DATABASE_URL: postgresql://${POSTGRES_USER:-clisonix}:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@postgres:5432/${POSTGRES_DB:-clisonixdb}
+      DATABASE_URL: ${API_DATABASE_URL:-sqlite+aiosqlite:////app/data/platform.db}
+      AUTH_INTERNAL_URL: http://user-management:8070
+      LONGO_URL: ${LONGO_URL:-http://longo:8030}
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY:-}
+      DB_POOL_SIZE: "2"
+      DB_MAX_OVERFLOW: "0"
       REDIS_URL: redis://redis:6379/0
       MARKETPLACE_URL: http://clisonix-marketplace:8004
+    volumes:
+      - ./data/api:/app/data
     ports:
       - 8000:8000
     depends_on:
-      postgres:
-        condition: service_healthy
       redis:
         condition: service_healthy
       jona:
@@ -847,7 +853,7 @@ services:
     healthcheck:
       test:
         - CMD-SHELL
-        - curl -fsS http://localhost:8000/health >/dev/null && python -c "import socket; socket.create_connection(('postgres',5432),2).close(); socket.create_connection(('redis',6379),2).close(); socket.create_connection(('jona',7777),2).close()"
+        - curl -fsS http://localhost:8000/health >/dev/null && python -c "import socket; socket.create_connection(('redis',6379),2).close(); socket.create_connection(('jona',7777),2).close()"
       interval: 30s
       timeout: 10s
       retries: 3
@@ -1935,6 +1941,7 @@ services:
       PYTHONUNBUFFERED: "1"
       USER_MANAGEMENT_PORT: "8070"
       CLISONIX_USER_DB: /app/data/users.db
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY:-}
       PUBLIC_WEB_URL: ${PUBLIC_WEB_URL:-https://clisonix.com}
       CLISONIX_BOOTSTRAP_ADMIN_EMAIL: ${CLISONIX_BOOTSTRAP_ADMIN_EMAIL:-}
       CLISONIX_BOOTSTRAP_ADMIN_PASSWORD: ${CLISONIX_BOOTSTRAP_ADMIN_PASSWORD:-}

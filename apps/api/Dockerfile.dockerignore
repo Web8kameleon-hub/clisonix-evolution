@@ -1,0 +1,16 @@
+**
+!apps/
+!apps/api/
+!apps/api/**
+!ai_model_versioning.py
+!model_governance.py
+!reviewer_identity_registry.py
+!routes/
+!routes/alba_routes.py
+**/.env*
+**/node_modules
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/logs
+**/*.log

@@ -7,6 +7,12 @@ RUN mkdir -p /out \
         | xargs -0 javac --release 25 -d /out \
     && jar --create --file /longo.jar --main-class com.clisonix.longo.LongoServer -C /out .
 
+COPY src/test/java ./src/test/java
+RUN mkdir -p /test-out \
+    && find src/test/java -name '*.java' -print0 \
+        | xargs -0 javac --release 25 -cp /out -d /test-out \
+    && java -cp /out:/test-out com.clisonix.longo.LongoRuntimeTest
+
 FROM eclipse-temurin:25-jre
 
 RUN useradd --system --uid 10001 --create-home longo

@@ -57,6 +57,13 @@ public class Document implements Serializable {
         return fields;
     }
 
+    public Map<String, Object> toMap() {
+        Map<String, Object> values = new LinkedHashMap<>();
+        values.put("id", id);
+        values.putAll(fields);
+        return values;
+    }
+
     public Document copy() {
         Document copy = new Document();
         copy.setId(this.id);

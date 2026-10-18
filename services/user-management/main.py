@@ -19,6 +19,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr, Field
 from user_core import (
     AccountStatus,
+    RecoveryEmailUnavailable,
     SubscriptionPlan,
     UserRegistry,
     get_user_registry,
@@ -78,6 +79,23 @@ class ChangePlanRequest(BaseModel):
 class AddCreditsRequest(BaseModel):
     """Shtimi i krediteve"""
     amount: int = Field(..., gt=0)
+
+
+class ForgotPasswordRequest(BaseModel):
+    """Kërkesa për rikuperim fjalëkalimi"""
+    email: EmailStr
+
+
+class ResetPasswordRequest(BaseModel):
+    """Konsumimi i token-it të rikuperimit"""
+    token: str = Field(..., min_length=16)
+    new_password: str = Field(..., min_length=8)
+
+
+class ChangePasswordRequest(BaseModel):
+    """Ndryshimi i fjalëkalimit (i loguar)"""
+    old_password: str = Field(..., min_length=1)
+    new_password: str = Field(..., min_length=8)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -199,11 +217,8 @@ async def register_user(
     Krijo llogari të re me email, username dhe fjalëkalim.
     """
     plan = SubscriptionPlan.FREE
-    if request.plan:
-        try:
-            plan = SubscriptionPlan(request.plan.lower())
-        except ValueError:
-            pass
+    if request.plan and request.plan.lower() != "free":
+        raise HTTPException(400, "Paid plans require a confirmed Stripe payment")
 
     result = registry.register_user(
         email=request.email,
@@ -262,6 +277,71 @@ async def logout_user(
     if session_id:
         return registry.logout(session_id)
     return {"success": True, "message": "Logged out"}
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ACCOUNT RECOVERY ENDPOINTS - Rikuperim fjalëkalimi
+# ═══════════════════════════════════════════════════════════════════════════════
+
+@app.post("/api/users/password/forgot")
+async def forgot_password(
+    request: ForgotPasswordRequest,
+    http_request: Request,
+    registry: UserRegistry = Depends(get_registry)
+):
+    """
+    📧 Kërko rikuperim fjalëkalimi
+
+    Dërgon një email real me lidhje rikuperimi nëse SMTP është
+    konfiguruar. Kthen gjithmonë të njëjtin mesazh suksesi (nuk zbulon
+    nëse email-i ekziston). Nëse SMTP nuk është konfiguruar në këtë
+    mjedis, kthen 503 — asnjëherë nuk shtiret se u dërgua email kur
+    s'u dërgua në të vërtetë.
+    """
+    ip_address = http_request.client.host if http_request.client else None
+    try:
+        result = registry.request_password_reset(request.email, ip_address=ip_address)
+    except RecoveryEmailUnavailable:
+        raise HTTPException(
+            status_code=503,
+            detail="Dërgimi i email-eve të rikuperimit nuk është konfiguruar në këtë mjedis.",
+        )
+    return result
+
+
+@app.post("/api/users/password/reset")
+async def reset_password(
+    request: ResetPasswordRequest,
+    registry: UserRegistry = Depends(get_registry)
+):
+    """
+    🔑 Rivendos fjalëkalimin duke përdorur token-in e rikuperimit
+
+    Çaktivizon të gjitha sesionet ekzistuese pas rivendosjes.
+    """
+    result = registry.reset_password(request.token, request.new_password)
+    if not result["success"]:
+        raise HTTPException(status_code=400, detail=result["error"])
+    return result
+
+
+@app.post("/api/users/password/change")
+async def change_password(
+    request: ChangePasswordRequest,
+    current_user: Dict[str, Any] = Depends(get_current_user),
+    registry: UserRegistry = Depends(get_registry)
+):
+    """
+    🔐 Ndrysho fjalëkalimin (për përdorues të loguar)
+
+    Kërkon fjalëkalimin aktual. Çaktivizon sesionet e tjera pas ndryshimit.
+    """
+    result = registry.change_password(
+        current_user["user_id"], request.old_password, request.new_password
+    )
+    if not result["success"]:
+        raise HTTPException(status_code=400, detail=result["error"])
+    return result
 
 
 @app.post("/api/users/validate-token")
@@ -601,6 +681,9 @@ async def startup_event():
     stats = registry.get_stats()
     logger.info(f"👤 User Management API started - {stats['total_users']} users registered")
 
+
+from billing import router as billing_router
+app.include_router(billing_router)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8070)

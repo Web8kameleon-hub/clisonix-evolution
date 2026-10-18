@@ -30,4 +30,12 @@ public class LongoDatabase implements Serializable {
     public Map<String, LongoCollection> getCollections() {
         return collections;
     }
+
+    LongoDatabase copy() {
+        LongoDatabase copy = new LongoDatabase(name);
+        for (Map.Entry<String, LongoCollection> entry : collections.entrySet()) {
+            copy.collections.put(entry.getKey(), entry.getValue().copy());
+        }
+        return copy;
+    }
 }

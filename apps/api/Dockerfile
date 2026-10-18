@@ -1,10 +1,13 @@
 # Clisonix API Dockerfile
 FROM python:3.14
 
-WORKDIR /app
+WORKDIR /app/apps/api
 
-# Copy all files
-COPY . /app/
+# Build from the repository root so package imports and shared routers exist.
+COPY apps/api/ /app/apps/api/
+COPY ai_model_versioning.py model_governance.py reviewer_identity_registry.py /app/
+COPY routes/alba_routes.py /app/apps/api/routes/alba_routes.py
+ENV PYTHONPATH=/app:/app/apps/api
 
 # Install dependencies
 RUN apt-get update \

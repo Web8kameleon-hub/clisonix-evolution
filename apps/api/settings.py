@@ -42,7 +42,7 @@ class Settings(BaseSettings):
 
     # Database
     database_url: str = Field(
-        default="postgresql+asyncpg://Clisonix:secure123@localhost:5432/Clisonix_db"
+        default="sqlite+aiosqlite:///./data/platform.db"
     )
     database_echo: bool = Field(default=False)
 

@@ -20,4 +20,12 @@ public class LongoCluster implements Serializable {
     public Map<String, LongoDatabase> getDatabases() {
         return databases;
     }
+
+    LongoCluster copy() {
+        LongoCluster copy = new LongoCluster();
+        for (Map.Entry<String, LongoDatabase> entry : databases.entrySet()) {
+            copy.databases.put(entry.getKey(), entry.getValue().copy());
+        }
+        return copy;
+    }
 }

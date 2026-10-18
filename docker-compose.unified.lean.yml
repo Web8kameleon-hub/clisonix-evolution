@@ -11,7 +11,8 @@ services:
       - reporting
   api:
     build:
-      context: ./apps/api
+      context: .
+      dockerfile: apps/api/Dockerfile
     ports:
       - "8000:8000"
     environment:

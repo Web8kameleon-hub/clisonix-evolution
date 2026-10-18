@@ -41,6 +41,18 @@ def test_preserves_every_observed_server_path():
     assert SERVER_ONLY_PATHS <= app.openapi()["paths"].keys()
 
 
+def test_release_contains_shared_and_packaged_routers():
+    paths = app.openapi()["paths"]
+    assert len(paths) >= 245, f"Incomplete API image: only {len(paths)} paths"
+    assert {
+        "/fitness/health", "/api/alba/status", "/api/ocean/identity",
+        "/api/models/register",
+    } <= paths.keys()
+    from apps.api.routes.fitness_routes import get_db
+    from apps.api.database.connection import SessionLocal
+    assert callable(get_db) and callable(SessionLocal)
+
+
 def test_status_alias_reads_system_metrics():
     with TestClient(app) as client:
         response = client.get("/api/status")

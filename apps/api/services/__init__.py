@@ -5,10 +5,39 @@ Paketa qÃ« pÃ«rmban tÃ« gjithÃ« personazhet dhe shÃ«rbimet e sistemit 
 """
 
 # Eksporto komponentÃ«t kryesorÃ«
-from .albi_character import ALBI_Character, get_albi
-from .alba_character import ALBA_Character, get_alba 
-from .jona_character import JONA_Character, get_jona
-from .neuro_ecosystem import NeuroEcosystem, get_ecosystem
+from importlib import import_module
+
+_EXPORTS = {
+    "ALBI_Character": "albi_character", "get_albi": "albi_character",
+    "ALBA_Character": "alba_character", "get_alba": "alba_character",
+    "JONA_Character": "jona_character", "get_jona": "jona_character",
+    "NeuroEcosystem": "neuro_ecosystem", "get_ecosystem": "neuro_ecosystem",
+}
+
+
+def __getattr__(name):
+    # An optional character must not prevent importing unrelated API services.
+    if name not in _EXPORTS:
+        raise AttributeError(name)
+    value = getattr(import_module(f".{_EXPORTS[name]}", __name__), name)
+    globals()[name] = value
+    return value
+
+
+def get_albi():
+    return import_module(".albi_character", __name__).get_albi()
+
+
+def get_alba():
+    return import_module(".alba_character", __name__).get_alba()
+
+
+def get_jona():
+    return import_module(".jona_character", __name__).get_jona()
+
+
+def get_ecosystem():
+    return import_module(".neuro_ecosystem", __name__).get_ecosystem()
 
 # Eksporto processor-in neural
 try:
