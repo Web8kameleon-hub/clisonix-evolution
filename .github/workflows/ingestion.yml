@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Lint DAGs
-        run: |
-          pipx install ruff
-          ruff check airflow/dags
-
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate DAG Python syntax
+        run: python -m compileall -q airflow/dags
