@@ -135,17 +135,14 @@ jobs:
         service:
           - name: api
             image: clisonix-evolution-api
-            production_image: clisonix.com-api
             context: ./apps/api
             dockerfile: ./apps/api/Dockerfile
           - name: web
             image: clisonix-evolution-web
-            production_image: clisonix.com-web
             context: ./apps/web
             dockerfile: ./apps/web/Dockerfile
           - name: ocean-core
             image: clisonix-evolution-ocean-core
-            production_image: clisonix.com-ocean-core
             context: ./ocean_core
             dockerfile: ./ocean_core/Dockerfile
 
@@ -172,9 +169,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: |
-            ${{ env.REGISTRY }}/${{ steps.owner.outputs.owner }}/${{ matrix.service.image }}
-            ${{ env.REGISTRY }}/${{ steps.owner.outputs.owner }}/${{ matrix.service.production_image }}
+          images: ${{ env.REGISTRY }}/${{ steps.owner.outputs.owner }}/${{ matrix.service.image }}
           tags: |
             type=sha
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
