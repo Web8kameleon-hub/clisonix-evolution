@@ -46,7 +46,7 @@ jobs:
           set -euo pipefail
           test -f docker-compose.75-services.yml
           test -f apps/web/Dockerfile
-          test -f ocean-core/requirements.txt
+          test -f ocean_core/requirements.txt
           test -f scripts/hetzner-autodeploy.sh
           echo "✅ Required deployment files exist"
 
