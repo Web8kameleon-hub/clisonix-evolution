@@ -298,3 +298,9 @@ apps/android-twa/app/build/
 apps/android-twa/.gradle/
 apps/android-twa/build/
 apps/android-twa/*.idsig
+
+# Frontend source libraries must remain versioned
+!apps/web/lib/
+!apps/web/lib/**
+!apps/web/app/lib/
+!apps/web/app/lib/**
