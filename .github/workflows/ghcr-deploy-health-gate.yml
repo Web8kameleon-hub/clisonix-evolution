@@ -128,8 +128,8 @@ jobs:
               return {(method.upper(), path) for path, methods in spec["paths"].items()
                       for method in methods if method.lower() in verbs}
           required = operations(expected)
-          if len(expected["paths"]) < 245:
-              raise SystemExit("Tested API has fewer than the required 245 route paths")
+          if len(expected["paths"]) < 278:
+              raise SystemExit("Tested API has fewer than the required 278 route paths")
           print(f"Checking all {len(expected['paths'])} paths and {len(required)} HTTP operations.")
           last_error = ""
           for attempt in range(30):
