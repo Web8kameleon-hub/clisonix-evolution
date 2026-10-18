@@ -1,5 +1,5 @@
 # Clisonix API Dockerfile
-FROM python:3.13
+FROM python:3.14
 
 WORKDIR /app
 

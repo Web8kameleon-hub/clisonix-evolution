@@ -1,0 +1,82 @@
+name: GHCR Deploy Health Gate (No SSH)
+
+on:
+  workflow_run:
+    workflows: ["GHCR Build Push (No SSH)"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      web_health_url:
+        description: Public web health URL
+        required: false
+        default: https://www.clisonix.com/api/health-check
+        type: string
+      api_health_url:
+        description: Public API health URL
+        required: false
+        default: https://api.clisonix.com/health
+        type: string
+      ocean_health_url:
+        description: Public ocean health URL
+        required: false
+        default: https://api.clisonix.com/ocean/health
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  WEB_HEALTH_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.web_health_url || 'https://www.clisonix.com/api/health-check' }}
+  API_HEALTH_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.api_health_url || 'https://api.clisonix.com/health' }}
+  OCEAN_HEALTH_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.ocean_health_url || 'https://api.clisonix.com/ocean/health' }}
+
+jobs:
+  health-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - name: Validate required URLs
+        run: |
+          set -euo pipefail
+          if [ -z "${WEB_HEALTH_URL}" ] || [ -z "${API_HEALTH_URL}" ] || [ -z "${OCEAN_HEALTH_URL}" ]; then
+            echo "::error::Missing health URLs"
+            exit 1
+          fi
+
+      - name: Check endpoints
+        run: |
+          set -euo pipefail
+
+          check_url() {
+            name="$1"
+            url="$2"
+            ok=0
+            for i in $(seq 1 25); do
+              code=$(curl -L -sS --connect-timeout 10 --max-time 20 -o /dev/null -w "%{http_code}" "$url" || true)
+              if [ "$code" = "200" ]; then
+                ok=1
+                break
+              fi
+              sleep 3
+            done
+
+            if [ "$ok" -ne 1 ]; then
+              echo "::error::$name failed health check: $url"
+              return 1
+            fi
+            echo "$name healthy: $url"
+          }
+
+          check_url "web" "${WEB_HEALTH_URL}"
+          check_url "api" "${API_HEALTH_URL}"
+          check_url "ocean-core" "${OCEAN_HEALTH_URL}"
+
+      - name: Summary
+        run: |
+          echo "## Deploy Health Gate" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Result: success" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Web URL: ${WEB_HEALTH_URL}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- API URL: ${API_HEALTH_URL}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Ocean URL: ${OCEAN_HEALTH_URL}" >> "$GITHUB_STEP_SUMMARY"

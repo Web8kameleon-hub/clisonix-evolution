@@ -1,0 +1,44 @@
+services:
+  api:
+    image: ghcr.io/web8kameleon-hub/clisonix-evolution-api:${CLISONIX_IMAGE_TAG:-latest}
+    command: ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+    working_dir: /app
+    volumes: []
+    restart: unless-stopped
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+
+  web:
+    image: ghcr.io/web8kameleon-hub/clisonix-evolution-web:${CLISONIX_IMAGE_TAG:-latest}
+    restart: unless-stopped
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+
+  ocean-core:
+    image: ghcr.io/web8kameleon-hub/clisonix-evolution-ocean-core:${CLISONIX_IMAGE_TAG:-latest}
+    command: ["python", "ocean_core_full.py"]
+    working_dir: /app
+    volumes: []
+    restart: unless-stopped
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: clisonix-watchtower
+    command: --interval 30 --cleanup --rolling-restart --label-enable --include-stopped --revive-stopped --stop-timeout 90s
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_LABEL_ENABLE: "true"
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_ROLLING_RESTART: "true"
+      WATCHTOWER_INCLUDE_STOPPED: "true"
+      WATCHTOWER_REVIVE_STOPPED: "true"
+    restart: unless-stopped
+    networks:
+      - clisonix-net
+
+networks:
+  clisonix-net:
+    external: true

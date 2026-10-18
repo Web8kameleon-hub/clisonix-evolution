@@ -1,0 +1,187 @@
+name: GHCR Build Push (No SSH)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - apps/api/**
+      - apps/web/**
+      - ocean_core/**
+      - .github/workflows/ghcr-build-push.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: ghcr-build-push-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  smoke-build:
+    name: Build + Smoke (${{ matrix.service.name }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        service:
+          - name: api
+            image: clisonix-evolution-api
+            context: ./apps/api
+            dockerfile: ./apps/api/Dockerfile
+            host_port: 18000
+            container_port: 8000
+            health_path: /health
+          - name: web
+            image: clisonix-evolution-web
+            context: ./apps/web
+            dockerfile: ./apps/web/Dockerfile
+            host_port: 13000
+            container_port: 3000
+            health_path: /api/health-check
+          - name: ocean-core
+            image: clisonix-evolution-ocean-core
+            context: ./ocean_core
+            dockerfile: ./ocean_core/Dockerfile
+            host_port: 18030
+            container_port: 8030
+            health_path: /health
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set image owner
+        id: owner
+        run: |
+          echo "owner=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build local test image
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.service.context }}
+          file: ${{ matrix.service.dockerfile }}
+          load: true
+          tags: local/${{ matrix.service.image }}:${{ github.sha }}
+          build-args: |
+            NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_placeholder
+            NEXT_PUBLIC_API_BASE=/api
+            NEXT_PUBLIC_GOOGLE_ADSENSE_ID=
+            AUTH_SECRET=health-gate-auth-secret
+            NEXTAUTH_SECRET=health-gate-nextauth-secret
+
+      - name: Start test container
+        run: |
+          set -euo pipefail
+          docker run -d \
+            --name smoke-${{ matrix.service.name }} \
+            -p ${{ matrix.service.host_port }}:${{ matrix.service.container_port }} \
+            -e PORT=${{ matrix.service.container_port }} \
+            -e NEXTAUTH_SECRET=health-gate-nextauth-secret \
+            -e AUTH_SECRET=health-gate-auth-secret \
+            local/${{ matrix.service.image }}:${{ github.sha }}
+
+      - name: Wait for health endpoint
+        run: |
+          set -euo pipefail
+          URL="http://127.0.0.1:${{ matrix.service.host_port }}${{ matrix.service.health_path }}"
+          ok=0
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$URL" || true)
+            if [ "$code" = "200" ]; then
+              ok=1
+              break
+            fi
+            sleep 2
+          done
+
+          if [ "$ok" -ne 1 ]; then
+            echo "::error::Health check failed for $URL"
+            docker logs smoke-${{ matrix.service.name }} || true
+            exit 1
+          fi
+
+      - name: Cleanup smoke container
+        if: always()
+        run: |
+          docker rm -f smoke-${{ matrix.service.name }} >/dev/null 2>&1 || true
+
+  push-images:
+    name: Push Images (${{ matrix.service.name }})
+    runs-on: ubuntu-latest
+    needs: smoke-build
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        service:
+          - name: api
+            image: clisonix-evolution-api
+            context: ./apps/api
+            dockerfile: ./apps/api/Dockerfile
+          - name: web
+            image: clisonix-evolution-web
+            context: ./apps/web
+            dockerfile: ./apps/web/Dockerfile
+          - name: ocean-core
+            image: clisonix-evolution-ocean-core
+            context: ./ocean_core
+            dockerfile: ./ocean_core/Dockerfile
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set image owner
+        id: owner
+        run: |
+          echo "owner=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ steps.owner.outputs.owner }}/${{ matrix.service.image }}
+          tags: |
+            type=sha
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.service.context }}
+          file: ${{ matrix.service.dockerfile }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_placeholder
+            NEXT_PUBLIC_API_BASE=/api
+            NEXT_PUBLIC_GOOGLE_ADSENSE_ID=
+            AUTH_SECRET=ghcr-build-auth-secret
+            NEXTAUTH_SECRET=ghcr-build-nextauth-secret
+
+      - name: Summary
+        run: |
+          echo "## GHCR image published" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Service: ${{ matrix.service.name }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Image: ${{ env.REGISTRY }}/${{ steps.owner.outputs.owner }}/${{ matrix.service.image }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Commit: ${{ github.sha }}" >> "$GITHUB_STEP_SUMMARY"
