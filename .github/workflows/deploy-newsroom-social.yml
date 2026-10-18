@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 env:
-  HETZNER_IP: 46.225.14.83
+  HETZNER_IP: 178.63.89.121
   DEPLOY_PATH: /root/Clisonix-cloud
 
 jobs:

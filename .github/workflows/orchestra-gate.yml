@@ -9,7 +9,7 @@ on:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-  HETZNER_IP: 46.225.14.83
+  HETZNER_IP: 178.63.89.121
   REMOTE_DIR: /root/Clisonix-cloud
   NON_BLOCKING_SCHEDULE: ${{ github.event_name == 'schedule' && 'true' || 'false' }}
 
@@ -43,7 +43,7 @@ jobs:
       fail-fast: false
       matrix:
         domain:
-          - { name: "hetzner",     allow_failure: true  }   # unreachable from GH runners (IP 46.225.14.83)
+          - { name: "hetzner",     allow_failure: true  }   # unreachable from GH runners (IP 178.63.89.121)
           - { name: "repo",        allow_failure: false }
           - { name: "cloudflare",  allow_failure: true  }   # needs CF_API_TOKEN
           - { name: "git_profile", allow_failure: false }

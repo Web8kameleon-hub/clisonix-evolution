@@ -6,7 +6,7 @@ on:
       host:
         description: 'Target host IP or DNS'
         required: true
-        default: '46.225.14.83'
+        default: '178.63.89.121'
         type: string
       deploy_path:
         description: 'Project path on server'

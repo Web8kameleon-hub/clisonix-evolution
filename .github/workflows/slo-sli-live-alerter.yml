@@ -15,7 +15,7 @@
 #   API_ADMIN_TOKEN        backend-api admin token (for key rotation)
 #   HETZNER_SSH_KEY        (used only by ocean-core-selfheal workflow call)
 #
-# All hosts resolve to the real Hetzner IP 46.225.14.83.
+# All hosts resolve to the real Hetzner IP 178.63.89.121.
 # =============================================================================
 
 name: "🔄 SLO/SLI Autonomous Cycle (Hetzner)"
@@ -47,13 +47,13 @@ permissions:
   actions: write    # needed to trigger ocean-core-selfheal
 
 env:
-  HETZNER_IP: "46.225.14.83"
-  OCEAN_HOST:   "46.225.14.83"
-  API_HOST:     "46.225.14.83"
-  OPENMIND_HOST: "46.225.14.83"
-  EXCEL_HOST:   "46.225.14.83"
-  OLLAMA_HOST:  "46.225.14.83"
-  TRANS_HOST:   "46.225.14.83"
+  HETZNER_IP: "178.63.89.121"
+  OCEAN_HOST:   "178.63.89.121"
+  API_HOST:     "178.63.89.121"
+  OPENMIND_HOST: "178.63.89.121"
+  EXCEL_HOST:   "178.63.89.121"
+  OLLAMA_HOST:  "178.63.89.121"
+  TRANS_HOST:   "178.63.89.121"
   NON_BLOCKING_SCHEDULE: ${{ github.event_name == 'schedule' && 'true' || 'false' }}
 
 jobs:
