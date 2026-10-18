@@ -1,14 +1,14 @@
 # Daily Public Package Catalog
 
-Generated: 2026-10-17T06:14:16Z
+Generated: 2026-10-18T06:14:39Z
 
 ## Summary
-- npm packages (records/unique): 243/129
-- PyPI packages (records/unique): 387/125
+- npm packages (records/unique): 267/131
+- PyPI packages (records/unique): 448/133
 - Cargo/Carter packages (records/unique): 40/24
 - API routes discovered: 500
 - Protocols discovered: 5
-- Recursive scan files/directories/depth: 3306/715/11
+- Recursive scan files/directories/depth: 3756/810/11
 
 ## Download & Integration Quick Links
 | ecosystem | package | download_url | install_command |
@@ -28,6 +28,7 @@ Generated: 2026-10-17T06:14:16Z
 | npm | @radix-ui/react-dropdown-menu | https://www.npmjs.com/package/@radix-ui/react-dropdown-menu | npm i @radix-ui/react-dropdown-menu |
 | npm | @radix-ui/react-scroll-area | https://www.npmjs.com/package/@radix-ui/react-scroll-area | npm i @radix-ui/react-scroll-area |
 | npm | @radix-ui/react-select | https://www.npmjs.com/package/@radix-ui/react-select | npm i @radix-ui/react-select |
+| pypi | Clisonix-cloud | https://pypi.org/project/Clisonix-cloud/ | pip install Clisonix-cloud |
 | pypi | Pillow | https://pypi.org/project/Pillow/ | pip install Pillow |
 | pypi | PyJWT | https://pypi.org/project/PyJWT/ | pip install PyJWT |
 | pypi | SpeechRecognition | https://pypi.org/project/SpeechRecognition/ | pip install SpeechRecognition |
@@ -42,7 +43,6 @@ Generated: 2026-10-17T06:14:16Z
 | pypi | asyncpg | https://pypi.org/project/asyncpg/ | pip install asyncpg |
 | pypi | bandit | https://pypi.org/project/bandit/ | pip install bandit |
 | pypi | beautifulsoup4 | https://pypi.org/project/beautifulsoup4/ | pip install beautifulsoup4 |
-| pypi | bentoml | https://pypi.org/project/bentoml/ | pip install bentoml |
 | cargo | aes-gcm | https://crates.io/crates/aes-gcm | cargo add aes-gcm |
 | cargo | algebra | https://crates.io/crates/algebra | cargo add algebra |
 | cargo | axum | https://crates.io/crates/axum | cargo add axum |
@@ -69,6 +69,8 @@ Generated: 2026-10-17T06:14:16Z
 | GET | /tenants/{tenant_id} | multi_tenant_api.py | 191 |
 | PATCH | /tenants/{tenant_id} | multi_tenant_api.py | 199 |
 | GET | /health | alda_server.py | 317 |
+| GET | /health | clx_hybrid_service.py | 296 |
+| POST | /api/v1/hybrid/scan-print | clx_hybrid_service.py | 342 |
 | GET | /health | slack_integration_service.py | 325 |
 | GET | /service-health | slack_integration_service.py | 336 |
 | GET | /status-report | slack_integration_service.py | 352 |
@@ -460,8 +462,6 @@ Generated: 2026-10-17T06:14:16Z
 | GET | /health | balancer_nodes_3333.js | 119 |
 | GET | /info | balancer_nodes_3333.js | 134 |
 | GET | /api/monitoring/health | monitoring_system_config.py | 206 |
-| GET | /api/monitoring/metrics | monitoring_system_config.py | 222 |
-| POST | /api/monitoring/service/{service_name} | monitoring_system_config.py | 226 |
 
 ## Protocol Matrix
 | protocol | endpoint | file |
@@ -470,8 +470,6 @@ Generated: 2026-10-17T06:14:16Z
 | http | http://0.0.0.0:8000 | CURRENT_STATUS.md |
 | http | http://127.0.0.1:6681 | ALBI_EEG_SETTINGS_TAB_ANALYSIS.md |
 | http | http://127.0.0.1:6681` | ALBI_EEG_SETTINGS_TAB_ANALYSIS.md |
-| http | http://127.0.0.1:9091/alba/latest | agiem_core.py |
-| http | http://127.0.0.1:9093/economy/compute | agiem_core.py |
 | http | http://46.225.14.83:11434/api/tags | OCEAN_CORE_v2_DEPLOYMENT_READY.md |
 | http | http://46.225.14.83:8030/health | OCEAN_CORE_v2_HETZNER_GUIDE.md |
 | http | http://46.225.14.83:8030/health | OCEAN_CORE_v2_HETZNER_GUIDE.md |
@@ -486,22 +484,65 @@ Generated: 2026-10-17T06:14:16Z
 | http | http://46.225.14.83:8035/health | OCEAN_CORE_v2_HETZNER_GUIDE.md |
 | http | http://46.225.14.83:8035/health | OCEAN_CORE_v2_HETZNER_GUIDE.md |
 | http | http://46.225.14.83:8035/health | OCEAN_CORE_v2_DEPLOYMENT_READY.md |
-| http | http://[HETZNER_IP]:3001 | DEPLOYMENT_CHECKLIST.md |
-| http | http://[HETZNER_IP]:3001 | DEPLOYMENT_CHECKLIST.md |
-| http | http://[HETZNER_IP]:9090 | DEPLOYMENT_CHECKLIST.md |
-| http | http://[HETZNER_IP]:9090/targets | DEPLOYMENT_CHECKLIST.md |
-| http | http://api:8000/metrics` | DEPLOYMENT_CHECKLIST.md |
+| http | http://46.62.210.251:11434 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:16686 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:3000 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:3001 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:3001 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:5555 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:6680 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:7474 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:7777 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:8000 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:8000/docs | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:8030 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:8040 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:8041 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:8041/publish | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:8095/api/test-payment | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9001 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9090 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9094 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9101 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9102 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9103 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9123 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9301 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9302 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9303 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9304 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9305 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9306 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9307 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://46.62.210.251:9308 | DEPLOYMENT_SUMMARY_HETZNER.md |
+| http | http://clisonix-api:8000 | DOCKER_LOCALHOST_FIX.md |
+| http | http://clisonix-ocean-core-blerina:8032 | DOCKER_LOCALHOST_FIX.md |
+| http | http://clisonix-ocean-core-multimodal:8033 | DOCKER_LOCALHOST_FIX.md |
+| http | http://clisonix-ocean-core-strict-chat:8035 | DOCKER_LOCALHOST_FIX.md |
+| http | http://clisonix-ocean-core:8030 | DOCKER_LOCALHOST_FIX.md |
 | http | http://clisonix-ocean-core:8030/api/v1/chat | ocean-core-diagnostic.py |
 | http | http://clisonix-ocean-core:8030/api/v1/status | ocean-core-diagnostic.py |
+| http | http://clisonix-ocean-core:8030/health | DOCKER_LOCALHOST_FIX.md |
+| http | http://clisonix-ocean-core:8030/health | DOCKER_LOCALHOST_FIX.md |
+| http | http://clisonix-ocean-core:8030/health | DOCKER_LOCALHOST_FIX.md |
+| http | http://clisonix-ocean-core:8030/health` | DOCKER_LOCALHOST_FIX.md |
+| http | http://clisonix-ollama:11434 | docker-compose.local-llama.yml |
+| http | http://clisonix-ollama:11434 | docker-compose.local-llama.yml |
 | http | http://clisonix-ollama:11434 | docker-compose.lean.yml |
 | http | http://clisonix-ollama:11434 | OCEAN_CORE_v2_DEPLOYMENT_READY.md |
+| http | http://clisonix-openmind:9999 | DOCKER_LOCALHOST_FIX.md |
 | http | http://clisonix-web:3000/api/ocean | ocean-core-diagnostic.py |
 | http | http://localhost | docker-compose.lean.yml |
 | http | http://localhost:${API_PORT}/health | docker-compose.lean.yml |
-| http | http://localhost:11434 | eap_layer.py |
 | http | http://localhost:11434/api/tags | docker-compose.lean.yml |
+| http | http://localhost:11434/api/tags | DEPLOYMENT_SUMMARY_HETZNER.md |
 | http | http://localhost:3000 | docker-compose.lean.yml |
 | http | http://localhost:3000 | INTEGRATION_GUIDE_AI_AGENTS.md |
+| http | http://localhost:3000/api/service-discovery | DOCKER_LOCALHOST_FIX.md |
+| http | http://localhost:3000/api/service-info | DOCKER_LOCALHOST_FIX.md |
+| http | http://localhost:3000/api/service-info | DOCKER_LOCALHOST_FIX.md |
+| http | http://localhost:3000/api/service-info` | DOCKER_LOCALHOST_FIX.md |
+| http | http://localhost:3000/api/system-status | DOCKER_LOCALHOST_FIX.md |
 | http | http://localhost:3000/modules/hybrid-biometric-dashboard | HYBRID_BIOMETRIC_DOCUMENTATION.md |
 | http | http://localhost:3001 | DOCKER_STARTUP_REPORT.md |
 | http | http://localhost:3001 | DOCKER_STARTUP_REPORT.md |
@@ -522,36 +563,21 @@ Generated: 2026-10-17T06:14:16Z
 | http | http://localhost:5555 | DOCKER_STARTUP_REPORT.md |
 | http | http://localhost:6666 | DOCKER_STARTUP_REPORT.md |
 | http | http://localhost:7777 | DOCKER_STARTUP_REPORT.md |
-| http | http://localhost:7777 | agiem_core.py |
-| http | http://localhost:7777 | agiem_core.py |
-| http | http://localhost:7777 | agiem_core.py |
-| http | http://localhost:7777/mesh/event | agiem_core.py |
-| http | http://localhost:7777/mesh/register | agiem_core.py |
 | http | http://localhost:8000 | DOCKER_STARTUP_REPORT.md |
 | http | http://localhost:8000 | CURRENT_STATUS.md |
 | http | http://localhost:8000 | INTEGRATION_GUIDE_AI_AGENTS.md |
 | http | http://localhost:8000 | INTEGRATION_GUIDE_AI_AGENTS.md |
 | http | http://localhost:8000 | INTEGRATION_GUIDE_AI_AGENTS.md |
-| http | http://localhost:8000 | OPENAPI-COMPLETE-GUIDE.md |
-| http | http://localhost:8000 | OPENAPI-COMPLETE-GUIDE.md |
-| http | http://localhost:8000 | OPENAPI-COMPLETE-GUIDE.md |
-| http | http://localhost:8000 | OPENAPI-COMPLETE-GUIDE.md |
-| http | http://localhost:8000 | OPENAPI-COMPLETE-GUIDE.md |
 | http | http://localhost:8000/api/ai/agents-status | INTEGRATION_GUIDE_AI_AGENTS.md |
 | http | http://localhost:8000/api/ai/agents-status | INTEGRATION_GUIDE_AI_AGENTS.md |
 | http | http://localhost:8000/api/ai/agents-status | INTEGRATION_GUIDE_AI_AGENTS.md |
 | http | http://localhost:8000/api/ai/curiosity-ocean | INTEGRATION_GUIDE_AI_AGENTS.md |
 | http | http://localhost:8000/api/ai/curiosity-ocean | INTEGRATION_GUIDE_AI_AGENTS.md |
 | http | http://localhost:8000/api/ai/trinity-analysis | INTEGRATION_GUIDE_AI_AGENTS.md |
-| http | http://localhost:8000/api/alba/streams/eeg_session_001/data?limit=100 | OPENAPI-COMPLETE-GUIDE.md |
-| http | http://localhost:8000/api/alba/streams/start | OPENAPI-COMPLETE-GUIDE.md |
 | http | http://localhost:8000/api/asi/status | INTEGRATION_GUIDE_AI_AGENTS.md |
 | http | http://localhost:8000/api/external/crypto | INTEGRATION_GUIDE_AI_AGENTS.md |
 | http | http://localhost:8000/api/external/weather | INTEGRATION_GUIDE_AI_AGENTS.md |
 | http | http://localhost:8000/api/v1/service-discovery | FIREBASE_KEY_SETUP_QUICK.md |
-| http | http://localhost:8000/billing/paypal/order | OPENAPI-COMPLETE-GUIDE.md |
-| http | http://localhost:8000/brain/energy/check | OPENAPI-COMPLETE-GUIDE.md |
-| http | http://localhost:8000/brain/youtube/insight?video_id=dQw4w9WgXcQ | OPENAPI-COMPLETE-GUIDE.md |
 | http | http://localhost:8000/docs | DOCKER_STARTUP_REPORT.md |
 | http | http://localhost:8000/docs | DOCKER_STARTUP_REPORT.md |
 | http | http://localhost:8000/docs | CURRENT_STATUS.md |
@@ -566,22 +592,19 @@ Generated: 2026-10-17T06:14:16Z
 | http | http://localhost:8000/fitness/users/{user_id}/biometrics | FITNESS_MODULE_IMPLEMENTATION_SUMMARY.md |
 | http | http://localhost:8000/fitness/users/{user_id}/workouts | FITNESS_MODULE_IMPLEMENTATION_SUMMARY.md |
 | http | http://localhost:8000/health | DOCKER_STARTUP_REPORT.md |
-| http | http://localhost:8000/health | OPENAPI-COMPLETE-GUIDE.md |
-| http | http://localhost:8000/health | OPENAPI-COMPLETE-GUIDE.md |
+| http | http://localhost:8000/health | DOCKER_LOCALHOST_FIX.md |
+| http | http://localhost:8000/health | DEPLOYMENT_SUMMARY_HETZNER.md |
 | http | http://localhost:8000/metrics | INTEGRATION_GUIDE_AI_AGENTS.md |
 | http | http://localhost:8000/redoc | DOCKER_STARTUP_REPORT.md |
 | http | http://localhost:8000/redoc` | FITNESS_MODULE_IMPLEMENTATION_SUMMARY.md |
 | http | http://localhost:8001 | HYBRID_BIOMETRIC_DOCUMENTATION.md |
-| http | http://localhost:8001/apis | OPENAPI-COMPLETE-GUIDE.md |
-| http | http://localhost:8001/apis/clisonix/plugins | OPENAPI-COMPLETE-GUIDE.md |
 | http | http://localhost:8030 | test_multilang_fix.py |
+| http | http://localhost:8030/health | DOCKER_LOCALHOST_FIX.md |
 | http | http://localhost:8030/health | docker-compose.lean.yml |
+| http | http://localhost:8030/health | DEPLOYMENT_SUMMARY_HETZNER.md |
 | http | http://localhost:8030/health | OCEAN_CORE_v2_HETZNER_GUIDE.md |
 | http | http://localhost:8030/health` | OCEAN_CORE_v2_HETZNER_GUIDE.md |
 | http | http://localhost:8035/api/v1/pillars/generate | update_blerina_topics.py |
-| http | http://localhost:8080` | OPENAPI-COMPLETE-GUIDE.md |
-| http | http://localhost:8080` | OPENAPI-COMPLETE-GUIDE.md |
-| http | http://localhost:8086 | NANOGRIDATA_PRODUCTION_GUIDE.md |
 | http | http://localhost:8888 | DOCKER_STARTUP_REPORT.md |
 | http | http://localhost:9001 | DOCKER_STARTUP_REPORT.md |
 | http | http://localhost:9090 | DOCKER_STARTUP_REPORT.md |
@@ -592,76 +615,53 @@ Generated: 2026-10-17T06:14:16Z
 | http | http://localhost:9090 | INTEGRATION_GUIDE_AI_AGENTS.md |
 | http | http://localhost:9090 | INTEGRATION_GUIDE_AI_AGENTS.md |
 | http | http://localhost:9090 | INTEGRATION_GUIDE_AI_AGENTS.md |
-| http | http://localhost:9800/publish` | NEWSROOM_90DAY_ROADMAP.md |
 | http | http://localhost:9999 | DOCKER_STARTUP_REPORT.md |
 | http | http://localhost:9999/health | DOCKER_STARTUP_REPORT.md |
 | http | http://localhost:PORT/health | OCEAN_CORE_v2_DEPLOYMENT_READY.md |
-| http | http://node-exporter:9100/metrics` | DEPLOYMENT_CHECKLIST.md |
 | http | http://ocean-core:8030 | docker-compose.lean.yml |
 | http | http://ollama:11434/api/generate | ocean-core-diagnostic.py |
 | http | http://ollama:11434/api/tags | ocean-core-diagnostic.py |
-| http | http://prometheus:9090` | DEPLOYMENT_CHECKLIST.md |
 | https | https://api.clisonix.com | HYBRID_BIOMETRIC_DOCUMENTATION.md |
-| https | https://api.clisonix.com/docs | DEPLOYMENT_CHECKLIST.md |
-| https | https://api.clisonix.com/health | DEPLOYMENT_CHECKLIST.md |
-| https | https://api.clisonix.com/health | DEPLOYMENT_CHECKLIST.md |
 | https | https://api.example.com | HYBRID_BIOMETRIC_DOCUMENTATION.md |
 | https | https://brainflow.readthedocs.io/ | HYBRID_BIOMETRIC_DOCUMENTATION.md |
 | https | https://clinic-api.example.com | HYBRID_BIOMETRIC_DOCUMENTATION.md |
 | https | https://clinic-api.example.com | HYBRID_BIOMETRIC_DOCUMENTATION.md |
 | https | https://clisonix-docs.example.com | HYBRID_BIOMETRIC_DOCUMENTATION.md |
 | https | https://clisonix.com | DEPLOYMENT_CHECKLIST.md |
-| https | https://clisonix.com | DEPLOYMENT_CHECKLIST.md |
-| https | https://clisonix.com/api/uploads/audio/process | agiem_core.py |
-| https | https://clisonix.com/api/uploads/eeg/process | agiem_core.py |
 | https | https://console.cloud.google.com/apis/library/firestore.googleapis.com | FIREBASE_KEY_SETUP_QUICK.md |
 | https | https://console.cloud.google.com/iam-admin/serviceaccounts | FIREBASE_KEY_SETUP_QUICK.md |
 | https | https://console.firebase.google.com/ | FIREBASE_KEY_SETUP_QUICK.md |
 | https | https://console.firebase.google.com/ | FIREBASE_KEY_SETUP_QUICK.md |
 | https | https://console.firebase.google.com/ | FIREBASE_KEY_SETUP_QUICK.md |
+| https | https://console.hetzner.cloud | DEPLOYMENT_SUMMARY_HETZNER.md |
 | https | https://console.hetzner.com | DEPLOYMENT_CHECKLIST.md |
-| https | https://console.hetzner.com | DEPLOYMENT_CHECKLIST.md |
-| https | https://dnschecker.org | DEPLOYMENT_CHECKLIST.md |
+| https | https://dashboard.stripe.com/test/webhooks | DEPLOYMENT_SUMMARY_HETZNER.md |
 | https | https://docs.anthropic.com | INTEGRATION_GUIDE_AI_AGENTS.md |
 | https | https://docs.anthropic.com/en/docs/build/tool-use | AI_AGENT_FRAMEWORKS.md |
-| https | https://docs.clisonix.com/nanogridata | NANOGRIDATA_PRODUCTION_GUIDE.md |
+| https | https://docs.docker.com/compose | DEPLOYMENT_SUMMARY_HETZNER.md |
+| https | https://docs.hetzner.cloud | DEPLOYMENT_SUMMARY_HETZNER.md |
 | https | https://github.com/LedjanAhmati/clisonix-blog | REPO_AUDIT.md |
 | https | https://github.com/Significant-Gravitas/AutoGPT | AI_AGENT_FRAMEWORKS.md |
 | https | https://github.com/Web8kameleon-hub/clisonix.com | HYBRID_BIOMETRIC_DOCUMENTATION.md |
 | https | https://github.com/Web8kameleon-hub/clisonix.com | REPO_AUDIT.md |
-| https | https://github.com/Web8kameleon-hub/clisonix.com | NEWSROOM_90DAY_ROADMAP.md |
-| https | https://github.com/Web8kameleon-hub/clisonix.com.git | NANOGRIDATA_PRODUCTION_GUIDE.md |
-| https | https://github.com/Web8kameleon-hub/clisonix.com/issues | NANOGRIDATA_PRODUCTION_GUIDE.md |
+| https | https://github.com/Web8kameleon-hub/clisonix.com | DEPLOYMENT_SUMMARY_HETZNER.md |
 | https | https://github.com/joaomdmoura/crewai | AI_AGENT_FRAMEWORKS.md |
 | https | https://github.com/joaomdmoura/crewai | INTEGRATION_GUIDE_AI_AGENTS.md |
 | https | https://github.com/langchain-ai/langchain | AI_AGENT_FRAMEWORKS.md |
 | https | https://grafana.com | INTEGRATION_GUIDE_AI_AGENTS.md |
-| https | https://learning.postman.com/docs/collections/collections-overview/ | OPENAPI-COMPLETE-GUIDE.md |
 | https | https://mne.tools/ | HYBRID_BIOMETRIC_DOCUMENTATION.md |
-| https | https://mxtoolbox.com | DEPLOYMENT_CHECKLIST.md |
 | https | https://n8n.io | AI_AGENT_FRAMEWORKS.md |
-| https | https://nextjs.org/docs/app/api-reference/config/typescript | next-env.d.ts |
-| https | https://openapi-generator.tech/ | OPENAPI-COMPLETE-GUIDE.md |
 | https | https://openbci.com/ | HYBRID_BIOMETRIC_DOCUMENTATION.md |
 | https | https://prometheus.io | INTEGRATION_GUIDE_AI_AGENTS.md |
 | https | https://prometheus.io/download/ | INTEGRATION_GUIDE_AI_AGENTS.md |
 | https | https://python.langchain.com | INTEGRATION_GUIDE_AI_AGENTS.md |
 | https | https://raw.githubusercontent.com/Web8kameleon-hub/clisonix.com/main/deploy-hetzner.sh | DEPLOYMENT_CHECKLIST.md |
-| https | https://spectacle.netlify.app/ | OPENAPI-COMPLETE-GUIDE.md |
 | https | https://support.hetzner.com/) | HETZNER_SUPPORT_TEMPLATE.md |
-| https | https://tools.ietf.org/html/rfc7049 | OPENAPI-COMPLETE-GUIDE.md |
-| https | https://www.apivalidator.dev/ | OPENAPI-COMPLETE-GUIDE.md |
 | https | https://www.clisonix.com | DEPLOYMENT_CHECKLIST.md |
-| https | https://www.googleapis.com/youtube/v3 | blerina_reformatter.py |
 | https | https://www.postman.com | INTEGRATION_GUIDE_AI_AGENTS.md |
 | https | https://www.strato.de/apps/CustomerService | DEPLOYMENT_CHECKLIST.md |
-| https | https://www.strato.de/faq | DEPLOYMENT_CHECKLIST.md |
-| https | https://www.whatsmydns.net | DEPLOYMENT_CHECKLIST.md |
-| https | https://youtube.com/watch?v={video_id} | blerina_reformatter.py |
 | redis | redis://:${REDIS_PASSWORD}@redis:6379/0 | docker-compose.lean.yml |
 | redis | redis://:${REDIS_PASSWORD}@redis:6379/0 | docker-compose.lean.yml |
-| redis | redis://:pass@localhost:6379/0 | ENV_KEYS_SHQIP.md |
-| redis | redis://localhost:6379/0 | blerina_reformatter.py |
 | ws | ws://6681/stream/{id} | ALBI_EEG_SETTINGS_TAB_ANALYSIS.md |
 | wss | wss://api.clisonix.com/ws | HYBRID_BIOMETRIC_DOCUMENTATION.md |
 | wss | wss://api.example.com/ws/clinic/clinic_001/stream | HYBRID_BIOMETRIC_DOCUMENTATION.md |
@@ -795,23 +795,28 @@ Monetization references:
 | @tailwindcss/postcss | ^4.1.18 | dependencies | package.json |
 | @tailwindcss/typography | ^0.5.19 | devDependencies | frontend/package.json |
 | @types/bcryptjs | ^2.4.6 | devDependencies | backend/package.json |
+| @types/bcryptjs | ^2.4.6 | devDependencies | microservices/package.json |
 | @types/bcryptjs | ^2.4.6 | devDependencies | package.json |
 | @types/body-parser | ^1.19.6 | devDependencies | apps/alba-collector/package.json |
 | @types/body-parser | ^1.19.6 | devDependencies | apps/web/package.json |
 | @types/cbor | ^5.0.1 | devDependencies | package.json |
 | @types/clamscan | 2.4.1 | devDependencies | package.json |
+| @types/compression | ^1.7.5 | devDependencies | microservices/package.json |
 | @types/connect | ^3.4.38 | devDependencies | apps/web/package.json |
 | @types/convict | ^6.1.6 | devDependencies | backend/package.json |
 | @types/cors | ^2.8.19 | devDependencies | apps/alba-collector/package.json |
 | @types/cors | ^2.8.17 | devDependencies | backend/package.json |
+| @types/cors | ^2.8.17 | devDependencies | microservices/package.json |
 | @types/express | ^4.17.25 | devDependencies | apps/alba-collector/package.json |
 | @types/express | ^4.17.21 | devDependencies | backend/package.json |
+| @types/express | ^5.0.2 | devDependencies | microservices/package.json |
 | @types/file-type | 10.6.0 | devDependencies | package.json |
 | @types/fluent-ffmpeg | 2.1.27 | devDependencies | package.json |
 | @types/hpp | ^0.2.6 | devDependencies | backend/package.json |
 | @types/jest | ^30.0.0 | devDependencies | apps/web/package.json |
 | @types/jest | ^29.5.5 | devDependencies | backend/package.json |
 | @types/jsonwebtoken | ^9.0.5 | devDependencies | backend/package.json |
+| @types/jsonwebtoken | ^9.0.9 | devDependencies | microservices/package.json |
 | @types/lodash | ^4.17.24 | devDependencies | apps/web/package.json |
 | @types/lodash | ^4.17.23 | devDependencies | packages/shared/package.json |
 | @types/mime | ^3.0.4 | devDependencies | apps/web/package.json |
@@ -821,6 +826,7 @@ Monetization references:
 | @types/node | ^20.8.0 | devDependencies | backend/package.json |
 | @types/node | ^20.12.7 | dependencies | frontend/package.json |
 | @types/node | ^20.19.39 | devDependencies | hello-ai/package.json |
+| @types/node | ^22.15.21 | devDependencies | microservices/package.json |
 | @types/node | 22.10.2 | devDependencies | package.json |
 | @types/node | ^22.10.2 | devDependencies | packages/nanogrid/package.json |
 | @types/node | ^20.8.0 | devDependencies | packages/signal-gen/backend/package.json |
@@ -842,8 +848,10 @@ Monetization references:
 | @types/react-dom | ^18.3.7 | devDependencies | packages/ui/package.json |
 | @types/supertest | ^2.0.16 | devDependencies | backend/package.json |
 | @types/uuid | ^9.0.8 | devDependencies | apps/alba-collector/package.json |
+| @types/uuid | ^10.0.0 | devDependencies | microservices/package.json |
 | @types/ws | ^8.18.1 | devDependencies | apps/alba-collector/package.json |
 | @types/ws | ^8.5.8 | devDependencies | backend/package.json |
+| @types/ws | ^8.18.1 | devDependencies | microservices/package.json |
 | @typescript-eslint/eslint-plugin | ^8.56.0 | dependencies | apps/web/package.json |
 | @typescript-eslint/eslint-plugin | ^6.7.4 | devDependencies | backend/package.json |
 | @typescript-eslint/eslint-plugin | ^8.0.0 | devDependencies | frontend/package.json |
@@ -860,6 +868,7 @@ Monetization references:
 | axios | ^1.16.0 | dependencies | frontend/package.json |
 | axios | ^1.16.0 | dependencies | package.json |
 | bcryptjs | ^2.4.3 | dependencies | backend/package.json |
+| bcryptjs | ^3.0.2 | dependencies | microservices/package.json |
 | bcryptjs | ^3.0.3 | dependencies | package.json |
 | body-parser | ^1.20.4 | dependencies | apps/alba-collector/package.json |
 | body-parser | ^1.20.2 | dependencies | backend/package.json |
@@ -873,16 +882,20 @@ Monetization references:
 | class-variance-authority | ^0.7.1 | dependencies | apps/web/package.json |
 | classnames | ^2.3.2 | dependencies | frontend/package.json |
 | clsx | ^2.1.1 | dependencies | apps/web/package.json |
+| compression | ^1.8.0 | dependencies | microservices/package.json |
 | compression | ^1.8.1 | dependencies | package.json |
+| concurrently | ^9.2.0 | devDependencies | microservices/package.json |
 | concurrently | ^9.2.1 | devDependencies | package.json |
 | convict | ^6.2.4 | dependencies | backend/package.json |
 | cors | ^2.8.5 | dependencies | apps/alba-collector/package.json |
 | cors | ^2.8.5 | dependencies | backend/package.json |
+| cors | ^2.8.5 | dependencies | microservices/package.json |
 | cors | 2.8.5 | dependencies | package.json |
 | cross-env | ^7.0.3 | devDependencies | apps/web/package.json |
 | date-fns | ^3.6.0 | dependencies | frontend/package.json |
 | date-fns | ^2.30.0 | dependencies | packages/shared/package.json |
 | dotenv | ^16.3.1 | dependencies | backend/package.json |
+| dotenv | ^16.5.0 | dependencies | microservices/package.json |
 | eslint | 9.39.2 | devDependencies | apps/web/package.json |
 | eslint | ^8.51.0 | devDependencies | backend/package.json |
 | eslint | ^9.0.0 | devDependencies | frontend/package.json |
@@ -894,8 +907,10 @@ Monetization references:
 | eslint-config-next | 16.2.6 | devDependencies | hello-ai/package.json |
 | express | ^4.21.1 | dependencies | apps/alba-collector/package.json |
 | express | ^4.18.2 | dependencies | backend/package.json |
+| express | ^4.21.2 | dependencies | microservices/package.json |
 | express | ^5.2.1 | dependencies | package.json |
 | express-rate-limit | ^7.1.5 | dependencies | backend/package.json |
+| express-rate-limit | ^7.5.0 | dependencies | microservices/package.json |
 | express-slow-down | ^2.0.1 | dependencies | backend/package.json |
 | express-validator | ^7.0.1 | dependencies | backend/package.json |
 | fast-xml-parser | ^5.5.5 | dependencies | package.json |
@@ -906,14 +921,18 @@ Monetization references:
 | fluent-ffmpeg | 2.1.3 | dependencies | package.json |
 | framer-motion | ^12.30.0 | dependencies | apps/web/package.json |
 | helmet | ^7.1.0 | dependencies | backend/package.json |
+| helmet | ^8.1.0 | dependencies | microservices/package.json |
 | helmet | 8.0.0 | dependencies | package.json |
 | hermes-parser | ^0.25.1 | devDependencies | apps/web/package.json |
 | hpp | ^0.2.3 | dependencies | backend/package.json |
+| http-proxy-middleware | ^3.0.3 | dependencies | microservices/package.json |
 | ioredis | ^5.3.2 | dependencies | backend/package.json |
+| ioredis | ^5.6.1 | dependencies | microservices/package.json |
 | ioredis | ^5.4.1 | dependencies | services/kitchen-worker/package.json |
 | jest | ^29.7.0 | devDependencies | backend/package.json |
 | jose | ^6.2.2 | dependencies | cloudflare/package.json |
 | jsonwebtoken | ^9.0.2 | dependencies | backend/package.json |
+| jsonwebtoken | ^9.0.2 | dependencies | microservices/package.json |
 | livekit-server-sdk | ^2.15.0 | dependencies | apps/web/package.json |
 | lodash | ^4.18.0 | dependencies | packages/shared/package.json |
 | lucide-react | ^0.545.0 | dependencies | apps/web/package.json |
@@ -980,6 +999,7 @@ Monetization references:
 | tsup | ^8.0.0 | devDependencies | sdk/typescript/package.json |
 | tsx | ^4.21.0 | devDependencies | apps/alba-collector/package.json |
 | tsx | ^4.1.0 | devDependencies | backend/package.json |
+| tsx | ^4.20.3 | devDependencies | microservices/package.json |
 | tsx | ^4.1.0 | devDependencies | packages/signal-gen/backend/package.json |
 | typescript | ^5.6.3 | devDependencies | apps/alba-collector/package.json |
 | typescript | ^5.7.0 | devDependencies | apps/pwa/package.json |
@@ -987,6 +1007,7 @@ Monetization references:
 | typescript | ^5.2.2 | devDependencies | backend/package.json |
 | typescript | ^5.4.5 | dependencies | frontend/package.json |
 | typescript | ^5.7.4 | devDependencies | hello-ai/package.json |
+| typescript | ^5.8.3 | devDependencies | microservices/package.json |
 | typescript | 5.7.2 | devDependencies | package.json |
 | typescript | ^5.7.2 | devDependencies | packages/nanogrid/package.json |
 | typescript | ^5.0.0 | devDependencies | packages/shared/package.json |
@@ -995,15 +1016,18 @@ Monetization references:
 | typescript | ^5.3.0 | devDependencies | sdk/typescript/package.json |
 | uuid | ^14.0.0 | dependencies | apps/alba-collector/package.json |
 | uuid | ^14.0.0 | dependencies | apps/web/package.json |
+| uuid | ^11.1.0 | dependencies | microservices/package.json |
 | uuid | ^14.0.0 | dependencies | package.json |
 | vite | ^6.4.2 | devDependencies | package.json |
 | vitest | ^1.0.0 | devDependencies | sdk/typescript/package.json |
 | winston | ^3.11.0 | dependencies | backend/package.json |
+| winston | ^3.17.0 | dependencies | microservices/package.json |
 | winston-daily-rotate-file | ^4.7.1 | dependencies | backend/package.json |
 | wrangler | ^4.80.0 | devDependencies | cloudflare/package.json |
 | wrangler | ^4.80.0 | devDependencies | hello-ai/package.json |
 | ws | ^8.19.0 | dependencies | apps/alba-collector/package.json |
 | ws | ^8.14.2 | dependencies | backend/package.json |
+| ws | ^8.18.1 | dependencies | microservices/package.json |
 | ws | ^8.19.0 | dependencies | package.json |
 | zod | ^3.22.4 | dependencies | backend/package.json |
 | zod | 3.24.1 | dependencies | package.json |
@@ -1012,15 +1036,21 @@ Monetization references:
 ## PyPI Snapshot
 | name | version | section | file |
 | --- | --- | --- | --- |
+| Clisonix-cloud | [api,data,ocean,payments,observability] | project.optional-dependencies.full | pyproject.toml |
 | Pillow | >=11.1.0 | requirements | apps/api/requirements-excel.txt |
+| Pillow | >=11.1.0 | project.optional-dependencies.excel | pyproject.toml |
 | Pillow | >=11.0.0 | requirements | services/video-generator/requirements.txt |
+| PyJWT | [crypto]>=2.10.1 | project.optional-dependencies.api | pyproject.toml |
 | PyJWT | [crypto]>=2.10.1 | project.dependencies | services/api/pyproject.toml |
 | SpeechRecognition | >=3.14.0 | requirements | requirements.txt |
 | XlsxWriter | >=3.2.9 | requirements | apps/api/requirements-excel.txt |
+| XlsxWriter | >=3.2.9 | project.optional-dependencies.excel | pyproject.toml |
 | accelerate | >=1.0.0 | requirements | ocean_core/requirements-internal-llm.txt |
 | aiofiles | >=24.1.0 | requirements | apps/api/requirements-slim.txt |
 | aiofiles | >=24.1.0 | requirements | apps/api/requirements.txt |
 | aiofiles | >=23.0.0 | requirements | ocean_core/requirements.txt |
+| aiofiles | >=24.1.0 | project.optional-dependencies.api | pyproject.toml |
+| aiofiles | >=24.1.0 | requirements | services/lab/requirements.txt |
 | aiofiles | >=23.0.0 | requirements | services/video-generator/requirements.txt |
 | aiohttp | >=3.11.0 | requirements | ocean_core/requirements-internal-core.txt |
 | aiohttp | >=3.11.0 | requirements | ocean_core/requirements.txt |
@@ -1032,9 +1062,11 @@ Monetization references:
 | aioredis | >=2.0.0 | requirements | services/redis_core/requirements.txt |
 | alembic | >=1.14.0 | requirements | apps/api/requirements-slim.txt |
 | alembic | >=1.14.0 | requirements | apps/api/requirements.txt |
+| alembic | >=1.14.0 | project.optional-dependencies.api | pyproject.toml |
 | anyio | >=4.0.0 | requirements | ocean_core/requirements.txt |
 | apscheduler | >=3.10.4 | requirements | services/dr_albana/requirements.txt |
 | asyncpg | >=0.29.0 | requirements | apps/api/requirements.txt |
+| asyncpg | >=0.30.0 | project.optional-dependencies.api | pyproject.toml |
 | asyncpg | >=0.30.0 | requirements | requirements.txt |
 | asyncpg | >=0.28.0 | requirements | services/reporting/requirements.txt |
 | bandit | >=1.7.0 | requirements | requirements-dev.txt |
@@ -1042,7 +1074,9 @@ Monetization references:
 | bentoml | >=1.3.0 | requirements | ocean_core/requirements-internal-llm.txt |
 | biosppy | >=2.2.2 | requirements | ocean_core/requirements-internal-eeg.txt |
 | bitsandbytes | >=0.44.0 | requirements | ocean_core/requirements-internal-llm.txt |
+| black | >=24.10.0 | project.optional-dependencies.dev | pyproject.toml |
 | black | >=24.0.0 | requirements | requirements-dev.txt |
+| black | >=23.0.0 | project.optional-dependencies.dev | sdk/python/clx/pyproject.toml |
 | black | >=23.0.0 | project.optional-dependencies.dev | sdk/python/pyproject.toml |
 | boto3 | >=1.34.0 | requirements | airflow/requirements.txt |
 | boto3 | >=1.36.0 | requirements | requirements.txt |
@@ -1050,6 +1084,7 @@ Monetization references:
 | cbor2 | >=5.6.5 | requirements | apps/api/requirements.txt |
 | cbor2 | >=5.6.5 | requirements | ocean_core/requirements-internal-core.txt |
 | cbor2 | >=5.6.0 | requirements | ocean_core/requirements.txt |
+| cbor2 | >=5.6.5 | project.optional-dependencies.ocean | pyproject.toml |
 | cbor2 | >=5.6.5 | requirements | requirements-autolearning.txt |
 | cbor2 | >=5.6.5 | requirements | requirements-ocean.txt |
 | cbor2 | >=5.6.5 | requirements | requirements.txt |
@@ -1060,7 +1095,9 @@ Monetization references:
 | diffusers | >=0.31.0 | requirements | ocean_core/requirements-internal-multimodal.txt |
 | docker | >=7.1.0 | requirements | requirements.txt |
 | docker | >=7.1.0 | requirements | services/reporting/requirements.txt |
+| duckdb | >=1.1.0 | project.optional-dependencies.ocean | pyproject.toml |
 | duckdb | >=1.1.0 | requirements | requirements-ocean.txt |
+| duckdb-engine | >=0.14.0 | project.optional-dependencies.ocean | pyproject.toml |
 | duckdb-engine | >=0.14.0 | requirements | requirements-ocean.txt |
 | edge-tts | >=7.0.0 | requirements | ocean_core/requirements-internal-core.txt |
 | edge-tts | >=6.1.10 | requirements | ocean_core/requirements.txt |
@@ -1078,6 +1115,7 @@ Monetization references:
 | fastapi | >=0.104.0 | requirements | ocean_core/requirements.txt |
 | fastapi | >=0.115.6 | requirements | orchestra/requirements.txt |
 | fastapi | >=0.115 | requirements | packages/wwwmmm-ndb-stigma-pc/requirements-min.txt |
+| fastapi | >=0.115.6 | project.dependencies | pyproject.toml |
 | fastapi | >=0.115.0 | requirements | requirements-ocean.txt |
 | fastapi | >=0.115.6 | requirements | requirements-test.txt |
 | fastapi | >=0.115.6 | requirements | requirements.txt |
@@ -1104,6 +1142,7 @@ Monetization references:
 | fastapi | ==0.116.1 | requirements | services/kitchen-api/requirements.txt |
 | fastapi | >=0.115,<1.0 | requirements | services/kloud_bridge/requirements.txt |
 | fastapi | >=0.115,<1.0 | requirements | services/kloud_upstream_runtime/requirements.txt |
+| fastapi | >=0.115.6 | requirements | services/lab/requirements.txt |
 | fastapi | >=0.109.0,<0.120.0 | requirements | services/lagter/requirements.txt |
 | fastapi | >=0.115.6 | requirements | services/reporting/requirements.txt |
 | fastapi | >=0.115.6 | requirements | services/user-management/requirements.txt |
@@ -1122,6 +1161,7 @@ Monetization references:
 | httpx | >=0.28.1 | requirements | apps/api/requirements.txt |
 | httpx | >=0.25.0 | requirements | ocean_core/requirements.txt |
 | httpx | >=0.27 | requirements | packages/wwwmmm-ndb-stigma-pc/requirements-min.txt |
+| httpx | >=0.28.1 | project.dependencies | pyproject.toml |
 | httpx | >=0.28.1 | requirements | requirements-dev.txt |
 | httpx | >=0.28.1 | requirements | requirements-test.txt |
 | httpx | >=0.28.1 | requirements | requirements.txt |
@@ -1139,6 +1179,7 @@ Monetization references:
 | httpx | >=0.24.0 | requirements | services/excel/requirements.txt |
 | httpx | >=0.28.1 | requirements | services/intelligence-lab/requirements.txt |
 | httpx | >=0.27,<1.0 | requirements | services/kloud_bridge/requirements.txt |
+| httpx | >=0.28.1 | requirements | services/lab/requirements.txt |
 | httpx | >=0.26.0,<0.30.0 | requirements | services/lagter/requirements.txt |
 | httpx | >=0.28.1 | requirements | services/reporting/requirements.txt |
 | httpx | >=0.28.1 | requirements | services/user-management/requirements.txt |
@@ -1150,24 +1191,30 @@ Monetization references:
 | isort | >=5.13.0 | requirements | requirements-dev.txt |
 | langdetect | >=1.0.9 | requirements | ocean_core/requirements.txt |
 | langgraph | >=0.2.0 | requirements | ocean_core/requirements-internal-llm.txt |
+| librosa | >=0.10.2 | project.optional-dependencies.ml | pyproject.toml |
 | librosa | >=0.10.2 | requirements | requirements.txt |
 | line-profiler | >=4.1.0 | requirements | requirements-dev.txt |
 | livekit-api | >=1.0.0 | requirements | apps/api/requirements.txt |
 | lxml | >=5.0.0 | requirements | apps/api/requirements-excel.txt |
+| lxml | >=5.0.0 | project.optional-dependencies.excel | pyproject.toml |
 | memory-profiler | >=0.61.0 | requirements | requirements-dev.txt |
 | mkdocs | >=1.5.0 | requirements | requirements-dev.txt |
 | mkdocs-material | >=9.4.0 | requirements | requirements-dev.txt |
 | mne | >=1.8.0 | requirements | ocean_core/requirements-internal-eeg.txt |
+| mne | >=1.8.0 | project.optional-dependencies.ml | pyproject.toml |
 | mne | >=1.8.0 | requirements | requirements.txt |
 | moviepy | >=1.0.3 | requirements | ocean_core/requirements-internal-multimodal.txt |
 | moviepy | >=1.0.3 | requirements | services/video-generator/requirements.txt |
 | msgpack | >=1.1.0 | requirements | apps/api/requirements.txt |
 | msgpack | >=1.1.0 | requirements | ocean_core/requirements-internal-core.txt |
 | msgpack | >=1.0.7 | requirements | ocean_core/requirements.txt |
+| msgpack | >=1.1.0 | project.optional-dependencies.ocean | pyproject.toml |
 | msgpack | >=1.1.0 | requirements | requirements-ocean.txt |
 | msgpack | >=1.1.2 | requirements | requirements.txt |
 | mutagen | >=1.47.0 | requirements | services/video-generator/requirements.txt |
+| mypy | >=1.13.0 | project.optional-dependencies.dev | pyproject.toml |
 | mypy | >=1.8.0 | requirements | requirements-dev.txt |
+| mypy | >=1.0.0 | project.optional-dependencies.dev | sdk/python/clx/pyproject.toml |
 | mypy | >=1.0.0 | project.optional-dependencies.dev | sdk/python/pyproject.toml |
 | neo4j | >=5.22.0 | requirements | airflow/requirements.txt |
 | neo4j | unspecified | project.dependencies | services/api/pyproject.toml |
@@ -1176,6 +1223,7 @@ Monetization references:
 | numpy | >=1.26.0 | requirements | 9999/requirements.txt |
 | numpy | >=1.26.4 | requirements | apps/api/requirements.txt |
 | numpy | >=1.26.0 | requirements | ocean_core/requirements.txt |
+| numpy | >=2.0.0 | project.optional-dependencies.data | pyproject.toml |
 | numpy | >=2.0.0 | requirements | requirements-autolearning.txt |
 | numpy | >=2.2.0 | requirements | requirements.txt |
 | numpy | >=2.0.0 | requirements | services/content-factory/requirements.txt |
@@ -1186,40 +1234,54 @@ Monetization references:
 | openpyxl | >=3.1.5 | requirements | excel-core/requirements.txt |
 | openpyxl | >=3.1.0 | requirements | hybrid_saas_platform/requirements.txt |
 | openpyxl | >=3.1.5 | requirements | ocean_core/requirements.txt |
+| openpyxl | >=3.1.5 | project.optional-dependencies.excel | pyproject.toml |
 | openpyxl | >=3.1.0 | requirements | services/excel/requirements.txt |
 | openpyxl | >=3.1.0 | requirements | services/intelligence-lab/requirements.txt |
 | openpyxl | >=3.1.0 | requirements | services/reporting/requirements.txt |
+| opentelemetry-api | >=1.29.0 | project.optional-dependencies.observability | pyproject.toml |
 | opentelemetry-api | >=1.30.0 | requirements | requirements.txt |
+| opentelemetry-exporter-otlp | >=1.29.0 | project.optional-dependencies.observability | pyproject.toml |
 | opentelemetry-exporter-otlp | >=1.30.0 | requirements | requirements.txt |
 | opentelemetry-exporter-otlp-proto-http | >=1.30.0 | requirements | requirements.txt |
 | opentelemetry-instrumentation-aiohttp-client | >=0.51b0 | requirements | requirements.txt |
+| opentelemetry-instrumentation-fastapi | >=0.50b0 | project.optional-dependencies.observability | pyproject.toml |
 | opentelemetry-instrumentation-fastapi | >=0.51b0 | requirements | requirements.txt |
 | opentelemetry-instrumentation-httpx | >=0.51b0 | requirements | requirements.txt |
 | opentelemetry-instrumentation-logging | >=0.51b0 | requirements | requirements.txt |
+| opentelemetry-instrumentation-redis | >=0.50b0 | project.optional-dependencies.observability | pyproject.toml |
 | opentelemetry-instrumentation-requests | >=0.51b0 | requirements | requirements.txt |
+| opentelemetry-instrumentation-sqlalchemy | >=0.50b0 | project.optional-dependencies.observability | pyproject.toml |
+| opentelemetry-sdk | >=1.29.0 | project.optional-dependencies.observability | pyproject.toml |
 | opentelemetry-sdk | >=1.30.0 | requirements | requirements.txt |
 | orjson | >=3.10.0 | requirements | ocean_core/requirements-internal-core.txt |
 | orjson | >=3.9.0 | requirements | ocean_core/requirements.txt |
+| orjson | >=3.10.0 | project.optional-dependencies.ocean | pyproject.toml |
 | orjson | >=3.10.0 | requirements | requirements-ocean.txt |
 | orjson | >=3.10.14 | requirements | requirements.txt |
 | pandas | >=2.2.0 | requirements | apps/api/requirements.txt |
+| pandas | >=2.2.0 | project.optional-dependencies.data | pyproject.toml |
 | pandas | >=2.2.3 | requirements | requirements.txt |
 | pandas | >=2.2.0 | requirements | services/content-factory/requirements.txt |
 | pandas | >=2.0.0 | requirements | services/excel/requirements.txt |
 | pandas | >=2.0.0 | requirements | services/intelligence-lab/requirements.txt |
+| passlib | [bcrypt]>=1.7.4 | project.optional-dependencies.api | pyproject.toml |
 | paypalrestsdk | >=1.7.1 | requirements | apps/api/requirements.txt |
+| paypalrestsdk | >=1.7.1 | project.optional-dependencies.payments | pyproject.toml |
 | peft | >=0.13.0 | requirements | ocean_core/requirements-internal-llm.txt |
 | pillow | >=10.0.0 | requirements | 9999/requirements.txt |
+| pip-audit | >=2.7.0 | project.optional-dependencies.dev | pyproject.toml |
 | pre-commit | >=3.6.0 | requirements | requirements-dev.txt |
 | prometheus-client | >=0.21.1 | requirements | apps/api/requirements.txt |
 | prometheus-client | >=0.21.0 | requirements | ocean_core/requirements-internal-core.txt |
 | prometheus-client | >=0.18.0 | requirements | ocean_core/requirements.txt |
 | prometheus-client | >=0.20 | requirements | packages/wwwmmm-ndb-stigma-pc/requirements-min.txt |
+| prometheus-client | >=0.21.1 | project.optional-dependencies.api | pyproject.toml |
 | prometheus-client | >=0.21.1 | requirements | requirements-autolearning.txt |
 | prometheus-client | >=0.21.0 | requirements | requirements-ocean.txt |
 | psutil | >=6.0.0 | requirements | apps/api/requirements-slim.txt |
 | psutil | >=6.0.0 | requirements | apps/api/requirements.txt |
 | psutil | >=5.9.0 | requirements | excel-core/requirements.txt |
+| psutil | >=6.1.0 | project.optional-dependencies.api | pyproject.toml |
 | psutil | >=6.1.0 | requirements | requirements.txt |
 | psutil | >=6.1.0 | requirements | services/core/requirements.txt |
 | psutil | >=6.1.0 | requirements | services/intelligence-lab/requirements.txt |
@@ -1239,6 +1301,7 @@ Monetization references:
 | pydantic | >=2.5.0 | requirements | ocean_core/requirements.txt |
 | pydantic | >=2.10.4 | requirements | orchestra/requirements.txt |
 | pydantic | >=2.8 | requirements | packages/wwwmmm-ndb-stigma-pc/requirements-min.txt |
+| pydantic | >=2.10.4 | project.dependencies | pyproject.toml |
 | pydantic | >=2.10.0 | requirements | requirements-ocean.txt |
 | pydantic | >=2.10.4 | requirements | requirements.txt |
 | pydantic | ==2.10.3 | requirements | services/ads_core/requirements.txt |
@@ -1266,6 +1329,7 @@ Monetization references:
 | pydantic-extra-types | >=2.10.1 | requirements | requirements.txt |
 | pydantic-settings | >=2.7.0 | requirements | apps/api/requirements.txt |
 | pydantic-settings | >=2.7.0 | requirements | orchestra/requirements.txt |
+| pydantic-settings | >=2.7.0 | project.dependencies | pyproject.toml |
 | pydantic-settings | >=2.7.0 | requirements | requirements.txt |
 | pydub | >=0.25.1 | requirements | ocean_core/requirements-internal-multimodal.txt |
 | pydub | >=0.25.1 | requirements | requirements.txt |
@@ -1274,16 +1338,22 @@ Monetization references:
 | pypdf | >=4.2.0 | requirements | ocean_core/requirements-internal-core.txt |
 | pypdf | >=4.2.0 | requirements | ocean_core/requirements.txt |
 | pyriemann | >=0.7 | requirements | ocean_core/requirements-internal-eeg.txt |
+| pytest | >=8.3.0 | project.optional-dependencies.dev | pyproject.toml |
 | pytest | >=8.0.0 | requirements | requirements-dev.txt |
 | pytest | >=8.3.0 | requirements | requirements-dev.txt |
 | pytest | >=8.3.0 | requirements | requirements-test.txt |
+| pytest | >=7.0.0 | project.optional-dependencies.dev | sdk/python/clx/pyproject.toml |
 | pytest | >=7.0.0 | project.optional-dependencies.dev | sdk/python/pyproject.toml |
 | pytest | unspecified | project.optional-dependencies.dev | services/api/pyproject.toml |
+| pytest-asyncio | >=0.24.0 | project.optional-dependencies.dev | pyproject.toml |
 | pytest-asyncio | >=0.23.0 | requirements | requirements-dev.txt |
 | pytest-asyncio | >=0.24.0 | requirements | requirements-test.txt |
+| pytest-asyncio | >=0.20.0 | project.optional-dependencies.dev | sdk/python/clx/pyproject.toml |
 | pytest-asyncio | >=0.20.0 | project.optional-dependencies.dev | sdk/python/pyproject.toml |
+| pytest-cov | >=6.0.0 | project.optional-dependencies.dev | pyproject.toml |
 | pytest-cov | >=4.1.0 | requirements | requirements-dev.txt |
 | python-dateutil | >=2.8.0 | requirements | hybrid_saas_platform/requirements.txt |
+| python-docx | >=1.2.0 | requirements | apps/api/requirements-excel.txt |
 | python-docx | >=1.1.2 | requirements | ocean_core/requirements.txt |
 | python-docx | >=1.1.2 | requirements | services/reporting/requirements.txt |
 | python-dotenv | >=1.0.0 | requirements | 9999/requirements.txt |
@@ -1291,6 +1361,7 @@ Monetization references:
 | python-dotenv | >=1.0.1 | requirements | apps/api/requirements.txt |
 | python-dotenv | >=1.0.1 | requirements | ocean_core/requirements-internal-core.txt |
 | python-dotenv | >=1.0.0 | requirements | ocean_core/requirements.txt |
+| python-dotenv | >=1.0.1 | project.dependencies | pyproject.toml |
 | python-dotenv | >=1.0.1 | requirements | requirements-ocean.txt |
 | python-dotenv | ==1.0.1 | requirements | services/ads_core/requirements.txt |
 | python-dotenv | >=1.0.0 | requirements | services/ai-global-9999/requirements.txt |
@@ -1305,23 +1376,27 @@ Monetization references:
 | python-multipart | >=0.0.22 | requirements | apps/api/requirements.txt |
 | python-multipart | >=0.0.9 | requirements | ocean_core/requirements-internal-core.txt |
 | python-multipart | >=0.0.9 | requirements | ocean_core/requirements.txt |
+| python-multipart | >=0.0.22 | project.dependencies | pyproject.toml |
 | python-multipart | >=0.0.6 | requirements | services/blerina/requirements.txt |
 | python-multipart | >=0.0.22 | requirements | services/blog_api/requirements.txt |
 | python-multipart | >=0.0.9 | requirements | services/content-factory/requirements.txt |
 | python-multipart | >=0.0.22 | requirements | services/excel/requirements.txt |
 | python-multipart | >=0.0.9 | requirements | services/user-management/requirements.txt |
 | python-pptx | >=1.0.2 | requirements | apps/api/requirements-excel.txt |
+| python-pptx | >=1.0.2 | project.optional-dependencies.excel | pyproject.toml |
 | python-pptx | >=0.6.21 | requirements | services/reporting/requirements.txt |
 | pyyaml | >=6.0.0 | requirements | ocean_core/requirements-internal-core.txt |
 | pyyaml | >=6.0.0 | requirements | ocean_core/requirements.txt |
 | redis | >=5.2.0 | requirements | apps/api/requirements.txt |
 | redis | >=5.2.0 | requirements | ocean_core/requirements-internal-core.txt |
 | redis | >=5.0.0 | requirements | ocean_core/requirements.txt |
+| redis | [hiredis]>=5.2.0 | project.optional-dependencies.api | pyproject.toml |
 | redis | >=5.2.0 | requirements | requirements-ocean.txt |
 | redis | >=5.2.1 | requirements | requirements.txt |
 | redis | >=4.5.0 | requirements | services/clx_brain/requirements.txt |
 | redis | >=5.0.0 | requirements | services/redis_core/requirements.txt |
 | redis | >=5.0.0 | requirements | services/reporting/requirements.txt |
+| reportlab | >=4.4.0 | requirements | apps/api/requirements-excel.txt |
 | reportlab | >=4.2.5 | requirements | requirements.txt |
 | reportlab | >=4.2.2 | requirements | services/reporting/requirements.txt |
 | requests | >=2.32.0 | requirements | airflow/requirements.txt |
@@ -1335,27 +1410,35 @@ Monetization references:
 | requests | >=2.32.3 | requirements | requirements-test.txt |
 | requests | >=2.32.3 | requirements | requirements.txt |
 | ruff | >=0.8.0 | requirements | requirements-dev.txt |
+| ruff | >=0.1.0 | project.optional-dependencies.dev | sdk/python/clx/pyproject.toml |
 | ruff | >=0.1.0 | project.optional-dependencies.dev | sdk/python/pyproject.toml |
 | ruff | unspecified | project.optional-dependencies.dev | services/api/pyproject.toml |
 | safety | >=3.0.0 | requirements | requirements-dev.txt |
+| scikit-learn | >=1.6.0 | project.optional-dependencies.ml | pyproject.toml |
+| scipy | >=1.14.0 | project.optional-dependencies.ml | pyproject.toml |
+| sentry-sdk | [fastapi]>=2.19.0 | project.optional-dependencies.observability | pyproject.toml |
 | soundfile | >=0.13.0 | requirements | requirements.txt |
 | sqlalchemy | >=2.0.36 | requirements | apps/api/requirements-slim.txt |
 | sqlalchemy | >=2.0.36 | requirements | apps/api/requirements.txt |
+| sqlalchemy | [asyncio]>=2.0.36 | project.optional-dependencies.api | pyproject.toml |
 | sqlalchemy | >=2.0.36 | requirements | requirements.txt |
 | sqlalchemy | >=2.0 | project.dependencies | services/api/pyproject.toml |
 | sqlalchemy | >=2.0 | requirements | services/api/requirements.txt |
 | sqlalchemy | ==2.0.23 | requirements | services/blog_api/requirements.txt |
 | starlette | >=0.47.2 | requirements | services/blog_api/requirements.txt |
 | stripe | >=12.0.0 | requirements | apps/api/requirements.txt |
+| stripe | >=12.0.0 | project.optional-dependencies.payments | pyproject.toml |
 | stripe | >=10.0.0 | requirements | requirements.txt |
 | stripe | >=12.1.0 | requirements | requirements.txt |
 | stripe | ==11.3.0 | requirements | services/billing_core/requirements.txt |
 | stripe | ==7.4.0 | requirements | services/blog_api/requirements.txt |
 | structlog | >=24.4.0 | requirements | ocean_core/requirements-internal-core.txt |
 | structlog | >=23.2.0 | requirements | ocean_core/requirements.txt |
+| structlog | >=24.4.0 | project.dependencies | pyproject.toml |
 | structlog | >=24.4.0 | requirements | requirements-ocean.txt |
 | tenacity | >=9.0.0 | requirements | apps/api/requirements-slim.txt |
 | tenacity | >=9.0.0 | requirements | apps/api/requirements.txt |
+| tenacity | >=9.0.0 | project.optional-dependencies.api | pyproject.toml |
 | torch | >=2.0.0 | requirements | ocean_core/ocean_ai_processes/requirements.txt |
 | torch | >=2.4.0 | requirements | ocean_core/requirements-internal-llm.txt |
 | transformers | >=4.45.0 | requirements | ocean_core/requirements-internal-llm.txt |
@@ -1370,6 +1453,7 @@ Monetization references:
 | uvicorn | >=0.32.0 | requirements | ocean_core/requirements-lite.txt |
 | uvicorn | >=0.24.0 | requirements | ocean_core/requirements.txt |
 | uvicorn | >=0.30 | requirements | packages/wwwmmm-ndb-stigma-pc/requirements-min.txt |
+| uvicorn | [standard]>=0.32.1 | project.dependencies | pyproject.toml |
 | uvicorn | >=0.30.0 | requirements | requirements-ocean.txt |
 | uvicorn | >=0.32.1 | requirements | requirements-test.txt |
 | uvicorn | >=0.34.0 | requirements | requirements.txt |
@@ -1386,6 +1470,7 @@ Monetization references:
 | uvicorn | >=0.22.0 | requirements | services/excel/requirements.txt |
 | uvicorn | >=0.32.1 | requirements | services/intelligence-lab/requirements.txt |
 | uvicorn | ==0.35.0 | requirements | services/kitchen-api/requirements.txt |
+| uvicorn | >=0.32.1 | requirements | services/lab/requirements.txt |
 | uvicorn | >=0.27.0,<0.35.0 | requirements | services/lagter/requirements.txt |
 | uvicorn | >=0.32.1 | requirements | services/reporting/requirements.txt |
 | uvicorn | >=0.32.1 | requirements | services/user-management/requirements.txt |
