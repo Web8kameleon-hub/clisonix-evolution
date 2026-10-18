@@ -158,7 +158,7 @@ def main() -> int:
         ROOT / "apps/web/app/api/proxy/user-summary/route.ts",
         ROOT / "apps/api/main.py",
         ROOT / "services/kloud_bridge/main.py",
-        ROOT / "ocean-core/ocean_core_full.py",
+        ROOT / "ocean_core/ocean_core_full.py",
     ]
     for path in required_files:
         if not path.exists():
@@ -167,13 +167,15 @@ def main() -> int:
     # Critical endpoint contracts by regex.
     endpoint_contracts = [
         (ROOT / "apps/api/main.py", r"@app\.get\(\s*[\"']?/health[\"']?"),
-        (ROOT / "apps/api/main.py", r"@app\.(get|post)\(\s*[\"']?/api/zurich[\"']?\s*\)"),
+        # /api/zurich is implemented by the Next.js route, not the API service.
+        (ROOT / "apps/web/app/api/zurich/route.ts", r"^export\s+async\s+function\s+GET\s*\("),
+        (ROOT / "apps/web/app/api/zurich/route.ts", r"^export\s+async\s+function\s+POST\s*\("),
         (ROOT / "services/kloud_bridge/main.py", r"@app\.get\(\s*[\"']?/health[\"']?"),
         (ROOT / "services/kloud_bridge/main.py", r"@app\.get\(\s*[\"']?/status[\"']?"),
         (ROOT / "services/kloud_bridge/main.py", r"/hardware/nodes/register"),
         (ROOT / "services/kloud_bridge/main.py", r"/hardware/mesh/status"),
-        (ROOT / "ocean-core/ocean_core_full.py", r"@app\.get\(\s*[\"']?/health[\"']?"),
-        (ROOT / "ocean-core/ocean_core_full.py", r"/api/v1/nanogrid/status"),
+        (ROOT / "ocean_core/ocean_core_full.py", r"@app\.get\(\s*[\"']?/health[\"']?"),
+        (ROOT / "ocean_core/ocean_core_full.py", r"/api/v1/nanogrid/status"),
     ]
 
     for file_path, pattern in endpoint_contracts:
