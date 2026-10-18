@@ -24,6 +24,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 env:
   WEB_HEALTH_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.web_health_url || 'https://www.clisonix.com/api/health-check' }}
@@ -37,6 +38,37 @@ jobs:
     if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
 
     steps:
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+
+      - name: Select tested build
+        id: build
+        uses: actions/github-script@v7
+        with:
+          script: |
+            let run = context.payload.workflow_run;
+            if (!run) {
+              const response = await github.rest.actions.listWorkflowRuns({
+                owner: context.repo.owner, repo: context.repo.repo,
+                workflow_id: 'ghcr-build-push.yml', branch: 'main', status: 'success', per_page: 1
+              });
+              run = response.data.workflow_runs[0];
+            }
+            if (!run || run.conclusion !== 'success') throw new Error('A successful build is required');
+            core.setOutput('run_id', String(run.id));
+            core.setOutput('revision', run.head_sha);
+
+      - name: Download complete tested API contract
+        uses: actions/download-artifact@v4
+        with:
+          name: tested-api-contract
+          path: tested-api-contract
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ steps.build.outputs.run_id }}
+
       - name: Validate required URLs
         run: |
           set -euo pipefail
@@ -76,9 +108,9 @@ jobs:
 
       - name: Verify deployed API contract
         env:
-          EXPECTED_OPENAPI_TITLE: Clisonix Industrial Backend (REAL)
+          EXPECTED_REVISION: ${{ steps.build.outputs.revision }}
         run: |
-          python3 - <<'PY'
+          python - <<'PY'
           import json
           import os
           import time
@@ -86,7 +118,19 @@ jobs:
           import urllib.request
 
           base = os.environ["API_HEALTH_URL"].removesuffix("/health").rstrip("/")
-          expected_title = os.environ["EXPECTED_OPENAPI_TITLE"]
+          from pathlib import Path
+          expected = json.loads(Path("tested-api-contract/openapi.json").read_text())
+          revision = Path("tested-api-contract/revision.txt").read_text().strip()
+          if revision != os.environ["EXPECTED_REVISION"]:
+              raise SystemExit("Route contract revision does not match the selected release")
+          verbs = {"get", "post", "put", "patch", "delete", "head", "options", "trace"}
+          def operations(spec):
+              return {(method.upper(), path) for path, methods in spec["paths"].items()
+                      for method in methods if method.lower() in verbs}
+          required = operations(expected)
+          if len(expected["paths"]) < 245:
+              raise SystemExit("Tested API has fewer than the required 245 route paths")
+          print(f"Checking all {len(expected['paths'])} paths and {len(required)} HTTP operations.")
           last_error = ""
           for attempt in range(30):
               try:
@@ -94,12 +138,11 @@ jobs:
                                                    headers={"Cache-Control": "no-cache"})
                   with urllib.request.urlopen(request, timeout=15) as response:
                       document = json.load(response)
-                  title = document.get("info", {}).get("title")
-                  paths = document.get("paths", {})
-                  required = {"/api/reporting/export-pdf", "/api/reporting/export-docx",
-                              "/api/asi/{service_name}/health", "/api/system/health"}
-                  if title != expected_title or not required <= paths.keys():
-                      raise RuntimeError(f"Old API contract: title={title!r}, missing={sorted(required - paths.keys())}")
+                  actual = operations(document)
+                  missing = sorted(required - actual)
+                  extra = sorted(actual - required)
+                  if missing or extra:
+                      raise RuntimeError(f"Route contract differs: missing={missing}, extra={extra}")
                   try:
                       urllib.request.urlopen(base + "/neural-symphony", timeout=15)
                       raise RuntimeError("Synthetic endpoint retirement is not active")
