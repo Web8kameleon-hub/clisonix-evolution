@@ -20,6 +20,7 @@ from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from pydantic import BaseModel, Field
 from sqlalchemy import Boolean, Column, DateTime, Integer, String, create_engine, func
 from sqlalchemy.orm import Session, declarative_base, sessionmaker
+from sqlalchemy.engine import make_url
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # CONFIGURATION
@@ -29,7 +30,9 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("APIMonetization")
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./api_monetization.db")
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+database_url = make_url(DATABASE_URL)
+connect_args = {"check_same_thread": False} if database_url.get_backend_name() == "sqlite" else {}
+engine = create_engine(database_url, connect_args=connect_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
