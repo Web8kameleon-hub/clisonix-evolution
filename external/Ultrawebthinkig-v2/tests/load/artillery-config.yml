@@ -1,0 +1,188 @@
+# EuroWeb Platform - Load Testing Configuration
+# Industrial-grade performance testing with Artillery.js
+
+config:
+  target: 'http://localhost:3000'
+  phases:
+    # Warm-up phase
+    - duration: 60
+      arrivalRate: 5
+      name: "Warm-up"
+    
+    # Ramp-up phase
+    - duration: 300
+      arrivalRate: 10
+      rampTo: 50
+      name: "Ramp-up"
+    
+    # Sustained load phase
+    - duration: 600
+      arrivalRate: 50
+      name: "Sustained Load"
+    
+    # Peak load phase
+    - duration: 300
+      arrivalRate: 50
+      rampTo: 200
+      name: "Peak Load"
+    
+    # Cool-down phase
+    - duration: 180
+      arrivalRate: 200
+      rampTo: 10
+      name: "Cool-down"
+
+  payload:
+    path: './test-data/users.csv'
+    fields:
+      - name
+      - email
+      - company
+
+  defaults:
+    headers:
+      User-Agent: 'EuroWeb-LoadTest/8.0.0'
+      Accept: 'application/json'
+      Content-Type: 'application/json'
+
+  variables:
+    apiKey: '{{ $randomString(32) }}'
+    userId: '{{ $randomInt(1, 10000) }}'
+
+  processor: './tests/load/processors.js'
+
+  plugins:
+    expect: {}
+    metrics-by-endpoint: {}
+    hdrhistogram: {}
+
+scenarios:
+  - name: "Homepage and Navigation"
+    weight: 30
+    flow:
+      - get:
+          url: "/"
+          capture:
+            - json: "$.version"
+              as: "appVersion"
+      - think: 2
+      - get:
+          url: "/agi-demo"
+          headers:
+            X-Request-ID: '{{ $randomString(16) }}'
+      - think: 3
+      - get:
+          url: "/agixeco-demo"
+
+  - name: "AGI Core Functionality"
+    weight: 25
+    flow:
+      - post:
+          url: "/api/agi/analyze"
+          json:
+            text: "{{ $randomString(100) }}"
+            language: "sq"
+            type: "sentiment"
+          capture:
+            - json: "$.requestId"
+              as: "analysisId"
+          expect:
+            - statusCode: 200
+            - hasProperty: "result"
+      - think: 1
+      - get:
+          url: "/api/agi/status/{{ analysisId }}"
+          expect:
+            - statusCode: 200
+
+  - name: "AGISheet Operations"
+    weight: 20
+    flow:
+      - post:
+          url: "/api/agisheet/create"
+          json:
+            name: "Test Sheet {{ $randomInt(1, 1000) }}"
+            type: "analysis"
+          capture:
+            - json: "$.sheetId"
+              as: "sheetId"
+      - post:
+          url: "/api/agisheet/{{ sheetId }}/data"
+          json:
+            data: [
+              ["Name", "Value", "Category"],
+              ["{{ name }}", "{{ $randomInt(1, 100) }}", "A"],
+              ["Test {{ $randomInt(1, 100) }}", "{{ $randomInt(1, 100) }}", "B"]
+            ]
+      - get:
+          url: "/api/agisheet/{{ sheetId }}/analyze"
+          expect:
+            - statusCode: 200
+
+  - name: "Health and Monitoring"
+    weight: 10
+    flow:
+      - get:
+          url: "/api/health"
+          expect:
+            - statusCode: 200
+            - hasProperty: "status"
+            - equals:
+              - "{{ status }}"
+              - "healthy"
+      - get:
+          url: "/api/metrics"
+          expect:
+            - statusCode: 200
+
+  - name: "Static Assets"
+    weight: 10
+    flow:
+      - get:
+          url: "/_next/static/css/{{ $randomString(16) }}.css"
+          ifTrue: "{{ $randomBoolean() }}"
+      - get:
+          url: "/favicon.ico"
+      - get:
+          url: "/api/sitemap.xml"
+
+  - name: "Error Scenarios"
+    weight: 5
+    flow:
+      - get:
+          url: "/api/invalid-endpoint"
+          expect:
+            - statusCode: 404
+      - post:
+          url: "/api/agi/analyze"
+          json:
+            invalid: "data"
+          expect:
+            - statusCode: 400
+      - get:
+          url: "/api/agisheet/nonexistent"
+          expect:
+            - statusCode: 404
+
+# Performance Thresholds
+expect:
+  thresholds:
+    http_req_duration:
+      - p(95) < 2000  # 95% of requests should be under 2s
+      - p(99) < 5000  # 99% of requests should be under 5s
+    http_req_failed:
+      - rate < 0.05   # Error rate should be under 5%
+    http_reqs:
+      - rate > 10     # Should handle at least 10 RPS
+
+# Custom metrics
+metrics:
+  - name: agi_processing_time
+    type: histogram
+    unit: ms
+  - name: database_connection_time
+    type: histogram
+    unit: ms
+  - name: cache_hit_rate
+    type: rate
+    unit: percent

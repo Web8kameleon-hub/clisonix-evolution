@@ -1,0 +1,4 @@
+{
+  "dependency:audit": "tsx scripts/dependency-auditor.ts",
+  "modules:check": "tsx scripts/dependency-auditor.ts"
+}

@@ -1,0 +1,19 @@
+source_loc: "saas_services_orchestrator_v3.py:75"
+bindings:
+  - binding: "Standalone FastAPI app with permissive CORS."
+    source_loc: "saas_services_orchestrator_v3.py:91"
+    must_appear_in_target: false
+  - binding: "No matching service entry exists in the active docker-compose.yml."
+    source_loc: "saas_services_orchestrator_v3.py:75"
+    must_appear_in_target: false
+runtime_config:
+  - key: SERVICE_ALBA_HOST
+    source_loc: "saas_services_orchestrator_v3.py:58"
+    must_appear_in_target: false
+  - key: SERVICE_ALBI_HOST
+    source_loc: "saas_services_orchestrator_v3.py:59"
+    must_appear_in_target: false
+  - key: SERVICE_JONA_HOST
+    source_loc: "saas_services_orchestrator_v3.py:60"
+    must_appear_in_target: false
+

@@ -1,0 +1,585 @@
+'use client'
+
+/**
+ * 🤖 AI Manager Chat Interface - Real Responses
+ * Client ↔ AI Manager Communication (NO HUMAN TECHNICIANS)
+ * 
+ * Architecture:
+ * Client 👤 → Manager Module 🤖 → AGI Core 🧠 → ALBA/ASI ⚙️
+ * 
+ * Complete Autonomous System - Zero Human Intervention
+ * REAL AI RESPONSES - NO TEMPLATES
+ * 
+ * @version 3.1.0 REAL AI MANAGER CHAT
+ * @author UltraWebThinking Team
+ */
+
+import React, { useState, useEffect, useRef } from 'react'
+
+interface AIMessage {
+  id: string
+  type: 'client' | 'ai-manager' | 'system' | 'alert'
+  content: string
+  timestamp: string
+  confidence?: number
+  category?: string
+  actionsTaken?: string[]
+  nextSteps?: string[]
+  handledBy?: string
+}
+
+interface AIManagerChatProps {
+  clientId?: string
+  managerUrl?: string
+  className?: string;
+  onSystemAlert?: (alert: any) => void;
+}
+
+export const AIManagerChat = ({
+  clientId = 'client-001',
+  managerUrl = '/api/ai-manager',
+  className = '',
+  onSystemAlert
+}: AIManagerChatProps) => {
+  const [messages, setMessages] = useState<AIMessage[]>([]);
+  const [inputValue, setInputValue] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [systemHealth, setSystemHealth] = useState({
+    agiCore: true,
+    albaNetwork: true,
+    asiEngine: true,
+    status: 'OPERATIONAL'
+  });
+  
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to newest messages
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  // Initialize with system greeting
+  useEffect(() => {
+    const welcomeMessage: AIMessage = {
+      id: 'welcome',
+      type: 'ai-manager',
+      content: `🤖 Mirë se vini në Sistemin AI Manager!
+
+Jam sistemi juaj i menaxhimit autonom që do t'ju ndihmoj me:
+• 🛰️ Monitorim IoT dhe sensorë (ALBA)
+• 🔧 Diagnostikim sistemi (ASI)
+• 💬 Mbështetje teknike 24/7
+• 🚨 Reagim emergjent automatik
+
+Si mund t'ju ndihmoj sot?`,
+      timestamp: new Date().toISOString(),
+      confidence: 1.0,
+      handledBy: 'AI Manager System'
+    };
+    
+    setMessages([welcomeMessage]);
+  }, []);
+
+  // System health monitoring
+  useEffect(() => {
+    const checkSystemHealth = async () => {
+      try {
+        const response = await fetch(`${managerUrl}/health`);
+        if (response.ok) {
+          const health = await response.json();
+          setSystemHealth({
+            agiCore: health.agiCore || true,
+            albaNetwork: health.albaNetwork || true,
+            asiEngine: health.asiEngine || true,
+            status: health.status || 'OPERATIONAL'
+          });
+        }
+      } catch (error) {
+        console.error('Health check failed:', error);
+        setSystemHealth(prev => ({ ...prev, status: 'DEGRADED' }));
+      }
+    };
+
+    checkSystemHealth();
+    const interval = setInterval(checkSystemHealth, 30000); // Every 30s
+    
+    return () => clearInterval(interval);
+  }, [managerUrl]);
+
+  // Send message to AI Manager
+  const handleSendMessage = async () => {
+    if (!inputValue.trim() || isProcessing) return;
+
+    const clientMessage: AIMessage = {
+      id: `msg-${Date.now()}`,
+      type: 'client',
+      content: inputValue.trim(),
+      timestamp: new Date().toISOString()
+    };
+
+    setMessages(prev => [...prev, clientMessage]);
+    setInputValue('');
+    setIsProcessing(true);
+
+    try {
+      const response = await fetch(`${managerUrl}/manager/handle`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          clientId,
+          message: clientMessage.content
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      
+      const aiResponse: AIMessage = {
+        id: `ai-${Date.now()}`,
+        type: 'ai-manager',
+        content: result.solution || result.message || 'Response received',
+        timestamp: result.timestamp,
+        confidence: result.confidence,
+        category: result.category,
+        actionsTaken: result.actionsTaken,
+        nextSteps: result.nextSteps,
+        handledBy: result.handledBy
+      };
+
+      setMessages(prev => [...prev, aiResponse]);
+
+      // Handle system alerts
+      if (result.category === 'emergency' && onSystemAlert) {
+        onSystemAlert(result);
+      }
+
+    } catch (error) {
+      console.error('AI Manager error:', error);
+      
+      const errorResponse: AIMessage = {
+        id: `error-${Date.now()}`,
+        type: 'system',
+        content: `⚠️ Gabim në komunikim me AI Manager: ${error}\n\nJu lutem provoni përsëri pas pak çastesh.`,
+        timestamp: new Date().toISOString(),
+        confidence: 0
+      };
+
+      setMessages(prev => [...prev, errorResponse]);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  // Handle enter key
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
+  // Get message styling
+  const getMessageStyle = (message: AIMessage) => {
+    const baseStyle = {
+      maxWidth: '85%',
+      padding: '16px 20px',
+      borderRadius: message.type === 'client' ? '20px 20px 4px 20px' : '20px 20px 20px 4px',
+      margin: '12px 0',
+      fontSize: '0.95rem',
+      lineHeight: '1.6',
+      wordWrap: 'break-word' as const,
+      position: 'relative' as const
+    };
+
+    switch (message.type) {
+      case 'client':
+        return {
+          ...baseStyle,
+          background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+          color: '#ffffff',
+          alignSelf: 'flex-end' as const,
+          marginLeft: 'auto',
+          boxShadow: '0 4px 16px rgba(59, 130, 246, 0.3)'
+        };
+      
+      case 'ai-manager':
+        return {
+          ...baseStyle,
+          background: 'linear-gradient(135deg, #10b981, #059669)',
+          color: '#ffffff',
+          alignSelf: 'flex-start' as const,
+          boxShadow: '0 4px 16px rgba(16, 185, 129, 0.3)'
+        };
+      
+      case 'system':
+        return {
+          ...baseStyle,
+          background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+          color: '#ffffff',
+          alignSelf: 'center' as const,
+          textAlign: 'center' as const,
+          fontSize: '0.9rem',
+          boxShadow: '0 4px 16px rgba(245, 158, 11, 0.3)'
+        };
+      
+      default:
+        return {
+          ...baseStyle,
+          background: '#f3f4f6',
+          color: '#374151',
+          border: '1px solid #d1d5db'
+        };
+    }
+  };
+
+  // Get system status indicator
+  const getSystemStatusColor = () => {
+    switch (systemHealth.status) {
+      case 'OPERATIONAL': return '#10b981';
+      case 'DEGRADED': return '#f59e0b';
+      case 'OFFLINE': return '#ef4444';
+      default: return '#6b7280';
+    }
+  };
+
+  return (
+    <div 
+      className={`ai-manager-chat ${className}`}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        maxHeight: '700px',
+        border: '2px solid #e5e7eb',
+        borderRadius: '20px',
+        overflow: 'hidden',
+        background: '#ffffff',
+        fontFamily: 'system-ui, -apple-system, sans-serif',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.1)'
+      }}
+    >
+    // Header
+    createMotionDiv('chat-header', {
+      padding: '20px 24px',
+      background: 'linear-gradient(135deg, #1f2937, #374151)',
+      color: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    }, [
+      React.createElement('div', {
+        key: 'header-info',
+        style: { display: 'flex', alignItems: 'center', gap: '16px' }
+      }, [
+        React.createElement('div', { 
+          key: 'icon', 
+          style: { fontSize: '28px' } 
+        }, '🤖'),
+        React.createElement('div', { key: 'text' }, [
+          React.createElement('h3', {
+            key: 'title',
+            style: { margin: 0, fontSize: '1.3rem', fontWeight: 700 }
+          }, 'AI Manager System'),
+          React.createElement('p', {
+            key: 'subtitle',
+            style: { margin: 0, fontSize: '0.9rem', opacity: 0.8 }
+          }, `Client: ${clientId} • Zero Human Intervention`)
+        ])
+      ]),
+      
+      // System Health Panel
+      React.createElement('div', {
+        key: 'health-panel',
+        style: { 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'flex-end',
+          gap: '4px' 
+        }
+      }, [
+        React.createElement('div', {
+          key: 'status-indicator',
+          style: { display: 'flex', alignItems: 'center', gap: '8px' }
+        }, [
+          React.createElement('div', {
+            key: 'status-dot',
+            style: {
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              background: getSystemStatusColor(),
+              animation: systemHealth.status === 'OPERATIONAL' ? 'pulse 2s infinite' : 'none'
+            }
+          }),
+          React.createElement('span', {
+            key: 'status-text',
+            style: { fontSize: '0.85rem', fontWeight: 600 }
+          }, systemHealth.status)
+        ]),
+        React.createElement('div', {
+          key: 'system-indicators',
+          style: { 
+            display: 'flex', 
+            gap: '6px', 
+            fontSize: '0.75rem',
+            opacity: 0.8 
+          }
+        }, [
+          React.createElement('span', {
+            key: 'agi',
+            style: { color: systemHealth.agiCore ? '#10b981' : '#ef4444' }
+          }, '🧠 AGI'),
+          React.createElement('span', {
+            key: 'alba',
+            style: { color: systemHealth.albaNetwork ? '#10b981' : '#ef4444' }
+          }, '🛰️ ALBA'),
+          React.createElement('span', {
+            key: 'asi',
+            style: { color: systemHealth.asiEngine ? '#10b981' : '#ef4444' }
+          }, '⚡ ASI')
+        ])
+      ])
+    ]),
+
+    // Messages Area
+    createMotionDiv('messages-area', {
+      flex: 1,
+      overflow: 'auto',
+      padding: '20px',
+      display: 'flex',
+      flexDirection: 'column',
+      background: 'linear-gradient(to bottom, #f9fafb, #f3f4f6)'
+    }, [
+      ...messages.map((message, index) => 
+        createMotionDiv(`message-${index}`, {
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: message.type === 'client' ? 'flex-end' : 
+                      message.type === 'system' ? 'center' : 'flex-start',
+          marginBottom: '16px',
+          opacity: 0,
+          transform: 'translateY(20px)',
+          animation: `slideInUp 0.4s ease forwards ${index * 0.1}s`
+        }, [
+          // Message Bubble
+          React.createElement('div', {
+            key: `bubble-${index}`,
+            style: getMessageStyle(message)
+          }, [
+            React.createElement('div', {
+              key: `content-${index}`,
+              style: { whiteSpace: 'pre-wrap' }
+            }, message.content),
+            
+            // Message Metadata
+            (message.confidence !== undefined || message.handledBy) && 
+            React.createElement('div', {
+              key: `metadata-${index}`,
+              style: {
+                fontSize: '0.75rem',
+                marginTop: '12px',
+                paddingTop: '12px',
+                borderTop: '1px solid rgba(255,255,255,0.2)',
+                opacity: 0.8
+              }
+            }, [
+              message.handledBy && React.createElement('div', {
+                key: `handler-${index}`,
+                style: { marginBottom: '4px' }
+              }, `🔧 ${message.handledBy}`),
+              
+              message.confidence !== undefined && React.createElement('div', {
+                key: `confidence-${index}`,
+                style: { marginBottom: '4px' }
+              }, `📊 Confidence: ${Math.round(message.confidence * 100)}%`),
+              
+              React.createElement('div', {
+                key: `time-${index}`
+              }, new Date(message.timestamp).toLocaleTimeString('sq-AL', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+              }))
+            ]),
+
+            // Actions Taken (if available)
+            message.actionsTaken && message.actionsTaken.length > 0 &&
+            React.createElement('div', {
+              key: `actions-${index}`,
+              style: {
+                fontSize: '0.8rem',
+                marginTop: '12px',
+                padding: '8px 12px',
+                background: 'rgba(255,255,255,0.2)',
+                borderRadius: '8px'
+              }
+            }, [
+              React.createElement('div', {
+                key: `actions-title-${index}`,
+                style: { fontWeight: 600, marginBottom: '4px' }
+              }, '⚙️ Actions Taken:'),
+              ...message.actionsTaken.map((action, actionIndex) =>
+                React.createElement('div', {
+                  key: `action-${index}-${actionIndex}`,
+                  style: { marginLeft: '8px' }
+                }, `• ${action}`)
+              )
+            ])
+          ])
+        ])
+      ),
+      
+      // Typing Indicator
+      isProcessing && createMotionDiv('typing-indicator', {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+        padding: '16px 20px',
+        background: 'rgba(16, 185, 129, 0.1)',
+        borderRadius: '16px',
+        marginBottom: '12px'
+      }, [
+        React.createElement('div', {
+          key: 'ai-icon',
+          style: { fontSize: '20px' }
+        }, '🤖'),
+        React.createElement('span', {
+          key: 'typing-text',
+          style: { 
+            fontSize: '0.9rem', 
+            color: '#059669',
+            fontStyle: 'italic'
+          }
+        }, 'AI Manager is processing your request...'),
+        React.createElement('div', {
+          key: 'typing-dots',
+          style: { display: 'flex', gap: '4px' }
+        }, [0, 1, 2].map(i =>
+          React.createElement('div', {
+            key: `dot-${i}`,
+            style: {
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              background: '#059669',
+              animation: `bounce 1.4s ease-in-out ${i * 0.16}s infinite both`
+            }
+          })
+        ))
+      ]),
+      
+      React.createElement('div', {
+        key: 'scroll-anchor',
+        ref: messagesEndRef
+      })
+    ]),
+
+    // Input Area
+    createMotionDiv('input-area', {
+      padding: '20px 24px',
+      borderTop: '1px solid #e5e7eb',
+      background: '#ffffff'
+    }, [
+      React.createElement('div', {
+        key: 'input-container',
+        style: { 
+          display: 'flex', 
+          gap: '16px', 
+          alignItems: 'flex-end' 
+        }
+      }, [
+        React.createElement('textarea', {
+          key: 'input',
+          value: inputValue,
+          onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => setInputValue(e.target.value),
+          onKeyPress: handleKeyPress,
+          placeholder: 'Pyeteni AI Manager për ndihmë teknike, diagnostikim, ose monitorim IoT...',
+          disabled: isProcessing,
+          style: {
+            flex: 1,
+            resize: 'none' as const,
+            border: '2px solid #e5e7eb',
+            borderRadius: '16px',
+            padding: '16px',
+            fontSize: '0.95rem',
+            maxHeight: '120px',
+            outline: 'none',
+            transition: 'all 0.2s',
+            background: '#ffffff',
+            fontFamily: 'inherit'
+          },
+          rows: 1
+        }),
+        React.createElement('button', {
+          key: 'send-button',
+          onClick: handleSendMessage,
+          disabled: !inputValue.trim() || isProcessing,
+          style: {
+            padding: '16px 24px',
+            background: inputValue.trim() && !isProcessing 
+              ? 'linear-gradient(135deg, #10b981, #059669)' 
+              : '#9ca3af',
+            color: 'white',
+            border: 'none',
+            borderRadius: '16px',
+            fontSize: '0.9rem',
+            fontWeight: 700,
+            cursor: inputValue.trim() && !isProcessing ? 'pointer' : 'not-allowed',
+            transition: 'all 0.2s',
+            minWidth: '100px'
+          }
+        }, isProcessing ? '⏳' : '🚀 Send')
+      ])
+    ])
+  ]);
+};
+
+// CSS Animation Keyframes
+if (typeof window !== 'undefined') {
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+    
+    .ai-manager-chat textarea:focus {
+      border-color: #10b981 !important;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+    }
+    
+    .ai-manager-chat button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+export default AIManagerChat;
+
+console.log('🤖 AI Manager Chat Interface - LOADED');
+console.log('🚫 ZERO HUMAN INTERVENTION');
+console.log('⚡ COMPLETE AUTONOMOUS SYSTEM');
+console.log('🔒 MAXIMUM SECURITY PROTOCOL');

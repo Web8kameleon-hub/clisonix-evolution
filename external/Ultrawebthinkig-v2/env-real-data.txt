@@ -1,0 +1,22 @@
+# REAL BIO DATA API KEYS - NO FAKE/MOCK DATA
+# Get real environmental data from verified APIs
+
+# OpenWeatherMap API (Free tier: 1000 calls/day)
+# Get free key: https://openweathermap.org/api
+OPENWEATHER_API_KEY=your_real_openweather_key_here
+
+# NASA API Key (Optional for advanced data)
+# Get free key: https://api.nasa.gov/
+NASA_API_KEY=your_real_nasa_key_here
+
+# REAL DATA SOURCES USED:
+# ✅ OpenWeatherMap - Real weather data
+# ✅ OpenWeatherMap Air Pollution - Real air quality
+# ✅ Open-Elevation - Real elevation data  
+# ✅ iNaturalist - Real biodiversity observations
+# ✅ Calculated soil data from real climate/elevation
+
+# INSTRUCTIONS:
+# 1. Copy this to .env.local
+# 2. Replace with your actual API keys
+# 3. Restart development server

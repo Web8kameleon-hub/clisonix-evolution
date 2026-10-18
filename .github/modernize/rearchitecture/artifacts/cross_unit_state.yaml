@@ -1,0 +1,45 @@
+flows:
+  - source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1032"
+    state: user_identity
+    writer_unit: curiosity_ocean_workspace
+    reader_units: [web_ocean_stream, web_ocean_document]
+    transport: "Caller-provided X-User-ID and body user_id"
+    pairing: matched
+    must_preserve: false
+    required_target: "Server-verified principal and tenant context; never trust the caller-provided identity."
+  - source_loc: "apps/web/app/api/ocean/stream/route.ts:430"
+    state: execution_progress
+    writer_unit: web_ocean_stream
+    reader_units: [curiosity_ocean_workspace]
+    transport: "SSE status and data frames"
+    pairing: matched
+    must_preserve: true
+    required_target: "Typed, ordered action events with execution_id and terminal status."
+  - source_loc: "apps/api/ocean_central_hub.py:230"
+    state: lab_execution_id
+    writer_unit: api_ocean_action_surface
+    reader_units: []
+    transport: "Response-only UUID held with process-local active_executions"
+    pairing: unpaired
+    must_confirm: runtime
+    must_preserve: true
+    required_target: "Durable execution record queryable by the product shell."
+  - source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1770"
+    state: document_artifact_provenance
+    writer_unit: web_ocean_document
+    reader_units: [curiosity_ocean_workspace]
+    transport: "Parser/checksum/ingestion fields are read then discarded from the rendered message."
+    pairing: partial
+    must_confirm: runtime
+    must_preserve: true
+    required_target: "Persist and render artifact metadata linked to execution_id."
+  - source_loc: "apps/web/app/api/service-discovery/route.ts:486"
+    state: live_registry_availability
+    writer_unit: web_service_discovery
+    reader_units: []
+    transport: "Probes backend paths that are not wired by apps/api/main.py"
+    pairing: unpaired
+    must_confirm: runtime
+    must_preserve: false
+    required_target: "One authoritative registry endpoint with explicit unavailable state."
+

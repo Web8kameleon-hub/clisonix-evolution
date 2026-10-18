@@ -1,0 +1,71 @@
+/**
+ * LoadingSpinner Component Styles
+ * Pure CSS Modules with CVA Integration
+ */
+
+.spinner {
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--color-primary);
+  animation: spin 1s linear infinite;
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-right-color: var(--color-primary);
+  animation: spin 1s linear infinite reverse;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Size Variants */
+.small {
+  width: 20px;
+  height: 20px;
+}
+
+.medium {
+  width: 40px;
+  height: 40px;
+}
+
+.large {
+  width: 60px;
+  height: 60px;
+}
+
+/* Color Variants */
+.primary {
+  border-top-color: var(--color-primary);
+}
+
+.primary .inner {
+  border-right-color: var(--color-primary);
+}
+
+.secondary {
+  border-top-color: var(--color-secondary);
+}
+
+.secondary .inner {
+  border-right-color: var(--color-secondary);
+}
+
+.accent {
+  border-top-color: var(--color-accent);
+}
+
+.accent .inner {
+  border-right-color: var(--color-accent);
+}

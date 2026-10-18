@@ -1,0 +1,52 @@
+# Canonical production compose file
+compose-hosting.yml
+
+# Root compose variants to deprecate from production deploy flow
+# Keep only for migration/testing until fully removed.
+docker-compose.75-services.yml
+docker-compose.yml
+docker-compose.unified.yml
+docker-compose.unified.lean.yml
+docker-compose.ultrawebthinking-v2.yml
+docker-compose.thunder-postman.yml
+docker-compose.ocean-core.yml
+docker-compose.my-data-dashboard.yml
+docker-compose.mirror.yml
+docker-compose.lean.yml
+docker-compose.kitchen-worker.yml
+docker-compose.kitchen-api.yml
+docker-compose.excel-core.yml
+docker-compose.dashboard.yml
+docker-compose.bind.yml
+docker-compose.api_manager.yml
+docker-compose.api.yml
+docker-compose.aiagi-upstream.yml
+docker-compose.ads.yml
+
+# Non-production compose scopes (do not use in hosting deploy)
+apps/android-clisonix/docker-compose.android.yml
+microservices/docker-compose.yml
+scripts/hetzner/docker-compose.healthchecks.override.yml
+labs-docker/docker-compose.lab-athens-classical.yml
+labs-docker/docker-compose.lab-beograd-industrial.yml
+labs-docker/docker-compose.lab-bucharest-nanotechnology.yml
+labs-docker/docker-compose.lab-budapest-data.yml
+labs-docker/docker-compose.lab-cairo-archeology.yml
+labs-docker/docker-compose.lab-durres-iot.yml
+labs-docker/docker-compose.lab-elbasan-ai.yml
+labs-docker/docker-compose.lab-istanbul-trade.yml
+labs-docker/docker-compose.lab-jerusalem-heritage.yml
+labs-docker/docker-compose.lab-korce-agricultural.yml
+labs-docker/docker-compose.lab-kostur-energy.yml
+labs-docker/docker-compose.lab-ljubljana-quantum.yml
+labs-docker/docker-compose.lab-prague-robotics.yml
+labs-docker/docker-compose.lab-prishtina-security.yml
+labs-docker/docker-compose.lab-rome-architecture.yml
+labs-docker/docker-compose.lab-sarrande-underwater.yml
+labs-docker/docker-compose.lab-shkoder-marine.yml
+labs-docker/docker-compose.lab-sofia-chemistry.yml
+labs-docker/docker-compose.lab-tirana-medical.yml
+labs-docker/docker-compose.lab-vienna-neuroscience.yml
+labs-docker/docker-compose.lab-vlore-environmental.yml
+labs-docker/docker-compose.lab-zagreb-biotech.yml
+labs-docker/docker-compose.lab-zurich-finance.yml

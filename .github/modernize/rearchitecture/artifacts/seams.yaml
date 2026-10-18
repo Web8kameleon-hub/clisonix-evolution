@@ -1,0 +1,57 @@
+seams:
+  - source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1802"
+    source: inferred
+    migrating_side: "Curiosity Ocean workspace action state"
+    frozen_side: "Existing /api/ocean/stream SSE consumer behavior"
+    frozen_side_rule: "Do not break incremental text display or stop/cancel behavior while typed action events are introduced."
+    protocol_shift: "legacy SSE text/status frames to typed action events"
+    bridge_points:
+      - mapping_rule: "Map upstream text chunks to type=output_delta; map upstream errors to type=failed; map [DONE] to completed only when no failure event occurred."
+        edge_cases: ["empty stream body", "client cancellation", "upstream HTTP failure after stream open", "duplicate terminal frame"]
+        idempotency_retry: "Use execution_id plus monotonic sequence; the browser ignores repeated sequence numbers."
+        fallback: "Emit failed with real upstream status and no output data."
+  - source_loc: "apps/web/app/api/ocean/document/route.ts:187"
+    source: inferred
+    migrating_side: "Action attachment and artifact model"
+    frozen_side: "Ocean document scan/generate/query endpoints"
+    frozen_side_rule: "Do not change existing Ocean endpoint payloads during the first vertical slice."
+    protocol_shift: "Action attachment reference to legacy multipart/base64 provider calls"
+    bridge_points:
+      - mapping_rule: "Resolve the tenant-owned attachment, verify checksum/media type, then send one multipart file to scan; normalize extraction metadata into ArtifactRecord without inventing missing fields."
+        edge_cases: ["empty extraction", "unsupported type", "invalid base64 legacy request", "Ocean 404", "CBOR decode failure"]
+        idempotency_retry: "Reuse attachment checksum and execution_id; do not upload or create a second artifact after a confirmed provider response."
+        fallback: "Return 422, 502, or 503 with no synthetic summary."
+  - source_loc: "apps/api/main.py:1189"
+    source: inferred
+    migrating_side: "OS-CLX Action Router and clisonix.com compatibility adapter"
+    frozen_side: "LabsCell and Lab.execute contracts"
+    frozen_side_rule: "Do not refactor laboratory algorithms or artifact content in the control-plane phase."
+    protocol_shift: "HTTP action envelope to synchronous Python lab execution"
+    bridge_points:
+      - mapping_rule: "Validate capability input, call the selected lab via asyncio.to_thread, preserve LabResult fields, and convert each returned Artifact to metadata plus storage reference."
+        edge_cases: ["unknown lab", "lab import unavailable", "lab raises", "artifact content too large for response"]
+        idempotency_retry: "Do not automatically retry non-idempotent labs; record the failed provider attempt and require an explicit retry action."
+        fallback: "Mark execution failed with the real lab error; never return status ok."
+  - source_loc: "ocean-core/ocean_multimodal.py:321"
+    source: inferred
+    migrating_side: "Capability provider adapter"
+    frozen_side: "Ocean Multimodal request/response routes"
+    frozen_side_rule: "Keep current public route signatures compatible while health and error semantics are corrected."
+    protocol_shift: "Capability manifest schema to MultimodalRequest"
+    bridge_points:
+      - mapping_rule: "Map capability suffix vision/audio/document/reason to SensorMode and its matching request object; reject missing or conflicting inputs with 422."
+        edge_cases: ["mode without input", "multiple incompatible inputs", "Ollama unavailable", "configured model missing"]
+        idempotency_retry: "Retry only connection failures before any provider output and within the action deadline."
+        fallback: "503 for unavailable dependency or failed execution with the provider error."
+  - source_loc: "apps/web/app/api/service-discovery/route.ts:486"
+    source: inferred
+    migrating_side: "Authoritative capability registry client"
+    frozen_side: "Docker Compose deployment inventory"
+    frozen_side_rule: "Do not mutate Compose service definitions as part of capability discovery."
+    protocol_shift: "Compose service declaration to capability manifest registration"
+    bridge_points:
+      - mapping_rule: "Use Compose only to locate candidate providers; a provider becomes executable only after its signed manifest validates and its declared health probe succeeds."
+        edge_cases: ["service declared but stopped", "duplicate capability versions", "expired lease", "manifest schema mismatch"]
+        idempotency_retry: "Registration key is provider_id plus manifest version; repeated identical registration renews the lease."
+        fallback: "Keep the row as non-executable inventory with availability=unknown."
+

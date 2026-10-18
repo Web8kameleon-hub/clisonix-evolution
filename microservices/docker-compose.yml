@@ -1,0 +1,118 @@
+version: '3.9'
+
+services:
+  # API Gateway - Pika hyrëse
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - FRONTEND_URL=http://localhost:3000
+    depends_on:
+      - auth
+      - agi
+      - data
+      - realtime
+    networks:
+      - euroweb-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Auth Service
+  auth:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["node", "dist/auth/index.js"]
+    ports:
+      - "4001:4001"
+    environment:
+      - NODE_ENV=production
+      - JWT_SECRET=${JWT_SECRET:-euroweb-secret-2026}
+    networks:
+      - euroweb-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # AGI Service
+  agi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["node", "dist/agi/index.js"]
+    ports:
+      - "4002:4002"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - euroweb-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Data Service
+  data:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["node", "dist/data/index.js"]
+    ports:
+      - "4003:4003"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - data-storage:/app/data
+    networks:
+      - euroweb-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Realtime Service
+  realtime:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["node", "dist/realtime/index.js"]
+    ports:
+      - "4004:4004"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - euroweb-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4004/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis for caching & pub/sub
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis-data:/data
+    networks:
+      - euroweb-network
+    command: redis-server --appendonly yes --protected-mode yes
+    restart: unless-stopped
+
+networks:
+  euroweb-network:
+    driver: bridge
+
+volumes:
+  data-storage:
+  redis-data:

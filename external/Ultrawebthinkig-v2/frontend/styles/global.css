@@ -1,0 +1,14 @@
+@import "./theme-vars.css";
+
+/* Reset & bazë */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}

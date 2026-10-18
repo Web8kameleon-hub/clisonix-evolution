@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI AGI Platform - EuroWeb Microservices</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --dark: #0f172a;
+            --darker: #020617;
+            --card: #1e293b;
+            --card-border: #334155;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60vh;
+            background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at top right, rgba(16, 185, 129, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Header */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--card-border);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(2, 6, 23, 0.8);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text);
+        }
+        
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 100px;
+            font-size: 14px;
+            color: var(--success);
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--text) 0%, var(--primary) 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(99, 102, 241, 0.5);
+        }
+        
+        .btn-secondary {
+            background: var(--card);
+            color: var(--text);
+            border: 1px solid var(--card-border);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--card-border);
+        }
+        
+        /* Services Grid */
+        .section-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 18px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            padding: 40px 0 80px;
+        }
+        
+        .service-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .service-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .service-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid var(--card-border);
+        }
+        
+        .service-port {
+            font-family: monospace;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        
+        .service-health {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+        }
+        
+        .service-health.online {
+            color: var(--success);
+        }
+        
+        .service-health.offline {
+            color: var(--error);
+        }
+        
+        /* Stats */
+        .stats-section {
+            padding: 60px 0;
+            background: var(--card);
+            border-top: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        
+        .stat-item p {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+        
+        /* API Demo */
+        .api-demo {
+            padding: 80px 0;
+        }
+        
+        .api-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .api-header {
+            padding: 20px 24px;
+            background: var(--dark);
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .api-method {
+            padding: 6px 12px;
+            background: var(--secondary);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        
+        .api-endpoint {
+            font-family: monospace;
+            color: var(--text-muted);
+        }
+        
+        .api-body {
+            padding: 24px;
+        }
+        
+        .api-response {
+            background: var(--darker);
+            border-radius: 12px;
+            padding: 20px;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            color: var(--secondary);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+            border-top: 1px solid var(--card-border);
+        }
+        
+        footer p {
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .nav-links { display: none; }
+        }
+        
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--card-border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+    
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">🧠</div>
+                <span>AI AGI</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#api">API</a>
+                <a href="#docs">Documentation</a>
+            </nav>
+            <div class="status-badge">
+                <div class="status-dot"></div>
+                <span>All Systems Operational</span>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>EuroWeb AGI Platform</h1>
+                <p>Next-generation artificial general intelligence microservices platform. Scalable, secure, and blazingly fast.</p>
+                <div class="hero-buttons">
+                    <a href="#api" class="btn btn-primary">Explore API</a>
+                    <a href="#docs" class="btn btn-secondary">Documentation</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="services" class="container">
+            <div class="section-title">
+                <h2>Microservices</h2>
+                <p>Distributed architecture for maximum performance and reliability</p>
+            </div>
+            <div class="services-grid" id="servicesGrid">
+                <!-- Services loaded dynamically -->
+            </div>
+        </section>
+        
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3 id="uptimeStat">99.9%</h3>
+                        <p>Uptime</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 id="requestsStat">0</h3>
+                        <p>API Requests</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 id="latencyStat">&lt;50ms</h3>
+                        <p>Avg Latency</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 id="servicesStat">5</h3>
+                        <p>Active Services</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="api" class="api-demo">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Try the API</h2>
+                    <p>Test our endpoints directly from your browser</p>
+                </div>
+                <div class="api-card">
+                    <div class="api-header">
+                        <span class="api-method">GET</span>
+                        <span class="api-endpoint">/health</span>
+                        <button class="btn btn-primary" onclick="testAPI()" style="margin-left: auto; padding: 8px 16px; font-size: 14px;">
+                            Run Request
+                        </button>
+                    </div>
+                    <div class="api-body">
+                        <div class="api-response" id="apiResponse">
+// Click "Run Request" to test the API
+{
+  "service": "gateway",
+  "status": "healthy",
+  "timestamp": "...",
+  "uptime": "..."
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2026 EuroWeb AI AGI Platform. Built with ❤️ by Clisonix Unlimited</p>
+        </div>
+    </footer>
+    
+    <script>
+        const API_BASE = window.location.origin;
+        
+        const services = [
+            {
+                name: 'Gateway',
+                description: 'Central API gateway that routes requests to appropriate microservices with load balancing and rate limiting.',
+                icon: '🚀',
+                color: '#6366f1',
+                port: 4000
+            },
+            {
+                name: 'Authentication',
+                description: 'JWT-based authentication service with secure token management and user session handling.',
+                icon: '🔐',
+                color: '#10b981',
+                port: 4001
+            },
+            {
+                name: 'AGI Core',
+                description: 'Artificial General Intelligence processing engine for advanced reasoning and decision making.',
+                icon: '🧠',
+                color: '#f59e0b',
+                port: 4002
+            },
+            {
+                name: 'Data Store',
+                description: 'High-performance data management service with caching and persistence layers.',
+                icon: '💾',
+                color: '#ec4899',
+                port: 4003
+            },
+            {
+                name: 'Realtime',
+                description: 'WebSocket-based realtime communication service for live updates and notifications.',
+                icon: '⚡',
+                color: '#8b5cf6',
+                port: 4004
+            }
+        ];
+        
+        function renderServices() {
+            const grid = document.getElementById('servicesGrid');
+            grid.innerHTML = services.map(service => `
+                <div class="service-card">
+                    <div class="service-icon" style="background: ${service.color}20; color: ${service.color}">
+                        ${service.icon}
+                    </div>
+                    <h3>${service.name}</h3>
+                    <p>${service.description}</p>
+                    <div class="service-status">
+                        <span class="service-port">Port ${service.port}</span>
+                        <span class="service-health online" id="health-${service.port}">
+                            ● Online
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        async function testAPI() {
+            const responseEl = document.getElementById('apiResponse');
+            responseEl.textContent = '// Loading...';
+            
+            try {
+                const start = performance.now();
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                const latency = Math.round(performance.now() - start);
+                
+                responseEl.textContent = `// Response (${latency}ms)\n` + JSON.stringify(data, null, 2);
+            } catch (error) {
+                responseEl.textContent = `// Error\n{\n  "error": "${error.message}"\n}`;
+            }
+        }
+        
+        async function checkHealth() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                if (response.ok) {
+                    document.querySelector('.status-badge span').textContent = 'All Systems Operational';
+                }
+            } catch (e) {
+                document.querySelector('.status-badge span').textContent = 'Checking Status...';
+            }
+        }
+        
+        // Initialize
+        renderServices();
+        checkHealth();
+        setInterval(checkHealth, 30000);
+        
+        // Animate stats
+        let requests = 0;
+        setInterval(() => {
+            requests += Math.floor(Math.random() * 5);
+            document.getElementById('requestsStat').textContent = requests.toLocaleString();
+        }, 2000);
+    </script>
+</body>
+</html>

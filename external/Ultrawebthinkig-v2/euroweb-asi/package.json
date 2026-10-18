@@ -1,0 +1,19 @@
+{
+  "name": "euroweb-asi",
+  "version": "1.0.0",
+  "description": "EuroWeb • ASI (Alba/Albi/Jona/Core) — Industrial Intelligence, 100% JavaScript",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "prom-client": "^15.1.3"
+  }
+}

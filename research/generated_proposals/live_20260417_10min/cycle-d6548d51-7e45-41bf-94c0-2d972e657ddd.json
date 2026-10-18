@@ -1,0 +1,97 @@
+{
+  "cycle_started": "2026-04-17T16:28:15.707137+00:00",
+  "cycle_duration_seconds": 0.099,
+  "stages": [
+    {
+      "stage": "ALBA",
+      "source_dir": "/root/Clisonix-cloud/data/alba",
+      "processed_files": [],
+      "ingestion_sources": [],
+      "frames_ingested": 0,
+      "total_history": 0,
+      "last_timestamp": null,
+      "message": "No frames ingested",
+      "duration_seconds": 0.009
+    },
+    {
+      "stage": "ALBI",
+      "status": "no-data",
+      "message": "Skipped, missing ALBA data",
+      "duration_seconds": 0.003
+    },
+    {
+      "stage": "JONA",
+      "status": "pending",
+      "focus_channels": [],
+      "alignment_score": 0.0,
+      "updated_at": "2026-04-17T16:28:15.778192+00:00",
+      "ethics_profile": "Feminine Care Principle",
+      "message": "Alignment pending",
+      "duration_seconds": 0.004
+    },
+    {
+      "stage": "ASI",
+      "status": "degraded",
+      "reason": "asi_core_missing",
+      "message": "ASI status unavailable",
+      "duration_seconds": 0.003
+    }
+  ],
+  "summary": {
+    "alba": {
+      "frames_ingested": 0,
+      "source_files": 0
+    },
+    "albi": {},
+    "jona": {
+      "status": "pending",
+      "alignment_score": 0.0,
+      "focus_channels": []
+    },
+    "asi": {
+      "health_score": null,
+      "asi_status": null,
+      "generated_api": null
+    },
+    "metadata": {
+      "center": {
+        "name": "Hetzner-Zurich"
+      },
+      "specialization": "neural-alignment",
+      "priority": "high"
+    }
+  },
+  "metadata": {
+    "center": {
+      "name": "Hetzner-Zurich"
+    },
+    "specialization": "neural-alignment",
+    "priority": "high"
+  },
+  "multi_tenant": {
+    "center": "Hetzner-Zurich",
+    "active_counts": {
+      "at_start": {
+        "per_center": {
+          "Hetzner-Zurich": 1
+        },
+        "total_active_cycles": 1,
+        "center_active_cycles": 1
+      },
+      "during_cycle": {
+        "per_center": {
+          "Hetzner-Zurich": 1
+        },
+        "total_active_cycles": 1,
+        "center_active_cycles": 1
+      },
+      "after_cycle": {
+        "per_center": {},
+        "total_active_cycles": 0,
+        "center_active_cycles": 0
+      }
+    }
+  },
+  "cycle_id": "d6548d51-7e45-41bf-94c0-2d972e657ddd",
+  "recorded_at": "2026-04-17T16:28:15.806138+00:00"
+}

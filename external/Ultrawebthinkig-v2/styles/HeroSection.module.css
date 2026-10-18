@@ -1,0 +1,52 @@
+.heroSection {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f0f1c, #1b1b2f);
+  text-align: center;
+  padding: 2rem;
+}
+
+.heroContent {
+  max-width: 800px;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: linear-gradient(to right, #00f5d4, #9b5de5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow 4s ease-in-out infinite alternate;
+}
+
+.heroSubtitle {
+  font-size: 1.3rem;
+  color: #ccc;
+  margin: 1rem 0 2rem;
+}
+
+.ctaButton {
+  background: #00f5d4;
+  color: #000;
+  font-weight: bold;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.ctaButton:hover {
+  background: #00c3a5;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #00f5d4;
+  }
+  to {
+    text-shadow: 0 0 30px #00f5d4;
+  }
+}
+

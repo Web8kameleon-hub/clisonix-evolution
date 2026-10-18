@@ -1,0 +1,13 @@
+modules:
+  - source_loc: "apps/web/app/api/ocean/_lib/strict-ultra.ts:1"
+    kind: shared_request_profile
+    used_by_units: [web_ocean_stream, web_ocean_document]
+    fields:
+      - name: applyStrictUltraProfile
+        type: "(payload: Record<string, unknown>) => profile result"
+    god_class: false
+    split_candidate: false
+    migration_strategy: "Preserve as a provider-specific request transform; do not place it in the universal manifest contract."
+notes:
+  - "No current registry or execution module is shared by both the canonical web and deployed API runtimes."
+

@@ -1,0 +1,26 @@
+source_loc: "saas_services_orchestrator_v3.py:75"
+side_effects:
+  - effect: "Mutates process-local agent, docs, health, and communication registries."
+    source_loc: "saas_services_orchestrator_v3.py:102"
+    must_preserve: false
+  - effect: "Forwards arbitrary service paths and request headers."
+    source_loc: "saas_services_orchestrator_v3.py:499"
+    must_preserve: false
+  - effect: "Posts ServiceRequest to a fixed service /execute endpoint."
+    source_loc: "saas_services_orchestrator_v3.py:524"
+    must_preserve: false
+branches:
+  - condition: "Registered agent may include arbitrary capability and endpoint declarations."
+    source_loc: "saas_services_orchestrator_v3.py:249"
+    must_preserve: false
+  - condition: "Destination limited to hardcoded Alba/Albi/Jona registry."
+    source_loc: "saas_services_orchestrator_v3.py:463"
+    must_preserve: false
+error_paths:
+  - contract: "Unknown service/agent returns 404; provider transport failure returns 502."
+    source_loc: "saas_services_orchestrator_v3.py:464"
+    must_preserve: true
+concurrency:
+  model: "FastAPI async calls with unsynchronized process-local mutable dictionaries/lists."
+  tx_boundary: null
+

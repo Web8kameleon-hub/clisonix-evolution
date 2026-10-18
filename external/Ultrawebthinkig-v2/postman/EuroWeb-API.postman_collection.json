@@ -1,0 +1,154 @@
+{
+  "info": {
+    "name": "EuroWeb Platform API",
+    "version": "8.0.0",
+    "description": "Ultra Intelligent AGI Platform - API Collection",
+    "contact": {
+      "name": "Ledjan Ahmati",
+      "email": "dealsjona@gmail.com"
+    },
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "item": [
+    {
+      "name": "AGI Core API",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "health"]
+            }
+          }
+        },
+        {
+          "name": "AGI Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/agi/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "agi", "status"]
+            }
+          }
+        },
+        {
+          "name": "Neural Process",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"test neural processing\",\n  \"context\": \"medical\",\n  \"priority\": \"high\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/agi/process",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "agi", "process"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Web8 Tab System",
+      "item": [
+        {
+          "name": "Get Tabs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/tabs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tabs"]
+            }
+          }
+        },
+        {
+          "name": "Create Tab",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"New AGI Tab\",\n  \"url\": \"euroweb://custom\",\n  \"neuralWeight\": 0.8\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tabs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tabs"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Guardian Monitor",
+      "item": [
+        {
+          "name": "Security Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/guardian/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "guardian", "status"]
+            }
+          }
+        },
+        {
+          "name": "Security Alert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"level\": \"high\",\n  \"message\": \"Security breach detected\",\n  \"timestamp\": \"{{$timestamp}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/guardian/alert",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "guardian", "alert"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "prodUrl",
+      "value": "https://euroweb.ai",
+      "type": "string"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+# EuroWeb Ultra - Mesh Offline Configuration
+# Industrial-grade settings for aviation compliance
+
+offline:
+  # Aviation standard: 72 hours offline operation
+  hours: 72
+
+  # Message rate in mesh network (messages per minute)
+  msg_rate_per_minute: 5
+
+  # Average message size (bytes) - includes headers and encryption
+  avg_msg_bytes: 1024
+
+  # Available storage capacity (MB) - conservative estimate
+  storage_mb: 512
+
+mesh:
+  # LoRa network settings
+  frequency: 868 # EU868 MHz
+  spreading_factor: 7
+  bandwidth: 125 # kHz
+  coding_rate: 5
+
+  # Network topology
+  max_nodes: 256
+  max_hops: 8
+
+  # Store-and-forward settings
+  buffer_size_mb: 128
+  retention_hours: 96 # 4 days
+
+aviation:
+  # Aviation-specific requirements
+  reliability_sla: 99.9 # 99.9% uptime SLA
+  emergency_priority: true
+  icao_compliance: true
+
+  # ADS-B integration
+  adsb_rate_hz: 1 # 1 message per second
+  flight_tracking: true
+
+security:
+  # Cryptographic settings
+  encryption: "AES-256-GCM"
+  key_rotation_hours: 24
+  mesh_authentication: true
+
+performance:
+  # Performance thresholds
+  max_latency_ms: 5000
+  throughput_target_kbps: 10
+  cpu_threshold_percent: 80
+  memory_threshold_mb: 256

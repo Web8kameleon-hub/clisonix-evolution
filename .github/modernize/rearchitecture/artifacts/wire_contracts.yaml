@@ -1,0 +1,91 @@
+contracts:
+  - source_loc: "apps/web/app/api/service-discovery/route.ts:616"
+    units: [web_service_discovery]
+    protocol: http_json
+    direction: browser_to_registry_gateway
+    current_contract: "GET returns services/summary/topology; POST accepts capability."
+    stability: replace
+    target_contract:
+      request: "GET /api/actions/capabilities or GET /api/actions/capabilities/{id}"
+      success: "200 with only declared manifests and explicit provider availability evidence."
+      no_data: "404 for unknown capability; 503 when the authoritative registry cannot be queried."
+      rule: "Compose/catalog rows may be returned as deployment inventory only and cannot be executable or healthy."
+  - source_loc: "apps/web/app/api/ocean/stream/route.ts:359"
+    units: [web_ocean_stream, curiosity_ocean_workspace]
+    protocol: sse
+    direction: gateway_to_browser
+    current_contract: "text/event-stream with status, data, error, and done frames."
+    stability: frozen
+    target_contract:
+      headers: "text/event-stream; no-cache; X-Accel-Buffering=no"
+      event_fields: [execution_id, sequence, type, stage, timestamp, data, error]
+      terminal_types: [completed, failed, cancelled]
+      rule: "No fabricated data frame; upstream failure emits failed with the real HTTP/error code."
+  - source_loc: "apps/web/app/api/ocean/document/route.ts:131"
+    units: [web_ocean_document, curiosity_ocean_workspace]
+    protocol: http_multipart_json_cbor
+    direction: browser_gateway_to_ocean
+    current_contract: "JSON base64 input is converted to multipart; Ocean JSON/CBOR is normalized."
+    stability: bridge
+    target_contract:
+      input: "Attachment reference plus action input; raw bytes uploaded once through the attachment endpoint."
+      output: "ArtifactRecord metadata plus provider result; empty extraction is 204 or a typed failed execution."
+      validation: "Size, media type, checksum, and tenant ownership are verified server-side."
+  - source_loc: "apps/api/main.py:1189"
+    units: [api_ocean_action_surface]
+    protocol: in_process_python
+    direction: api_to_lab_provider
+    current_contract: "lab_type plus row returns execution_id, LabResult, artifacts, and ocean_format."
+    stability: frozen
+    target_contract:
+      adapter_input: "ActionExecution input validated against the capability JSON Schema."
+      adapter_output: "ProviderResult containing real LabResult and ArtifactRecord references."
+      errors: "Unknown lab 404; provider unavailable 503; invalid input 422; provider failure preserves provider error."
+  - source_loc: "ocean-core/ocean_multimodal.py:467"
+    units: [ocean_multimodal_api]
+    protocol: http_json
+    direction: action_router_to_multimodal_provider
+    current_contract: "MultimodalRequest to AnalysisResult."
+    stability: frozen
+    target_contract:
+      mapping: "Manifest input maps mode and exactly one compatible input object to MultimodalRequest."
+      output: "AnalysisResult is wrapped without changing output or inventing confidence."
+      health: "Provider is available only after dependency and configured model probes succeed."
+  - source_loc: "saas_services_orchestrator_v3.py:524"
+    units: [saas_orchestrator_prototype]
+    protocol: http_json
+    direction: prototype_to_service
+    current_contract: "ServiceRequest(action, parameters) posted to /execute."
+    stability: replace
+    target_contract:
+      request: "Signed provider dispatch containing execution_id, capability_id/version, validated input, principal context, trace_id, deadline."
+      response: "ProviderResult with status, output or typed error, artifacts, metrics, and provider identity."
+      rule: "Only manifest-declared provider endpoints may be called; arbitrary path proxying is not an Action Fabric feature."
+  - source_loc: "services/registry.py:65"
+    units: [web_service_discovery, api_ocean_action_surface]
+    protocol: firestore_or_memory
+    direction: provider_to_registry
+    current_contract: "Service metadata with capability strings and TTL."
+    stability: replace
+    target_contract:
+      registration: "Signed CapabilityManifest plus ProviderRegistration and lease TTL."
+      availability: "Lease validity and real health are separate fields."
+      durability: "Production registration failure is surfaced; process-local fallback is development-only and never reported as authoritative."
+  - source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1032"
+    units: [curiosity_ocean_workspace, web_ocean_stream, web_ocean_document]
+    protocol: identity_context
+    direction: browser_to_gateway_to_provider
+    current_contract: "Caller sends X-User-ID/body user_id."
+    stability: replace
+    target_contract:
+      principal: "Gateway resolves authenticated user and tenant from the server session."
+      propagation: "Internal signed principal context or service token; caller headers are discarded."
+      authorization: "Capability scopes and resource ownership checked before dispatch."
+semantic_divergence:
+  - source_loc: "apps/web/app/api/service-discovery/route.ts:641"
+    source_semantics: "A compose/catalog row is returned with HTTP 200 when registry is unavailable."
+    target_semantics: "Inventory is not availability; execution discovery fails with 503 without authoritative registry data."
+  - source_loc: "apps/api/main.py:4042"
+    source_semantics: "String interpolation is labeled completed execution."
+    target_semantics: "Only a provider-confirmed terminal event may mark execution completed."
+

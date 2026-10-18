@@ -1,0 +1,83 @@
+# Docker Production Configuration
+# Industrial-grade Docker setup për Web8 deployment
+# 
+# Author: UltraWeb Industrial Team
+# Version: 8.0.0-DOCKER-PRODUCTION
+
+# Multi-stage production build
+FROM node:20-alpine AS base
+
+# Install dependencies only when needed
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+# Install yarn berry
+RUN corepack enable && corepack prepare yarn@4.9.2 --activate
+
+# Copy dependency files
+COPY package.json yarn.lock* .yarnrc.yml ./
+COPY .yarn ./.yarn
+
+# Install dependencies with optimizations
+RUN yarn install --immutable --inline-builds
+
+# Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+
+# Copy dependencies from deps stage
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/.yarn ./.yarn
+COPY --from=deps /app/.yarnrc.yml ./
+
+# Copy source code
+COPY . .
+
+# Set production environment
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Build the application
+RUN yarn build
+
+# Production image, copy all the files and run next
+FROM base AS runner
+WORKDIR /app
+
+# Create system user for security
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Set production environment
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Copy built application
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+# Create necessary directories
+RUN mkdir -p /app/logs /app/tmp
+
+# Set permissions
+RUN chown -R nextjs:nodejs /app
+RUN chmod -R 755 /app
+
+# Switch to non-root user
+USER nextjs
+
+# Expose port
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1
+
+# Set hostname and port
+ENV HOSTNAME="0.0.0.0"
+ENV PORT=3000
+
+# Start the application
+CMD ["node", "server.js"]

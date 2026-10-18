@@ -1,0 +1,111 @@
+{
+  "$schema": "./clisonix-contract.schema.json",
+  "contract_version": "2026.09.10",
+  "services": {
+    "alba": {
+      "base_url": "http://127.0.0.1:5555",
+      "health": "/health",
+      "status": "/status",
+      "telemetry_ingest": {
+        "method": "POST",
+        "path": "/api/telemetry/ingest",
+        "request": {
+          "required": ["source", "data"]
+        },
+        "success_status": [200, 201]
+      }
+    },
+    "albi": {
+      "base_url": "http://127.0.0.1:6060",
+      "analytics": {
+        "method": "POST",
+        "path": "/api/analytics/agent",
+        "success_status": [200, 201]
+      }
+    },
+    "jona": {
+      "base_url": "http://127.0.0.1:7070",
+      "coordination": {
+        "method": "POST",
+        "path": "/api/coordination/event",
+        "success_status": [200, 201]
+      }
+    },
+    "asi": {
+      "base_url": "http://127.0.0.1:8000",
+      "health": "/asi/health",
+      "status": "/asi/status",
+      "execute": {
+        "method": "POST",
+        "path": "/asi/execute",
+        "requires_approval": true,
+        "success_status": [200]
+      }
+    }
+  },
+  "event_envelope": {
+    "required": [
+      "event_id",
+      "trace_id",
+      "correlation_id",
+      "source",
+      "operation",
+      "status",
+      "timestamp"
+    ],
+    "status_values": [
+      "received",
+      "running",
+      "success",
+      "failed",
+      "blocked",
+      "simulated",
+      "verified"
+    ]
+  },
+  "execution_policy": {
+    "observed": ["read-only"],
+    "planned": ["no side effect"],
+    "simulated": ["no live execution"],
+    "executed": ["job_id", "verification"],
+    "blocked": ["reason", "next_step"]
+  },
+  "telemetry_schema": {
+    "type": "object",
+    "required": ["agent_name", "timestamp", "status", "success"],
+    "properties": {
+      "agent_name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "timestamp": {
+        "type": "number"
+      },
+      "status": {
+        "type": "string",
+        "enum": ["success", "error", "running", "blocked"]
+      },
+      "operation": {
+        "type": ["string", "null"]
+      },
+      "duration_ms": {
+        "type": ["number", "null"],
+        "minimum": 0
+      },
+      "success": {
+        "type": "boolean"
+      },
+      "error": {
+        "type": ["string", "null"]
+      },
+      "metadata": {
+        "type": ["object", "null"]
+      }
+    },
+    "additionalProperties": true
+  },
+  "openapi_sources": [
+    "openapi.json",
+    "openapi.yaml"
+  ]
+}

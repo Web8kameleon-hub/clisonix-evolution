@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://clisonix.local/contracts/clisonix-contract.schema.json",
+  "title": "Clisonix Service Contract",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "services",
+    "event_envelope",
+    "execution_policy",
+    "telemetry_schema"
+  ],
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "services": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["base_url"],
+        "properties": {
+          "base_url": {
+            "type": "string",
+            "pattern": "^https?://"
+          },
+          "health": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "telemetry_ingest": {
+            "$ref": "#/$defs/endpointContract"
+          },
+          "analytics": {
+            "$ref": "#/$defs/endpointContract"
+          },
+          "coordination": {
+            "$ref": "#/$defs/endpointContract"
+          },
+          "execute": {
+            "$ref": "#/$defs/endpointContract"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "event_envelope": {
+      "type": "object",
+      "required": ["required", "status_values"],
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1
+        },
+        "status_values": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "execution_policy": {
+      "type": "object",
+      "required": ["observed", "planned", "simulated", "executed", "blocked"],
+      "properties": {
+        "observed": {"type": "array", "items": {"type": "string"}},
+        "planned": {"type": "array", "items": {"type": "string"}},
+        "simulated": {"type": "array", "items": {"type": "string"}},
+        "executed": {"type": "array", "items": {"type": "string"}},
+        "blocked": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "telemetry_schema": {
+      "type": "object",
+      "required": ["type", "required", "properties"],
+      "properties": {
+        "type": {"const": "object"},
+        "required": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "properties": {
+          "type": "object"
+        },
+        "additionalProperties": {
+          "type": ["boolean", "object"]
+        }
+      },
+      "additionalProperties": true
+    },
+    "openapi_sources": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  },
+  "$defs": {
+    "endpointContract": {
+      "type": "object",
+      "required": ["method", "path"],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "request": {
+          "type": "object",
+          "properties": {
+            "required": {
+              "type": "array",
+              "items": {"type": "string"}
+            }
+          },
+          "additionalProperties": true
+        },
+        "success_status": {
+          "type": "array",
+          "items": {"type": "integer"},
+          "minItems": 1
+        },
+        "requires_approval": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

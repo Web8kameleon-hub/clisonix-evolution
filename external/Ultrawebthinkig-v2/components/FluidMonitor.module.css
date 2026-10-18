@@ -1,0 +1,481 @@
+/* FLUID MONITOR STYLES - Natural Water-like Interface */
+
+.fluidMonitor {
+  padding: 20px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-radius: 15px;
+  margin: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.title {
+  margin: 0;
+  color: #1565c0;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.waterQuality {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qualityLabel {
+  font-weight: 500;
+  color: #424242;
+}
+
+.qualityValue {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: pulse 2s infinite;
+}
+
+.qualityValue.crystal {
+  background: linear-gradient(45deg, #e1f5fe, #b3e5fc);
+  color: #0277bd;
+  box-shadow: 0 0 20px rgba(2, 119, 189, 0.3);
+}
+
+.qualityValue.pure {
+  background: linear-gradient(45deg, #f1f8e9, #dcedc8);
+  color: #388e3c;
+  box-shadow: 0 0 20px rgba(56, 142, 60, 0.3);
+}
+
+.qualityValue.clean {
+  background: linear-gradient(45deg, #fff3e0, #ffe0b2);
+  color: #f57c00;
+}
+
+.qualityValue.cloudy {
+  background: linear-gradient(45deg, #fafafa, #eeeeee);
+  color: #757575;
+}
+
+.globalFlow {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.globalFlow h2 {
+  margin: 0 0 20px 0;
+  color: #1565c0;
+  font-size: 1.8rem;
+}
+
+.flowMetrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metricLabel {
+  font-weight: 600;
+  color: #424242;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+.progressBar {
+  height: 12px;
+  background: #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #42a5f5, #1e88e5);
+  border-radius: 6px;
+  transition: width 0.5s ease;
+  animation: flow 2s ease-in-out infinite;
+}
+
+.progressFill.turbulence {
+  background: linear-gradient(90deg, #ff7043, #d32f2f);
+}
+
+.metricValue {
+  font-weight: 600;
+  color: #1565c0;
+  font-size: 1.1rem;
+}
+
+.visualizationContainer {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.visualizationContainer h2 {
+  margin: 0 0 20px 0;
+  color: #1565c0;
+  font-size: 1.8rem;
+}
+
+.flowCanvas {
+  width: 100%;
+  max-width: 800px;
+  height: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.flowStreams {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.flowStreams h2 {
+  margin: 0 0 20px 0;
+  color: #1565c0;
+  font-size: 1.8rem;
+}
+
+.streamsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.streamCard {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 20px;
+  border: 2px solid #e3f2fd;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.streamCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-color: #42a5f5;
+}
+
+.streamHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.streamHeader h3 {
+  margin: 0;
+  color: #1565c0;
+  font-size: 1.2rem;
+}
+
+.streamState {
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.streamState.flowing {
+  background: #e8f5e8;
+  color: #2e7d32;
+}
+
+.streamState.perfect {
+  background: #e3f2fd;
+  color: #1565c0;
+  animation: glow 2s ease-in-out infinite;
+}
+
+.streamState.blocked {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.streamState.slow {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.streamMetrics {
+  margin-bottom: 15px;
+}
+
+.streamMetric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.miniProgress {
+  width: 80px;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.miniProgress div {
+  height: 100%;
+  background: linear-gradient(90deg, #42a5f5, #1e88e5);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.obstacles {
+  margin-bottom: 15px;
+}
+
+.obstacleCount {
+  color: #ff5722;
+  font-weight: 500;
+  font-size: 0.9rem;
+  animation: warning 1s ease-in-out infinite;
+}
+
+.streamActions {
+  display: flex;
+  gap: 10px;
+}
+
+.boostButton {
+  background: linear-gradient(45deg, #42a5f5, #1e88e5);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.boostButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(45deg, #1e88e5, #1565c0);
+}
+
+.recommendations {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.recommendations h2 {
+  margin: 0 0 20px 0;
+  color: #1565c0;
+  font-size: 1.8rem;
+}
+
+.recommendationsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recommendationsList li {
+  background: #f8f9fa;
+  border-left: 4px solid #42a5f5;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  border-radius: 0 8px 8px 0;
+  color: #424242;
+  font-weight: 500;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.controlButton {
+  background: linear-gradient(45deg, #42a5f5, #1e88e5);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.controlButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.controlButton.active {
+  background: linear-gradient(45deg, #4caf50, #388e3c);
+}
+
+.controlButton.resetButton {
+  background: linear-gradient(45deg, #f44336, #d32f2f);
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  margin: 20px;
+}
+
+.waterSpinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #e3f2fd;
+  border-top: 4px solid #42a5f5;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  margin: 20px;
+  border: 2px solid #ffcdd2;
+}
+
+.retryButton {
+  background: linear-gradient(45deg, #ff5722, #d84315);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(33, 150, 243, 0.8);
+  }
+}
+
+@keyframes warning {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .fluidMonitor {
+    margin: 10px;
+    padding: 15px;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .flowMetrics {
+    grid-template-columns: 1fr;
+  }
+  
+  .streamsList {
+    grid-template-columns: 1fr;
+  }
+  
+  .controls {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .controlButton {
+    width: 100%;
+    max-width: 300px;
+  }
+}

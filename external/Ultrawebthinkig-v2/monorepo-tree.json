@@ -1,0 +1,169 @@
+{
+  "monorepo": {
+    "name": "ASI Ultimate Laboratory",
+    "version": "8.0.0",
+    "type": "tree-based-monorepo",
+    "architecture": "organic-hierarchical",
+    "description": "🌳 ASI Monorepo - Structured like a tree: roots, trunk, branches, and fruits"
+  },
+  "tree": {
+    "roots": {
+      "description": "🌱 Foundation layer - Core configuration and orchestration",
+      "components": [
+        {
+          "name": "package.json",
+          "role": "root-configuration",
+          "purpose": "Workspace orchestration and dependency management"
+        },
+        {
+          "name": "lab-config.json", 
+          "role": "laboratory-configuration",
+          "purpose": "Laboratory services and routing configuration"
+        }
+      ]
+    },
+    "trunk": {
+      "description": "🌲 Central coordination system - Main orchestration layer",
+      "components": [
+        {
+          "name": "lab-manager.js",
+          "role": "central-orchestrator", 
+          "purpose": "Service lifecycle management and coordination",
+          "port_management": "dynamic-allocation",
+          "health_monitoring": "real-time"
+        }
+      ]
+    },
+    "branches": {
+      "description": "🌿 Major functional modules - Specialized service layers",
+      "components": [
+        {
+          "name": "asi-saas-frontend",
+          "role": "user-interface-branch",
+          "port": 3001,
+          "technology": "Next.js 14 + React 18 + TypeScript",
+          "purpose": "Interactive dashboard and user experience",
+          "command": "cd asi-saas-frontend && npm run dev"
+        },
+        {
+          "name": "api-gateway", 
+          "role": "data-gateway-branch",
+          "port": 3003,
+          "technology": "Express.js + Node.js",
+          "purpose": "API orchestration and real data integration",
+          "command": "cd api-gateway && node server.js"
+        },
+        {
+          "name": "asi-agent-ultra-demo",
+          "role": "demonstration-branch", 
+          "port": 3004,
+          "technology": "Node.js + Express",
+          "purpose": "Interactive demo system and AI showcase",
+          "command": "node asi-agent-ultra-demo.js"
+        },
+        {
+          "name": "asi-api-producer",
+          "role": "production-branch",
+          "port": 3005, 
+          "technology": "Node.js + Dynamic APIs",
+          "purpose": "API generation and real-time data production",
+          "command": "node asi-api-producer.js"
+        }
+      ]
+    },
+    "fruits": {
+      "description": "🍎 End results - Functional outputs and integrations",
+      "real_data_sources": [
+        {
+          "name": "Financial Intelligence",
+          "source": "exchangerate.host",
+          "type": "forex-rates",
+          "endpoint": "/api/financial/eur"
+        },
+        {
+          "name": "Blockchain Intelligence", 
+          "source": "coingecko.com",
+          "type": "cryptocurrency-prices",
+          "endpoint": "/api/blockchain/btc"
+        },
+        {
+          "name": "News Intelligence",
+          "source": "google-news-rss", 
+          "type": "albania-news",
+          "endpoint": "/api/news/albania"
+        },
+        {
+          "name": "Library Intelligence",
+          "source": "arxiv.org",
+          "type": "research-papers",
+          "endpoint": "/api/library/arxiv"
+        },
+        {
+          "name": "Museum Intelligence",
+          "source": "europeana.eu",
+          "type": "cultural-artifacts", 
+          "endpoint": "/api/museum/illyrian"
+        },
+        {
+          "name": "Health Intelligence",
+          "source": "who.int",
+          "type": "global-health-data",
+          "endpoint": "/api/health"
+        }
+      ],
+      "interactive_features": [
+        {
+          "name": "📊 Interactive Dashboard",
+          "url": "http://localhost:3004/demo/interactive-dashboard",
+          "description": "ASI system control from single interface"
+        },
+        {
+          "name": "🧠 Ultra Comprehensive Demo", 
+          "url": "http://localhost:3004/demo/ultra-comprehensive",
+          "description": "Full ASI system demonstration"
+        },
+        {
+          "name": "🇦🇱 Cultural Super Analysis",
+          "url": "http://localhost:3004/demo/cultural-super-analysis/albania", 
+          "description": "Albanian cultural intelligence analysis"
+        },
+        {
+          "name": "⚡ Real-time Processing Showcase",
+          "url": "http://localhost:3004/demo/real-time-processing-showcase",
+          "description": "High-performance real-time processing demo"
+        }
+      ]
+    }
+  },
+  "orchestration": {
+    "startup_sequence": [
+      "🌱 Initialize root configuration",
+      "🌲 Start central orchestrator (lab-manager.js)",  
+      "🌿 Launch branch services (frontend, gateway, demo, producer)",
+      "🍎 Validate fruit outputs (real data connections)"
+    ],
+    "health_monitoring": {
+      "interval": "30s",
+      "endpoints": [
+        "http://localhost:3001/api/health",
+        "http://localhost:3003/api/health", 
+        "http://localhost:3004/demo/interactive-dashboard",
+        "http://localhost:3005/asi/health"
+      ]
+    },
+    "port_allocation": {
+      "strategy": "hierarchical-dynamic",
+      "base_port": 3000,
+      "frontend_offset": 1,
+      "gateway_offset": 3, 
+      "demo_offset": 4,
+      "producer_offset": 5
+    }
+  },
+  "integration": {
+    "data_flow": "roots → trunk → branches → fruits",
+    "configuration_cascade": "lab-config.json → lab-manager.js → service.config",
+    "monitoring_tree": "central → branch → leaf monitoring",
+    "error_propagation": "leaf → branch → trunk → root reporting"
+  }
+}

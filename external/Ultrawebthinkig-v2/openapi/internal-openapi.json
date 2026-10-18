@@ -1,0 +1,1881 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Ultrawebthinking Internal APIs",
+    "version": "1.0.0",
+    "description": "Auto-generated internal API catalog for App Router and Pages Router endpoints."
+  },
+  "servers": [
+    {
+      "url": "https://ultraweb.ai",
+      "description": "Frontend on Vercel (production)"
+    },
+    {
+      "url": "https://api.ultraweb.ai",
+      "description": "Backend microservices (Docker production)"
+    },
+    {
+      "url": "http://127.0.0.1:3000",
+      "description": "Frontend local development"
+    },
+    {
+      "url": "http://127.0.0.1:8080",
+      "description": "Backend local microservice"
+    }
+  ],
+  "tags": [
+    {
+      "name": "internal",
+      "description": "Internal platform endpoints"
+    }
+  ],
+  "paths": {
+    "/api/advanced-chat": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_advanced_chat_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/advanced-chat/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_advanced_chat_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/advanced-chat/route.ts"
+      }
+    },
+    "/api/advanced-firewall": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_advanced_firewall_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/advanced-firewall/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_advanced_firewall_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/advanced-firewall/route.ts"
+      }
+    },
+    "/api/agi-advanced": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_agi_advanced_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/agi-advanced/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_agi_advanced_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/agi-advanced/route.ts"
+      }
+    },
+    "/api/agi/query": {
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_agi_query_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/agi/query/route.ts"
+      }
+    },
+    "/api/ai-manager": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_ai_manager_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/ai-manager/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_ai_manager_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/ai-manager/route.ts"
+      }
+    },
+    "/api/alba-asi-hub": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_alba_asi_hub_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/alba-asi-hub/route.ts"
+      }
+    },
+    "/api/asi-12layer": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_asi_12layer_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/asi-12layer/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_asi_12layer_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/asi-12layer/route.ts"
+      }
+    },
+    "/api/asi-ultimate": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_asi_ultimate_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/asi-ultimate/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_asi_ultimate_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/asi-ultimate/route.ts"
+      }
+    },
+    "/api/audio": {
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_pages_api_audio_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "pages/api/audio.ts"
+      }
+    },
+    "/api/aviation-weather": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_aviation_weather_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/aviation-weather/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_aviation_weather_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/aviation-weather/route.ts"
+      }
+    },
+    "/api/bio-data": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_bio_data_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/bio-data/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_bio_data_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/bio-data/route.ts"
+      }
+    },
+    "/api/bridgeway": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_bridgeway_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/bridgeway/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_bridgeway_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/bridgeway/route.ts"
+      }
+    },
+    "/api/chat": {
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_pages_api_chat_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "pages/api/chat.ts"
+      }
+    },
+    "/api/continental-mesh": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_continental_mesh_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/continental-mesh/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_continental_mesh_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/continental-mesh/route.ts"
+      }
+    },
+    "/api/continental/mesh": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_continental_mesh_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/continental/mesh/route.ts"
+      }
+    },
+    "/api/cultural-hub": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_cultural_hub_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/cultural-hub/route.ts"
+      }
+    },
+    "/api/cyber-security": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_cyber_security_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/cyber-security/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_cyber_security_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/cyber-security/route.ts"
+      }
+    },
+    "/api/dashboard": {
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_pages_api_dashboard_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "pages/api/dashboard.ts"
+      }
+    },
+    "/api/gateway": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_gateway_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/gateway/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_gateway_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/gateway/route.ts"
+      }
+    },
+    "/api/global-news/breaking-news": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_global_news_breaking_news_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/global-news/breaking-news/route.ts"
+      }
+    },
+    "/api/guardian": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_guardian_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/guardian/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_guardian_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/guardian/route.ts"
+      }
+    },
+    "/api/health": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_health_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/health/route.ts"
+      }
+    },
+    "/api/integration/health": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_integration_health_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/integration/health/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_integration_health_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/integration/health/route.ts"
+      }
+    },
+    "/api/iot": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_iot_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/iot/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_iot_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/iot/route.ts"
+      }
+    },
+    "/api/iot-production": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_iot_production_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/iot-production/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_iot_production_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/iot-production/route.ts"
+      }
+    },
+    "/api/life-sciences-hub": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_life_sciences_hub_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/life-sciences-hub/route.ts"
+      }
+    },
+    "/api/lora-mesh": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_lora_mesh_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/lora-mesh/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_lora_mesh_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/lora-mesh/route.ts"
+      }
+    },
+    "/api/lora/status": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_lora_status_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/lora/status/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_lora_status_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/lora/status/route.ts"
+      }
+    },
+    "/api/memory": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_memory_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/memory/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_memory_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/memory/route.ts"
+      }
+    },
+    "/api/mesh/status": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_mesh_status_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/mesh/status/route.ts"
+      }
+    },
+    "/api/neural-acceleration": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_neural_acceleration_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/neural-acceleration/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_neural_acceleration_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/neural-acceleration/route.ts"
+      }
+    },
+    "/api/neural-search": {
+      "delete": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal DELETE endpoint",
+        "operationId": "delete_app_api_neural_search_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/neural-search/route.ts"
+      },
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_neural_search_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/neural-search/route.ts"
+      },
+      "options": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal OPTIONS endpoint",
+        "operationId": "options_app_api_neural_search_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/neural-search/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_neural_search_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/neural-search/route.ts"
+      }
+    },
+    "/api/openapi": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_openapi_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/openapi/route.ts"
+      }
+    },
+    "/api/openmind": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_openmind_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/openmind/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_openmind_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/openmind/route.ts"
+      }
+    },
+    "/api/payments": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_payments_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/payments/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_payments_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/payments/route.ts"
+      }
+    },
+    "/api/projects/create": {
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_projects_create_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/projects/create/route.ts"
+      }
+    },
+    "/api/quantum-processing": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_quantum_processing_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/quantum-processing/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_quantum_processing_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/quantum-processing/route.ts"
+      }
+    },
+    "/api/radio-propagation": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_radio_propagation_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/radio-propagation/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_radio_propagation_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/radio-propagation/route.ts"
+      }
+    },
+    "/api/revolution/status": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_revolution_status_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/revolution/status/route.ts"
+      }
+    },
+    "/api/security/shield": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_security_shield_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/security/shield/route.ts"
+      }
+    },
+    "/api/system-status": {
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_pages_api_system_status_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "pages/api/system-status.ts"
+      }
+    },
+    "/api/system/real": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_system_real_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/system/real/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_system_real_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/system/real/route.ts"
+      }
+    },
+    "/api/ultra-industrial": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_ultra_industrial_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/ultra-industrial/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_ultra_industrial_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/ultra-industrial/route.ts"
+      }
+    },
+    "/api/utt/info": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_utt_info_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/utt/info/route.ts"
+      }
+    },
+    "/api/utt/sign-physical": {
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_utt_sign_physical_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/utt/sign-physical/route.ts"
+      }
+    },
+    "/api/utt/test": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_utt_test_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/utt/test/route.ts"
+      }
+    },
+    "/api/utt/transfer": {
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_utt_transfer_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/utt/transfer/route.ts"
+      }
+    },
+    "/api/utt/verify-physical": {
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_utt_verify_physical_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/utt/verify-physical/route.ts"
+      }
+    },
+    "/api/vision": {
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_pages_api_vision_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "pages/api/vision.ts"
+      }
+    },
+    "/api/wallet": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_wallet_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/wallet/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_wallet_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/wallet/route.ts"
+      }
+    },
+    "/api/web-services": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_web_services_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/web-services/route.ts"
+      },
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal POST endpoint",
+        "operationId": "post_app_api_web_services_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/web-services/route.ts"
+      }
+    },
+    "/api/web8/intelligence": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Internal GET endpoint",
+        "operationId": "get_app_api_web8_intelligence_route_ts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        },
+        "x-internal-source": "app/api/web8/intelligence/route.ts"
+      }
+    }
+  }
+}

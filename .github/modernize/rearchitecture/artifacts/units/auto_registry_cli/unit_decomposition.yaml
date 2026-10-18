@@ -1,0 +1,10 @@
+source_loc: "core/auto_registry.py:432"
+commit: false
+candidate_splits:
+  - name: static_inventory_importer
+    drivers: [trust_boundary, responsibility]
+    rationale: "Static source discovery may suggest manifest candidates but cannot declare runtime availability."
+  - name: remove_env_generation
+    drivers: [configuration_ownership]
+    rationale: "Generated localhost service configuration conflicts with Compose/environment ownership."
+

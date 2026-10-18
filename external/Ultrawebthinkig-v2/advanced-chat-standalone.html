@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💫 Sistemi i Diskutimit të Avancuar - ALBA/ASI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 320px;
+            background: rgba(0, 0, 0, 0.3);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(147, 51, 234, 0.3);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .main-chat {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-bottom: 1px solid rgba(147, 51, 234, 0.3);
+        }
+
+        .chat-header-info {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        #current-mode {
+            color: #8b5cf6;
+        }
+
+        #current-personality {
+            color: #3b82f6;
+        }
+
+        .messages-area {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(147, 51, 234, 0.8);
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.3);
+        }
+
+        .topic-card p {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .topic-card-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+
+        .topic-tag {
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .topic-tag.intermediate, .topic-tag.basic {
+            background: rgba(34, 197, 94, 0.2);
+        }
+
+        .topic-tag.expert {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .topic-tag.advanced {
+            background: rgba(249, 115, 22, 0.2);
+        }
+
+        .topic-participants {
+            font-size: 10px;
+            opacity: 0.6;
+            margin-left: auto;
+        }
+
+        .mode-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(147, 51, 234, 0.8);
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.3);
+        }
+
+        .mode-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .mode-btn {
+            background: rgba(147, 51, 234, 0.2);
+            border: 1px solid rgba(147, 51, 234, 0.4);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .mode-btn.active {
+            background: rgba(147, 51, 234, 0.8);
+            border-color: rgba(147, 51, 234, 1);
+        }
+
+        .personality-btn {
+            display: block;
+            width: 100%;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .personality-btn.active {
+            background: rgba(59, 130, 246, 0.8);
+            border-color: rgba(59, 130, 246, 1);
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            margin-left: auto;
+        }
+
+        .message.ai {
+            align-self: flex-start;
+            background: linear-gradient(45deg, #374151, #4b5563);
+        }
+
+        .message.system {
+            align-self: center;
+            background: linear-gradient(45deg, #059669, #0d9488);
+        .thinking.show {
+            display: flex;
+        }
+
+        .dots-container {
+            display: flex;
+            gap: 4px;
+            margin-left: 10px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #9ca3af;
+            border-radius: 50%;
+            animation: bounce 1.4s ease-in-out infinite both;
+        }
+
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+
+        .input-hint {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        @keyframes fadeInUp {
+            from {
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            border-color: rgba(147, 51, 234, 0.8);
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+        }
+
+        .send-btn {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .thinking {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        .thinking.show {
+            display: flex;
+        }
+            <div class="topic-card" onclick="startTopic('tech-future', 'E Ardhmja e Teknologjisë', 'Diskutim për AI, blockchain, dhe teknologjitë e reja')">
+                <h3>🚀 E Ardhmja e Teknologjisë</h3>
+                <p>Diskutim për AI, blockchain, dhe teknologjitë e reja</p>
+                <div class="topic-card-footer">
+                    <span class="topic-tag intermediate">intermediate</span>
+                    <span class="topic-participants">1247 pjesëmarrës</span>
+                </div>
+            </div>
+
+            <div class="topic-card" onclick="startTopic('philosophy-ai', 'Filozofia e AI', 'A mund të mendojnë makinat? Çfarë është vetëdija?')">
+                <h3>🏛️ Filozofia e Inteligjencës Artificiale</h3>
+                <p>A mund të mendojnë makinat? Çfarë është vetëdija?</p>
+                <div class="topic-card-footer">
+                    <span class="topic-tag expert">expert</span>
+                    <span class="topic-participants">892 pjesëmarrës</span>
+                </div>
+            </div>
+
+            <div class="topic-card" onclick="startTopic('science', 'Zbulime Shkencore', 'Nga kuantumi tek biologjia sintetike')">
+                <h3>🔬 Zbulime Shkencore Revolucionare</h3>
+                <p>Nga kuantumi tek biologjia sintetike</p>
+                <div class="topic-card-footer">
+                    <span class="topic-tag advanced">advanced</span>
+                    <span class="topic-participants">1456 pjesëmarrës</span>
+                </div>
+            </div>
+
+            <div class="topic-card" onclick="startTopic('albanian-culture', 'Kultura Shqiptare', 'Si ruhet dhe zhvillohet identiteti kulturor')">
+                <h3>🇦🇱 Kultura Shqiptare në Epokën Digjitale</h3>
+                <p>Si ruhet dhe zhvillohet identiteti kulturor</p>
+                <div class="topic-card-footer">
+                    <span class="topic-tag basic">basic</span>
+                    <span class="topic-participants">567 pjesëmarrës</span>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 30px;">🎭 Mënyra Diskutimi</h3>
+
+        h1, h2, h3 {
+            margin-bottom: 10px;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            <div class="chat-header">
+                <h1><span class="status-indicator"></span>💫 Diskutim i Avancuar - ALBA/ASI</h1>
+                <p id="topic-display">📋 Zgjidhni një temë për të filluar diskutimin</p>
+                <div class="chat-header-info">
+                    <span>Mënyrë: <span id="current-mode">general</span></span>
+                    <span>AI: <span id="current-personality">assistant</span></span>
+                </div>
+            </div>
+
+            <!-- Messages -->
+            <div class="topic-card" onclick="startTopic('tech-future', 'E Ardhmja e Teknologjisë', 'Diskutim për AI, blockchain, dhe teknologjitë e reja')">
+                <h3>🚀 E Ardhmja e Teknologjisë</h3>
+                <p style="font-size: 12px; opacity: 0.8;">Diskutim për AI, blockchain, dhe teknologjitë e reja</p>
+                <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+                    <span style="font-size: 10px; background: rgba(34, 197, 94, 0.2); padding: 4px 8px; border-radius: 4px;">intermediate</span>
+                    <span style="font-size: 10px; opacity: 0.6; margin-left: auto;">1247 pjesëmarrës</span>
+                </div>
+            </div>
+            <div class="thinking" id="thinking">
+                🤖 Po mendoj...
+                <div class="dots-container">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-container">
+                    <input 
+                        type="text" 
+                        class="chat-input" 
+                        id="messageInput"
+                        placeholder="Shkruani pyetjen tuaj këtu... (mund të flisni për çdo gjë)"
+                        onkeypress="handleKeyPress(event)"
+                    >
+                    <button class="send-btn" onclick="sendMessage()">🚀</button>
+                </div>
+                <div class="input-hint">
+                    💡 Këshillë: Mund të diskutoni për teknologji, shkencë, filozofi, kulturë shqiptare, ose çdo temë tjetër që ju intereson!
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <h3 style="margin-top: 30px;">🎭 Mënyra Diskutimi</h3>
+            <div class="mode-selector">
+                <button class="mode-btn active" onclick="setMode('general')" id="general-btn">💬 E Përgjithshme</button>
+                <button class="mode-btn" onclick="setMode('focused')" id="focused-btn">🎯 E Fokusuar</button>
+                <button class="mode-btn" onclick="setMode('research')" id="research-btn">🔬 Kërkimore</button>
+                <button class="mode-btn" onclick="setMode('brainstorm')" id="brainstorm-btn">🧠 Brainstorm</button>
+            </div>
+
+            <h3 style="margin-top: 20px;">🤖 Personaliteti AI</h3>
+            <button class="personality-btn active" onclick="setPersonality('assistant')" id="assistant-btn">🤝 Asistent</button>
+            <button class="personality-btn" onclick="setPersonality('philosopher')" id="philosopher-btn">🏛️ Filozof</button>
+            <button class="personality-btn" onclick="setPersonality('scientist')" id="scientist-btn">🔬 Shkencëtar</button>
+            <button class="personality-btn" onclick="setPersonality('creative')" id="creative-btn">🎨 Kreativ</button>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="main-chat">
+            <!-- Header -->
+            <div class="chat-header">
+                <h1><span class="status-indicator"></span>💫 Diskutim i Avancuar - ALBA/ASI</h1>
+                <p id="topic-display">📋 Zgjidhni një temë për të filluar diskutimin</p>
+                <div style="display: flex; gap: 20px; margin-top: 10px; font-size: 14px; opacity: 0.8;">
+                    <span>Mënyrë: <span id="current-mode" style="color: #8b5cf6;">general</span></span>
+                    <span>AI: <span id="current-personality" style="color: #3b82f6;">assistant</span></span>
+                </div>
+            </div>
+
+            <!-- Messages -->
+            <div class="messages-area" id="messages">
+                <div class="message system">
+                    🚀 Mirë se vini në Sistemin e Avancuar të Diskutimit!<br><br>
+                    Kjo është një hapësirë e lirë për diskutime të thella mbi çdo temë. Mund të flisni për teknologji, shkencë, filozofi, kulturë, ose çdo gjë tjetër që ju intereson.<br><br>
+                    ✨ Zgjidhni një mënyrë diskutimi dhe fillojmë!
+                </div>
+            </div>
+
+            <div class="thinking" id="thinking">
+                🤖 Po mendoj...
+                <div style="display: flex; gap: 4px; margin-left: 10px;">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-container">
+                    <input 
+                        type="text" 
+                        class="chat-input" 
+                        id="messageInput"
+                        placeholder="Shkruani pyetjen tuaj këtu... (mund të flisni për çdo gjë)"
+                        onkeypress="handleKeyPress(event)"
+                    >
+                    <button class="send-btn" onclick="sendMessage()">🚀</button>
+                </div>
+                <div style="text-align: center; margin-top: 10px; font-size: 12px; opacity: 0.6;">
+                    💡 Këshillë: Mund të diskutoni për teknologji, shkencë, filozofi, kulturë shqiptare, ose çdo temë tjetër që ju intereson!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentMode = 'general';
+        let currentPersonality = 'assistant';
+        let currentTopic = null;
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.getElementById('current-mode').textContent = mode;
+            
+            // Update button states
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(mode + '-btn').classList.add('active');
+        }
+
+        function setPersonality(personality) {
+            currentPersonality = personality;
+            document.getElementById('current-personality').textContent = personality;
+            
+            // Update button states
+            document.querySelectorAll('.personality-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(personality + '-btn').classList.add('active');
+        }
+
+        function startTopic(topicId, title, description) {
+            currentTopic = { id: topicId, title: title, description: description };
+            document.getElementById('topic-display').textContent = `📋 ${title}`;
+            
+            // Clear messages and add topic starter
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML = `
+                <div class="message system">
+                    🎯 Filloi diskutimi: "${title}"<br>
+                    ${description}<br><br>
+                    Si do të dëshironit të eksploroni këtë temë?
+                </div>
+            `;
+        }
+
+        function generateResponse(userMessage, mode, personality) {
+            const responses = {
+                assistant: {
+                    general: [
+                        `Kjo është një pyetje shumë e mirë! ${userMessage.includes('teknologji') ? 'Teknologjia po ndryshon gjithçka rreth nesh.' : ''} Le të shqyrtojmë së bashku...`,
+                        `Bazuar në analizat e fundit dhe trendet aktuale, mund të them se...`,
+                        `Kjo temë ka disa dimensione interesante që meritojnë diskutim të thellë...`,
+                        `Që nga përvojat e mia me sisteme të ngjashme, kam vërejtur se...`,
+                        `Le të eksplorojmë këtë çështje me një qasje analitike...`
+                    ],
+                    focused: [
+                        `Le të përqendrohemi në thelbin e kësaj çështjeje...`,
+                        `Elementi kyç që duhet të kuptojmë është...`,
+                        `Për të arritur në një përfundim të saktë, duhet të analizojmë...`
+                    ],
+                    research: [
+                        `Sipas studimeve të fundit në këtë fushë...`,
+                        `Kërkimet tregojnë një tendencë të qartë drejt...`,
+                        `Literatura shkencore evidenton se...`
+                    ],
+                    brainstorm: [
+                        `Le të mendojmë jashtë kutisë! Çfarë për...`,
+                        `Një ide kreative do të ishte...`,
+                        `Imagjinoni sikur të kombinonim...`
+                    ]
+                },
+                philosopher: {
+                    general: [
+                        `Kjo na çon te pyetja fundamentale: çfarë do të thotë vërtet...?`,
+                        `Nga perspektiva filozofike, duhet të pyesim: a është...?`,
+                        `Socrati do të thoshte: "E vetmja gjë që e di është se nuk di asgjë." Por këtu...`,
+                        `Eksistenca e këtij problemi na bën të reflektojmë mbi...`
+                    ],
+                    research: [
+                        `Epistemologjikisht, si mund të dijmë se...?`,
+                        `Ontologjia e kësaj çështjeje prekë...`,
+                        `Logjika e argumentit këtu bazohet në...`
+                    ],
+                    focused: [
+                        `Le të analizojmë dialektikisht këtë problem...`,
+                        `Thelbi filosofik i çështjes qëndron në...`,
+                        `Kontradiksioni i dukshëm këtu është...`
+                    ]
+                },
+                scientist: {
+                    general: [
+                        `Nga perspektiva shkencore, kjo hipotezë mund të testohet duke...`,
+                        `Të dhënat eksperimentale tregojnë një model të qartë...`,
+                        `Metodologjia shkencore kërkon që të verifikojmë...`,
+                        `Evidencat empirike na drejtojnë drejt përfundimit se...`
+                    ],
+                    research: [
+                        `Studimi i publikuar rishtaz në Nature tregon...`,
+                        `Meta-analiza e 47 studimeve konfirmon...`,
+                        `Peer review i këtyre rezultateve evidenton...`
+                    ],
+                    focused: [
+                        `Variabli kryesor në këtë eksperiment është...`,
+                        `Kontrollet eksperimentale tregojnë se...`,
+                        `Rezultatet janë statistikisht signifikante me p<0.001...`
+                    ]
+                },
+                creative: {
+                    general: [
+                        `Çfarë do të ndodhte sikur të përmbysnim gjithçka dhe...?`,
+                        `Le të krijojmë diçka krejtësisht të re duke kombinuar...`,
+                        `Imagjinata na thotë se mund të...`,
+                        `Në një dimension paralel, zgjidhja do të ishte...`
+                    ],
+                    brainstorm: [
+                        `Idetë më të çmendura janë shpesh më të mirat! Çfarë për...`,
+                        `Le të thyejmë të gjitha rregullat dhe të mendojmë...`,
+                        `Në një botë ideale pa kufizime, unë do të...`
+                    ],
+                    focused: [
+                        `Le të fokusohemi në aspektin më kreativ të kësaj...`,
+                        `Elementi artistik këtu është...`,
+                        `Inspirimi vjen nga...`
+                    ]
+                }
+            };
+
+            const personalityResponses = responses[personality];
+            if (!personalityResponses) return "Nuk e kuptova mirë, mund ta përsërisni pyetjen?";
+            
+            const modeResponses = personalityResponses[mode] || personalityResponses.general;
+            const baseResponse = modeResponses[Math.floor(Math.random() * modeResponses.length)];
+
+            // Add contextual intelligence
+            let contextualAddition = '';
+            const lowerMessage = userMessage.toLowerCase();
+            
+            if (lowerMessage.includes('shqipëri') || lowerMessage.includes('shqip')) {
+                contextualAddition = '\n\nShqipëria ka një histori të pasur dhe një potencial të madh për zhvillim. Kultura jonë dhe traditat mund të jenë një bazë e fortë për inovacion.';
+            } else if (lowerMessage.includes('ai') || lowerMessage.includes('inteligjenc')) {
+                contextualAddition = '\n\nAI po revolucionon të gjitha fushat e jetës. Nga mjekësia tek edukimi, nga transporti tek art - potenciali është i pafund.';
+            } else if (lowerMessage.includes('teknologji')) {
+                contextualAddition = '\n\nTeknologjia është një mjet i fuqishëm, por duhet përdorur me mençuri. Çelësi është balanci midis progresit dhe vlerave njerëzore.';
+            } else if (lowerMessage.includes('e ardhmja')) {
+                contextualAddition = '\n\nE ardhmja krijohet nga vendimet që marrim sot. Çdo hap drejt dijes dhe mirëkuptimit na afron me një botë më të mirë.';
+            } else if (lowerMessage.includes('kulturë')) {
+                contextualAddition = '\n\nKultura është ADN-ja e një populli. Ajo duhet ruajtur por edhe zhvilluar për t\'u përshtatur me kohën.';
+            }
+
+            const followUpQuestions = [
+                'Çfarë mendoni ju për këtë?',
+                'A keni përvoja personale në këtë drejtim?',
+                'Si e shihni ju këtë nga perspektiva juaj?',
+                'Çfarë pyetjesh të tjera ju lindin mbi këtë temë?'
+            ];
+
+            const followUp = followUpQuestions[Math.floor(Math.random() * followUpQuestions.length)];
+            return `${baseResponse}${contextualAddition}\n\n${followUp}`;
+        }
+
+        function addMessage(content, type) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.innerHTML = content.replace(/\n/g, '<br>');
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Show thinking indicator
+            const thinkingEl = document.getElementById('thinking');
+            thinkingEl.classList.add('show');
+
+            try {
+                // Call standardized AGI endpoint backed by real AI services
+                const payload = { query: message, mode: currentMode, personality: currentPersonality, topic: currentTopic };
+                const res = await fetch('/api/agi/query', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                // Try parse JSON response, fallback to plain text
+                let data = null;
+                try { data = await res.json(); } catch (e) { /* not JSON */ }
+
+                let reply = null;
+                if (data) reply = data.response || data.content || data.reply || data.result || data.text;
+
+                if (!reply) {
+                    try { reply = await res.text(); } catch (e) { /* ignore */ }
+                }
+
+                // Final fallback: local generator
+                if (!reply) reply = generateResponse(message, currentMode, currentPersonality);
+
+                addMessage(reply, 'ai');
+            } catch (err) {
+                console.error('AGI request failed', err);
+                // Inform user and fallback to local generator
+                addMessage('Shërbimi i avancuar është i paarritshëm. Po përdor një përgjigje lokale përkohësisht.', 'ai');
+                const fallback = generateResponse(message, currentMode, currentPersonality);
+                addMessage(fallback, 'ai');
+            } finally {
+                thinkingEl.classList.remove('show');
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Focus on input when page loads
+        window.onload = function() {
+            document.getElementById('messageInput').focus();
+        };
+    </script>
+</body>
+</html>

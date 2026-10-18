@@ -1,0 +1,10 @@
+source_loc: "apps/web/app/api/service-discovery/route.ts:558"
+commit: false
+candidate_splits:
+  - name: capability_registry_client
+    drivers: [protocol_boundary, testability]
+    rationale: "Authoritative HTTP lookup must be isolated from deployment inventory parsing."
+  - name: deployment_inventory_reader
+    drivers: [responsibility, trust_boundary]
+    rationale: "Compose discovery can remain informational but cannot produce executable capabilities."
+

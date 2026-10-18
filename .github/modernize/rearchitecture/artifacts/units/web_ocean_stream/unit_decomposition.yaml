@@ -1,0 +1,10 @@
+source_loc: "apps/web/app/api/ocean/stream/route.ts:369"
+commit: false
+candidate_splits:
+  - name: action_planner_adapter
+    drivers: [responsibility, testability]
+    rationale: "Research/decision prompt enrichment is separate from transport."
+  - name: ocean_sse_provider_adapter
+    drivers: [protocol_boundary, error_contract]
+    rationale: "Upstream selection, SSE parsing, and terminal error mapping form one provider adapter."
+

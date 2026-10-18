@@ -1,0 +1,26 @@
+source_loc: "apps/web/app/api/service-discovery/route.ts:558"
+side_effects:
+  - effect: "Reads Compose files synchronously to construct service inventory."
+    source_loc: "apps/web/app/api/service-discovery/route.ts:252"
+    must_preserve: false
+  - effect: "Calls multiple backend registry paths with four-second timeouts."
+    source_loc: "apps/web/app/api/service-discovery/route.ts:486"
+    must_preserve: true
+branches:
+  - condition: "Authoritative registry returns a services array."
+    source_loc: "apps/web/app/api/service-discovery/route.ts:618"
+    must_preserve: true
+  - condition: "Registry unavailable; returns inferred compose/catalog services with HTTP 200."
+    source_loc: "apps/web/app/api/service-discovery/route.ts:641"
+    must_preserve: false
+error_paths:
+  - contract: "Missing capability returns 400."
+    source_loc: "apps/web/app/api/service-discovery/route.ts:562"
+    must_preserve: true
+  - contract: "Registry unavailable is 503 for POST but may be 200 for GET."
+    source_loc: "apps/web/app/api/service-discovery/route.ts:578"
+    must_preserve: false
+concurrency:
+  model: "Sequential upstream candidate probing."
+  tx_boundary: null
+

@@ -1,0 +1,23 @@
+{
+  "short_name": "UltraBrowser",
+  "name": "UltraBrowser - AGI-Powered Web Browser",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0f172a",
+  "display": "browser",
+  "scope": "/",
+  "theme_color": "#6366f1",
+  "description": "An advanced AGI-powered web browser with neural network capabilities.",
+  "orientation": "any",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["productivity", "utilities", "browsers"],
+  "display_override": ["browser", "minimal-ui", "standalone"]
+}

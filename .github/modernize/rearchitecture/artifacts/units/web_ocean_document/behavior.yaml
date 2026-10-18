@@ -1,0 +1,26 @@
+source_loc: "apps/web/app/api/ocean/document/route.ts:131"
+side_effects:
+  - effect: "Decodes base64 and uploads multipart bytes to Ocean."
+    source_loc: "apps/web/app/api/ocean/document/route.ts:198"
+    must_preserve: true
+  - effect: "Normalizes JSON or CBOR provider responses."
+    source_loc: "apps/web/app/api/ocean/document/route.ts:59"
+    must_preserve: true
+branches:
+  - condition: "capabilities, generate/query, scan, or raw content analysis action."
+    source_loc: "apps/web/app/api/ocean/document/route.ts:167"
+    must_preserve: true
+  - condition: "CBOR request falls back to JSON on 400/415/422."
+    source_loc: "apps/web/app/api/ocean/document/route.ts:104"
+    must_preserve: true
+error_paths:
+  - contract: "Missing scan content returns 400; missing provider route returns 404; unavailable provider returns 502."
+    source_loc: "apps/web/app/api/ocean/document/route.ts:187"
+    must_preserve: true
+  - contract: "CBOR decode failures currently become empty objects."
+    source_loc: "apps/web/app/api/ocean/document/route.ts:66"
+    must_preserve: false
+concurrency:
+  model: "Sequential upstream/path fallback."
+  tx_boundary: null
+

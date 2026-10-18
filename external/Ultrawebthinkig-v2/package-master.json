@@ -1,0 +1,22 @@
+{
+  "name": "ultrawebthinking-master",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "cd frontend && yarn dev",
+    "dev:backend": "cd backend && python -m uvicorn main:app --reload --port 8000",
+    "dev:all": "concurrently --names \"Frontend,Backend\" --prefix-colors \"green,blue\" \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "setup:frontend": "cd frontend && yarn install",
+    "setup:backend": "cd backend && pip install -r requirements.txt", 
+    "setup:all": "npm run setup:frontend && npm run setup:backend",
+    "clean:frontend": "cd frontend && yarn clean",
+    "clean:backend": "cd backend && Remove-Item __pycache__ -Recurse -Force -ErrorAction SilentlyContinue",
+    "clean:all": "npm run clean:frontend && npm run clean:backend",
+    "test:frontend": "curl -s http://localhost:3000",
+    "test:backend": "curl -s http://localhost:8000/health", 
+    "test:all": "npm run test:frontend && npm run test:backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

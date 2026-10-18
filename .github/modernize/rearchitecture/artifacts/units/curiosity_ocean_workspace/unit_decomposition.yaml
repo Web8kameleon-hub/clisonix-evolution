@@ -1,0 +1,13 @@
+source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:874"
+commit: false
+candidate_splits:
+  - name: action_composer
+    drivers: [change_frequency, responsibility]
+    rationale: "Prompt, attachment queue, selected capability, and approval request evolve together."
+  - name: execution_timeline
+    drivers: [state_lifecycle, protocol_boundary]
+    rationale: "Ordered SSE events and cancellation have a lifecycle distinct from message text."
+  - name: artifact_renderer
+    drivers: [schema_boundary, reuse]
+    rationale: "Document, chart, image, audio, and report output require typed rendering rather than text concatenation."
+

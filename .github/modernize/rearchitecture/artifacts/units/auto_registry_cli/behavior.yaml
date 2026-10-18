@@ -1,0 +1,23 @@
+source_loc: "core/auto_registry.py:432"
+side_effects:
+  - effect: "Scans Python source files and extracts function/route strings."
+    source_loc: "core/auto_registry.py:93"
+    must_preserve: true
+  - effect: "Writes registry_export.json or .env.services."
+    source_loc: "core/auto_registry.py:336"
+    must_preserve: false
+branches:
+  - condition: "Known service file exists, is missing, or scan raises."
+    source_loc: "core/auto_registry.py:116"
+    must_preserve: true
+  - condition: "Any existing source file is marked active without a runtime health probe."
+    source_loc: "core/auto_registry.py:138"
+    must_preserve: false
+error_paths:
+  - contract: "Function and route parse errors are silently skipped."
+    source_loc: "core/auto_registry.py:206"
+    must_preserve: false
+concurrency:
+  model: "Single-process synchronous filesystem scan with global singleton cache."
+  tx_boundary: null
+

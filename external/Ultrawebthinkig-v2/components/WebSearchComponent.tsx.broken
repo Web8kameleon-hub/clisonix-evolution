@@ -1,0 +1,217 @@
+/**
+ * Web Search Component - React UI for Web Search Engine
+ * Provides interactive search interface with TypeScript
+ * 
+ * @author Ledjan Ahmati
+ * @version 8.0.0-WEB-SEARCH-UI
+ * @license MIT
+ */
+
+'use client';
+
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Search, Filter, History, Loader2, X, Clock, Globe, Image, Video, FileText, BookOpen, MapPin } from 'lucide-react';
+import { WebSearchEngine, SearchQuery, SearchResponse, SearchResult, SearchHistory } from '../lib/WebSearchEngine';
+import styles from './WebSearchComponent.module.css';
+
+interface WebSearchComponentProps {
+  className?: string;
+  initialQuery?: string;
+  onResultSelect?: (result: SearchResult) => void;
+  maxResults?: number;
+}
+
+export const WebSearchComponent: React.FC<WebSearchComponentProps> = ({
+  className,
+  initialQuery = '',
+  onResultSelect,
+  maxResults = 10
+}) => {
+  // State management
+  const [query, setQuery] = useState<string>(initialQuery);
+  const [searchType, setSearchType] = useState<SearchQuery['type']>('web');
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [searchTime, setSearchTime] = useState<number>(0);
+  const [totalResults, setTotalResults] = useState<number>(0);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
+  const [searchHistory, setSearchHistory] = useState<SearchHistory[]>([]);
+  const [showHistory, setShowHistory] = useState<boolean>(false);
+  const [showFilters, setShowFilters] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [error, setError] = useState<string | null>(null);
+
+  // Refs
+  const searchEngine = useRef<WebSearchEngine | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const suggestionsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Initialize search engine
+  useEffect(() => {
+    searchEngine.current = new WebSearchEngine({
+      cacheEnabled: true,
+      maxConcurrentRequests: 3
+    });
+
+    // Listen to search engine events
+    const engine = searchEngine.current;
+    
+    engine.on('searchStarted', () => {
+      setIsLoading(true);
+      setError(null);
+    });
+
+    engine.on('searchCompleted', ({ response }: { response: SearchResponse }) => {
+      setResults(response.results);
+      setSearchTime(response.searchTime);
+      setTotalResults(response.totalResults);
+      setSuggestions(response.suggestions);
+      setIsLoading(false);
+    });
+
+    engine.on('searchError', ({ error }: { error: unknown }) => {
+      setError(error.message);
+      setIsLoading(false);
+    });
+
+    engine.on('historyUpdated', (history: SearchHistory[]) => {
+      setSearchHistory(history);
+    });
+
+    // Load initial history
+    setSearchHistory(engine.getSearchHistory());
+
+    return () => {
+      engine.removeAllListeners();
+    };
+  }, []);
+
+  // Generate suggestions with debouncing
+  const generateSuggestions = useCallback((value: string) => {
+    if (suggestionsTimeoutRef.current) {
+      clearTimeout(suggestionsTimeoutRef.current);
+    }
+
+    suggestionsTimeoutRef.current = setTimeout(() => {
+      if (value.length >= 2 && searchEngine.current) {
+        const newSuggestions = searchEngine.current.getSuggestions(value);
+        setSuggestions(newSuggestions);
+        setShowSuggestions(true);
+      } else {
+        setShowSuggestions(false);
+      }
+    }, 300);
+  }, []);
+
+  // Handle search execution
+  const handleSearch = useCallback(async (searchQuery: string = query, type: SearchQuery['type'] = searchType) => {
+    if (!searchQuery.trim() || !searchEngine.current) return;
+
+    const searchRequest: SearchQuery = {
+      query: searchQuery.trim(),
+      type,
+      options: {
+        maxResults,
+        page: currentPage,
+        includeSnippets: true,
+        includeThumbnails: type === 'images' || type === 'videos'
+      }
+    };
+
+    try {
+      await searchEngine.current.search(searchRequest);
+      setShowSuggestions(false);
+      setShowHistory(false);
+    } catch (error) {
+      console.error('Search failed:', error);
+    }
+  }, [query, searchType, maxResults, currentPage]);
+
+  // Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setQuery(value);
+    generateSuggestions(value);
+  };
+
+  // Handle suggestion selection
+  const handleSuggestionSelect = (suggestion: string) => {
+    setQuery(suggestion);
+    setShowSuggestions(false);
+    handleSearch(suggestion);
+  };
+
+  // Handle history selection
+  const handleHistorySelect = (historyItem: SearchHistory) => {
+    setQuery(historyItem.query);
+    setShowHistory(false);
+    handleSearch(historyItem.query);
+  };
+
+  // Handle result selection
+  const handleResultClick = (result: SearchResult) => {
+    if (onResultSelect) {
+      onResultSelect(result);
+    }
+    // Open in new tab by default
+    window.open(result.url, '_blank', 'noopener,noreferrer');
+  };
+
+  // Handle search type change
+  const handleSearchTypeChange = (type: SearchQuery['type']) => {
+    setSearchType(type);
+    if (query.trim()) {
+      handleSearch(query, type);
+    }
+  };
+
+  // Handle key press
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    } else if (e.key === 'Escape') {
+      setShowSuggestions(false);
+      setShowHistory(false);
+    }
+  };
+
+  // Search type icons
+  const getSearchTypeIcon = (type: SearchQuery['type']) => {
+    switch (type) {
+      case 'web': return <Globe size={16} />;
+      case 'images': return <Image size={16} />;
+      case 'videos': return <Video size={16} />;
+      case 'news': return <FileText size={16} />;
+      case 'academic': return <BookOpen size={16} />;
+      case 'local': return <MapPin size={16} />;
+      default: return <Globe size={16} />;
+    }
+  };
+
+  // Format search time
+  const formatSearchTime = (time: number): string => {
+    return time < 1 ? `${Math.round(time * 1000)}ms` : `${time.toFixed(2)}s`;
+  };
+
+  return (
+    <div className={`${styles.searchContainer} ${className || ''}`}>
+      <div className={styles.searchHeader}>
+        {searchTypes.map((type) => (
+          <button
+            key={type}
+            onClick={() => setSearchType(type as SearchType)}
+            className={`${styles.searchTypeTab} ${searchType === type ? styles.active : ''}`}
+          >
+            {type}
+          </button>
+        ))}
+      </div>
+      
+      <div className={styles.searchInput}>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+          placeholder={`Search ${searchType}...`}

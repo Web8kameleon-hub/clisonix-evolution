@@ -1,0 +1,335 @@
+/* AGICoreComponent.module.css */
+
+.agiContainer {
+  padding: 2rem;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+  border-radius: 16px;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  min-height: 70vh;
+  transition: all 0.3s ease;
+}
+
+.agiContainer[data-theme="light"] {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  color: #212529;
+}
+
+.agiContainer[data-theme="nature"] {
+  background: linear-gradient(135deg, #2d5016 0%, #4a7c59 100%);
+  color: #ffffff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.title {
+  font-size: 2rem;
+  margin: 0;
+  background: linear-gradient(45deg, #00ff88, #00ccff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid #00ff88;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.statusIndicator {
+  width: 8px;
+  height: 8px;
+  background: #00ff88;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.statusIndicator.processing {
+  background: #ffaa00;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.dashboard {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.section {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.section h3 {
+  margin: 0 0 1rem 0;
+  color: #00ff88;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stateGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stateItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stateItem label {
+  font-weight: 500;
+  color: #aaa;
+}
+
+.stateItem span {
+  font-weight: bold;
+  color: #00ccff;
+}
+
+.agiStatus {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  background: rgba(0, 255, 136, 0.2);
+  color: #00ff88 !important;
+}
+
+.responsesList {
+  max-height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.responseItem {
+  padding: 0.75rem;
+  background: rgba(0, 204, 255, 0.1);
+  border: 1px solid rgba(0, 204, 255, 0.2);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.noResponses {
+  padding: 1rem;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.querySection {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.queryInput {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.queryInput::placeholder {
+  color: #aaa;
+}
+
+.queryInput:focus {
+  outline: none;
+  border-color: #00ff88;
+  box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.2);
+}
+
+.queryInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.button {
+  background: linear-gradient(45deg, #00ff88, #00ccff);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  font-size: 0.9rem;
+  min-width: 120px;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  color: #666;
+  font-size: 0.8rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .agiContainer {
+    padding: 1rem;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .stateGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .querySection {
+    flex-direction: column;
+  }
+  
+  .actionButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Light theme adjustments */
+.agiContainer[data-theme="light"] .section {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 1rem;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 255, 136, 0.3);
+  border-top: 3px solid #00ff88;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading p {
+  color: #aaa;
+  font-size: 1rem;
+}
+
+.agiContainer[data-theme="light"] .stateItem {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.agiContainer[data-theme="light"] .queryInput {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.2);
+  color: #212529;
+}
+
+.agiContainer[data-theme="light"] .header {
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Nature theme adjustments */
+.agiContainer[data-theme="nature"] .section {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.agiContainer[data-theme="nature"] .title {
+  background: linear-gradient(45deg, #90EE90, #32CD32);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.agiContainer[data-theme="nature"] .statusIndicator {
+  background: #90EE90;
+}
+
+.agiContainer[data-theme="nature"] .status {
+  background: rgba(144, 238, 144, 0.1);
+  border-color: #90EE90;
+}

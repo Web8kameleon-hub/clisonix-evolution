@@ -1,0 +1,31 @@
+:root {
+  --color-bg: #f8f9fa;
+  --color-bg-dark: #0f172a;
+  --color-text: #1e293b;
+  --color-text-invert: #f8fafc;
+  --color-primary: #007bff;
+  --color-primary-hover: #0056b3;
+  --color-border: #e2e8f0;
+  --color-border-dark: #1e293b;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --font-main: "Segoe UI", sans-serif;
+  --font-mono: "Courier New", monospace;
+}
+
+.dark {
+  --color-bg: #0f172a;
+  --color-text: #f8fafc;
+  --color-primary: #38bdf8;
+  --color-primary-hover: #0ea5e9;
+  --color-border: #1e293b;
+}

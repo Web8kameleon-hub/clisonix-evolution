@@ -1,0 +1,71 @@
+units:
+  - name: curiosity_ocean_workspace
+    trigger: "GET /modules/curiosity-ocean and browser interactions"
+    source_anchors:
+      - "apps/web/app/modules/curiosity-ocean/page.tsx:874"
+      - "apps/web/app/modules/curiosity-ocean/input-composer.tsx:27"
+    exported_signature: "default CuriosityOceanChat(); InputComposer(props: InputComposerProps)"
+    depends_on: [web_ocean_stream, web_ocean_document]
+    dynamic_entrypoints: []
+    shared_refs: []
+  - name: web_service_discovery
+    trigger: "GET|POST /api/service-discovery"
+    source_anchors:
+      - "apps/web/app/api/service-discovery/route.ts:558"
+    exported_signature: "POST(request: NextRequest); GET()"
+    depends_on: []
+    dynamic_entrypoints: ["Next.js App Router route discovery"]
+    shared_refs: []
+  - name: web_ocean_stream
+    trigger: "POST /api/ocean/stream"
+    source_anchors:
+      - "apps/web/app/api/ocean/stream/route.ts:369"
+    exported_signature: "POST(request: Request): Promise<Response>"
+    depends_on: []
+    dynamic_entrypoints: ["Next.js App Router route discovery"]
+    shared_refs:
+      - module: "apps/web/app/api/ocean/_lib/strict-ultra.ts"
+        used_fields: [applyStrictUltraProfile]
+  - name: web_ocean_document
+    trigger: "GET|POST /api/ocean/document"
+    source_anchors:
+      - "apps/web/app/api/ocean/document/route.ts:131"
+    exported_signature: "POST(request: NextRequest); GET(request: NextRequest)"
+    depends_on: []
+    dynamic_entrypoints: ["Next.js App Router route discovery"]
+    shared_refs:
+      - module: "apps/web/app/api/ocean/_lib/strict-ultra.ts"
+        used_fields: [applyStrictUltraProfile]
+  - name: api_ocean_action_surface
+    trigger: "FastAPI routes for Ocean labs, health, uploads, and ASI execute"
+    source_anchors:
+      - "apps/api/main.py:1026"
+    exported_signature: "FastAPI app routes including /api/ocean/labs/*, /api/uploads/*, /asi/execute"
+    depends_on: []
+    dynamic_entrypoints: ["FastAPI decorator registration", "conditional Ocean hub import at module load"]
+    shared_refs: []
+  - name: ocean_multimodal_api
+    trigger: "GET /health; POST /api/v1/analyze|vision|audio|document|reason"
+    source_anchors:
+      - "ocean-core/ocean_multimodal.py:459"
+    exported_signature: "FastAPI multimodal provider routes"
+    depends_on: []
+    dynamic_entrypoints: ["FastAPI decorator registration"]
+    shared_refs: []
+  - name: saas_orchestrator_prototype
+    trigger: "Agent registry, communication, proxy, and service execute HTTP routes"
+    source_anchors:
+      - "saas_services_orchestrator_v3.py:75"
+    exported_signature: "FastAPI orchestrator v3 routes"
+    depends_on: []
+    dynamic_entrypoints: ["FastAPI decorator registration"]
+    shared_refs: []
+  - name: auto_registry_cli
+    trigger: "python core/auto_registry.py --scan|--export|--env|--search|--summary"
+    source_anchors:
+      - "core/auto_registry.py:432"
+    exported_signature: "discover_all(force=False); get_function; get_service; search; export; generate_env"
+    depends_on: []
+    dynamic_entrypoints: ["Filesystem scan of Python source"]
+    shared_refs: []
+

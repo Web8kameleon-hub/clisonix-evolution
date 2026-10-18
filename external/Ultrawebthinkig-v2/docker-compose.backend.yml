@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  backend-api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: ultraweb-backend-api
+    environment:
+      - NODE_ENV=production
+      - PORT_BACKEND=8080
+      - BACKEND_HOST=0.0.0.0
+      - OLLAMA_URL=${OLLAMA_URL:-http://host.docker.internal:11434}
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  ultracom:
+    build:
+      context: ./ultracom
+      dockerfile: Dockerfile
+    container_name: ultracom-service
+    environment:
+      - CORS_ORIGINS=${CORS_ORIGINS:-https://ultraweb.ai,http://127.0.0.1:3000}
+      - MANAGER_ROUTE_SENSOR=${MANAGER_ROUTE_SENSOR:-https://ultraweb.ai/api/iot}
+      - MANAGER_ROUTE_ANALYTICS=${MANAGER_ROUTE_ANALYTICS:-https://ultraweb.ai/api/analytics}
+      - MANAGER_ROUTE_NEWS=${MANAGER_ROUTE_NEWS:-https://ultraweb.ai/api/global-news/breaking-news}
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/manager/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    container_name: ultraweb-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: ultraweb-postgres
+    environment:
+      - POSTGRES_DB=ultraweb
+      - POSTGRES_USER=ultraweb
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-ultraweb_secure_2026}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

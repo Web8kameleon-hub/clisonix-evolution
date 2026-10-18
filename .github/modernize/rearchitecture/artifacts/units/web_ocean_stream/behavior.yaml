@@ -1,0 +1,26 @@
+source_loc: "apps/web/app/api/ocean/stream/route.ts:369"
+side_effects:
+  - effect: "Optionally performs web research before Ocean dispatch."
+    source_loc: "apps/web/app/api/ocean/stream/route.ts:462"
+    must_preserve: true
+  - effect: "Streams upstream SSE chunks to the browser."
+    source_loc: "apps/web/app/api/ocean/stream/route.ts:658"
+    must_preserve: true
+branches:
+  - condition: "Strict profile, complexity, research, shopping, and decision modes alter the provider payload."
+    source_loc: "apps/web/app/api/ocean/stream/route.ts:404"
+    must_preserve: true
+  - condition: "Multiple configured upstream candidates are tried."
+    source_loc: "apps/web/app/api/ocean/stream/route.ts:530"
+    must_preserve: true
+error_paths:
+  - contract: "Missing message returns 422."
+    source_loc: "apps/web/app/api/ocean/stream/route.ts:426"
+    must_preserve: true
+  - contract: "Unavailable/empty upstream emits a real SSE error and done."
+    source_loc: "apps/web/app/api/ocean/stream/route.ts:633"
+    must_preserve: true
+concurrency:
+  model: "ReadableStream controller proxies one upstream stream; client cancellation uses AbortController."
+  tx_boundary: null
+

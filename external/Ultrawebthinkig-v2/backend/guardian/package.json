@@ -1,0 +1,9 @@
+{
+  "name": "guardian-security",
+  "version": "8.0.0",
+  "description": "Guardian Security Module - Real-time threat monitoring",
+  "main": "Guardian.ts",
+  "type": "module",
+  "author": "Ledjan Ahmati <dealsjona@gmail.com>",
+  "license": "MIT"
+}

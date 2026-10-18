@@ -1,0 +1,10 @@
+source_loc: "apps/web/app/api/ocean/document/route.ts:131"
+commit: false
+candidate_splits:
+  - name: attachment_adapter
+    drivers: [data_boundary, security_boundary]
+    rationale: "Byte validation, ownership, checksum, and multipart transfer should be independent of analysis response mapping."
+  - name: ocean_document_provider_adapter
+    drivers: [protocol_boundary, error_contract]
+    rationale: "CBOR/JSON negotiation and legacy path compatibility belong to the Ocean provider."
+

@@ -1,0 +1,16 @@
+source_loc: "apps/web/app/api/ocean/document/route.ts:131"
+bindings:
+  - binding: "Next.js App Router GET/POST /api/ocean/document."
+    source_loc: "apps/web/app/api/ocean/document/route.ts:131"
+    must_appear_in_target: true
+  - binding: "Provider-specific strict-ultra transform."
+    source_loc: "apps/web/app/api/ocean/document/route.ts:134"
+    must_appear_in_target: true
+runtime_config:
+  - key: OCEAN_INTERNAL_URL
+    source_loc: "apps/web/app/api/ocean/document/route.ts:11"
+    must_appear_in_target: true
+  - key: OCEAN_CORE_URL
+    source_loc: "apps/web/app/api/ocean/document/route.ts:13"
+    must_appear_in_target: true
+

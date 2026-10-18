@@ -1,0 +1,17 @@
+# Production override: keep both Ollama APIs off public host interfaces.
+# Apply last, after compose.runtime-repair.yml.
+services:
+  ollama:
+    ports: !reset []
+    volumes: !override
+      - type: volume
+        source: ollama_existing
+        target: /root/.ollama
+  ollama-multi-api:
+    ports: !override
+      - "127.0.0.1:4444:4444"
+
+volumes:
+  ollama_existing:
+    external: true
+    name: clisonix_ollama_data

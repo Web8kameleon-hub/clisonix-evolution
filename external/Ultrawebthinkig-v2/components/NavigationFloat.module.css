@@ -1,0 +1,269 @@
+/* Navigation Float Styles */
+
+.navigationFloat {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Toggle Button */
+.toggleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.toggleButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.toggleButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+}
+
+.toggleButton:hover::before {
+  opacity: 1;
+}
+
+.toggleButton.active {
+  transform: rotate(180deg);
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+}
+
+.toggleButton svg {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+/* Menu Container */
+.menuContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+.menuBackdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+}
+
+.menu {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 280px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Menu Header */
+.menuHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px 16px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.menuHeader h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+/* Navigation List */
+.navigationList {
+  padding: 8px;
+}
+
+.navigationItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 4px;
+  animation: slideInItem 0.3s ease var(--item-delay) both;
+}
+
+.navigationItem:hover {
+  background: color-mix(in srgb, var(--item-color) 10%, transparent);
+  color: var(--item-color);
+  transform: translateX(4px);
+}
+
+.itemIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: color-mix(in srgb, var(--item-color) 15%, transparent);
+  border-radius: 10px;
+  color: var(--item-color);
+  transition: all 0.2s ease;
+}
+
+.navigationItem:hover .itemIcon {
+  background: var(--item-color);
+  color: white;
+  transform: scale(1.1);
+}
+
+.itemLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  flex: 1;
+}
+
+/* Menu Footer */
+.menuFooter {
+  padding: 16px 24px 20px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-top: 1px solid #e2e8f0;
+}
+
+.appInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.appName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.appVersion {
+  font-size: 0.75rem;
+  color: #64748b;
+  background: #e2e8f0;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideInItem {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navigationFloat {
+    top: 16px;
+    right: 16px;
+  }
+  
+  .toggleButton {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .menu {
+    top: 16px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+  }
+  
+  .menuHeader {
+    padding: 16px 20px 12px;
+  }
+  
+  .menuFooter {
+    padding: 12px 20px 16px;
+  }
+}

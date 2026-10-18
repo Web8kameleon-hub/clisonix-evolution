@@ -1,0 +1,91 @@
+# 🌟 kameleon.life - Docker Compose Production
+# Ultra Industrial Platform - Complete Stack
+
+version: '3.8'
+
+services:
+  # Main Frontend Application
+  kameleon-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.kameleon
+    container_name: kameleon-frontend
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_APP_URL=https://kameleon.life
+      - OPENWEATHER_API_KEY=kR9iYsrcVVqtxrnqLJI5juDSHcREW0UuVPtYHxSF
+      - NASA_API_KEY=DEMO_KEY
+      - ALPHA_VANTAGE_API_KEY=3QPHSL0U8XYW0D0M
+    volumes:
+      - kameleon_data:/app/data
+      - kameleon_logs:/app/logs
+    networks:
+      - kameleon_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ASI Backend Service
+  asi-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.kameleon
+    container_name: asi-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+      - SERVICE_TYPE=asi-backend
+    volumes:
+      - kameleon_data:/app/data
+    networks:
+      - kameleon_network
+    restart: unless-stopped
+
+  # NeuroSonix API Service  
+  neurosonix-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.kameleon
+    container_name: neurosonix-api
+    ports:
+      - "8081:8081"
+    environment:
+      - NODE_ENV=production
+      - PORT=8081
+      - SERVICE_TYPE=neurosonix
+    volumes:
+      - kameleon_data:/app/data
+    networks:
+      - kameleon_network
+    restart: unless-stopped
+
+  # API Collection Database
+  api-collector:
+    image: sqlite:latest
+    container_name: kameleon-db
+    volumes:
+      - kameleon_data:/data
+    networks:
+      - kameleon_network
+    restart: unless-stopped
+
+volumes:
+  kameleon_data:
+    driver: local
+  kameleon_logs:
+    driver: local
+
+networks:
+  kameleon_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

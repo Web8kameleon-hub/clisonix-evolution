@@ -1,0 +1,40 @@
+/* Footer.module.css */
+.footer {
+  padding: 32px 24px;
+  background: rgba(248, 250, 252, 0.9);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(99, 102, 241, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  color: #64748b;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 48px;
+}
+
+.brand {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.links {
+  display: flex;
+  gap: 16px;
+}
+
+.link {
+  color: #4682b4;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: #1e40af;
+}
+
+.version {
+  color: #6b7280;
+  font-size: 12px;
+}

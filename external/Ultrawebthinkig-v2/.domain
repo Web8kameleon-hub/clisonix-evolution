@@ -1,0 +1,134 @@
+# EuroWeb Platform Domain Configuration
+# Domain setup për Web8 AGI Browser
+
+# Primary Domain
+DOMAIN=euroweb.ai
+SUBDOMAIN=www.euroweb.ai
+
+# Alternative Domains
+ALT_DOMAIN_1=eurowebplatform.com
+ALT_DOMAIN_2=web8browser.ai
+ALT_DOMAIN_3=eurowebagi.com
+
+# API Endpoints
+API_DOMAIN=api.euroweb.ai
+ADMIN_DOMAIN=admin.euroweb.ai
+DOCS_DOMAIN=docs.euroweb.ai
+CHAT_DOMAIN=chat.euroweb.ai
+OPENMIND_DOMAIN=ai.euroweb.ai
+
+# CDN & Assets
+CDN_DOMAIN=cdn.euroweb.ai
+ASSETS_DOMAIN=assets.euroweb.ai
+STATIC_DOMAIN=static.euroweb.ai
+
+# Development
+DEV_DOMAIN=dev.euroweb.ai
+STAGING_DOMAIN=staging.euroweb.ai
+TEST_DOMAIN=test.euroweb.ai
+
+# Regional Domains
+EUROPE_DOMAIN=eu.euroweb.ai
+ALBANIA_DOMAIN=al.euroweb.ai
+BALKANS_DOMAIN=balkans.euroweb.ai
+
+# SSL Configuration
+SSL_ENABLED=true
+SSL_PROVIDER=letsencrypt
+SSL_AUTO_RENEW=true
+
+# DNS Configuration
+DNS_PROVIDER=cloudflare
+DNS_ZONE_ID=auto
+DNS_API_TOKEN=auto
+
+# Deployment Platform
+PLATFORM=vercel
+BACKUP_PLATFORM=netlify
+CUSTOM_SERVER=enabled
+
+# Performance
+CDN_ENABLED=true
+CACHE_ENABLED=true
+COMPRESSION=gzip
+
+# Security
+SECURITY_HEADERS=enabled
+CSP_ENABLED=true
+HSTS_ENABLED=true
+
+# Analytics
+ANALYTICS_DOMAIN=analytics.euroweb.ai
+MONITORING_DOMAIN=monitor.euroweb.ai
+
+# Contact & Support
+SUPPORT_DOMAIN=support.euroweb.ai
+CONTACT_EMAIL=contact@euroweb.ai
+ADMIN_EMAIL=admin@euroweb.ai
+
+# Legal
+PRIVACY_URL=https://euroweb.ai/privacy
+TERMS_URL=https://euroweb.ai/terms
+LICENSE_URL=https://euroweb.ai/license
+
+# Social Media
+SOCIAL_TWITTER=@EuroWebAI
+SOCIAL_GITHUB=github.com/Web8kameleon-hub/ultrawebthinking
+SOCIAL_LINKEDIN=company/euroweb-ai
+
+# Repository
+REPO_URL=https://github.com/Web8kameleon-hub/ultrawebthinking
+ISSUES_URL=https://github.com/Web8kameleon-hub/ultrawebthinking/issues
+
+# Author Information
+AUTHOR=Ledjan Ahmati
+AUTHOR_EMAIL=dealsjona@gmail.com
+COMPANY=EuroWeb Development Team
+LOCATION=Albania, Europe
+
+# Branding
+BRAND_NAME=EuroWeb Platform
+BRAND_TAGLINE=AGI-Powered Web8 Browser with Industrial Intelligence
+BRAND_COLOR=#d4af37
+BRAND_THEME=dark
+
+# Languages
+PRIMARY_LANGUAGE=sq
+SECONDARY_LANGUAGE=en
+SUPPORTED_LANGUAGES=sq,en,it,de,fr
+
+# Technical Stack
+FRAMEWORK=Next.js
+LANGUAGE=TypeScript
+STYLING=Vanilla CSS + Framer Motion
+TESTING=Vitest
+PACKAGE_MANAGER=Yarn Berry
+NODE_VERSION=18+
+
+# Features
+AGI_ENABLED=true
+MULTI_AI_CHAT=true
+REAL_TIME_SEARCH=true
+VOICE_INTERFACE=false
+MOBILE_APP=planned
+
+# Status
+PROJECT_STATUS=active
+VERSION=8.0.0
+LAST_UPDATED=2025-07-18
+
+# Domain Registration Notes
+# euroweb.ai - Primary domain (premium .ai TLD)
+# Alternative: euroweb.com, euroweb.net, euroweb.org
+# Country-specific: euroweb.al (Albania)
+# 
+# Recommended registrar: Namecheap, GoDaddy, or Cloudflare
+# DNS: Cloudflare for performance and security
+# SSL: Free Let's Encrypt via Vercel/Netlify
+# 
+# Domain setup commands:
+# 1. Register domain at registrar
+# 2. Point nameservers to Cloudflare
+# 3. Add domain to Vercel project
+# 4. Configure DNS records in Cloudflare
+# 5. Enable SSL and security features

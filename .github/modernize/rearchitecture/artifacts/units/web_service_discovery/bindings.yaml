@@ -1,0 +1,16 @@
+source_loc: "apps/web/app/api/service-discovery/route.ts:558"
+bindings:
+  - binding: "Next.js App Router GET/POST /api/service-discovery."
+    source_loc: "apps/web/app/api/service-discovery/route.ts:558"
+    must_appear_in_target: true
+  - binding: "Uses shared apiSuccess/apiError envelope."
+    source_loc: "apps/web/app/api/service-discovery/route.ts:10"
+    must_appear_in_target: true
+runtime_config:
+  - key: API_INTERNAL_URL
+    source_loc: "apps/web/app/api/service-discovery/route.ts:14"
+    must_appear_in_target: true
+  - key: OCEAN_INTERNAL_URL
+    source_loc: "apps/web/app/api/service-discovery/route.ts:18"
+    must_appear_in_target: false
+

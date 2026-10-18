@@ -1,0 +1,19 @@
+services:
+  ocean-core:
+    environment:
+      OCEAN_LLM_PROVIDER_ORDER: "ollama,selflearning"
+      MODEL: "${LOCAL_TEXT_MODEL:-llama3.1:8b}"
+      ILDE_MODEL: ""
+      OCEAN_STREAM_MODEL: "${LOCAL_STREAM_MODEL:-llama3.2:3b}"
+      OCEAN_STREAM_FALLBACK_ENABLED: "true"
+
+  ocean-core-multimodal:
+    environment:
+      OLLAMA_HOST: "http://clisonix-ollama:11434"
+      VISION_MODEL: "llava:7b"
+      REASONING_MODEL: "${LOCAL_TEXT_MODEL:-llama3.1:8b}"
+
+  clx-i:
+    environment:
+      CLXI_OLLAMA_HOST: "http://clisonix-ollama:11434"
+      CLXI_VISION_MODEL: "clx-i:latest"

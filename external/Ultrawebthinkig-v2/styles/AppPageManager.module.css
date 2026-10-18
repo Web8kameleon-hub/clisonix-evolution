@@ -1,0 +1,73 @@
+/**
+ * EuroWeb Web8 - App Page Manager Styles
+ * Pure CSS Modules Implementation
+ */
+
+/* Base Page Container */
+.pageContainer {
+  min-height: 100vh;
+  position: relative;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family-sans);
+}
+
+/* Layout Variants */
+.pageDefault {
+  padding: var(--spacing-4);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pageFullscreen {
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.pageCentered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8);
+}
+
+.pageSidebar {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+}
+
+/* Theme Variants */
+.themeLight {
+  background: var(--bg-light);
+  color: var(--text-light);
+}
+
+.themeDark {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+.themeIndustrial {
+  background: linear-gradient(135deg, var(--color-slate-900), var(--color-slate-800));
+  color: var(--color-slate-100);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pageSidebar {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2);
+  }
+  
+  .pageDefault {
+    padding: var(--spacing-2);
+  }
+  
+  .pageCentered {
+    padding: var(--spacing-4);
+  }
+}

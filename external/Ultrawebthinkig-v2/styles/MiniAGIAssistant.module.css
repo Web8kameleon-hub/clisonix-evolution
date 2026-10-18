@@ -1,0 +1,11 @@
+.agiBox {
+  background: #12121a;
+  border: 1px solid #00f5d4;
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 500px;
+  margin: 4rem auto;
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.2);
+  color: white;
+}
+/* ... pjesa tjetër që të dhashë më lart */

@@ -1,0 +1,74 @@
+[project]
+name = "clx"
+version = "2.1.0"
+description = "CLX (Clisonix Lightweight eXtensions) - hotguard streaming, nanodecibel metrics, and no-fake-data validation"
+readme = "README.md"
+license = "MIT"
+authors = [
+    {name = "Clisonix Cloud", email = "support@clisonix.cloud"}
+]
+keywords = [
+    "clx",
+    "clisonix",
+    "hotguard",
+    "nanodecibel",
+    "streaming",
+    "observability",
+    "no-fake-data",
+    "real-metrics"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+requires-python = ">=3.8"
+
+[project.urls]
+Homepage = "https://clisonix.cloud"
+Documentation = "https://clisonix.cloud/docs/sdk/python/clx"
+Repository = "https://github.com/clisonix/sdk-python"
+Issues = "https://github.com/clisonix/sdk-python/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.20.0",
+    "black>=23.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0"
+]
+
+[build-system]
+requires = ["setuptools>=75.0.0", "wheel>=0.46.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["clx", "clx.hotguard", "clx.creative"]
+include-package-data = true
+
+[tool.setuptools.package-dir]
+clx = "."
+"clx.hotguard" = "hotguard"
+"clx.creative" = "creative"
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+[tool.mypy]
+python_version = "3.8"
+strict = true
+warn_return_any = true
+warn_unused_configs = true

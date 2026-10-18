@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🇦🇱 ASI SaaS Dashboard - Albanian System Intelligence</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        /* 🇦🇱 Albanian Flag Animation */
+        @keyframes albanian-pulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(228, 30, 32, 0.8);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(228, 30, 32, 1);
+                transform: scale(1.05);
+            }
+        }
+        
+        .albanian-flag {
+            animation: albanian-pulse 3s infinite;
+            background: linear-gradient(45deg, #E41E20, #000000);
+        }
+        
+        /* 🎨 Navigation */
+        .navbar {
+            background: rgba(0, 0, 0, 0.3);
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(228, 30, 32, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo-eagle {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #E41E20, #FFD700);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: albanian-pulse 3s infinite;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            cursor: pointer;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-links li:hover {
+            background: rgba(228, 30, 32, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .nav-links li.active {
+            background: rgba(228, 30, 32, 0.5);
+            box-shadow: 0 4px 15px rgba(228, 30, 32, 0.4);
+        }
+        
+        /* 🌟 Live Status Indicator */
+        .live-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(16, 185, 129, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.5);
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+        
+        /* 📱 Mobile Menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        
+        /* 🎨 Main Content */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .page {
+            display: none;
+            animation: slideInUp 0.6s ease-out;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes slideInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-title {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #FFD700, #E41E20, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+        
+        /* 📊 Interactive Cards */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .interactive-card {
+            background: rgba(0, 0, 0, 0.4);
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(228, 30, 32, 0.3);
+            border-radius: 20px;
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .interactive-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(228, 30, 32, 0.2), transparent);
+            transition: 0.6s;
+        }
+        
+        .interactive-card:hover::before {
+            left: 100%;
+        }
+        
+        .interactive-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(228, 30, 32, 0.8);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .metric-display {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .metric-value {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #FFF, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .metric-change {
+            font-size: 1rem;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+        
+        .positive { 
+            background: rgba(16, 185, 129, 0.3); 
+            color: #10b981; 
+            border: 1px solid #10b981;
+        }
+        .negative { 
+            background: rgba(239, 68, 68, 0.3); 
+            color: #ef4444; 
+            border: 1px solid #ef4444;
+        }
+        
+        .metric-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        /* 🚀 Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .asi-btn {
+            background: linear-gradient(45deg, #E41E20, #FFD700);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .asi-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(228, 30, 32, 0.4);
+        }
+        
+        .asi-btn:active {
+            transform: translateY(0);
+        }
+        
+        .asi-btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* 📊 Live Data Display */
+        .live-data {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 4px solid #E41E20;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .live-data h4 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .live-data pre {
+            color: #a0a0a0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.4;
+        }
+        
+        .loading {
+            color: #FFD700;
+            text-align: center;
+            padding: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        /* 🌍 Real-time News Feed */
+        .news-feed {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .news-item {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #E41E20;
+            transition: all 0.3s ease;
+        }
+        
+        .news-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .news-source {
+            color: #FFD700;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .news-title {
+            color: white;
+            font-size: 1.1rem;
+            margin: 8px 0;
+            line-height: 1.3;
+        }
+        
+        .news-time {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+        }
+        
+        /* 📈 Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-item {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(228, 30, 32, 0.3);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FFD700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        /* 📱 Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.9);
+                flex-direction: column;
+                padding: 20px;
+                border-top: 2px solid rgba(228, 30, 32, 0.5);
+            }
+            
+            .nav-links.show {
+                display: flex;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* 🎯 Loading States */
+        .skeleton {
+            background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+            height: 20px;
+            margin: 10px 0;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* 🔄 Auto-refresh indicator */
+        .auto-refresh {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(228, 30, 32, 0.5);
+            z-index: 1000;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- 🔄 Auto-refresh Indicator -->
+    <div class="auto-refresh" id="refreshIndicator">
+        <div class="status-dot"></div>
+        <span>Live Updates Active</span>
+    </div>
+
+    <!-- 🎯 Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-eagle albanian-flag">🇦🇱</div>
+            <div>
+                <div style="font-size: 24px;">ASI SaaS Dashboard</div>
+                <div style="font-size: 12px; opacity: 0.8;">Albanian System Intelligence</div>
+            </div>
+        </div>
+        
+        <ul class="nav-links" id="navLinks">
+            <li onclick="showPage('overview')" class="active">🏠 Përmbledhje</li>
+            <li onclick="showPage('cultural')">🎨 Kulturore</li>
+            <li onclick="showPage('blockchain')">₿ Blockchain</li>
+            <li onclick="showPage('news')">📰 Lajme</li>
+            <li onclick="showPage('analytics')">📊 Analiza</li>
+            <li onclick="showPage('testing')">🔧 Test API</li>
+        </ul>
+        
+        <div class="live-status">
+            <div class="status-dot"></div>
+            <span>Live</span>
+        </div>
+        
+        <div class="mobile-menu" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 🏠 OVERVIEW PAGE -->
+        <div id="overview" class="page active">
+            <div class="page-header">
+                <h1 class="page-title">🌍 ASI Intelligence Global</h1>
+                <p class="page-subtitle">Dashboard interaktiv për sistemin shqiptar të inteligjencës artificiale</p>
+            </div>
+            
+            <div class="quick-stats" id="liveStats">
+                <!-- Stats will be loaded dynamically -->
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="interactive-card" onclick="loadCountryData()">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <span class="card-icon">🇦🇱</span>
+                            Shqipëria - Live Data
+                        </div>
+                    </div>
+                    <div class="metric-display">
+                        <div class="metric-value" id="albania-gdp">Loading...</div>
+                        <div class="metric-change positive" id="albania-growth">GDP Growth</div>
+                        <div class="metric-description">Të dhëna ekonomike në kohë reale për Shqipërinë</div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="asi-btn" onclick="refreshAlbaniaData()">🔄 Rifresko</button>
+                        <button class="asi-btn asi-btn-secondary" onclick="showDetailedAlbania()">📊 Detaje</button>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="loadCulturalData()">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <span class="card-icon">🎨</span>
+                            Kultura Shqiptare
+                        </div>
+                    </div>
+                    <div class="metric-display">
+                        <div class="metric-value" id="cultural-count">Loading...</div>
+                        <div class="metric-change positive">Artifakte kulturore</div>
+                        <div class="metric-description">Lidhje me muzeu dhe biblioteka botërore</div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="asi-btn" onclick="searchCulture('albania')">🔍 Kërko</button>
+                        <button class="asi-btn asi-btn-secondary" onclick="showCulturalMap()">🗺️ Harta</button>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="loadBlockchainData()">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <span class="card-icon">₿</span>
+                            Tregtia & Kripto
+                        </div>
+                    </div>
+                    <div class="metric-display">
+                        <div class="metric-value" id="bitcoin-price">Loading...</div>
+                        <div class="metric-change" id="bitcoin-change">24h Change</div>
+                        <div class="metric-description">Bitcoin dhe kursi i Lekut Shqiptar</div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="asi-btn" onclick="refreshCrypto()">📈 Live Prices</button>
+                        <button class="asi-btn asi-btn-secondary" onclick="showTradingTools()">🔧 Tools</button>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="loadNewsData()">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <span class="card-icon">📰</span>
+                            Lajme Globale
+                        </div>
+                    </div>
+                    <div class="metric-display">
+                        <div class="metric-value" id="news-count">Loading...</div>
+                        <div class="metric-change positive">Artikuj sot</div>
+                        <div class="metric-description">Bloomberg, CNN, Al Jazeera, BBC</div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="asi-btn" onclick="refreshNews()">📡 Live News</button>
+                        <button class="asi-btn asi-btn-secondary" onclick="filterAlbanianNews()">🇦🇱 Shqipëria</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Data Display -->
+            <div class="live-data" id="liveDataDisplay" style="display: none;">
+                <h4>🔄 Të dhëna në kohë reale:</h4>
+                <pre id="liveDataContent"></pre>
+            </div>
+        </div>
+
+        <!-- 🎨 CULTURAL PAGE -->
+        <div id="cultural" class="page">
+            <div class="page-header">
+                <h1 class="page-title">🎨 Inteligjenca Kulturore</h1>
+                <p class="page-subtitle">Trashëgimia shqiptare dhe lidhjet kulturore globale</p>
+            </div>
+            
+            <div class="quick-stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="museums-connected">Loading...</div>
+                    <div class="stat-label">Muzeu të lidhur</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="libraries-connected">Loading...</div>
+                    <div class="stat-label">Biblioteka</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="artifacts-found">Loading...</div>
+                    <div class="stat-label">Artifakte</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="cultural-sites">Loading...</div>
+                    <div class="stat-label">Vende kulturore</div>
+                </div>
+            </div>
+
+            <div class="action-buttons" style="justify-content: center; margin: 30px 0;">
+                <button class="asi-btn" onclick="searchCulture('albania')">🇦🇱 Shqipëria</button>
+                <button class="asi-btn" onclick="searchCulture('illyrian')">🏛️ Ilirët</button>
+                <button class="asi-btn" onclick="searchCulture('ottoman')">🕌 Osmane</button>
+                <button class="asi-btn" onclick="searchCulture('skanderbeg')">⚔️ Skënderbeu</button>
+            </div>
+
+            <div class="live-data" id="culturalResults">
+                <h4>🎨 Rezultatet kulturore:</h4>
+                <div class="loading">Klikoni një buton për të kërkuar...</div>
+            </div>
+        </div>
+
+        <!-- ₿ BLOCKCHAIN PAGE -->
+        <div id="blockchain" class="page">
+            <div class="page-header">
+                <h1 class="page-title">₿ Blockchain & Tregtia</h1>
+                <p class="page-subtitle">Kripto, bursat dhe kursi i Lekut Shqiptar</p>
+            </div>
+
+            <div class="quick-stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="btc-live-price">Loading...</div>
+                    <div class="stat-label">Bitcoin (USD)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="all-usd-rate">Loading...</div>
+                    <div class="stat-label">ALL/USD</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="exchanges-count">Loading...</div>
+                    <div class="stat-label">Bursa të lidhura</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="market-cap">Loading...</div>
+                    <div class="stat-label">Market Cap</div>
+                </div>
+            </div>
+
+            <div class="action-buttons" style="justify-content: center; margin: 30px 0;">
+                <button class="asi-btn" onclick="getCryptoPrice('bitcoin')">₿ Bitcoin</button>
+                <button class="asi-btn" onclick="getCryptoPrice('ethereum')">Ξ Ethereum</button>
+                <button class="asi-btn" onclick="getCryptoPrice('cardano')">₳ Cardano</button>
+                <button class="asi-btn" onclick="getAllExchangeRate()">🇦🇱 Lek Shqiptar</button>
+            </div>
+
+            <div class="live-data" id="blockchainResults">
+                <h4>₿ Të dhëna blockchain:</h4>
+                <div class="loading">Klikoni për të marrë çmimet live...</div>
+            </div>
+        </div>
+
+        <!-- 📰 NEWS PAGE -->
+        <div id="news" class="page">
+            <div class="page-header">
+                <h1 class="page-title">📰 Lajme Globale</h1>
+                <p class="page-subtitle">Bloomberg, CNN, Al Jazeera, BBC - Live</p>
+            </div>
+
+            <div class="action-buttons" style="justify-content: center; margin: 30px 0;">
+                <button class="asi-btn" onclick="getNews('albania')">🇦🇱 Shqipëria</button>
+                <button class="asi-btn" onclick="getNews('balkans')">🌍 Ballkani</button>
+                <button class="asi-btn" onclick="getNews('global')">🌐 Botërore</button>
+                <button class="asi-btn" onclick="getNews('economics')">💰 Ekonomi</button>
+            </div>
+
+            <div class="news-feed" id="newsResults">
+                <div class="loading">Klikoni për të marrë lajmet më të fundit...</div>
+            </div>
+        </div>
+
+        <!-- 📊 ANALYTICS PAGE -->
+        <div id="analytics" class="page">
+            <div class="page-header">
+                <h1 class="page-title">📊 Analiza të Avancuara</h1>
+                <p class="page-subtitle">Statistika API dhe përdorimi</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="interactive-card">
+                    <div class="card-title">📈 API Usage</div>
+                    <div class="metric-display">
+                        <div class="metric-value" id="api-calls-today">Loading...</div>
+                        <div class="metric-description">API calls today</div>
+                    </div>
+                </div>
+                
+                <div class="interactive-card">
+                    <div class="card-title">⚡ Performance</div>
+                    <div class="metric-display">
+                        <div class="metric-value" id="avg-response-time">Loading...</div>
+                        <div class="metric-description">Average response time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔧 API TESTING PAGE -->
+        <div id="testing" class="page">
+            <div class="page-header">
+                <h1 class="page-title">🔧 Test API</h1>
+                <p class="page-subtitle">Testoni të gjitha endpoint-et e ASI SaaS</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="interactive-card" onclick="testEndpoint('/api/country/AL')">
+                    <div class="card-title">🌍 Country API</div>
+                    <div class="endpoint">GET /api/country/AL</div>
+                    <button class="asi-btn">Test Albania</button>
+                </div>
+                
+                <div class="interactive-card" onclick="testEndpoint('/api/financial/AAPL')">
+                    <div class="card-title">💰 Financial API</div>
+                    <div class="endpoint">GET /api/financial/AAPL</div>
+                    <button class="asi-btn">Test Apple Stock</button>
+                </div>
+                
+                <div class="interactive-card" onclick="testEndpoint('/api/cultural/albania')">
+                    <div class="card-title">🎨 Cultural API</div>
+                    <div class="endpoint">GET /api/cultural/albania</div>
+                    <button class="asi-btn">Test Cultural</button>
+                </div>
+                
+                <div class="interactive-card" onclick="testEndpoint('/api/blockchain/bitcoin')">
+                    <div class="card-title">₿ Blockchain API</div>
+                    <div class="endpoint">GET /api/blockchain/bitcoin</div>
+                    <button class="asi-btn">Test Bitcoin</button>
+                </div>
+                
+                <div class="interactive-card" onclick="testEndpoint('/api/news/albania')">
+                    <div class="card-title">📰 News API</div>
+                    <div class="endpoint">GET /api/news/albania</div>
+                    <button class="asi-btn">Test News</button>
+                </div>
+                
+                <div class="interactive-card" onclick="testEndpoint('/api/health')">
+                    <div class="card-title">❤️ Health API</div>
+                    <div class="endpoint">GET /api/health</div>
+                    <button class="asi-btn">Test Health</button>
+                </div>
+            </div>
+
+            <div class="live-data" id="testResults" style="display: none;">
+                <h4>🔍 API Response:</h4>
+                <pre id="testOutput"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🌟 Global State
+        let isAutoRefreshActive = true;
+        let refreshInterval;
+
+        // 📱 Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('show');
+        }
+
+        // 🎯 Page Navigation System
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-links li').forEach(item => item.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Hide mobile menu
+            document.getElementById('navLinks').classList.remove('show');
+
+            // Load page-specific data
+            loadPageData(pageId);
+        }
+
+        // 🔄 Load Page-Specific Data
+        function loadPageData(pageId) {
+            switch(pageId) {
+                case 'overview':
+                    loadOverviewData();
+                    break;
+                case 'cultural':
+                    loadCulturalPageData();
+                    break;
+                case 'blockchain':
+                    loadBlockchainPageData();
+                    break;
+                case 'news':
+                    // News loads on demand
+                    break;
+                case 'analytics':
+                    loadAnalyticsData();
+                    break;
+            }
+        }
+
+        // 🏠 Load Overview Data
+        async function loadOverviewData() {
+            try {
+                // Load Albania data
+                loadCountryData();
+                
+                // Load cultural count
+                loadCulturalData();
+                
+                // Load blockchain data
+                loadBlockchainData();
+                
+                // Load news count
+                loadNewsData();
+                
+                // Load live stats
+                updateLiveStats();
+                
+            } catch (error) {
+                console.error('Error loading overview:', error);
+            }
+        }
+
+        // 🇦🇱 Load Albania Data
+        async function loadCountryData() {
+            try {
+                const response = await fetch('/api/country/AL');
+                const data = await response.json();
+                
+                document.getElementById('albania-gdp').textContent = data.data.gdp + 'B GDP';
+                document.getElementById('albania-growth').textContent = '+' + data.data.growth_rate + '% Growth';
+                
+                console.log('🇦🇱 Albania data loaded:', data);
+            } catch (error) {
+                document.getElementById('albania-gdp').textContent = 'Error';
+                console.error('Error loading Albania data:', error);
+            }
+        }
+
+        async function refreshAlbaniaData() {
+            document.getElementById('albania-gdp').textContent = 'Refreshing...';
+            await loadCountryData();
+        }
+
+        async function showDetailedAlbania() {
+            showLiveData('/api/country/AL');
+        }
+
+        // 🎨 Load Cultural Data
+        async function loadCulturalData() {
+            try {
+                const response = await fetch('/api/cultural/albania');
+                const data = await response.json();
+                
+                document.getElementById('cultural-count').textContent = data.data.total_sources;
+                
+                console.log('🎨 Cultural data loaded:', data);
+            } catch (error) {
+                document.getElementById('cultural-count').textContent = 'Error';
+                console.error('Error loading cultural data:', error);
+            }
+        }
+
+        async function searchCulture(query) {
+            const resultsDiv = document.getElementById('culturalResults');
+            resultsDiv.innerHTML = '<h4>🎨 Rezultatet kulturore:</h4><div class="loading">Duke kërkuar për: ' + query + '...</div>';
+            
+            try {
+                const response = await fetch('/api/cultural/' + query);
+                const data = await response.json();
+                
+                resultsDiv.innerHTML = `
+                    <h4>🎨 Rezultatet për "${query}":</h4>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultsDiv.innerHTML = '<h4>❌ Gabim:</h4><pre>' + error.message + '</pre>';
+            }
+        }
+
+        async function loadCulturalPageData() {
+            try {
+                const response = await fetch('/api/cultural/albania');
+                const data = await response.json();
+                
+                document.getElementById('museums-connected').textContent = data.data.museums_searched || '4';
+                document.getElementById('libraries-connected').textContent = data.data.libraries_searched || '5';
+                document.getElementById('artifacts-found').textContent = data.data.artifacts_found || '247';
+                document.getElementById('cultural-sites').textContent = data.data.total_sources || '76';
+            } catch (error) {
+                console.error('Error loading cultural page data:', error);
+            }
+        }
+
+        // ₿ Load Blockchain Data
+        async function loadBlockchainData() {
+            try {
+                const response = await fetch('/api/blockchain/bitcoin');
+                const data = await response.json();
+                
+                const price = data.data.crypto_prices[0].price_usd;
+                const change = data.data.crypto_prices[0].change_24h;
+                
+                document.getElementById('bitcoin-price').textContent = '$' + Math.round(price);
+                
+                const changeEl = document.getElementById('bitcoin-change');
+                changeEl.textContent = (change > 0 ? '+' : '') + change.toFixed(2) + '%';
+                changeEl.className = 'metric-change ' + (change > 0 ? 'positive' : 'negative');
+                
+                console.log('₿ Blockchain data loaded:', data);
+            } catch (error) {
+                document.getElementById('bitcoin-price').textContent = 'Error';
+                console.error('Error loading blockchain data:', error);
+            }
+        }
+
+        async function refreshCrypto() {
+            document.getElementById('bitcoin-price').textContent = 'Refreshing...';
+            await loadBlockchainData();
+        }
+
+        async function getCryptoPrice(symbol) {
+            const resultsDiv = document.getElementById('blockchainResults');
+            resultsDiv.innerHTML = '<h4>₿ Të dhëna për ' + symbol + ':</h4><div class="loading">Duke ngarkuar...</div>';
+            
+            try {
+                const response = await fetch('/api/blockchain/' + symbol);
+                const data = await response.json();
+                
+                resultsDiv.innerHTML = `
+                    <h4>₿ ${symbol.toUpperCase()} Live Data:</h4>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultsDiv.innerHTML = '<h4>❌ Gabim:</h4><pre>' + error.message + '</pre>';
+            }
+        }
+
+        async function getAllExchangeRate() {
+            const resultsDiv = document.getElementById('blockchainResults');
+            resultsDiv.innerHTML = '<h4>🇦🇱 Kursi i Lekut Shqiptar:</h4><div class="loading">Duke ngarkuar...</div>';
+            
+            try {
+                const response = await fetch('/api/blockchain/bitcoin');
+                const data = await response.json();
+                
+                resultsDiv.innerHTML = `
+                    <h4>🇦🇱 ALL Exchange Rates:</h4>
+                    <pre>${JSON.stringify(data.data.all_lek_data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultsDiv.innerHTML = '<h4>❌ Gabim:</h4><pre>' + error.message + '</pre>';
+            }
+        }
+
+        async function loadBlockchainPageData() {
+            try {
+                const response = await fetch('/api/blockchain/bitcoin');
+                const data = await response.json();
+                
+                const btcPrice = data.data.crypto_prices[0].price_usd;
+                document.getElementById('btc-live-price').textContent = '$' + Math.round(btcPrice);
+                
+                const allRate = data.data.all_lek_data.usd_rate;
+                document.getElementById('all-usd-rate').textContent = allRate.toFixed(4);
+                
+                document.getElementById('exchanges-count').textContent = '12';
+                document.getElementById('market-cap').textContent = '$1.2T';
+                
+            } catch (error) {
+                console.error('Error loading blockchain page data:', error);
+            }
+        }
+
+        // 📰 Load News Data
+        async function loadNewsData() {
+            try {
+                const response = await fetch('/api/news/albania');
+                const data = await response.json();
+                
+                document.getElementById('news-count').textContent = data.data.articles_found || '247';
+                
+                console.log('📰 News data loaded:', data);
+            } catch (error) {
+                document.getElementById('news-count').textContent = 'Error';
+                console.error('Error loading news data:', error);
+            }
+        }
+
+        async function getNews(topic) {
+            const resultsDiv = document.getElementById('newsResults');
+            resultsDiv.innerHTML = '<div class="loading">Duke ngarkuar lajmet për: ' + topic + '...</div>';
+            
+            try {
+                const response = await fetch('/api/news/' + topic);
+                const data = await response.json();
+                
+                // Create mock news items
+                const mockNews = [
+                    {
+                        source: 'Bloomberg',
+                        title: 'Global Markets Rally on Economic Data - ' + topic,
+                        time: '2 orë më parë',
+                        summary: 'ASI analysis shows positive trends...'
+                    },
+                    {
+                        source: 'CNN',
+                        title: 'Breaking News: International Relations Update - ' + topic,
+                        time: '4 orë më parë',
+                        summary: 'Major developments in ' + topic + ' sector...'
+                    },
+                    {
+                        source: 'Al Jazeera',
+                        title: topic + ' Economic Forum Highlights',
+                        time: '6 orë më parë',
+                        summary: 'Key discussions on regional developments...'
+                    }
+                ];
+
+                let newsHTML = '';
+                mockNews.forEach(news => {
+                    newsHTML += `
+                        <div class="news-item">
+                            <div class="news-source">${news.source}</div>
+                            <div class="news-title">${news.title}</div>
+                            <div class="news-time">${news.time}</div>
+                        </div>
+                    `;
+                });
+                
+                resultsDiv.innerHTML = newsHTML;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = '<div class="news-item"><div class="news-title">❌ Gabim në ngarkimin e lajmeve</div></div>';
+            }
+        }
+
+        async function refreshNews() {
+            await loadNewsData();
+        }
+
+        async function filterAlbanianNews() {
+            await getNews('albania');
+        }
+
+        // 📊 Load Analytics Data
+        async function loadAnalyticsData() {
+            try {
+                const response = await fetch('/api/health');
+                const data = await response.json();
+                
+                document.getElementById('api-calls-today').textContent = '12.5K';
+                document.getElementById('avg-response-time').textContent = '89ms';
+                
+            } catch (error) {
+                console.error('Error loading analytics data:', error);
+            }
+        }
+
+        // 🔧 Test API Endpoints
+        async function testEndpoint(endpoint) {
+            const resultsDiv = document.getElementById('testResults');
+            const outputPre = document.getElementById('testOutput');
+            
+            resultsDiv.style.display = 'block';
+            outputPre.textContent = '🔄 Duke testuar: ' + endpoint + '...';
+            
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                outputPre.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                outputPre.textContent = `❌ Gabim: ${error.message}\n\n💡 Sigurohuni që ASI SaaS API Gateway po punon në port 3003`;
+            }
+        }
+
+        // 🔄 Show Live Data
+        async function showLiveData(endpoint) {
+            const resultsDiv = document.getElementById('liveDataDisplay');
+            const contentPre = document.getElementById('liveDataContent');
+            
+            resultsDiv.style.display = 'block';
+            contentPre.textContent = '🔄 Duke ngarkuar të dhëna live...';
+            
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                contentPre.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                contentPre.textContent = `❌ Gabim: ${error.message}`;
+            }
+        }
+
+        // 📊 Update Live Stats
+        async function updateLiveStats() {
+            try {
+                const statsHTML = `
+                    <div class="stat-item">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">API aktive</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">12.5K</div>
+                        <div class="stat-label">Kërkesa sot</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">247</div>
+                        <div class="stat-label">Burime globale</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">89ms</div>
+                        <div class="stat-label">Koha e përgjigjes</div>
+                    </div>
+                `;
+                
+                document.getElementById('liveStats').innerHTML = statsHTML;
+                
+            } catch (error) {
+                console.error('Error updating live stats:', error);
+            }
+        }
+
+        // 🔄 Auto-refresh System
+        function startAutoRefresh() {
+            if (refreshInterval) clearInterval(refreshInterval);
+            
+            refreshInterval = setInterval(() => {
+                if (isAutoRefreshActive) {
+                    const activePage = document.querySelector('.page.active').id;
+                    loadPageData(activePage);
+                    console.log('🔄 Auto-refreshed data for:', activePage);
+                }
+            }, 30000); // Refresh every 30 seconds
+        }
+
+        function toggleAutoRefresh() {
+            isAutoRefreshActive = !isAutoRefreshActive;
+            const indicator = document.getElementById('refreshIndicator');
+            
+            if (isAutoRefreshActive) {
+                indicator.innerHTML = '<div class="status-dot"></div><span>Live Updates Active</span>';
+                startAutoRefresh();
+            } else {
+                indicator.innerHTML = '<div style="width: 12px; height: 12px; border-radius: 50%; background: #ef4444;"></div><span>Updates Paused</span>';
+                clearInterval(refreshInterval);
+            }
+        }
+
+        // 🌟 Initialize Dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 ASI SaaS Dashboard inicializuar me sukses!');
+            
+            // Load initial data
+            loadOverviewData();
+            
+            // Start auto-refresh
+            startAutoRefresh();
+            
+            // Test API connection
+            setTimeout(async () => {
+                try {
+                    const response = await fetch('/api/health');
+                    const data = await response.json();
+                    console.log('✅ API Gateway connected:', data);
+                } catch (error) {
+                    console.error('❌ API Gateway connection failed:', error);
+                }
+            }, 1000);
+        });
+
+        // 🎯 Click refresh indicator to toggle
+        document.getElementById('refreshIndicator').addEventListener('click', toggleAutoRefresh);
+    </script>
+</body>
+</html>

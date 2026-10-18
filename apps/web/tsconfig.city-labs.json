@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "incremental": false
+  },
+  "include": [
+    "next-env.d.ts",
+    "app/labs/page.tsx",
+    "app/labs/[labId]/page.tsx",
+    "app/api/city-labs/[...path]/route.ts"
+  ],
+  "exclude": ["node_modules", ".next"]
+}

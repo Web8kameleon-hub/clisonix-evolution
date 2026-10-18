@@ -1,0 +1,17 @@
+{
+  "name": "legacy-npm-isolated",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Isolated npm area for legacy packages (kept separate from root Yarn Berry setup)",
+  "type": "module",
+  "scripts": {
+    "install:legacy": "npm install",
+    "add": "npm install",
+    "remove": "npm uninstall",
+    "list": "npm ls --depth=0"
+  },
+  "dependencies": {
+    "fast-glob": "^3.3.3",
+    "zod": "^4.3.6"
+  }
+}

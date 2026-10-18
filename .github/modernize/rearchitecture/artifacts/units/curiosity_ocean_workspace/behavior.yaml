@@ -1,0 +1,29 @@
+source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:874"
+side_effects:
+  - effect: "Appends user/AI messages and streaming state in browser memory."
+    source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1806"
+    must_preserve: true
+  - effect: "Reads one selected file into base64 and sends it immediately."
+    source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1728"
+    must_preserve: false
+  - effect: "Captures camera/audio through browser media APIs."
+    source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1651"
+    must_preserve: true
+branches:
+  - condition: "Streaming enabled, cancelled, empty, or failed"
+    source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1802"
+    must_preserve: true
+  - condition: "File exceeds 10 MiB"
+    source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1731"
+    must_preserve: true
+error_paths:
+  - contract: "Provider failures are rendered as an AI-style text message."
+    source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1763"
+    must_preserve: false
+  - contract: "No file selected returns without action."
+    source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1730"
+    must_preserve: true
+concurrency:
+  model: "React state plus one AbortController for the active stream."
+  tx_boundary: null
+

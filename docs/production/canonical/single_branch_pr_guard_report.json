@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "repo": "",
+  "event": "",
+  "ref_name": "",
+  "policy": {
+    "default_branch": "main",
+    "primary_work_branch": "fix/hetzner-swarm-rollout",
+    "max_open_prs": 1,
+    "allowed_push_branches": [
+      "fix/hetzner-swarm-rollout",
+      "main"
+    ]
+  },
+  "failures": [],
+  "note": "No GITHUB_REPOSITORY detected (local mode)."
+}

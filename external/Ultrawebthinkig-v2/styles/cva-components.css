@@ -1,0 +1,199 @@
+/**
+ * CVA Components CSS Styles
+ * Pure CSS for Class Variance Authority components
+ */
+
+/* Button Base Styles */
+.button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-md);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+}
+
+.button-base:focus {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+.button-base:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Button Variants */
+.button-primary {
+  background-color: var(--color-primary-600);
+  color: var(--color-white);
+}
+
+.button-primary:hover {
+  background-color: var(--color-primary-700);
+}
+
+.button-secondary {
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-900);
+}
+
+.button-secondary:hover {
+  background-color: var(--color-gray-300);
+}
+
+.button-destructive {
+  background-color: var(--color-red-600);
+  color: var(--color-white);
+}
+
+.button-destructive:hover {
+  background-color: var(--color-red-700);
+}
+
+.button-ghost {
+  background-color: transparent;
+  color: var(--color-gray-700);
+}
+
+.button-ghost:hover {
+  background-color: var(--color-gray-100);
+}
+
+.button-agi {
+  background: linear-gradient(135deg, var(--color-purple-600), var(--color-blue-600));
+  color: var(--color-white);
+}
+
+.button-agi:hover {
+  background: linear-gradient(135deg, var(--color-purple-700), var(--color-blue-700));
+}
+
+.button-industrial {
+  background-color: var(--color-gray-900);
+  color: var(--color-white);
+  border: 1px solid var(--color-gray-700);
+}
+
+.button-industrial:hover {
+  background-color: var(--color-gray-800);
+}
+
+/* Button Sizes */
+.button-sm {
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--font-size-sm);
+}
+
+.button-md {
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: var(--font-size-base);
+}
+
+.button-lg {
+  padding: var(--spacing-3) var(--spacing-6);
+  font-size: var(--font-size-lg);
+}
+
+.button-xl {
+  padding: var(--spacing-4) var(--spacing-8);
+  font-size: var(--font-size-xl);
+}
+
+/* Card Base Styles */
+.card-base {
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-white);
+}
+
+/* Card Variants */
+.card-default {
+  border: 1px solid var(--color-gray-200);
+}
+
+.card-bordered {
+  border: 2px solid var(--color-gray-300);
+}
+
+.card-elevated {
+  box-shadow: var(--shadow-md);
+}
+
+.card-ghost {
+  background-color: transparent;
+  border: none;
+}
+
+/* Card Padding */
+.card-padding-none {
+  padding: 0;
+}
+
+.card-padding-sm {
+  padding: var(--spacing-2);
+}
+
+.card-padding-md {
+  padding: var(--spacing-4);
+}
+
+.card-padding-lg {
+  padding: var(--spacing-6);
+}
+
+/* Text Base Styles */
+.text-base {
+  margin: 0;
+  color: var(--color-gray-900);
+}
+
+/* Text Variants */
+.text-h1 {
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-tight);
+}
+
+.text-h2 {
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-tight);
+}
+
+.text-h3 {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-tight);
+}
+
+.text-body {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+}
+
+.text-small {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.text-muted {
+  color: var(--color-gray-500);
+}
+
+/* Text Weights */
+.text-weight-normal {
+  font-weight: var(--font-weight-normal);
+}
+
+.text-weight-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.text-weight-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.text-weight-bold {
+  font-weight: var(--font-weight-bold);
+}

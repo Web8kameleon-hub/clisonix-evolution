@@ -1,0 +1,7 @@
+# Apply only after nvidia-smi succeeds on the host and the NVIDIA container
+# toolkit exposes the device to Docker.
+services:
+  ollama:
+    gpus: all
+    environment:
+      OLLAMA_NUM_GPU: "1"

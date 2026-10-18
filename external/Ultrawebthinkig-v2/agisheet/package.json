@@ -1,0 +1,61 @@
+{
+  "name": "@euroweb/agisheet",
+  "version": "1.0.0",
+  "description": "AGISheet - Kameleoni i Inteligjencës Operacionale për Web8",
+  "type": "module",
+  "main": "dist/index.ts",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.ts",
+      "types": "./dist/index.d.ts"
+    },
+    "./core": {
+      "import": "./dist/core/index.ts",
+      "types": "./dist/core/index.d.ts"
+    },
+    "./engine": {
+      "import": "./dist/engine/index.ts",
+      "types": "./dist/engine/index.d.ts"
+    },
+    "./ui": {
+      "import": "./dist/ui/index.ts",
+      "types": "./dist/ui/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "test": "vitest run src/**/*.test.ts",
+    "test:watch": "vitest src/**/*.test.ts",
+    "lint": "eslint src/**/*.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "socket.io": "^4.8.0",
+    "socket.io-client": "^4.8.0",
+    "lowdb": "^7.0.1",
+    "rxjs": "^7.8.1",
+    "eventemitter3": "^5.0.1",
+    "zod": "^3.23.8",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.13",
+    "typescript": "^5.8.3",
+    "": "^2.0.0"
+  },
+  "keywords": [
+    "agisheet",
+    "excel",
+    "agi",
+    "kameleon",
+    "intelligence",
+    "web8",
+    "euroweb"
+  ],
+  "author": "Web8kameleon Team",
+  "license": "MIT"
+}
+
+

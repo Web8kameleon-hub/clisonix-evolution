@@ -1,0 +1,332 @@
+/* ASI API Producer Styles */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+  color: #ffffff;
+  padding: 2rem;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #333;
+  border-top: 3px solid #00ff88;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #00ff88, #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #888;
+  margin: 0;
+}
+
+.statusGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.statusCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.statusCard:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #00ff88;
+  transform: translateY(-2px);
+}
+
+.statusCard h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.status.active {
+  background: rgba(0, 255, 136, 0.2);
+  color: #00ff88;
+  border: 1px solid #00ff88;
+}
+
+.generatorSection {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.generatorSection h2 {
+  margin: 0 0 2rem 0;
+  font-size: 1.5rem;
+  color: #00d4ff;
+}
+
+.generatorForm {
+  display: flex;
+  gap: 1.5rem;
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 200px;
+}
+
+.inputGroup label {
+  font-weight: 500;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.input, .select {
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.input:focus, .select:focus {
+  outline: none;
+  border-color: #00ff88;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.input::placeholder {
+  color: #666;
+}
+
+.generateButton {
+  background: linear-gradient(45deg, #00ff88, #00d4ff);
+  color: #000;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: fit-content;
+}
+
+.generateButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 255, 136, 0.3);
+}
+
+.generateButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.apisSection h2 {
+  margin: 0 0 2rem 0;
+  font-size: 1.5rem;
+  color: #00d4ff;
+}
+
+.apisGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.apiCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.apiCard:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #00ff88;
+  transform: translateY(-2px);
+}
+
+.apiHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.apiHeader h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.badge.real-data {
+  background: rgba(255, 107, 107, 0.2);
+  color: #ff6b6b;
+}
+
+.badge.cultural-intelligence {
+  background: rgba(255, 165, 2, 0.2);
+  color: #ffa502;
+}
+
+.badge.alba-labor {
+  background: rgba(0, 212, 255, 0.2);
+  color: #00d4ff;
+}
+
+.badge.jonify-processing {
+  background: rgba(0, 255, 136, 0.2);
+  color: #00ff88;
+}
+
+.apiDetails {
+  margin-bottom: 1.5rem;
+}
+
+.apiDetails p {
+  margin: 0.5rem 0;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.apiDetails code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  word-break: break-all;
+}
+
+.apiActions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.testButton, .docsButton {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.testButton {
+  background: rgba(0, 255, 136, 0.2);
+  color: #00ff88;
+  border: 1px solid #00ff88;
+}
+
+.docsButton {
+  background: rgba(0, 212, 255, 0.2);
+  color: #00d4ff;
+  border: 1px solid #00d4ff;
+}
+
+.testButton:hover, .docsButton:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.2);
+}
+
+.message {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid #00ff88;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.message p {
+  margin: 0 0 0.5rem 0;
+  color: #00ff88;
+  font-weight: 500;
+}
+
+.message small {
+  color: #888;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .statusGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .generatorForm {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .inputGroup {
+    min-width: 100%;
+  }
+  
+  .apisGrid {
+    grid-template-columns: 1fr;
+  }
+}

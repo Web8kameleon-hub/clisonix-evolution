@@ -1,0 +1,22 @@
+source_loc: "apps/api/main.py:1026"
+bindings:
+  - binding: "FastAPI application deployed as Docker Compose service api."
+    source_loc: "docker-compose.yml:573"
+    must_appear_in_target: true
+  - binding: "Conditional route registration around Ocean hub import."
+    source_loc: "apps/api/main.py:1076"
+    must_appear_in_target: false
+  - binding: "PostgreSQL and Redis are startup dependencies in Compose."
+    source_loc: "docker-compose.yml:595"
+    must_appear_in_target: true
+runtime_config:
+  - key: DATABASE_URL
+    source_loc: "docker-compose.yml:588"
+    must_appear_in_target: true
+  - key: REDIS_URL
+    source_loc: "docker-compose.yml:589"
+    must_appear_in_target: true
+  - key: OCEAN_HUB_MAX_USERS
+    source_loc: "apps/api/ocean_central_hub.py:308"
+    must_appear_in_target: false
+

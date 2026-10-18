@@ -1,0 +1,48 @@
+{
+  "name": "@euroweb/microservices",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "EuroWeb Microservices - Shërbime të pavarura pa konflikte",
+  "scripts": {
+    "dev:all": "concurrently \"npm run dev:gateway\" \"npm run dev:auth\" \"npm run dev:agi\" \"npm run dev:data\" \"npm run dev:realtime\"",
+    "dev:gateway": "tsx watch gateway/index.ts",
+    "dev:auth": "tsx watch auth/index.ts",
+    "dev:agi": "tsx watch agi/index.ts",
+    "dev:data": "tsx watch data/index.ts",
+    "dev:realtime": "tsx watch realtime/index.ts",
+    "build": "tsc -b",
+    "start:all": "node dist/gateway/index.js & node dist/auth/index.js & node dist/agi/index.js & node dist/data/index.js & node dist/realtime/index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "cors": "^2.8.5",
+    "helmet": "^8.1.0",
+    "compression": "^1.8.0",
+    "express-rate-limit": "^7.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^3.0.2",
+    "uuid": "^11.1.0",
+    "ws": "^8.18.1",
+    "ioredis": "^5.6.1",
+    "dotenv": "^16.5.0",
+    "winston": "^3.17.0",
+    "http-proxy-middleware": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.2",
+    "@types/cors": "^2.8.17",
+    "@types/compression": "^1.7.5",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/uuid": "^10.0.0",
+    "@types/ws": "^8.18.1",
+    "@types/node": "^22.15.21",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3",
+    "concurrently": "^9.2.0"
+  },
+  "overrides": {
+    "shell-quote": "^1.9.0"
+  }
+}

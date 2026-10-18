@@ -1,0 +1,29 @@
+{
+  "schema": "clisonix.city-labs.registry/v1",
+  "internal_port": 9100,
+  "labs": [
+    {"lab_id":"Elbasan_AI","service":"lab-elbasan","name":"Elbasan AI Lab","city":"Elbasan","country":"Albania","lab_type":"AI","function":"Artificial Intelligence & Machine Learning"},
+    {"lab_id":"Tirana_Medical","service":"lab-tirana","name":"Tirana Medical Lab","city":"Tirana","country":"Albania","lab_type":"Medical","function":"Medical Research & Bioscience"},
+    {"lab_id":"Durres_IoT","service":"lab-durres","name":"Durrës IoT Lab","city":"Durrës","country":"Albania","lab_type":"IoT","function":"Internet of Things & Sensor Networks"},
+    {"lab_id":"Shkoder_Marine","service":"lab-shkoder","name":"Shkodër Marine Lab","city":"Shkodër","country":"Albania","lab_type":"Marine","function":"Marine Biology & Oceanography"},
+    {"lab_id":"Vlore_Environmental","service":"lab-vlore","name":"Vlorë Environmental Lab","city":"Vlorë","country":"Albania","lab_type":"Environmental","function":"Environmental Monitoring & Ecology"},
+    {"lab_id":"Korce_Agricultural","service":"lab-korce","name":"Korça Agricultural Lab","city":"Korça","country":"Albania","lab_type":"Agricultural","function":"Agricultural Sciences & Crop Analysis"},
+    {"lab_id":"Sarrande_Underwater","service":"lab-saranda","name":"Sarandë Underwater Lab","city":"Sarandë","country":"Albania","lab_type":"Underwater","function":"Underwater Exploration & Deep Sea Research"},
+    {"lab_id":"Prishtina_Security","service":"lab-prishtina","name":"Prishtina Security Lab","city":"Prishtina","country":"Kosovo","lab_type":"Security","function":"Cybersecurity & Network Protection"},
+    {"lab_id":"Kostur_Energy","service":"lab-kostur","name":"Kostur Energy Lab","city":"Kostur","country":"North Macedonia","lab_type":"Energy","function":"Renewable Energy & Power Systems"},
+    {"lab_id":"Athens_Classical","service":"lab-athens","name":"Athens Classical Lab","city":"Athens","country":"Greece","lab_type":"Academic","function":"Classical Studies & Historical Research"},
+    {"lab_id":"Rome_Architecture","service":"lab-rome","name":"Rome Architecture Lab","city":"Rome","country":"Italy","lab_type":"Architecture","function":"Architectural Engineering & Design"},
+    {"lab_id":"Zurich_Finance","service":"lab-zurich","name":"Zurich Finance Lab","city":"Zurich","country":"Switzerland","lab_type":"Finance","function":"Financial Analysis & Blockchain"},
+    {"lab_id":"Beograd_Industrial","service":"lab-beograd","name":"Beograd Industrial Lab","city":"Beograd","country":"Serbia","lab_type":"Industrial","function":"Industrial Process Optimization"},
+    {"lab_id":"Sofia_Chemistry","service":"lab-sofia","name":"Sofia Chemistry Lab","city":"Sofia","country":"Bulgaria","lab_type":"Chemistry","function":"Chemical Research & Material Science"},
+    {"lab_id":"Zagreb_Biotech","service":"lab-zagreb","name":"Zagreb Biotech Lab","city":"Zagreb","country":"Croatia","lab_type":"Biotech","function":"Biotechnology & Genetic Engineering"},
+    {"lab_id":"Ljubljana_Quantum","service":"lab-ljubljana","name":"Ljubljana Quantum Lab","city":"Ljubljana","country":"Slovenia","lab_type":"Quantum","function":"Quantum Computing & Physics"},
+    {"lab_id":"Vienna_Neuroscience","service":"lab-vienna","name":"Vienna Neuroscience Lab","city":"Vienna","country":"Austria","lab_type":"Neuroscience","function":"Neuroscience & Brain Research"},
+    {"lab_id":"Prague_Robotics","service":"lab-prague","name":"Prague Robotics Lab","city":"Prague","country":"Czech Republic","lab_type":"Robotics","function":"Robotics & Automation Systems"},
+    {"lab_id":"Budapest_Data","service":"lab-budapest","name":"Budapest Data Lab","city":"Budapest","country":"Hungary","lab_type":"Data","function":"Big Data Analytics & Visualization"},
+    {"lab_id":"Bucharest_Nanotechnology","service":"lab-bucharest","name":"Bucharest Nanotechnology Lab","city":"Bucharest","country":"Romania","lab_type":"Nanotechnology","function":"Nanotechnology & Nanomaterials"},
+    {"lab_id":"Istanbul_Trade","service":"lab-istanbul","name":"Istanbul Trade Lab","city":"Istanbul","country":"Turkey","lab_type":"Trade","function":"International Trade & Logistics"},
+    {"lab_id":"Cairo_Archeology","service":"lab-cairo","name":"Cairo Archeology Lab","city":"Cairo","country":"Egypt","lab_type":"Archeology","function":"Archeological Research & Preservation"},
+    {"lab_id":"Jerusalem_Heritage","service":"lab-jerusalem","name":"Jerusalem Heritage Lab","city":"Jerusalem","country":"Palestine","lab_type":"Heritage","function":"Cultural Heritage & Restoration"}
+  ]
+}

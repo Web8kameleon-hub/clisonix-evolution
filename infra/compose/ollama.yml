@@ -1,0 +1,28 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: clisonix-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - clisonix_ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_FLASH_ATTENTION=1
+      - OLLAMA_NUM_PARALLEL=1
+      - OLLAMA_MAX_LOADED_MODELS=1
+      - OLLAMA_GPU_LAYERS=999
+      - OLLAMA_CONTEXT_LENGTH=65536
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  clisonix_ollama_data:
+    external: true

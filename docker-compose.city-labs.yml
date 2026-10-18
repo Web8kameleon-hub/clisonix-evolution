@@ -1,0 +1,114 @@
+x-lab-env: &lab-env
+  PORT: "9100"
+  PYTHONUNBUFFERED: "1"
+  ANALYSIS_UPSTREAM: ${CITY_LABS_ANALYSIS_UPSTREAM:-http://clisonix-ocean-core:8030/api/v1/chat}
+  ANALYSIS_TIMEOUT_SECONDS: ${CITY_LABS_ANALYSIS_TIMEOUT_SECONDS:-45}
+
+x-lab-service: &lab-service
+  image: clisonix-city-lab:latest
+  build:
+    context: .
+    dockerfile: Dockerfile.lab
+  restart: unless-stopped
+  networks:
+    - clisonix-fabric
+
+services:
+  city-labs-registry:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - ./:/app:ro
+    command: >
+      sh -c "pip install --no-cache-dir -q -r services/lab/requirements.txt &&
+      python -m uvicorn services.lab_registry.main:app --host 0.0.0.0 --port 9130"
+    environment:
+      CITY_LABS_REGISTRY: /app/config/city-labs.registry.json
+      CITY_LABS_INTERNAL_PORT: "9100"
+      CITY_LABS_PROBE_TIMEOUT: "2.5"
+      CITY_LABS_CORS: "*"
+    ports:
+      - "127.0.0.1:9130:9130"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:9130/health', timeout=5)"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - clisonix-fabric
+
+  lab-elbasan:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Elbasan_AI}
+  lab-tirana:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Tirana_Medical}
+  lab-durres:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Durres_IoT}
+  lab-vlore:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Vlore_Environmental}
+  lab-shkoder:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Shkoder_Marine}
+  lab-korce:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Korce_Agricultural}
+  lab-saranda:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Sarrande_Underwater}
+  lab-prishtina:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Prishtina_Security}
+  lab-kostur:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Kostur_Energy}
+  lab-athens:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Athens_Classical}
+  lab-rome:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Rome_Architecture}
+  lab-zurich:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Zurich_Finance}
+  lab-beograd:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Beograd_Industrial}
+  lab-sofia:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Sofia_Chemistry}
+  lab-zagreb:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Zagreb_Biotech}
+  lab-ljubljana:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Ljubljana_Quantum}
+  lab-vienna:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Vienna_Neuroscience}
+  lab-prague:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Prague_Robotics}
+  lab-budapest:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Budapest_Data}
+  lab-bucharest:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Bucharest_Nanotechnology}
+  lab-istanbul:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Istanbul_Trade}
+  lab-cairo:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Cairo_Archeology}
+  lab-jerusalem:
+    <<: *lab-service
+    environment: {<<: *lab-env, LAB_ID: Jerusalem_Heritage}
+
+networks:
+  clisonix-fabric:
+    external: true
+    name: ${CLISONIX_FABRIC_NETWORK:-clisonix-swarm}

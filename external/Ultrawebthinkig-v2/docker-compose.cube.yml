@@ -1,0 +1,225 @@
+# Cube.js Analytics Stack - EuroWeb Platform
+# Ultra-Industrial Business Intelligence & Real-time Analytics
+# 
+# @author Ledjan Ahmati
+# @version 8.0.0-CUBE-ANALYTICS
+
+version: '3.8'
+
+services:
+  # Cube.js API Server
+  cube-api:
+    image: cubejs/cube:latest
+    ports:
+      - "4000:4000"
+    environment:
+      # Core Configuration
+      - CUBEJS_DEV_MODE=false
+      - CUBEJS_API_SECRET=${CUBEJS_API_SECRET:-euroweb-ultra-cube-secret-key}
+      - CUBEJS_DB_TYPE=postgres
+      - CUBEJS_DB_HOST=${POSTGRES_HOST:-postgres}
+      - CUBEJS_DB_PORT=${POSTGRES_PORT:-5432}
+      - CUBEJS_DB_NAME=${POSTGRES_DB:-euroweb_analytics}
+      - CUBEJS_DB_USER=${POSTGRES_USER:-euroweb}
+      - CUBEJS_DB_PASS=${POSTGRES_PASSWORD}
+      
+      # Redis Configuration
+      - CUBEJS_REDIS_URL=redis://redis:6379
+      - CUBEJS_CACHE_AND_QUEUE_DRIVER=redis
+      
+      # Security
+      - CUBEJS_JWT_SECRET=${JWT_SECRET:-euroweb-ultra-jwt-secret}
+      - CUBEJS_JWT_AUDIENCE=euroweb-platform
+      - CUBEJS_JWT_ISSUER=euroweb.al
+      
+      # Performance
+      - CUBEJS_CONCURRENCY=4
+      - CUBEJS_PRE_AGGREGATIONS_BUILDER=true
+      - CUBEJS_ROLLUP_ONLY=true
+      
+      # External APIs
+      - EXTERNAL_REFRESH_WEBHOOK=${EXTERNAL_REFRESH_WEBHOOK}
+      
+      # Multi-tenant
+      - CUBEJS_SCHEMA_PATH=schema
+      
+      # Logging
+      - CUBEJS_LOG_LEVEL=info
+      
+    volumes:
+      - ./schema:/cube/conf/schema:ro
+      - ./cube.js:/cube/conf/cube.js:ro
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+    networks:
+      - cube-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/readyz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Cube.js Refresh Worker
+  cube-refresh-worker:
+    image: cubejs/cube:latest
+    environment:
+      - CUBEJS_DEV_MODE=false
+      - CUBEJS_API_SECRET=${CUBEJS_API_SECRET:-euroweb-ultra-cube-secret-key}
+      - CUBEJS_DB_TYPE=postgres
+      - CUBEJS_DB_HOST=${POSTGRES_HOST:-postgres}
+      - CUBEJS_DB_PORT=${POSTGRES_PORT:-5432}
+      - CUBEJS_DB_NAME=${POSTGRES_DB:-euroweb_analytics}
+      - CUBEJS_DB_USER=${POSTGRES_USER:-euroweb}
+      - CUBEJS_DB_PASS=${POSTGRES_PASSWORD}
+      - CUBEJS_REDIS_URL=redis://redis:6379
+      - CUBEJS_CACHE_AND_QUEUE_DRIVER=redis
+      - CUBEJS_REFRESH_WORKER=true
+      - CUBEJS_ROLLUP_ONLY=true
+    volumes:
+      - ./schema:/cube/conf/schema:ro
+      - ./cube.js:/cube/conf/cube.js:ro
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+    networks:
+      - cube-network
+
+  # PostgreSQL Analytics Database
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-euroweb_analytics}
+      - POSTGRES_USER=${POSTGRES_USER:-euroweb}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - cube-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-euroweb}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache & Queue
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:ro
+    command: redis-server /usr/local/etc/redis/redis.conf
+    restart: unless-stopped
+    networks:
+      - cube-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # MySQL Financial Database (optional)
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DB:-financial_data}
+      - MYSQL_USER=${MYSQL_USER:-finance_user}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql-init.sql:/docker-entrypoint-initdb.d/mysql-init.sql:ro
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    networks:
+      - cube-network
+    profiles:
+      - financial
+
+  # ClickHouse for Real-time Analytics (optional)
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    environment:
+      - CLICKHOUSE_DB=${CLICKHOUSE_DB:-realtime_analytics}
+      - CLICKHOUSE_USER=${CLICKHOUSE_USER:-analytics}
+      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+      - ./clickhouse-init.sql:/docker-entrypoint-initdb.d/clickhouse-init.sql:ro
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    restart: unless-stopped
+    networks:
+      - cube-network
+    profiles:
+      - realtime
+
+  # Grafana for Visualization
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-euroweb-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_ROOT_URL=http://localhost:3001/grafana
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "3001:3000"
+    depends_on:
+      - cube-api
+    restart: unless-stopped
+    networks:
+      - cube-network
+    profiles:
+      - visualization
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - cube-api
+      - grafana
+    restart: unless-stopped
+    networks:
+      - cube-network
+    profiles:
+      - production
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  mysql_data:
+    driver: local
+  clickhouse_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+networks:
+  cube-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

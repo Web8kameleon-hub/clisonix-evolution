@@ -1,0 +1,2587 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Clisonix Kloud Bridge",
+    "description": "Isolated bridge microservice that connects Clisonix to the sovereign Kloud fabric without merging codebases.",
+    "version": "0.5.0",
+    "x-clisonix-service": "kloud-bridge",
+    "x-exported-at": "2026-04-12T08:29:15.600580+00:00"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Root",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Root  Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_api_v1_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Health Api V1 Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Health Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status": {
+      "get": {
+        "summary": "Status",
+        "operationId": "status_api_v1_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Status Api V1 Status Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "summary": "Status",
+        "operationId": "status_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Status Status Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fabric/state": {
+      "get": {
+        "summary": "Fabric Summary",
+        "operationId": "fabric_summary_api_v1_fabric_state_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Fabric Summary Api V1 Fabric State Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fabric/summary": {
+      "get": {
+        "summary": "Fabric Summary",
+        "operationId": "fabric_summary_api_v1_fabric_summary_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Fabric Summary Api V1 Fabric Summary Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fabric/state": {
+      "get": {
+        "summary": "Fabric Summary",
+        "operationId": "fabric_summary_fabric_state_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Fabric Summary Fabric State Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fabric/summary": {
+      "get": {
+        "summary": "Fabric Summary",
+        "operationId": "fabric_summary_fabric_summary_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Fabric Summary Fabric Summary Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ocean/status": {
+      "get": {
+        "summary": "Ocean Status",
+        "operationId": "ocean_status_api_v1_ocean_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Ocean Status Api V1 Ocean Status Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ocean/status": {
+      "get": {
+        "summary": "Ocean Status",
+        "operationId": "ocean_status_ocean_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Ocean Status Ocean Status Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/profile": {
+      "get": {
+        "summary": "Hardware Profile",
+        "operationId": "hardware_profile_api_v1_hardware_profile_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Hardware Profile Api V1 Hardware Profile Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/profile": {
+      "get": {
+        "summary": "Hardware Profile",
+        "operationId": "hardware_profile_hardware_profile_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Hardware Profile Hardware Profile Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/contracts/firmware-v0.1": {
+      "get": {
+        "summary": "Hardware Firmware Contract",
+        "operationId": "hardware_firmware_contract_api_v1_hardware_contracts_firmware_v0_1_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Hardware Firmware Contract Api V1 Hardware Contracts Firmware V0 1 Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/contracts/firmware-v0.1": {
+      "get": {
+        "summary": "Hardware Firmware Contract",
+        "operationId": "hardware_firmware_contract_hardware_contracts_firmware_v0_1_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Hardware Firmware Contract Hardware Contracts Firmware V0 1 Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/hierarchy/blueprint": {
+      "get": {
+        "summary": "Hardware Hierarchy Blueprint",
+        "operationId": "hardware_hierarchy_blueprint_api_v1_hardware_hierarchy_blueprint_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Hardware Hierarchy Blueprint Api V1 Hardware Hierarchy Blueprint Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/hierarchy/blueprint": {
+      "get": {
+        "summary": "Hardware Hierarchy Blueprint",
+        "operationId": "hardware_hierarchy_blueprint_hardware_hierarchy_blueprint_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Hardware Hierarchy Blueprint Hardware Hierarchy Blueprint Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/hierarchy": {
+      "get": {
+        "summary": "Hardware Hierarchy",
+        "operationId": "hardware_hierarchy_api_v1_hardware_hierarchy_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Hardware Hierarchy Api V1 Hardware Hierarchy Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/hierarchy": {
+      "get": {
+        "summary": "Hardware Hierarchy",
+        "operationId": "hardware_hierarchy_hardware_hierarchy_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Hardware Hierarchy Hardware Hierarchy Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/contracts/openapi-v1": {
+      "get": {
+        "summary": "Openapi Contract Snapshot",
+        "operationId": "openapi_contract_snapshot_api_v1_contracts_openapi_v1_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Openapi Contract Snapshot Api V1 Contracts Openapi V1 Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contracts/openapi-v1": {
+      "get": {
+        "summary": "Openapi Contract Snapshot",
+        "operationId": "openapi_contract_snapshot_contracts_openapi_v1_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Openapi Contract Snapshot Contracts Openapi V1 Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/nodes": {
+      "get": {
+        "summary": "List Hardware Nodes",
+        "operationId": "list_hardware_nodes_api_v1_hardware_nodes_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response List Hardware Nodes Api V1 Hardware Nodes Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/nodes": {
+      "get": {
+        "summary": "List Hardware Nodes",
+        "operationId": "list_hardware_nodes_hardware_nodes_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response List Hardware Nodes Hardware Nodes Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/registry": {
+      "get": {
+        "summary": "Hardware Registry",
+        "operationId": "hardware_registry_api_v1_hardware_registry_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Hardware Registry Api V1 Hardware Registry Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/registry": {
+      "get": {
+        "summary": "Hardware Registry",
+        "operationId": "hardware_registry_hardware_registry_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Hardware Registry Hardware Registry Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/nodes/{node_id}": {
+      "get": {
+        "summary": "Get Hardware Node",
+        "operationId": "get_hardware_node_api_v1_hardware_nodes__node_id__get",
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Node Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Get Hardware Node Api V1 Hardware Nodes  Node Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/nodes/{node_id}": {
+      "get": {
+        "summary": "Get Hardware Node",
+        "operationId": "get_hardware_node_hardware_nodes__node_id__get",
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Node Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Get Hardware Node Hardware Nodes  Node Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/nodes/register": {
+      "post": {
+        "summary": "Register Hardware Node",
+        "operationId": "register_hardware_node_api_v1_hardware_nodes_register_post",
+        "parameters": [
+          {
+            "name": "x-node-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Node-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HardwareNodeRegistration"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Register Hardware Node Api V1 Hardware Nodes Register Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/nodes/register": {
+      "post": {
+        "summary": "Register Hardware Node",
+        "operationId": "register_hardware_node_hardware_nodes_register_post",
+        "parameters": [
+          {
+            "name": "x-node-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Node-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HardwareNodeRegistration"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Register Hardware Node Hardware Nodes Register Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/nodes/heartbeat": {
+      "post": {
+        "summary": "Hardware Node Heartbeat",
+        "operationId": "hardware_node_heartbeat_api_v1_hardware_nodes_heartbeat_post",
+        "parameters": [
+          {
+            "name": "x-node-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Node-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HardwareNodeHeartbeat"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Hardware Node Heartbeat Api V1 Hardware Nodes Heartbeat Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/nodes/heartbeat": {
+      "post": {
+        "summary": "Hardware Node Heartbeat",
+        "operationId": "hardware_node_heartbeat_hardware_nodes_heartbeat_post",
+        "parameters": [
+          {
+            "name": "x-node-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Node-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HardwareNodeHeartbeat"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Hardware Node Heartbeat Hardware Nodes Heartbeat Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/nodes/control": {
+      "post": {
+        "summary": "Hardware Node Control",
+        "operationId": "hardware_node_control_api_v1_hardware_nodes_control_post",
+        "parameters": [
+          {
+            "name": "x-node-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Node-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodeControlRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Hardware Node Control Api V1 Hardware Nodes Control Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/nodes/control": {
+      "post": {
+        "summary": "Hardware Node Control",
+        "operationId": "hardware_node_control_hardware_nodes_control_post",
+        "parameters": [
+          {
+            "name": "x-node-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Node-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodeControlRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Hardware Node Control Hardware Nodes Control Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/hierarchy/dispatch": {
+      "post": {
+        "summary": "Hardware Hierarchy Dispatch",
+        "operationId": "hardware_hierarchy_dispatch_api_v1_hardware_hierarchy_dispatch_post",
+        "parameters": [
+          {
+            "name": "x-node-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Node-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HierarchyCommandRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Hardware Hierarchy Dispatch Api V1 Hardware Hierarchy Dispatch Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/hierarchy/dispatch": {
+      "post": {
+        "summary": "Hardware Hierarchy Dispatch",
+        "operationId": "hardware_hierarchy_dispatch_hardware_hierarchy_dispatch_post",
+        "parameters": [
+          {
+            "name": "x-node-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Node-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HierarchyCommandRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Hardware Hierarchy Dispatch Hardware Hierarchy Dispatch Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/nodes/pulse": {
+      "post": {
+        "summary": "Hardware Node Pulse",
+        "operationId": "hardware_node_pulse_api_v1_hardware_nodes_pulse_post",
+        "parameters": [
+          {
+            "name": "x-node-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Node-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HardwareNodePulse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Hardware Node Pulse Api V1 Hardware Nodes Pulse Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/nodes/pulse": {
+      "post": {
+        "summary": "Hardware Node Pulse",
+        "operationId": "hardware_node_pulse_hardware_nodes_pulse_post",
+        "parameters": [
+          {
+            "name": "x-node-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Node-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HardwareNodePulse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Hardware Node Pulse Hardware Nodes Pulse Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/mesh/status": {
+      "get": {
+        "summary": "Hardware Mesh Status",
+        "operationId": "hardware_mesh_status_api_v1_hardware_mesh_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Hardware Mesh Status Api V1 Hardware Mesh Status Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/mesh/status": {
+      "get": {
+        "summary": "Hardware Mesh Status",
+        "operationId": "hardware_mesh_status_hardware_mesh_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Hardware Mesh Status Hardware Mesh Status Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hardware/mesh/ping": {
+      "post": {
+        "summary": "Hardware Mesh Ping",
+        "operationId": "hardware_mesh_ping_api_v1_hardware_mesh_ping_post",
+        "parameters": [
+          {
+            "name": "x-node-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Node-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MeshPingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Hardware Mesh Ping Api V1 Hardware Mesh Ping Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hardware/mesh/ping": {
+      "post": {
+        "summary": "Hardware Mesh Ping",
+        "operationId": "hardware_mesh_ping_hardware_mesh_ping_post",
+        "parameters": [
+          {
+            "name": "x-node-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Node-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MeshPingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Hardware Mesh Ping Hardware Mesh Ping Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/diagnostics": {
+      "get": {
+        "summary": "Admin Diagnostics",
+        "operationId": "admin_diagnostics_api_v1_admin_diagnostics_get",
+        "parameters": [
+          {
+            "name": "x-admin-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Admin-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Admin Diagnostics Api V1 Admin Diagnostics Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/diagnostics": {
+      "get": {
+        "summary": "Admin Diagnostics",
+        "operationId": "admin_diagnostics_admin_diagnostics_get",
+        "parameters": [
+          {
+            "name": "x-admin-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Admin-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Admin Diagnostics Admin Diagnostics Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/audit/recent": {
+      "get": {
+        "summary": "Admin Recent Audit",
+        "operationId": "admin_recent_audit_api_v1_admin_audit_recent_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "x-admin-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Admin-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Admin Recent Audit Api V1 Admin Audit Recent Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/audit/recent": {
+      "get": {
+        "summary": "Admin Recent Audit",
+        "operationId": "admin_recent_audit_admin_audit_recent_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "x-admin-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Admin-Token"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Admin Recent Audit Admin Audit Recent Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ocean/signals/publish": {
+      "post": {
+        "summary": "Publish To Ocean",
+        "operationId": "publish_to_ocean_api_v1_ocean_signals_publish_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OceanSignalRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Publish To Ocean Api V1 Ocean Signals Publish Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ocean/signals/publish": {
+      "post": {
+        "summary": "Publish To Ocean",
+        "operationId": "publish_to_ocean_ocean_signals_publish_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OceanSignalRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Publish To Ocean Ocean Signals Publish Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/signals/publish": {
+      "post": {
+        "summary": "Publish Signal",
+        "operationId": "publish_signal_api_v1_signals_publish_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublishRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Publish Signal Api V1 Signals Publish Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/signals/publish": {
+      "post": {
+        "summary": "Publish Signal",
+        "operationId": "publish_signal_signals_publish_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublishRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Publish Signal Signals Publish Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fabric/sync": {
+      "post": {
+        "summary": "Fabric Sync",
+        "operationId": "fabric_sync_api_v1_fabric_sync_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FabricSyncRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Fabric Sync Api V1 Fabric Sync Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fabric/sync": {
+      "post": {
+        "summary": "Fabric Sync",
+        "operationId": "fabric_sync_fabric_sync_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FabricSyncRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Fabric Sync Fabric Sync Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FabricSyncRequest": {
+        "properties": {
+          "include_state": {
+            "type": "boolean",
+            "title": "Include State",
+            "default": true
+          },
+          "include_peers": {
+            "type": "boolean",
+            "title": "Include Peers",
+            "default": true
+          },
+          "include_status": {
+            "type": "boolean",
+            "title": "Include Status",
+            "default": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "title": "Dry Run",
+            "default": false
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "title": "FabricSyncRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HardwareNodeHeartbeat": {
+        "properties": {
+          "node_id": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 2,
+            "title": "Node Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "online"
+          },
+          "uptime_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Uptime Seconds"
+          },
+          "temperature_c": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temperature C"
+          },
+          "power_watts": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Power Watts"
+          },
+          "latency_ms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latency Ms"
+          },
+          "telemetry": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Telemetry"
+          },
+          "forward_to_ocean": {
+            "type": "boolean",
+            "title": "Forward To Ocean",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "node_id"
+        ],
+        "title": "HardwareNodeHeartbeat"
+      },
+      "HardwareNodePulse": {
+        "properties": {
+          "node_id": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 2,
+            "title": "Node Id"
+          },
+          "signal": {
+            "type": "string",
+            "title": "Signal",
+            "default": "pulse"
+          },
+          "latency_ms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latency Ms"
+          },
+          "queue_depth": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Queue Depth"
+          },
+          "telemetry": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Telemetry"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "node_id"
+        ],
+        "title": "HardwareNodePulse"
+      },
+      "HardwareNodeRegistration": {
+        "properties": {
+          "node_id": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 2,
+            "title": "Node Id"
+          },
+          "node_class": {
+            "type": "string",
+            "title": "Node Class",
+            "default": "oceancore-edge"
+          },
+          "architecture": {
+            "type": "string",
+            "title": "Architecture",
+            "default": "riscv"
+          },
+          "runtime": {
+            "type": "string",
+            "title": "Runtime",
+            "default": "rust"
+          },
+          "transport": {
+            "type": "string",
+            "title": "Transport",
+            "default": "http"
+          },
+          "firmware_version": {
+            "type": "string",
+            "title": "Firmware Version",
+            "default": "0.1.0"
+          },
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name"
+          },
+          "rank": {
+            "type": "string",
+            "title": "Rank",
+            "default": "soldier"
+          },
+          "symbol": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Symbol"
+          },
+          "parent_node_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Node Id"
+          },
+          "sleep_capable": {
+            "type": "boolean",
+            "title": "Sleep Capable",
+            "default": true
+          },
+          "pause_seconds": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 3600.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pause Seconds"
+          },
+          "capabilities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Capabilities"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "node_id"
+        ],
+        "title": "HardwareNodeRegistration"
+      },
+      "HierarchyCommandRequest": {
+        "properties": {
+          "source_node_id": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 2,
+            "title": "Source Node Id"
+          },
+          "message": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Message"
+          },
+          "target_node_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Node Id"
+          },
+          "direction": {
+            "type": "string",
+            "title": "Direction",
+            "default": "downstream"
+          },
+          "pause_ms": {
+            "type": "integer",
+            "maximum": 3000.0,
+            "minimum": 0.0,
+            "title": "Pause Ms",
+            "default": 0
+          },
+          "max_depth": {
+            "type": "integer",
+            "maximum": 12.0,
+            "minimum": 1.0,
+            "title": "Max Depth",
+            "default": 8
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_node_id",
+          "message"
+        ],
+        "title": "HierarchyCommandRequest"
+      },
+      "MeshPingRequest": {
+        "properties": {
+          "source_node_id": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 2,
+            "title": "Source Node Id"
+          },
+          "target_node_id": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 2,
+            "title": "Target Node Id"
+          },
+          "signal": {
+            "type": "string",
+            "title": "Signal",
+            "default": "ping"
+          },
+          "ttl_ms": {
+            "type": "integer",
+            "maximum": 10000.0,
+            "minimum": 100.0,
+            "title": "Ttl Ms",
+            "default": 1500
+          },
+          "payload": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_node_id",
+          "target_node_id"
+        ],
+        "title": "MeshPingRequest"
+      },
+      "NodeControlRequest": {
+        "properties": {
+          "node_id": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 2,
+            "title": "Node Id"
+          },
+          "action": {
+            "type": "string",
+            "title": "Action",
+            "default": "pause"
+          },
+          "duration_seconds": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 86400.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration Seconds",
+            "default": 30
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason",
+            "default": "operator-control"
+          }
+        },
+        "type": "object",
+        "required": [
+          "node_id"
+        ],
+        "title": "NodeControlRequest"
+      },
+      "OceanSignalRequest": {
+        "properties": {
+          "event_type": {
+            "type": "string",
+            "title": "Event Type",
+            "default": "kloud.bridge.signal"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source",
+            "default": "kloud-bridge"
+          },
+          "payload": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Payload"
+          },
+          "priority": {
+            "type": "string",
+            "title": "Priority",
+            "default": "normal"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags"
+          },
+          "correlation_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Correlation Id"
+          },
+          "dry_run": {
+            "type": "boolean",
+            "title": "Dry Run",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "OceanSignalRequest"
+      },
+      "PublishRequest": {
+        "properties": {
+          "ops": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Ops"
+          },
+          "payload": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Payload"
+          },
+          "payload_b64": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payload B64"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source",
+            "default": "clisonix"
+          },
+          "route": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Route"
+          },
+          "dry_run": {
+            "type": "boolean",
+            "title": "Dry Run",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "PublishRequest"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

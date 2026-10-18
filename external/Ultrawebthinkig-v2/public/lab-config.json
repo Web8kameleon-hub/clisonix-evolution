@@ -1,0 +1,240 @@
+{
+  "laboratory": {
+    "name": "ASI Laboratory",
+    "version": "1.0.0",
+    "description": "Albanian System Intelligence - Monorepo Laboratory Platform",
+    "author": "Ledjan Ahmati",
+    "email": "dealsjona@gmail.com",
+    "homepage": "https://github.com/ledjanahmati/asi-laboratory"
+  },
+  "architecture": {
+    "type": "monorepo",
+    "pattern": "microservices",
+    "orchestration": "centralized",
+    "deployment": "docker-compose"
+  },
+  "services": {
+    "frontend": {
+      "name": "Ultra SaaS Frontend",
+      "type": "next.js",
+      "framework": "React 18 + Next.js 14",
+      "port": 3001,
+      "path": "./asi-saas-frontend",
+      "script": "npm run dev",
+      "endpoints": {
+        "dashboard": "/",
+        "api_gateway": "/api/gateway",
+        "asi_12layer": "/api/asi-12layer",
+        "health": "/api/health"
+      },
+      "features": [
+        "Ultra SaaS Dashboard",
+        "ASI Core Interface",
+        "ALBA Management",
+        "ALBI Analytics",
+        "API Registry UI",
+        "Real-time Monitoring"
+      ]
+    },
+    "api_gateway": {
+      "name": "ASI API Gateway",
+      "type": "express.js",
+      "framework": "Express + CORS + Rate Limiting",
+      "port": 3003,
+      "path": "./api-gateway",
+      "script": "node server.js",
+      "endpoints": {
+        "health": "/api/health",
+        "country": "/api/country/:code",
+        "financial": "/api/financial/:symbol",
+        "news": "/api/news/:topic",
+        "cultural": "/api/cultural/:topic",
+        "library": "/api/library/:topic",
+        "museum": "/api/museum/:topic",
+        "blockchain": "/api/blockchain/:symbol",
+        "real_financial": "/api/real-financial/:symbol",
+        "global_news": "/api/global-news/breaking-news",
+        "real_economic": "/api/real-economic/:country",
+        "real_cultural": "/api/real-cultural/:topic",
+        "analytics_cbor": "/api/analytics/performance-cbor",
+        "cultural_cbor": "/api/cultural/sites-cbor",
+        "real_research": "/api/real-research"
+      },
+      "data_sources": [
+        "Guardian API",
+        "World Bank Open Data", 
+        "ExchangeRate-API",
+        "Reuters RSS"
+      ]
+    },
+    "asi_demo": {
+      "name": "ASI Agent Ultra Demo",
+      "type": "express.js",
+      "framework": "Express + ASI Intelligence",
+      "port": 3004,
+      "path": ".",
+      "script": "node asi-agent-ultra-demo.js",
+      "endpoints": {
+        "ultra_comprehensive": "/demo/ultra-comprehensive",
+        "interactive_dashboard": "/demo/interactive-dashboard", 
+        "cultural_analysis": "/demo/cultural-super-analysis/:topic",
+        "realtime_showcase": "/demo/real-time-processing-showcase",
+        "performance_test": "/demo/performance-limits-test"
+      },
+      "features": [
+        "ASI Super Intelligence Core",
+        "ALBA Ultra Interface",
+        "Jonify Ultra Processor",
+        "Cultural Super Analyzer",
+        "Real-time Ultra Processor",
+        "Visual Demo Engine"
+      ]
+    },
+    "api_producer": {
+      "name": "ASI API Producer",
+      "type": "express.js",
+      "framework": "Express + Dynamic API Generation",
+      "port": 3005,
+      "path": ".", 
+      "script": "node asi-api-producer.js",
+      "endpoints": {
+        "generate_api": "/asi/generate-api",
+        "apis_registry": "/asi/apis-registry",
+        "producer_status": "/asi/api-producer-status",
+        "produce_real_data": "/asi/produce-real-data-api",
+        "real_sources_status": "/asi/real-sources-status",
+        "integrate_source": "/asi/integrate-new-source",
+        "generate_cultural": "/asi/generate-cultural-api",
+        "generate_alba": "/asi/generate-alba-api",
+        "generate_jonify": "/asi/generate-jonify-api",
+        "api_analytics": "/asi/api-analytics",
+        "performance_metrics": "/asi/performance-metrics",
+        "generated_api": "/generated/:apiName",
+        "api_docs": "/api-docs/:apiName"
+      },
+      "capabilities": [
+        "Real Data API Generation",
+        "Cultural Intelligence APIs",
+        "ALBA Labor Processing APIs", 
+        "Jonify Processing APIs",
+        "Hybrid Intelligence APIs",
+        "Dynamic API Documentation",
+        "Performance Optimization"
+      ]
+    },
+    "asi_agent": {
+      "name": "ASI Core Agent",
+      "type": "express.js",
+      "framework": "Express + ASI Core Processing",
+      "port": 3006,
+      "path": ".",
+      "script": "node asi-agent.js",
+      "endpoints": {
+        "asi_process": "/asi/process",
+        "alba_interface": "/alba/interface",
+        "jonify_process": "/jonify/process",
+        "cultural_analyze": "/cultural/analyze"
+      },
+      "features": [
+        "ASI Core Processing",
+        "ALBA Integration", 
+        "Jonify Ultra Processor",
+        "Cultural Intelligence"
+      ]
+    }
+  },
+  "routing": {
+    "base_url": "http://localhost",
+    "api_prefix": "/api",
+    "versioning": "v1",
+    "rate_limiting": {
+      "enabled": true,
+      "requests_per_minute": 100,
+      "burst": 200
+    },
+    "cors": {
+      "enabled": true,
+      "origins": ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"],
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      "headers": ["Content-Type", "Authorization", "X-ASI-Client"]
+    }
+  },
+  "database": {
+    "type": "in-memory",
+    "backup": {
+      "enabled": true,
+      "interval": "1h",
+      "location": "./backups"
+    }
+  },
+  "monitoring": {
+    "health_checks": true,
+    "metrics": true,
+    "logging": {
+      "level": "info",
+      "format": "json",
+      "file": "./logs/laboratory.log"
+    },
+    "performance": {
+      "response_time_threshold": 1000,
+      "memory_threshold": "512MB",
+      "cpu_threshold": 80
+    }
+  },
+  "deployment": {
+    "environment": "development",
+    "docker": {
+      "enabled": false,
+      "compose_file": "./docker-compose.yml"
+    },
+    "kubernetes": {
+      "enabled": false,
+      "namespace": "asi-laboratory"
+    }
+  },
+  "security": {
+    "helmet": true,
+    "rate_limiting": true,
+    "input_validation": true,
+    "authentication": {
+      "enabled": false,
+      "type": "jwt"
+    }
+  },
+  "integrations": {
+    "external_apis": [
+      {
+        "name": "Guardian API",
+        "type": "news",
+        "endpoint": "https://content.guardianapis.com",
+        "status": "active"
+      },
+      {
+        "name": "World Bank Open Data",
+        "type": "economic",
+        "endpoint": "https://api.worldbank.org/v2",
+        "status": "active" 
+      },
+      {
+        "name": "ExchangeRate-API",
+        "type": "financial", 
+        "endpoint": "https://api.exchangerate-api.com/v4",
+        "status": "active"
+      },
+      {
+        "name": "Reuters RSS",
+        "type": "news",
+        "endpoint": "https://feeds.reuters.com",
+        "status": "active"
+      }
+    ]
+  },
+  "statistics": {
+    "total_endpoints": 45,
+    "active_services": 5,
+    "supported_languages": ["Albanian", "English", "Italian", "German"],
+    "data_sources": 4,
+    "api_types": ["REST", "GraphQL", "WebSocket"],
+    "response_formats": ["JSON", "XML", "CBOR"]
+  }
+}

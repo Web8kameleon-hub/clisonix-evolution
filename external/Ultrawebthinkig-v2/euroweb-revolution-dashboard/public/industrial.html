@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<title>EuroWeb Revolution • Industrial Intelligence</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body{background:#000;color:#00ffe1;font-family:monospace;padding:25px}
+  h1{color:#fff;font-size:22px}
+  section{border:1px solid #00ffe1;border-radius:10px;padding:15px;margin:20px 0}
+  pre{background:#050505;padding:10px;border-radius:8px;overflow-x:auto;color:#00ffcc}
+  .comment{color:#ccc;margin-top:8px;font-style:italic}
+  canvas{background:#050505;border-radius:8px;margin-top:10px}
+</style>
+</head>
+<body>
+<h1>🌍 EuroWeb Revolution — Industrial Intelligence Dashboard</h1>
+
+<section>
+  <h2>🖥️ System Performance</h2>
+  <canvas id="sysChart" height="100"></canvas>
+  <div class="comment" id="sysComment"></div>
+</section>
+
+<section>
+  <h2>🧠 AGI Core</h2>
+  <canvas id="agiChart" height="100"></canvas>
+  <div class="comment" id="agiComment"></div>
+</section>
+
+<section>
+  <h2>🛡️ Guardian Security</h2>
+  <pre id="security"></pre>
+</section>
+
+<section>
+  <h2>⚡ Mesh / LoRa Energy Network</h2>
+  <canvas id="meshChart" height="100"></canvas>
+  <div class="comment" id="meshComment"></div>
+</section>
+
+<script>
+const BASE="http://localhost:8080";
+let sysChart,agiChart,meshChart;
+const sysLabels=[],cpu=[],mem=[],agiLabels=[],agiData=[],meshLabels=[],signal=[],energy=[];
+
+async function update(){
+  const sys=await fetch(`${BASE}/api/system`).then(r=>r.json());
+  const agi=await fetch(`${BASE}/api/agi`).then(r=>r.json());
+  const sec=await fetch(`${BASE}/api/security`).then(r=>r.json());
+  const mesh=await fetch(`${BASE}/api/mesh`).then(r=>r.json());
+
+  // System
+  sysLabels.push(new Date().toLocaleTimeString());
+  cpu.push(parseFloat(sys.cpuLoad)); mem.push(parseFloat(sys.usagePercent));
+  if(sysLabels.length>20){sysLabels.shift();cpu.shift();mem.shift();}
+  sysChart.data.labels=sysLabels;
+  sysChart.data.datasets[0].data=cpu;
+  sysChart.data.datasets[1].data=mem;
+  sysChart.update();
+  document.getElementById("sysComment").textContent="📊 "+sys.analysis;
+
+  // AGI
+  agiLabels.push(new Date().toLocaleTimeString());
+  agiData.push(parseFloat(agi.reasoning||0));
+  if(agiLabels.length>20){agiLabels.shift();agiData.shift();}
+  agiChart.data.labels=agiLabels;
+  agiChart.data.datasets[0].data=agiData;
+  agiChart.update();
+  document.getElementById("agiComment").textContent="🤖 "+(agi.insight||agi.message);
+
+  // Security
+  document.getElementById("security").textContent=JSON.stringify(sec,null,2);
+
+  // Mesh
+  meshLabels.push(new Date().toLocaleTimeString());
+  signal.push(parseFloat(mesh.signalStrength||0));
+  energy.push(parseFloat(mesh.energyLevel||0));
+  if(meshLabels.length>20){meshLabels.shift();signal.shift();energy.shift();}
+  meshChart.data.labels=meshLabels;
+  meshChart.data.datasets[0].data=signal;
+  meshChart.data.datasets[1].data=energy;
+  meshChart.update();
+  document.getElementById("meshComment").textContent="⚡ "+(mesh.quality||mesh.message);
+}
+
+// init charts
+function initCharts(){
+  sysChart=new Chart(document.getElementById("sysChart"),{
+    type:"line",
+    data:{labels:sysLabels,datasets:[
+      {label:"CPU Load",borderColor:"#00ffe1",data:[],fill:false},
+      {label:"RAM Usage %",borderColor:"#ff00ff",data:[],fill:false}
+    ]},
+    options:{scales:{y:{beginAtZero:true}}}
+  });
+  agiChart=new Chart(document.getElementById("agiChart"),{
+    type:"line",
+    data:{labels:agiLabels,datasets:[
+      {label:"AGI Reasoning %",borderColor:"#00ff99",data:[],fill:false}
+    ]},
+    options:{scales:{y:{beginAtZero:true,max:100}}}
+  });
+  meshChart=new Chart(document.getElementById("meshChart"),{
+    type:"line",
+    data:{labels:meshLabels,datasets:[
+      {label:"Signal Strength",borderColor:"#00ffff",data:[],fill:false},
+      {label:"Energy Level",borderColor:"#ffff00",data:[],fill:false}
+    ]},
+    options:{scales:{y:{beginAtZero:true,max:100}}}
+  });
+}
+initCharts();
+setInterval(update,4000);
+update();
+</script>
+</body>
+</html>

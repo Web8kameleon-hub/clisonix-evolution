@@ -1,0 +1,16 @@
+source_loc: "apps/web/app/api/ocean/stream/route.ts:369"
+bindings:
+  - binding: "Next.js node runtime, force-dynamic, 300-second maximum."
+    source_loc: "apps/web/app/api/ocean/stream/route.ts:8"
+    must_appear_in_target: true
+  - binding: "SSE response headers disable buffering and transformation."
+    source_loc: "apps/web/app/api/ocean/stream/route.ts:359"
+    must_appear_in_target: true
+runtime_config:
+  - key: OCEAN_INTERNAL_URL
+    source_loc: "apps/web/app/api/ocean/stream/route.ts:29"
+    must_appear_in_target: true
+  - key: OCEAN_CORE_URL
+    source_loc: "apps/web/app/api/ocean/stream/route.ts:28"
+    must_appear_in_target: true
+

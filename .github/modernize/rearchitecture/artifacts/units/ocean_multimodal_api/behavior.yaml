@@ -1,0 +1,26 @@
+source_loc: "ocean-core/ocean_multimodal.py:459"
+side_effects:
+  - effect: "Calls Ollama vision, audio, document, and reasoning endpoints."
+    source_loc: "ocean-core/ocean_multimodal.py:386"
+    must_preserve: true
+  - effect: "Increments request count only through unified analyze."
+    source_loc: "ocean-core/ocean_multimodal.py:467"
+    must_preserve: false
+branches:
+  - condition: "SensorMode selects vision, audio, document, reason, or multimodal."
+    source_loc: "ocean-core/ocean_multimodal.py:329"
+    must_preserve: true
+  - condition: "Mode has no matching input; current output remains empty with medium confidence."
+    source_loc: "ocean-core/ocean_multimodal.py:358"
+    must_preserve: false
+error_paths:
+  - contract: "Provider exceptions are logged and re-raised."
+    source_loc: "ocean-core/ocean_multimodal.py:370"
+    must_preserve: true
+  - contract: "Non-200 reasoning response becomes generic HTTP 500."
+    source_loc: "ocean-core/ocean_multimodal.py:404"
+    must_preserve: false
+concurrency:
+  model: "Async HTTP calls; multimodal inputs execute sequentially."
+  tx_boundary: null
+

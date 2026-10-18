@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  sidecar:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./configs:/app/configs
+    environment:
+      - RUST_LOG=info

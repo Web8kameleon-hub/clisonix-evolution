@@ -1,0 +1,22 @@
+source_loc: "ocean-core/ocean_multimodal.py:459"
+bindings:
+  - binding: "FastAPI app deployed as ocean-core-multimodal."
+    source_loc: "docker-compose.yml:484"
+    must_appear_in_target: true
+  - binding: "Docker health check calls /health."
+    source_loc: "docker-compose.yml:499"
+    must_appear_in_target: true
+runtime_config:
+  - key: OLLAMA_HOST
+    source_loc: "ocean-core/ocean_multimodal.py:27"
+    must_appear_in_target: true
+  - key: VISION_MODEL
+    source_loc: "ocean-core/ocean_multimodal.py:28"
+    must_appear_in_target: true
+  - key: AUDIO_MODEL
+    source_loc: "ocean-core/ocean_multimodal.py:29"
+    must_appear_in_target: true
+  - key: REASONING_MODEL
+    source_loc: "ocean-core/ocean_multimodal.py:30"
+    must_appear_in_target: true
+

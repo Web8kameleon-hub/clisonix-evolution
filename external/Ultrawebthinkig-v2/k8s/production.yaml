@@ -1,0 +1,153 @@
+# euroweb-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: euroweb-app
+  namespace: euroweb-production
+  labels:
+    app: euroweb-app
+    version: v8.0.0
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0  # Zero downtime deployments
+  selector:
+    matchLabels:
+      app: euroweb-app
+  template:
+    metadata:
+      labels:
+        app: euroweb-app
+        version: v8.0.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "3000"
+        prometheus.io/path: "/api/metrics"
+        rollme: "{{ randAlphaNum 5 | lower }}"  # Force redeploy on changes
+    spec:
+      containers:
+      - name: euroweb-app
+        image: ghcr.io/your-org/euroweb-platform:v8.0.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+          name: http
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: PORT
+          value: "3000"
+        - name: NEXT_TELEMETRY_DISABLED
+          value: "1"
+        - name: LOG_LEVEL
+          value: "info"
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: euroweb-secrets
+              key: DATABASE_URL
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: euroweb-secrets
+              key: JWT_SECRET
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: euroweb-secrets
+              key: OPENAI_API_KEY
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+            httpHeaders:
+            - name: Custom-Health-Check
+              value: "euroweb-liveness"
+          initialDelaySeconds: 45
+          periodSeconds: 20
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+            httpHeaders:
+            - name: Custom-Health-Check
+              value: "euroweb-readiness"
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 2
+        startupProbe:
+          httpGet:
+            path: /api/health/startup
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 10
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sh", "-c", "sleep 30"]  # Graceful shutdown
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1001
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+      - name: agi-sidecar
+        image: ghcr.io/your-org/euroweb-agi:v1.0.0
+        ports:
+        - containerPort: 8080
+          name: agi-http
+        env:
+        - name: AGI_MODEL
+          value: "galactic-thinking-v2"
+        - name: AGI_PROVIDER
+          value: "anthropic"
+        - name: AGI_PORT
+          value: "8080"
+        - name: CLAUDE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: euroweb-secrets
+              key: CLAUDE_API_KEY
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+      initContainers:
+      - name: init-db-check
+        image: busybox:1.35
+        command: ['sh', '-c', 'until nslookup postgres-service; do echo waiting for postgres; sleep 2; done']
+      securityContext:
+        fsGroup: 1001
+        runAsNonRoot: true

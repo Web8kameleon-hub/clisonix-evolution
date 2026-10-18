@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EUROWEB REVOLUTION • LIVE</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="header">
+    <h1 id="title">EUROWEB REVOLUTION • LIVE</h1>
+    <div class="subtitle">100% JavaScript • Null TypeScript Drama • 🇦🇱</div>
+    <nav class="nav">
+      <button data-section="revolution">Revolution</button>
+      <button data-section="web8">Web8 Intelligence</button>
+      <button data-section="security">Security</button>
+      <button data-section="iot">IoT</button>
+      <button data-section="api">API Gateway</button>
+      <button data-section="agi">AGI Platform</button>
+      <button data-section="mesh">Mesh</button>
+      <button data-section="ultra-industrial">Ultra Industrial</button>
+      <a class="metrics" href="/metrics" target="_blank">Prometheus /metrics</a>
+    </nav>
+  </header>
+
+  <main class="grid">
+    <section id="revolution" class="card wide">
+      <h2>🔥 Status der Revolution</h2>
+      <pre id="rev-json" class="json"></pre>
+    </section>
+
+    <section id="web8" class="card">
+      <h2>🧠 Web8-Intelligenz</h2>
+      <pre id="web8-json" class="json"></pre>
+    </section>
+
+    <section id="security" class="card">
+      <h2>🛡️ Cybersicherheit</h2>
+      <pre id="sec-json" class="json"></pre>
+    </section>
+
+    <section id="ultra-industrial" class="card">
+      <h2>🏭 Ultra Industrial</h2>
+      <div class="controls">
+        <button onclick="loadIndustrial('default')">General</button>
+        <button onclick="loadIndustrial('satellite')">Satellite</button>
+      </div>
+      <pre id="industrial-json" class="json"></pre>
+    </section>
+
+    <section id="iot" class="card">
+      <h2>📱 IoT Device Manager</h2>
+      <div class="hint">Konfiguro <code>IOT_URL</code> në .env për tërhequr të dhëna reale.</div>
+      <pre id="iot-json" class="json"></pre>
+    </section>
+
+    <section id="api" class="card">
+      <h2>🌐 API Gateway Dashboard</h2>
+      <div class="hint">Konfiguro <code>API_GATEWAY_URL</code> në .env.</div>
+      <pre id="api-json" class="json"></pre>
+    </section>
+
+    <section id="agi" class="card">
+      <h2>⚡ AGI Platform</h2>
+      <div class="hint">Konfiguro <code>AGI_CORE_URL</code> në .env.</div>
+      <pre id="agi-json" class="json"></pre>
+    </section>
+
+    <section id="mesh" class="card">
+      <h2>🌐 Continental Mesh</h2>
+      <div class="hint">Konfiguro <code>MESH_URL</code> në .env.</div>
+      <pre id="mesh-json" class="json"></pre>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>© 2025 EuroWeb • Made in Albania • Express.js + Vanilla JS • Real Metrics Only</div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

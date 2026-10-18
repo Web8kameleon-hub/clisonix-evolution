@@ -1,0 +1,32 @@
+source_loc: "apps/api/main.py:1026"
+side_effects:
+  - effect: "Initializes an in-process Ocean hub during application lifespan."
+    source_loc: "apps/api/main.py:1015"
+    must_preserve: true
+  - effect: "Executes labs on a worker thread and returns lab artifacts."
+    source_loc: "apps/api/main.py:1189"
+    must_preserve: true
+  - effect: "Writes EEG/audio uploads to configured storage."
+    source_loc: "apps/api/main.py:2330"
+    must_preserve: true
+  - effect: "ASI execute currently emits interpolated completed results without provider execution."
+    source_loc: "apps/api/main.py:4042"
+    must_preserve: false
+branches:
+  - condition: "Ocean hub import/initialization succeeds or is silently skipped."
+    source_loc: "apps/api/main.py:1017"
+    must_preserve: false
+  - condition: "Lab is available and lab_type is provided."
+    source_loc: "apps/api/main.py:1193"
+    must_preserve: true
+error_paths:
+  - contract: "Lab import failure is 503; other execution errors are 500."
+    source_loc: "apps/api/main.py:1209"
+    must_preserve: true
+  - contract: "Lifespan initialization failure is swallowed."
+    source_loc: "apps/api/main.py:1022"
+    must_preserve: false
+concurrency:
+  model: "FastAPI async routes; synchronous labs run through asyncio.to_thread; hub state is process-local."
+  tx_boundary: null
+

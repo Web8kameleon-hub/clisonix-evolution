@@ -1,0 +1,12 @@
+{
+  "test_name": "EuroWeb Ultra - Store & Forward Capacity",
+  "timestamp": "C:\\UltraBuild\\_verify\\euroweb-stabil\\tests\\mesh",
+  "hours": 72,
+  "messages_per_minute": 5,
+  "avg_msg_bytes": 1024,
+  "needed_storage_mb": 25.312,
+  "available_storage_mb": 512,
+  "fits": true,
+  "status": "PASS",
+  "aviation_compliance": true
+}

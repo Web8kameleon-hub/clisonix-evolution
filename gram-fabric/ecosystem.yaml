@@ -1,0 +1,38 @@
+version: gram-fabric/v1
+
+systems:
+  - id: os-clx
+    type: runtime
+    required: true
+
+  - id: kloud
+    type: compute
+    required: true
+
+  - id: lightning
+    type: fast-path
+    required: true
+
+  - id: cwy
+    type: orchestration
+    required: true
+
+  - id: web8
+    type: mesh
+    required: true
+
+  - id: euroweb
+    type: federation
+    required: true
+
+  - id: ultrawebthinking
+    type: planning
+    required: true
+
+  - id: neurosonic
+    type: cognition
+    required: true
+
+  - id: clisonix
+    type: product-platform
+    required: true

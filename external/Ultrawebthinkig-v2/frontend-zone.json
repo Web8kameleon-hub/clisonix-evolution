@@ -1,0 +1,10 @@
+{
+  "name": "ultrawebthinking-frontend-clean",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'Frontend Zone: Starting on port 3000' && echo 'Clean frontend ready!'",
+    "build": "echo 'Building frontend...'",
+    "start": "echo 'Starting production frontend...'"
+  }
+}

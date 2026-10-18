@@ -1,0 +1,270 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    /* 🇦🇱 ASI Custom Properties */
+    --asi-eagle-red: 346 83% 52%;
+    --asi-eagle-black: 0 0% 0%;
+    --asi-gold: 51 100% 50%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* 🎨 ASI Custom Components */
+  .asi-glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+
+  .asi-card {
+    @apply asi-glass rounded-xl p-6 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl;
+  }
+
+  .asi-button {
+    @apply px-6 py-3 rounded-lg font-medium transition-all duration-200 
+           bg-gradient-to-r from-blue-600 to-purple-600 text-white
+           hover:from-blue-700 hover:to-purple-700 hover:transform hover:scale-105
+           active:scale-95 shadow-lg hover:shadow-xl;
+  }
+
+  .asi-input {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-200 
+           focus:ring-2 focus:ring-blue-500 focus:border-transparent
+           bg-white/5 backdrop-blur-sm text-white placeholder-gray-300;
+  }
+
+  .asi-gradient-text {
+    @apply bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent;
+  }
+
+  .asi-hero-gradient {
+    @apply bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600;
+  }
+
+  .asi-cultural-gradient {
+    @apply bg-gradient-to-br from-red-500 via-yellow-500 to-green-500;
+  }
+
+  .asi-financial-gradient {
+    @apply bg-gradient-to-br from-green-500 via-blue-500 to-purple-500;
+  }
+
+  .asi-news-gradient {
+    @apply bg-gradient-to-br from-orange-500 via-pink-500 to-purple-500;
+  }
+
+  /* 📱 Responsive Grid Layouts */
+  .asi-dashboard-grid {
+    @apply grid gap-6 
+           grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  }
+
+  .asi-stats-grid {
+    @apply grid gap-4 
+           grid-cols-2 md:grid-cols-4;
+  }
+
+  .asi-chart-grid {
+    @apply grid gap-6 
+           grid-cols-1 lg:grid-cols-2;
+  }
+
+  /* ⚡ Animation Classes */
+  .asi-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .asi-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .asi-pulse {
+    animation: pulse 2s infinite;
+  }
+
+  .asi-bounce {
+    animation: bounce 1s infinite;
+  }
+}
+
+@layer utilities {
+  /* 🎨 Custom Utilities */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Background pattern disabled to avoid visual conflicts */
+
+  /* 🌍 Scrollbar Styling */
+  .asi-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .asi-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+
+  .asi-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+
+  .asi-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* 🎯 Custom Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* 🌟 Loading Animation */
+.asi-loading {
+  position: relative;
+}
+
+.asi-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #ffffff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 📱 Mobile Optimizations */
+@media (max-width: 768px) {
+  .asi-card {
+    @apply p-4;
+  }
+
+  .asi-dashboard-grid {
+    @apply grid-cols-1 gap-4;
+  }
+
+  .asi-stats-grid {
+    @apply grid-cols-1 gap-3;
+  }
+}
+
+/* 🎨 Print Styles */
+@media print {
+  .asi-no-print {
+    display: none !important;
+  }
+  
+  .asi-card {
+    @apply border border-gray-300 bg-white text-black;
+  }
+}

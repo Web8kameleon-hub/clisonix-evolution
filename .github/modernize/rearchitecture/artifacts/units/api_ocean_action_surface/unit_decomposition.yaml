@@ -1,0 +1,13 @@
+source_loc: "apps/api/main.py:1026"
+commit: false
+candidate_splits:
+  - name: action_fabric_router
+    drivers: [god_file, security_boundary, change_frequency]
+    rationale: "Manifest, execution, approval, events, and artifacts should be mounted as a dedicated router, leaving main.py as composition."
+  - name: labs_provider_adapter
+    drivers: [dependency_boundary, testability]
+    rationale: "Lab imports and synchronous execution must remain isolated from the control plane."
+  - name: upload_provider_adapters
+    drivers: [dependency_boundary, data_boundary]
+    rationale: "EEG/audio ML dependencies stay outside the core Action Fabric package."
+

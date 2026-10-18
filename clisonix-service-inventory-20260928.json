@@ -1,0 +1,1009 @@
+{
+  "checked_at": "2026-09-28T19:25:39.898619+00:00",
+  "configured_services": 133,
+  "containers_total": 102,
+  "containers_running": 97,
+  "services": [
+    {
+      "service": "gram",
+      "container": "clisonix-gram",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "longo",
+      "container": "clisonix-longo",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "postgres",
+      "container": "clisonix-postgres",
+      "profiles": [
+        "legacy-postgres"
+      ],
+      "state": "exited",
+      "health": "unhealthy"
+    },
+    {
+      "service": "mongodb",
+      "container": "clisonix-mongodb",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "redis",
+      "container": "clisonix-redis",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "neo4j",
+      "container": "clisonix-neo4j",
+      "profiles": [],
+      "state": "restarting",
+      "health": "unhealthy"
+    },
+    {
+      "service": "minio",
+      "container": "clisonix-minio",
+      "profiles": [],
+      "state": "restarting",
+      "health": "unhealthy"
+    },
+    {
+      "service": "alba",
+      "container": "clisonix-alba",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "albi",
+      "container": "clisonix-albi",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "albi-user",
+      "container": "clisonix-albi-user",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "jona",
+      "container": "clisonix-jona",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "ollama",
+      "container": "clisonix-ollama",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "ollama-multi-api",
+      "container": "clisonix-ollama-multi-api",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "ocean-core",
+      "container": "clisonix-ocean-core",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "ocean-mission-service",
+      "container": "clisonix-ocean-mission",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "kloud-upstream-runtime",
+      "container": "clisonix-kloud-upstream-runtime",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "kloud-bridge",
+      "container": "clisonix-kloud-bridge",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "kloud-rust-node",
+      "container": "clisonix-kloud-rust-node",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "regulatory-service",
+      "container": "clisonix-regulatory",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "ocean-core-multimodal",
+      "container": "clisonix-ocean-core-multimodal",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "ocean-core-strict-chat",
+      "container": "clisonix-ocean-core-strict-chat",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "ocean-core-blerina",
+      "container": "clisonix-ocean-core-blerina",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "aviation",
+      "container": "clisonix-aviation",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "api",
+      "container": "clisonix-api",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "matia",
+      "container": "clisonix-matia",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "shopping-therapy",
+      "container": "clisonix-shopping-therapy",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "openmind",
+      "container": "clisonix-openmind",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "web",
+      "container": "clisonix-web",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "victoriametrics",
+      "container": "clisonix-victoriametrics",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "prometheus",
+      "container": "clisonix-prometheus",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "grafana",
+      "container": "clisonix-grafana",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "loki",
+      "container": "clisonix-loki",
+      "profiles": [
+        "monitoring"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "jaeger",
+      "container": "clisonix-jaeger",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "tempo",
+      "container": "clisonix-tempo",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "nginx",
+      "container": "clisonix-nginx",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "asi",
+      "container": "clisonix-asi",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "marketplace",
+      "container": "clisonix-marketplace",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "developer-portal",
+      "container": "clisonix-developer-portal",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "clx-i",
+      "container": "clisonix-clx-i",
+      "profiles": [],
+      "state": "running",
+      "health": "unhealthy"
+    },
+    {
+      "service": "usage-analytics",
+      "container": "clisonix-analytics",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "content-factory",
+      "container": "clisonix-content-factory",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "linkedin-poster",
+      "container": "clisonix-linkedin-poster",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "lagter",
+      "container": "clisonix-lagter",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "video-generator",
+      "container": "clisonix-video-generator",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "alphabet-layers",
+      "container": "clisonix-alphabet-layers",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "liam",
+      "container": "clisonix-liam",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "alda",
+      "container": "clisonix-alda",
+      "profiles": [],
+      "state": "running",
+      "health": "unhealthy"
+    },
+    {
+      "service": "alba-idle",
+      "container": "clisonix-alba-idle",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "blerina",
+      "container": "clisonix-blerina",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "dr_albana",
+      "container": "clisonix-dr-albana",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "blog_publisher",
+      "container": "clisonix-blog-publisher",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "blog-paywall",
+      "container": "clisonix-blog-paywall",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "saas-api",
+      "container": "clisonix-saas-api",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "personas",
+      "container": "clisonix-personas",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "bridges",
+      "container": "clisonix-bridges",
+      "profiles": [],
+      "state": "exited",
+      "health": "not_defined"
+    },
+    {
+      "service": "multi-tenant",
+      "container": "clisonix-multi-tenant",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "user-management",
+      "container": "clisonix-user-management",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "tide",
+      "container": "clisonix-tide",
+      "profiles": [],
+      "state": "running",
+      "health": "unhealthy"
+    },
+    {
+      "service": "intelligence-lab",
+      "container": "clisonix-intelligence-lab",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "agiem",
+      "container": "clisonix-agiem",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "datasource-europe",
+      "container": "clisonix-datasource-europe",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "datasource-americas",
+      "container": "clisonix-datasource-americas",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "datasource-asia",
+      "container": "clisonix-datasource-asia",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "datasource-india",
+      "container": "clisonix-datasource-india",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "datasource-africa",
+      "container": "clisonix-datasource-africa",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "datasource-oceania",
+      "container": "clisonix-datasource-oceania",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "datasource-central-asia",
+      "container": "clisonix-datasource-central-asia",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "datasource-antarctica",
+      "container": "clisonix-datasource-antarctica",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "agent-telemetry",
+      "container": "clisonix-agent-telemetry",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "cognitive-engine",
+      "container": "clisonix-cognitive-engine",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "adaptive-router",
+      "container": "clisonix-adaptive-router",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "excel",
+      "container": "clisonix-excel",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "reporting",
+      "container": "clisonix-reporting",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "economy",
+      "container": "clisonix-economy",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "behavioral",
+      "container": "clisonix-behavioral",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "cycle",
+      "container": "clisonix-cycle",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "neurosonix",
+      "container": "clisonix-neurosonix",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "analytics",
+      "container": "clisonix-advanced-analytics",
+      "profiles": [
+        "legacy-postgres"
+      ],
+      "state": "created",
+      "health": "not_defined"
+    },
+    {
+      "service": "saas",
+      "container": "clisonix-saas",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "biometric",
+      "container": "clisonix-biometric",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "userdata",
+      "container": "clisonix-userdata",
+      "profiles": [
+        "legacy-postgres"
+      ],
+      "state": "created",
+      "health": "not_defined"
+    },
+    {
+      "service": "curiosity",
+      "container": "clisonix-curiosity",
+      "profiles": [],
+      "state": "exited",
+      "health": "unhealthy"
+    },
+    {
+      "service": "knowledge",
+      "container": "clisonix-knowledge",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "crawler",
+      "container": "clisonix-crawler",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "lab-elbasan",
+      "container": "clisonix-lab-elbasan",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-tirana",
+      "container": "clisonix-lab-tirana",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-durres",
+      "container": "clisonix-lab-durres",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-vlore",
+      "container": "clisonix-lab-vlore",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-shkoder",
+      "container": "clisonix-lab-shkoder",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-korce",
+      "container": "clisonix-lab-korce",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-saranda",
+      "container": "clisonix-lab-saranda",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-prishtina",
+      "container": "clisonix-lab-prishtina",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-kostur",
+      "container": "clisonix-lab-kostur",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-athens",
+      "container": "clisonix-lab-athens",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-rome",
+      "container": "clisonix-lab-rome",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-zurich",
+      "container": "clisonix-lab-zurich",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-beograd",
+      "container": "clisonix-lab-beograd",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-sofia",
+      "container": "clisonix-lab-sofia",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-zagreb",
+      "container": "clisonix-lab-zagreb",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-ljubljana",
+      "container": "clisonix-lab-ljubljana",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-vienna",
+      "container": "clisonix-lab-vienna",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-prague",
+      "container": "clisonix-lab-prague",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-budapest",
+      "container": "clisonix-lab-budapest",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-bucharest",
+      "container": "clisonix-lab-bucharest",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-istanbul",
+      "container": "clisonix-lab-istanbul",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-cairo",
+      "container": "clisonix-lab-cairo",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "lab-jerusalem",
+      "container": "clisonix-lab-jerusalem",
+      "profiles": [
+        "research"
+      ],
+      "state": "not_created",
+      "health": null
+    },
+    {
+      "service": "kitchen-worker",
+      "container": "clisonix-kitchen-worker",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "newsroom",
+      "container": "clisonix-newsroom",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "orchestra",
+      "container": "clisonix-orchestra",
+      "profiles": [],
+      "state": "restarting",
+      "health": "unhealthy"
+    },
+    {
+      "service": "athens-classical-lab",
+      "container": "clisonix-lab-athens-classical",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "beograd-industrial-lab",
+      "container": "clisonix-lab-beograd-industrial",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "bucharest-nanotechnology-lab",
+      "container": "clisonix-lab-bucharest-nanotechnology",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "budapest-data-lab",
+      "container": "clisonix-lab-budapest-data",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "cairo-archeology-lab",
+      "container": "clisonix-lab-cairo-archeology",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "durres-iot-lab",
+      "container": "clisonix-lab-durres-iot",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "elbasan-ai-lab",
+      "container": "clisonix-lab-elbasan-ai",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "istanbul-trade-lab",
+      "container": "clisonix-lab-istanbul-trade",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "jerusalem-heritage-lab",
+      "container": "clisonix-lab-jerusalem-heritage",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "korce-agricultural-lab",
+      "container": "clisonix-lab-korce-agricultural",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "kostur-energy-lab",
+      "container": "clisonix-lab-kostur-energy",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "ljubljana-quantum-lab",
+      "container": "clisonix-lab-ljubljana-quantum",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "prague-robotics-lab",
+      "container": "clisonix-lab-prague-robotics",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "prishtina-security-lab",
+      "container": "clisonix-lab-prishtina-security",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "rome-architecture-lab",
+      "container": "clisonix-lab-rome-architecture",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "sarrande-underwater-lab",
+      "container": "clisonix-lab-sarrande-underwater",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "shkoder-marine-lab",
+      "container": "clisonix-lab-shkoder-marine",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "sofia-chemistry-lab",
+      "container": "clisonix-lab-sofia-chemistry",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "tirana-medical-lab",
+      "container": "clisonix-lab-tirana-medical",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "vienna-neuroscience-lab",
+      "container": "clisonix-lab-vienna-neuroscience",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "vlore-environmental-lab",
+      "container": "clisonix-lab-vlore-environmental",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "zagreb-biotech-lab",
+      "container": "clisonix-lab-zagreb-biotech",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "zurich-finance-lab",
+      "container": "clisonix-lab-zurich-finance",
+      "profiles": [],
+      "state": "running",
+      "health": "healthy"
+    }
+  ]
+}

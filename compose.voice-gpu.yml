@@ -1,0 +1,37 @@
+# Private GPU speech recognition; no host ports are published.
+services:
+  voice-stt:
+    image: clisonix-voice-stt:20261011
+    build: ./services/ocean-voice-stt
+    container_name: clisonix-voice-stt
+    gpus: all
+    environment:
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+      VOICE_WHISPER_MODEL: large-v3-turbo
+    networks:
+      - clisonix-net
+    volumes:
+      - voice_whisper_models:/models
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 6G
+    healthcheck:
+      test: [CMD, python3, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8045/health', timeout=5)"]
+      interval: 15s
+      timeout: 6s
+      retries: 5
+      start_period: 300s
+
+networks:
+  clisonix-net:
+    external: true
+
+volumes:
+  voice_whisper_models:

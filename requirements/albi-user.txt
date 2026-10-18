@@ -1,0 +1,7 @@
+# ALBI user EEG API - isolated runtime dependencies
+fastapi>=0.115.6
+ijson>=3.3.0
+numpy>=1.26.4
+pydantic>=2.10.4
+pydantic-settings>=2.7.0
+uvicorn[standard]>=0.32.1

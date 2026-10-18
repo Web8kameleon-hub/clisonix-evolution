@@ -1,0 +1,2428 @@
+{
+  "spec_version": "clisonix.project-map/v1",
+  "generated_from": "mali.module-evaluation/v1",
+  "generated_at": "2026-09-02T22:23:10.400647+00:00",
+  "project": "clisonix-platform",
+  "central_orchestrator": "intelligence-lab",
+  "signal_stream": "clisonix:signals:v1",
+  "modules": {
+    "adaptive-router": {
+      "module_id": "adaptive-router",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "adaptive-router",
+      "health_url": null,
+      "source_references": {}
+    },
+    "agent-telemetry": {
+      "module_id": "agent-telemetry",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "agent-telemetry",
+      "health_url": null,
+      "source_references": {}
+    },
+    "agiem": {
+      "module_id": "agiem",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "agiem",
+      "health_url": null,
+      "source_references": {}
+    },
+    "alba": {
+      "module_id": "alba",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "alba",
+      "health_url": null,
+      "source_references": {}
+    },
+    "alba-idle": {
+      "module_id": "alba-idle",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "alba-idle",
+      "health_url": null,
+      "source_references": {}
+    },
+    "albi": {
+      "module_id": "albi",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "albi",
+      "health_url": null,
+      "source_references": {}
+    },
+    "albi-user": {
+      "module_id": "albi-user",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "albi-user",
+      "health_url": null,
+      "source_references": {}
+    },
+    "alda": {
+      "module_id": "alda",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "alda",
+      "health_url": null,
+      "source_references": {}
+    },
+    "alphabet-layers": {
+      "module_id": "alphabet-layers",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "alphabet-layers",
+      "health_url": null,
+      "source_references": {}
+    },
+    "analytics": {
+      "module_id": "analytics",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "analytics",
+      "health_url": null,
+      "source_references": {}
+    },
+    "api": {
+      "module_id": "api",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "longo",
+        "redis",
+        "jona",
+        "reporting"
+      ],
+      "service": "api",
+      "health_url": null,
+      "source_references": {}
+    },
+    "asi": {
+      "module_id": "asi",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "asi",
+      "health_url": null,
+      "source_references": {}
+    },
+    "aviation": {
+      "module_id": "aviation",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "aviation",
+      "health_url": null,
+      "source_references": {}
+    },
+    "behavioral": {
+      "module_id": "behavioral",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "behavioral",
+      "health_url": null,
+      "source_references": {}
+    },
+    "biometric": {
+      "module_id": "biometric",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "biometric",
+      "health_url": null,
+      "source_references": {}
+    },
+    "blerina": {
+      "module_id": "blerina",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "ollama",
+        "video-generator"
+      ],
+      "service": "blerina",
+      "health_url": null,
+      "source_references": {}
+    },
+    "blog-paywall": {
+      "module_id": "blog-paywall",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "blog-paywall",
+      "health_url": null,
+      "source_references": {}
+    },
+    "blog_publisher": {
+      "module_id": "blog_publisher",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "blerina",
+        "dr_albana"
+      ],
+      "service": "blog_publisher",
+      "health_url": null,
+      "source_references": {}
+    },
+    "clx-agent": {
+      "module_id": "clx-agent",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "clx-agent",
+      "health_url": null,
+      "source_references": {}
+    },
+    "clx-brain": {
+      "module_id": "clx-brain",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "ollama"
+      ],
+      "service": "clx-brain",
+      "health_url": null,
+      "source_references": {}
+    },
+    "clx-hybrid": {
+      "module_id": "clx-hybrid",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "clx-agent",
+        "clx-brain",
+        "clx-i"
+      ],
+      "service": "clx-hybrid",
+      "health_url": null,
+      "source_references": {}
+    },
+    "clx-i": {
+      "module_id": "clx-i",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "clx-i",
+      "health_url": null,
+      "source_references": {}
+    },
+    "cognitive-engine": {
+      "module_id": "cognitive-engine",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "cognitive-engine",
+      "health_url": null,
+      "source_references": {}
+    },
+    "content-factory": {
+      "module_id": "content-factory",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "ollama"
+      ],
+      "service": "content-factory",
+      "health_url": null,
+      "source_references": {}
+    },
+    "crawler": {
+      "module_id": "crawler",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "crawler",
+      "health_url": null,
+      "source_references": {}
+    },
+    "curiosity": {
+      "module_id": "curiosity",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "ocean-core"
+      ],
+      "service": "curiosity",
+      "health_url": null,
+      "source_references": {}
+    },
+    "cycle": {
+      "module_id": "cycle",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "cycle",
+      "health_url": null,
+      "source_references": {}
+    },
+    "datasource-africa": {
+      "module_id": "datasource-africa",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "datasource-africa",
+      "health_url": null,
+      "source_references": {}
+    },
+    "datasource-americas": {
+      "module_id": "datasource-americas",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "datasource-americas",
+      "health_url": null,
+      "source_references": {}
+    },
+    "datasource-antarctica": {
+      "module_id": "datasource-antarctica",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "datasource-antarctica",
+      "health_url": null,
+      "source_references": {}
+    },
+    "datasource-asia": {
+      "module_id": "datasource-asia",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "datasource-asia",
+      "health_url": null,
+      "source_references": {}
+    },
+    "datasource-central-asia": {
+      "module_id": "datasource-central-asia",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "datasource-central-asia",
+      "health_url": null,
+      "source_references": {}
+    },
+    "datasource-europe": {
+      "module_id": "datasource-europe",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "datasource-europe",
+      "health_url": null,
+      "source_references": {}
+    },
+    "datasource-india": {
+      "module_id": "datasource-india",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "datasource-india",
+      "health_url": null,
+      "source_references": {}
+    },
+    "datasource-oceania": {
+      "module_id": "datasource-oceania",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "datasource-oceania",
+      "health_url": null,
+      "source_references": {}
+    },
+    "developer-portal": {
+      "module_id": "developer-portal",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "marketplace"
+      ],
+      "service": "developer-portal",
+      "health_url": null,
+      "source_references": {}
+    },
+    "dr_albana": {
+      "module_id": "dr_albana",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "ollama"
+      ],
+      "service": "dr_albana",
+      "health_url": null,
+      "source_references": {}
+    },
+    "economy": {
+      "module_id": "economy",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "economy",
+      "health_url": null,
+      "source_references": {}
+    },
+    "excel": {
+      "module_id": "excel",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "excel",
+      "health_url": null,
+      "source_references": {}
+    },
+    "grafana": {
+      "module_id": "grafana",
+      "checks": {
+        "declared": true,
+        "source_context_exists": null,
+        "dockerfile_exists": null,
+        "image_declared": true,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 55,
+      "dependencies": [
+        "prometheus",
+        "victoriametrics"
+      ],
+      "service": "grafana",
+      "health_url": null,
+      "source_references": {}
+    },
+    "gram": {
+      "module_id": "gram",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis",
+        "intelligence-lab"
+      ],
+      "service": "gram",
+      "health_url": null,
+      "source_references": {}
+    },
+    "intelligence-lab": {
+      "module_id": "intelligence-lab",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "intelligence-lab",
+      "health_url": null,
+      "source_references": {}
+    },
+    "jaeger": {
+      "module_id": "jaeger",
+      "checks": {
+        "declared": true,
+        "source_context_exists": null,
+        "dockerfile_exists": null,
+        "image_declared": true,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 55,
+      "dependencies": [],
+      "service": "jaeger",
+      "health_url": null,
+      "source_references": {}
+    },
+    "jona": {
+      "module_id": "jona",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "jona",
+      "health_url": null,
+      "source_references": {}
+    },
+    "kitchen-worker": {
+      "module_id": "kitchen-worker",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "kitchen-worker",
+      "health_url": null,
+      "source_references": {}
+    },
+    "kloud-bridge": {
+      "module_id": "kloud-bridge",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "kloud-upstream-runtime"
+      ],
+      "service": "kloud-bridge",
+      "health_url": null,
+      "source_references": {}
+    },
+    "kloud-rust-node": {
+      "module_id": "kloud-rust-node",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "kloud-bridge"
+      ],
+      "service": "kloud-rust-node",
+      "health_url": null,
+      "source_references": {}
+    },
+    "kloud-upstream-runtime": {
+      "module_id": "kloud-upstream-runtime",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "kloud-upstream-runtime",
+      "health_url": null,
+      "source_references": {}
+    },
+    "knowledge": {
+      "module_id": "knowledge",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "knowledge",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-athens": {
+      "module_id": "lab-athens",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-athens",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-beograd": {
+      "module_id": "lab-beograd",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-beograd",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-bucharest": {
+      "module_id": "lab-bucharest",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-bucharest",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-budapest": {
+      "module_id": "lab-budapest",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-budapest",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-cairo": {
+      "module_id": "lab-cairo",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-cairo",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-durres": {
+      "module_id": "lab-durres",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-durres",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-elbasan": {
+      "module_id": "lab-elbasan",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-elbasan",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-istanbul": {
+      "module_id": "lab-istanbul",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-istanbul",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-jerusalem": {
+      "module_id": "lab-jerusalem",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-jerusalem",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-korce": {
+      "module_id": "lab-korce",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-korce",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-kostur": {
+      "module_id": "lab-kostur",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-kostur",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-ljubljana": {
+      "module_id": "lab-ljubljana",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-ljubljana",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-prague": {
+      "module_id": "lab-prague",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-prague",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-prishtina": {
+      "module_id": "lab-prishtina",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-prishtina",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-rome": {
+      "module_id": "lab-rome",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-rome",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-saranda": {
+      "module_id": "lab-saranda",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-saranda",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-shkoder": {
+      "module_id": "lab-shkoder",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-shkoder",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-sofia": {
+      "module_id": "lab-sofia",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-sofia",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-tirana": {
+      "module_id": "lab-tirana",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-tirana",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-vienna": {
+      "module_id": "lab-vienna",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-vienna",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-vlore": {
+      "module_id": "lab-vlore",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-vlore",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-zagreb": {
+      "module_id": "lab-zagreb",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-zagreb",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lab-zurich": {
+      "module_id": "lab-zurich",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "lab-zurich",
+      "health_url": null,
+      "source_references": {}
+    },
+    "lagter": {
+      "module_id": "lagter",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "blog_publisher"
+      ],
+      "service": "lagter",
+      "health_url": null,
+      "source_references": {}
+    },
+    "liam": {
+      "module_id": "liam",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "liam",
+      "health_url": null,
+      "source_references": {}
+    },
+    "linkedin-poster": {
+      "module_id": "linkedin-poster",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "linkedin-poster",
+      "health_url": null,
+      "source_references": {}
+    },
+    "longo": {
+      "module_id": "longo",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "longo",
+      "health_url": null,
+      "source_references": {}
+    },
+    "marketplace": {
+      "module_id": "marketplace",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "marketplace",
+      "health_url": null,
+      "source_references": {}
+    },
+    "matia": {
+      "module_id": "matia",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "matia",
+      "health_url": null,
+      "source_references": {}
+    },
+    "minio": {
+      "module_id": "minio",
+      "checks": {
+        "declared": true,
+        "source_context_exists": null,
+        "dockerfile_exists": null,
+        "image_declared": true,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 55,
+      "dependencies": [],
+      "service": "minio",
+      "health_url": null,
+      "source_references": {}
+    },
+    "mongodb": {
+      "module_id": "mongodb",
+      "checks": {
+        "declared": true,
+        "source_context_exists": null,
+        "dockerfile_exists": null,
+        "image_declared": true,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 55,
+      "dependencies": [],
+      "service": "mongodb",
+      "health_url": null,
+      "source_references": {}
+    },
+    "multi-tenant": {
+      "module_id": "multi-tenant",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "multi-tenant",
+      "health_url": null,
+      "source_references": {}
+    },
+    "neo4j": {
+      "module_id": "neo4j",
+      "checks": {
+        "declared": true,
+        "source_context_exists": null,
+        "dockerfile_exists": null,
+        "image_declared": true,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 55,
+      "dependencies": [],
+      "service": "neo4j",
+      "health_url": null,
+      "source_references": {}
+    },
+    "neurosonix": {
+      "module_id": "neurosonix",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "neurosonix",
+      "health_url": null,
+      "source_references": {}
+    },
+    "newsroom": {
+      "module_id": "newsroom",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "newsroom",
+      "health_url": null,
+      "source_references": {}
+    },
+    "nginx": {
+      "module_id": "nginx",
+      "checks": {
+        "declared": true,
+        "source_context_exists": null,
+        "dockerfile_exists": null,
+        "image_declared": true,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 55,
+      "dependencies": [
+        "api",
+        "web"
+      ],
+      "service": "nginx",
+      "health_url": null,
+      "source_references": {}
+    },
+    "ocean-core": {
+      "module_id": "ocean-core",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "clx-agent",
+        "clx-brain",
+        "translation-node",
+        "ocean-core-multimodal",
+        "kloud-bridge"
+      ],
+      "service": "ocean-core",
+      "health_url": null,
+      "source_references": {}
+    },
+    "ocean-core-blerina": {
+      "module_id": "ocean-core-blerina",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "ollama"
+      ],
+      "service": "ocean-core-blerina",
+      "health_url": null,
+      "source_references": {}
+    },
+    "ocean-core-multimodal": {
+      "module_id": "ocean-core-multimodal",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "ollama"
+      ],
+      "service": "ocean-core-multimodal",
+      "health_url": null,
+      "source_references": {}
+    },
+    "ocean-core-strict-chat": {
+      "module_id": "ocean-core-strict-chat",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "ollama"
+      ],
+      "service": "ocean-core-strict-chat",
+      "health_url": null,
+      "source_references": {}
+    },
+    "ocean-mission-service": {
+      "module_id": "ocean-mission-service",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "ocean-mission-service",
+      "health_url": null,
+      "source_references": {}
+    },
+    "ollama": {
+      "module_id": "ollama",
+      "checks": {
+        "declared": true,
+        "source_context_exists": null,
+        "dockerfile_exists": null,
+        "image_declared": true,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 55,
+      "dependencies": [],
+      "service": "ollama",
+      "health_url": null,
+      "source_references": {}
+    },
+    "ollama-multi-api": {
+      "module_id": "ollama-multi-api",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "ollama"
+      ],
+      "service": "ollama-multi-api",
+      "health_url": null,
+      "source_references": {}
+    },
+    "openmind": {
+      "module_id": "openmind",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "ocean-core"
+      ],
+      "service": "openmind",
+      "health_url": null,
+      "source_references": {}
+    },
+    "orchestra": {
+      "module_id": "orchestra",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "orchestra",
+      "health_url": null,
+      "source_references": {}
+    },
+    "personas": {
+      "module_id": "personas",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "personas",
+      "health_url": null,
+      "source_references": {}
+    },
+    "prometheus": {
+      "module_id": "prometheus",
+      "checks": {
+        "declared": true,
+        "source_context_exists": null,
+        "dockerfile_exists": null,
+        "image_declared": true,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 55,
+      "dependencies": [],
+      "service": "prometheus",
+      "health_url": null,
+      "source_references": {}
+    },
+    "redis": {
+      "module_id": "redis",
+      "checks": {
+        "declared": true,
+        "source_context_exists": null,
+        "dockerfile_exists": null,
+        "image_declared": true,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 55,
+      "dependencies": [],
+      "service": "redis",
+      "health_url": null,
+      "source_references": {}
+    },
+    "regulatory-service": {
+      "module_id": "regulatory-service",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "regulatory-service",
+      "health_url": null,
+      "source_references": {}
+    },
+    "reporting": {
+      "module_id": "reporting",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "reporting",
+      "health_url": null,
+      "source_references": {}
+    },
+    "saas": {
+      "module_id": "saas",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "saas",
+      "health_url": null,
+      "source_references": {}
+    },
+    "saas-api": {
+      "module_id": "saas-api",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "saas-api",
+      "health_url": null,
+      "source_references": {}
+    },
+    "shopping-therapy": {
+      "module_id": "shopping-therapy",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "shopping-therapy",
+      "health_url": null,
+      "source_references": {}
+    },
+    "tempo": {
+      "module_id": "tempo",
+      "checks": {
+        "declared": true,
+        "source_context_exists": null,
+        "dockerfile_exists": null,
+        "image_declared": true,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 55,
+      "dependencies": [],
+      "service": "tempo",
+      "health_url": null,
+      "source_references": {}
+    },
+    "translation-node": {
+      "module_id": "translation-node",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "translation-node",
+      "health_url": null,
+      "source_references": {}
+    },
+    "usage-analytics": {
+      "module_id": "usage-analytics",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "usage-analytics",
+      "health_url": null,
+      "source_references": {}
+    },
+    "user-management": {
+      "module_id": "user-management",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "user-management",
+      "health_url": null,
+      "source_references": {}
+    },
+    "userdata": {
+      "module_id": "userdata",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [
+        "redis"
+      ],
+      "service": "userdata",
+      "health_url": null,
+      "source_references": {}
+    },
+    "victoriametrics": {
+      "module_id": "victoriametrics",
+      "checks": {
+        "declared": true,
+        "source_context_exists": null,
+        "dockerfile_exists": null,
+        "image_declared": true,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 55,
+      "dependencies": [],
+      "service": "victoriametrics",
+      "health_url": null,
+      "source_references": {}
+    },
+    "video-generator": {
+      "module_id": "video-generator",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": true,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 46,
+      "dependencies": [],
+      "service": "video-generator",
+      "health_url": null,
+      "source_references": {}
+    },
+    "web": {
+      "module_id": "web",
+      "checks": {
+        "declared": true,
+        "source_context_exists": true,
+        "dockerfile_exists": true,
+        "image_declared": false,
+        "healthcheck_declared": false,
+        "dependencies_resolve": true
+      },
+      "runtime": {
+        "tested": false,
+        "healthy": null
+      },
+      "grade": "UNVERIFIED",
+      "score": 37,
+      "dependencies": [
+        "api",
+        "ocean-core",
+        "matia",
+        "shopping-therapy",
+        "openmind"
+      ],
+      "service": "web",
+      "health_url": null,
+      "source_references": {}
+    }
+  }
+}

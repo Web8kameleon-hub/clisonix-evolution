@@ -1,0 +1,10 @@
+source_loc: "saas_services_orchestrator_v3.py:75"
+commit: false
+candidate_splits:
+  - name: contract_evidence_only
+    drivers: [deployment_boundary, security_boundary]
+    rationale: "Reuse correlation and request field ideas, not this unauthenticated in-memory runtime."
+  - name: discard_arbitrary_proxy
+    drivers: [security_boundary, scope_control]
+    rationale: "Action Fabric dispatch is allowlisted by manifests and must not expose arbitrary service paths."
+

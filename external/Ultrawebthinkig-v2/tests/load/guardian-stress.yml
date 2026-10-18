@@ -1,0 +1,150 @@
+# Guardian Stress Testing Configuration
+# Industrial-grade security testing for EuroWeb Platform
+
+config:
+  target: 'http://localhost:3000'
+  phases:
+    # Warm-up phase
+    - duration: 60
+      arrivalRate: 10
+      name: "Warm-up"
+    
+    # Normal load
+    - duration: 120
+      arrivalRate: 50
+      name: "Normal Load"
+    
+    # High load
+    - duration: 180
+      arrivalRate: 100
+      name: "High Load"
+    
+    # DDoS simulation
+    - duration: 60
+      arrivalRate: 500
+      name: "DDoS Simulation"
+    
+    # Recovery phase
+    - duration: 120
+      arrivalRate: 20
+      name: "Recovery"
+
+  payload:
+    path: './test-data/payloads.csv'
+
+scenarios:
+  - name: "Normal User Behavior"
+    weight: 60
+    flow:
+      - get:
+          url: "/api/health"
+      - think: 1
+      - get:
+          url: "/api/agi/status"
+      - think: 2
+      - post:
+          url: "/api/agi/query"
+          json:
+            query: "Test AGI query"
+            model: "gpt-4"
+
+  - name: "SQL Injection Attempts"
+    weight: 10
+    flow:
+      - get:
+          url: "/api/search"
+          qs:
+            q: "'; DROP TABLE users; --"
+      - get:
+          url: "/api/users"
+          qs:
+            id: "1 OR 1=1"
+      - post:
+          url: "/api/login"
+          json:
+            username: "admin"
+            password: "' OR '1'='1"
+
+  - name: "XSS Attempts"
+    weight: 10
+    flow:
+      - get:
+          url: "/api/comments"
+          qs:
+            content: "<script>alert('XSS')</script>"
+      - post:
+          url: "/api/feedback"
+          json:
+            message: "<img src=x onerror=alert(1)>"
+      - get:
+          url: "/search"
+          qs:
+            q: "javascript:alert(document.cookie)"
+
+  - name: "Path Traversal Attempts"
+    weight: 5
+    flow:
+      - get:
+          url: "/files/../../etc/passwd"
+      - get:
+          url: "/download"
+          qs:
+            file: "../../../etc/shadow"
+      - get:
+          url: "/api/logs/%2e%2e%2f%2e%2e%2fconfig%2fsecrets"
+
+  - name: "Large Payload Attacks"
+    weight: 5
+    flow:
+      - post:
+          url: "/api/upload"
+          json:
+            data: "{{ $randomString(1000000) }}" # 1MB random data
+      - put:
+          url: "/api/data"
+          json:
+            payload: "{{ $randomString(2000000) }}" # 2MB random data
+
+  - name: "Suspicious User Agents"
+    weight: 10
+    flow:
+      - get:
+          url: "/api/status"
+          headers:
+            User-Agent: "python-requests/2.25.1"
+      - get:
+          url: "/api/health"
+          headers:
+            User-Agent: "curl/7.68.0"
+      - get:
+          url: "/robots.txt"
+          headers:
+            User-Agent: "Nikto/2.1.6"
+      - get:
+          url: "/api/admin"
+          headers:
+            User-Agent: "sqlmap/1.4.7"
+
+before:
+  flow:
+    - log: "Starting Guardian stress test..."
+
+after:
+  flow:
+    - log: "Guardian stress test completed"
+
+plugins:
+  expect:
+    - statusCode: [200, 403] # Allow both success and blocked responses
+  
+  metrics-by-endpoint:
+    - useOnlyRequestNames: true
+  
+  hdrhistogram: {}
+
+# Custom metrics for Guardian testing
+metrics:
+  - name: "guardian_blocks"
+    unit: "count"
+  - name: "response_time_blocked"
+    unit: "milliseconds"

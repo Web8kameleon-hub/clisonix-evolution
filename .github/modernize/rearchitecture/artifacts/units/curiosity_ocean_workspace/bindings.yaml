@@ -1,0 +1,15 @@
+source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:874"
+bindings:
+  - binding: "Next.js client page at /modules/curiosity-ocean"
+    source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1"
+    must_appear_in_target: true
+  - binding: "InputComposer prop callbacks bind camera, audio, document, send, and cancel."
+    source_loc: "apps/web/app/modules/curiosity-ocean/input-composer.tsx:5"
+    must_appear_in_target: true
+  - binding: "Auth client exposes userId, currently forwarded as a caller-controlled header."
+    source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:875"
+    must_appear_in_target: false
+runtime_config: []
+notes:
+  - "Use the already installed Zustand only if shared action state crosses extracted components."
+

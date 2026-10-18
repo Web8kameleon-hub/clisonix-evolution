@@ -1,0 +1,312 @@
+{
+  "info": {
+    "name": "EuroWeb Platform API - Complete Collection",
+    "description": "Complete API collection for EuroWeb Web8 Platform - OpenMind AI Gateway, Domain Management, Health Checks, and AGI Features",
+    "version": "2.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3001",
+      "description": "Base URL for local development"
+    },
+    {
+      "key": "production_url",
+      "value": "https://euroweb.ai",
+      "description": "Production URL"
+    },
+    {
+      "key": "api_key",
+      "value": "your-api-key",
+      "description": "API Key for authentication"
+    }
+  ],
+  "item": [
+    {
+      "name": "🏥 Health & Status",
+      "item": [
+        {
+          "name": "System Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/health",
+              "host": ["{{base_url}}"],
+              "path": ["api", "health"]
+            },
+            "description": "Check system health and uptime"
+          },
+          "response": []
+        },
+        {
+          "name": "API Version Info",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/version",
+              "host": ["{{base_url}}"],
+              "path": ["api", "version"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧠 OpenMind AI Gateway",
+      "item": [
+        {
+          "name": "Chat with OpenMind AI",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider\": \"openmind\",\n  \"message\": \"Hello, how can you help me today?\",\n  \"model\": \"gpt-4\",\n  \"temperature\": 0.7\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/openmind",
+              "host": ["{{base_url}}"],
+              "path": ["api", "openmind"]
+            },
+            "description": "Chat with OpenMind AI"
+          }
+        },
+        {
+          "name": "Chat with Claude",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider\": \"claude\",\n  \"message\": \"Explain quantum computing in simple terms\",\n  \"model\": \"claude-3-sonnet\",\n  \"temperature\": 0.5\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/openmind",
+              "host": ["{{base_url}}"],
+              "path": ["api", "openmind"]
+            }
+          }
+        },
+        {
+          "name": "Chat with GitHub Copilot",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider\": \"copilot\",\n  \"message\": \"Write a TypeScript function to sort an array\",\n  \"model\": \"copilot\",\n  \"temperature\": 0.3\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/openmind",
+              "host": ["{{base_url}}"],
+              "path": ["api", "openmind"]
+            }
+          }
+        },
+        {
+          "name": "Chat with DeepSeek",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider\": \"deepseek\",\n  \"message\": \"What are the latest trends in AI?\",\n  \"model\": \"deepseek-chat\",\n  \"temperature\": 0.7\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/openmind",
+              "host": ["{{base_url}}"],
+              "path": ["api", "openmind"]
+            }
+          }
+        },
+        {
+          "name": "Chat with OpenAI GPT",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider\": \"openai\",\n  \"message\": \"Create a business plan for a tech startup\",\n  \"model\": \"gpt-4\",\n  \"temperature\": 0.6\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/openmind",
+              "host": ["{{base_url}}"],
+              "path": ["api", "openmind"]
+            }
+          }
+        },
+        {
+          "name": "Chat with Google Gemini",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider\": \"gemini\",\n  \"message\": \"Analyze this data and provide insights\",\n  \"model\": \"gemini-pro\",\n  \"temperature\": 0.4\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/openmind",
+              "host": ["{{base_url}}"],
+              "path": ["api", "openmind"]
+            }
+          }
+        },
+        {
+          "name": "Chat with Perplexity",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider\": \"perplexity\",\n  \"message\": \"What are the latest news in technology?\",\n  \"model\": \"perplexity-chat\",\n  \"temperature\": 0.5\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/openmind",
+              "host": ["{{base_url}}"],
+              "path": ["api", "openmind"]
+            }
+          }
+        },
+        {
+          "name": "Get Available AI Providers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/openmind/providers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "openmind", "providers"]
+            },
+            "description": "Get list of available AI providers and their models"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🌐 Domain & Deployment",
+      "item": [
+        {
+          "name": "Check Domain Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{production_url}}/api/health",
+              "host": ["{{production_url}}"],
+              "path": ["api", "health"]
+            }
+          }
+        },
+        {
+          "name": "Verify SSL Certificate",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{production_url}}/api/ssl-info",
+              "host": ["{{production_url}}"],
+              "path": ["api", "ssl-info"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🛠️ Development Tools",
+      "item": [
+        {
+          "name": "Tech Guard Scan",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/tech-guard",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tech-guard"]
+            },
+            "description": "Run tech guard scan for forbidden technologies"
+          }
+        },
+        {
+          "name": "Build Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/build-status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "build-status"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Set dynamic variables",
+          "pm.environment.set('timestamp', Date.now());",
+          "pm.environment.set('random_id', Math.random().toString(36).substr(2, 9));"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Global test scripts",
+          "pm.test('Status code is successful', function () {",
+          "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+          "});",
+          "",
+          "pm.test('Response time is reasonable', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+          "});"
+        ]
+      }
+    }
+  ]
+}

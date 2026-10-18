@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 UltraWebThinking - TË GJITHA MODULET</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .stat {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        .stat h3 { font-size: 2rem; }
+        .category {
+            margin-bottom: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .category h2 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        .modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .module-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .module-card:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: #ffd700;
+            transform: translateY(-5px);
+        }
+        .module-card h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .module-card p {
+            margin-bottom: 8px;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        .status {
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .status.ready { background: #4CAF50; }
+        .status.testing { background: #FF9800; }
+        .status.success { background: #2196F3; }
+        .status.error { background: #F44336; }
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+        .btn {
+            background: #ffd700;
+            color: #333;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: #ffed4e;
+            transform: scale(1.05);
+        }
+        .log {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 400px;
+            max-height: 300px;
+            background: rgba(0,0,0,0.8);
+            border-radius: 15px;
+            padding: 15px;
+            overflow-y: auto;
+            display: none;
+        }
+        .log-entry {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 UltraWebThinking Platform</h1>
+        <p>TË GJITHA MODULET - Arkitekturë e unifikuar me një port të vetëm</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <h3>46</h3>
+            <p>Totali Moduleve</p>
+        </div>
+        <div class="stat">
+            <h3>11</h3>
+            <p>Kategori</p>
+        </div>
+        <div class="stat">
+            <h3>1</h3>
+            <p>Port (3000)</p>
+        </div>
+        <div class="stat">
+            <h3 id="active-count">0</h3>
+            <p>Aktive</p>
+        </div>
+    </div>
+
+    
+        <div class="category">
+          <h2>🔥 Security Systems (3 module)</h2>
+          <div class="modules">
+            
+              <div class="module-card" onclick="testModule('advanced-security', '/advanced-security')">
+                <h3>Advanced Security</h3>
+                <p>Endpoint: /api/security/advanced</p>
+                <p>Path: /advanced-security</p>
+                <div class="status" id="status-advanced-security">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('cyber-security', '/cyber-security')">
+                <h3>Cyber Security</h3>
+                <p>Endpoint: /api/security/cyber</p>
+                <p>Path: /cyber-security</p>
+                <div class="status" id="status-cyber-security">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('guardian-demo', '/guardian-demo')">
+                <h3>Guardian Demo</h3>
+                <p>Endpoint: /api/security/guardian</p>
+                <p>Path: /guardian-demo</p>
+                <div class="status" id="status-guardian-demo">⏳ Ready</div>
+              </div>
+            
+          </div>
+        </div>
+    
+        <div class="category">
+          <h2>🔥 AI & AGI Core (10 module)</h2>
+          <div class="modules">
+            
+              <div class="module-card" onclick="testModule('agi', '/agi')">
+                <h3>Agi</h3>
+                <p>Endpoint: /api/agi/</p>
+                <p>Path: /agi</p>
+                <div class="status" id="status-agi">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('agi-demo', '/agi-demo')">
+                <h3>Agi Demo</h3>
+                <p>Endpoint: /api/agi/demo</p>
+                <p>Path: /agi-demo</p>
+                <div class="status" id="status-agi-demo">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('agi-search-demo', '/agi-search-demo')">
+                <h3>Agi Search Demo</h3>
+                <p>Endpoint: /api/agi/search-demo</p>
+                <p>Path: /agi-search-demo</p>
+                <div class="status" id="status-agi-search-demo">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('agi-tunnel', '/agi-tunnel')">
+                <h3>Agi Tunnel</h3>
+                <p>Endpoint: /api/agi/tunnel</p>
+                <p>Path: /agi-tunnel</p>
+                <div class="status" id="status-agi-tunnel">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('agimed-professional', '/agimed-professional')">
+                <h3>Agimed Professional</h3>
+                <p>Endpoint: /api/agi/med-professional</p>
+                <p>Path: /agimed-professional</p>
+                <div class="status" id="status-agimed-professional">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('agixbionature-demo', '/agixbionature-demo')">
+                <h3>Agixbionature Demo</h3>
+                <p>Endpoint: /api/agi/xbionature-demo</p>
+                <p>Path: /agixbionature-demo</p>
+                <div class="status" id="status-agixbionature-demo">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('agixeco-demo', '/agixeco-demo')">
+                <h3>Agixeco Demo</h3>
+                <p>Endpoint: /api/agi/xeco-demo</p>
+                <p>Path: /agixeco-demo</p>
+                <div class="status" id="status-agixeco-demo">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('asi-12layer', '/asi-12layer')">
+                <h3>Asi 12layer</h3>
+                <p>Endpoint: /api/agi/asi-12layer</p>
+                <p>Path: /asi-12layer</p>
+                <div class="status" id="status-asi-12layer">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('asi-dashboard', '/asi-dashboard')">
+                <h3>Asi Dashboard</h3>
+                <p>Endpoint: /api/agi/asi-dashboard</p>
+                <p>Path: /asi-dashboard</p>
+                <div class="status" id="status-asi-dashboard">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('asi-ultimate', '/asi-ultimate')">
+                <h3>Asi Ultimate</h3>
+                <p>Endpoint: /api/agi/asi-ultimate</p>
+                <p>Path: /asi-ultimate</p>
+                <div class="status" id="status-asi-ultimate">⏳ Ready</div>
+              </div>
+            
+          </div>
+        </div>
+    
+        <div class="category">
+          <h2>🔥 Medical AI (2 module)</h2>
+          <div class="modules">
+            
+              <div class="module-card" onclick="testModule('albamed-demo', '/albamed-demo')">
+                <h3>Albamed Demo</h3>
+                <p>Endpoint: /api/medical/alba</p>
+                <p>Path: /albamed-demo</p>
+                <div class="status" id="status-albamed-demo">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('albion-utt', '/albion-utt')">
+                <h3>Albion Utt</h3>
+                <p>Endpoint: /api/medical/albion-utt</p>
+                <p>Path: /albion-utt</p>
+                <div class="status" id="status-albion-utt">⏳ Ready</div>
+              </div>
+            
+          </div>
+        </div>
+    
+        <div class="category">
+          <h2>🔥 System Utilities (7 module)</h2>
+          <div class="modules">
+            
+              <div class="module-card" onclick="testModule('api-gateway', '/api-gateway')">
+                <h3>Api Gateway</h3>
+                <p>Endpoint: /api/utilities/api-gateway</p>
+                <p>Path: /api-gateway</p>
+                <div class="status" id="status-api-gateway">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('base.json', '/base.json')">
+                <h3>Base.json</h3>
+                <p>Endpoint: /api/utilities/base.json</p>
+                <p>Path: /base.json</p>
+                <div class="status" id="status-base.json">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('browser', '/browser')">
+                <h3>Browser</h3>
+                <p>Endpoint: /api/utilities/browser</p>
+                <p>Path: /browser</p>
+                <div class="status" id="status-browser">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('overview', '/overview')">
+                <h3>Overview</h3>
+                <p>Endpoint: /api/utilities/overview</p>
+                <p>Path: /overview</p>
+                <div class="status" id="status-overview">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('revolution', '/revolution')">
+                <h3>Revolution</h3>
+                <p>Endpoint: /api/utilities/revolution</p>
+                <p>Path: /revolution</p>
+                <div class="status" id="status-revolution">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('time-compression', '/time-compression')">
+                <h3>Time Compression</h3>
+                <p>Endpoint: /api/utilities/time-compression</p>
+                <p>Path: /time-compression</p>
+                <div class="status" id="status-time-compression">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('utt-tools', '/utt-tools')">
+                <h3>Utt Tools</h3>
+                <p>Endpoint: /api/utilities/utt-tools</p>
+                <p>Path: /utt-tools</p>
+                <div class="status" id="status-utt-tools">⏳ Ready</div>
+              </div>
+            
+          </div>
+        </div>
+    
+        <div class="category">
+          <h2>🔥 Specialized Systems (2 module)</h2>
+          <div class="modules">
+            
+              <div class="module-card" onclick="testModule('aviation-weather', '/aviation-weather')">
+                <h3>Aviation Weather</h3>
+                <p>Endpoint: /api/specialized/aviation-weather</p>
+                <p>Path: /aviation-weather</p>
+                <div class="status" id="status-aviation-weather">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('radio-propaganda', '/radio-propaganda')">
+                <h3>Radio Propaganda</h3>
+                <p>Endpoint: /api/specialized/radio-propaganda</p>
+                <p>Path: /radio-propaganda</p>
+                <div class="status" id="status-radio-propaganda">⏳ Ready</div>
+              </div>
+            
+          </div>
+        </div>
+    
+        <div class="category">
+          <h2>🔥 Demos & Testing (3 module)</h2>
+          <div class="modules">
+            
+              <div class="module-card" onclick="testModule('cva-demo', '/cva-demo')">
+                <h3>Cva Demo</h3>
+                <p>Endpoint: /api/utilities/cva-demo</p>
+                <p>Path: /cva-demo</p>
+                <div class="status" id="status-cva-demo">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('fluid-demo', '/fluid-demo')">
+                <h3>Fluid Demo</h3>
+                <p>Endpoint: /api/utilities/fluid-demo</p>
+                <p>Path: /fluid-demo</p>
+                <div class="status" id="status-fluid-demo">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('lazy-demo', '/lazy-demo')">
+                <h3>Lazy Demo</h3>
+                <p>Endpoint: /api/utilities/lazy-demo</p>
+                <p>Path: /lazy-demo</p>
+                <div class="status" id="status-lazy-demo">⏳ Ready</div>
+              </div>
+            
+          </div>
+        </div>
+    
+        <div class="category">
+          <h2>🔥 Network & IoT (3 module)</h2>
+          <div class="modules">
+            
+              <div class="module-card" onclick="testModule('infinite-bandwidth', '/infinite-bandwidth')">
+                <h3>Infinite Bandwidth</h3>
+                <p>Endpoint: /api/network/infinite-bandwidth</p>
+                <p>Path: /infinite-bandwidth</p>
+                <div class="status" id="status-infinite-bandwidth">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('iot-manager', '/iot-manager')">
+                <h3>Iot Manager</h3>
+                <p>Endpoint: /api/network/iot-manager</p>
+                <p>Path: /iot-manager</p>
+                <div class="status" id="status-iot-manager">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('lora-mesh', '/lora-mesh')">
+                <h3>Lora Mesh</h3>
+                <p>Endpoint: /api/network/lora-mesh</p>
+                <p>Path: /lora-mesh</p>
+                <div class="status" id="status-lora-mesh">⏳ Ready</div>
+              </div>
+            
+          </div>
+        </div>
+    
+        <div class="category">
+          <h2>🔥 Performance Systems (6 module)</h2>
+          <div class="modules">
+            
+              <div class="module-card" onclick="testModule('light-speed-io', '/light-speed-io')">
+                <h3>Light Speed Io</h3>
+                <p>Endpoint: /api/performance/light-speed-io</p>
+                <p>Path: /light-speed-io</p>
+                <div class="status" id="status-light-speed-io">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('quantum-processing', '/quantum-processing')">
+                <h3>Quantum Processing</h3>
+                <p>Endpoint: /api/performance/quantum-processing</p>
+                <p>Path: /quantum-processing</p>
+                <div class="status" id="status-quantum-processing">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('ultra-industrial', '/ultra-industrial')">
+                <h3>Ultra Industrial</h3>
+                <p>Endpoint: /api/performance/ultra-industrial</p>
+                <p>Path: /ultra-industrial</p>
+                <div class="status" id="status-ultra-industrial">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('ultra-saas', '/ultra-saas')">
+                <h3>Ultra Saas</h3>
+                <p>Endpoint: /api/performance/ultra-saas</p>
+                <p>Path: /ultra-saas</p>
+                <div class="status" id="status-ultra-saas">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('ultra-speed', '/ultra-speed')">
+                <h3>Ultra Speed</h3>
+                <p>Endpoint: /api/performance/ultra-speed</p>
+                <p>Path: /ultra-speed</p>
+                <div class="status" id="status-ultra-speed">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('zero-latency', '/zero-latency')">
+                <h3>Zero Latency</h3>
+                <p>Endpoint: /api/performance/zero-latency</p>
+                <p>Path: /zero-latency</p>
+                <div class="status" id="status-zero-latency">⏳ Ready</div>
+              </div>
+            
+          </div>
+        </div>
+    
+        <div class="category">
+          <h2>🔥 AI & Neural Networks (7 module)</h2>
+          <div class="modules">
+            
+              <div class="module-card" onclick="testModule('neural-acceleration', '/neural-acceleration')">
+                <h3>Neural Acceleration</h3>
+                <p>Endpoint: /api/neural/acceleration</p>
+                <p>Path: /neural-acceleration</p>
+                <div class="status" id="status-neural-acceleration">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('neural-demo', '/neural-demo')">
+                <h3>Neural Demo</h3>
+                <p>Endpoint: /api/neural/demo</p>
+                <p>Path: /neural-demo</p>
+                <div class="status" id="status-neural-demo">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('neural-dev', '/neural-dev')">
+                <h3>Neural Dev</h3>
+                <p>Endpoint: /api/neural/dev</p>
+                <p>Path: /neural-dev</p>
+                <div class="status" id="status-neural-dev">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('neural-search-demo', '/neural-search-demo')">
+                <h3>Neural Search Demo</h3>
+                <p>Endpoint: /api/neural/search-demo</p>
+                <p>Path: /neural-search-demo</p>
+                <div class="status" id="status-neural-search-demo">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('openmind-chat', '/openmind-chat')">
+                <h3>Openmind Chat</h3>
+                <p>Endpoint: /api/neural/openmind-chat</p>
+                <p>Path: /openmind-chat</p>
+                <div class="status" id="status-openmind-chat">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('openmind-demo', '/openmind-demo')">
+                <h3>Openmind Demo</h3>
+                <p>Endpoint: /api/neural/openmind-demo</p>
+                <p>Path: /openmind-demo</p>
+                <div class="status" id="status-openmind-demo">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('openmind-enhanced', '/openmind-enhanced')">
+                <h3>Openmind Enhanced</h3>
+                <p>Endpoint: /api/neural/openmind-enhanced</p>
+                <p>Path: /openmind-enhanced</p>
+                <div class="status" id="status-openmind-enhanced">⏳ Ready</div>
+              </div>
+            
+          </div>
+        </div>
+    
+        <div class="category">
+          <h2>🔥 Search Engines (2 module)</h2>
+          <div class="modules">
+            
+              <div class="module-card" onclick="testModule('real-search-demo', '/real-search-demo')">
+                <h3>Real Search Demo</h3>
+                <p>Endpoint: /api/search/real</p>
+                <p>Path: /real-search-demo</p>
+                <div class="status" id="status-real-search-demo">⏳ Ready</div>
+              </div>
+            
+              <div class="module-card" onclick="testModule('web-search-demo', '/web-search-demo')">
+                <h3>Web Search Demo</h3>
+                <p>Endpoint: /api/search/web</p>
+                <p>Path: /web-search-demo</p>
+                <div class="status" id="status-web-search-demo">⏳ Ready</div>
+              </div>
+            
+          </div>
+        </div>
+    
+        <div class="category">
+          <h2>🔥 Business & SaaS (1 module)</h2>
+          <div class="modules">
+            
+              <div class="module-card" onclick="testModule('saas-dashboard', '/saas-dashboard')">
+                <h3>Saas Dashboard</h3>
+                <p>Endpoint: /api/saas/saas-dashboard</p>
+                <p>Path: /saas-dashboard</p>
+                <div class="status" id="status-saas-dashboard">⏳ Ready</div>
+              </div>
+            
+          </div>
+        </div>
+    
+
+    <div class="controls">
+        <button class="btn" onclick="testAllModules()">🧪 Test TË GJITHA</button>
+        <button class="btn" onclick="toggleLog()">📊 Log</button>
+        <button class="btn" onclick="startUnifiedSystem()">🚀 Nis Sistemin</button>
+    </div>
+
+    <div class="log" id="log"></div>
+
+    <script>
+        let activeModules = 0;
+
+        async function testModule(name, path) {
+            const statusEl = document.getElementById('status-' + name);
+            statusEl.textContent = '🔄 Testing...';
+            statusEl.className = 'status testing';
+            
+            log('🧪 Testing: ' + name);
+            
+            try {
+                const response = await fetch(path);
+                if (response.ok) {
+                    statusEl.textContent = '✅ Active';
+                    statusEl.className = 'status success';
+                    activeModules++;
+                    log('✅ ' + name + ': SUCCESS');
+                } else {
+                    statusEl.textContent = '⚠️ Error';
+                    statusEl.className = 'status error';
+                    log('⚠️ ' + name + ': HTTP ' + response.status);
+                }
+            } catch (error) {
+                statusEl.textContent = '❌ Offline';
+                statusEl.className = 'status error';
+                log('❌ ' + name + ': ' + error.message);
+            }
+            
+            document.getElementById('active-count').textContent = activeModules;
+        }
+
+        async function testAllModules() {
+            activeModules = 0;
+            log('🚀 Testing all 46 modules...');
+            
+            const modules = [
+                { name: 'advanced-security', path: '/advanced-security' },
+                { name: 'agi', path: '/agi' },
+                { name: 'agi-demo', path: '/agi-demo' },
+                { name: 'agi-search-demo', path: '/agi-search-demo' },
+                { name: 'agi-tunnel', path: '/agi-tunnel' },
+                { name: 'agimed-professional', path: '/agimed-professional' },
+                { name: 'agixbionature-demo', path: '/agixbionature-demo' },
+                { name: 'agixeco-demo', path: '/agixeco-demo' },
+                { name: 'albamed-demo', path: '/albamed-demo' },
+                { name: 'albion-utt', path: '/albion-utt' },
+                { name: 'api-gateway', path: '/api-gateway' },
+                { name: 'asi-12layer', path: '/asi-12layer' },
+                { name: 'asi-dashboard', path: '/asi-dashboard' },
+                { name: 'asi-ultimate', path: '/asi-ultimate' },
+                { name: 'aviation-weather', path: '/aviation-weather' },
+                { name: 'base.json', path: '/base.json' },
+                { name: 'browser', path: '/browser' },
+                { name: 'cva-demo', path: '/cva-demo' },
+                { name: 'cyber-security', path: '/cyber-security' },
+                { name: 'fluid-demo', path: '/fluid-demo' },
+                { name: 'guardian-demo', path: '/guardian-demo' },
+                { name: 'infinite-bandwidth', path: '/infinite-bandwidth' },
+                { name: 'iot-manager', path: '/iot-manager' },
+                { name: 'lazy-demo', path: '/lazy-demo' },
+                { name: 'light-speed-io', path: '/light-speed-io' },
+                { name: 'lora-mesh', path: '/lora-mesh' },
+                { name: 'neural-acceleration', path: '/neural-acceleration' },
+                { name: 'neural-demo', path: '/neural-demo' },
+                { name: 'neural-dev', path: '/neural-dev' },
+                { name: 'neural-search-demo', path: '/neural-search-demo' },
+                { name: 'openmind-chat', path: '/openmind-chat' },
+                { name: 'openmind-demo', path: '/openmind-demo' },
+                { name: 'openmind-enhanced', path: '/openmind-enhanced' },
+                { name: 'overview', path: '/overview' },
+                { name: 'quantum-processing', path: '/quantum-processing' },
+                { name: 'radio-propaganda', path: '/radio-propaganda' },
+                { name: 'real-search-demo', path: '/real-search-demo' },
+                { name: 'revolution', path: '/revolution' },
+                { name: 'saas-dashboard', path: '/saas-dashboard' },
+                { name: 'time-compression', path: '/time-compression' },
+                { name: 'ultra-industrial', path: '/ultra-industrial' },
+                { name: 'ultra-saas', path: '/ultra-saas' },
+                { name: 'ultra-speed', path: '/ultra-speed' },
+                { name: 'utt-tools', path: '/utt-tools' },
+                { name: 'web-search-demo', path: '/web-search-demo' },
+                { name: 'zero-latency', path: '/zero-latency' }
+            ];
+            
+            for (const module of modules) {
+                await testModule(module.name, module.path);
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+            
+            log(`🎯 Completed! ${activeModules}/${modules.length} active modules`);
+        }
+
+        function startUnifiedSystem() {
+            log('🚀 Starting UltraWebThinking unified system...');
+            log('🌐 All modules available on: http://localhost:3000');
+            alert('🚀 Sistema po niset...\n\nTë gjitha modulet do të jenë të disponueshme në:\nhttp://localhost:3000');
+        }
+
+        function log(message) {
+            const logEl = document.getElementById('log');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logEl.appendChild(entry);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function toggleLog() {
+            const logEl = document.getElementById('log');
+            logEl.style.display = logEl.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Initialize
+        log('📊 UltraWebThinking Dashboard loaded');
+        log('📈 Found 46 modules in 11 categories');
+    </script>
+</body>
+</html>

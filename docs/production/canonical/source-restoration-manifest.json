@@ -1,0 +1,13 @@
+{
+  "source_repository": "Web8kameleon-hub/clisonix.com",
+  "source_commit": "45d1dadf01691aab0c5a6a5202d3536b1d373c13",
+  "restored_files": 1459,
+  "ocean_source_path": "ocean_core/",
+  "mode": "add_missing_only",
+  "notes": [
+    "Existing destination files preserved.",
+    "Runtime secrets and environment files excluded.",
+    "External source files retained as normal files; not activated as runtime services.",
+    "Repository restoration does not prove a production deployment."
+  ]
+}

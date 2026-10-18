@@ -1,0 +1,98 @@
+name: EuroWeb CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  NODE_VERSION: '18.x'
+  RUST_VERSION: '1.75.0'
+
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+    name: Test Frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn type-check
+      - run: yarn lint:frontend
+      - run: yarn test frontend/
+      - run: yarn build:frontend
+
+  test-backend:
+    runs-on: ubuntu-latest
+    name: Test Backend & AGI
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn type-check:backend
+      - run: yarn lint:backend
+      - run: yarn test:industrial
+      - run: yarn build:backend
+
+  test-rust-ffi:
+    runs-on: ubuntu-latest
+    name: Test Rust FFI
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
+          override: true
+      - uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --manifest-path backend/rust/Cargo.toml
+
+  security-scan:
+    runs-on: ubuntu-latest
+    name: Security Scan
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn audit
+      - run: yarn security:scan
+
+  build-docker:
+    runs-on: ubuntu-latest
+    name: Build Docker Image
+    needs: [test-frontend, test-backend, test-rust-ffi]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker Image
+        run: |
+          docker build -t euroweb-platform:latest .
+          docker run --rm euroweb-platform:latest yarn --version
+
+  deploy-vercel:
+    runs-on: ubuntu-latest
+    name: Deploy to Vercel
+    needs: [test-frontend, test-backend, security-scan]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: yarn deploy:vercel

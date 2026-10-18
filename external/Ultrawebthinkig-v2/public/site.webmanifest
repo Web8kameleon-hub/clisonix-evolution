@@ -1,0 +1,18 @@
+{
+  "name": "EuroWeb Platform",
+  "short_name": "EuroWeb",
+  "description": "Advanced Web Platform with AI Integration",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2563eb",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

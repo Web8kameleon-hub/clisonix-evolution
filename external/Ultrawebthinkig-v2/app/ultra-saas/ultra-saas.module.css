@@ -1,0 +1,349 @@
+/* Ultra SaaS Platform CSS Module */
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  color: white;
+}
+
+.header {
+  padding: 2rem 0;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid #00ff88;
+}
+
+.headerContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.titleSection h1 {
+  font-size: 3rem;
+  margin: 0;
+  background: linear-gradient(45deg, #00ff88, #00ccff, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+.titleSection p {
+  font-size: 1.2rem;
+  color: #a0a0a0;
+  margin: 0.5rem 0 0 0;
+  text-align: center;
+}
+
+.dashboardLink {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(45deg, #00ff88, #00ccff);
+  color: black;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.dashboardLink:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 255, 136, 0.4);
+}
+
+.askAgiLink {
+  display: inline-block;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: #dc2626;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 700;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.askAgiLink:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.45);
+}
+
+.systemStats {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: #a0a0a0;
+  margin-bottom: 0.5rem;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00ff88;
+}
+
+.controls {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.searchContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.searchInput {
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(0, 255, 136, 0.3);
+  border-radius: 25px;
+  color: white;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: #00ff88;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.searchInput::placeholder {
+  color: #a0a0a0;
+}
+
+.categoryFilter {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.categoryBtn {
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.categoryBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.categoryBtn.active {
+  background: var(--category-color, #00ff88);
+  color: #000;
+  border-color: var(--category-color, #00ff88);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+}
+
+.main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem 2rem;
+}
+
+.categorySection {
+  margin-bottom: 4rem;
+}
+
+.categoryTitle {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.moduleCount {
+  font-size: 1rem;
+  color: #a0a0a0;
+  font-weight: normal;
+}
+
+.moduleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.moduleCard {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.moduleCard:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--module-color, #00ff88);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.moduleIcon {
+  font-size: 2.5rem;
+  margin-right: 1rem;
+  min-width: 60px;
+  text-align: center;
+}
+
+.moduleContent {
+  flex: 1;
+}
+
+.moduleTitle {
+  font-size: 1.3rem;
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statusBadge {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.statusBadge.active {
+  background: #00ff88;
+  color: #000;
+}
+
+.statusBadge.beta {
+  background: #ffa502;
+  color: #000;
+}
+
+.statusBadge.new {
+  background: #ff6b6b;
+  color: white;
+}
+
+.moduleDescription {
+  color: #a0a0a0;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.moduleAction {
+  margin-left: 1rem;
+  color: var(--module-color, #00ff88);
+  font-weight: bold;
+}
+
+.footer {
+  background: rgba(0, 0, 0, 0.5);
+  border-top: 2px solid #00ff88;
+  padding: 3rem 0 1rem 0;
+}
+
+.footerContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footerSection h4 {
+  color: #00ff88;
+  margin-bottom: 1rem;
+}
+
+.footerSection p {
+  color: #a0a0a0;
+  line-height: 1.6;
+}
+
+.footerBottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 2rem 0 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  color: #a0a0a0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .headerContent {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .titleSection h1 {
+    font-size: 2rem;
+  }
+
+  .systemStats {
+    justify-content: center;
+  }
+
+  .moduleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .moduleCard {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .moduleIcon {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .moduleAction {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+
+  .askAgiLink {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,10 @@
+source_loc: "ocean-core/ocean_multimodal.py:459"
+commit: false
+candidate_splits:
+  - name: multimodal_provider_manifest
+    drivers: [contract_boundary, capability_variation]
+    rationale: "Each mode needs an explicit schema and availability without changing one provider deployment."
+  - name: ollama_health_probe
+    drivers: [operational_boundary, error_contract]
+    rationale: "Dependency/model verification is independent of request dispatch."
+

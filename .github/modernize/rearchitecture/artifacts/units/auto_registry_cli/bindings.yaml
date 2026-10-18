@@ -1,0 +1,12 @@
+source_loc: "core/auto_registry.py:432"
+bindings:
+  - binding: "Argparse CLI entrypoint."
+    source_loc: "core/auto_registry.py:432"
+    must_appear_in_target: false
+  - binding: "Imported as a global singleton by core.service_bridge."
+    source_loc: "core/service_bridge.py:29"
+    must_appear_in_target: false
+runtime_config: []
+notes:
+  - "If retained, expose output as non-authoritative inventory import only."
+

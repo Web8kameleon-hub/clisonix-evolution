@@ -1,0 +1,52 @@
+user_intent:
+  goal: "Turn existing deployed capabilities into a unified, real action path instead of adding engines or repositories."
+  cleanup_required: false
+  acceptance_criteria:
+    - "Prompt or explicit action can select a declared, healthy capability."
+    - "Every dispatch is authorized and audited before provider execution."
+    - "Progress and terminal errors are derived from real execution events."
+    - "Artifacts retain provider provenance and are rendered by declared media/schema type."
+strategy: partial_federated_bridge
+smallest_runnable_boundary:
+  control_plane_owner: "Web8kameleon-hub/OS-CLX"
+  current_repository_role: "Product shell, BFF, compatibility adapters, and provider manifests."
+  note: "OS-CLX source was not part of this workspace audit; target paths there must be confirmed in that repository before implementation."
+must_rewrite:
+  - source_loc: "apps/web/app/api/service-discovery/route.ts:160"
+    reason: "Inferred capabilities and successful catalog fallback cannot drive execution."
+  - source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1032"
+    reason: "Caller-controlled user identity cannot authorize actions."
+  - source_loc: "apps/web/app/modules/curiosity-ocean/page.tsx:1728"
+    reason: "Single-file immediate execution must become attachment registration plus explicit action input."
+  - source_loc: "apps/web/app/api/ocean/stream/route.ts:369"
+    reason: "Prompt streaming needs authenticated action context and typed execution events."
+  - source_loc: "apps/web/app/api/ocean/document/route.ts:131"
+    reason: "Document actions need verified principal propagation and artifact provenance."
+  - source_loc: "apps/api/main.py:1189"
+    reason: "Lab execution must dispatch through the Action Fabric bridge rather than an unauthenticated direct route."
+  - source_loc: "apps/api/main.py:3977"
+    reason: "Synthetic completed execution results must be removed; unavailable execution returns a real error."
+  - source_loc: "ocean-core/ocean_multimodal.py:439"
+    reason: "Provider health must probe actual dependencies/models."
+copy_as_is:
+  - source_loc: "hybrid_saas_platform/labs/lab_executor.py:30"
+    reason: "Preserve real lab result and artifact production behind an adapter."
+  - source_loc: "core/engines/contract.py:115"
+    reason: "Reuse the existing engine request/response adapter contract inside providers."
+legacy_allowed_to_remain:
+  - "frontend/**"
+  - "saas_services_orchestrator.py"
+  - "saas_services_orchestrator_v3.py"
+  - "services/internal_agi/module_registry.py"
+  - "core/auto_registry.py"
+defer_cleanup:
+  - "Delete or consolidate unused registry/orchestrator prototypes only after runtime callers are measured."
+  - "Move control-plane ownership physically to OS-CLX after its repository structure and deployment contract are audited."
+target_create:
+  - "Versioned clx capability manifest schema"
+  - "Durable capability/provider registry"
+  - "Permission gateway and approval policy"
+  - "Action router with provider adapters"
+  - "Execution/event/artifact ledger"
+  - "Schema-driven result renderer and action progress store"
+
