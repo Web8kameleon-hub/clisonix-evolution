@@ -237,7 +237,7 @@ def collect_recursive_scan_stats(root: Path) -> dict[str, Any]:
     }
 
 
-def collect_api_routes(root: Path, limit: int = 500) -> list[dict[str, str]]:
+def collect_api_routes(root: Path, limit: int | None = None) -> list[dict[str, str]]:
     routes: list[dict[str, str]] = []
     for path in root.rglob("*"):
         if not path.is_file() or is_excluded(path, root):
@@ -265,7 +265,7 @@ def collect_api_routes(root: Path, limit: int = 500) -> list[dict[str, str]]:
                             "line": str(line_no),
                         }
                     )
-                    if len(routes) >= limit:
+                    if limit is not None and len(routes) >= limit:
                         return routes
     return routes
 
@@ -452,7 +452,7 @@ def build_report(root: Path) -> str:
     lines.append(render_table(dl_rows, ["ecosystem", "package", "download_url", "install_command"]))
 
     lines.append("## API Inventory")
-    api_rows = [[r["method"], r["route"], r["file"], r["line"]] for r in routes[:400]]
+    api_rows = [[r["method"], r["route"], r["file"], r["line"]] for r in routes]
     lines.append(render_table(api_rows, ["method", "route", "file", "line"]))
 
     lines.append("## Protocol Matrix")
@@ -491,15 +491,15 @@ def build_report(root: Path) -> str:
     lines.append(render_table(monetization_rows, ["path"]))
 
     lines.append("## npm Snapshot")
-    npm_rows = [[i["name"], i["version"], i["section"], i["file"]] for i in sorted(npm, key=lambda x: (x["name"], x["file"]))[:500]]
+    npm_rows = [[i["name"], i["version"], i["section"], i["file"]] for i in sorted(npm, key=lambda x: (x["name"], x["file"]))]
     lines.append(render_table(npm_rows, ["name", "version", "section", "file"]))
 
     lines.append("## PyPI Snapshot")
-    pypi_rows = [[i["name"], i["version"], i["section"], i["file"]] for i in sorted(pypi, key=lambda x: (x["name"], x["file"]))[:500]]
+    pypi_rows = [[i["name"], i["version"], i["section"], i["file"]] for i in sorted(pypi, key=lambda x: (x["name"], x["file"]))]
     lines.append(render_table(pypi_rows, ["name", "version", "section", "file"]))
 
     lines.append("## Cargo/Carter Snapshot")
-    cargo_rows = [[i["name"], i["version"], i["section"], i["file"]] for i in sorted(cargo, key=lambda x: (x["name"], x["file"]))[:500]]
+    cargo_rows = [[i["name"], i["version"], i["section"], i["file"]] for i in sorted(cargo, key=lambda x: (x["name"], x["file"]))]
     lines.append(render_table(cargo_rows, ["name", "version", "section", "file"]))
 
     lines.append("## Notes")
@@ -563,10 +563,39 @@ def build_payload(root: Path) -> dict[str, Any]:
                 for item in top_unique(cargo, 20)
             ],
         },
-        "api_inventory": routes[:300],
+        "packages": {"npm": npm, "pypi": pypi, "cargo": cargo},
+        "api_inventory": routes,
         "protocol_matrix": protocols[:200],
         "growth_tracks": growth_tracks,
     }
+
+
+
+def write_catalog_directories(destination: Path, payload: dict[str, Any]) -> None:
+    """Publish separate inventories without dropping package or route records."""
+    destination.mkdir(parents=True, exist_ok=True)
+    sections = {
+        **{name: (items, ["name", "version", "section", "file"])
+           for name, items in payload["packages"].items()},
+        "api": (payload["api_inventory"], ["method", "route", "file", "line"]),
+        "protocols": (payload["protocol_matrix"], ["protocol", "endpoint", "file"]),
+    }
+    index = ["# Public Package Catalog", "", f"Generated: {payload['generated_at']}", "",
+             "Source declarations discovered by static scan; runtime availability is not verified.", "",
+             "| Directory | Records | Markdown | JSON |", "| --- | --- | --- | --- |"]
+    for name, (items, headers) in sections.items():
+        folder = destination / name
+        folder.mkdir(parents=True, exist_ok=True)
+        (folder / "latest.json").write_text(
+            json.dumps(items, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        (folder / "README.md").write_text(
+            f"# {name} inventory\n\n[Catalog index](../README.md)\n\n"
+            + render_table([[str(item.get(key, "")) for key in headers] for item in items], headers),
+            encoding="utf-8")
+        index.append(f"| {name} | {len(items)} | [{name}]({name}/README.md) | [JSON]({name}/latest.json) |")
+    index.extend(["", "## Complete snapshots", "",
+                  "- [Markdown](latest.md)", "- [JSON](latest.json)", ""])
+    (destination / "README.md").write_text("\n".join(index), encoding="utf-8")
 
 
 def main() -> int:
@@ -574,6 +603,7 @@ def main() -> int:
     parser.add_argument("--root", default=".")
     parser.add_argument("--out", default=".github/reports/daily-package-catalog.md")
     parser.add_argument("--json-out", default="")
+    parser.add_argument("--catalog-dir", default="")
     args = parser.parse_args()
 
     root = Path(args.root).resolve()
@@ -585,13 +615,19 @@ def main() -> int:
     out.write_text(build_report(root), encoding="utf-8")
     print(f"Report written: {out}")
 
+    payload = build_payload(root) if args.json_out or args.catalog_dir else None
+    if args.catalog_dir:
+        destination = Path(args.catalog_dir)
+        if not destination.is_absolute():
+            destination = root / destination
+        write_catalog_directories(destination, payload)
+
     json_out_raw = (args.json_out or "").strip()
     if json_out_raw:
         json_out = Path(json_out_raw)
         if not json_out.is_absolute():
             json_out = root / json_out
         json_out.parent.mkdir(parents=True, exist_ok=True)
-        payload = build_payload(root)
         json_out.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
         print(f"JSON written: {json_out}")
     return 0

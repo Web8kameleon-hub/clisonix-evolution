@@ -23,7 +23,7 @@ jobs:
 
       - name: Generate Package Catalog
         run: |
-          python .github/scripts/daily_packages_catalog.py --root . --out .github/reports/daily-package-catalog.md --json-out .github/reports/daily-package-catalog.json
+          python .github/scripts/daily_packages_catalog.py --root . --out .github/reports/daily-package-catalog.md --json-out .github/reports/daily-package-catalog.json --catalog-dir public/catalog
 
       - name: Publish Catalog In Repo (Public Path)
         run: |
@@ -52,6 +52,7 @@ jobs:
           path: |
             .github/reports/daily-package-catalog.md
             .github/reports/daily-package-catalog.json
+            public/catalog/
 
       - name: Add Summary
         run: |
@@ -75,7 +76,7 @@ jobs:
             // Issues contain only the summary, with a fixed budget for future growth.
             const summary = report.split(/^## Download & Integration Quick Links\s*$/m)[0].trimEnd();
             const notice = '\n\nFull inventory: use the complete Markdown and JSON links below.';
-            const links = `\n\n## Public Access\n- Markdown: ${publicMd}\n- JSON API-like feed: ${publicJson}`;
+            const links = `\n\n## Public Access\n- Directory index: https://github.com/${owner}/${repo}/blob/${branch}/public/catalog/README.md\n- Markdown: ${publicMd}\n- JSON API-like feed: ${publicJson}`;
             const maxBodyLength = 60000;
             const budget = maxBodyLength - notice.length - links.length;
             if (budget < 0) throw new Error('Catalog links exceed the issue body budget');
