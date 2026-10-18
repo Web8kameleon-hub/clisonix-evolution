@@ -8,8 +8,12 @@ import httpx
 import pytest
 from fastapi.testclient import TestClient
 
-ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "apps" / "api"))
+ROOT = next(
+    (parent for parent in Path(__file__).resolve().parents
+     if (parent / "apps" / "api").is_dir()),
+    Path("/app"),
+)
+sys.path.insert(0, str(ROOT / "apps" / "api" if (ROOT / "apps" / "api").is_dir() else ROOT))
 import runtime_compat_routes as compat
 from main import app
 
