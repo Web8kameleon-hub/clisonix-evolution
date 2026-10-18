@@ -28,7 +28,7 @@ import requests  # type: ignore[import-untyped]
 
 # FastAPI / ASGI
 from fastapi import (
-    FastAPI, UploadFile, File, Request, HTTPException, APIRouter, Form, Depends, Header
+    FastAPI, UploadFile, File, Request, HTTPException, APIRouter, Form, Depends, Header, Query
 )
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -273,6 +273,7 @@ ROOT_DIR = Path(os.environ["CLISONIX_PROJECT_ROOT"]).resolve() if os.getenv("CLI
     (parent for parent in _api_file.parents if (parent / "apps" / "api").is_dir()),
     _api_file.parent,
 )
+_REPO_ROOT = ROOT_DIR
 if str(ROOT_DIR) not in sys.path:
     sys.path.append(str(ROOT_DIR))
 
