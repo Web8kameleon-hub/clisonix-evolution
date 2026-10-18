@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - tests/unit/test_runtime_route_compatibility.py
       - apps/api/**
       - apps/web/**
       - ocean_core/**
@@ -108,6 +109,15 @@ jobs:
             docker logs smoke-${{ matrix.service.name }} || true
             exit 1
           fi
+
+      - name: Verify API route compatibility
+        if: matrix.service.name == 'api'
+        run: |
+          docker run --rm --entrypoint sh \
+            -e PYTHONPATH=/app \
+            -v "${{ github.workspace }}/tests/unit/test_runtime_route_compatibility.py:/tests/test_runtime_route_compatibility.py:ro" \
+            local/${{ matrix.service.image }}:${{ github.sha }} \
+            -c 'python -m pip install "pytest>=8.3,<10" && python -m pytest -q /tests/test_runtime_route_compatibility.py'
 
       - name: Cleanup smoke container
         if: always()

@@ -962,38 +962,9 @@ import io
 
 from fastapi import APIRouter
 
-@neural_router.get(
-    "/neural-symphony",
-    response_class=StreamingResponse,
-    responses={
-        200: {
-            "content": {
-                "audio/wav": {"schema": {"type": "string", "format": "binary"}}
-            },
-            "description": "WAV audio stream generated from synthetic EEG alpha wave",
-        }
-    },
-)
+@neural_router.get("/neural-symphony", status_code=410)
 async def neural_symphony():
-    """
-    Gjeneron një audio wav demo nga sinjal EEG sintetik (valë alpha)
-    """
-    import io
-
-    import numpy as np
-
-    sr = 22050  # sample rate
-    duration = 5  # sekonda
-    t = np.linspace(0, duration, int(sr * duration), endpoint=False)
-    # Simulo një sinjal alpha (10 Hz)
-    eeg_wave = 0.5 * np.sin(2 * np.pi * 10 * t)
-    # Konverto në int16 për wav
-    audio = np.int16(eeg_wave * 32767)
-    import soundfile as sf
-    buf = io.BytesIO()
-    sf.write(buf, audio, sr, format="WAV")
-    buf.seek(0)
-    return StreamingResponse(buf, media_type="audio/wav")
+    raise HTTPException(410, "Synthetic EEG generation is retired; provide real EEG input.")
 """
 Copyright (c) 2025 Ledjan Ahmati. All rights reserved.
 This software is proprietary and confidential. Unauthorized copying, distribution, or use is strictly prohibited.
@@ -2898,7 +2869,6 @@ def get_system_metrics() -> Dict[str, Any]:
     if psutil is None:
         raise HTTPException(status_code=501, detail="psutil not available")
     try:
-        import psutil  # Ensure psutil is imported in this scope
         cpu = psutil.cpu_percent(interval=0.1)
         vm = psutil.virtual_memory()
         disk = psutil.disk_usage(Path(settings.storage_dir).anchor or "/")
@@ -3635,155 +3605,33 @@ async def query_prometheus(query: str) -> dict:
         logger.error(f"Prometheus query failed: {e}")
         return {"success": False, "value": None, "reason": str(e)}
 
+from runtime_compat_routes import proxy_service, asi_snapshot
+
+@app.get("/api/asi/alba/metrics")
 @app.get("/asi/alba/metrics")
 async def alba_metrics():
-    """ALBA Network - Real Prometheus metrics OR psutil (NO MOCK DATA)"""
-    try:
-        # Skip Prometheus queries if not available - return defaults
-        cpu_value = 45.0
-        memory_value = 512.0
+    return await proxy_service("alba", "/metrics")
 
-        health = min(100, max(0, 100 - (cpu_value + (memory_value / 2048) * 50) / 2)) / 100
-
-        return {
-            "timestamp": utcnow(),
-            "alba_network": {
-                "operational": True,
-                "role": "network_monitor",
-                "health": round(health, 3),
-                "metrics": {
-                    "cpu_percent": round(cpu_value * 100, 2),
-                    "memory_mb": round(memory_value, 1),
-                    "latency_ms": round(12.3, 1)
-                }
-            }
-        }
-    except Exception as e:
-        logger.error(f"ALBA metrics error: {e}")
-        return {"error": str(e), "timestamp": utcnow()}
-
+@app.get("/api/asi/albi/metrics")
 @app.get("/asi/albi/metrics")
 async def albi_metrics():
-    """ALBI Neural - Real metrics (Prometheus OR System psutil - NO MOCK DATA)"""
-    try:
-        # Using mock values instead of Prometheus queries (Prometheus not running in local dev)
-        goroutines_value = 50.0
+    return await proxy_service("albi", "/metrics")
 
-        # Normalize goroutines to neural health (0-100)
-        neural_health = min(100, (goroutines_value / 2)) / 100
-
-        return {
-            "timestamp": utcnow(),
-            "albi_neural": {
-                "operational": True,
-                "role": "neural_processor",
-                "health": round(neural_health, 3),
-                "metrics": {
-                    "goroutines": int(goroutines_value),
-                    "neural_patterns": int(1247 + (goroutines_value / 5)),
-                    "processing_efficiency": round(neural_health, 3),
-                    "gc_operations": 12.5
-                }
-            }
-        }
-    except Exception as e:
-        logger.error(f"ALBI metrics error: {e}")
-        return {"error": str(e), "timestamp": utcnow()}
-
+@app.get("/api/asi/jona/metrics")
 @app.get("/asi/jona/metrics")
 async def jona_metrics():
-    """JONA Coordination - Real Prometheus metrics (HTTP requests, uptime)"""
-    try:
-        # Using mock values instead of Prometheus queries (Prometheus not running in local dev)
-        requests_value = 800.0
+    return await proxy_service("jona", "/metrics")
 
-        # Normalize coordination health based on request throughput
-        coordination_health = min(100, 50 + (requests_value / 20)) / 100
-
-        return {
-            "timestamp": utcnow(),
-            "jona_coordination": {
-                "operational": service_status in {"healthy", "operational"},
-                "role": "data_coordinator",
-                "health": round(coordination_health, 3),
-                "metrics": {
-                    "requests_5m": int(requests_value),
-                    "infinite_potential": round(coordination_health * 100, 2),
-                    "audio_synthesis": True,
-                    "coordination_score": round(coordination_health * 100, 1)
-                }
-            }
-        }
-    except Exception as e:
-        logger.error(f"JONA metrics error: {e}")
-        return {"error": str(e), "timestamp": utcnow()}
-
+@app.get("/api/asi/status")
 @app.get("/asi/status")
 async def asi_status():
-    """ASI Trinity architecture status - REAL data from Prometheus"""
-    try:
-        alba = await alba_metrics()
-        albi = await albi_metrics()
-        jona = await jona_metrics()
+    return await asi_snapshot()
 
-        return {
-            "status": "operational",
-            "timestamp": utcnow(),
-            "trinity": {
-                "alba": alba.get("alba_network", {"status": "active", "health": 0.92}),
-                "albi": albi.get("albi_neural", {"status": "active", "health": 0.88}),
-                "jona": jona.get("jona_coordination", {"status": "active", "health": 0.95})
-            },
-            "system": {
-                "version": "2.1.0",
-                "uptime": round(time.time() - START_TIME, 2),
-                "instance": INSTANCE_ID,
-                "data_source": "Prometheus (Real-Time)",
-            },
-        }
-    except Exception as e:
-        logger.error(f"ASI status error: {e}")
-        return {
-            "status": "degraded",
-            "timestamp": utcnow(),
-            "error": str(e),
-            "data_source": "Fallback",
-        }
-
+@app.get("/api/asi/health")
 @app.get("/asi/health")
 async def asi_health():
-    """ASI system health check - REAL data from Prometheus"""
-    try:
-        alba = await alba_metrics()
-        albi = await albi_metrics()
-        jona = await jona_metrics()
-
-        alba_health = alba.get("alba_network", {}).get("health", 0.92)
-        albi_health = albi.get("albi_neural", {}).get("health", 0.88)
-        jona_health = jona.get("jona_coordination", {}).get("health", 0.95)
-
-        overall = (alba_health + albi_health + jona_health) / 3
-
-        return {
-            "healthy": overall > 0.5,
-            "timestamp": utcnow(),
-            "components": {
-                "alba_network": alba.get("alba_network", {}),
-                "albi_processor": albi.get("albi_neural", {}),
-                "jona_coordinator": jona.get("jona_coordination", {}),
-            },
-            "overall_health": round(overall, 3),
-            "data_source": "Prometheus (Real-Time)",
-        }
-    except Exception as e:
-        logger.error(f"ASI health error: {e}")
-        return {
-            "healthy": False,
-            "timestamp": utcnow(),
-            "error": str(e),
-            "overall_health": 0.0,
-            "data_source": "Error",
-        }
+    snapshot = await asi_snapshot()
+    return JSONResponse(snapshot, status_code=200 if snapshot["status"] == "operational" else 503)
 
 @app.get("/api/asi/joint-status")
 @app.get("/asi/joint-status")
@@ -7396,3 +7244,7 @@ def root():
     }
 
 
+
+
+from runtime_compat_routes import register_compatibility_routes
+register_compatibility_routes(app)
