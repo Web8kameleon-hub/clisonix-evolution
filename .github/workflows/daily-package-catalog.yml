@@ -71,7 +71,17 @@ jobs:
             const report = fs.readFileSync('.github/reports/daily-package-catalog.md', 'utf8');
             const publicMd = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/catalog/latest.md`;
             const publicJson = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/catalog/latest.json`;
-            const body = `${report}\n\n## Public Access\n- Markdown: ${publicMd}\n- JSON API-like feed: ${publicJson}`;
+            // Keep the full inventory in public/catalog and the artifact.
+            // Issues contain only the summary, with a fixed budget for future growth.
+            const summary = report.split(/^## Download & Integration Quick Links\s*$/m)[0].trimEnd();
+            const notice = '\n\nFull inventory: use the complete Markdown and JSON links below.';
+            const links = `\n\n## Public Access\n- Markdown: ${publicMd}\n- JSON API-like feed: ${publicJson}`;
+            const maxBodyLength = 60000;
+            const budget = maxBodyLength - notice.length - links.length;
+            if (budget < 0) throw new Error('Catalog links exceed the issue body budget');
+            const excerpt = summary.slice(0, budget).replace(/[\uD800-\uDBFF]$/, '');
+            const body = `${excerpt}${notice}${links}`;
+            if (body.length > 65536) throw new Error('Catalog issue exceeds GitHub body limit');
 
             const labelsResp = await github.rest.issues.listLabelsForRepo({ owner, repo, per_page: 100 });
             if (!labelsResp.data.find(l => l.name === labelName)) {
