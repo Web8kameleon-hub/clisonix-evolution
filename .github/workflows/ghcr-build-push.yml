@@ -87,12 +87,12 @@ jobs:
           file: ${{ matrix.service.dockerfile }}
           load: true
           tags: local/${{ matrix.service.image }}:${{ github.sha }}
+          secrets: |
+            auth_secret=ci-build-verification-only
           build-args: |
             NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_placeholder
             NEXT_PUBLIC_API_BASE=/api
             NEXT_PUBLIC_GOOGLE_ADSENSE_ID=
-            AUTH_SECRET=health-gate-auth-secret
-            NEXTAUTH_SECRET=health-gate-nextauth-secret
 
       - name: Start test container
         run: |
@@ -224,12 +224,12 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          secrets: |
+            auth_secret=ci-build-verification-only
           build-args: |
             NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_placeholder
             NEXT_PUBLIC_API_BASE=/api
             NEXT_PUBLIC_GOOGLE_ADSENSE_ID=
-            AUTH_SECRET=ghcr-build-auth-secret
-            NEXTAUTH_SECRET=ghcr-build-nextauth-secret
 
       - name: Summary
         run: |

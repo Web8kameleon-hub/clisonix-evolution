@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
-import { Inter } from "next/font/google";
+
 import "./globals.css";
 import { CONSENT_STATE_CHANGE_EVENT, CONSENT_STORAGE_KEY } from "../src/lib/consent/state";
 import { DynamicFavicon } from "../src/components/DynamicFavicon";
@@ -140,10 +140,7 @@ const CONSENT_MODE_BOOTSTRAP_SCRIPT = `
 import AppProviders from '../src/components/AppProviders';
 
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
+
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -363,7 +360,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} antialiased`}
+        className="antialiased"
         suppressHydrationWarning
       >
         <AppProviders>

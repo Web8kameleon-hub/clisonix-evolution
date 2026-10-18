@@ -28,3 +28,4 @@ pydantic-extra-types>=2.10.0
 livekit-api>=1.0.0
 PyJWT>=2.10.1
 passlib[bcrypt]>=1.7.4
+greenlet

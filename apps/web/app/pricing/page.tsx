@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import './pricing-layout.css';
 import Script from 'next/script';
 import { useEffect } from 'react';
 import { trackEconomy } from '@/lib/economy/track';
@@ -55,7 +56,7 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+    <div className="clx-pricing min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -120,7 +121,7 @@ export default function PricingPage() {
       {/* Free Tier Info */}
       <section className="py-8 px-6">
         <div className="max-w-2xl mx-auto text-center">
-          <div className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700">
+          <div className="pricing-card p-6 rounded-2xl bg-slate-800/50 border border-slate-700">
             <h3 className="text-xl font-bold mb-2">🆓 Free Tier Available</h3>
             <p className="text-gray-400 mb-4">
               Want to try before you buy? Get 10 free research articles and basic Curiosity Ocean access.
@@ -177,7 +178,7 @@ export default function PricingPage() {
 
           <div className="space-y-6">
             {faqs.map((faq) => (
-              <div key={faq.q} className="p-6 rounded-xl bg-slate-800/50 border border-slate-700">
+              <div key={faq.q} className="pricing-card p-6 rounded-xl bg-slate-800/50 border border-slate-700">
                 <h3 className="font-semibold text-lg mb-2">{faq.q}</h3>
                 <p className="text-gray-400">{faq.a}</p>
               </div>
