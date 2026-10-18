@@ -54,7 +54,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.13'
+          python-version: '3.14'
 
       - name: Validate agents manifest
         run: |
@@ -94,7 +94,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.13'
+          python-version: '3.14'
 
       - name: Agent registry import check
         run: python -c "from agents import AgentOrchestrator; print('agents.py import ok')"
@@ -252,7 +252,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.13'
+          python-version: '3.14'
 
       - name: Validate required agent endpoints map
         run: |

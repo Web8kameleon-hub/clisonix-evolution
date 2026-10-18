@@ -1,4 +1,4 @@
-name: Python Version Matrix
+name: Python 3.14 Smoke
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.12", "3.13", "3.14"]
+        python-version: ["3.14"]
 
     steps:
       - name: Checkout
@@ -40,6 +40,6 @@ jobs:
 
       - name: Compile smoke
         run: |
-          python -m py_compile ocean-core/ocean_mission_service.py
+          python -m py_compile ocean_core/ocean_mission_service.py
           python -m py_compile investor-pack/send_investor_package_email.py
           python -c "import sys; print('python', sys.version)"
