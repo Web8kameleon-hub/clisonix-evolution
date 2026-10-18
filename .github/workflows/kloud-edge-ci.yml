@@ -97,8 +97,7 @@ jobs:
           git clone --recursive https://github.com/YosysHQ/prjtrellis.git /tmp/prjtrellis
           git -C /tmp/prjtrellis checkout a31ff7042e712c0e2ad217054116ce2c4995f5c7
           git -C /tmp/prjtrellis submodule update --init --recursive
-          cmake -S /tmp/prjtrellis/libtrellis -B /tmp/prjtrellis/libtrellis \\
-            -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_PYTHON=OFF
+          cmake -S /tmp/prjtrellis/libtrellis -B /tmp/prjtrellis/libtrellis -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_PYTHON=OFF
           cmake --build /tmp/prjtrellis/libtrellis --parallel 2
           sudo cmake --install /tmp/prjtrellis/libtrellis
           command -v ecppack

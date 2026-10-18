@@ -267,7 +267,12 @@ class Settings(BaseSettings):
 settings = Settings()
 
 # Extend module search path
-ROOT_DIR = Path(__file__).resolve().parents[2] # Assuming apps/api/main.py
+# Support both repository layout (apps/api/main.py) and flat Docker /app/main.py.
+_api_file = Path(__file__).resolve()
+ROOT_DIR = Path(os.environ["CLISONIX_PROJECT_ROOT"]).resolve() if os.getenv("CLISONIX_PROJECT_ROOT") else next(
+    (parent for parent in _api_file.parents if (parent / "apps" / "api").is_dir()),
+    _api_file.parent,
+)
 if str(ROOT_DIR) not in sys.path:
     sys.path.append(str(ROOT_DIR))
 

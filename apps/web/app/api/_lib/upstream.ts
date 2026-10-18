@@ -1,4 +1,4 @@
-export type UpstreamGroup = "api" | "reporting";
+export type UpstreamGroup = "api" | "auth" | "reporting";
 
 function normalizeBaseUrl(value?: string | null) {
   return value?.trim().replace(/\/+$/, "") || null;
@@ -11,21 +11,18 @@ function unique(values: Array<string | null | undefined>) {
 export function getUpstreamCandidates(group: UpstreamGroup) {
   const apiInternal = normalizeBaseUrl(process.env.API_INTERNAL_URL);
   const reportingInternal = normalizeBaseUrl(process.env.REPORTING_INTERNAL_URL);
-  const publicApi = normalizeBaseUrl(process.env.NEXT_PUBLIC_API_URL);
-  const publicReporting = normalizeBaseUrl(
-    process.env.NEXT_PUBLIC_REPORTING_URL,
+  const authInternal = normalizeBaseUrl(
+    process.env.AUTH_INTERNAL_URL || process.env.USER_MANAGEMENT_INTERNAL_URL,
   );
-
   if (group === "reporting") {
-    return unique([
-      reportingInternal,
-      publicReporting,
-      apiInternal,
-      publicApi,
-    ]);
+    return unique([reportingInternal]);
   }
 
-  return unique([apiInternal, publicApi]);
+  if (group === "auth") {
+    return unique([authInternal]);
+  }
+
+  return unique([apiInternal]);
 }
 
 interface FetchFromCandidatesOptions {
@@ -34,6 +31,7 @@ interface FetchFromCandidatesOptions {
   headers?: HeadersInit;
   init?: RequestInit;
   timeoutMs?: number;
+  acceptNonOk?: boolean;
 }
 
 interface FetchFromCandidatesResult {
@@ -47,13 +45,16 @@ export async function fetchFromCandidates({
   headers,
   init,
   timeoutMs = 5000,
+  acceptNonOk = false,
 }: FetchFromCandidatesOptions): Promise<FetchFromCandidatesResult> {
   const candidates = getUpstreamCandidates(group);
   if (candidates.length === 0) {
     throw new Error(
       group === "reporting"
-        ? "Missing upstream config: set REPORTING_INTERNAL_URL or API_INTERNAL_URL"
-        : "Missing upstream config: set API_INTERNAL_URL",
+        ? "Missing upstream config: set REPORTING_INTERNAL_URL"
+        : group === "auth"
+          ? "Missing upstream config: set AUTH_INTERNAL_URL"
+          : "Missing upstream config: set API_INTERNAL_URL",
     );
   }
 
@@ -76,7 +77,7 @@ export async function fetchFromCandidates({
         signal: AbortSignal.timeout(timeoutMs),
       });
 
-      if (!response.ok) {
+      if (!response.ok && !acceptNonOk) {
         lastError = `${source} -> ${response.status}`;
         continue;
       }
