@@ -73,6 +73,48 @@ jobs:
           check_url "api" "${API_HEALTH_URL}"
           check_url "ocean-core" "${OCEAN_HEALTH_URL}"
 
+
+      - name: Verify deployed API contract
+        env:
+          EXPECTED_OPENAPI_TITLE: Clisonix Industrial Backend (REAL)
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import time
+          import urllib.error
+          import urllib.request
+
+          base = os.environ["API_HEALTH_URL"].removesuffix("/health").rstrip("/")
+          expected_title = os.environ["EXPECTED_OPENAPI_TITLE"]
+          last_error = ""
+          for attempt in range(30):
+              try:
+                  request = urllib.request.Request(base + "/openapi.json",
+                                                   headers={"Cache-Control": "no-cache"})
+                  with urllib.request.urlopen(request, timeout=15) as response:
+                      document = json.load(response)
+                  title = document.get("info", {}).get("title")
+                  paths = document.get("paths", {})
+                  required = {"/api/reporting/export-pdf", "/api/reporting/export-docx",
+                              "/api/asi/{service_name}/health", "/api/system/health"}
+                  if title != expected_title or not required <= paths.keys():
+                      raise RuntimeError(f"Old API contract: title={title!r}, missing={sorted(required - paths.keys())}")
+                  try:
+                      urllib.request.urlopen(base + "/neural-symphony", timeout=15)
+                      raise RuntimeError("Synthetic endpoint retirement is not active")
+                  except urllib.error.HTTPError as error:
+                      if error.code != 410:
+                          raise RuntimeError(f"Expected HTTP 410, received {error.code}") from error
+                  print("Deployed API contract matches required release behavior.")
+                  break
+              except Exception as error:
+                  last_error = str(error)
+                  if attempt == 29:
+                      raise SystemExit("Deployment contract verification failed: " + last_error)
+                  time.sleep(5)
+          PY
+
       - name: Summary
         run: |
           echo "## Deploy Health Gate" >> "$GITHUB_STEP_SUMMARY"
