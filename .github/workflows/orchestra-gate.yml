@@ -120,6 +120,7 @@ jobs:
 
   # ── 3. remote ocean smoke ───────────────────────────────────────────────────
   ocean-smoke-over-ssh:
+    if: github.event_name == 'workflow_dispatch' && vars.ENABLE_LEGACY_SSH == 'true'
     name: Ocean smoke over SSH
     needs: orchestra-probe
     runs-on: ubuntu-latest

@@ -10,13 +10,9 @@
 # 3. Restarts containers with new images
 # =============================================================================
 
-name: "🚀 Deploy via SSH (Docker Compose)"
+name: "Manual SSH Deploy (Legacy)"
 
 on:
-  push:
-    branches:
-      - main
-
   # Manual dispatch for full control
   workflow_dispatch:
     inputs:

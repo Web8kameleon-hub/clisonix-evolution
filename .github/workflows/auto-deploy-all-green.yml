@@ -1,10 +1,6 @@
-name: "🚦 Auto Deploy (All Green)"
+name: "Manual SSH Deploy + Health Gate (Legacy)"
 
 on:
-  workflow_run:
-    workflows: ["CI - Enterprise Security (Free Tier)"]
-    types: [completed]
-    branches: [main]
   workflow_dispatch:
     inputs:
       services:

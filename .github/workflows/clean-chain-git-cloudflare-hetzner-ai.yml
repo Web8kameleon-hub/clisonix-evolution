@@ -19,16 +19,6 @@ on:
         options:
           - skip
           - purge-api-and-root
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/clean-chain-git-cloudflare-hetzner-ai.yml
-      - agents.yml
-      - docs/ops/GEX44_CLEAN_DEPLOY_ULTRA_CHECKLIST.md
-      - scripts/hetzner/post_deploy_verify_auth_billing_ocean.sh
-      - docs/openapi/clisonix-auth-billing-paywall-ocean.openapi.yaml
-
 concurrency:
   group: clean-chain-${{ github.ref }}
   cancel-in-progress: false
