@@ -1,0 +1,1871 @@
+[
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@aws-sdk/client-s3",
+    "version": "^3.893.0"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@aws-sdk/s3-request-presigner",
+    "version": "^3.893.0"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@fastify/cors",
+    "version": "^11.2.0"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@tailwindcss/postcss",
+    "version": "^4.1.18"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@types/pg",
+    "version": "^8.16.0"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "axios",
+    "version": "^1.16.0"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "bcryptjs",
+    "version": "^3.0.3"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "cbor",
+    "version": "^10.0.11"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "clamscan",
+    "version": "2.4.0"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "compression",
+    "version": "^1.8.1"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "cors",
+    "version": "2.8.5"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "express",
+    "version": "^5.2.1"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "fast-xml-parser",
+    "version": "^5.5.5"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "fastify",
+    "version": "^5.8.2"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "ffprobe-static",
+    "version": "3.1.0"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "file-type",
+    "version": "21.3.2"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "fluent-ffmpeg",
+    "version": "2.1.3"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "helmet",
+    "version": "8.0.0"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "next",
+    "version": "16.3.0-canary.17"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "node-fetch",
+    "version": "^3.3.2"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "pg",
+    "version": "^8.18.0"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "react",
+    "version": "18.3.1"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "react-dom",
+    "version": "18.3.1"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "redis",
+    "version": "4.7.0"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "svelte",
+    "version": "^5.53.5"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "uuid",
+    "version": "^14.0.0"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "ws",
+    "version": "^8.19.0"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "zod",
+    "version": "3.24.1"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/bcryptjs",
+    "version": "^2.4.6"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/cbor",
+    "version": "^5.0.1"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/clamscan",
+    "version": "2.4.1"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/file-type",
+    "version": "10.6.0"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/fluent-ffmpeg",
+    "version": "2.1.27"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/node",
+    "version": "22.10.2"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/node-fetch",
+    "version": "^2.6.13"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/react",
+    "version": "18.3.18"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/react-dom",
+    "version": "18.3.7"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "autoprefixer",
+    "version": "10.4.20"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "concurrently",
+    "version": "^9.2.1"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "eslint",
+    "version": "^9.39.2"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "postcss",
+    "version": "8.5.14"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "rimraf",
+    "version": "6.0.1"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "tailwindcss",
+    "version": "^3.4.17"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "typescript",
+    "version": "5.7.2"
+  },
+  {
+    "file": "package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "vite",
+    "version": "^6.4.2"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "express",
+    "version": "^4.21.2"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "cors",
+    "version": "^2.8.5"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "helmet",
+    "version": "^8.1.0"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "compression",
+    "version": "^1.8.0"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "express-rate-limit",
+    "version": "^7.5.0"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "jsonwebtoken",
+    "version": "^9.0.2"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "bcryptjs",
+    "version": "^3.0.2"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "uuid",
+    "version": "^11.1.0"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "ws",
+    "version": "^8.18.1"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "ioredis",
+    "version": "^5.6.1"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "dotenv",
+    "version": "^16.5.0"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "winston",
+    "version": "^3.17.0"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "http-proxy-middleware",
+    "version": "^3.0.3"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/express",
+    "version": "^5.0.2"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/cors",
+    "version": "^2.8.17"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/compression",
+    "version": "^1.7.5"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/jsonwebtoken",
+    "version": "^9.0.9"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/bcryptjs",
+    "version": "^2.4.6"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/uuid",
+    "version": "^10.0.0"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/ws",
+    "version": "^8.18.1"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/node",
+    "version": "^22.15.21"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "tsx",
+    "version": "^4.20.3"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "typescript",
+    "version": "^5.8.3"
+  },
+  {
+    "file": "microservices/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "concurrently",
+    "version": "^9.2.0"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@opennextjs/cloudflare",
+    "version": "^1.19.8"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "next",
+    "version": "16.2.6"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "postcss",
+    "version": "^8.5.14"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "react",
+    "version": "19.1.5"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "react-dom",
+    "version": "19.1.5"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@eslint/eslintrc",
+    "version": "^3"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@tailwindcss/postcss",
+    "version": "^4"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/node",
+    "version": "^20.19.39"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/react",
+    "version": "^19.1.5"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/react-dom",
+    "version": "^19.1.5"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "eslint",
+    "version": "^9"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "eslint-config-next",
+    "version": "16.2.6"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "tailwindcss",
+    "version": "^4"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "typescript",
+    "version": "^5.7.4"
+  },
+  {
+    "file": "hello-ai/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "wrangler",
+    "version": "^4.80.0"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "body-parser",
+    "version": "^1.20.2"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "cbor",
+    "version": "^10.0.11"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "cors",
+    "version": "^2.8.5"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "express",
+    "version": "^4.18.2"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "multer",
+    "version": "^2.0.0"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "node-fetch",
+    "version": "^3.3.2"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "pg",
+    "version": "^8.11.3"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "redis",
+    "version": "^4.6.10"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "ws",
+    "version": "^8.14.2"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "zod",
+    "version": "^3.22.4"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "helmet",
+    "version": "^7.1.0"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "express-rate-limit",
+    "version": "^7.1.5"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "express-slow-down",
+    "version": "^2.0.1"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "express-validator",
+    "version": "^7.0.1"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "hpp",
+    "version": "^0.2.3"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "winston",
+    "version": "^3.11.0"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "winston-daily-rotate-file",
+    "version": "^4.7.1"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "pino",
+    "version": "^8.17.2"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "pino-http",
+    "version": "^9.0.0"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "opossum",
+    "version": "^8.1.3"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "dotenv",
+    "version": "^16.3.1"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "convict",
+    "version": "^6.2.4"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "jsonwebtoken",
+    "version": "^9.0.2"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "bcryptjs",
+    "version": "^2.4.3"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "ioredis",
+    "version": "^5.3.2"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/cors",
+    "version": "^2.8.17"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/express",
+    "version": "^4.17.21"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/bcryptjs",
+    "version": "^2.4.6"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/convict",
+    "version": "^6.1.6"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/hpp",
+    "version": "^0.2.6"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/jest",
+    "version": "^29.5.5"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/jsonwebtoken",
+    "version": "^9.0.5"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/multer",
+    "version": "^1.4.13"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/node",
+    "version": "^20.8.0"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/pg",
+    "version": "^8.10.7"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/ws",
+    "version": "^8.5.8"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@typescript-eslint/eslint-plugin",
+    "version": "^6.7.4"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@typescript-eslint/parser",
+    "version": "^6.7.4"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "eslint",
+    "version": "^8.51.0"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "jest",
+    "version": "^29.7.0"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "supertest",
+    "version": "^6.3.3"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/supertest",
+    "version": "^2.0.16"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "tsx",
+    "version": "^4.1.0"
+  },
+  {
+    "file": "backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "typescript",
+    "version": "^5.2.2"
+  },
+  {
+    "file": "cloudflare/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "jose",
+    "version": "^6.2.2"
+  },
+  {
+    "file": "cloudflare/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "wrangler",
+    "version": "^4.80.0"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@types/node",
+    "version": "^20.12.7"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@types/react",
+    "version": "^18.3.2"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@types/react-dom",
+    "version": "^18.3.0"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "autoprefixer",
+    "version": "^10.4.19"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "axios",
+    "version": "^1.16.0"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "chart.js",
+    "version": "^4.4.2"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "classnames",
+    "version": "^2.3.2"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "date-fns",
+    "version": "^3.6.0"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "next",
+    "version": "^16.2.6"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "postcss",
+    "version": "^8.5.14"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "react",
+    "version": "^18.3.1"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "react-chartjs-2",
+    "version": "^5.2.0"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "react-dom",
+    "version": "^18.3.1"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "recharts",
+    "version": "^2.12.7"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "tailwindcss",
+    "version": "^3.4.3"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "typescript",
+    "version": "^5.4.5"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@tailwindcss/aspect-ratio",
+    "version": "^0.4.2"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@tailwindcss/forms",
+    "version": "^0.5.11"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@tailwindcss/line-clamp",
+    "version": "^0.4.4"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@tailwindcss/typography",
+    "version": "^0.5.19"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@typescript-eslint/eslint-plugin",
+    "version": "^8.0.0"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@typescript-eslint/parser",
+    "version": "^8.0.0"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "eslint",
+    "version": "^9.0.0"
+  },
+  {
+    "file": "frontend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "eslint-config-next",
+    "version": "^16.1.4"
+  },
+  {
+    "file": "sdk/typescript/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/node",
+    "version": "^20.0.0"
+  },
+  {
+    "file": "sdk/typescript/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "tsup",
+    "version": "^8.0.0"
+  },
+  {
+    "file": "sdk/typescript/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "typescript",
+    "version": "^5.3.0"
+  },
+  {
+    "file": "sdk/typescript/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "vitest",
+    "version": "^1.0.0"
+  },
+  {
+    "file": "sdk/typescript/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "eslint",
+    "version": "^8.55.0"
+  },
+  {
+    "file": "sdk/typescript/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@typescript-eslint/eslint-plugin",
+    "version": "^6.0.0"
+  },
+  {
+    "file": "sdk/typescript/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@typescript-eslint/parser",
+    "version": "^6.0.0"
+  },
+  {
+    "file": "packages/shared/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "date-fns",
+    "version": "^2.30.0"
+  },
+  {
+    "file": "packages/shared/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "lodash",
+    "version": "^4.18.0"
+  },
+  {
+    "file": "packages/shared/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/lodash",
+    "version": "^4.17.23"
+  },
+  {
+    "file": "packages/shared/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "rimraf",
+    "version": "^5.0.0"
+  },
+  {
+    "file": "packages/shared/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "typescript",
+    "version": "^5.0.0"
+  },
+  {
+    "file": "packages/ui/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@clisonix/shared",
+    "version": "1.0.0"
+  },
+  {
+    "file": "packages/ui/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "react",
+    "version": "^18.0.0"
+  },
+  {
+    "file": "packages/ui/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "react-dom",
+    "version": "^18.0.0"
+  },
+  {
+    "file": "packages/ui/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/react",
+    "version": "^18.3.27"
+  },
+  {
+    "file": "packages/ui/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/react-dom",
+    "version": "^18.3.7"
+  },
+  {
+    "file": "packages/ui/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "rimraf",
+    "version": "^5.0.0"
+  },
+  {
+    "file": "packages/ui/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "typescript",
+    "version": "^5.0.0"
+  },
+  {
+    "file": "packages/ui/package.json",
+    "ecosystem": "npm",
+    "section": "peerDependencies",
+    "name": "react",
+    "version": "^18.0.0"
+  },
+  {
+    "file": "packages/ui/package.json",
+    "ecosystem": "npm",
+    "section": "peerDependencies",
+    "name": "react-dom",
+    "version": "^18.0.0"
+  },
+  {
+    "file": "packages/nanogrid/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "cbor",
+    "version": "^10.0.11"
+  },
+  {
+    "file": "packages/nanogrid/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/node",
+    "version": "^22.10.2"
+  },
+  {
+    "file": "packages/nanogrid/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "rimraf",
+    "version": "^6.0.1"
+  },
+  {
+    "file": "packages/nanogrid/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "typescript",
+    "version": "^5.7.2"
+  },
+  {
+    "file": "packages/signal-gen/backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "fastify",
+    "version": "^5.3.0"
+  },
+  {
+    "file": "packages/signal-gen/backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@fastify/cors",
+    "version": "^11.0.1"
+  },
+  {
+    "file": "packages/signal-gen/backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@fastify/rate-limit",
+    "version": "^10.0.0"
+  },
+  {
+    "file": "packages/signal-gen/backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "pino",
+    "version": "^9.0.0"
+  },
+  {
+    "file": "packages/signal-gen/backend/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "pino-pretty",
+    "version": "^13.0.0"
+  },
+  {
+    "file": "packages/signal-gen/backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/node",
+    "version": "^20.8.0"
+  },
+  {
+    "file": "packages/signal-gen/backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "typescript",
+    "version": "^5.2.2"
+  },
+  {
+    "file": "packages/signal-gen/backend/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "tsx",
+    "version": "^4.1.0"
+  },
+  {
+    "file": "apps/alba-collector/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "body-parser",
+    "version": "^1.20.4"
+  },
+  {
+    "file": "apps/alba-collector/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "cors",
+    "version": "^2.8.5"
+  },
+  {
+    "file": "apps/alba-collector/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "express",
+    "version": "^4.21.1"
+  },
+  {
+    "file": "apps/alba-collector/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "uuid",
+    "version": "^14.0.0"
+  },
+  {
+    "file": "apps/alba-collector/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "ws",
+    "version": "^8.19.0"
+  },
+  {
+    "file": "apps/alba-collector/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/body-parser",
+    "version": "^1.19.6"
+  },
+  {
+    "file": "apps/alba-collector/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/cors",
+    "version": "^2.8.19"
+  },
+  {
+    "file": "apps/alba-collector/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/express",
+    "version": "^4.17.25"
+  },
+  {
+    "file": "apps/alba-collector/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/uuid",
+    "version": "^9.0.8"
+  },
+  {
+    "file": "apps/alba-collector/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/ws",
+    "version": "^8.18.1"
+  },
+  {
+    "file": "apps/alba-collector/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "tsx",
+    "version": "^4.21.0"
+  },
+  {
+    "file": "apps/alba-collector/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "typescript",
+    "version": "^5.6.3"
+  },
+  {
+    "file": "apps/pwa/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "next",
+    "version": "16.3.0-canary.17"
+  },
+  {
+    "file": "apps/pwa/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "postcss",
+    "version": "^8.5.10"
+  },
+  {
+    "file": "apps/pwa/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "react",
+    "version": "18.3.1"
+  },
+  {
+    "file": "apps/pwa/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "react-dom",
+    "version": "18.3.1"
+  },
+  {
+    "file": "apps/pwa/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@tailwindcss/postcss",
+    "version": "^4.1.18"
+  },
+  {
+    "file": "apps/pwa/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/node",
+    "version": "^24.0.0"
+  },
+  {
+    "file": "apps/pwa/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/react",
+    "version": "18.3.18"
+  },
+  {
+    "file": "apps/pwa/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/react-dom",
+    "version": "18.3.7"
+  },
+  {
+    "file": "apps/pwa/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "autoprefixer",
+    "version": "^10.4.20"
+  },
+  {
+    "file": "apps/pwa/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "postcss",
+    "version": "^8.5.6"
+  },
+  {
+    "file": "apps/pwa/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "tailwindcss",
+    "version": "^4.1.18"
+  },
+  {
+    "file": "apps/pwa/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "typescript",
+    "version": "^5.7.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@fontsource/noto-color-emoji",
+    "version": "^5.2.12"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@radix-ui/react-avatar",
+    "version": "^1.1.11"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@radix-ui/react-dialog",
+    "version": "^1.1.15"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@radix-ui/react-dropdown-menu",
+    "version": "^2.1.16"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@radix-ui/react-scroll-area",
+    "version": "^1.2.10"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@radix-ui/react-select",
+    "version": "^2.2.6"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@radix-ui/react-separator",
+    "version": "^1.1.8"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@radix-ui/react-slot",
+    "version": "^1.2.3"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@radix-ui/react-tabs",
+    "version": "^1.1.13"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@radix-ui/react-tooltip",
+    "version": "^1.2.8"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@types/react",
+    "version": "18.3.18"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@types/react-dom",
+    "version": "18.3.7"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@typescript-eslint/eslint-plugin",
+    "version": "^8.56.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@typescript-eslint/parser",
+    "version": "^8.56.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "@vanilla-extract/css",
+    "version": "^1.18.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "cbor",
+    "version": "^10.0.11"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "class-variance-authority",
+    "version": "^0.7.1"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "clsx",
+    "version": "^2.1.1"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "framer-motion",
+    "version": "^12.30.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "livekit-server-sdk",
+    "version": "^2.15.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "lucide-react",
+    "version": "^0.545.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "next",
+    "version": "16.3.0-canary.17"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "next-auth",
+    "version": "^5.0.0-beta.30"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "next-sitemap",
+    "version": "^4.2.3"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "react",
+    "version": "18.3.1"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "react-dom",
+    "version": "18.3.1"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "recharts",
+    "version": "^3.7.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "stripe",
+    "version": "^20.3.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "tailwind-merge",
+    "version": "^3.4.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "typescript",
+    "version": "^5.0.2"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "uuid",
+    "version": "^14.0.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "zustand",
+    "version": "^5.0.11"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@eslint/eslintrc",
+    "version": "^3.3.3"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@eslint/js",
+    "version": "^9.0.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@jest/globals",
+    "version": "^30.3.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@tailwindcss/postcss",
+    "version": "^4.1.18"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/body-parser",
+    "version": "^1.19.6"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/connect",
+    "version": "^3.4.38"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/jest",
+    "version": "^30.0.0"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/lodash",
+    "version": "^4.17.24"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/mime",
+    "version": "^3.0.4"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "@types/node",
+    "version": "^24.9.2"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "autoprefixer",
+    "version": "^10.4.20"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "cross-env",
+    "version": "^7.0.3"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "eslint",
+    "version": "9.39.2"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "eslint-config-next",
+    "version": "16.3.0-canary.17"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "hermes-parser",
+    "version": "^0.25.1"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "playwright",
+    "version": "^1.58.2"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "postcss",
+    "version": "^8.5.14"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "react-is",
+    "version": "18.3.1"
+  },
+  {
+    "file": "apps/web/package.json",
+    "ecosystem": "npm",
+    "section": "devDependencies",
+    "name": "tailwindcss",
+    "version": "^4.1.18"
+  },
+  {
+    "file": "services/kitchen-worker/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "newman",
+    "version": "^6.1.0"
+  },
+  {
+    "file": "services/kitchen-worker/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "newman-reporter-htmlextra",
+    "version": "^1.23.1"
+  },
+  {
+    "file": "services/kitchen-worker/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "redis",
+    "version": "^4.7.0"
+  },
+  {
+    "file": "services/kitchen-worker/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "bullmq",
+    "version": "^5.76.5"
+  },
+  {
+    "file": "services/kitchen-worker/package.json",
+    "ecosystem": "npm",
+    "section": "dependencies",
+    "name": "ioredis",
+    "version": "^5.4.1"
+  }
+]

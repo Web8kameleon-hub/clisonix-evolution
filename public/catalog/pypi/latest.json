@@ -1,0 +1,3152 @@
+[
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "flake8",
+    "version": ">=7.0.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "black",
+    "version": ">=24.0.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "isort",
+    "version": ">=5.13.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "mypy",
+    "version": ">=1.8.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pytest",
+    "version": ">=8.0.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pytest-cov",
+    "version": ">=4.1.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pytest-asyncio",
+    "version": ">=0.23.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "mkdocs",
+    "version": ">=1.5.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "mkdocs-material",
+    "version": ">=9.4.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "bandit",
+    "version": ">=1.7.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "safety",
+    "version": ">=3.0.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "memory-profiler",
+    "version": ">=0.61.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "line-profiler",
+    "version": ">=4.1.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pre-commit",
+    "version": ">=3.6.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "commitizen",
+    "version": ">=3.13.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "types-all",
+    "version": ">=1.0.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "requests",
+    "version": "unspecified"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pytest",
+    "version": ">=8.3.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "requests",
+    "version": ">=2.32.3"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "ruff",
+    "version": ">=0.8.0"
+  },
+  {
+    "file": "requirements-dev.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.34.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.4"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic-settings",
+    "version": ">=2.7.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "psutil",
+    "version": ">=6.1.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "numpy",
+    "version": ">=2.2.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pandas",
+    "version": ">=2.2.3"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "librosa",
+    "version": ">=0.10.2"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "soundfile",
+    "version": ">=0.13.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "mne",
+    "version": ">=1.8.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "asyncpg",
+    "version": ">=0.30.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "redis",
+    "version": ">=5.2.1"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "sqlalchemy",
+    "version": ">=2.0.36"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "cryptography",
+    "version": ">=42.0.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pyOpenSSL",
+    "version": ">=26.0.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "stripe",
+    "version": ">=10.0.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "boto3",
+    "version": ">=1.36.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "docker",
+    "version": ">=7.1.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "requests",
+    "version": ">=2.32.3"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "SpeechRecognition",
+    "version": ">=3.14.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "faster-whisper",
+    "version": ">=1.1.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydub",
+    "version": ">=0.25.1"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "edge-tts",
+    "version": ">=7.0.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "reportlab",
+    "version": ">=4.2.5"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "cbor2",
+    "version": ">=5.6.5"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "msgpack",
+    "version": ">=1.1.2"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "orjson",
+    "version": ">=3.10.14"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "opentelemetry-api",
+    "version": ">=1.30.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "opentelemetry-sdk",
+    "version": ">=1.30.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "opentelemetry-instrumentation-fastapi",
+    "version": ">=0.51b0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "opentelemetry-instrumentation-httpx",
+    "version": ">=0.51b0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "opentelemetry-instrumentation-requests",
+    "version": ">=0.51b0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "opentelemetry-instrumentation-aiohttp-client",
+    "version": ">=0.51b0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "opentelemetry-instrumentation-logging",
+    "version": ">=0.51b0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "opentelemetry-exporter-otlp",
+    "version": ">=1.30.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "opentelemetry-exporter-otlp-proto-http",
+    "version": ">=1.30.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "stripe",
+    "version": ">=12.1.0"
+  },
+  {
+    "file": "requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic-extra-types",
+    "version": ">=2.10.1"
+  },
+  {
+    "file": "requirements-test.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "requirements-test.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.1"
+  },
+  {
+    "file": "requirements-test.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "requests",
+    "version": ">=2.32.3"
+  },
+  {
+    "file": "requirements-test.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pytest",
+    "version": ">=8.3.0"
+  },
+  {
+    "file": "requirements-test.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pytest-asyncio",
+    "version": ">=0.24.0"
+  },
+  {
+    "file": "requirements-test.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.0"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.30.0"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvloop",
+    "version": ">=0.20.0"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "h2",
+    "version": ">=4.1.0"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.0"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "duckdb",
+    "version": ">=1.1.0"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "duckdb-engine",
+    "version": ">=0.14.0"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "redis",
+    "version": ">=5.2.0"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "msgpack",
+    "version": ">=1.1.0"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "cbor2",
+    "version": ">=5.6.5"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "orjson",
+    "version": ">=3.10.0"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "prometheus-client",
+    "version": ">=0.21.0"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": ">=1.0.1"
+  },
+  {
+    "file": "requirements-ocean.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "structlog",
+    "version": ">=24.4.0"
+  },
+  {
+    "file": "requirements-autolearning.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "numpy",
+    "version": ">=2.0.0"
+  },
+  {
+    "file": "requirements-autolearning.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "cbor2",
+    "version": ">=5.6.5"
+  },
+  {
+    "file": "requirements-autolearning.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aiohttp",
+    "version": ">=3.11.0"
+  },
+  {
+    "file": "requirements-autolearning.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "requests",
+    "version": ">=2.32.3"
+  },
+  {
+    "file": "requirements-autolearning.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "prometheus-client",
+    "version": ">=0.21.1"
+  },
+  {
+    "file": "hybrid_saas_platform/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "openpyxl",
+    "version": ">=3.1.0"
+  },
+  {
+    "file": "hybrid_saas_platform/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.0.0"
+  },
+  {
+    "file": "hybrid_saas_platform/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dateutil",
+    "version": ">=2.8.0"
+  },
+  {
+    "file": "hybrid_saas_platform/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "xlwings",
+    "version": ">=0.30.0"
+  },
+  {
+    "file": "airflow/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "requests",
+    "version": ">=2.32.0"
+  },
+  {
+    "file": "airflow/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "weaviate-client",
+    "version": ">=4.6.4"
+  },
+  {
+    "file": "airflow/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "psycopg2-binary",
+    "version": ">=2.9.9"
+  },
+  {
+    "file": "airflow/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "neo4j",
+    "version": ">=5.22.0"
+  },
+  {
+    "file": "airflow/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "boto3",
+    "version": ">=1.34.0"
+  },
+  {
+    "file": "excel-core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.104.0"
+  },
+  {
+    "file": "excel-core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.24.0"
+  },
+  {
+    "file": "excel-core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "psutil",
+    "version": ">=5.9.0"
+  },
+  {
+    "file": "excel-core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "openpyxl",
+    "version": ">=3.1.5"
+  },
+  {
+    "file": "9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.104.0"
+  },
+  {
+    "file": "9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.24.0"
+  },
+  {
+    "file": "9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.25.0"
+  },
+  {
+    "file": "9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.5.0"
+  },
+  {
+    "file": "9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": ">=1.0.0"
+  },
+  {
+    "file": "9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "numpy",
+    "version": ">=1.26.0"
+  },
+  {
+    "file": "9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pillow",
+    "version": ">=10.0.0"
+  },
+  {
+    "file": "9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "imageio",
+    "version": ">=2.34.0"
+  },
+  {
+    "file": "9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "imageio-ffmpeg",
+    "version": ">=0.4.9"
+  },
+  {
+    "file": "orchestra/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "orchestra/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.4"
+  },
+  {
+    "file": "orchestra/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic-settings",
+    "version": ">=2.7.0"
+  },
+  {
+    "file": "orchestra/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "typing_extensions",
+    "version": ">=4.10.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-multimodal.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "opencv-python",
+    "version": ">=4.10.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-multimodal.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "faster-whisper",
+    "version": ">=1.1.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-multimodal.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydub",
+    "version": ">=0.25.1"
+  },
+  {
+    "file": "ocean_core/requirements-internal-multimodal.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "moviepy",
+    "version": ">=1.0.3"
+  },
+  {
+    "file": "ocean_core/requirements-internal-multimodal.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "diffusers",
+    "version": ">=0.31.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-multimodal.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "controlnet_aux",
+    "version": ">=0.0.9"
+  },
+  {
+    "file": "ocean_core/requirements-lite.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.0"
+  },
+  {
+    "file": "ocean_core/requirements-lite.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.0"
+  },
+  {
+    "file": "ocean_core/requirements-lite.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "h2",
+    "version": ">=4.1.0"
+  },
+  {
+    "file": "ocean_core/requirements-lite.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.9.0"
+  },
+  {
+    "file": "ocean_core/requirements-lite.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "faster-whisper",
+    "version": ">=1.1.0"
+  },
+  {
+    "file": "ocean_core/requirements-lite.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "elasticsearch",
+    "version": ">=8.0.0,<9.0.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-eeg.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "mne",
+    "version": ">=1.8.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-eeg.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "neurokit2",
+    "version": ">=0.2.10"
+  },
+  {
+    "file": "ocean_core/requirements-internal-eeg.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pyedflib",
+    "version": ">=0.1.39"
+  },
+  {
+    "file": "ocean_core/requirements-internal-eeg.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "biosppy",
+    "version": ">=2.2.2"
+  },
+  {
+    "file": "ocean_core/requirements-internal-eeg.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pyriemann",
+    "version": ">=0.7"
+  },
+  {
+    "file": "ocean_core/requirements-internal-eeg.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "braindecode",
+    "version": ">=0.8.1"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.30.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aiohttp",
+    "version": ">=3.11.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-multipart",
+    "version": ">=0.0.9"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "cbor2",
+    "version": ">=5.6.5"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "msgpack",
+    "version": ">=1.1.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "orjson",
+    "version": ">=3.10.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "redis",
+    "version": ">=5.2.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "prometheus-client",
+    "version": ">=0.21.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": ">=1.0.1"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "structlog",
+    "version": ">=24.4.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pyyaml",
+    "version": ">=6.0.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "requests",
+    "version": ">=2.31.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "edge-tts",
+    "version": ">=7.0.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pypdf",
+    "version": ">=4.2.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-core.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "faster-whisper",
+    "version": ">=1.1.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "torch",
+    "version": ">=2.4.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "transformers",
+    "version": ">=4.45.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "accelerate",
+    "version": ">=1.0.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "bitsandbytes",
+    "version": ">=0.44.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "peft",
+    "version": ">=0.13.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "trl",
+    "version": ">=0.11.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "xformers",
+    "version": ">=0.0.28"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "vllm",
+    "version": ">=0.6.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "onnxruntime-gpu",
+    "version": ">=1.20.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "bentoml",
+    "version": ">=1.3.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "faiss-cpu",
+    "version": ">=1.8.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "chromadb",
+    "version": ">=0.5.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pymilvus",
+    "version": ">=2.4.0"
+  },
+  {
+    "file": "ocean_core/requirements-internal-llm.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "langgraph",
+    "version": ">=0.2.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.104.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.24.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.25.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.5.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aiohttp",
+    "version": ">=3.11.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-multipart",
+    "version": ">=0.0.9"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "langdetect",
+    "version": ">=1.0.9"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "googletrans",
+    "version": "==4.0.2"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "cbor2",
+    "version": ">=5.6.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "msgpack",
+    "version": ">=1.0.7"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "orjson",
+    "version": ">=3.9.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "anyio",
+    "version": ">=4.0.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aiofiles",
+    "version": ">=23.0.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "numpy",
+    "version": ">=1.26.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "redis",
+    "version": ">=5.0.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "prometheus-client",
+    "version": ">=0.18.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": ">=1.0.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "structlog",
+    "version": ">=23.2.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pyyaml",
+    "version": ">=6.0.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "requests",
+    "version": ">=2.31.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "edge-tts",
+    "version": ">=6.1.10"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pypdf",
+    "version": ">=4.2.0"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-docx",
+    "version": ">=1.1.2"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "openpyxl",
+    "version": ">=3.1.5"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "xlrd",
+    "version": ">=2.0.1"
+  },
+  {
+    "file": "ocean_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "faster-whisper",
+    "version": ">=1.0.3"
+  },
+  {
+    "file": "ocean_core/ocean_ai_processes/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "torch",
+    "version": ">=2.0.0"
+  },
+  {
+    "file": "packages/wwwmmm-ndb-stigma-pc/requirements-min.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115"
+  },
+  {
+    "file": "packages/wwwmmm-ndb-stigma-pc/requirements-min.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.30"
+  },
+  {
+    "file": "packages/wwwmmm-ndb-stigma-pc/requirements-min.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.27"
+  },
+  {
+    "file": "packages/wwwmmm-ndb-stigma-pc/requirements-min.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "prometheus-client",
+    "version": ">=0.20"
+  },
+  {
+    "file": "packages/wwwmmm-ndb-stigma-pc/requirements-min.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.8"
+  },
+  {
+    "file": "apps/api/requirements-excel.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "openpyxl",
+    "version": ">=3.1.5"
+  },
+  {
+    "file": "apps/api/requirements-excel.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-pptx",
+    "version": ">=1.0.2"
+  },
+  {
+    "file": "apps/api/requirements-excel.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "XlsxWriter",
+    "version": ">=3.2.9"
+  },
+  {
+    "file": "apps/api/requirements-excel.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "et-xmlfile",
+    "version": ">=2.0.0"
+  },
+  {
+    "file": "apps/api/requirements-excel.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "Pillow",
+    "version": ">=11.1.0"
+  },
+  {
+    "file": "apps/api/requirements-excel.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "lxml",
+    "version": ">=5.0.0"
+  },
+  {
+    "file": "apps/api/requirements-excel.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "reportlab",
+    "version": ">=4.4.0"
+  },
+  {
+    "file": "apps/api/requirements-excel.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-docx",
+    "version": ">=1.2.0"
+  },
+  {
+    "file": "apps/api/requirements-slim.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "apps/api/requirements-slim.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.1"
+  },
+  {
+    "file": "apps/api/requirements-slim.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.4"
+  },
+  {
+    "file": "apps/api/requirements-slim.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-multipart",
+    "version": ">=0.0.22"
+  },
+  {
+    "file": "apps/api/requirements-slim.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "requests",
+    "version": ">=2.32.3"
+  },
+  {
+    "file": "apps/api/requirements-slim.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aiofiles",
+    "version": ">=24.1.0"
+  },
+  {
+    "file": "apps/api/requirements-slim.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "psutil",
+    "version": ">=6.0.0"
+  },
+  {
+    "file": "apps/api/requirements-slim.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "sqlalchemy",
+    "version": ">=2.0.36"
+  },
+  {
+    "file": "apps/api/requirements-slim.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "psycopg",
+    "version": ">=3.2.0"
+  },
+  {
+    "file": "apps/api/requirements-slim.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "alembic",
+    "version": ">=1.14.0"
+  },
+  {
+    "file": "apps/api/requirements-slim.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": ">=1.0.1"
+  },
+  {
+    "file": "apps/api/requirements-slim.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "tenacity",
+    "version": ">=9.0.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.4"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic-settings",
+    "version": ">=2.7.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-multipart",
+    "version": ">=0.0.22"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "requests",
+    "version": ">=2.32.3"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aiofiles",
+    "version": ">=24.1.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "psutil",
+    "version": ">=6.0.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aiosqlite",
+    "version": ">=0.20.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "asyncpg",
+    "version": ">=0.29.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "redis",
+    "version": ">=5.2.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "alembic",
+    "version": ">=1.14.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": ">=1.0.1"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "tenacity",
+    "version": ">=9.0.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pandas",
+    "version": ">=2.2.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "numpy",
+    "version": ">=1.26.4"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "prometheus-client",
+    "version": ">=0.21.1"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "cbor2",
+    "version": ">=5.6.5"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "msgpack",
+    "version": ">=1.1.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "stripe",
+    "version": ">=12.0.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "paypalrestsdk",
+    "version": ">=1.7.1"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic-extra-types",
+    "version": ">=2.10.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "livekit-api",
+    "version": ">=1.0.0"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "PyJWT",
+    "version": ">=2.10.1"
+  },
+  {
+    "file": "apps/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "greenlet",
+    "version": "unspecified"
+  },
+  {
+    "file": "services/newsroom/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aiohttp",
+    "version": ">=3.9.1"
+  },
+  {
+    "file": "services/newsroom/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": ">=1.0.0"
+  },
+  {
+    "file": "services/dr_albana/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/dr_albana/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.0"
+  },
+  {
+    "file": "services/dr_albana/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "services/dr_albana/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": ">=1.0.1"
+  },
+  {
+    "file": "services/dr_albana/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "apscheduler",
+    "version": ">=3.10.4"
+  },
+  {
+    "file": "services/ai-global-9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/ai-global-9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.1"
+  },
+  {
+    "file": "services/ai-global-9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "services/ai-global-9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.0"
+  },
+  {
+    "file": "services/ai-global-9999/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": ">=1.0.0"
+  },
+  {
+    "file": "services/excel/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.100.0"
+  },
+  {
+    "file": "services/excel/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.22.0"
+  },
+  {
+    "file": "services/excel/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "openpyxl",
+    "version": ">=3.1.0"
+  },
+  {
+    "file": "services/excel/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pandas",
+    "version": ">=2.0.0"
+  },
+  {
+    "file": "services/excel/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.24.0"
+  },
+  {
+    "file": "services/excel/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-multipart",
+    "version": ">=0.0.22"
+  },
+  {
+    "file": "services/clx_brain/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "redis",
+    "version": ">=4.5.0"
+  },
+  {
+    "file": "services/clx_brain/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aioredis",
+    "version": ">=2.0.0"
+  },
+  {
+    "file": "services/clx_brain/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.100.0"
+  },
+  {
+    "file": "services/clx_brain/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.23.0"
+  },
+  {
+    "file": "services/clx_brain/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.0.0"
+  },
+  {
+    "file": "services/clx_brain/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": ">=1.0.0"
+  },
+  {
+    "file": "services/user-management/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/user-management/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.1"
+  },
+  {
+    "file": "services/user-management/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.0"
+  },
+  {
+    "file": "services/user-management/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-multipart",
+    "version": ">=0.0.9"
+  },
+  {
+    "file": "services/user-management/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "services/user-management/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "email-validator",
+    "version": "unspecified"
+  },
+  {
+    "file": "services/billing_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": "==0.121.0"
+  },
+  {
+    "file": "services/billing_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": "==2.10.3"
+  },
+  {
+    "file": "services/billing_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": "==1.0.1"
+  },
+  {
+    "file": "services/billing_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "stripe",
+    "version": "==11.3.0"
+  },
+  {
+    "file": "services/billing_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": "==0.28.1"
+  },
+  {
+    "file": "services/lab/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/lab/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "services/lab/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.1"
+  },
+  {
+    "file": "services/lab/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aiofiles",
+    "version": ">=24.1.0"
+  },
+  {
+    "file": "services/crawler/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": "==0.116.1"
+  },
+  {
+    "file": "services/crawler/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": "==0.28.1"
+  },
+  {
+    "file": "services/crawler/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "beautifulsoup4",
+    "version": "==4.13.5"
+  },
+  {
+    "file": "services/reporting/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/reporting/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.1"
+  },
+  {
+    "file": "services/reporting/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "openpyxl",
+    "version": ">=3.1.0"
+  },
+  {
+    "file": "services/reporting/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-pptx",
+    "version": ">=0.6.21"
+  },
+  {
+    "file": "services/reporting/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-docx",
+    "version": ">=1.1.2"
+  },
+  {
+    "file": "services/reporting/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "reportlab",
+    "version": ">=4.2.2"
+  },
+  {
+    "file": "services/reporting/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "services/reporting/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "psutil",
+    "version": ">=6.1.0"
+  },
+  {
+    "file": "services/reporting/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "docker",
+    "version": ">=7.1.0"
+  },
+  {
+    "file": "services/reporting/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "asyncpg",
+    "version": ">=0.28.0"
+  },
+  {
+    "file": "services/reporting/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "redis",
+    "version": ">=5.0.0"
+  },
+  {
+    "file": "services/reporting/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aiohttp",
+    "version": ">=3.11.0"
+  },
+  {
+    "file": "services/intelligence-lab/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/intelligence-lab/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.1"
+  },
+  {
+    "file": "services/intelligence-lab/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.0"
+  },
+  {
+    "file": "services/intelligence-lab/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "services/intelligence-lab/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "numpy",
+    "version": ">=2.0.0"
+  },
+  {
+    "file": "services/intelligence-lab/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "psutil",
+    "version": ">=6.1.0"
+  },
+  {
+    "file": "services/intelligence-lab/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "openpyxl",
+    "version": ">=3.1.0"
+  },
+  {
+    "file": "services/intelligence-lab/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pandas",
+    "version": ">=2.0.0"
+  },
+  {
+    "file": "services/kloud_bridge/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115,<1.0"
+  },
+  {
+    "file": "services/kloud_bridge/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.27,<1.0"
+  },
+  {
+    "file": "services/kloud_bridge/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.9,<3.0"
+  },
+  {
+    "file": "services/cycle-engine/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/cycle-engine/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.1"
+  },
+  {
+    "file": "services/cycle-engine/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.0"
+  },
+  {
+    "file": "services/video-generator/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/video-generator/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.1"
+  },
+  {
+    "file": "services/video-generator/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.0"
+  },
+  {
+    "file": "services/video-generator/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "edge-tts",
+    "version": ">=6.1.0"
+  },
+  {
+    "file": "services/video-generator/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "gtts",
+    "version": ">=2.5.0"
+  },
+  {
+    "file": "services/video-generator/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "Pillow",
+    "version": ">=11.0.0"
+  },
+  {
+    "file": "services/video-generator/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "mutagen",
+    "version": ">=1.47.0"
+  },
+  {
+    "file": "services/video-generator/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "moviepy",
+    "version": ">=1.0.3"
+  },
+  {
+    "file": "services/video-generator/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "services/video-generator/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aiofiles",
+    "version": ">=23.0.0"
+  },
+  {
+    "file": "services/agent-telemetry/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.110.0"
+  },
+  {
+    "file": "services/agent-telemetry/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.27.0"
+  },
+  {
+    "file": "services/agent-telemetry/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.6.0"
+  },
+  {
+    "file": "services/kloud_upstream_runtime/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115,<1.0"
+  },
+  {
+    "file": "services/kloud_upstream_runtime/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.9,<3.0"
+  },
+  {
+    "file": "services/aviation-weather/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/aviation-weather/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "services/aviation-weather/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.0"
+  },
+  {
+    "file": "services/aviation-weather/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": ">=1.0.0"
+  },
+  {
+    "file": "services/kitchen-api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": "==0.116.1"
+  },
+  {
+    "file": "services/kitchen-api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": "==0.35.0"
+  },
+  {
+    "file": "services/core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.1"
+  },
+  {
+    "file": "services/core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "psutil",
+    "version": ">=6.1.0"
+  },
+  {
+    "file": "services/redis_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "redis",
+    "version": ">=5.0.0"
+  },
+  {
+    "file": "services/redis_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aioredis",
+    "version": ">=2.0.0"
+  },
+  {
+    "file": "services/blog_api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/blog_api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": "==2.5.0"
+  },
+  {
+    "file": "services/blog_api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "sqlalchemy",
+    "version": "==2.0.23"
+  },
+  {
+    "file": "services/blog_api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": "==0.25.1"
+  },
+  {
+    "file": "services/blog_api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "stripe",
+    "version": "==7.4.0"
+  },
+  {
+    "file": "services/blog_api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-multipart",
+    "version": ">=0.0.22"
+  },
+  {
+    "file": "services/blog_api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "starlette",
+    "version": ">=0.47.2"
+  },
+  {
+    "file": "services/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115"
+  },
+  {
+    "file": "services/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.8"
+  },
+  {
+    "file": "services/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": "unspecified"
+  },
+  {
+    "file": "services/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "psycopg2-binary",
+    "version": "unspecified"
+  },
+  {
+    "file": "services/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "sqlalchemy",
+    "version": ">=2.0"
+  },
+  {
+    "file": "services/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "influxdb-client",
+    "version": "unspecified"
+  },
+  {
+    "file": "services/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "neo4j",
+    "version": "unspecified"
+  },
+  {
+    "file": "services/api/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "weaviate-client",
+    "version": ">=4.6.4"
+  },
+  {
+    "file": "services/ads_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": "==0.121.0"
+  },
+  {
+    "file": "services/ads_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": "==2.10.3"
+  },
+  {
+    "file": "services/ads_core/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": "==1.0.1"
+  },
+  {
+    "file": "services/content-factory/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/content-factory/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.1"
+  },
+  {
+    "file": "services/content-factory/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.0"
+  },
+  {
+    "file": "services/content-factory/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "services/content-factory/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-multipart",
+    "version": ">=0.0.9"
+  },
+  {
+    "file": "services/content-factory/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "aiohttp",
+    "version": ">=3.11.0"
+  },
+  {
+    "file": "services/content-factory/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "tweepy",
+    "version": ">=4.14.0"
+  },
+  {
+    "file": "services/content-factory/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "numpy",
+    "version": ">=2.0.0"
+  },
+  {
+    "file": "services/content-factory/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pandas",
+    "version": ">=2.2.0"
+  },
+  {
+    "file": "services/lagter/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.109.0,<0.120.0"
+  },
+  {
+    "file": "services/lagter/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.27.0,<0.35.0"
+  },
+  {
+    "file": "services/lagter/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.26.0,<0.30.0"
+  },
+  {
+    "file": "services/lagter/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.5.0,<3.0.0"
+  },
+  {
+    "file": "services/lagter/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": ">=1.0.0,<2.0.0"
+  },
+  {
+    "file": "services/blerina/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.109.0"
+  },
+  {
+    "file": "services/blerina/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.26.0"
+  },
+  {
+    "file": "services/blerina/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.5.0"
+  },
+  {
+    "file": "services/blerina/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-multipart",
+    "version": ">=0.0.6"
+  },
+  {
+    "file": "services/agiem/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/agiem/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.1"
+  },
+  {
+    "file": "services/agiem/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.0"
+  },
+  {
+    "file": "services/blog_publisher/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "services/blog_publisher/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "uvicorn",
+    "version": ">=0.32.1"
+  },
+  {
+    "file": "services/blog_publisher/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "pydantic",
+    "version": ">=2.10.0"
+  },
+  {
+    "file": "services/blog_publisher/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "services/blog_publisher/requirements.txt",
+    "ecosystem": "pypi",
+    "section": "requirements",
+    "name": "python-dotenv",
+    "version": ">=1.0.1"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "fastapi",
+    "version": ">=0.115.6"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "uvicorn",
+    "version": "[standard]>=0.32.1"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "pydantic",
+    "version": ">=2.10.4"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "pydantic-settings",
+    "version": ">=2.7.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "python-multipart",
+    "version": ">=0.0.22"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "python-dotenv",
+    "version": ">=1.0.1"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "httpx",
+    "version": ">=0.28.1"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "structlog",
+    "version": ">=24.4.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.api",
+    "name": "sqlalchemy",
+    "version": "[asyncio]>=2.0.36"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.api",
+    "name": "asyncpg",
+    "version": ">=0.30.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.api",
+    "name": "alembic",
+    "version": ">=1.14.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.api",
+    "name": "redis",
+    "version": "[hiredis]>=5.2.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.api",
+    "name": "PyJWT",
+    "version": "[crypto]>=2.10.1"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.api",
+    "name": "passlib",
+    "version": "[bcrypt]>=1.7.4"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.api",
+    "name": "psutil",
+    "version": ">=6.1.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.api",
+    "name": "prometheus-client",
+    "version": ">=0.21.1"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.api",
+    "name": "aiofiles",
+    "version": ">=24.1.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.api",
+    "name": "tenacity",
+    "version": ">=9.0.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.data",
+    "name": "pandas",
+    "version": ">=2.2.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.data",
+    "name": "numpy",
+    "version": ">=2.0.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.ocean",
+    "name": "duckdb",
+    "version": ">=1.1.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.ocean",
+    "name": "duckdb-engine",
+    "version": ">=0.14.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.ocean",
+    "name": "orjson",
+    "version": ">=3.10.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.ocean",
+    "name": "msgpack",
+    "version": ">=1.1.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.ocean",
+    "name": "cbor2",
+    "version": ">=5.6.5"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.excel",
+    "name": "openpyxl",
+    "version": ">=3.1.5"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.excel",
+    "name": "XlsxWriter",
+    "version": ">=3.2.9"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.excel",
+    "name": "python-pptx",
+    "version": ">=1.0.2"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.excel",
+    "name": "Pillow",
+    "version": ">=11.1.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.excel",
+    "name": "lxml",
+    "version": ">=5.0.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.ml",
+    "name": "scipy",
+    "version": ">=1.14.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.ml",
+    "name": "scikit-learn",
+    "version": ">=1.6.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.ml",
+    "name": "librosa",
+    "version": ">=0.10.2"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.ml",
+    "name": "mne",
+    "version": ">=1.8.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.payments",
+    "name": "stripe",
+    "version": ">=12.0.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.payments",
+    "name": "paypalrestsdk",
+    "version": ">=1.7.1"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.observability",
+    "name": "opentelemetry-api",
+    "version": ">=1.29.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.observability",
+    "name": "opentelemetry-sdk",
+    "version": ">=1.29.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.observability",
+    "name": "opentelemetry-exporter-otlp",
+    "version": ">=1.29.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.observability",
+    "name": "opentelemetry-instrumentation-fastapi",
+    "version": ">=0.50b0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.observability",
+    "name": "opentelemetry-instrumentation-redis",
+    "version": ">=0.50b0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.observability",
+    "name": "opentelemetry-instrumentation-sqlalchemy",
+    "version": ">=0.50b0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.observability",
+    "name": "sentry-sdk",
+    "version": "[fastapi]>=2.19.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "pytest",
+    "version": ">=8.3.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "pytest-asyncio",
+    "version": ">=0.24.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "pytest-cov",
+    "version": ">=6.0.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "black",
+    "version": ">=24.10.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "mypy",
+    "version": ">=1.13.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "pip-audit",
+    "version": ">=2.7.0"
+  },
+  {
+    "file": "pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.full",
+    "name": "Clisonix-cloud",
+    "version": "[api,data,ocean,payments,observability]"
+  },
+  {
+    "file": "sdk/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "pytest",
+    "version": ">=7.0.0"
+  },
+  {
+    "file": "sdk/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "pytest-asyncio",
+    "version": ">=0.20.0"
+  },
+  {
+    "file": "sdk/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "black",
+    "version": ">=23.0.0"
+  },
+  {
+    "file": "sdk/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "mypy",
+    "version": ">=1.0.0"
+  },
+  {
+    "file": "sdk/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "ruff",
+    "version": ">=0.1.0"
+  },
+  {
+    "file": "sdk/python/clx/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "pytest",
+    "version": ">=7.0.0"
+  },
+  {
+    "file": "sdk/python/clx/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "pytest-asyncio",
+    "version": ">=0.20.0"
+  },
+  {
+    "file": "sdk/python/clx/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "black",
+    "version": ">=23.0.0"
+  },
+  {
+    "file": "sdk/python/clx/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "mypy",
+    "version": ">=1.0.0"
+  },
+  {
+    "file": "sdk/python/clx/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "ruff",
+    "version": ">=0.1.0"
+  },
+  {
+    "file": "services/concept_gap/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "fastapi",
+    "version": "unspecified"
+  },
+  {
+    "file": "services/concept_gap/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "uvicorn",
+    "version": "[standard]"
+  },
+  {
+    "file": "services/concept_gap/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "weaviate-client",
+    "version": "unspecified"
+  },
+  {
+    "file": "services/api/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "fastapi",
+    "version": ">=0.115"
+  },
+  {
+    "file": "services/api/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "uvicorn",
+    "version": "[standard]"
+  },
+  {
+    "file": "services/api/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "pydantic",
+    "version": ">=2.8"
+  },
+  {
+    "file": "services/api/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "httpx",
+    "version": "unspecified"
+  },
+  {
+    "file": "services/api/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "psycopg2-binary",
+    "version": "unspecified"
+  },
+  {
+    "file": "services/api/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "sqlalchemy",
+    "version": ">=2.0"
+  },
+  {
+    "file": "services/api/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "influxdb-client",
+    "version": "unspecified"
+  },
+  {
+    "file": "services/api/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "neo4j",
+    "version": "unspecified"
+  },
+  {
+    "file": "services/api/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "weaviate-client",
+    "version": ">=4.6.4"
+  },
+  {
+    "file": "services/api/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.dependencies",
+    "name": "PyJWT",
+    "version": "[crypto]>=2.10.1"
+  },
+  {
+    "file": "services/api/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "ruff",
+    "version": "unspecified"
+  },
+  {
+    "file": "services/api/pyproject.toml",
+    "ecosystem": "pypi",
+    "section": "project.optional-dependencies.dev",
+    "name": "pytest",
+    "version": "unspecified"
+  }
+]
