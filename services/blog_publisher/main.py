@@ -928,7 +928,7 @@ def _build_dynamic_index_html(entries: List[Dict[str, str]]) -> str:
             <span id="pageInfo"></span>
             <button id="next">Next</button>
     </div>
-    <footer>© 2026 Clisonix - Powered by AI</footer>
+    <footer>© 2026 Clisonix - Powered by Clisonix</footer>
   </div>
 
   <script>
