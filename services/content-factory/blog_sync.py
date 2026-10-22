@@ -263,7 +263,7 @@ New articles are published daily covering topics in healthcare technology and AI
         </div>
     </main>
     <footer>
-        <p>&copy; 2026 Clisonix - Powered by AI</p>
+        <p>&copy; 2026 Clisonix - Powered by Clisonix</p>
     </footer>
 </body>
 </html>'''
