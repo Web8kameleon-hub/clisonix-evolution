@@ -448,7 +448,7 @@ export default function HomePageClient() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">
-              Powered by AI
+              Powered by Clisonix
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">Advanced neural intelligence powering your experience</p>
           </div>
