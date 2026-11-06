@@ -1,3 +1,0 @@
-# Clisonix Cloud Backend App
-
-

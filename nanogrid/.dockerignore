@@ -1,7 +1,0 @@
-.git
-.vscode
-target
-node.log
-storage.log
-**/__pycache__
-**/*.pyc

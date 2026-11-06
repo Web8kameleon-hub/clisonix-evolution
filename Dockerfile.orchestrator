@@ -1,7 +1,0 @@
-FROM python:3.13
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt 2>/dev/null || pip install --no-cache-dir uvicorn fastapi 2>/dev/null || true
-COPY . .
-EXPOSE 9999
-CMD ["python", "agiem_core.py"]

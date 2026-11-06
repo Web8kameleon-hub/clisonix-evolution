@@ -1,6 +1,0 @@
-// Constraints
-CREATE CONSTRAINT IF NOT EXISTS paper_id IF NOT EXISTS ON (p:Paper) ASSERT p.id IS UNIQUE;
-CREATE CONSTRAINT IF NOT EXISTS gene_id IF NOT EXISTS ON (g:Gene) ASSERT g.id IS UNIQUE;
-CREATE CONSTRAINT IF NOT EXISTS pathway_id IF NOT EXISTS ON (r:Pathway) ASSERT r.id IS UNIQUE;
-// Example indices
-CREATE INDEX paper_title IF NOT EXISTS FOR (p:Paper) ON (p.title);

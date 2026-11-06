@@ -1,4 +1,0 @@
-# Git line ending fix for shell scripts
-*.sh text eol=lf
-*.bash text eol=lf
-deploy-*.sh text eol=lf

@@ -1,1 +1,0 @@
-"""Kloud Bridge microservice package."""
