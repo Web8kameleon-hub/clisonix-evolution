@@ -1,6 +1,6 @@
 # Daily Public Package Catalog
 
-Generated: 2026-11-10T06:10:23Z
+Generated: 2026-11-11T06:10:32Z
 
 ## Summary
 - npm packages (records/unique): 267/131
@@ -8,7 +8,7 @@ Generated: 2026-11-10T06:10:23Z
 - Cargo/Carter packages (records/unique): 40/24
 - API routes discovered: 1625
 - Protocols discovered: 4
-- Recursive scan files/directories/depth: 3828/816/11
+- Recursive scan files/directories/depth: 3830/816/11
 
 ## Download & Integration Quick Links
 | ecosystem | package | download_url | install_command |
