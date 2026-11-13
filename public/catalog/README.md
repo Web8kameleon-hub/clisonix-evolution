@@ -1,6 +1,6 @@
 # Public Package Catalog
 
-Generated: 2026-11-12T06:11:21Z
+Generated: 2026-11-13T06:10:36Z
 
 Source declarations discovered by static scan; runtime availability is not verified.
 
