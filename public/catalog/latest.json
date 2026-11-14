@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T06:10:36Z",
+  "generated_at": "2026-11-14T12:55:50Z",
   "summary": {
     "npm": {
       "records": 267,
@@ -16,7 +16,7 @@
     "api_routes_discovered": 1625,
     "protocols_discovered": 2,
     "recursive_scan": {
-      "files_scanned": 3834,
+      "files_scanned": 3836,
       "directories_scanned": 816,
       "max_depth": 11
     }
